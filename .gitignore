@@ -1,0 +1,56 @@
+# PUBLIC REPOSITORY: never commit secrets, credentials, member data or paid resources.
+
+# environment / secrets
+.env
+.env.local
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# dependencies
+node_modules/
+
+# build output
+.next/
+out/
+build/
+dist/
+next-env.d.ts
+*.tsbuildinfo
+.vercel/
+.wrangler/
+
+# test output
+test-results/
+playwright-report/
+blob-report/
+coverage/
+
+# temporary files
+tmp/
+temp/
+.cache/
+*.tmp
+*.log
+npm-debug.log*
+
+# local backups and member-state exports
+*.bak
+*.backup
+*.orig
+backups/
+og056-progress-*.json
+
+# private or paid resources: never commit (the repository is public)
+private/
+public/resources/private/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
