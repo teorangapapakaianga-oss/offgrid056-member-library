@@ -1,0 +1,33 @@
+{
+  "id": "res-0009",
+  "slug": "household-contacts-template",
+  "title": "Household Contacts Template",
+  "description": "DEMONSTRATION ENTRY: a placeholder for the Household Contacts Template. The final OffGrid056 resource will replace this text.",
+  "summary": "This is placeholder content used to build and test the Member Resource Library. It is not a final OffGrid056 resource.",
+  "learningObjectives": [
+    "Placeholder objective one",
+    "Placeholder objective two",
+    "Placeholder objective three"
+  ],
+  "foundation": "general",
+  "category": "planning",
+  "resourceType": "template",
+  "difficulty": "beginner",
+  "estimatedTime": 10,
+  "tags": [
+    "contacts",
+    "phone numbers",
+    "template"
+  ],
+  "collections": [
+    "planning-tools"
+  ],
+  "featured": false,
+  "premium": false,
+  "isPlaceholder": true,
+  "status": "published",
+  "downloadable": false,
+  "publishedDate": "2026-06-30",
+  "relatedResources": [],
+  "completionAvailable": true
+}

@@ -1,0 +1,14 @@
+{
+  "id": "start-here",
+  "title": "Start Here",
+  "description": "DEMONSTRATION learning path: Start Here.",
+  "foundation": "general",
+  "steps": [
+    "res-0001",
+    "res-0002",
+    "res-0003",
+    "res-0004",
+    "res-0005",
+    "res-0006"
+  ]
+}

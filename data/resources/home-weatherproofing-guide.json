@@ -1,0 +1,34 @@
+{
+  "id": "res-0018",
+  "slug": "home-weatherproofing-guide",
+  "title": "Home Weatherproofing Guide",
+  "description": "DEMONSTRATION ENTRY: a placeholder for the Home Weatherproofing Guide. The final OffGrid056 resource will replace this text.",
+  "summary": "This is placeholder content used to build and test the Member Resource Library. It is not a final OffGrid056 resource.",
+  "learningObjectives": [
+    "Placeholder objective one",
+    "Placeholder objective two",
+    "Placeholder objective three"
+  ],
+  "foundation": "shelter",
+  "category": "weatherproofing",
+  "resourceType": "guide",
+  "difficulty": "beginner",
+  "estimatedTime": 20,
+  "tags": [
+    "draughts",
+    "gutters",
+    "storms",
+    "weatherproofing"
+  ],
+  "featured": false,
+  "premium": false,
+  "isPlaceholder": true,
+  "status": "published",
+  "downloadable": false,
+  "publishedDate": "2026-08-11",
+  "relatedResources": [
+    "res-0021",
+    "res-0020"
+  ],
+  "completionAvailable": true
+}

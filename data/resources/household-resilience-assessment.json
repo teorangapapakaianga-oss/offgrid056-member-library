@@ -1,0 +1,39 @@
+{
+  "id": "res-0005",
+  "slug": "household-resilience-assessment",
+  "title": "Household Resilience Assessment",
+  "description": "DEMONSTRATION ENTRY: a placeholder for the Household Resilience Assessment. The final OffGrid056 resource will replace this text.",
+  "summary": "This is placeholder content used to build and test the Member Resource Library. It is not a final OffGrid056 resource.",
+  "learningObjectives": [
+    "Placeholder objective one",
+    "Placeholder objective two",
+    "Placeholder objective three"
+  ],
+  "foundation": "general",
+  "category": "planning",
+  "resourceType": "assessment",
+  "difficulty": "beginner",
+  "estimatedTime": 20,
+  "tags": [
+    "assessment",
+    "gaps",
+    "readiness"
+  ],
+  "collections": [
+    "start-here",
+    "planning-tools"
+  ],
+  "order": 5,
+  "featured": true,
+  "premium": false,
+  "isPlaceholder": true,
+  "status": "published",
+  "downloadable": false,
+  "publishedDate": "2026-08-20",
+  "relatedResources": [
+    "res-0007",
+    "res-0006"
+  ],
+  "learningPath": "start-here",
+  "completionAvailable": true
+}

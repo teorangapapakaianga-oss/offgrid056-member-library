@@ -1,0 +1,30 @@
+{
+  "id": "res-0012",
+  "slug": "indoor-air-quality-worksheet",
+  "title": "Indoor Air Quality Worksheet",
+  "description": "DEMONSTRATION ENTRY: a placeholder for the Indoor Air Quality Worksheet. The final OffGrid056 resource will replace this text.",
+  "summary": "This is placeholder content used to build and test the Member Resource Library. It is not a final OffGrid056 resource.",
+  "learningObjectives": [
+    "Placeholder objective one",
+    "Placeholder objective two",
+    "Placeholder objective three"
+  ],
+  "foundation": "air",
+  "category": "indoor-air-quality",
+  "resourceType": "worksheet",
+  "difficulty": "intermediate",
+  "estimatedTime": 20,
+  "tags": [
+    "air quality",
+    "indoor air",
+    "worksheet"
+  ],
+  "featured": false,
+  "premium": false,
+  "isPlaceholder": true,
+  "status": "published",
+  "downloadable": false,
+  "publishedDate": "2026-07-22",
+  "relatedResources": [],
+  "completionAvailable": true
+}

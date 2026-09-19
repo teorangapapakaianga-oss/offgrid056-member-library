@@ -1,0 +1,30 @@
+{
+  "id": "res-0025",
+  "slug": "safe-preserving-basics",
+  "title": "Safe Preserving Basics",
+  "description": "DEMONSTRATION ENTRY: a placeholder for the Safe Preserving Basics. The final OffGrid056 resource will replace this text.",
+  "summary": "This is placeholder content used to build and test the Member Resource Library. It is not a final OffGrid056 resource.",
+  "learningObjectives": [
+    "Placeholder objective one",
+    "Placeholder objective two",
+    "Placeholder objective three"
+  ],
+  "foundation": "food",
+  "category": "preservation-guidance",
+  "resourceType": "tutorial",
+  "difficulty": "intermediate",
+  "estimatedTime": 20,
+  "tags": [
+    "preserving",
+    "food safety",
+    "tested methods"
+  ],
+  "featured": false,
+  "premium": false,
+  "isPlaceholder": true,
+  "status": "published",
+  "downloadable": false,
+  "publishedDate": "2026-06-25",
+  "relatedResources": [],
+  "completionAvailable": true
+}

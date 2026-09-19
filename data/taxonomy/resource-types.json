@@ -1,0 +1,17 @@
+{
+  "resourceTypes": [
+    { "id": "guide", "label": "Guide", "plural": "Guides", "action": "Read guide" },
+    { "id": "workbook", "label": "Workbook", "plural": "Workbooks", "action": "Open workbook" },
+    { "id": "checklist", "label": "Checklist", "plural": "Checklists", "action": "Open checklist" },
+    { "id": "planner", "label": "Planner", "plural": "Planners", "action": "Open planner" },
+    { "id": "assessment", "label": "Assessment", "plural": "Assessments", "action": "Start assessment" },
+    { "id": "worksheet", "label": "Worksheet", "plural": "Worksheets", "action": "Open worksheet" },
+    { "id": "video", "label": "Video", "plural": "Videos", "action": "Watch video" },
+    { "id": "tutorial", "label": "Tutorial", "plural": "Tutorials", "action": "Start tutorial" },
+    { "id": "template", "label": "Template", "plural": "Templates", "action": "Open template" },
+    { "id": "supplier-resource", "label": "Supplier Resource", "plural": "Supplier Resources", "action": "View resource" },
+    { "id": "workshop", "label": "Workshop", "plural": "Workshops", "action": "View workshop" },
+    { "id": "programme", "label": "Programme", "plural": "Programmes", "action": "Open programme" },
+    { "id": "download-pack", "label": "Download Pack", "plural": "Download Packs", "action": "Open pack" }
+  ]
+}

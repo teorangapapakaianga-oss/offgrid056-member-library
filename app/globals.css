@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+/* OffGrid056 locked brand system. Palette only; no colours outside it except neutral white for card surfaces. */
+@theme {
+  --color-og-green: #a8cf20; /* Resilience Green: fills and on-dark accents only (1.6:1 on Warm White) */
+  --color-og-deep: #35551a; /* Deep Green: text/links on light (7.6:1) */
+  --color-og-charcoal: #11130f;
+  --color-og-graphite: #242720;
+  --color-og-white: #f4f2ea; /* Warm White: page background */
+  --color-og-taupe: #756b5b; /* Earth Taupe: secondary text (4.7:1 on Warm White) */
+  --color-og-line: #756b5b33; /* taupe 20 %: hairlines */
+}
+
+@theme inline {
+  --font-display: var(--font-bebas), "Bebas Neue", Impact, sans-serif;
+  --font-sans: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-og-white);
+    color: var(--color-og-charcoal);
+    font-family: var(--font-sans);
+  }
+  /* Bebas Neue has one weight: never let the browser fake a bold. */
+  .font-display {
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-og-deep);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-og-green);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Native <dialog> drawers and sheets */
+dialog.og-drawer::backdrop,
+dialog.og-sheet::backdrop {
+  background: rgb(17 19 15 / 0.55);
+}

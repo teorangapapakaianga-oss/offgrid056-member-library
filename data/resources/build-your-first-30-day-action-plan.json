@@ -1,0 +1,36 @@
+{
+  "id": "res-0006",
+  "slug": "build-your-first-30-day-action-plan",
+  "title": "Build Your First 30-Day Action Plan",
+  "description": "DEMONSTRATION ENTRY: a placeholder for the Build Your First 30-Day Action Plan. The final OffGrid056 resource will replace this text.",
+  "summary": "This is placeholder content used to build and test the Member Resource Library. It is not a final OffGrid056 resource.",
+  "learningObjectives": [
+    "Placeholder objective one",
+    "Placeholder objective two",
+    "Placeholder objective three"
+  ],
+  "foundation": "general",
+  "category": "planning",
+  "resourceType": "planner",
+  "difficulty": "beginner",
+  "estimatedTime": 30,
+  "tags": [
+    "action plan",
+    "30 days",
+    "planning"
+  ],
+  "collections": [
+    "start-here",
+    "planning-tools"
+  ],
+  "order": 6,
+  "featured": false,
+  "premium": false,
+  "isPlaceholder": true,
+  "status": "published",
+  "downloadable": false,
+  "publishedDate": "2026-08-20",
+  "relatedResources": [],
+  "learningPath": "start-here",
+  "completionAvailable": true
+}

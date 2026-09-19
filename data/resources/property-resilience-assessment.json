@@ -1,0 +1,30 @@
+{
+  "id": "res-0020",
+  "slug": "property-resilience-assessment",
+  "title": "Property Resilience Assessment",
+  "description": "DEMONSTRATION ENTRY: a placeholder for the Property Resilience Assessment. The final OffGrid056 resource will replace this text.",
+  "summary": "This is placeholder content used to build and test the Member Resource Library. It is not a final OffGrid056 resource.",
+  "learningObjectives": [
+    "Placeholder objective one",
+    "Placeholder objective two",
+    "Placeholder objective three"
+  ],
+  "foundation": "shelter",
+  "category": "property-assessment",
+  "resourceType": "assessment",
+  "difficulty": "advanced",
+  "estimatedTime": 60,
+  "tags": [
+    "property",
+    "assessment",
+    "risks"
+  ],
+  "featured": false,
+  "premium": false,
+  "isPlaceholder": true,
+  "status": "published",
+  "downloadable": false,
+  "publishedDate": "2026-06-10",
+  "relatedResources": [],
+  "completionAvailable": true
+}

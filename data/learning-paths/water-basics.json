@@ -1,0 +1,12 @@
+{
+  "id": "water-basics",
+  "title": "Water Basics",
+  "description": "DEMONSTRATION learning path: Water Basics.",
+  "foundation": "water",
+  "steps": [
+    "res-0014",
+    "res-0015",
+    "res-0017",
+    "res-0016"
+  ]
+}

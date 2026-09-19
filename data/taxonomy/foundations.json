@@ -1,0 +1,94 @@
+{
+  "foundations": [
+    {
+      "id": "air",
+      "name": "Air",
+      "order": 1,
+      "icon": "/icons/og-icon-air.svg",
+      "description": "Ventilation, moisture and indoor air: a dry, healthy home to breathe in.",
+      "categories": [
+        { "slug": "ventilation", "name": "Ventilation", "description": "Moving fresh air through the home, simply and safely." },
+        { "slug": "dampness-moisture", "name": "Dampness & Moisture", "description": "Finding and reducing condensation, damp and mould." },
+        { "slug": "indoor-air-quality", "name": "Indoor Air Quality", "description": "What affects the air inside your home, and what helps." },
+        { "slug": "healthy-home-checks", "name": "Healthy Home Checks", "description": "Walk-through checks for a drier, healthier home." },
+        { "slug": "air-worksheets", "name": "Air Worksheets", "description": "Every Air worksheet in one place.", "matchTypes": ["worksheet"] },
+        { "slug": "air-checklists", "name": "Air Checklists", "description": "Every Air checklist in one place.", "matchTypes": ["checklist"] }
+      ]
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "order": 2,
+      "icon": "/icons/og-icon-water.svg",
+      "description": "Storage, rainwater and a plan for when the tap stops.",
+      "categories": [
+        { "slug": "water-storage", "name": "Water Storage", "description": "How much to store, how to store it, and how to rotate it." },
+        { "slug": "rainwater", "name": "Rainwater", "description": "Collecting and using rainwater, within local rules." },
+        { "slug": "water-security", "name": "Water Security", "description": "Keeping your household supplied through an interruption." },
+        { "slug": "household-water-planning", "name": "Household Water Planning", "description": "Working out your household's water needs." },
+        { "slug": "water-worksheets", "name": "Water Worksheets", "description": "Every Water worksheet in one place.", "matchTypes": ["worksheet"] },
+        { "slug": "water-checklists", "name": "Water Checklists", "description": "Every Water checklist in one place.", "matchTypes": ["checklist"] }
+      ]
+    },
+    {
+      "id": "shelter",
+      "name": "Shelter",
+      "order": 3,
+      "icon": "/icons/og-icon-shelter.svg",
+      "description": "Warmth, weatherproofing and a home that looks after you.",
+      "categories": [
+        { "slug": "household-resilience", "name": "Household Resilience", "description": "The home as the base of your resilience plan." },
+        { "slug": "heating", "name": "Heating", "description": "Staying warm, including when the power is out." },
+        { "slug": "insulation", "name": "Insulation", "description": "Keeping heat in and cold out." },
+        { "slug": "weatherproofing", "name": "Weatherproofing", "description": "Draughts, leaks, gutters and storm readiness." },
+        { "slug": "maintenance", "name": "Maintenance", "description": "Small regular jobs that prevent big problems." },
+        { "slug": "property-assessment", "name": "Property Assessment", "description": "Assessing your property's strengths and gaps." },
+        { "slug": "shelter-worksheets", "name": "Shelter Worksheets", "description": "Every Shelter worksheet in one place.", "matchTypes": ["worksheet"] }
+      ]
+    },
+    {
+      "id": "food",
+      "name": "Food",
+      "order": 4,
+      "icon": "/icons/og-icon-food.svg",
+      "description": "A working pantry, food you can grow, and food kept safely.",
+      "categories": [
+        { "slug": "pantry-resilience", "name": "Pantry Resilience", "description": "A pantry buffer built from what you already eat." },
+        { "slug": "food-storage", "name": "Food Storage", "description": "Storing and rotating food so nothing is wasted." },
+        { "slug": "growing-food", "name": "Growing Food", "description": "Starting and keeping a productive garden." },
+        { "slug": "seasonal-growing", "name": "Seasonal Growing", "description": "Planting to your local season and climate." },
+        { "slug": "food-planning", "name": "Food Planning", "description": "Planning meals and supplies for your household." },
+        { "slug": "preservation-guidance", "name": "Preservation Guidance", "description": "Safe preserving, using tested methods from recognised authorities." },
+        { "slug": "food-worksheets", "name": "Food Worksheets", "description": "Every Food worksheet in one place.", "matchTypes": ["worksheet"] }
+      ]
+    },
+    {
+      "id": "energy",
+      "name": "Energy",
+      "order": 5,
+      "icon": "/icons/og-icon-energy.svg",
+      "description": "Light, power and a sensible, safe backup plan.",
+      "categories": [
+        { "slug": "backup-energy", "name": "Backup Energy", "description": "Keeping essentials running when the power goes out, safely." },
+        { "slug": "solar", "name": "Solar", "description": "Understanding solar for your home." },
+        { "slug": "lighting", "name": "Lighting", "description": "Safe, reliable light without mains power." },
+        { "slug": "household-energy-planning", "name": "Household Energy Planning", "description": "Working out what your household really needs to run." },
+        { "slug": "energy-use", "name": "Energy Use", "description": "Understanding and reducing everyday energy use." },
+        { "slug": "energy-worksheets", "name": "Energy Worksheets", "description": "Every Energy worksheet in one place.", "matchTypes": ["worksheet"] },
+        { "slug": "energy-checklists", "name": "Energy Checklists", "description": "Every Energy checklist in one place.", "matchTypes": ["checklist"] }
+      ]
+    },
+    {
+      "id": "general",
+      "name": "General",
+      "order": 6,
+      "icon": "/icons/og-icon-planning.svg",
+      "description": "Getting started, planning and resources that cover every foundation.",
+      "categories": [
+        { "slug": "getting-started", "name": "Getting Started", "description": "Your first steps in the library." },
+        { "slug": "planning", "name": "Planning", "description": "Household planning across all five foundations." },
+        { "slug": "packs", "name": "Resource Packs", "description": "Bundles of related resources." }
+      ]
+    }
+  ]
+}
