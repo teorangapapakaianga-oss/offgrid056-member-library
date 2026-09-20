@@ -45,7 +45,7 @@ function Skeleton({ lines = 2 }: { lines?: number }) {
 }
 
 const seeAll = (href: string, label = "See all") => (
-  <Link href={href} className="inline-flex items-center gap-1 text-sm font-semibold text-og-deep underline-offset-2 hover:underline">
+  <Link href={href} className="inline-flex min-h-6 items-center gap-1 text-sm font-semibold text-og-deep underline-offset-2 hover:underline">
     {label}
     <Icon name="chevronRight" className="size-4" />
   </Link>
@@ -214,7 +214,7 @@ export function Dashboard({ items, paths }: { items: ResourceSummary[]; paths: P
                       </span>
                     </p>
                     {p.next && (
-                      <Link href={`/resources/${p.next.slug}/`} className="mt-auto text-xs font-semibold text-og-deep underline-offset-2 hover:underline">
+                      <Link href={`/resources/${p.next.slug}/`} className="mt-auto inline-flex min-h-6 items-center text-xs font-semibold text-og-deep underline-offset-2 hover:underline">
                         Next: {p.next.title}
                       </Link>
                     )}
