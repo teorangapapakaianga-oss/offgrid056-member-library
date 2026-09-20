@@ -1,0 +1,64 @@
+{
+  "description": "Folders the scanner may read. READ-ONLY: the importer never writes, moves, renames or deletes anything here (Stage 9.1 §1).",
+  "workspace": "workspace",
+  "sources": [
+    {
+      "label": "30-Day Programme",
+      "path": "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme",
+      "enabled": true,
+      "misplaced": false
+    },
+    {
+      "label": "Household Resilience Guide V1",
+      "path": "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1",
+      "enabled": true,
+      "misplaced": false
+    },
+    {
+      "label": "Work: active project",
+      "path": "C:\\Users\\jgate\\Documents\\Work\\01_ACTIVE_PROJECTS\\OffGrid056",
+      "enabled": true,
+      "misplaced": false
+    },
+    {
+      "label": "Ready 2 Go (inside ITEEK Docs)",
+      "path": "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\ITEEK Docs\\OffGrid056-Ready 2 Go",
+      "enabled": false,
+      "misplaced": true,
+      "note": "Owner decision D9-2: OffGrid056 content in another project's folder. Scan read-only when enabled; flagged misplacedSource."
+    },
+    {
+      "label": "Ebooks Collection",
+      "path": "C:\\Users\\jgate\\Downloads\\New folder - Copy\\OffGrid056 Ebooks Collection-20260427T045217Z-3-001",
+      "enabled": false,
+      "misplaced": false
+    },
+    {
+      "label": "OffGridContent",
+      "path": "C:\\Users\\jgate\\Downloads\\New folder - Copy\\OffGridContent",
+      "enabled": false,
+      "misplaced": false
+    },
+    {
+      "label": "BackUp Files",
+      "path": "C:\\Users\\jgate\\Downloads\\New folder - Copy\\OffGrid056 BackUp Files",
+      "enabled": false,
+      "misplaced": false
+    },
+    {
+      "label": "Work: shared assets (Videos)",
+      "path": "C:\\Users\\jgate\\Documents\\Work\\03_SHARED_ASSETS\\OffGrid056",
+      "enabled": false,
+      "misplaced": false
+    }
+  ],
+  "ignore": {
+    "folders": ["node_modules", ".git", ".next", "out", "__pycache__", "$RECYCLE.BIN", "System Volume Information"],
+    "filenames": ["Thumbs.db", "desktop.ini", ".DS_Store"],
+    "extensions": [".lnk", ".tmp", ".ini", ".url"]
+  },
+  "limits": {
+    "maxTextBytesPerFile": 2000000,
+    "textExtractionSkipOver": 52428800
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "description": "Legacy OffGrid056 visual identity and terminology. Detected and flagged only: source files are never changed (Stage 9.1 §12).",
+  "colours": [
+    { "hex": "#1A2332", "name": "legacy navy" },
+    { "hex": "#C9A227", "name": "legacy gold" },
+    { "hex": "#E8703A", "name": "legacy orange" },
+    { "hex": "#2D3A4D", "name": "legacy slate" }
+  ],
+  "typography": ["Playfair Display", "Inter"],
+  "terminology": [
+    { "pattern": "5\\s*pillars", "issue": "\"5 Pillars\" terminology", "action": "rename to the Five Foundations" },
+    { "pattern": "five\\s*pillars", "issue": "\"Five Pillars\" terminology", "action": "rename to the Five Foundations" },
+    { "pattern": "pillar\\s*(one|two|three|four|five|1|2|3|4|5)", "issue": "pillar numbering", "action": "rename to foundations" }
+  ],
+  "logoFilenames": ["offgrid056_logo.png", "logo_navy", "logo_gold", "og056_logo_old"],
+  "currentBrand": {
+    "colours": ["#A8CF20", "#35551A", "#11130F", "#242720", "#F4F2EA", "#756B5B"],
+    "typography": ["Bebas Neue", "Montserrat"],
+    "terminology": "Five Foundations: Air, Water, Shelter, Food, Energy"
+  },
+  "migrationActions": {
+    "colours": "re-skin to the current palette",
+    "typography": "replace typography with Bebas Neue and Montserrat",
+    "terminology": "rename 5 Pillars to the Five Foundations",
+    "logo": "replace with the approved Design A logo"
+  }
+}

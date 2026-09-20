@@ -1,0 +1,41 @@
+{
+  "description": "Keyword evidence for resource-type and foundation inference (Stage 9.1 §6). Weights: filename 3, folder 2, title 3, text 1 per occurrence (capped).",
+  "resourceTypes": {
+    "assessment": ["assessment", "scorecard", "audit", "self-assessment", "score", "rating", "evaluate", "where you are"],
+    "checklist": ["checklist", "check list", "tick list", "72-hour", "72hour", "quick check"],
+    "planner": ["planner", "plan", "pathway", "roadmap", "schedule", "30-day plan", "action plan"],
+    "worksheet": ["worksheet", "calculator", "tracker", "matrix", "builder", "selector", "identifier", "template sheet", "fill in"],
+    "workbook": ["workbook", "work book", "exercise book"],
+    "guide": ["guide", "handbook", "overview", "introduction", "explained", "101", "reference"],
+    "tutorial": ["tutorial", "how to", "how-to", "step by step", "walkthrough", "lesson"],
+    "video": ["video", "recording", "webinar", "screencast"],
+    "template": ["template", "form", "blank", "info sheet", "contacts sheet"],
+    "workshop": ["workshop", "session", "live class", "masterclass"],
+    "programme": ["programme", "program", "30-day", "30 day", "course"],
+    "download-pack": ["bundle", "pack", "collection", "kit"],
+    "supplier-resource": ["supplier", "provider", "directory", "vendor", "installer"]
+  },
+  "calculatorKeywords": ["calculator", "calculate", "worked example", "litres per", "how much do i need"],
+  "foundations": {
+    "air": ["air", "ventilation", "ventilate", "damp", "dampness", "moisture", "mould", "mold", "condensation", "humidity", "healthy home", "indoor air", "extractor fan", "airflow"],
+    "water": ["water", "rainwater", "tank", "storage tank", "litres", "litre", "gallons", "filtration", "filter", "bore", "well", "downpipe", "gutter collection", "drinking water", "harvesting"],
+    "shelter": ["shelter", "home", "house", "roof", "insulation", "insulate", "heating", "heat pump", "wood burner", "draught", "draft", "weatherproof", "weather-proof", "maintenance", "property", "warm home", "cladding", "window"],
+    "food": ["food", "pantry", "preserve", "preserving", "canning", "bottling", "garden", "grow", "growing", "seed", "vegetable", "harvest", "rotation", "fifo", "meal", "storage of food", "freezer"],
+    "energy": ["energy", "power", "electricity", "solar", "battery", "generator", "backup power", "outage", "blackout", "lighting", "torch", "power cut", "inverter", "panel", "kwh", "fuel"],
+    "general": ["five foundations", "5 pillars", "overview", "getting started", "welcome", "introduction", "household resilience", "risk", "budget", "priority", "review", "programme"]
+  },
+  "categoryHints": {
+    "air": { "ventilation": ["ventilation", "airflow", "extractor"], "dampness-moisture": ["damp", "mould", "mold", "condensation", "moisture"], "indoor-air-quality": ["air quality", "indoor air"], "healthy-home-checks": ["healthy home", "audit", "check"] },
+    "water": { "water-storage": ["storage", "container", "tank size", "litres", "calculator"], "rainwater": ["rainwater", "roof", "downpipe", "harvest"], "water-security": ["security", "supply", "outage", "interruption"], "household-water-planning": ["planning", "needs", "how much"] },
+    "shelter": { "heating": ["heating", "heat pump", "wood burner", "fire"], "insulation": ["insulation", "insulate", "ceiling", "underfloor"], "weatherproofing": ["draught", "draft", "weather", "storm", "gutter"], "maintenance": ["maintenance", "repair", "service"], "property-assessment": ["property", "assessment", "profile", "matrix"], "household-resilience": ["resilience", "household", "scorecard"] },
+    "food": { "pantry-resilience": ["pantry", "buffer", "stock"], "food-storage": ["storage", "rotation", "fifo", "shelf life"], "growing-food": ["garden", "grow", "raised bed"], "seasonal-growing": ["season", "planting calendar"], "food-planning": ["meal", "planning", "shopping"], "preservation-guidance": ["preserve", "canning", "bottling", "dehydrate"] },
+    "energy": { "backup-energy": ["backup", "generator", "outage", "power cut"], "solar": ["solar", "panel", "inverter"], "lighting": ["light", "torch", "lantern", "head torch"], "household-energy-planning": ["planning", "needs", "load"], "energy-use": ["usage", "consumption", "bill", "kwh"] },
+    "general": { "getting-started": ["welcome", "start", "introduction", "quickstart"], "planning": ["plan", "priority", "budget", "action"], "packs": ["bundle", "pack", "collection"] }
+  },
+  "difficultyHints": {
+    "beginner": ["quick", "basics", "starter", "introduction", "simple", "first"],
+    "intermediate": ["planner", "matrix", "calculator", "comparison"],
+    "advanced": ["advanced", "detailed", "full assessment", "technical", "install"]
+  },
+  "wordsPerMinute": 200
+}

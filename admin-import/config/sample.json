@@ -1,0 +1,39 @@
+{
+  "description": "Stage 9.2 controlled sample: 20 real files chosen to exercise every part of the scanner and classifier before the scan is widened. Read-only, like every scan.",
+  "covers": [
+    "PDF, HTML, Markdown, image, ZIP",
+    "a calculator (owner decision D9-6)",
+    "PDF/HTML pairs (owner decision D9-10)",
+    "an exact duplicate, and a same-name-different-content version candidate",
+    "legacy branding and '5 Pillars' terminology",
+    "each of the Five Foundations plus General",
+    "current-brand material for contrast"
+  ],
+  "notes": [
+    "No DOCX or XLSX exists in the three approved folders, so those parsers are proven by fixtures in the test suite instead.",
+    "No video is in the sample: videos live in folders that are not enabled yet."
+  ],
+  "files": [
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\HTML_Source\\OG-01_Home_Resilience_Scorecard.html",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-01_Home_Resilience_Scorecard.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\HTML_Source\\OG-05_5_Pillars_Quick_Reference.html",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\HTML_Source\\OG-08_Water_Storage_Calculator.html",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-08_Water_Storage_Calculator.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-13_Healthy_Home_Air_Audit.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-11_30Day_Pantry_Builder.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-18_Solar_Power_101_Workbook.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-15_Warm_Home_Scorecard.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-B01_QuickStart_Resilience_Checklist.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\Covers\\Week2_WaterFoodAir_Cover.jpg",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\README.md",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\BRAND_PLAN.md",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1\\export\\OffGrid056_Household_Resilience_Guide_FINAL.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1\\export\\OffGrid056_Household_Resilience_Guide_Workbook_Pages.pdf",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1\\index.html",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1\\assets\\images\\OG056-HRG_IMG-01_cover-home-exterior_OUT.jpg",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1\\_source_deliveries\\from_assets\\OG056-HRG_IMG-01_cover-home-exterior_OUT.jpg",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1\\_build\\web_images\\OG056-HRG_IMG-01_cover-home-exterior_OUT.jpg",
+    "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\OffGrid056 Household Resilience Guide — Production Build V1\\delivery\\OffGrid056_Household_Resilience_Guide_FINAL.zip",
+    "C:\\Users\\jgate\\Documents\\Work\\01_ACTIVE_PROJECTS\\OffGrid056\\05_DELIVERABLES\\OFFGRID056_MASTER_FOLDER_COMPLETE_COMBINED_2026-07-19\\OFFGRID056_MASTER_FOLDER_COMPLETE_COMBINED_2026-07-19\\01_Brand_Core\\OFFGRID056_POSITIONING_AND_5_FOUNDATIONS.md"
+  ]
+}

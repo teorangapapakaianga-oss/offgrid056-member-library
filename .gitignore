@@ -54,3 +54,7 @@ desktop.ini
 .vscode/*
 !.vscode/extensions.json
 .idea/
+
+# importer working data: local paths and unreleased content (owner decision D9-4)
+workspace/
+
