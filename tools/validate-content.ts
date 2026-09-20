@@ -7,8 +7,9 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { ContentError, loadAllResourceFiles, loadLearningPaths } from "../lib/content/repository";
+import { ContentError, getProgramme, getProgrammeDays, loadAllResourceFiles, loadLearningPaths } from "../lib/content/repository";
 import { getCategory } from "../lib/content/taxonomy";
+import { PROGRAMME_DAYS } from "../lib/member/types";
 
 const release = process.argv.includes("--release");
 const errors: string[] = [];
@@ -44,6 +45,27 @@ try {
   for (const p of paths) {
     for (const id of p.steps) if (!published.has(id)) errors.push(`learning-paths/${p.id}.json: step "${id}" is not a published resource`);
   }
+
+  // 30-Day Programme: all 30 days present exactly once, every linked resource real
+  const programme = getProgramme();
+  const days = getProgrammeDays();
+  const dayNumbers = days.map((d) => d.day);
+  for (let n = 1; n <= PROGRAMME_DAYS; n++) {
+    const found = dayNumbers.filter((d) => d === n).length;
+    if (found === 0) errors.push(`programme: day ${n} is missing`);
+    if (found > 1) errors.push(`programme: day ${n} is defined ${found} times`);
+  }
+  const weekDays = programme.weeks.flatMap((w) => w.days);
+  if (new Set(weekDays).size !== PROGRAMME_DAYS) errors.push(`programme.json: weeks must cover days 1–${PROGRAMME_DAYS} exactly once`);
+  for (const d of days) {
+    const at = `programme/days/day-${String(d.day).padStart(2, "0")}.json`;
+    if (!programme.weeks.some((w) => w.number === d.week && w.days.includes(d.day))) errors.push(`${at}: day ${d.day} is not listed in week ${d.week}`);
+    for (const id of [...d.resourceIds, ...(d.worksheet?.resourceId ? [d.worksheet.resourceId] : [])]) {
+      if (!published.has(id)) errors.push(`${at}: links resource "${id}", which is not published`);
+    }
+    if (release && d.isPlaceholder) errors.push(`${at}: placeholder programme day in a release build`);
+  }
+  console.log(`Programme: ${days.length} days · ${programme.weeks.length} weeks${programme.isPlaceholder ? " (placeholder content)" : ""}`);
 
   const placeholders = all.filter((r) => r.isPlaceholder).length;
   console.log(`Content: ${all.length} resources (${published.size} published, ${placeholders} placeholder/demo) · ${paths.length} learning paths`);

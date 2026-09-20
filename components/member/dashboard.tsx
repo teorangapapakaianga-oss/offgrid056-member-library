@@ -66,8 +66,16 @@ export function Dashboard({ items, paths }: { items: ResourceSummary[]; paths: P
   const programmeDone = Object.values(state.programme.days).filter((d) => d.completed).length;
   const newThisMonth = now ? items.filter((r) => isNewResource(r, now)).sort((a, b) => b.publishedDate.localeCompare(a.publishedDate)) : [];
 
-  // Continue Learning: last viewed and not yet completed → next Start Here step.
-  const continueWith = recent.find((r) => r.completionAvailable && !completedIds.has(r.id)) ?? nextRecommended(items, completedIds, startPath);
+  // Continue Learning: where the member actually left off, then the last unfinished thing they viewed,
+  // then the next Start Here step.
+  const last = state.lastLocation;
+  const lastDay = last?.kind === "programme-day" ? Number(last.id) : null;
+  const lastDayOpen = lastDay !== null && !state.programme.days[String(lastDay)]?.completed;
+  const lastResource = last?.kind === "resource" ? byId.get(last.id) : undefined;
+  const continueWith =
+    (lastResource && lastResource.completionAvailable && !completedIds.has(lastResource.id) ? lastResource : undefined) ??
+    recent.find((r) => r.completionAvailable && !completedIds.has(r.id)) ??
+    nextRecommended(items, completedIds, startPath);
   // Recommended Next Step: assessment first, then the foundation with the lowest progress.
   const assessment = items.find((r) => r.slug === "household-resilience-assessment");
   const perFoundation = fiveFoundations.map((f) =>
@@ -107,6 +115,18 @@ export function Dashboard({ items, paths }: { items: ResourceSummary[]; paths: P
           <h2 className="font-display text-2xl leading-none">Continue learning</h2>
           {!ready ? (
             <div className="mt-4 h-20 animate-pulse rounded-lg bg-og-white/10" aria-hidden="true" />
+          ) : lastDayOpen ? (
+            <div className="mt-4">
+              <p className="text-lg leading-snug font-semibold">30-Day Programme, day {lastDay}</p>
+              <p className="mt-1 text-sm text-og-white/75">You were last here</p>
+              <Link
+                href={`/programme/day/${lastDay}/`}
+                className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg bg-og-green px-4 text-sm font-semibold text-og-charcoal hover:brightness-95"
+              >
+                Continue day {lastDay}
+                <Icon name="arrowRight" className="size-4" />
+              </Link>
+            </div>
           ) : continueWith ? (
             <div className="mt-4">
               <p className="text-lg leading-snug font-semibold">{continueWith.title}</p>

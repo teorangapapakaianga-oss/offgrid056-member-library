@@ -1,0 +1,68 @@
+{
+  "id": "30-day-resilience",
+  "title": "30-Day Resilience Programme",
+  "overview": "DEMONSTRATION CONTENT. This is placeholder programme data used to build and test the member library. One small action a day across the Five Foundations. The final OffGrid056 programme replaces every day below.",
+  "isPlaceholder": true,
+  "weeks": [
+    {
+      "number": 1,
+      "title": "Week 1 — Placeholder: where you are now",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Week 2 — Placeholder: water and air",
+      "days": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Week 3 — Placeholder: shelter and energy",
+      "days": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Week 4 — Placeholder: food and planning",
+      "days": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Finish — Placeholder: review and next steps",
+      "days": [
+        29,
+        30
+      ]
+    }
+  ]
+}

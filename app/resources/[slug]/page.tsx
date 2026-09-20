@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
+import { CompletionButton, RecordView, SaveButton, StorageNotice } from "@/components/member/member-actions";
 import { DemoBadge, DifficultyBadge, FeaturedBadge, FoundationBadge, ResourceTypeBadge } from "@/components/resources/badges";
 import { PlaceholderThumbnail } from "@/components/resources/placeholder-thumbnail";
 import { ResourceGrid } from "@/components/resources/resource-card";
@@ -41,6 +43,8 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   return (
     <>
       <Breadcrumbs items={[...trail, { label: r.title }]} />
+      <RecordView resourceId={r.id} />
+      <StorageNotice />
       {r.isPlaceholder && (
         <p className="mb-5 flex items-start gap-2 rounded-lg border border-dashed border-og-taupe bg-white px-4 py-3 text-sm text-og-graphite">
           <Icon name="info" className="mt-0.5 size-5 shrink-0 text-og-taupe" />
@@ -94,8 +98,19 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
               </ul>
             </section>
           )}
+          <div className="flex flex-col gap-3 rounded-xl bg-white p-5 ring-1 ring-og-line">
+            <CompletionButton resourceId={r.id} disabled={!r.completionAvailable} />
+            <SaveButton resourceId={r.id} title={r.title} />
+            <p className="text-xs text-og-taupe">
+              Your progress is kept in this browser. Back it up from{" "}
+              <Link href="/progress/" className="font-semibold text-og-deep underline underline-offset-2">
+                My Progress
+              </Link>
+              .
+            </p>
+          </div>
           <p className="rounded-xl border border-dashed border-og-taupe/50 p-4 text-sm text-og-taupe">
-            Open / Download, Save and Mark complete are added in Stages 4–5.
+            Open / Download and the resource viewer are added in Stage 5.
           </p>
         </aside>
       </article>

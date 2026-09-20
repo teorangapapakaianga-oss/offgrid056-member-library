@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { StagePlaceholder } from "@/components/layout/stage-placeholder";
+import { Breadcrumbs } from "@/components/layout/breadcrumbs";
+import { PageHeader } from "@/components/layout/page-header";
+import { StorageNotice } from "@/components/member/member-actions";
+import { SavedView } from "@/components/member/saved-view";
+import { getSummaries } from "@/lib/content/repository";
 
 export const metadata: Metadata = { title: "Saved resources" };
 
 export default function SavedPage() {
   return (
-    <StagePlaceholder title="Saved resources" eyebrow="My library" description="Resources you have saved, all in one place." stage={4} icon="saved">
-      Saving resources arrives in Stage 4 (member functionality). Saved items will be kept in this browser for V1.
-    </StagePlaceholder>
+    <>
+      <Breadcrumbs items={[{ label: "Saved" }]} />
+      <StorageNotice />
+      <PageHeader eyebrow="My library" title="Saved resources" description="Everything you have saved, newest first." />
+      <SavedView items={getSummaries()} />
+    </>
   );
 }

@@ -5,6 +5,7 @@ import { getResourceType } from "@/lib/content/taxonomy";
 import { formatMinutes, isNewResource } from "@/lib/format";
 import { useNow } from "@/lib/hooks/use-now";
 import { useMemberState } from "@/lib/member";
+import { SaveButton } from "@/components/member/member-actions";
 import { Icon } from "@/components/ui/icon";
 import { DemoBadge, DifficultyBadge, FeaturedBadge, FoundationBadge, NewBadge, ResourceTypeBadge } from "./badges";
 import { PlaceholderThumbnail } from "./placeholder-thumbnail";
@@ -22,12 +23,17 @@ export function ResourceCard({ resource: r, headingLevel = 3 }: { resource: Reso
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-og-line transition focus-within:ring-2 focus-within:ring-og-deep hover:shadow-md">
-      {r.thumbnail ? (
-        // eslint-disable-next-line @next/next/no-img-element -- static export: images are pre-sized at import
-        <img src={r.thumbnail.src} alt={r.thumbnail.alt} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-      ) : (
-        <PlaceholderThumbnail foundation={r.foundation} type={r.resourceType} />
-      )}
+      <div className="relative">
+        {r.thumbnail ? (
+          // eslint-disable-next-line @next/next/no-img-element -- static export: images are pre-sized at import
+          <img src={r.thumbnail.src} alt={r.thumbnail.alt} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+        ) : (
+          <PlaceholderThumbnail foundation={r.foundation} type={r.resourceType} />
+        )}
+        <div className="absolute top-2 right-2">
+          <SaveButton resourceId={r.id} title={r.title} compact />
+        </div>
+      </div>
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="flex flex-wrap items-center gap-1.5">

@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { z } from "zod";
+import { ProgrammeDaySchema, ProgrammeSchema, type Programme, type ProgrammeDay } from "./programme-schemas";
 import { LearningPathSchema, ResourceSchema, type LearningPath, type Resource } from "./schemas";
 import { toSummary, type ResourceSummary } from "./summaries";
 
@@ -68,6 +69,32 @@ export function getResourceBySlug(slug: string): Resource | undefined {
 
 export function getResourceById(id: string): Resource | undefined {
   return getResources().find((r) => r.id === id);
+}
+
+let programmeCache: Programme | null = null;
+let programmeDayCache: ProgrammeDay[] | null = null;
+
+export function getProgramme(): Programme {
+  if (!programmeCache) {
+    const file = path.join(DATA_DIR, "programme", "programme.json");
+    let raw: unknown;
+    try {
+      raw = JSON.parse(fs.readFileSync(file, "utf8"));
+    } catch (e) {
+      throw new ContentError(`programme/programme.json: invalid JSON (${(e as Error).message})`);
+    }
+    programmeCache = parseWith(ProgrammeSchema)(raw, "programme/programme.json");
+  }
+  return programmeCache;
+}
+
+export function getProgrammeDays(): ProgrammeDay[] {
+  programmeDayCache ??= readJsonDir("programme/days", parseWith(ProgrammeDaySchema)).sort((a, b) => a.day - b.day);
+  return programmeDayCache;
+}
+
+export function getProgrammeDay(day: number): ProgrammeDay | undefined {
+  return getProgrammeDays().find((d) => d.day === day);
 }
 
 export function getSummaries(filter?: (r: Resource) => boolean): ResourceSummary[] {

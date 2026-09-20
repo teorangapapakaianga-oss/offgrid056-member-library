@@ -1,0 +1,18 @@
+{
+  "day": 19,
+  "week": 3,
+  "title": "Day 19 — Placeholder action",
+  "foundation": "energy",
+  "objective": "DEMONSTRATION ENTRY: the objective for this day will be written during the resource import phase.",
+  "action": "DEMONSTRATION ENTRY: the one practical action for this day will be written during the resource import phase.",
+  "estimatedTime": 20,
+  "resourceIds": [
+    "res-0026"
+  ],
+  "worksheet": {
+    "label": "Placeholder worksheet",
+    "resourceId": "res-0026"
+  },
+  "notesEnabled": true,
+  "isPlaceholder": true
+}
