@@ -93,12 +93,19 @@ function quarantine(raw: string): MemberState {
 /**
  * Migrations. Version 1 is the first schema, so there is nothing to upgrade yet; later versions add a step here
  * and the member keeps their progress.
+ *
+ * It also repairs the one field that can be dropped without losing anything: a `lastLocation` missing its
+ * timestamp becomes `null` (the member loses only "continue where you left off"), instead of the whole document
+ * being treated as damaged and reset.
  */
 function migrate(doc: unknown): unknown {
   if (!doc || typeof doc !== "object") return doc;
   const v = (doc as { schemaVersion?: unknown }).schemaVersion;
-  if (v === MEMBER_SCHEMA_VERSION) return doc;
-  return null; // unknown version: treated as damaged, recovered rather than guessed at
+  if (v !== MEMBER_SCHEMA_VERSION) return null; // unknown version: recovered rather than guessed at
+  const d = doc as { lastLocation?: unknown };
+  const loc = d.lastLocation as { at?: unknown } | null | undefined;
+  if (loc && typeof loc === "object" && typeof loc.at !== "string") return { ...d, lastLocation: null };
+  return doc;
 }
 
 function view(state: MemberState, storage: StorageMode, recovered: boolean): MemberView {
@@ -242,29 +249,50 @@ export class LocalMemberStore implements MemberStore {
 }
 
 /**
- * Merge rules for restoring a backup (and, later, for a member's first sign-in):
- *  - saved / completed: union, keeping the EARLIEST date, so a member never loses credit for finishing something
- *  - recent: newest entry per resource wins, capped
- *  - programme: a day counts as done if it is done on either side; the newer notes win
- *  - nothing is deleted by a merge
+ * Field-level merge rules for restoring a backup (and, later, for a member's first sign-in).
+ * These are owner-approved and locked at Stage 4:
+ *
+ *  1. saved / completed .... union; the EARLIEST valid date is kept, so credit for finishing is never lost
+ *  2. completion ........... stays true if EITHER side marks it complete (resources and programme days)
+ *  3. notes ................ the version with the NEWEST timestamp wins; an untimed note loses to a timed one
+ *  4. recent ............... de-duplicated by resource, newest first, capped at RECENT_LIMIT (20)
+ *  5. unknown ids .......... kept exactly as they are; views and progress figures ignore ids the library has no
+ *                            resource for, so a retired or not-yet-imported id can never break navigation or
+ *                            inflate a percentage
+ *  6. lastLocation ......... the entry with the newest timestamp wins
+ *
+ *  Nothing is ever deleted by a merge. Only "replace" discards, and only when the member chooses it.
+ *
+ * Dates are compared as instants, not as text: a backup written in a different time zone can legitimately carry
+ * an offset (…+12:00), which sorts wrongly as a string.
  */
 export function mergeStates(a: MemberState, b: MemberState): MemberState {
-  const earliest = (x: Record<string, string>, y: Record<string, string>) => {
+  /** ISO date → milliseconds. An unparseable date loses every comparison. */
+  const ms = (iso: string | undefined, fallback: number) => {
+    const t = iso ? Date.parse(iso) : NaN;
+    return Number.isNaN(t) ? fallback : t;
+  };
+  const earlier = (x: string | undefined, y: string | undefined) => (ms(x, Infinity) <= ms(y, Infinity) ? x : y);
+
+  // Rule 1: union, earliest valid date wins.
+  const earliestDates = (x: Record<string, string>, y: Record<string, string>) => {
     const out: Record<string, string> = { ...x };
-    for (const [id, at] of Object.entries(y)) out[id] = out[id] && out[id] < at ? out[id] : at;
+    for (const [id, at] of Object.entries(y)) out[id] = (out[id] ? earlier(out[id], at) : at) as string;
     return out;
   };
 
+  // Rule 4: de-duplicate, newest per resource, newest first, capped.
   const recentById = new Map<string, string>();
   for (const { id, at } of [...a.recent, ...b.recent]) {
     const prev = recentById.get(id);
-    if (!prev || prev < at) recentById.set(id, at);
+    if (!prev || ms(at, -Infinity) > ms(prev, -Infinity)) recentById.set(id, at);
   }
   const recent = [...recentById.entries()]
     .map(([id, at]) => ({ id, at }))
-    .sort((x, y) => y.at.localeCompare(x.at))
+    .sort((x, y) => ms(y.at, -Infinity) - ms(x.at, -Infinity))
     .slice(0, RECENT_LIMIT);
 
+  // Rules 2 and 3: completion is sticky; the newest note wins.
   const days: MemberState["programme"]["days"] = { ...a.programme.days };
   for (const [key, incoming] of Object.entries(b.programme.days)) {
     const mine = days[key];
@@ -273,8 +301,8 @@ export function mergeStates(a: MemberState, b: MemberState): MemberState {
       continue;
     }
     const completed = mine.completed || incoming.completed;
-    const completedAt = [mine.completedAt, incoming.completedAt].filter(Boolean).sort()[0];
-    const newerNotes = (incoming.notesAt ?? "") > (mine.notesAt ?? "") ? incoming : mine;
+    const completedAt = earlier(mine.completedAt, incoming.completedAt);
+    const newerNotes = ms(incoming.notesAt, -Infinity) > ms(mine.notesAt, -Infinity) ? incoming : mine;
     days[key] = {
       completed,
       ...(completed && completedAt ? { completedAt } : {}),
@@ -283,14 +311,17 @@ export function mergeStates(a: MemberState, b: MemberState): MemberState {
   }
 
   const assessments = { ...a.assessments };
-  for (const [k, v] of Object.entries(b.assessments)) if (!assessments[k] || assessments[k].at < v.at) assessments[k] = v;
+  for (const [k, v] of Object.entries(b.assessments)) {
+    if (!assessments[k] || ms(assessments[k].at, -Infinity) < ms(v.at, -Infinity)) assessments[k] = v;
+  }
 
-  const lastLocation = (b.lastLocation?.at ?? "") > (a.lastLocation?.at ?? "") ? b.lastLocation : a.lastLocation;
+  // Rule 6: newest timestamp wins, whichever side it came from.
+  const lastLocation = ms(b.lastLocation?.at, -Infinity) > ms(a.lastLocation?.at, -Infinity) ? b.lastLocation : a.lastLocation;
 
   return {
     schemaVersion: MEMBER_SCHEMA_VERSION,
-    saved: earliest(a.saved, b.saved),
-    completed: earliest(a.completed, b.completed),
+    saved: earliestDates(a.saved, b.saved),
+    completed: earliestDates(a.completed, b.completed),
     recent,
     lastLocation,
     programme: { days },

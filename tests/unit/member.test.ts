@@ -1,4 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { getSummaries } from "@/lib/content/repository";
+import { overallProgress } from "@/lib/progress";
 import { createBackup, parseBackup } from "@/lib/member/backup";
 import { LocalMemberStore, mergeStates } from "@/lib/member/store";
 import { MEMBER_CORRUPT_KEY, MEMBER_STORAGE_KEY, NOTES_MAX, RECENT_LIMIT, emptyState, type MemberState } from "@/lib/member/types";
@@ -170,6 +172,97 @@ describe("backup and restore", () => {
     expect(Object.keys(merged.saved).sort()).toEqual(["res-0001", "res-0009"]);
     expect(merged.completed["res-0002"]).toBe("2026-09-11T00:00:00Z"); // earliest wins
     expect(merged.programme.days["1"]).toMatchObject({ completed: true, notes: "mine" }); // newer notes win
+  });
+
+  // Locked at Stage 4: the field-level merge rules, one test each.
+  describe("locked merge rules", () => {
+    const at = (iso: string) => iso;
+    const base = (over: Partial<MemberState> = {}): MemberState => ({ ...emptyState(new Date("2026-09-20T00:00:00Z")), ...over });
+
+    it("1. saved/completed keep the earliest valid date, even across time zones", () => {
+      const mine = base({ saved: { "res-0001": at("2026-09-20T09:00:00+12:00") }, completed: { "res-0002": at("2026-09-18T00:00:00Z") } });
+      const backup = base({ saved: { "res-0001": at("2026-09-19T23:00:00Z") }, completed: { "res-0002": at("2026-09-10T00:00:00Z") } });
+      const m = mergeStates(mine, backup);
+      // 2026-09-20T09:00+12:00 IS 2026-09-19T21:00Z, i.e. earlier than 23:00Z, despite sorting later as text
+      expect(m.saved["res-0001"]).toBe("2026-09-20T09:00:00+12:00");
+      expect(m.completed["res-0002"]).toBe("2026-09-10T00:00:00Z");
+    });
+
+    it("1b. an unparseable date never wins", () => {
+      const mine = base({ completed: { "res-0002": "2026-13-45T99:00:00Z" } });
+      const backup = base({ completed: { "res-0002": at("2026-09-10T00:00:00Z") } });
+      expect(mergeStates(mine, backup).completed["res-0002"]).toBe("2026-09-10T00:00:00Z");
+    });
+
+    it("2. completion stays true if either side has it, for resources and programme days", () => {
+      const mine = base({ programme: { days: { "4": { completed: false } } } });
+      const backup = base({ completed: { "res-0005": at("2026-09-01T00:00:00Z") }, programme: { days: { "4": { completed: true, completedAt: at("2026-09-02T00:00:00Z") } } } });
+      const m = mergeStates(mine, backup);
+      expect(m.completed["res-0005"]).toBeDefined();
+      expect(m.programme.days["4"]).toMatchObject({ completed: true, completedAt: "2026-09-02T00:00:00Z" });
+      // and the other way round
+      expect(mergeStates(backup, mine).programme.days["4"].completed).toBe(true);
+    });
+
+    it("3. the newest timestamped note wins, and a timed note beats an untimed one", () => {
+      const older = base({ programme: { days: { "3": { completed: true, notes: "older", notesAt: at("2026-09-10T00:00:00Z") } } } });
+      const newer = base({ programme: { days: { "3": { completed: true, notes: "newer", notesAt: at("2026-09-19T00:00:00Z") } } } });
+      expect(mergeStates(older, newer).programme.days["3"].notes).toBe("newer");
+      expect(mergeStates(newer, older).programme.days["3"].notes).toBe("newer");
+      const untimed = base({ programme: { days: { "3": { completed: true, notes: "no timestamp" } } } });
+      expect(mergeStates(untimed, older).programme.days["3"].notes).toBe("older");
+    });
+
+    it("4. recent items are de-duplicated, newest first and capped at 20", () => {
+      const many = (offset: number) =>
+        Array.from({ length: 15 }, (_, i) => ({ id: `res-${String(i + offset).padStart(4, "0")}`, at: new Date(Date.UTC(2026, 8, 1 + i + offset)).toISOString() }));
+      const mine = base({ recent: [...many(1), { id: "res-0001", at: at("2026-09-01T00:00:00Z") }] });
+      const backup = base({ recent: [...many(10), { id: "res-0001", at: at("2026-09-19T00:00:00Z") }] });
+      const m = mergeStates(mine, backup);
+      expect(m.recent).toHaveLength(RECENT_LIMIT);
+      expect(new Set(m.recent.map((r) => r.id)).size).toBe(m.recent.length);
+      expect(m.recent.map((r) => Date.parse(r.at))).toEqual([...m.recent.map((r) => Date.parse(r.at))].sort((x, y) => y - x));
+      expect(m.recent.find((r) => r.id === "res-0001")?.at).toBe("2026-09-19T00:00:00Z"); // newest entry per resource
+    });
+
+    it("5. ids the library no longer has are preserved, and ignored by views and progress", () => {
+      const retired = "res-9999";
+      const mine = base({ saved: { [retired]: at("2026-09-01T00:00:00Z") }, completed: { [retired]: at("2026-09-01T00:00:00Z") } });
+      const m = mergeStates(mine, base({ saved: { "res-0001": at("2026-09-02T00:00:00Z") } }));
+      expect(m.saved[retired]).toBeDefined(); // kept, never silently dropped
+      // progress counts only resources that exist in the content
+      const items = getSummaries();
+      const completedIds = new Set(Object.keys(m.completed));
+      const overall = overallProgress(items, completedIds);
+      expect(overall.completed).toBe(0);
+      expect(overall.percent).toBe(0);
+      // and nothing in the library resolves it to a link
+      expect(items.some((r) => r.id === retired)).toBe(false);
+    });
+
+    it("6. lastLocation: the newest timestamp wins, whichever side it is on", () => {
+      const browser = base({ lastLocation: { kind: "resource", id: "res-0014", at: at("2026-09-20T02:00:00Z") } });
+      const backup = base({ lastLocation: { kind: "programme-day", id: "9", at: at("2026-09-19T08:00:00Z") } });
+      expect(mergeStates(browser, backup).lastLocation).toMatchObject({ id: "res-0014", kind: "resource" });
+      expect(mergeStates(backup, browser).lastLocation).toMatchObject({ id: "res-0014" });
+      const newerBackup = base({ lastLocation: { kind: "programme-day", id: "12", at: at("2026-09-21T00:00:00Z") } });
+      expect(mergeStates(browser, newerBackup).lastLocation).toMatchObject({ id: "12", kind: "programme-day" });
+      // one side empty
+      expect(mergeStates(base(), browser).lastLocation).toMatchObject({ id: "res-0014" });
+      expect(mergeStates(browser, base()).lastLocation).toMatchObject({ id: "res-0014" });
+    });
+
+    it("6b. a stored location without a timestamp is repaired instead of resetting everything", async () => {
+      const storage = install();
+      storage.map.set(
+        MEMBER_STORAGE_KEY,
+        JSON.stringify({ ...emptyState(), saved: { "res-0014": "2026-09-01T00:00:00Z" }, lastLocation: { kind: "resource", id: "res-0014" } }),
+      );
+      const v = await new LocalMemberStore().load();
+      expect(v.recovered).toBe(false); // progress kept
+      expect(v.savedIds.has("res-0014")).toBe(true);
+      expect(v.state.lastLocation).toBeNull(); // only the unusable field is dropped
+    });
   });
 
   it("replace uses the backup exactly", async () => {
