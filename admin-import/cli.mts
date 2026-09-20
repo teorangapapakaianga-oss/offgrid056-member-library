@@ -14,6 +14,7 @@ import sourcesConfig from "./config/sources.json";
 import { scanSources, type SourceConfig } from "./scanner/scan";
 import { classify, type TextBundle } from "./mappers/classify";
 import { groupDuplicates } from "./dedupe/group";
+import { linkAssets } from "./assets/link";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -69,13 +70,14 @@ async function commandScan() {
   const candidates: Candidate[] = entries.map((e) => classify(e, texts.get(e.candidateId) ?? { text: "", raw: "", meta: {} }));
   const bundles = new Map<string, TextBundle>(texts);
   const groups = groupDuplicates(candidates, bundles);
+  const assets = linkAssets(candidates); // artwork attached to its resource, or flagged (owner decision 5)
 
   // Text stays in the workspace only: it can contain long extracts of unreleased material.
   fs.writeFileSync(path.join(WORKSPACE, "text", "extracted.json"), JSON.stringify(Object.fromEntries([...texts].map(([k, v]) => [k, v.text.slice(0, 20000)])), null, 1), "utf8");
   fs.writeFileSync(path.join(WORKSPACE, "inventory.json"), JSON.stringify({ summary, entries }, null, 1), "utf8");
   fs.writeFileSync(path.join(WORKSPACE, "candidates.json"), JSON.stringify(candidates, null, 1), "utf8");
   fs.writeFileSync(path.join(WORKSPACE, "duplicates.json"), JSON.stringify(groups, null, 1), "utf8");
-  audit("scan", { sources: summary.sources.map((s) => s.label), files: summary.files, sample });
+  audit("scan", { sources: summary.sources.map((s) => s.label), files: summary.files, sample, assetsAttached: assets.attached, assetsNeedingReview: assets.needsReview });
 
   writeReport(summary, candidates, groups);
   printSummary(summary, candidates, groups);
@@ -93,6 +95,18 @@ function writeReport(summary: ScanSummary, candidates: Candidate[], groups: Dupl
   for (const s of summary.sources) lines.push(`| ${s.label} | ${s.files} |`);
   lines.push("", "## File types", "", "| Type | Files |", "|---|---:|");
   for (const [type, n] of Object.entries(summary.byFileType).sort((a, b) => b[1] - a[1])) lines.push(`| ${type} | ${n} |`);
+
+  lines.push("", "## What the files are", "");
+  lines.push("| Material | Files | Meaning |", "|---|---:|---|");
+  lines.push(`| Resource candidates | ${count((c) => c.materialKind === "resource")} | may become library items |`);
+  lines.push(`| Internal / source-only | ${count((c) => c.materialKind === "internal")} | working files, never resources (owner decision 3) |`);
+  lines.push(`| Cover / support assets | ${count((c) => c.materialKind === "asset")} | artwork attached to a resource (owner decision 5) |`);
+  lines.push(`| Source / support packages | ${count((c) => c.materialKind === "package")} | ZIPs: provenance only (owner decision 2) |`);
+  lines.push("");
+  lines.push(`- Current candidates (resource, current brand): **${count((c) => c.materialKind === "resource" && !c.legacyBranding)}**`);
+  lines.push(`- Legacy candidates (resource, legacy brand): **${count((c) => c.materialKind === "resource" && c.legacyBranding)}**`);
+  lines.push(`- Needs review: **${count((c) => c.status === "NEEDS_REVIEW")}** · duplicates: **${count((c) => c.status === "DUPLICATE")}**`);
+  lines.push(`- Artwork attached to a resource: **${count((c) => c.materialKind === "asset" && !!c.asset?.attachTo)}** · flagged ASSET_LINK_REVIEW: **${count((c) => c.reviewFlags.includes("ASSET_LINK_REVIEW"))}**`);
 
   lines.push("", "## Classification", "");
   lines.push(`- OG codes found: **${count((c) => !!c.inferred.legacyCode.value)}** (${pct(count((c) => !!c.inferred.legacyCode.value))})`);
@@ -132,7 +146,12 @@ function printSummary(summary: ScanSummary, candidates: Candidate[], groups: Dup
   console.log(`\nfiles ${summary.files} · ${(summary.bytes / 1e6).toFixed(1)} MB · ${(summary.durationMs / 1000).toFixed(1)}s`);
   console.log(`types: ${Object.entries(summary.byFileType).map(([k, v]) => `${k} ${v}`).join(" · ")}`);
   console.log(`OG codes ${count((c) => !!c.inferred.legacyCode.value)} · legacy ${count((c) => c.legacyBranding)} · online-only ${summary.onlineOnly} · unreadable ${summary.unreadable}`);
-  console.log(`duplicate groups ${groups.length}: ${groups.map((g) => `${g.kind}×${g.members.length}`).join(", ") || "none"}`);
+  console.log(
+    `material: resource ${count((c) => c.materialKind === "resource")} · internal ${count((c) => c.materialKind === "internal")} · ` +
+      `asset ${count((c) => c.materialKind === "asset")} · package ${count((c) => c.materialKind === "package")}`,
+  );
+  const kinds = groups.reduce<Record<string, number>>((acc, g) => ({ ...acc, [g.kind]: (acc[g.kind] ?? 0) + 1 }), {});
+  console.log(`duplicate groups ${groups.length}: ${Object.entries(kinds).map(([k, v]) => `${k} ${v}`).join(" · ") || "none"}`);
 }
 
 const command = args[0] ?? "scan";

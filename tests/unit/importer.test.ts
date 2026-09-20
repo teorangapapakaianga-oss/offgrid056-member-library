@@ -202,7 +202,8 @@ describe("classification", () => {
   it("flags index and internal documents for review instead of importing them", async () => {
     const readme = await classifyFixture("README.md");
     expect(readme.status).toBe("NEEDS_REVIEW");
-    expect(readme.importNotes).toMatch(/internal or index/i);
+    expect(readme.materialKind).toBe("internal"); // internal material can never reach READY_TO_IMPORT
+    expect(readme.importNotes).not.toBe("");
   });
 
   it("makes a slug from a title", () => {

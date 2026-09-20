@@ -29,8 +29,25 @@ export type CandidateStatus =
 export type Disposition = "KEEP" | "ARCHIVE" | "REVIEW" | "IMPORT" | "IGNORE";
 export type DuplicateKind = "EXACT" | "LIKELY" | "VERSION_CANDIDATE" | null;
 
+/**
+ * What a file *is*, before anything is decided about it (owner decisions 3 and 5, Stage 9.3).
+ *
+ * - `resource`  — a member-facing resource, or a candidate to become one
+ * - `internal`  — READMEs, brand plans, manifests, build and navigation files: source material, never a resource
+ * - `asset`     — covers, thumbnails and other artwork: attached to a resource, never a resource on its own
+ * - `package`   — a ZIP: a source or support package, never a separate library item without explicit approval
+ *
+ * Only `resource` may ever reach READY_TO_IMPORT. The others need an explicit owner override.
+ */
+export type MaterialKind = "resource" | "internal" | "asset" | "package";
+
+export type AssetRole = "coverImage" | "thumbnail" | "supportingAsset";
+
 export type DetectedFileType =
-  | "pdf" | "html" | "markdown" | "text" | "docx" | "xlsx" | "zip" | "image" | "video" | "unknown";
+  | "pdf" | "html" | "markdown" | "text" | "docx" | "xlsx" | "zip" | "image" | "video"
+  /** fonts, stylesheets and scripts: build material, never content. Recorded, never read for text. */
+  | "font" | "style" | "code"
+  | "unknown";
 
 /** What the scanner records about a file. The file itself is never modified. */
 export interface InventoryEntry {
@@ -72,6 +89,23 @@ export interface LegacyFinding {
 /** A candidate is an inventory entry plus everything the import needs. */
 export interface Candidate extends InventoryEntry {
   status: CandidateStatus;
+  /** what the file is: only "resource" may become a library item (owner decisions 3 and 5) */
+  materialKind: MaterialKind;
+  /** artwork only: how it is meant to be used, and which resource it belongs to */
+  asset?: {
+    role: AssetRole;
+    /**
+     * "brand" artwork (logos, icons, diagrams, section covers) belongs to the brand or the programme, not to
+     * one resource, so it is never expected to attach anywhere. "resource" artwork does belong to a single
+     * resource — and when that resource cannot be identified, it is flagged ASSET_LINK_REVIEW.
+     */
+    scope: "brand" | "resource";
+    /** candidateId of the resource this artwork belongs to, or null when that is not clear */
+    attachTo: string | null;
+    attachEvidence: string[];
+  };
+  /** things a person must look at: ASSET_LINK_REVIEW, PACKAGE_CONTENTS_REVIEW, CONTENT_MISMATCH … */
+  reviewFlags: string[];
   inferred: {
     title: Inference<string>;
     resourceType: Inference<ResourceTypeId>;

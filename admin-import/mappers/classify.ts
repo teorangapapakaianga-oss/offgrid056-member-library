@@ -8,7 +8,7 @@ import rules from "../config/inference-rules.json";
 import legacyBrand from "../config/legacy-brand.json";
 import { foundations as taxonomy, getFoundation } from "@/lib/content/taxonomy";
 import type { Difficulty, FoundationId, ResourceTypeId } from "@/lib/content/constants";
-import type { Candidate, Confidence, Inference, InventoryEntry, LegacyFinding } from "../types";
+import type { AssetRole, Candidate, Confidence, Inference, InventoryEntry, LegacyFinding, MaterialKind } from "../types";
 
 export interface TextBundle {
   text: string;
@@ -92,6 +92,8 @@ interface Scored {
   strong: number;
   weak: number;
   evidence: string[];
+  /** keywords that matched in the filename or title, where the strongest signals come from */
+  nameWords: string[];
 }
 
 /**
@@ -102,6 +104,19 @@ interface Scored {
  * count as weak evidence and never make a foundation HIGH on their own.
  */
 const GENERIC = new Set(["home", "house", "household", "property", "power", "energy", "water", "food", "plan", "guide", "resilience"]);
+
+/**
+ * Words that describe the *whole household* rather than one foundation (owner decision 1, Stage 9.3).
+ *
+ * A broad scorecard called "Home Resilience Scorecard" is not a Shelter resource just because it says "home".
+ * When a foundation's only claim on the filename or title comes from words in this set, the resource is treated
+ * as cross-cutting and filed under General. A genuinely foundation-specific name — "Healthy Home **Air** Audit",
+ * "**Water** Security Assessment", "**Energy** Backup Assessment" — still wins its own foundation.
+ */
+const BROAD_SCOPE = new Set([
+  "home", "house", "household", "property", "family", "whanau", "overall", "whole",
+  "resilience", "readiness", "ready", "preparedness", "prepared", "emergency", "plan", "planning", "general",
+]);
 
 function scoreKeywords(
   map: Record<string, string[]>,
@@ -116,9 +131,11 @@ function scoreKeywords(
     let strong = 0;
     let weak = 0;
     const evidence: string[] = [];
+    const nameWords: string[] = [];
     for (const word of words) {
       const w = word.toLowerCase();
       const generic = demoteGeneric && GENERIC.has(w);
+      if (haystacks.filename.includes(w) || haystacks.title.includes(w)) nameWords.push(w);
       if (haystacks.filename.includes(w)) {
         score += generic ? 2 : 6;
         if (generic) weak++;
@@ -145,7 +162,7 @@ function scoreKeywords(
         evidence.push(`text mentions "${word}" ${inText}×`);
       }
     }
-    if (score > 0) results.push({ key, score, strong, weak, evidence: evidence.slice(0, 4) });
+    if (score > 0) results.push({ key, score, strong, weak, evidence: evidence.slice(0, 4), nameWords: [...new Set(nameWords)] });
   }
   return results.sort((a, b) => b.score - a.score);
 }
@@ -210,6 +227,14 @@ export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT)
         evidence: [`${specific.length} foundations score similarly (${specific.slice(0, 3).map((s) => `${s.key} ${s.score}`).join(", ")}): treated as cross-cutting`],
       };
       secondaryFoundations.push(...(specific.slice(0, 3).map((s) => s.key) as FoundationId[]));
+    } else if (top.key !== "general" && top.nameWords.length > 0 && top.nameWords.every((w) => BROAD_SCOPE.has(w))) {
+      // Owner decision 1: the name only claims this foundation through whole-household words ("home",
+      // "resilience", "readiness"). That is a broad household resource, not a foundation-specific one.
+      foundation = {
+        value: "general",
+        confidence: "MEDIUM",
+        evidence: [`the name only matches "${top.key}" through whole-household words (${top.nameWords.join(", ")}): filed under General (owner decision 1)`],
+      };
     } else {
       foundation = { value: top.key as FoundationId, confidence: scoreToConfidence(top.strong, top.weak, margin), evidence: top.evidence };
       for (const s of foundationScores.slice(1, 3)) {
@@ -247,21 +272,19 @@ export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT)
   // --- legacy branding -----------------------------------------------------------------------------------
   const { legacyIssues, migrationActions } = detectLegacy(bundle);
 
-  // --- is this a member resource at all? -----------------------------------------------------------------
-  // Internal working files (brand plans, READMEs, manifests, changelogs) and loose artwork are inventoried but
-  // should not become library resources. They are flagged rather than guessed at.
-  const nonResource = /^(readme|manifest|changelog|brand_plan|package|index|license|licence|notes?)\b/i.test(entry.source.filename) ||
-    entry.source.fileType === "image" ||
-    legacyCode.evidence.some((e) => e.includes("looks like an index"));
-  const notes = nonResource
-    ? entry.source.fileType === "image"
-      ? "Artwork, not a resource on its own: attach it to the resource it belongs to."
-      : "Looks like an internal or index document rather than a member resource: confirm before importing."
-    : "";
+  // --- what kind of material is this? --------------------------------------------------------------------
+  const { materialKind, notes, reviewFlags } = classifyMaterial(entry, legacyCode, bundle);
+  const asset =
+    materialKind === "asset"
+      ? { role: assetRole(entry.source.filename), scope: "resource" as const, attachTo: null, attachEvidence: [] as string[] }
+      : undefined;
 
   return {
     ...entry,
-    status: nonResource ? "NEEDS_REVIEW" : "CLASSIFIED",
+    status: materialKind === "resource" ? "CLASSIFIED" : "NEEDS_REVIEW",
+    materialKind,
+    ...(asset ? { asset } : {}),
+    reviewFlags,
     inferred: { title, resourceType, foundation, secondaryFoundations, category, legacyCode, estimatedTime, difficulty, tags },
     legacyBranding: legacyIssues.length > 0,
     legacyIssues,
@@ -276,6 +299,99 @@ export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT)
     importApproved: false,
     importedAt: null,
   };
+}
+
+/**
+ * Internal and source-only material (owner decision 3). These are never library resources: READMEs, brand
+ * plans, manifests, build output and navigation/index pages are working files, and treating one as a resource
+ * would put project internals in front of members.
+ */
+/**
+ * Matched against the filename with separators turned into spaces, because `\b` does not fire after an
+ * underscore: `^readme\b` never matches "README_FONTS.md". Anchored at the start so a genuine resource whose
+ * title happens to contain one of these words — "OG-13_Healthy_Home_Air_Audit.pdf" — is not caught.
+ */
+const INTERNAL_FILENAME =
+  /^(readme|read me|manifest|changelog|version|brand plan|brand pack|package|package lock|index|license|licence|notes?|sitemap|robots|env|tsconfig|makefile|components?|partials?|gate\d*|stage\d*|qa|audit|asset production|delivery|instructions?|spec|prompt|template)\b/i;
+const INTERNAL_FOLDER = /(^|[\\/])(_build|_source|_source_deliveries|build|dist|scripts?|tools?|templates?|working|wip|drafts?|\.git)([\\/]|$)/i;
+
+/**
+ * Business and marketing documents. These are how the business is run, not what members are taught: a sales
+ * system or a persona study would be an odd thing to find in a resilience library. Matched anywhere in the
+ * name, because they are rarely first ("OFFGRID056_SALES_SYSTEM.md").
+ *
+ * Flagged as internal rather than rejected, so the owner can still override any individual one.
+ */
+const INTERNAL_BUSINESS =
+  /\b(business strategy|delivery model|sales system|sales page|funnel|personas?|voice guide|positioning|objections?|pricing|marketing|offer validation|customer journey|customer problems|brand pack|style guide|launch plan|content (plan|system|creator)|campaign\d*|copywriting|carousel|showcase|newsletter|ad copy|post copy|social|seo|competitor|register)\b/i;
+
+function assetRole(filename: string): AssetRole {
+  const n = filename.toLowerCase();
+  if (/\bthumb(nail)?\b/.test(n)) return "thumbnail";
+  if (/\bcover\b/.test(n)) return "coverImage";
+  return "supportingAsset";
+}
+
+function classifyMaterial(
+  entry: InventoryEntry,
+  legacyCode: Inference<string>,
+  bundle: TextBundle,
+): { materialKind: MaterialKind; notes: string; reviewFlags: string[] } {
+  const { filename, folder, fileType } = entry.source;
+  const flags: string[] = [];
+
+  // Artwork: attached to a resource, never a resource (owner decision 5).
+  if (fileType === "image") {
+    return {
+      materialKind: "asset",
+      notes: "Supporting visual asset: attach it to the resource it belongs to. It must not be imported as a resource on its own.",
+      reviewFlags: flags,
+    };
+  }
+
+  // A ZIP is a source or support package, never a separate library item (owner decision 2). Where it looks
+  // like it holds several distinct resources, that is flagged rather than guessed at.
+  if (fileType === "zip") {
+    const names = ((bundle.meta.sample as string[]) ?? []).concat(bundle.text.split(/\s+/).slice(0, 400));
+    const codes = new Set(names.map((n) => detectOgCode(n, "").value).filter(Boolean));
+    if (codes.size > 1) flags.push("PACKAGE_CONTENTS_REVIEW");
+    return {
+      materialKind: "package",
+      notes:
+        codes.size > 1
+          ? `Source or support package holding ${codes.size} different OG codes: it may contain several separate resources. Review before anything is taken from it.`
+          : "Source or support package: retained as provenance, not imported as a library item (owner decision 2).",
+      reviewFlags: flags,
+    };
+  }
+
+  // Fonts, stylesheets and scripts are build material by definition.
+  if (fileType === "font" || fileType === "style" || fileType === "code") {
+    return { materialKind: "internal", notes: `Build material (${fileType}), not content.`, reviewFlags: flags };
+  }
+
+  const isIndex = legacyCode.evidence.some((e) => e.includes("looks like an index"));
+  // Leading ordering prefixes ("00_", "01-") and leading underscores ("_components.html") are stripped first,
+  // or they would defeat the start-of-name anchor.
+  const spacedName = filename
+    .replace(/\.[^.]+$/, "")
+    .replace(/[_\-.]+/g, " ")
+    .replace(/^[\d\s]+/, "")
+    .trim();
+  const isBusiness = INTERNAL_BUSINESS.test(spacedName);
+  if (INTERNAL_FILENAME.test(spacedName) || INTERNAL_FOLDER.test(folder) || isIndex || isBusiness) {
+    return {
+      materialKind: "internal",
+      notes: isIndex
+        ? "Lists many resources: an index or contents page, not a resource itself."
+        : isBusiness
+          ? "Business or marketing document (how the business is run), not member teaching material."
+          : "Internal or source material (working file, build output or navigation page), not a member resource.",
+      reviewFlags: flags,
+    };
+  }
+
+  return { materialKind: "resource", notes: "", reviewFlags: flags };
 }
 
 /** Legacy colours, typography and terminology. Detected only: the source file is never changed. */

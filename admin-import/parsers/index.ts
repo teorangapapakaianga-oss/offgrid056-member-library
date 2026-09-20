@@ -12,6 +12,10 @@ const MARKDOWN_EXT = new Set([".md", ".markdown", ".mdx"]);
 const TEXT_EXT = new Set([".txt", ".csv", ".json", ".log"]);
 const IMAGE_EXT = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".bmp"]);
 const VIDEO_EXT = new Set([".mp4", ".mov", ".m4v", ".webm", ".avi", ".mkv"]);
+/** Build material: recorded for completeness, never treated as content. */
+const FONT_EXT = new Set([".woff", ".woff2", ".ttf", ".otf", ".eot"]);
+const STYLE_EXT = new Set([".css", ".scss", ".sass", ".less"]);
+const CODE_EXT = new Set([".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx", ".py", ".ps1", ".sh", ".bat", ".cmd", ".rb", ".php"]);
 
 /** Sniff the real type from the first bytes, so a wrong extension cannot fool us. */
 export function detectFileType(filePath: string, extension: string): DetectedFileType {
@@ -35,6 +39,8 @@ export function detectFileType(filePath: string, extension: string): DetectedFil
   if (head.subarray(0, 6).toString("latin1").startsWith("GIF8")) return "image";
   if (head.subarray(8, 12).toString("latin1") === "WEBP") return "image";
   if (head.subarray(4, 8).toString("latin1") === "ftyp") return "video";
+  if (head.subarray(0, 4).toString("latin1") === "wOFF" || head.subarray(0, 4).toString("latin1") === "wOF2") return "font";
+  if (head.subarray(0, 4).toString("latin1") === "OTTO" || (head[0] === 0x00 && head[1] === 0x01 && head[2] === 0x00 && head[3] === 0x00 && FONT_EXT.has(extension))) return "font";
   if (head.subarray(0, 4).toString("latin1") === "\x1aE\xdf\xa3") return "video";
 
   if (head[0] === 0x50 && head[1] === 0x4b) {
@@ -53,6 +59,9 @@ export function detectFileType(filePath: string, extension: string): DetectedFil
   if (sample.includes("<!doctype html") || sample.includes("<html")) return "html";
   if (IMAGE_EXT.has(extension)) return "image"; // SVG and anything text-based
   if (VIDEO_EXT.has(extension)) return "video";
+  if (FONT_EXT.has(extension)) return "font";
+  if (STYLE_EXT.has(extension)) return "style";
+  if (CODE_EXT.has(extension)) return "code";
   if (MARKDOWN_EXT.has(extension)) return "markdown";
   if (TEXT_EXT.has(extension)) return "text";
   if (extension === ".html" || extension === ".htm") return "html";
@@ -146,6 +155,13 @@ export async function extractText(filePath: string, fileType: DetectedFileType, 
       }
       case "video": {
         return { text: "", raw: "", error: null, meta: { durationSeconds: mp4Duration(filePath) } };
+      }
+      case "font":
+      case "style":
+      case "code": {
+        // Build material. Recorded in the inventory for completeness, but there is no content to read, so this
+        // is not a failure: counting it as "unreadable" would hide the files that genuinely could not be read.
+        return { text: "", raw: "", error: null, meta: {} };
       }
       default:
         return empty("unsupported file type");
