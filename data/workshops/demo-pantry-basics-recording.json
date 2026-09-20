@@ -1,0 +1,25 @@
+{
+  "id": "wks-0003",
+  "slug": "demo-pantry-basics-recording",
+  "title": "DEMO: Pantry Basics (recording)",
+  "startDate": "2026-08-14T18:30:00+12:00",
+  "endDate": "2026-08-14T19:45:00+12:00",
+  "timeZone": "Pacific/Auckland",
+  "mode": "online",
+  "location": "Online",
+  "description": "DEMONSTRATION ENTRY: an example workshop listing used to build and test the library. No real workshop is scheduled, and no booking is available.",
+  "foundations": [
+    "food"
+  ],
+  "videoUrl": "https://vimeo.com/000000001",
+  "downloads": [
+    {
+      "label": "Placeholder worksheet",
+      "resourceId": "res-0023"
+    }
+  ],
+  "relatedResources": [
+    "res-0022"
+  ],
+  "isDemo": true
+}

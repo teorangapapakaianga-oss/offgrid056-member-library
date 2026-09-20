@@ -1,0 +1,18 @@
+{
+  "id": "sup-0010",
+  "slug": "demo-community-garden-training-nz",
+  "name": "DEMO: Example Community Garden Trainers",
+  "category": "Food growing training",
+  "foundations": [
+    "food"
+  ],
+  "serviceTypes": [
+    "training",
+    "advice"
+  ],
+  "country": "NZ",
+  "region": "Wellington",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a food growing training listing. No real supplier is listed yet.",
+  "isDemo": true
+}

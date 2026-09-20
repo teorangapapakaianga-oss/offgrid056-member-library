@@ -24,8 +24,12 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-08-25",
   "relatedResources": [],
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/energy/household-lighting-checklist.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19",
+  "learningPath": "energy-basics"
 }

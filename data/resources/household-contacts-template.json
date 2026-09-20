@@ -26,8 +26,11 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-06-30",
   "relatedResources": [],
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/general/household-contacts-template.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

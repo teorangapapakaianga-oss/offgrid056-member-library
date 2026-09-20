@@ -1,0 +1,19 @@
+{
+  "id": "sup-0004",
+  "slug": "demo-solar-installer-au",
+  "name": "DEMO: Example Solar Installers",
+  "category": "Solar & batteries",
+  "foundations": [
+    "energy"
+  ],
+  "serviceTypes": [
+    "products",
+    "installation",
+    "advice"
+  ],
+  "country": "AU",
+  "region": "Queensland",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a solar installation listing. No real supplier is listed yet.",
+  "isDemo": true
+}

@@ -1,0 +1,12 @@
+{
+  "id": "energy-basics",
+  "title": "Energy Basics",
+  "description": "DEMONSTRATION learning path: Energy Basics.",
+  "foundation": "energy",
+  "steps": [
+    "res-0026",
+    "res-0027",
+    "res-0028",
+    "res-0029"
+  ]
+}

@@ -8,6 +8,7 @@ import { formatMinutes } from "@/lib/format";
 import { FOUNDATION_STYLES } from "@/lib/foundation-style";
 import { memberStore, useMemberState, useProgrammeDay } from "@/lib/member";
 import { NOTES_MAX, PROGRAMME_DAYS } from "@/lib/member/types";
+import { DownloadActions, type FileInfo } from "@/components/resources/download-actions";
 import { ResourceListItem } from "@/components/resources/resource-list-item";
 import { Icon } from "@/components/ui/icon";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -90,8 +91,16 @@ export function ProgrammeOverview({ programme, days }: { programme: Programme; d
   );
 }
 
-/** One programme day: action, linked resources, completion tick and private notes. */
-export function ProgrammeDayView({ day, resources }: { day: ProgrammeDay; resources: ResourceSummary[] }) {
+/** One programme day: action, linked resources, worksheet download, completion tick and private notes. */
+export function ProgrammeDayView({
+  day,
+  resources,
+  worksheetFile,
+}: {
+  day: ProgrammeDay;
+  resources: ResourceSummary[];
+  worksheetFile?: FileInfo;
+}) {
   const { ready, completed, notes, setCompleted, setNotes } = useProgrammeDay(day.day);
   const [draft, setDraft] = useState(notes);
   const [savedAt, setSavedAt] = useState<string | null>(null);
@@ -147,10 +156,14 @@ export function ProgrammeDayView({ day, resources }: { day: ProgrammeDay; resour
                 </li>
               ))}
             </ul>
-            {day.worksheet && (
-              <p className="mt-3 text-sm text-og-taupe">
-                Worksheet: {day.worksheet.label}. Downloads arrive in Stage 5.
-              </p>
+            {worksheetFile && (
+              <div className="mt-4 flex flex-col gap-3 rounded-lg bg-og-white/70 p-4 ring-1 ring-og-line sm:flex-row sm:items-center sm:justify-between">
+                <p className="font-semibold text-og-charcoal">
+                  Worksheet: {day.worksheet?.label}
+                  <span className="block text-xs font-normal text-og-taupe">Print it, or fill it in on paper as you go.</span>
+                </p>
+                <DownloadActions file={worksheetFile} compact />
+              </div>
             )}
           </section>
         )}

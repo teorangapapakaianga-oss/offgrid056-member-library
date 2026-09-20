@@ -9,10 +9,6 @@
   "resourceIds": [
     "res-0025"
   ],
-  "worksheet": {
-    "label": "Placeholder worksheet",
-    "resourceId": "res-0025"
-  },
   "notesEnabled": true,
   "isPlaceholder": true
 }

@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
-import { CollectionPage } from "@/components/resources/collection-page";
-import { getSummaries } from "@/lib/content/repository";
+import { Breadcrumbs } from "@/components/layout/breadcrumbs";
+import { PageHeader } from "@/components/layout/page-header";
+import { DownloadCentre } from "@/components/resources/download-centre";
+import { getDownloads } from "@/lib/content/repository";
 
 export const metadata: Metadata = { title: "Member Downloads" };
 
 export default function DownloadsPage() {
+  const downloads = getDownloads();
   return (
-    <CollectionPage
-      title="Member Downloads"
-      eyebrow="Download centre"
-      description="Every downloadable guide, workbook, planner, checklist, assessment, worksheet and pack in one place."
-      items={getSummaries((r) => r.downloadable)}
-      hideGroups={[]} emptyTitle="No downloads yet" emptyText="V1 demo entries have no files yet. The download centre (format, file size, updated date, download button) is completed in Stage 5."
-    />
+    <>
+      <Breadcrumbs items={[{ label: "Member Downloads" }]} />
+      <PageHeader
+        eyebrow="Download centre"
+        title="Member Downloads"
+        description="Every downloadable guide, workbook, planner, checklist, assessment, worksheet and pack in one place. Files open in your browser or save to your device; nothing downloads until you choose it."
+      />
+      <DownloadCentre downloads={downloads} />
+    </>
   );
 }

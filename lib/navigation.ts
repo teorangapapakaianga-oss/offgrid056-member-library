@@ -38,6 +38,7 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "Tools & Programme",
     items: [
       { href: "/planning-tools/", label: "Planning Tools", icon: "planning" },
+      { href: "/learning-paths/", label: "Learning Paths", icon: "foundations" },
       { href: "/programme/", label: "30-Day Programme", icon: "programme" },
       { href: "/packs/", label: "Resource Packs", icon: "packs" },
       { href: "/videos/", label: "Videos & Tutorials", icon: "video" },

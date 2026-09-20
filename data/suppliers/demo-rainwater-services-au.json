@@ -1,0 +1,18 @@
+{
+  "id": "sup-0005",
+  "slug": "demo-rainwater-services-au",
+  "name": "DEMO: Example Rainwater Services",
+  "category": "Rainwater harvesting",
+  "foundations": [
+    "water"
+  ],
+  "serviceTypes": [
+    "installation",
+    "maintenance"
+  ],
+  "country": "AU",
+  "region": "New South Wales",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a rainwater harvesting service. No real supplier is listed yet.",
+  "isDemo": true
+}

@@ -1,0 +1,25 @@
+{
+  "id": "wks-0001",
+  "slug": "demo-water-storage-workshop",
+  "title": "DEMO: Household Water Storage Workshop",
+  "startDate": "2026-11-12T18:30:00+13:00",
+  "endDate": "2026-11-12T20:00:00+13:00",
+  "timeZone": "Pacific/Auckland",
+  "mode": "online",
+  "location": "Online (joining link sent to registered members)",
+  "description": "DEMONSTRATION ENTRY: an example workshop listing used to build and test the library. No real workshop is scheduled, and no booking is available.",
+  "foundations": [
+    "water"
+  ],
+  "downloads": [
+    {
+      "label": "Placeholder worksheet",
+      "resourceId": "res-0015"
+    }
+  ],
+  "relatedResources": [
+    "res-0014",
+    "res-0017"
+  ],
+  "isDemo": true
+}

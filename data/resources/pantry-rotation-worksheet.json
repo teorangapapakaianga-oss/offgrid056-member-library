@@ -23,8 +23,11 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-08-15",
   "relatedResources": [],
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/food/pantry-rotation-worksheet.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

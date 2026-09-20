@@ -28,12 +28,15 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-08-20",
   "relatedResources": [
     "res-0007",
     "res-0006"
   ],
   "learningPath": "start-here",
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/general/household-resilience-assessment.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

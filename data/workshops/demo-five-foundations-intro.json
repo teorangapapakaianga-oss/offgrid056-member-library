@@ -1,0 +1,25 @@
+{
+  "id": "wks-0005",
+  "slug": "demo-five-foundations-intro",
+  "title": "DEMO: Five Foundations Introduction",
+  "startDate": "2026-06-05T18:30:00+12:00",
+  "endDate": "2026-06-05T19:30:00+12:00",
+  "timeZone": "Pacific/Auckland",
+  "mode": "hybrid",
+  "location": "Placeholder venue, Tauranga, New Zealand, and online",
+  "description": "DEMONSTRATION ENTRY: an example workshop listing used to build and test the library. No real workshop is scheduled, and no booking is available.",
+  "foundations": [
+    "general"
+  ],
+  "downloads": [
+    {
+      "label": "Placeholder overview",
+      "resourceId": "res-0004"
+    }
+  ],
+  "relatedResources": [
+    "res-0003",
+    "res-0005"
+  ],
+  "isDemo": true
+}

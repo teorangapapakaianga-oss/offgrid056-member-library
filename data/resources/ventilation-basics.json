@@ -24,11 +24,14 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-09-05",
   "relatedResources": [
     "res-0011",
     "res-0013"
   ],
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/air/ventilation-basics.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

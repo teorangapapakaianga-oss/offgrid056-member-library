@@ -1,0 +1,19 @@
+{
+  "id": "sup-0006",
+  "slug": "demo-preparedness-supplies-us",
+  "name": "DEMO: Example Preparedness Supplies",
+  "category": "Household supplies",
+  "foundations": [
+    "food",
+    "water",
+    "energy"
+  ],
+  "serviceTypes": [
+    "products"
+  ],
+  "country": "US",
+  "region": "Pacific Northwest",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a household preparedness supplier. No real supplier is listed yet.",
+  "isDemo": true
+}

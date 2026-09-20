@@ -23,7 +23,7 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-09-10",
   "relatedResources": [
     "res-0015",
@@ -31,5 +31,8 @@
     "res-0016"
   ],
   "learningPath": "water-basics",
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/water/water-security-guide.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

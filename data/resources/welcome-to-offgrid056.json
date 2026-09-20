@@ -27,9 +27,12 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-09-12",
   "relatedResources": [],
   "learningPath": "start-here",
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/general/welcome-to-offgrid056.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

@@ -1,0 +1,18 @@
+{
+  "id": "sup-0001",
+  "slug": "demo-water-tank-supplier-nz",
+  "name": "DEMO: Example Water Tank Supplier",
+  "category": "Water tanks & storage",
+  "foundations": [
+    "water"
+  ],
+  "serviceTypes": [
+    "products",
+    "installation"
+  ],
+  "country": "NZ",
+  "region": "Waikato",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of how a water tank supplier will appear. No real supplier is listed yet.",
+  "isDemo": true
+}

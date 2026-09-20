@@ -1,0 +1,19 @@
+{
+  "id": "sup-0007",
+  "slug": "demo-generator-service-us",
+  "name": "DEMO: Example Standby Power Services",
+  "category": "Backup power",
+  "foundations": [
+    "energy"
+  ],
+  "serviceTypes": [
+    "products",
+    "installation",
+    "maintenance"
+  ],
+  "country": "US",
+  "region": "Nationwide",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a backup power service listing. No real supplier is listed yet.",
+  "isDemo": true
+}

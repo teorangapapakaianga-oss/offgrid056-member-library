@@ -24,12 +24,15 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-08-02",
   "relatedResources": [
     "res-0017",
     "res-0014"
   ],
   "learningPath": "water-basics",
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/water/water-storage-calculator.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

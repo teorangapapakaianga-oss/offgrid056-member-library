@@ -28,9 +28,12 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-08-20",
   "relatedResources": [],
   "learningPath": "start-here",
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/general/build-your-first-30-day-action-plan.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

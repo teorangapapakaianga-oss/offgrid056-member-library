@@ -1,0 +1,18 @@
+{
+  "id": "sup-0009",
+  "slug": "demo-ventilation-specialists-ca",
+  "name": "DEMO: Example Ventilation Specialists",
+  "category": "Ventilation & air quality",
+  "foundations": [
+    "air"
+  ],
+  "serviceTypes": [
+    "installation",
+    "assessment"
+  ],
+  "country": "CA",
+  "region": "Ontario",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a ventilation specialist listing. No real supplier is listed yet.",
+  "isDemo": true
+}

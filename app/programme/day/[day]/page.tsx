@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { StorageNotice } from "@/components/member/member-actions";
 import { ProgrammeDayView } from "@/components/programme/programme-views";
 import { Icon } from "@/components/ui/icon";
-import { getProgrammeDay, getProgrammeDays, getSummaries } from "@/lib/content/repository";
+import { fileSizeBytes, getProgrammeDay, getProgrammeDays, getResourceById, getSummaries } from "@/lib/content/repository";
 import { getFoundation } from "@/lib/content/taxonomy";
 import { formatMinutes } from "@/lib/format";
 
@@ -26,6 +26,20 @@ export default async function ProgrammeDayPage({ params }: PageProps<"/programme
   const resources = getSummaries((r) => day.resourceIds.includes(r.id));
   const f = getFoundation(day.foundation);
 
+  // The day's worksheet, resolved to the real file so it can be opened or downloaded.
+  const worksheetResource = day.worksheet?.resourceId ? getResourceById(day.worksheet.resourceId) : undefined;
+  const worksheetUrl = worksheetResource?.fileUrl ?? day.worksheet?.fileUrl;
+  const worksheetFile = worksheetUrl
+    ? {
+        fileUrl: worksheetUrl,
+        format: worksheetResource?.fileFormat ?? "PDF",
+        sizeBytes: fileSizeBytes(worksheetUrl, worksheetResource?.fileSizeBytes),
+        updatedDate: worksheetResource?.updatedDate ?? worksheetResource?.publishedDate ?? "2026-09-19",
+        title: worksheetResource?.title ?? day.worksheet?.label ?? "Worksheet",
+        openable: (worksheetResource?.fileFormat ?? "PDF") === "PDF",
+      }
+    : undefined;
+
   return (
     <>
       <Breadcrumbs items={[{ label: "30-Day Programme", href: "/programme/" }, { label: `Day ${day.day}` }]} />
@@ -45,7 +59,7 @@ export default async function ProgrammeDayPage({ params }: PageProps<"/programme
           </span>
         </p>
       )}
-      <ProgrammeDayView day={day} resources={resources} />
+      <ProgrammeDayView day={day} resources={resources} worksheetFile={worksheetFile} />
     </>
   );
 }

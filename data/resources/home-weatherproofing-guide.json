@@ -24,11 +24,14 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-08-11",
   "relatedResources": [
     "res-0021",
     "res-0020"
   ],
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/shelter/home-weatherproofing-guide.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

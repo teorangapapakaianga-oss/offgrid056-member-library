@@ -23,7 +23,7 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-09-16",
   "relatedResources": [],
   "packItems": [
@@ -32,5 +32,8 @@
     "res-0006",
     "res-0017"
   ],
-  "completionAvailable": false
+  "completionAvailable": false,
+  "fileUrl": "/resources/packs/starter-resource-pack.zip",
+  "fileFormat": "ZIP",
+  "updatedDate": "2026-09-19"
 }

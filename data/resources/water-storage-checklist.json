@@ -23,9 +23,12 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-08-02",
   "relatedResources": [],
   "learningPath": "water-basics",
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/water/water-storage-checklist.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

@@ -47,6 +47,12 @@
   }
 
   window.ogContrastAudit = function () {
+    // A hidden tab (the pane in the background) freezes CSS transitions part-way, so computed colours would be
+    // half-finished. Turn transitions off for the duration of the audit and measure the settled colours.
+    const killTransitions = document.createElement("style");
+    killTransitions.textContent = "*,*::before,*::after{transition:none !important;animation:none !important}";
+    document.head.appendChild(killTransitions);
+    void document.body.offsetHeight; // force a style recalculation
     const rows = [];
     const seen = new Set();
     for (const el of document.querySelectorAll("body *")) {
@@ -65,6 +71,7 @@
       seen.add(key);
       rows.push({ text: el.textContent.trim().slice(0, 30), size, weight, ratio, need, pass: ratio >= need });
     }
+    killTransitions.remove();
     return { page: location.pathname, checked: rows.length, failures: rows.filter((r) => !r.pass), min: Math.min(...rows.map((r) => r.ratio)) };
   };
 
@@ -83,6 +90,11 @@
       // A card title link stretches over its whole card (::after inset-0), so measure that card instead.
       const stretched = c.tagName === "A" && c.closest("article") && getComputedStyle(c, "::after").position === "absolute";
       const box = stretched ? c.closest("article").getBoundingClientRect() : r;
+      // WCAG 2.5.8 exempts a link inside a sentence of text ("inline" exception).
+      const parent = c.parentElement;
+      const inlineInSentence =
+        c.tagName === "A" && parent && /^(P|LI|SPAN|DD|TD)$/.test(parent.tagName) && parent.textContent.trim().length > name.trim().length + 12;
+      if (inlineInSentence) continue;
       if (r.width >= 1 && (c.tagName === "BUTTON" || c.tagName === "A") && (box.height < 24 || box.width < 24)) {
         issues.push(`tap target ${Math.round(box.width)}×${Math.round(box.height)}: ${name.slice(0, 20)}`);
       }

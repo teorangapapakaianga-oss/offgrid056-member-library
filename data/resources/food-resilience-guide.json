@@ -24,11 +24,14 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-09-08",
   "relatedResources": [
     "res-0023",
     "res-0024"
   ],
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/food/food-resilience-guide.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19"
 }

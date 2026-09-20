@@ -1,0 +1,18 @@
+{
+  "id": "sup-0003",
+  "slug": "demo-insulation-installer-nz",
+  "name": "DEMO: Example Insulation Installers",
+  "category": "Insulation",
+  "foundations": [
+    "shelter"
+  ],
+  "serviceTypes": [
+    "installation",
+    "assessment"
+  ],
+  "country": "NZ",
+  "region": "Otago",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of an insulation installer listing. No real supplier is listed yet.",
+  "isDemo": true
+}

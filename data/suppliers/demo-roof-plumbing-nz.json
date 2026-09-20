@@ -1,0 +1,19 @@
+{
+  "id": "sup-0002",
+  "slug": "demo-roof-plumbing-nz",
+  "name": "DEMO: Example Roof Plumbing & Guttering",
+  "category": "Roofing & guttering",
+  "foundations": [
+    "shelter",
+    "water"
+  ],
+  "serviceTypes": [
+    "installation",
+    "maintenance"
+  ],
+  "country": "NZ",
+  "region": "Nationwide",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a roofing and guttering service listing. No real supplier is listed yet.",
+  "isDemo": true
+}

@@ -24,11 +24,15 @@
   "premium": false,
   "isPlaceholder": true,
   "status": "published",
-  "downloadable": false,
+  "downloadable": true,
   "publishedDate": "2026-09-03",
   "relatedResources": [
     "res-0027",
     "res-0028"
   ],
-  "completionAvailable": true
+  "completionAvailable": true,
+  "fileUrl": "/resources/energy/energy-backup-guide.pdf",
+  "fileFormat": "PDF",
+  "updatedDate": "2026-09-19",
+  "learningPath": "energy-basics"
 }

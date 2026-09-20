@@ -1,0 +1,137 @@
+"use client";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import type { DownloadEntry } from "@/lib/content/repository";
+import { getFoundation, getResourceType } from "@/lib/content/taxonomy";
+import { formatBytes, formatDate } from "@/lib/format-bytes";
+import { EmptyState } from "@/components/ui/empty-state";
+import { Icon } from "@/components/ui/icon";
+
+/** The filters named in the brief, mapped onto resource types. */
+const GROUPS = [
+  { id: "guide", label: "Guides", types: ["guide"] },
+  { id: "workbook", label: "Workbooks", types: ["workbook"] },
+  { id: "planner", label: "Planners", types: ["planner", "template"] },
+  { id: "checklist", label: "Checklists", types: ["checklist"] },
+  { id: "assessment", label: "Assessments", types: ["assessment"] },
+  { id: "worksheet", label: "Worksheets", types: ["worksheet"] },
+  { id: "pack", label: "Packs", types: ["download-pack"] },
+] as const;
+
+export function DownloadCentre({ downloads }: { downloads: DownloadEntry[] }) {
+  const [group, setGroup] = useState<string>("all");
+
+  const counts = useMemo(() => {
+    const out: Record<string, number> = { all: downloads.length };
+    for (const g of GROUPS) out[g.id] = downloads.filter((d) => (g.types as readonly string[]).includes(d.resourceType)).length;
+    return out;
+  }, [downloads]);
+
+  const shown = useMemo(() => {
+    if (group === "all") return downloads;
+    const types = GROUPS.find((g) => g.id === group)?.types ?? [];
+    return downloads.filter((d) => (types as readonly string[]).includes(d.resourceType));
+  }, [downloads, group]);
+
+  return (
+    <>
+      <div role="group" aria-label="Filter downloads by type" className="mb-5 flex flex-wrap gap-2">
+        {[{ id: "all", label: "All downloads" }, ...GROUPS].map((g) => {
+          const active = group === g.id;
+          const n = counts[g.id] ?? 0;
+          if (!n && g.id !== "all") return null;
+          return (
+            <button
+              key={g.id}
+              type="button"
+              onClick={() => setGroup(g.id)}
+              aria-pressed={active}
+              className={`inline-flex min-h-11 items-center gap-2 rounded-full px-4 text-sm font-semibold transition ${
+                active ? "bg-og-charcoal text-og-white" : "bg-white text-og-charcoal ring-1 ring-og-taupe/35 hover:ring-og-deep"
+              }`}
+            >
+              {g.label}
+              <span className={active ? "text-og-green" : "text-og-taupe"}>{n}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <p className="mb-4 text-sm text-og-taupe" role="status">
+        {shown.length} {shown.length === 1 ? "file" : "files"}
+      </p>
+
+      {shown.length === 0 ? (
+        <EmptyState icon="downloads" title="No downloads in this group yet" action={{ href: "/library/", label: "Browse the library" }}>
+          Files will appear here as resources are added.
+        </EmptyState>
+      ) : (
+        <div className="overflow-hidden rounded-xl bg-white ring-1 ring-og-line">
+          <table className="w-full text-left text-sm">
+            <caption className="sr-only">Member downloads: title, format, file size, updated date and actions</caption>
+            <thead className="border-b border-og-line bg-og-white/70 text-xs uppercase tracking-wide text-og-taupe">
+              <tr>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Title
+                </th>
+                <th scope="col" className="px-4 py-3 font-semibold">
+                  Format
+                </th>
+                <th scope="col" className="hidden px-4 py-3 font-semibold sm:table-cell">
+                  Size
+                </th>
+                <th scope="col" className="hidden px-4 py-3 font-semibold md:table-cell">
+                  Updated
+                </th>
+                <th scope="col" className="px-4 py-3 text-right font-semibold">
+                  Get it
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {shown.map((d) => (
+                <tr key={d.id} className="border-b border-og-line last:border-0">
+                  <th scope="row" className="px-4 py-3 font-normal">
+                    <Link href={`/resources/${d.slug}/`} className="inline-flex min-h-6 items-center font-semibold text-og-charcoal underline-offset-2 hover:text-og-deep hover:underline">
+                      {d.title}
+                    </Link>
+                    <span className="block text-xs text-og-taupe">
+                      {getResourceType(d.resourceType).label} · {getFoundation(d.foundation).name}
+                      {d.isPlaceholder && " · Demo"}
+                    </span>
+                  </th>
+                  <td className="px-4 py-3 text-og-graphite">{d.format}</td>
+                  <td className="hidden px-4 py-3 text-og-graphite sm:table-cell">{formatBytes(d.sizeBytes)}</td>
+                  <td className="hidden px-4 py-3 text-og-graphite md:table-cell">{formatDate(d.updatedDate)}</td>
+                  <td className="px-4 py-3">
+                    <div className="flex justify-end gap-2">
+                      {d.openable && (
+                        <a
+                          href={d.fileUrl}
+                          target="_blank"
+                          rel="noopener"
+                          className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-og-deep ring-1 ring-og-taupe/35 hover:ring-og-deep"
+                        >
+                          Open<span className="sr-only"> {d.title} in a new tab</span>
+                        </a>
+                      )}
+                      <a
+                        href={d.fileUrl}
+                        download
+                        className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-og-charcoal px-3 text-sm font-semibold text-og-white hover:bg-og-deep"
+                      >
+                        <Icon name="download" className="size-4" />
+                        <span className="hidden sm:inline">Download</span>
+                        <span className="sr-only"> {d.title}</span>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}

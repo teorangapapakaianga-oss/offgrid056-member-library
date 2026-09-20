@@ -6,6 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { z } from "zod";
+import { SupplierSchema, WorkshopSchema, type Supplier, type Workshop } from "./directory-schemas";
 import { ProgrammeDaySchema, ProgrammeSchema, type Programme, type ProgrammeDay } from "./programme-schemas";
 import { LearningPathSchema, ResourceSchema, type LearningPath, type Resource } from "./schemas";
 import { toSummary, type ResourceSummary } from "./summaries";
@@ -101,4 +102,66 @@ export function getSummaries(filter?: (r: Resource) => boolean): ResourceSummary
   return getResources()
     .filter(filter ?? (() => true))
     .map(toSummary);
+}
+
+let supplierCache: Supplier[] | null = null;
+let workshopCache: Workshop[] | null = null;
+
+export function getSuppliers(): Supplier[] {
+  supplierCache ??= readJsonDir("suppliers", parseWith(SupplierSchema)).sort((a, b) => a.name.localeCompare(b.name));
+  return supplierCache;
+}
+
+export function getWorkshops(): Workshop[] {
+  workshopCache ??= readJsonDir("workshops", parseWith(WorkshopSchema)).sort((a, b) => b.startDate.localeCompare(a.startDate));
+  return workshopCache;
+}
+
+export function getWorkshopBySlug(slug: string): Workshop | undefined {
+  return getWorkshops().find((w) => w.slug === slug);
+}
+
+export interface DownloadEntry {
+  id: string;
+  slug: string;
+  title: string;
+  resourceType: Resource["resourceType"];
+  foundation: Resource["foundation"];
+  format: string;
+  sizeBytes: number | null;
+  updatedDate: string;
+  fileUrl: string;
+  isPlaceholder: boolean;
+  /** true when the browser can show it in a tab (PDF, image); otherwise only download makes sense */
+  openable: boolean;
+}
+
+/** File size read from disk at build time for local files, so it can never be wrong or forgotten. */
+export function fileSizeBytes(fileUrl: string, declared?: number): number | null {
+  if (!fileUrl.startsWith("/")) return declared ?? null;
+  try {
+    return fs.statSync(path.join(process.cwd(), "public", fileUrl)).size;
+  } catch {
+    return declared ?? null;
+  }
+}
+
+/** Everything downloadable, newest update first: the Member Download Centre. */
+export function getDownloads(): DownloadEntry[] {
+  return getResources()
+    .filter((r) => r.downloadable && r.fileUrl)
+    .map((r) => ({
+      id: r.id,
+      slug: r.slug,
+      title: r.title,
+      resourceType: r.resourceType,
+      foundation: r.foundation,
+      format: r.fileFormat ?? "FILE",
+      sizeBytes: fileSizeBytes(r.fileUrl!, r.fileSizeBytes),
+      updatedDate: r.updatedDate ?? r.publishedDate,
+      fileUrl: r.fileUrl!,
+      isPlaceholder: r.isPlaceholder,
+      openable: (r.fileFormat ?? "") === "PDF" || (r.fileFormat ?? "") === "PNG",
+    }))
+    .sort((a, b) => b.updatedDate.localeCompare(a.updatedDate) || a.title.localeCompare(b.title));
 }

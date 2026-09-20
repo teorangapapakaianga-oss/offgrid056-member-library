@@ -1,0 +1,19 @@
+{
+  "id": "sup-0008",
+  "slug": "demo-home-energy-audit-ca",
+  "name": "DEMO: Example Home Energy Assessors",
+  "category": "Home energy assessment",
+  "foundations": [
+    "energy",
+    "shelter"
+  ],
+  "serviceTypes": [
+    "assessment",
+    "advice"
+  ],
+  "country": "CA",
+  "region": "British Columbia",
+  "website": "https://example.com",
+  "description": "DEMONSTRATION ENTRY: an example of a home energy assessment service. No real supplier is listed yet.",
+  "isDemo": true
+}
