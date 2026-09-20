@@ -66,8 +66,17 @@ export function DownloadCentre({ downloads }: { downloads: DownloadEntry[] }) {
           Files will appear here as resources are added.
         </EmptyState>
       ) : (
-        <div className="overflow-hidden rounded-xl bg-white ring-1 ring-og-line">
-          <table className="w-full text-left text-sm">
+        <div
+          role="region"
+          aria-label="Member downloads table"
+          tabIndex={0}
+          className="relative overflow-x-auto rounded-xl bg-white ring-1 ring-og-line"
+        >
+          {/*
+            A table cannot shrink below its content, so on a narrow phone the table scrolls inside this box
+            instead of the whole page scrolling sideways. tabIndex makes that scroller reachable by keyboard.
+          */}
+          <table className="w-full min-w-[34rem] text-left text-sm">
             <caption className="sr-only">Member downloads: title, format, file size, updated date and actions</caption>
             <thead className="border-b border-og-line bg-og-white/70 text-xs uppercase tracking-wide text-og-taupe">
               <tr>

@@ -50,6 +50,12 @@ export const WorkshopSchema = z
     location: z.string().min(3),
     description: z.string().min(10),
     foundations: z.array(FoundationIdSchema).default([]),
+    /**
+     * Booking happens on an external site (owner decision: no booking engine inside the library).
+     * When absent, no booking button is shown at all.
+     */
+    bookingUrl: z.url({ protocol: /^https$/ }).optional(),
+    bookingLabel: z.string().max(40).optional(),
     videoUrl: z.url({ protocol: /^https$/ }).optional(),
     downloads: z
       .array(z.object({ label: z.string(), resourceId: z.string().optional(), fileUrl: z.string().optional() }).strict())

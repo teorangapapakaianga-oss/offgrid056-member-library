@@ -2,7 +2,7 @@
  * Progress and recommendations: pure functions of (content, member state). Nothing derived is stored
  * (docs/ARCHITECTURE.md §10).
  */
-import type { FoundationId } from "@/lib/content/schemas";
+import type { FoundationId } from "@/lib/content/constants";
 import type { ResourceSummary } from "@/lib/content/summaries";
 
 const DIFFICULTY_RANK = { beginner: 0, intermediate: 1, advanced: 2 } as const;

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import type { Workshop } from "@/lib/content/directory-schemas";
+import type { Workshop } from "@/lib/content/constants";
 import { useNow } from "@/lib/hooks/use-now";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Icon } from "@/components/ui/icon";
@@ -29,6 +29,7 @@ function WorkshopCard({ w, now }: { w: Workshop; now: Date | null }) {
         <span className="rounded-full bg-og-deep px-2.5 py-0.5 text-og-white">{MODE_LABELS[w.mode]}</span>
         {w.videoUrl && <span className="rounded-full bg-og-green px-2.5 py-0.5 text-og-charcoal">Recording</span>}
         {w.downloads.length > 0 && <span className="rounded-full bg-white px-2.5 py-0.5 text-og-charcoal ring-1 ring-og-graphite/30">Handouts</span>}
+        {w.bookingUrl && <span className="rounded-full bg-white px-2.5 py-0.5 text-og-deep ring-1 ring-og-deep/40">Booking open</span>}
         {w.isDemo && <span className="rounded-full border border-dashed border-og-taupe px-2.5 py-0.5 text-og-taupe">Demonstration content</span>}
       </div>
       <h2 className="text-base leading-snug font-semibold text-og-charcoal">
@@ -104,6 +105,32 @@ export function WorkshopTabs({ workshops }: { workshops: Workshop[] }) {
         )}
       </div>
     </>
+  );
+}
+
+/**
+ * Booking happens on an external site (owner decision: no booking engine in the library).
+ * The button appears only when a workshop has a booking link, and never for an event that has already happened.
+ */
+export function WorkshopBooking({ workshop }: { workshop: Workshop }) {
+  const now = useNow();
+  if (!workshop.bookingUrl) return null;
+  const past = now ? new Date(workshop.endDate ?? workshop.startDate) < now : false;
+  if (past) return null;
+  return (
+    <div className="flex flex-col gap-2">
+      <a
+        href={workshop.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-og-green px-5 text-sm font-semibold text-og-charcoal hover:brightness-95"
+      >
+        {workshop.bookingLabel ?? "Book / Register"}
+        <Icon name="arrowRight" className="size-4" />
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+      <p className="text-xs text-og-taupe">Booking is handled on the event page, which opens in a new tab.</p>
+    </div>
   );
 }
 

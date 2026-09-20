@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import type { LearningPath } from "@/lib/content/schemas";
+import type { LearningPath } from "@/lib/content/constants";
 import type { ResourceSummary } from "@/lib/content/summaries";
 import { getFoundation } from "@/lib/content/taxonomy";
 import { formatMinutes } from "@/lib/format";

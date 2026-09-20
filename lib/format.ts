@@ -1,4 +1,4 @@
-import type { Difficulty } from "@/lib/content/schemas";
+import type { Difficulty } from "@/lib/content/constants";
 
 /** 8 → "8 min" · 60 → "1 h" · 90 → "1 h 30 min" */
 export function formatMinutes(mins: number): string {

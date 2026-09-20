@@ -12,6 +12,8 @@
     "shelter",
     "air"
   ],
+  "bookingUrl": "https://example.com/demo-booking",
+  "bookingLabel": "Book a place",
   "downloads": [
     {
       "label": "Placeholder checklist",

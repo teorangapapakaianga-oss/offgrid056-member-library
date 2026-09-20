@@ -10,6 +10,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Icon } from "@/components/ui/icon";
 import { ProgressBar } from "@/components/ui/progress-bar";
 import { BackupRestore } from "./backup-restore";
+import { StartAgain } from "./start-again";
 import type { PathLite } from "./dashboard";
 
 export function ProgressView({ items, paths }: { items: ResourceSummary[]; paths: PathLite[] }) {
@@ -114,6 +115,7 @@ export function ProgressView({ items, paths }: { items: ResourceSummary[]; paths
       </section>
 
       <BackupRestore />
+      <StartAgain />
     </div>
   );
 }

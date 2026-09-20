@@ -1,25 +1,18 @@
 /**
- * Taxonomy lookups (foundations, categories, resource types). Small and static, so safe for client components.
+ * Taxonomy lookups (foundations, categories, resource types).
+ *
+ * Small, fixed data that the browser needs, so this module stays free of the validation library. The taxonomy
+ * files are validated at build time by `tools/validate-content.ts`, which fails the build if they are wrong.
  */
 import foundationsJson from "@/data/taxonomy/foundations.json";
 import typesJson from "@/data/taxonomy/resource-types.json";
-import {
-  FoundationSchema,
-  ResourceTypeSchema,
-  type Category,
-  type Foundation,
-  type FoundationId,
-  type ResourceType,
-  type ResourceTypeId,
-} from "./schemas";
+import type { Category, Foundation, FoundationId, ResourceType, ResourceTypeId } from "./constants";
 
-export const foundations: Foundation[] = FoundationSchema.array()
-  .parse(foundationsJson.foundations)
-  .sort((a, b) => a.order - b.order);
+export const foundations: Foundation[] = (foundationsJson.foundations as Foundation[]).slice().sort((a, b) => a.order - b.order);
 
 export const fiveFoundations = foundations.filter((f) => f.id !== "general");
 
-export const resourceTypes: ResourceType[] = ResourceTypeSchema.array().parse(typesJson.resourceTypes);
+export const resourceTypes: ResourceType[] = typesJson.resourceTypes as ResourceType[];
 
 const foundationById = new Map(foundations.map((f) => [f.id, f]));
 const typeById = new Map(resourceTypes.map((t) => [t.id, t]));

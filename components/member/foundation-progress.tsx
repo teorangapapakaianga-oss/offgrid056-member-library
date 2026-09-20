@@ -1,5 +1,5 @@
 "use client";
-import type { FoundationId } from "@/lib/content/schemas";
+import type { FoundationId } from "@/lib/content/constants";
 import type { ResourceSummary } from "@/lib/content/summaries";
 import { getFoundation } from "@/lib/content/taxonomy";
 import { useMemberState } from "@/lib/member";

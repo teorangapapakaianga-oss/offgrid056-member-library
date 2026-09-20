@@ -5,8 +5,10 @@
  *  - Everything is keyed by the PERMANENT resource id (`res-0001`), never by slug or title.
  *  - Values carry an ISO timestamp, not just a boolean, so history, ordering and merges work.
  *  - `schemaVersion` gates every read: unknown or damaged data is recovered, never trusted.
+ *
+ * These are plain types and constants on purpose: this module is loaded by the browser, so it must not pull in a
+ * validation library. The runtime checks live in `validate.ts` (see the note there).
  */
-import { z } from "zod";
 
 export const MEMBER_STORAGE_KEY = "og056.member.v1";
 export const MEMBER_CORRUPT_KEY = "og056.member.v1.corrupt";
@@ -15,53 +17,45 @@ export const RECENT_LIMIT = 20;
 export const NOTES_MAX = 2000;
 export const PROGRAMME_DAYS = 30;
 
-const isoDate = z.iso.datetime({ offset: true }).or(z.iso.datetime());
-const resourceId = z.string().regex(/^res-\d{4}$/);
-const dayKey = z.string().regex(/^([1-9]|[12]\d|30)$/);
+export interface ProgrammeDayState {
+  completed: boolean;
+  completedAt?: string;
+  notes?: string;
+  notesAt?: string;
+}
 
-export const ProgrammeDayStateSchema = z
-  .object({
-    completed: z.boolean(),
-    completedAt: isoDate.optional(),
-    notes: z.string().max(NOTES_MAX).optional(),
-    notesAt: isoDate.optional(),
-  })
-  .strict();
+export interface LastLocationValue {
+  kind: "resource" | "programme-day";
+  id: string;
+  at: string;
+}
 
-export const MemberStateSchema = z
-  .object({
-    schemaVersion: z.literal(MEMBER_SCHEMA_VERSION),
-    saved: z.record(resourceId, isoDate),
-    completed: z.record(resourceId, isoDate),
-    recent: z.array(z.object({ id: resourceId, at: isoDate }).strict()).max(200),
-    lastLocation: z
-      .object({ kind: z.enum(["resource", "programme-day"]), id: z.string().max(40), at: isoDate })
-      .strict()
-      .nullable(),
-    programme: z.object({ days: z.record(dayKey, ProgrammeDayStateSchema) }).strict(),
-    /** Reserved for scored assessments (Stage 6+). Assessment status is derived from completion in V1. */
-    assessments: z.record(z.string().max(40), z.object({ status: z.string().max(20), at: isoDate, score: z.number().optional() }).strict()),
-    updatedAt: isoDate,
-  })
-  .strict();
+export interface MemberState {
+  schemaVersion: typeof MEMBER_SCHEMA_VERSION;
+  /** resource id → when it was saved */
+  saved: Record<string, string>;
+  /** resource id → when it was completed */
+  completed: Record<string, string>;
+  /** newest first, capped at RECENT_LIMIT */
+  recent: { id: string; at: string }[];
+  lastLocation: LastLocationValue | null;
+  programme: { days: Record<string, ProgrammeDayState> };
+  /** Reserved for scored assessments (Stage 6+). Assessment status is derived from completion in V1. */
+  assessments: Record<string, { status: string; at: string; score?: number }>;
+  updatedAt: string;
+}
 
-export type ProgrammeDayState = z.infer<typeof ProgrammeDayStateSchema>;
-export type MemberState = z.infer<typeof MemberStateSchema>;
 export type LastLocation = MemberState["lastLocation"];
 
 export const BACKUP_FORMAT = "og056.member.backup";
 
-export const BackupFileSchema = z
-  .object({
-    format: z.literal(BACKUP_FORMAT),
-    version: z.literal(1),
-    app: z.string(),
-    exportedAt: isoDate,
-    state: MemberStateSchema,
-  })
-  .strict();
-
-export type BackupFile = z.infer<typeof BackupFileSchema>;
+export interface BackupFile {
+  format: typeof BACKUP_FORMAT;
+  version: 1;
+  app: string;
+  exportedAt: string;
+  state: MemberState;
+}
 
 export function emptyState(now = new Date()): MemberState {
   return {

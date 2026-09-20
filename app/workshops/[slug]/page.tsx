@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { PageHeader } from "@/components/layout/page-header";
-import { WorkshopStatus, WorkshopWhen } from "@/components/directory/workshop-views";
+import { WorkshopBooking, WorkshopStatus, WorkshopWhen } from "@/components/directory/workshop-views";
 import { DownloadActions } from "@/components/resources/download-actions";
 import { ResourceGrid } from "@/components/resources/resource-card";
 import { VideoEmbed } from "@/components/resources/video-embed";
@@ -81,7 +81,7 @@ export default async function WorkshopPage({ params }: PageProps<"/workshops/[sl
                     <div className="min-w-0">
                       <p className="font-semibold text-og-charcoal">{h.title}</p>
                       {h.slug && (
-                        <Link href={`/resources/${h.slug}/`} className="text-xs font-semibold text-og-deep underline-offset-2 hover:underline">
+                        <Link href={`/resources/${h.slug}/`} className="inline-flex min-h-6 items-center text-xs font-semibold text-og-deep underline-offset-2 hover:underline">
                           Open the resource page
                         </Link>
                       )}
@@ -100,6 +100,9 @@ export default async function WorkshopPage({ params }: PageProps<"/workshops/[sl
               Details
             </h2>
             <WorkshopStatus workshop={w} />
+            <div className="mt-3">
+              <WorkshopBooking workshop={w} />
+            </div>
             <dl className="mt-3 flex flex-col gap-2 text-sm">
               <div>
                 <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-og-taupe">When</dt>

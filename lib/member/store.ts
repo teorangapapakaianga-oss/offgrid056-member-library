@@ -9,7 +9,6 @@ import {
   MEMBER_CORRUPT_KEY,
   MEMBER_SCHEMA_VERSION,
   MEMBER_STORAGE_KEY,
-  MemberStateSchema,
   NOTES_MAX,
   RECENT_LIMIT,
   emptyState,
@@ -18,6 +17,7 @@ import {
   type MemberView,
   type StorageMode,
 } from "./types";
+import { checkMemberState } from "./validate";
 
 export interface MemberStore {
   load(): Promise<MemberView>;
@@ -74,9 +74,9 @@ function readState(): { state: MemberState; recovered: boolean } {
     return { state: quarantine(raw), recovered: true };
   }
   const migrated = migrate(parsed);
-  const result = MemberStateSchema.safeParse(migrated);
-  if (!result.success) return { state: quarantine(raw), recovered: true };
-  return { state: result.data, recovered: false };
+  const result = checkMemberState(migrated);
+  if (!result.ok) return { state: quarantine(raw), recovered: true };
+  return { state: result.value, recovered: false };
 }
 
 /** Keeps a copy of unreadable data under a separate key so nothing is lost, then starts clean. */

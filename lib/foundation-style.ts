@@ -2,7 +2,7 @@
  * Foundation colour treatments (owner decision D1): the six locked brand colours only, no new colours.
  * Every foundation is always shown with its icon and name too, so nothing relies on colour alone.
  */
-import type { FoundationId } from "@/lib/content/schemas";
+import type { FoundationId } from "@/lib/content/constants";
 
 export interface FoundationStyle {
   /** thumbnail / badge surface */

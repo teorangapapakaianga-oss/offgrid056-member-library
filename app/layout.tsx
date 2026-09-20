@@ -13,11 +13,11 @@ const bebas = localFont({
   fallback: ["Impact", "Arial Narrow", "sans-serif"],
 });
 
+// Only the three weights the interface actually uses: body 400, semibold 600 and bold 700 (for <strong>).
+// Italic and Medium were declared but never used, and cost about 158 KB on first load.
 const montserrat = localFont({
   src: [
     { path: "../styles/fonts/Montserrat-Regular.woff", weight: "400", style: "normal" },
-    { path: "../styles/fonts/Montserrat-Italic.woff", weight: "400", style: "italic" },
-    { path: "../styles/fonts/Montserrat-Medium.woff", weight: "500", style: "normal" },
     { path: "../styles/fonts/Montserrat-SemiBold.woff", weight: "600", style: "normal" },
     { path: "../styles/fonts/Montserrat-Bold.woff", weight: "700", style: "normal" },
   ],

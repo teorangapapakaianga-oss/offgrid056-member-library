@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import { COUNTRY_NAMES, SERVICE_TYPE_LABELS, type Supplier } from "@/lib/content/directory-schemas";
+import { COUNTRY_NAMES, SERVICE_TYPE_LABELS, type Supplier } from "@/lib/content/constants";
 import { getFoundation } from "@/lib/content/taxonomy";
 import { FOUNDATION_STYLES } from "@/lib/foundation-style";
 import { EmptyState } from "@/components/ui/empty-state";

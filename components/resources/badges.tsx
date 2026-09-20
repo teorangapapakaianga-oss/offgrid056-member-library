@@ -1,4 +1,4 @@
-import type { Difficulty, FoundationId, ResourceTypeId } from "@/lib/content/schemas";
+import type { Difficulty, FoundationId, ResourceTypeId } from "@/lib/content/constants";
 import { getFoundation, getResourceType } from "@/lib/content/taxonomy";
 import { DIFFICULTY_LABELS } from "@/lib/format";
 import { FOUNDATION_STYLES } from "@/lib/foundation-style";

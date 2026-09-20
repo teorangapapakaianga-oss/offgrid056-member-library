@@ -11,6 +11,8 @@
   "foundations": [
     "water"
   ],
+  "bookingUrl": "https://example.com/demo-booking",
+  "bookingLabel": "Register for this workshop",
   "downloads": [
     {
       "label": "Placeholder worksheet",

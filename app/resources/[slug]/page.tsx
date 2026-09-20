@@ -130,7 +130,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
                 {packItems.map((p) => (
                   <li key={p.id} className="flex items-center gap-2">
                     <Icon name="check" className="size-4 shrink-0 text-og-deep" />
-                    <Link href={`/resources/${p.slug}/`} className="font-semibold text-og-deep underline-offset-2 hover:underline">
+                    <Link href={`/resources/${p.slug}/`} className="inline-flex min-h-6 items-center font-semibold text-og-deep underline-offset-2 hover:underline">
                       {p.title}
                     </Link>
                     <span className="text-og-taupe">· {getResourceType(p.resourceType).label}</span>

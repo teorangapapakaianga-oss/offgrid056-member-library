@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>OffGrid056 QA sweep</title>
+    <style>
+      body { font: 14px/1.5 system-ui, sans-serif; margin: 1rem; }
+      iframe { border: 1px solid #ccc; height: 900px; }
+      pre { white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <!--
+      QA ONLY (never part of the product): loads each route in a frame of a given width and runs the contrast and
+      interface audits inside it. Media queries follow the frame's width, so one run covers mobile, tablet and
+      desktop without resizing the browser.
+
+      Usage: copy tools/qa-contrast.js and tools/qa-sweep.html into out/, serve out/, then open
+             /qa-sweep.html and call:  await sweep(375)   (or 768 / 1440)
+             Results land in window.__sweep and are printed below.
+    -->
+    <h1>QA sweep</h1>
+    <p>Call <code>await sweep(375)</code> from the console.</p>
+    <pre id="out"></pre>
+    <script>
+      const ROUTES = [
+        "/", "/start-here/", "/library/", "/foundations/", "/foundations/water/",
+        "/foundations/water/water-storage/", "/resources/water-security-guide/", "/resources/solar-basics-video/",
+        "/resources/starter-resource-pack/", "/planning-tools/", "/learning-paths/", "/learning-paths/water-basics/",
+        "/programme/", "/programme/day/9/", "/packs/", "/videos/", "/downloads/", "/suppliers/", "/workshops/",
+        "/workshops/demo-water-storage-workshop/", "/workshops/demo-power-cut-ready-recording/", "/saved/",
+        "/progress/", "/404.html",
+      ];
+
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      window.sweep = async function sweep(width = 375, routes = ROUTES) {
+        const frame = document.createElement("iframe");
+        frame.width = String(width);
+        document.body.append(frame);
+        const results = [];
+        for (const route of routes) {
+          frame.src = `${route}${route.includes("?") ? "&" : "?"}qa=${Date.now()}`; // always a fresh page, never a cached one
+          await new Promise((res) => frame.addEventListener("load", res, { once: true }));
+          await wait(700); // let client components hydrate and member panels settle
+          const w = frame.contentWindow;
+          const s = w.document.createElement("script");
+          s.src = `/qa-contrast.js?v=${Date.now()}`; // never let the browser reuse an older copy of the audit
+          w.document.head.append(s);
+          await new Promise((res) => s.addEventListener("load", res, { once: true }));
+          const contrast = w.ogContrastAudit();
+          const a11y = w.ogA11yAudit();
+          results.push({
+            route,
+            width,
+            contrastChecked: contrast.checked,
+            contrastFailures: contrast.failures,
+            minRatio: contrast.min,
+            issues: a11y.issues,
+            frameWidth: a11y.width,
+          });
+          document.getElementById("out").textContent = JSON.stringify(results, null, 1);
+        }
+        frame.remove();
+        window.__sweep = results;
+        return {
+          width,
+          routes: results.length,
+          contrastFailures: results.flatMap((r) => r.contrastFailures.map((f) => `${r.route} ${f.text} ${f.ratio}`)),
+          issues: results.flatMap((r) => r.issues.map((i) => `${r.route} ${i}`)),
+          lowestRatio: Math.min(...results.map((r) => r.minRatio)),
+        };
+      };
+    </script>
+  </body>
+</html>

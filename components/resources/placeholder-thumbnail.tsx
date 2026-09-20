@@ -1,4 +1,4 @@
-import type { FoundationId, ResourceTypeId } from "@/lib/content/schemas";
+import type { FoundationId, ResourceTypeId } from "@/lib/content/constants";
 import { getFoundation, getResourceType } from "@/lib/content/taxonomy";
 import { FOUNDATION_STYLES } from "@/lib/foundation-style";
 

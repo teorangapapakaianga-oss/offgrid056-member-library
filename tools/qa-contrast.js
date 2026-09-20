@@ -101,8 +101,15 @@
     }
     if (!document.querySelector("main")) issues.push("no <main> landmark");
     if (!document.querySelector('a[href="#main"]')) issues.push("no skip link");
+    // Can the member actually scroll the page sideways? Try it, rather than reading scrollWidth: an element that
+    // scrolls inside its own box (a wide table in an overflow-x container) inflates documentElement.scrollWidth
+    // without the page itself ever moving.
     const doc = document.documentElement;
-    if (doc.scrollWidth > doc.clientWidth + 1) issues.push(`horizontal overflow: ${doc.scrollWidth} > ${doc.clientWidth}`);
+    const startX = window.scrollX;
+    window.scrollTo(9999, window.scrollY);
+    const scrolledBy = window.scrollX;
+    window.scrollTo(startX, window.scrollY);
+    if (scrolledBy > 1) issues.push(`page scrolls sideways by ${Math.round(scrolledBy)}px at ${doc.clientWidth}px wide`);
     return { page: location.pathname, width: doc.clientWidth, issues };
   };
 })();

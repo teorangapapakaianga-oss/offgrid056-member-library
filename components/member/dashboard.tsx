@@ -22,7 +22,8 @@ export interface PathLite {
 function Panel({ title, action, children, className = "" }: { title: string; action?: ReactNode; children: ReactNode; className?: string }) {
   const id = `panel-${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
   return (
-    <section aria-labelledby={id} className={`rounded-xl bg-white p-5 ring-1 ring-og-line ${className}`}>
+    // min-w-0 keeps a long resource title from widening the grid track on a narrow phone.
+    <section aria-labelledby={id} className={`min-w-0 rounded-xl bg-white p-5 ring-1 ring-og-line ${className}`}>
       <div className="mb-4 flex items-baseline justify-between gap-3">
         <h2 id={id} className="font-display text-2xl leading-none text-og-charcoal">
           {title}

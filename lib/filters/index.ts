@@ -2,7 +2,7 @@
  * Library filtering: pure functions (docs/ARCHITECTURE.md §9). OR within a group, AND across groups.
  * Filter state round-trips through the URL query string so views are shareable and Back works.
  */
-import { DIFFICULTIES, FOUNDATION_IDS, RESOURCE_TYPE_IDS } from "@/lib/content/schemas";
+import { DIFFICULTIES, FOUNDATION_IDS, RESOURCE_TYPE_IDS } from "@/lib/content/constants";
 import type { ResourceSummary } from "@/lib/content/summaries";
 import { TIME_BANDS, isNewResource } from "@/lib/format";
 

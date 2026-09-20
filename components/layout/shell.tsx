@@ -151,7 +151,7 @@ function MobileNavigation() {
               <Link
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`flex h-16 flex-col items-center justify-center gap-1 text-[0.7rem] font-medium ${active ? "text-og-green" : "text-og-white/80"}`}
+                className={`flex h-16 flex-col items-center justify-center gap-1 text-[0.7rem] font-semibold ${active ? "text-og-green" : "text-og-white/80"}`}
               >
                 <Icon name={item.icon as IconName} className="size-6" />
                 {item.label}
@@ -164,7 +164,7 @@ function MobileNavigation() {
             type="button"
             onClick={open}
             aria-haspopup="dialog"
-            className="flex h-16 w-full flex-col items-center justify-center gap-1 text-[0.7rem] font-medium text-og-white/80"
+            className="flex h-16 w-full flex-col items-center justify-center gap-1 text-[0.7rem] font-semibold text-og-white/80"
           >
             <Icon name="menu" className="size-6" />
             Menu

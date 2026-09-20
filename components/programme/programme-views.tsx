@@ -56,7 +56,9 @@ export function ProgrammeOverview({ programme, days }: { programme: Programme; d
               const hasNotes = Boolean(dayState[String(n)]?.notes);
               const s = FOUNDATION_STYLES[day.foundation];
               return (
-                <li key={n}>
+                // min-w-0: without it the grid track grows to the day title's unwrapped width and the page
+                // scrolls sideways on a narrow phone.
+                <li key={n} className="min-w-0">
                   <Link
                     href={`/programme/day/${n}/`}
                     className="flex h-full items-center gap-3 rounded-xl bg-white p-4 ring-1 ring-og-line transition hover:shadow-md"

@@ -2,7 +2,9 @@
  * ResourceSummary: the slim shape sent to the browser for cards, search and filters.
  * Long text (summary, objectives) stays on the detail page.
  */
-import type { Difficulty, FoundationId, Resource, ResourceTypeId } from "./schemas";
+import type { Difficulty, FoundationId, ResourceTypeId } from "./constants";
+// Type-only: erased at build, so the schema library never reaches the browser through this module.
+import type { Resource } from "./schemas";
 import { getCategory } from "./taxonomy";
 
 export interface ResourceSummary {
