@@ -79,10 +79,22 @@ describe("content flags", () => {
       "OG-27",
     );
     const kinds = flags.map((f) => f.kind);
-    expect(kinds).toContain("programme-structure");
-    expect(kinds).toContain("next-step-cta");
-    expect(kinds).toContain("product-tier");
-    expect(flags).toContainEqual({ kind: "cross-reference", text: "OG-28" });
+    expect(kinds).toContain("programme-sequencing");
+    expect(kinds).toContain("day-complete");
+    expect(kinds).toContain("next-link");
+    expect(kinds).toContain("product-name");
+    expect(flags).toContainEqual({ code: "LEGACY_PROGRAMME_CONTEXT", kind: "cross-reference", text: "OG-28" });
+    expect(flags.filter((f) => f.kind !== "figure-needs-source").every((f) => f.code === "LEGACY_PROGRAMME_CONTEXT")).toBe(true);
+  });
+
+  it("flags previous-step links and the old product and platform names from config", () => {
+    const terms = { productNames: ["Resilience Action Plan Community"], platformNames: ["Skool", "Kajabi"] };
+    const flags = findContentFlags(
+      `<p>Previous: OG-13 Heat Loss Map</p><p>Join the Resilience Action Plan Community</p><p>Post it on Kajabi</p>`,
+      "OG-14",
+      terms,
+    );
+    expect(flags.map((f) => f.kind)).toEqual(expect.arrayContaining(["previous-link", "product-name", "platform-name", "cross-reference"]));
   });
 
   it("does not flag the resource's own code, and flags unsourced figures and health claims", () => {
@@ -90,6 +102,11 @@ describe("content flags", () => {
     expect(flags.some((f) => f.kind === "cross-reference")).toBe(false);
     expect(flags.some((f) => f.kind === "figure-needs-source")).toBe(true);
     expect(flags.some((f) => f.kind === "health-claim")).toBe(true);
+  });
+
+  it("does not flag a resource's own weekly structure or the ordinary word 'previous'", () => {
+    const flags = findContentFlags(`<p>Week 1: Learn</p><p>Week 2: Assess</p><p>Previous reports or assessments</p>`, "OG-B04");
+    expect(flags).toEqual([]);
   });
 
   it("finds nothing in plain teaching copy", () => {
@@ -141,8 +158,23 @@ describe("prepareResource: safety", () => {
     expect(au).toContain("licensed electrician");
     expect(au).not.toContain("licensed electrical worker");
     expect(nz).toContain("call 111");
-    expect(au).toContain("call 000");
+    expect(au).toContain("call Triple Zero (000)");
     for (const html of [nz, au]) expect(html).not.toMatch(/\{\{[^}]+\}\}/);
+  });
+
+  it("fails closed in a market that has no verified wording of its own", () => {
+    const r = prep({ launchMarkets: ["NZ", "AU", "US"], extraSafetyBlocks: ["batteries-and-electrical"] });
+    const us = r.markets.find((m) => m.code === "US")!;
+    expect(us.publishable).toBe(false);
+    expect(us.problems.join(" ")).toContain("safety.notVerifiedForMarket");
+    expect(r.markets.filter((m) => m.code !== "US").every((m) => m.publishable)).toBe(true);
+  });
+
+  it("keeps every topic block's NZ and AU wording free of the other market's number", () => {
+    for (const block of Object.values(topicBlocks.blocks) as { id: string; marketBody: Record<string, string> }[]) {
+      expect(block.marketBody.NZ, block.id).not.toMatch(/\b000\b|\b112\b|Triple Zero/);
+      expect(block.marketBody.AU, block.id).not.toMatch(/\b111\b/);
+    }
   });
 
   it("holds a resource whose topic blocks are still proposals", () => {

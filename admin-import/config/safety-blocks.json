@@ -1,38 +1,118 @@
 {
-  "description": "Topic safety blocks from OFFGRID056_SAFETY_CONTENT_STANDARD.md, prepared for insertion into migrated documents. Status PROPOSED: a resource using one of these is NOT ready until the owner approves the block for that resource. Wording is the standard's, with three market substitutions only: the fixed licence name becomes {{term.electrician}}, and 'call emergency services' becomes 'call {{emergency.number}}', so each market reads its own term and number. No new facts, figures or distances are introduced. Source basis per block is recorded below and is NOT all NZ/AU official guidance.",
-  "status": "PROPOSED — awaiting owner approval per resource",
+  "description": "Topic safety blocks, written separately for New Zealand and Australia from each market's own official sources (Stage 9.17). No US or Canadian wording is used. The shared `body` is deliberately an unresolvable token, so any market without its own verified wording fails closed (publishable() = false) rather than inheriting another country's advice. Status PROPOSED: a resource using one of these is NOT ready until the owner approves the block.",
+  "status": "PROPOSED — awaiting owner approval per block and per resource",
   "blocks": {
     "batteries-and-electrical": {
       "id": "batteries-and-electrical",
       "title": "Batteries and electrical safety",
       "severity": "CRITICAL",
-      "body": "**Anything that connects to your home's fixed wiring must be installed by a {{term.electrician}}.** That includes solar, battery storage, inverters, transfer switches and any way of feeding a generator into your house circuits.\n**Never plug a generator into a wall socket to power the house.** This is called backfeeding. It can electrocute line workers repairing the network, and it can destroy your wiring. Use appliance leads plugged directly into the generator, or a transfer switch installed by a {{term.electrician}}.\nTreat batteries with respect: they store a lot of energy. Do not modify, puncture or short battery packs. Follow the manufacturer's instructions for charging, ventilation and storage temperature. If a lithium battery is hot, swollen, leaking or smoking, move away from it and call {{emergency.number}} — do not carry it through the house.",
-      "sources": ["Standard Block 7 — backfeeding and transfer-switch guidance is CPSC (US); NZ/AU official source not yet cited"],
-      "substitutions": ["'licensed electrician' → {{term.electrician}} (NZ: licensed electrical worker · AU: licensed electrician)", "'an electrician' → 'a {{term.electrician}}'", "'call emergency services' → 'call {{emergency.number}}'"]
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Solar panels, home batteries, inverters and any permanent generator connection must be installed by a licensed electrical worker.** The rules that let homeowners do some of their own wiring do not cover solar (PV) systems, and some battery systems can give off flammable gases, so how and where they are installed matters.\n**Never connect a generator to your house wiring unless the connection was installed by an electrician.** Plug appliances directly into the generator instead, and use a safety switch (RCD) when equipment is outside or in a damp place.\nStop using any lithium-ion battery that is too hot to touch, swelling, leaking, cracked or dented. **If a battery is giving off smoke, vapour or flames, do not touch or pick it up: get out of the building and call 111.**",
+        "AU": "**Electrical work in your home — including solar, home batteries, inverters and generator connections — must be done by a licensed electrician.** DIY electrical work is illegal, even for small jobs, and DIY home-battery installations are a serious fire risk.\n**Never power the house by plugging a generator into a power point or switchboard** unless a licensed electrician has installed a dedicated generator inlet: it can back-feed the network and put utility workers and neighbours at risk. Plug appliances into the generator with heavy-duty extension leads rated for it.\nDo not use a lithium-ion battery that is swelling, leaking, overheating, damaged or venting gas. **If a battery is overheating, smoking or on fire, call Triple Zero (000) and get to a safe place.** Do not try to put it out with a fire extinguisher."
+      },
+      "sources": {
+        "NZ": [
+          "WorkSafe NZ — DIY solar installations (28 Aug 2024): https://www.worksafe.govt.nz/about-us/news-and-media/diy-solar-installation",
+          "WorkSafe NZ — Using portable generators after a natural event or emergency (18 Jul 2024): https://www.worksafe.govt.nz/topic-and-industry/natural-events-and-emergencies/using-portable-generators-after-a-natural-event-or-emergency/",
+          "WorkSafe NZ — Doing your own electrical work: https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-electricity/getting-electrical-work-done/doing-your-own-electrical-work/",
+          "Fire and Emergency NZ — Lithium-ion battery safety flyer (FENZ-2055): https://www.fireandemergency.nz/assets/Uploads-v2/Lithium-ion-batteries/FENZ-2055-Li-ion-flyer-03.pdf"
+        ],
+        "AU": [
+          "Energy Safe Victoria — Electrical DDIY (don't do it yourself): https://www.energysafe.vic.gov.au/electrical-ddiy-dont-do-it-yourself",
+          "Energy Safe Victoria — Using a generator safely: https://www.energysafe.vic.gov.au/community-safety/emergencies/using-generator-safely",
+          "Electrical Safety Office Queensland — Don't do your own electrical work: https://www.electricalsafety.qld.gov.au/electrical-safety-home/dont-do-your-own-electrical-work",
+          "ACCC Product Safety — Lithium-ion batteries guide: https://www.productsafety.gov.au/consumers/be-safe-around-the-home/safely-use-batteries-and-technology/lithium-ion-batteries-guide"
+        ]
+      },
+      "sharedOrVaries": "VARIES — the law differs (NZ homeowners may do some wiring but not PV; in AU all DIY electrical work is illegal), the licence name differs, and the battery-fire instruction and number differ."
     },
     "carbon-monoxide": {
       "id": "carbon-monoxide",
       "title": "Carbon monoxide",
       "severity": "CRITICAL",
-      "body": "**Carbon monoxide has no colour, no smell and no taste.** It is produced by anything that burns fuel: generators, gas and LPG appliances, wood burners, charcoal, petrol and diesel engines.\nEarly symptoms look like flu without the fever — headache, dizziness, nausea, weakness, confusion. If more than one person in the house feels unwell at the same time, or pets are affected too, suspect CO.\n**Fit CO alarms** adjacent to sleeping areas and on every level of the home, and test them regularly. Buy alarms carrying your country's certification mark.\n**If the alarm sounds: get everyone out immediately and call {{emergency.number}} from outside.** Do not go back in until the fire service says it is safe.",
-      "sources": ["Standard Block 3 — Health Canada, Ontario and CPSC guidance; NZ/AU official source not yet cited"],
-      "substitutions": ["'call emergency services' → 'call {{emergency.number}}'"]
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Carbon monoxide (CO) is a poisonous gas you cannot see or smell.** It comes from anything that burns fuel — gas and LPG heaters, wood burners, barbecues, generators and vehicle engines.\nSymptoms include headache, dizziness, weakness, confusion and feeling sick. **If you suspect CO poisoning, get outside into fresh air immediately, then call 111 for an ambulance.**\nSigns a gas appliance is not burning properly include a yellow rather than blue flame (unless it is a flame-effect heater designed that way), soot around it, or a smell like car exhaust. Turn it off and contact a licensed gas worker. Have heating appliances serviced by a qualified person, and consider installing carbon monoxide alarms.",
+        "AU": "**Carbon monoxide (CO) is a dangerous gas you cannot see or smell.** It is made by burning fuels such as gas, petrol, wood and charcoal, and it can build up inside when doors and windows are closed.\nSmall amounts can cause headaches, nausea, vomiting and weakness; larger amounts cause dizziness, fainting and loss of consciousness. **If someone is dizzy, fainting or unconscious, call Triple Zero (000).** If people have milder symptoms, get everyone out into fresh air and call the Poisons Information Centre on 13 11 26.\nHave gas heaters checked by a licensed gasfitter at least every two years. Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard."
+      },
+      "sources": {
+        "NZ": [
+          "Health New Zealand — Carbon monoxide poisoning: https://www.healthnz.govt.nz/conditions-treatments/emergencies-and-first-aid/carbon-monoxide-poisoning",
+          "WorkSafe NZ — Keep yourself safe from carbon monoxide: https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/carbon-monoxide-hazards/"
+        ],
+        "AU": [
+          "NSW Health — Carbon monoxide safety factsheet (May 2025): https://www.health.nsw.gov.au/environment/factsheets/Factsheets/carbon-monoxide.pdf",
+          "Victorian Department of Health — Carbon monoxide poisoning in the home: https://www.health.vic.gov.au/environmental-health/carbon-monoxide-poisoning-in-the-home"
+        ]
+      },
+      "sharedOrVaries": "VARIES — the first aid instruction differs (NZ: get outside then call 111; AU: 000 for severe symptoms, Poisons Information Centre for mild), and only the AU sources give a servicing interval and an alarm standard. NZ sources disagree on the servicing interval (Health NZ: yearly; WorkSafe: at least every other year), so no NZ interval is stated."
     },
     "indoor-combustion": {
       "id": "indoor-combustion",
       "title": "Never bring it inside",
       "severity": "CRITICAL",
-      "body": "**Anything designed for outdoor use stays outdoors.** Never bring a BBQ, charcoal grill, camping stove, patio heater, outdoor gas burner or generator inside to cook or to keep warm — not into the house, garage or tent. Every one of them produces carbon monoxide, and people die doing this during power cuts and storms.\nUnflued portable gas heaters release combustion products and moisture straight into the room. If you use one, follow the manufacturer's instructions exactly, never run it in a bedroom or a closed room, and keep ventilation as directed.",
-      "sources": ["Standard Block 4 — CPSC power-outage guidance (US); NZ/AU official source not yet cited; unflued-heater restrictions in NZ/AU still VERIFY"],
-      "substitutions": []
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Outdoor appliances stay outdoors.** Never use a barbecue, patio heater, camping cooker or generator inside your home or garage — they are not built for indoor use and they produce carbon monoxide. Run a generator only outside in a well-ventilated place, with its exhaust directed away from the house.\nIf you use an unflued gas heater, such as an LPG cabinet heater: never use it in a bedroom, bathroom, caravan or tent; keep internal doors and at least one window open; have it serviced by a qualified person at least once a year; and use it for as short a time as you can. Unflued heaters are not recommended in homes where someone has a breathing condition.",
+        "AU": "**Outdoor appliances stay outdoors.** Never bring barbecues, grills, outdoor gas heaters or patio heaters inside, and never run a generator or other petrol engine inside your home or garage — even with the doors or windows open. Use a portable generator only outside, in a well-ventilated area.\nIf you use an unflued gas heater: check its instructions allow indoor use, never use it overnight in the room where you sleep, keep the room's air vents clear (or a door or window open if it has none), and have it checked by a licensed gasfitter at least every two years."
+      },
+      "sources": {
+        "NZ": [
+          "WorkSafe NZ — Keep yourself safe from carbon monoxide: https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/carbon-monoxide-hazards/",
+          "WorkSafe NZ — Using portable generators after a natural event or emergency: https://www.worksafe.govt.nz/topic-and-industry/natural-events-and-emergencies/using-portable-generators-after-a-natural-event-or-emergency/",
+          "Health New Zealand — Unflued gas heaters: https://www.healthnz.govt.nz/health-topics/keeping-healthy/healthy-homes-environments/household-items-and-electronics/unflued-gas-heaters",
+          "WorkSafe NZ — Cabinet heater safety (respiratory conditions; search-indexed text, page not read directly): https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/cabinet-heater-safety/"
+        ],
+        "AU": [
+          "NSW Health — Carbon monoxide safety factsheet (May 2025): https://www.health.nsw.gov.au/environment/factsheets/Factsheets/carbon-monoxide.pdf",
+          "NSW Health — Unflued gas heaters factsheet: https://www.health.nsw.gov.au/environment/factsheets/Pages/unflued-gas-heaters.aspx",
+          "Energy Safe Victoria — Using a generator safely: https://www.energysafe.vic.gov.au/community-safety/emergencies/using-generator-safely"
+        ]
+      },
+      "sharedOrVaries": "VARIES — the unflued-heater rules differ: NZ says never in a bedroom, bathroom, caravan or tent and service yearly; NSW says never overnight in the room where you sleep and check every two years. Neither source bans unflued heaters outright, so no ban is stated."
     },
     "solid-fuel-heating": {
       "id": "solid-fuel-heating",
       "title": "Wood burners and open fires",
       "severity": "HIGH",
-      "body": "**Have the chimney or flue checked and swept at least once a year**, and before you rely on it through a winter. A blocked or damaged flue pushes smoke and carbon monoxide back into the room.\nUse a proper fireguard or screen. Keep furniture, curtains, washing and kindling well clear of the fire — follow the clearances in your appliance's manual and your local rules, not a guess.\nLet ash cool completely, then put it in a metal container with a lid, outside and away from the building. Ash can stay hot enough to start a fire for days.\nBurn only dry, untreated wood. Never burn treated timber, painted wood, plastics or rubbish: the fumes are toxic and they damage the flue.",
-      "sources": ["Standard Block 5 — Fire and Emergency New Zealand checklists; AU official source not yet cited"],
-      "substitutions": []
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Have your chimney checked or swept every year**, before you rely on it through winter. Always use a fireguard or spark guard when the fire is lit.\nKeep clothes, bedding and anything else that can burn **at least one metre** from any heater or fire.\nLet ashes cool, then empty them into a metal bin and pour water over them — ashes can take up to five days to cool completely.",
+        "AU": "**Have your chimney and flue cleaned every year**, and checked before winter. Always use a fire screen in front of an open fire.\nKeep firewood, drying clothes and anything else that can burn **at least one metre** from the fire or heater, and burn only dry, clean wood.\nMake sure ashes are cold before you get rid of them, keep them in a metal container, and put the fire out before you go to bed or leave the house."
+      },
+      "sources": {
+        "NZ": [
+          "Fire and Emergency NZ — Urban home fire safety checklist (search-indexed text; fireandemergency.nz blocks automated reading, confirm before publishing): https://www.fireandemergency.nz/at-home/urban-home-fire-safety-checklist/",
+          "Fire and Emergency NZ — Keep a metre from the heater (search-indexed text, confirm before publishing): https://www.fireandemergency.nz/incidents-and-news/news-and-media/keep-a-metre-from-the-heater/"
+        ],
+        "AU": [
+          "CFA — Home heating safety factsheet (Aug 2019): https://www.cfa.vic.gov.au/ArticleDocuments/372/Factsheet%20Heating.pdf",
+          "CFA — Chimney and flue: https://www.cfa.vic.gov.au/plan-prepare/fires-in-the-home/home-fire-safety-communications-kit/chimney-and-flue"
+        ]
+      },
+      "sharedOrVaries": "MOSTLY SHAREABLE in substance (yearly chimney care, a screen, one metre clearance, cold ashes in metal), but kept per market so each sentence traces to that market's source. The five-day ash figure is NZ-only."
+    },
+    "working-at-height": {
+      "id": "working-at-height",
+      "title": "Stay off the roof",
+      "severity": "CRITICAL",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**You do not need to climb onto the roof to complete this worksheet.** Take measurements from your house plans, ask the installers who are quoting to measure the roof for you, or estimate from the ground — and leave blank anything you cannot fill in safely.\nFalls are the most common cause of injury in Aotearoa. If you do use a ladder, use one in good condition on a firm, even surface, keep three points of contact, avoid the top rungs, and get down and move the ladder rather than over-reaching. Leave work on the roof itself to a professional.",
+        "AU": "**You do not need to climb onto the roof to complete this worksheet.** Take measurements from your house plans, ask the installers who are quoting to measure the roof for you, or estimate from the ground — and leave blank anything you cannot fill in safely.\nOn average more than 30 Australians die each year after falling from a ladder. If you do use one, set it up on a firm, flat surface, have another person hold it, and do not work in wet or windy conditions. Leave work on the roof itself to a professional."
+      },
+      "sources": {
+        "NZ": [
+          "ACC — Ladder safety tips (search-indexed text; acc.co.nz blocks automated reading, confirm before publishing): https://www.acc.co.nz/assets/injury-prevention/acc4407-ladder-safety.pdf",
+          "ACC — Staying safe from trips and falls (falls 39% of claims; search-indexed): https://www.acc.co.nz/preventing-injury/trips-falls",
+          "WorkSafe NZ — Working at height (workplace guidance, used for the principle only): https://www.worksafe.govt.nz/topic-and-industry/working-at-height/"
+        ],
+        "AU": [
+          "ACCC Product Safety — Ladders guide: https://www.productsafety.gov.au/consumers/be-safe-around-the-home/use-garden-and-outdoor-products-safely/ladders-guide"
+        ]
+      },
+      "sharedOrVaries": "FIRST PARAGRAPH SHARED (the owner's principle: members must not be encouraged onto a roof to complete the worksheet). SECOND PARAGRAPH VARIES — each market's own consumer ladder guidance and statistic. No heights, angles or equipment ratings are stated: WorkSafe's roof figures are workplace requirements, not household advice."
     }
   }
 }

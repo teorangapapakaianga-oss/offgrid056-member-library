@@ -1,0 +1,14 @@
+{
+  "description": "Names that belong to the old 30-Day Programme, the old offer ladder or old delivery platforms. Any match in a migrated resource is flagged LEGACY_PROGRAMME_CONTEXT for owner review. Nothing is removed automatically. Add names here as they are found.",
+  "productNames": [
+    "Action Plan Plus",
+    "Resilience Action Plan Community",
+    "Skool Action Plan",
+    "Principle Starter Pack",
+    "Partnership Circle",
+    "Professional Add-On",
+    "E-Pack",
+    "Bonus Asset"
+  ],
+  "platformNames": ["Skool", "Facebook group", "Discord", "Patreon", "WhatsApp group", "Telegram", "Kajabi", "Teachable", "Thinkific"]
+}

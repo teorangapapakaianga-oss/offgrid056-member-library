@@ -63,10 +63,30 @@ const PLATFORM_REFERENCES = /\b(skool|facebook group|discord|patreon|whatsapp gr
 
 const clean = (s: string) => s.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 
+export type ContentFlagKind =
+  | "day-complete"
+  | "next-link"
+  | "previous-link"
+  | "programme-sequencing"
+  | "product-name"
+  | "platform-name"
+  | "cross-reference"
+  | "figure-needs-source"
+  | "health-claim";
+
 export interface ContentFlag {
-  kind: "programme-structure" | "cross-reference" | "next-step-cta" | "product-tier" | "figure-needs-source" | "health-claim";
+  /** LEGACY_PROGRAMME_CONTEXT: made sense only inside the old linear programme or offer. NEEDS_SOURCE: a claim to verify. */
+  code: "LEGACY_PROGRAMME_CONTEXT" | "NEEDS_SOURCE";
+  kind: ContentFlagKind;
   text: string;
 }
+
+export interface LegacyTerms {
+  productNames: string[];
+  platformNames: string[];
+}
+
+const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 /**
  * Text that belonged to the 30-Day Programme or an old product, and may not survive into the current library.
@@ -74,18 +94,24 @@ export interface ContentFlag {
  * These are flags for the owner, not edits: some are teaching content in disguise ("Tier 1 (Essential)" is a
  * budget tier the member chose, not a product), so nothing here changes the document.
  */
-const CONTENT_FLAG_PATTERNS: { kind: ContentFlag["kind"]; pattern: RegExp }[] = [
-  { kind: "programme-structure", pattern: /OffGrid056 30-Day Programme/g },
-  { kind: "programme-structure", pattern: /\bWeek \d\s*—\s*[A-Z][^|\n]*/g },
-  { kind: "programme-structure", pattern: /\bDay \d{1,2}(?: Complete\b|\s*[—–]\s*[^\n|]*)/g },
-  { kind: "programme-structure", pattern: /\bAsset OG-B?\d{2}[^\n]*/g },
-  { kind: "next-step-cta", pattern: /\bNext:\s[^\n]+/g },
-  { kind: "next-step-cta", pattern: /\bTomorrow\b[^\n.]*/g },
-  { kind: "product-tier", pattern: /\bAction Plan Plus\b[^\n|]*/g },
-  { kind: "product-tier", pattern: /\bBonus Asset\b[^\n]*/g },
-  { kind: "figure-needs-source", pattern: /[^\n.]*\b\d+(?:[–-]\d+)?\s?(?:%|°C)[^\n.]*/g },
-  { kind: "health-claim", pattern: /[^\n.]*\b(?:hypothermia|survival)\b[^\n.]*/gi },
+const CONTENT_FLAG_PATTERNS: { code: ContentFlag["code"]; kind: ContentFlagKind; pattern: RegExp }[] = [
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "day-complete", pattern: /\bDay \d{1,2} Complete\b/g },
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "next-link", pattern: /\bNext:\s[^\n]+/g },
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "next-link", pattern: /\bTomorrow\b[^\n.]*/g },
+  // A navigation label ("Previous: OG-13 …", "Back to OG-13"), not the word in ordinary use ("Previous reports").
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "previous-link", pattern: /\b(?:Previous|Back to)\s*:\s[^\n]*|\bBack to OG-B?\d{2}\b[^\n]*/g },
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\b(?:OffGrid056 )?30-Day Programme\b[^\n|]*/g },
+  // The programme's week headings use a dash ("Week 4 — Action Plan & Pathway"). A colon is a resource's own
+  // teaching structure ("Week 1: Learn" in a monthly template) and is not flagged.
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bWeek \d\s*[—–]\s*[A-Z][^|\n]*/g },
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bDay \d{1,2}\s*[—–]\s*[^\n|]*/g },
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bAsset OG-B?\d{2}[^\n]*/g },
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bTier \d\b(?=[^\n]*(?:Bonus|Asset|member))|(?:Bonus Asset|Asset)\s*\|\s*Tier \d/g },
+  { code: "NEEDS_SOURCE", kind: "figure-needs-source", pattern: /[^\n.]*\b\d+(?:[–-]\d+)?\s?(?:%|°C)[^\n.]*/g },
+  { code: "NEEDS_SOURCE", kind: "health-claim", pattern: /[^\n.]*\b(?:hypothermia|survival)\b[^\n.]*/gi },
 ];
+
+const DEFAULT_LEGACY_TERMS: LegacyTerms = { productNames: ["Action Plan Plus", "Bonus Asset"], platformNames: ["Skool"] };
 
 /** Visible text of a document, one line per block element. */
 export function visibleText(html: string): string {
@@ -105,21 +131,27 @@ export function visibleText(html: string): string {
     .join("\n");
 }
 
-export function findContentFlags(html: string, ownCode: string): ContentFlag[] {
+export function findContentFlags(html: string, ownCode: string, terms: LegacyTerms = DEFAULT_LEGACY_TERMS): ContentFlag[] {
   const text = visibleText(html);
   const flags: ContentFlag[] = [];
   const seen = new Set<string>();
-  const add = (kind: ContentFlag["kind"], raw: string) => {
+  const add = (code: ContentFlag["code"], kind: ContentFlagKind, raw: string) => {
     const t = raw.trim();
     const key = `${kind}|${t}`;
     if (t && !seen.has(key)) {
       seen.add(key);
-      flags.push({ kind, text: t });
+      flags.push({ code, kind, text: t });
     }
   };
-  for (const { kind, pattern } of CONTENT_FLAG_PATTERNS) for (const m of text.matchAll(pattern)) add(kind, m[0]);
+  for (const { code, kind, pattern } of CONTENT_FLAG_PATTERNS) for (const m of text.matchAll(pattern)) add(code, kind, m[0]);
+  // Old offer and platform names, from config so the owner can extend the list without a code change.
+  for (const [kind, names] of [["product-name", terms.productNames], ["platform-name", terms.platformNames]] as const) {
+    for (const name of names) {
+      for (const m of text.matchAll(new RegExp(`[^\\n]*\\b${escape(name)}\\b[^\\n]*`, "gi"))) add("LEGACY_PROGRAMME_CONTEXT", kind, m[0]);
+    }
+  }
   // References to other programme resources, which may not exist in the library.
-  for (const m of text.matchAll(/\bOG-B?\d{2}\b/g)) if (m[0] !== ownCode) add("cross-reference", m[0]);
+  for (const m of text.matchAll(/\bOG-B?\d{2}\b/g)) if (m[0] !== ownCode) add("LEGACY_PROGRAMME_CONTEXT", "cross-reference", m[0]);
   return flags;
 }
 
@@ -219,6 +251,8 @@ export interface PrepInputs {
   requiredSafety?: string[];
   /** ids of blocks whose wording is still a proposal */
   proposedBlockIds?: string[];
+  /** old product and platform names to flag (config/legacy-terms.json) */
+  legacyTerms?: LegacyTerms;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -244,7 +278,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   for (const r of copy.results.filter((x) => !x.applied)) {
     otherFindings.push(`approved copy change (${r.where}) was NOT applied: expected the original wording once, found it ${r.matched} time(s)`);
   }
-  const contentFlags = findContentFlags(reskinned, item.legacyCode);
+  const contentFlags = findContentFlags(reskinned, item.legacyCode, inputs.legacyTerms);
 
   // 4. market resolution, with the standard blocks plus this resource's topic blocks
   const safetyBlocks = ["general-disclaimer", "emergency-contact", ...(inputs.extraSafetyBlocks ?? [])];

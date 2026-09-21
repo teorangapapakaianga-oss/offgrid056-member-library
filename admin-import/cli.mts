@@ -493,6 +493,7 @@ async function commandPrep() {
   // Topic safety blocks are proposals until the owner approves them for a resource.
   const topicBlocks = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "safety-blocks.json"), "utf8")).blocks ?? {};
   const blocks = { ...spec.safetyBlocks, ...topicBlocks };
+  const legacyTerms = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "legacy-terms.json"), "utf8"));
   // What each resource's topics require, so a missing CRITICAL block stops the resource.
   const exposure = new Map(analyseGroupA(auditResult, ws.texts).map((r) => [r.legacyCode, r.safetyExposure]));
   const results = [];
@@ -519,6 +520,7 @@ async function commandPrep() {
       extraSafetyBlocks: metadata[item.legacyCode]?.safetyBlocks ?? [],
       requiredSafety: exposure.get(item.legacyCode) ?? [],
       proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
+      legacyTerms,
     });
     results.push(result);
 
@@ -529,7 +531,7 @@ async function commandPrep() {
     for (const f of result.terminology.otherFindings) console.log(`    ⚠ ${f}`);
     console.log(`    safety blocks: ${result.safety.blocks.join(", ")}${result.safety.proposed.length ? ` (proposed: ${result.safety.proposed.join(", ")})` : ""}`);
     for (const b of result.safety.missingRequired) console.log(`    ✗ required safety block missing: ${b}`);
-    for (const f of result.contentFlags) console.log(`    ⚑ ${f.kind}: ${f.text.slice(0, 110)}`);
+    for (const f of result.contentFlags) console.log(`    ⚑ ${f.code} · ${f.kind}: ${f.text.slice(0, 100)}`);
     for (const m of result.markets) console.log(`    ${m.code}: ${m.publishable ? "publishable" : "blocked"} · emergency ${m.emergencyNumber}`);
     for (const c of result.copyChanges) console.log(`    copy (${c.where}): ${c.applied ? "APPLIED" : `NOT applied — matched ${c.matched}×`}`);
     console.log(`    estimated time: ${result.estimatedTime ?? "unset"} min`);
