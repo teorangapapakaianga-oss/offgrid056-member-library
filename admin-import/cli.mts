@@ -20,6 +20,8 @@ import { planImport, runImport, updateLedger } from "./import/engine";
 import { buildDemo } from "./import/demo";
 import { auditProgramme } from "./audit/programme";
 import { renderAuditReport, renderStructure } from "./audit/report";
+import { reskinHtml } from "./reskin/reskin";
+import { runPilot, writePilot } from "./pilot/run";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -258,8 +260,177 @@ async function commandAudit() {
   console.log(`\n  report: ${path.relative(ROOT, reportFile)}\n`);
 }
 
+/**
+ * Stage 9.6C — re-skin. Reads legacy HTML, writes current-brand HTML into `workspace/reskin/`.
+ * The source folders are never written to.
+ *
+ *   npm run import:reskin                 re-skin every Group-A resource
+ *   npm run import:reskin -- --only OG-02
+ */
+async function commandReskin() {
+  ensureWorkspace();
+  const ws = loadWorkspace(WORKSPACE);
+  const auditResult = auditProgramme(ws.candidates, ws.texts, ws.groups);
+  const only = valueOf("--only");
+
+  const targets = auditResult.items.filter((i) => (only ? i.legacyCode === only : i.reskinGroup === "A"));
+  if (!targets.length) {
+    console.error(only ? `No resource ${only} in the audit.` : "No Group-A resources found.");
+    process.exit(1);
+  }
+
+  const outDir = path.join(WORKSPACE, "reskin");
+  const fontsOut = path.join(outDir, "fonts");
+  const assetsOut = path.join(outDir, "assets");
+  for (const d of [outDir, fontsOut, assetsOut]) fs.mkdirSync(d, { recursive: true });
+
+  // Brand fonts travel with the re-skinned documents, so they render without a network call.
+  for (const font of ["BebasNeue-Regular.woff2", "Montserrat-Regular.woff", "Montserrat-SemiBold.woff", "Montserrat-Bold.woff"]) {
+    const from = path.join(ROOT, "styles", "fonts", font);
+    if (fs.existsSync(from)) fs.copyFileSync(from, path.join(fontsOut, font));
+  }
+
+  // Cover art referenced by the documents, copied from the programme source (read-only).
+  const covers = ws.candidates.filter((c) => c.materialKind === "asset" && /cover/i.test(c.source.filename));
+  for (const cover of covers) {
+    const dest = path.join(assetsOut, cover.source.filename);
+    if (!fs.existsSync(dest) && fs.existsSync(cover.source.path)) fs.copyFileSync(cover.source.path, dest);
+  }
+
+  const log: Record<string, unknown>[] = [];
+  console.log(`\n  re-skinning ${targets.length} resource(s) → ${path.relative(ROOT, outDir)}\n`);
+
+  for (const item of targets) {
+    if (!item.html) {
+      console.log(`  ✗ ${item.legacyCode} has no HTML source to re-skin`);
+      continue;
+    }
+    const source = fs.readFileSync(item.html.folder + path.sep + item.html.filename, "utf8");
+    const { html, changes, warnings } = reskinHtml(source, { strapline: "Prepare • Adapt • Thrive" });
+    const outFile = path.join(outDir, `${item.proposedSlug}.html`);
+    fs.writeFileSync(outFile, html, "utf8");
+
+    // The source's absolute asset paths were broken; check the repointed files actually arrived, and only
+    // complain about the ones that did not.
+    for (const m of html.matchAll(/src="assets\/([^"]+)"/g)) {
+      if (!fs.existsSync(path.join(assetsOut, m[1]))) warnings.push(`cover image missing from the re-skin output: assets/${m[1]}`);
+    }
+
+    const changed = changes.filter((c) => c.kind !== "note").reduce((n, c) => n + c.count, 0);
+    console.log(`  ✓ ${item.legacyCode.padEnd(7)} ${item.proposedSlug.padEnd(36)} ${changed} change(s)${warnings.length ? ` · ${warnings.length} warning(s)` : ""}`);
+    for (const w of warnings) console.log(`      ⚠ ${w}`);
+
+    log.push({ legacyCode: item.legacyCode, slug: item.proposedSlug, file: path.relative(ROOT, outFile), changes, warnings });
+    audit("reskin", { legacyCode: item.legacyCode, changes: changed, warnings: warnings.length });
+  }
+
+  fs.writeFileSync(path.join(outDir, "reskin-log.json"), JSON.stringify(log, null, 1), "utf8");
+  console.log(`\n  log: ${path.relative(ROOT, path.join(outDir, "reskin-log.json"))}`);
+  console.log("  source files were not modified.\n");
+}
+
+/**
+ * Stage 9.6D — one resource, all the way through.
+ *
+ *   npm run import:pilot
+ */
+async function commandPilot() {
+  ensureWorkspace();
+  const ws = loadWorkspace(WORKSPACE);
+  const auditResult = auditProgramme(ws.candidates, ws.texts, ws.groups);
+  const item = auditResult.items.find((i) => i.legacyCode === "OG-02");
+  if (!item?.html) {
+    console.error("OG-02 or its HTML source is not in the audit. Run `npm run import:scan` first.");
+    process.exit(1);
+  }
+
+  const pilotDir = path.join(WORKSPACE, "pilot");
+  const spec = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "pilot", "og-02.json"), "utf8"));
+  const profiles = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "markets", "profiles.json"), "utf8"));
+  const sourcePath = path.join(item.html.folder, item.html.filename);
+
+  const result = runPilot({
+    sourceHtml: fs.readFileSync(sourcePath, "utf8"),
+    sourcePath,
+    resource: spec.resource,
+    blocks: spec.safetyBlocks,
+    libraryRecord: spec.libraryRecord,
+    markets: profiles.markets,
+    launchMarkets: profiles.launchMarkets,
+  });
+
+  // The re-skinned documents need the fonts and their own cover art beside them. Only what the pilot actually
+  // references is copied: the asset folder also holds multi-megabyte cover masters this document never uses.
+  const referenced = new Set([...(result.markets[0]?.html ?? "").matchAll(/src="assets\/([^"]+)"/g)].map((m) => m[1]));
+  const copyInto = (sub: string, wanted?: Set<string>) => {
+    const from = path.join(WORKSPACE, "reskin", sub);
+    const to = path.join(pilotDir, sub);
+    fs.mkdirSync(to, { recursive: true });
+    if (!fs.existsSync(from)) return;
+    for (const f of fs.readdirSync(from)) {
+      if (wanted && !wanted.has(f)) continue;
+      const dest = path.join(to, f);
+      if (fs.existsSync(dest)) continue; // already there: copying again can fail on a read-only copy
+      try {
+        fs.copyFileSync(path.join(from, f), dest);
+      } catch (e) {
+        console.log(`    ⚠ could not copy ${sub}/${f}: ${(e as Error).message}`);
+      }
+    }
+  };
+  copyInto("fonts");
+  copyInto("assets", referenced);
+  const written = writePilot(result, pilotDir);
+
+  console.log(`\n  PILOT — ${result.legacyCode} → ${spec.libraryRecord.id}\n`);
+  console.log(`  re-skin: ${result.changeLog.length} kinds of change${result.reskinWarnings.length ? `, ${result.reskinWarnings.length} warning(s)` : ""}`);
+  for (const c of result.changeLog) console.log(`    · ${c}`);
+  for (const w of result.reskinWarnings) console.log(`    ⚠ ${w}`);
+
+  console.log(`\n  markets:`);
+  for (const m of result.markets) {
+    console.log(`    ${m.market}: ${m.publishable ? "publishable" : "NOT publishable"}${m.unresolvedTokens.length ? ` · unresolved: ${m.unresolvedTokens.join(", ")}` : ""}`);
+    for (const p of m.problems) console.log(`      ✗ ${p}`);
+  }
+
+  console.log(`\n  differences between launch markets (${result.differences.length} fields):`);
+  for (const d of result.differences) {
+    console.log(`    ${d.field.padEnd(30)} ${Object.entries(d.values).map(([k, v]) => `${k}: ${v}`).join("  |  ")}`);
+  }
+
+  console.log(`\n  validation: ${result.validation.ok ? "PASSES the member library schema" : "FAILS"}`);
+  for (const i of result.validation.issues) console.log(`    ✗ ${i}`);
+
+  // --- draft import into a sandbox library (never the member library) -------------------------------------
+  if (result.validation.ok && result.record) {
+    const libraryRoot = path.join(pilotDir, "library");
+    for (const d of [path.join(libraryRoot, "data", "resources"), path.join(libraryRoot, "public", "resources")]) {
+      fs.mkdirSync(d, { recursive: true });
+    }
+    const recordFile = path.join(libraryRoot, "data", "resources", `${spec.libraryRecord.slug}.json`);
+    const existed = fs.existsSync(recordFile);
+    if (existed) {
+      // Backup before replacement, exactly as the import engine does.
+      const backupDir = path.join(WORKSPACE, "backups", new Date().toISOString().replace(/[:.]/g, "-"), "pilot");
+      fs.mkdirSync(backupDir, { recursive: true });
+      fs.copyFileSync(recordFile, path.join(backupDir, path.basename(recordFile)));
+    }
+    fs.writeFileSync(recordFile, JSON.stringify(result.record, null, 2) + "\n", "utf8");
+    audit("pilot.import", { candidate: result.legacyCode, slug: spec.libraryRecord.slug, action: existed ? "replace" : "create", status: result.record.status });
+    console.log(`\n  draft import: ${existed ? "replaced" : "created"} ${path.relative(ROOT, recordFile)} (status: ${result.record.status})`);
+    console.log(`  the member library was not touched: this is a sandbox under workspace/.`);
+  }
+
+  audit("pilot", { legacyCode: result.legacyCode, markets: result.markets.map((m) => m.market), valid: result.validation.ok });
+  console.log(`\n  written: ${written.map((w) => path.relative(ROOT, w)).join(", ")}\n`);
+}
+
 const command = args[0] ?? "scan";
-if (command === "scan") {
+if (command === "pilot") {
+  await commandPilot();
+} else if (command === "reskin") {
+  await commandReskin();
+} else if (command === "scan") {
   await commandScan();
 } else if (command === "apply") {
   await commandApply();

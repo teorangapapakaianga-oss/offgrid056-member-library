@@ -227,14 +227,17 @@ any rule. Clearance distances are **deliberately not stated** — they belong to
 >
 > Never use an outdoor gas appliance indoors (see Block 4).
 
-**Market-specific elements:** the trade licence name and the gas emergency line differ by market.
-`VERIFY:` the correct licensing body and emergency gas number for NZ, AU, US and CA before publishing.
+**Market-specific elements and sources — NZ and AU now verified:**
+
+| Market | Verified position |
+|---|---|
+| **New Zealand** | Gasfitting is **restricted work**: it can only be done by a currently **licensed or certifying gasfitter**, and doing restricted gasfitting without a current NZ licence **is illegal**. This covers pipework, gas appliances, flues and any additions or alterations. Since 1 July 2013 all gasfitting requires certification, and the person responsible must issue a **Gas Safety Certificate**. Registration and licensing is administered by the **PGDB**. |
+| **Australia** | Gasfitting requires a **licence** — in NSW under the *Gas & Electricity (Consumer Safety) Act 2017*, for any gas work regardless of value or whether it is residential or commercial. After installing a gas appliance the licensed gasfitter **must give you a compliance certificate**. Regulation is **state-based** (Building Commission NSW, the Building and Plumbing Commission in Victoria, Energy Safe Victoria). |
+| US, CA | `VERIFY` — secondary markets, not required for launch. |
 
 **Resources needing it:** the resources the audit flagged for gas, plus any cooking-without-power content.
 
-**Source basis:** `VERIFY` — this block is written from the general principle that gas work is a licensed
-trade in all four markets. **It needs a named official source per market before approval.** I have not cited
-one because I did not verify one.
+**Sources:** [WorkSafe NZ — Getting gas work done](https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/) · [PGDB](https://www.pgdb.co.nz) · [NSW Fair Trading — Using a gasfitter](https://www.fairtrading.nsw.gov.au/housing-and-property/building-and-renovating/preparing-to-build-and-renovate/using-a-gasfitter) · [Energy Safe Victoria — Gasfitters](https://www.energysafe.vic.gov.au/community-safety/working-tradespeople/gasfitters)
 
 ---
 
@@ -289,7 +292,8 @@ OG-B12, OG-B13, OG-B15 — the 11 the audit flagged.
 |---|---|
 | New Zealand | "At least three litres of drinking water per person per day… at least nine litres per person for the three days". Ideally a week: 21 litres per person. Hot conditions or physical activity "can double the amount required". Children, nursing mothers and ill people need more. |
 | United States | "At least one gallon of water per person per day for several days". "In very hot temperatures, water needs can double." Children, nursing mothers and sick people may need more. |
-| Australia, Canada | `VERIFY` — use each country's own emergency management guidance rather than borrowing the NZ or US figure. |
+| **Australia** | **"Pack 10 litres of drinking water per person at a minimum"**, for a three-day emergency period, with a three-day food plan alongside it. Rural and remote households may need to stock for longer. Australian emergency guidance is **issued by the states**, so this is presented to members as their state's guidance with a link, not as a national rule. |
+| Canada | `VERIFY` — secondary market, not required for launch. |
 
 **Market-specific elements:** the quantity and the unit — **litres in NZ/AU/CA, gallons in the US**. This is
 exactly the "litres" flag from the audit: it is not wording to correct, it is a market variant.
@@ -313,18 +317,22 @@ flagged, plus the water foundation generally.
 > **When in doubt, throw it out.** Never taste food to decide whether it is safe, and do not rely on smell or
 > appearance — food can be unsafe without either.
 
-`VERIFY:` the official "safe for N hours" figures for a closed refrigerator, a full freezer and a half-full
-freezer, and the temperature threshold for discarding food. The US source (FoodSafety.gov) publishes exactly
-these figures but the page **could not be retrieved** while preparing this standard (HTTP 403), so the numbers
-are deliberately left out rather than written from memory. They must be added from the official page, per
-market, before this block is published.
+**Market-specific figures — and they differ sharply, which is the point:**
 
-**Market-specific elements:** the food safety authority and its figures (US FoodSafety.gov / USDA, NZ MPI,
-AU FSANZ, CA CFIA).
+| | New Zealand (MPI) | Australia (NSW Food Authority) |
+|---|---|---|
+| Fridge | food is usable if the power was off **less than 24 hours** | a closed fridge keeps food cold **about 4 hours**; discard perishables unrefrigerated **more than 4 hours** |
+| Freezer | a **full** freezer, power off **less than 4 days** | **about 24 hours** if it stays closed |
+| Thawed food | may be kept or used, but **must be kept cold** | **do not refreeze**; keep cold and eat within 24 hours |
+| Judgement | check smell, look, colour, slimy texture; discard anything past its Use-By date; do not use damaged tins | **never taste** suspect food; if it does not feel cold, discard it |
+
+**This divergence is exactly why a shared figure would be a safety bug.** Quoting NZ's "less than 24 hours" to
+an Australian member contradicts their own food authority by a factor of six. The market layer keeps them
+apart, and a test asserts the two values are never equal.
 
 **Resources needing it:** OG-11, OG-12, OG-14 and the food foundation generally.
 
-**Source:** `VERIFY` — [FoodSafety.gov — Food Safety During a Power Outage](https://www.foodsafety.gov/food-safety-charts/food-safety-during-power-outage) (not retrieved; figures pending).
+**Sources:** [MPI — Food safety in natural disasters and emergencies](https://www.mpi.govt.nz/food-business/food-safety-in-natural-disasters-and-emergencies-2) · [NSW Food Authority — Food safety in emergencies](https://www.foodauthority.nsw.gov.au/consumer/keeping-food-safe/flood-fire-power-cut-emergencies) · US/CA figures remain `VERIFY` (secondary markets).
 
 ---
 
@@ -368,16 +376,20 @@ CA state/provincial codes). `VERIFY:` before stating any requirement as law.
 | 3 | Carbon monoxide | **CRITICAL** | 10+ | ✅ |
 | 4 | Indoor combustion | **CRITICAL** | 4+ | ✅ |
 | 5 | Solid-fuel heating | HIGH | 7 | ✅ |
-| 6 | Gas and LPG | **CRITICAL** | flagged set | ⚠ needs a per-market source |
+| 6 | Gas and LPG | **CRITICAL** | flagged set | ✅ **NZ + AU verified** |
 | 7 | Batteries and electrical | **CRITICAL** | 11 | ✅ |
-| 8 | Stored drinking water | HIGH | 8+ | ✅ NZ + US; AU/CA pending |
-| 9 | Food safety in a power cut | HIGH | 3+ | ⚠ figures pending |
+| 8 | Stored drinking water | HIGH | 8+ | ✅ **NZ + AU verified** |
+| 9 | Food safety in a power cut | HIGH | 3+ | ✅ **NZ + AU verified** |
 | 10 | Fire and emergency response | **CRITICAL** | 5+ | ✅ |
 
-**Three blocks are not ready to publish as they stand** and are marked accordingly: Block 6 (gas) needs a named
-licensing source per market, Block 8 needs AU and CA storage figures, and Block 9 needs the official power-cut
-food timings. I would rather hand you three gaps than eleven confident-sounding blocks where three of them were
-guessed.
+**All eleven blocks are now sourced for the two launch markets, New Zealand and Australia.** The three gaps
+that were open at first draft — gas licensing, Australian water storage, and power-cut food timings — have been
+closed against official sources for NZ and AU.
+
+**What remains `VERIFY`:** the generator distance for NZ, AU and CA (only the US CPSC figure of 20 feet is
+confirmed), and the US and Canadian values for gas, water and food. US and CA are secondary markets, so those
+are deliberately left open. Every remaining `VERIFY` behaves as a missing value: the token stays visible and
+`publishable()` returns false for that market.
 
 ---
 

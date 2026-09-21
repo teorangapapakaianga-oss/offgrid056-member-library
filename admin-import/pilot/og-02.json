@@ -1,0 +1,58 @@
+{
+  "description": "Stage 9.6D pilot — OG-02 Household Risk Identifier as a market-neutral core resource plus the safety blocks it requires. The teaching content stays in the re-skinned HTML document; this file carries the library record and the safety layer.",
+
+  "resource": {
+    "id": "res-1002",
+    "legacyCode": "OG-02",
+    "slug": "household-risk-identifier",
+    "title": "Household Risk Identifier",
+    "description": "Identify the top risks your household faces, then rank them by probability and impact so you know what to tackle first.",
+    "safetyBlocks": ["general-disclaimer", "emergency-contact"],
+    "body": "Rate each household risk for probability and impact, multiply the two, and work on the highest scores first. If you are unsure where to start, your {{agency.emergencyManagement}} publishes guidance for your area."
+  },
+
+  "safetyBlocks": {
+    "general-disclaimer": {
+      "id": "general-disclaimer",
+      "title": "Before you start",
+      "severity": "STANDARD",
+      "body": "OffGrid056 gives general household resilience education, not professional advice. Anything involving fixed wiring, gas, structural work or an appliance flue must be done by a suitably qualified and licensed tradesperson in your area — in {{market.name}}, that means a {{term.electrician}} or {{term.gasfitter}}. Where this material names a standard, agency or programme, check it still applies to you before relying on it.",
+      "sources": ["OffGrid056 editorial standard"]
+    },
+    "emergency-contact": {
+      "id": "emergency-contact",
+      "title": "In an emergency",
+      "severity": "CRITICAL",
+      "body": "**In an emergency, call {{emergency.number}} now.** If you are unsure whether it is an emergency, call anyway and ask — the operator will help you decide. Guidance for your area: {{agency.emergencyManagement}}.",
+      "marketBody": {
+        "NZ": "**In an emergency, call {{emergency.number}} now.** Calls are free and work on a mobile even with no credit. If you are unsure whether it is an emergency, call anyway and ask — the operator will help you decide. {{emergency.accessibility}}. Guidance for your area: {{agency.emergencyManagement}}.",
+        "AU": "**In an emergency, call {{emergency.number}} now.** You can also dial 112 from a mobile, which reaches the same service. If you are unsure whether it is an emergency, call anyway and ask — the operator will help you decide. {{emergency.accessibility}}. Guidance for your area: {{agency.emergencyManagement}}."
+      },
+      "sources": [
+        "https://www.police.govt.nz/call-111",
+        "https://www.triplezero.gov.au/triple-zero/How-to-Call-000"
+      ]
+    }
+  },
+
+  "libraryRecord": {
+    "id": "res-1002",
+    "slug": "household-risk-identifier",
+    "legacyCode": "OG-02",
+    "title": "Household Risk Identifier",
+    "description": "Identify the top risks your household faces, then rank them by probability and impact so you know what to tackle first.",
+    "foundation": "general",
+    "category": "planning",
+    "resourceType": "worksheet",
+    "difficulty": "beginner",
+    "estimatedTime": 20,
+    "tags": ["risk", "planning", "week-1"],
+    "learningObjectives": [
+      "List the risks your household actually faces",
+      "Score each risk by probability and impact",
+      "Choose the first action for your highest-scoring risks"
+    ],
+    "collections": ["start-here"],
+    "status": "draft"
+  }
+}

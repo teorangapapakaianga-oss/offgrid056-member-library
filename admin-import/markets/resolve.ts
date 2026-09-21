@@ -84,6 +84,15 @@ export interface ResolvedResource {
 const TOKEN = /\{\{\s*([a-z][\w.]*)\s*\}\}/gi;
 
 /**
+ * A profile field whose official value has not been verified yet carries this sentinel.
+ *
+ * It must behave exactly like a missing value, not like a string: otherwise "VERIFY" renders into the page as
+ * if it were an answer ("store VERIFY of water per person"), and `publishable()` waves it through. An
+ * unverified safety figure has to fail closed.
+ */
+export const UNVERIFIED = "VERIFY";
+
+/**
  * Resolve `{{token}}` against a market profile.
  *
  * An unknown token is **left visible and reported**, never silently blanked. A missing emergency number that
@@ -93,7 +102,7 @@ export function resolveTokens(text: string, market: MarketProfile): { text: stri
   const unresolved: string[] = [];
   const resolved = text.replace(TOKEN, (whole, path: string) => {
     const value = lookup(path, market);
-    if (value === undefined) {
+    if (value === undefined || value === UNVERIFIED) {
       unresolved.push(path);
       return whole; // stays visible, so it cannot be missed in review
     }

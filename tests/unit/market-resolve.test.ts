@@ -44,11 +44,11 @@ describe("token resolution", () => {
   });
 
   it("never turns a missing official figure into an empty string", () => {
-    // AU has no verified water figure yet: it must not render as "store  of water per person".
-    const { text, unresolved } = resolveTokens("Store {{figure.waterThreeDays}} of water.", market("AU"));
-    expect(text).toContain("{{figure.waterThreeDays}}");
-    expect(text).not.toBe("Store  of water.");
-    expect(unresolved).toContain("figure.waterThreeDays");
+    // No market has a verified generator distance yet: it must not render as "stand  from the house".
+    const { text, unresolved } = resolveTokens("Stand {{figure.generatorDistance}} from the house.", market("AU"));
+    expect(text).toContain("{{figure.generatorDistance}}");
+    expect(text).not.toBe("Stand  from the house.");
+    expect(unresolved).toContain("figure.generatorDistance");
   });
 });
 
@@ -101,11 +101,19 @@ describe("the publish gate", () => {
     expect(publishable(nz, ["emergency-contact"]).ok).toBe(true);
   });
 
-  it("refuses a market whose official figures have not been verified yet", () => {
-    const au = resolveForMarket(resource, market("AU"), blocks);
-    const check = publishable(au, ["emergency-contact"]);
+  it("clears both launch markets now their official figures are verified", () => {
+    // NZ and AU were completed for the dual launch: the sample resource must pass in both.
+    for (const code of ["NZ", "AU"]) {
+      const resolved = resolveForMarket(resource, market(code), blocks);
+      expect(publishable(resolved, ["emergency-contact"]).ok).toBe(true);
+    }
+  });
+
+  it("still refuses a market whose figures have not been verified", () => {
+    const needsUnverified = { ...resource, body: "Stand {{figure.generatorDistance}} from the house." };
+    const check = publishable(resolveForMarket(needsUnverified, market("CA"), blocks), ["emergency-contact"]);
     expect(check.ok).toBe(false);
-    expect(check.problems.join(" ")).toMatch(/waterPerPersonPerDay|waterThreeDays/);
+    expect(check.problems.join(" ")).toMatch(/generatorDistance/);
   });
 
   it("refuses a resource that is missing a required critical safety block", () => {

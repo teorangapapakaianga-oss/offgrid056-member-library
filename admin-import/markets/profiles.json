@@ -1,5 +1,7 @@
 {
-  "description": "Stage 9.6B PROPOSAL — market profiles. One file per market, shared by every resource. Figures marked VERIFY are deliberately absent: they must come from that market's own official source before publication.",
+  "description": "Stage 9.6B market profiles. One file per market, shared by every resource. A field set to VERIFY is treated as MISSING, not as a value: the token stays visible and publishable() returns false for that market. NZ and AU are the primary launch markets and are fully resolved; US and CA keep their architecture but are deliberately left partly unresolved until they are needed.",
+  "launchMarkets": ["NZ", "AU"],
+  "secondaryMarkets": ["US", "CA"],
   "markets": [
     {
       "code": "NZ",
@@ -15,22 +17,29 @@
         "fire": { "name": "Fire and Emergency New Zealand", "url": "https://www.fireandemergency.nz" },
         "energy": { "name": "EECA", "url": "https://www.eeca.govt.nz" },
         "housingStandard": { "name": "Healthy Homes Standards" },
-        "foodSafety": { "name": "Ministry for Primary Industries (MPI)" }
+        "foodSafety": { "name": "New Zealand Food Safety (MPI)", "url": "https://www.mpi.govt.nz/food-safety-home" },
+        "gasRegulator": { "name": "WorkSafe New Zealand", "url": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/" },
+        "tradeRegistration": { "name": "Plumbers, Gasfitters and Drainlayers Board (PGDB)", "url": "https://www.pgdb.co.nz" }
       },
       "figures": {
         "waterPerPersonPerDay": "3 litres",
         "waterThreeDays": "9 litres per person",
         "waterOneWeek": "21 litres per person",
+        "fridgeWithoutPower": "less than 24 hours",
+        "freezerWithoutPower": "less than 4 days, if the freezer was full",
+        "gasCertificate": "a Gas Safety Certificate",
         "generatorDistance": "VERIFY"
       },
       "terms": {
         "emergencyManagement": "Civil Defence",
         "electrician": "licensed electrical worker",
-        "gasfitter": "licensed gasfitter"
+        "gasfitter": "licensed or certifying gasfitter"
       },
       "links": {
         "storingWater": "https://getready.govt.nz/prepared/household/supplies/storing-water",
-        "emergency": "https://www.police.govt.nz/call-111"
+        "emergency": "https://www.police.govt.nz/call-111",
+        "gasWork": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/",
+        "foodInEmergencies": "https://www.mpi.govt.nz/food-business/food-safety-in-natural-disasters-and-emergencies-2"
       }
     },
     {
@@ -43,13 +52,19 @@
       },
       "units": "metric",
       "agencies": {
-        "emergencyManagement": { "name": "State Emergency Service (SES)" },
+        "emergencyManagement": { "name": "your State Emergency Service (SES)" },
         "fire": { "name": "your state fire service" },
         "energy": { "name": "VERIFY" },
-        "foodSafety": { "name": "Food Standards Australia New Zealand (FSANZ)" }
+        "foodSafety": { "name": "your state food authority", "url": "https://www.foodauthority.nsw.gov.au/consumer/keeping-food-safe/flood-fire-power-cut-emergencies" },
+        "gasRegulator": { "name": "your state gas safety regulator", "url": "https://www.energysafe.vic.gov.au/community-safety/working-tradespeople/gasfitters" },
+        "tradeRegistration": { "name": "your state licensing authority", "url": "https://www.fairtrading.nsw.gov.au/trades-and-businesses/licensing-and-qualifications/plumbing,-draining-and-gasfitting-licences" }
       },
       "figures": {
-        "waterPerPersonPerDay": "VERIFY",
+        "waterPerPersonPerDay": "at least 10 litres for three days",
+        "waterThreeDays": "10 litres per person, minimum",
+        "fridgeWithoutPower": "about 4 hours with the door kept closed",
+        "freezerWithoutPower": "about 24 hours, if the freezer stays closed",
+        "gasCertificate": "a compliance certificate",
         "generatorDistance": "VERIFY"
       },
       "terms": {
@@ -58,8 +73,12 @@
         "gasfitter": "licensed gasfitter"
       },
       "links": {
-        "emergency": "https://www.triplezero.gov.au/triple-zero/How-to-Call-000"
-      }
+        "emergency": "https://www.triplezero.gov.au/triple-zero/How-to-Call-000",
+        "storingWater": "https://www.getready.qld.gov.au/emergencykit",
+        "gasWork": "https://www.fairtrading.nsw.gov.au/housing-and-property/building-and-renovating/preparing-to-build-and-renovate/using-a-gasfitter",
+        "foodInEmergencies": "https://www.foodauthority.nsw.gov.au/consumer/keeping-food-safe/flood-fire-power-cut-emergencies"
+      },
+      "note": "Australian emergency, food-safety and gas guidance is issued by the states, not nationally. The figures here come from Queensland (Get Ready) and New South Wales (Food Authority, Fair Trading) and are presented to members as 'your state' guidance with a link, so nobody is told a Queensland figure is a national rule."
     },
     {
       "code": "US",
