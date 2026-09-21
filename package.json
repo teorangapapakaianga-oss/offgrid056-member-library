@@ -21,7 +21,8 @@
                     "import:pilot":  "tsx admin-import/cli.mts pilot",
                     "import:readiness":  "tsx admin-import/cli.mts readiness",
                     "build:preview":  "node tools/build-preview.mjs",
-                    "import:prep":  "tsx admin-import/cli.mts prep"
+                    "import:prep":  "tsx admin-import/cli.mts prep",
+                    "import:verify-prep":  "tsx admin-import/pilot/verify-prep.mts"
                 },
     "dependencies":  {
                          "minisearch":  "7.2.0",

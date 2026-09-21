@@ -1,0 +1,50 @@
+{
+  "description": "Per-resource metadata PROPOSED for owner review. Estimates are rounded to the owner's scale (10 / 15 / 20 / 30 / 45 min) and assume a first pass with the needed information to hand. They exclude any time spent gathering information such as quotes or measurements. Status 'proposed' until the owner approves.",
+  "resources": {
+    "OG-B04": {
+      "category": "planning",
+      "categoryStatus": "approved 2026-09-22",
+      "estimatedTime": 15,
+      "estimatedTimeStatus": "proposed",
+      "evidence": {
+        "pages": 2,
+        "words": 164,
+        "fillInFields": 9,
+        "checkboxes": 16,
+        "sections": 4,
+        "nature": "short reflective planning answers: month, theme, why it matters, check-in day, what to share, partner, how to measure, baseline, target"
+      },
+      "reasoning": "About a minute to read, then nine short answers of a line or two and a checklist to skim. Reused monthly, so the estimate is per month."
+    },
+    "OG-B10": {
+      "category": "planning",
+      "categoryStatus": "approved 2026-09-22",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "proposed",
+      "evidence": {
+        "pages": 3,
+        "words": 184,
+        "fillInFields": 24,
+        "checkboxes": 12,
+        "sections": 5,
+        "nature": "budget burn-down with arithmetic (starting budget, remaining at days 30/60/90, a 10-20% contingency), phase breakdown, action dependencies and supplier lead times"
+      },
+      "reasoning": "Short to read but the most thinking per field: budget figures need working out and dependency mapping means reasoning about the order of actions. Labelled Advanced, and assumes a plan already exists."
+    },
+    "OG-25": {
+      "category": "planning",
+      "categoryStatus": "approved 2026-09-22",
+      "estimatedTime": 45,
+      "estimatedTimeStatus": "proposed",
+      "evidence": {
+        "pages": "6 (AU) / 7 (NZ)",
+        "words": 425,
+        "fillInFields": 24,
+        "fieldInputs": 45,
+        "sections": 6,
+        "nature": "a brief for a tradesperson: project overview, resilience context, scope of works, commercial terms, attachments checklist, evaluation criteria"
+      },
+      "reasoning": "The longest document and the most demanding writing: a scope of works and commercial terms are substantive. 45 minutes assumes the member already knows what they want done; gathering measurements or quotes would add to it."
+    }
+  }
+}

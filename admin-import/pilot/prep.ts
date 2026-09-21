@@ -34,7 +34,15 @@ export interface PrepResult {
   safety: { blocks: string[]; exposure: string[] };
   markets: { code: string; publishable: boolean; problems: string[]; emergencyNumber: string }[];
   validation: { ok: boolean; issues: string[] };
-  importReadiness: "READY_AFTER_METADATA" | "NEEDS_OWNER_COPY" | "NEEDS_CONTENT_REVIEW";
+  importReadiness:
+    | "READY_AFTER_METADATA"
+    | "READY_AFTER_METADATA_AND_COPY_APPROVAL"
+    | "NEEDS_OWNER_METADATA"
+    | "NEEDS_OWNER_COPY"
+    | "NEEDS_CONTENT_REVIEW";
+  /** owner-approved copy changes, and whether each was applied */
+  copyChanges: CopyChangeResult[];
+  estimatedTime: number | null;
   files: string[];
 }
 
@@ -78,6 +86,44 @@ export function describeFromHtml(html: string): { title: string | null; descript
 const slugify = (title: string) =>
   title.toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60);
 
+/** An owner-approved change to a resource's wording, recorded in config/approved-copy.json. */
+export interface ApprovedCopyChange {
+  where: string;
+  from: string;
+  to: string;
+  expectedMatches: number;
+  approvedBy: string;
+  approvedOn: string;
+  reason: string;
+}
+
+export interface CopyChangeResult {
+  where: string;
+  from: string;
+  to: string;
+  matched: number;
+  applied: boolean;
+}
+
+/**
+ * Apply approved copy changes to the migrated HTML — never to the source.
+ *
+ * A change is applied only when it matches exactly as many times as the owner approved. If the source has
+ * drifted (the sentence was edited, or now appears twice), the change is refused and reported, because
+ * applying it anyway would put approved-looking wording somewhere nobody approved it.
+ */
+export function applyCopyChanges(html: string, changes: ApprovedCopyChange[]): { html: string; results: CopyChangeResult[] } {
+  let out = html;
+  const results: CopyChangeResult[] = [];
+  for (const c of changes) {
+    const matched = out.split(c.from).length - 1;
+    const applied = matched === c.expectedMatches;
+    if (applied) out = out.split(c.from).join(c.to);
+    results.push({ where: c.where, from: c.from, to: c.to, matched, applied });
+  }
+  return { html: out, results };
+}
+
 export interface PrepInputs {
   item: ProgrammeItem;
   sourceHtml: string;
@@ -85,23 +131,34 @@ export interface PrepInputs {
   markets: MarketProfile[];
   launchMarkets: string[];
   outDir: string;
+  /** owner-approved wording changes for this resource, if any */
+  copyChanges?: ApprovedCopyChange[];
+  /** owner-reviewed estimate in minutes; null means "not supported by the document — leave unset" */
+  estimatedTime?: number | null;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
-  const { item, sourceHtml, blocks, markets, launchMarkets, outDir } = inputs;
+  const { item, sourceHtml, blocks, markets, launchMarkets, outDir, copyChanges = [] } = inputs;
 
-  // 1. re-skin (brand + terminology, context-aware)
-  const { html: reskinned, changes, warnings } = reskinHtml(sourceHtml, { strapline: "Prepare • Adapt • Thrive" });
+  // 1. re-skin (brand + terminology, context-aware), then any owner-approved copy changes
+  const skinned = reskinHtml(sourceHtml, { strapline: "Prepare • Adapt • Thrive" });
+  const { changes, warnings } = skinned;
+  const copy = applyCopyChanges(skinned.html, copyChanges);
+  const reskinned = copy.html;
 
   // 2. what the document says about itself
   const described = describeFromHtml(sourceHtml);
   const title = described.title ?? item.title;
   const slug = slugify(title);
 
-  // 3. terminology beyond the framework phrase
+  // 3. terminology beyond the framework phrase — checked on the MIGRATED html, so an approved copy change that
+  //    removed a reference clears it, while anything still left in the member-facing document is still caught.
   const otherFindings: string[] = [];
-  for (const m of new Set(sourceHtml.match(PLATFORM_REFERENCES) ?? [])) {
+  for (const m of new Set(reskinned.match(PLATFORM_REFERENCES) ?? [])) {
     otherFindings.push(`references "${m}" — a platform outside the member library; confirm before publishing`);
+  }
+  for (const r of copy.results.filter((x) => !x.applied)) {
+    otherFindings.push(`approved copy change (${r.where}) was NOT applied: expected the original wording once, found it ${r.matched} time(s)`);
   }
 
   // 4. market resolution, with the standard blocks for a Group-A resource
@@ -152,12 +209,14 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     description: described.description ?? "",
     learningObjectives: [],
     foundation: foundation,
-    // The audit does not settle a category, so the foundation's first one stands in. It is a placeholder for
-    // the owner to confirm during review, not a decision — which is why readiness never reaches "ready".
-    category: getFoundation(foundation as never).categories[0]?.slug ?? "planning",
+    // Owner-approved (2026-09-22) for the General planning resources prepared so far. Other foundations still
+    // fall back to their first category, which remains a placeholder for review.
+    category: foundation === "general" ? "planning" : (getFoundation(foundation as never).categories[0]?.slug ?? "planning"),
     resourceType: item.resourceType.value ?? "worksheet",
     difficulty: "beginner",
-    estimatedTime: 20,
+    // Only an owner-reviewed estimate is used. When the document does not support one, the field is left out,
+    // validation fails on purpose, and the resource cannot be imported until someone decides.
+    ...(typeof inputs.estimatedTime === "number" ? { estimatedTime: inputs.estimatedTime } : {}),
     tags: [],
     featured: false,
     premium: false,
@@ -174,11 +233,16 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
 
   // 6. readiness
   const legacyIssues = item.legacyIssues.map((i) => i.issue);
+  const copyApplied = copy.results.length > 0 && copy.results.every((r) => r.applied);
   const importReadiness: PrepResult["importReadiness"] = !described.description
     ? "NEEDS_OWNER_COPY"
     : otherFindings.length || item.safetyNotes.length
       ? "NEEDS_CONTENT_REVIEW"
-      : "READY_AFTER_METADATA";
+      : typeof inputs.estimatedTime !== "number"
+        ? "NEEDS_OWNER_METADATA"
+        : copyApplied
+          ? "READY_AFTER_METADATA_AND_COPY_APPROVAL"
+          : "READY_AFTER_METADATA";
 
   return {
     legacyCode: item.legacyCode,
@@ -199,6 +263,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       issues: parsed.success ? [] : parsed.error.issues.map((i) => `${i.path.join(".") || "(root)"}: ${i.message}`),
     },
     importReadiness,
+    copyChanges: copy.results,
+    estimatedTime: typeof inputs.estimatedTime === "number" ? inputs.estimatedTime : null,
     files,
   };
 }

@@ -487,6 +487,9 @@ async function commandPrep() {
 
   const spec = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "pilot", "og-02.json"), "utf8"));
   const profiles = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "markets", "profiles.json"), "utf8"));
+  // Owner decisions live in config, not in code, so each one is visible and dated.
+  const approvedCopy = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "approved-copy.json"), "utf8")).changes ?? {};
+  const metadata = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "metadata-review.json"), "utf8")).resources ?? {};
   const results = [];
 
   for (const code of codes) {
@@ -502,6 +505,8 @@ async function commandPrep() {
       markets: profiles.markets,
       launchMarkets: profiles.launchMarkets,
       outDir: path.join(WORKSPACE, "prep", item.legacyCode),
+      copyChanges: approvedCopy[item.legacyCode] ?? [],
+      estimatedTime: metadata[item.legacyCode]?.estimatedTime ?? null,
     });
     results.push(result);
 
@@ -511,6 +516,8 @@ async function commandPrep() {
     console.log(`    re-skin: ${result.reskin.changes.length} kinds of change · legacy brand issues ${result.branding.legacyIssues}`);
     for (const f of result.terminology.otherFindings) console.log(`    ⚠ ${f}`);
     for (const m of result.markets) console.log(`    ${m.code}: ${m.publishable ? "publishable" : "blocked"} · emergency ${m.emergencyNumber}`);
+    for (const c of result.copyChanges) console.log(`    copy (${c.where}): ${c.applied ? "APPLIED" : `NOT applied — matched ${c.matched}×`}`);
+    console.log(`    estimated time: ${result.estimatedTime ?? "unset"} min`);
     console.log(`    validation: ${result.validation.ok ? "passes" : "FAILS"}${result.validation.issues.length ? " — " + result.validation.issues[0] : ""}`);
     console.log(`    readiness: ${result.importReadiness}`);
   }

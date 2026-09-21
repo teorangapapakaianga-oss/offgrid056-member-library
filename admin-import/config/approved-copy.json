@@ -1,0 +1,25 @@
+{
+  "description": "Owner-approved copy changes, applied to a resource's migrated HTML. Nothing here edits the original source file. Each change must match exactly the number of times recorded, or the resource fails preparation: a source that has drifted must not silently skip an approved change or have it applied somewhere unintended.",
+  "changes": {
+    "OG-B04": [
+      {
+        "where": "header line beneath the title",
+        "from": "OffGrid056 Skool Community | Reusable monthly challenge framework",
+        "to": "OffGrid056 Member Community | Reusable monthly challenge framework",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "reason": "Remove the external Skool platform reference. The resource describes a community challenge, so 'Member Community' keeps the meaning. No link added: there is no approved destination."
+      },
+      {
+        "where": "page footer",
+        "from": "OFFGRID056.COM | SKOOL COMMUNITY MONTHLY CHALLENGE",
+        "to": "OFFGRID056.COM | MEMBER COMMUNITY MONTHLY CHALLENGE",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "reason": "Same change in the footer. OFFGRID056.COM is kept: it is OffGrid056's own domain, not an external platform."
+      }
+    ]
+  }
+}
