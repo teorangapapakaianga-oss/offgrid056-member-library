@@ -59,9 +59,19 @@ export function loadLearningPaths(): LearningPath[] {
   return pathCache;
 }
 
-/** Published resources only: what the site builds. */
+/**
+ * Draft resources are included only when the build is explicitly told to, by setting
+ * `OG056_INCLUDE_DRAFTS=1`.
+ *
+ * This exists so the private, access-controlled preview can show a freshly imported resource while it is still
+ * a draft (owner decision D9-7: every import enters as a draft). A production build sets nothing, so the
+ * behaviour there is unchanged: published only.
+ */
+const INCLUDE_DRAFTS = process.env.OG056_INCLUDE_DRAFTS === "1";
+
+/** Published resources — plus drafts in a preview build. */
 export function getResources(): Resource[] {
-  return loadAllResourceFiles().filter((r) => r.status === "published");
+  return loadAllResourceFiles().filter((r) => r.status === "published" || (INCLUDE_DRAFTS && r.status === "draft"));
 }
 
 export function getResourceBySlug(slug: string): Resource | undefined {

@@ -55,3 +55,18 @@ export function DemoBadge() {
     </span>
   );
 }
+
+/**
+ * Only ever seen in a preview build, where drafts are loaded alongside published resources
+ * (`OG056_INCLUDE_DRAFTS=1`). A production build never loads a draft, so this never renders there.
+ *
+ * Without it an imported, unreviewed resource looks exactly like approved content, which is a poor thing to
+ * hand someone who is reviewing it.
+ */
+export function DraftBadge() {
+  return (
+    <span className={`${pill} bg-og-charcoal text-og-green`} title="Draft: imported but not yet approved for members">
+      Draft
+    </span>
+  );
+}

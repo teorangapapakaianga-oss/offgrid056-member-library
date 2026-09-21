@@ -47,6 +47,23 @@ og056-progress-*.json
 private/
 public/resources/private/
 
+# Real member content, kept out of this PUBLIC repository but still built and deployed.
+#
+# The build loads every .json in data/resources, so a "*.private.json" record is picked up locally and by a
+# Direct Upload deployment, while never being committed here. Its download lives in public/resources and is
+# ignored for the same reason. This is what lets the private preview serve real resources from a public repo
+# without ever publishing them (Stage 9.7 owner ruling).
+data/resources/*.private.json
+
+# Real member downloads live OUTSIDE public/, because public/ is copied wholesale into every build. They are
+# staged into public/resources only by `npm run build:preview`, and removed again afterwards, so a plain
+# production build cannot pick them up even by accident.
+private-assets/
+public/resources/*.pdf
+public/resources/*.xlsx
+public/resources/*.docx
+public/resources/*.zip
+
 # OS and editor files
 .DS_Store
 Thumbs.db

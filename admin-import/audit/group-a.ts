@@ -9,7 +9,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import type { ProgrammeAudit, ProgrammeItem } from "./programme";
+import type { ProgrammeAudit } from "./programme";
 
 export type Risk = "LOW" | "MEDIUM" | "HIGH";
 
@@ -65,8 +65,10 @@ const MARKET_TOKENS: { pattern: RegExp; token: string }[] = [
   { pattern: /\b(generator)\b/i, token: "figure.generatorDistance" },
 ];
 
-/** Blocks whose wording is not yet signed off, and fields still unverified for the launch markets. */
-const UNAPPROVED_BLOCKS = new Set<string>(); // all blocks are drafted; approval is the owner's, tracked below
+/**
+ * Market fields still unverified for the launch markets. A resource needing one of these cannot be published
+ * in that market, so it is sequenced last (owner ruling: the US generator distance must not be borrowed).
+ */
 const UNVERIFIED_FIELDS = new Set(["figure.generatorDistance"]);
 
 function complexityOf(layout: Omit<GroupAReport["layout"], "complexity">): Risk {
