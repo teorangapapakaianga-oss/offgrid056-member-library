@@ -50,6 +50,8 @@ export interface PrepResult {
     | "READY_AFTER_FINAL_VALIDATION"
     /** held until another resource it depends on is in the library */
     | "BLOCKED_BY_RESOURCE_DEPENDENCY"
+    /** rendered with unapproved copy so the owner can review it; never deployable as it stands */
+    | "PREVIEW_WITH_PROPOSED_COPY"
     | "NEEDS_OWNER_METADATA"
     | "NEEDS_OWNER_COPY"
     | "NEEDS_SAFETY_APPROVAL"
@@ -153,7 +155,13 @@ export function findContentFlags(html: string, ownCode: string, terms: LegacyTer
       flags.push({ code, kind, text: t });
     }
   };
-  for (const { code, kind, pattern } of CONTENT_FLAG_PATTERNS) for (const m of text.matchAll(pattern)) add(code, kind, m[0]);
+  for (const { code, kind, pattern } of CONTENT_FLAG_PATTERNS) {
+    for (const m of text.matchAll(pattern)) {
+      // A bare "100%" is a table's total row (the "% of Budget" column sums to it), not a claim to source.
+      if (kind === "figure-needs-source" && /^100\s?%$/.test(m[0].trim())) continue;
+      add(code, kind, m[0]);
+    }
+  }
   // Old offer and platform names, from config so the owner can extend the list without a code change.
   for (const [kind, names] of [["product-name", terms.productNames], ["platform-name", terms.platformNames]] as const) {
     for (const name of names) {
@@ -209,6 +217,8 @@ export interface ApprovedCopyChange {
   approvedBy: string;
   approvedOn: string;
   reason: string;
+  /** markets this change applies to; omitted means every market (a genuine market variant sets this) */
+  markets?: string[];
 }
 
 export interface CopyChangeResult {
@@ -217,6 +227,10 @@ export interface CopyChangeResult {
   to: string;
   matched: number;
   applied: boolean;
+  /** markets the change applies to; absent means all */
+  markets?: string[];
+  /** true when the change is an unapproved proposal rendered for review only */
+  proposed?: boolean;
 }
 
 /**
@@ -233,7 +247,7 @@ export function applyCopyChanges(html: string, changes: ApprovedCopyChange[]): {
     const matched = out.split(c.from).length - 1;
     const applied = matched === c.expectedMatches;
     if (applied) out = out.split(c.from).join(c.to);
-    results.push({ where: c.where, from: c.from, to: c.to, matched, applied });
+    results.push({ where: c.where, from: c.from, to: c.to, matched, applied, ...(c.markets ? { markets: c.markets } : {}) });
   }
   return { html: out, results };
 }
@@ -265,19 +279,30 @@ export interface PrepInputs {
   legacyTerms?: LegacyTerms;
   /** an owner-approved library description, replacing the one read from the document */
   description?: string | null;
-  /** an owner-specified PDF title (the title bar); defaults to the resource title. Never carries a legacy code. */
+  /** an owner-specified PDF title (the title bar); defaults to "<title> — OffGrid056". Never carries a legacy code. */
   pdfTitle?: string | null;
+  /** unapproved copy changes, rendered only so the owner can review the result; they hold the resource */
+  proposedCopy?: ApprovedCopyChange[];
   /** another resource this one cannot be published without */
   blockedBy?: { dependency: string; reason?: string } | null;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
   const { item, sourceHtml, blocks, markets, launchMarkets, outDir, copyChanges = [] } = inputs;
+  const proposedCopy = inputs.proposedCopy ?? [];
 
-  // 1. re-skin (brand + terminology, context-aware), then any owner-approved copy changes
+  // 1. re-skin (brand + terminology, context-aware), then copy changes. Changes without `markets` apply to every
+  //    market here; market-specific ones (a genuine market variant) are applied per market below. Proposed changes
+  //    are applied after approved ones and marked, so a preview can be reviewed but never mistaken for approved.
   const skinned = reskinHtml(sourceHtml, { strapline: "Prepare • Adapt • Thrive" });
   const { changes, warnings } = skinned;
-  const copy = applyCopyChanges(skinned.html, copyChanges);
+  const shared = (list: ApprovedCopyChange[]) => list.filter((c) => !c.markets?.length);
+  const approvedShared = applyCopyChanges(skinned.html, shared(copyChanges));
+  const proposedShared = applyCopyChanges(approvedShared.html, shared(proposedCopy));
+  const copy = {
+    html: proposedShared.html,
+    results: [...approvedShared.results, ...proposedShared.results.map((r) => ({ ...r, proposed: true }))],
+  };
 
   // 2. what the document says about itself
   const described = describeFromHtml(sourceHtml);
@@ -286,9 +311,9 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   const title = described.title ?? item.title;
   const slug = slugify(title);
 
-  // The <title> becomes the PDF's title bar. Owner rule (2026-09-22): the member sees the current resource title
-  // only — never the legacy code ("OG-15 Warm Home Scorecard — OffGrid056"), which stays in `legacyCode`.
-  const pdfTitle = inputs.pdfTitle ?? title;
+  // The <title> becomes the PDF's title bar. Owner standard (2026-09-22): "<Resource Title> — OffGrid056", never
+  // the legacy code ("OG-15 Warm Home Scorecard — OffGrid056"), which stays in `legacyCode`.
+  const pdfTitle = inputs.pdfTitle ?? `${title} — OffGrid056`;
   const titleTag = `<title>${escapeHtml(pdfTitle)}</title>`;
   // Replace the source's title, or add one: a document without <title> prints with no title at all.
   const reskinned = /<title>[\s\S]*?<\/title>/i.test(copy.html)
@@ -301,10 +326,21 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   for (const m of new Set(reskinned.match(PLATFORM_REFERENCES) ?? [])) {
     otherFindings.push(`references "${m}" — a platform outside the member library; confirm before publishing`);
   }
-  for (const r of copy.results.filter((x) => !x.applied)) {
-    otherFindings.push(`approved copy change (${r.where}) was NOT applied: expected the original wording once, found it ${r.matched} time(s)`);
-  }
-  const contentFlags = findContentFlags(reskinned, item.legacyCode, inputs.legacyTerms);
+  const unapplied = (r: CopyChangeResult) =>
+    `${r.proposed ? "proposed" : "approved"} copy change (${r.where}${r.markets ? ` · ${r.markets.join("/")}` : ""}) was NOT applied: expected the original wording, found it ${r.matched} time(s)`;
+  for (const r of copy.results.filter((x) => !x.applied)) otherFindings.push(unapplied(r));
+  // Flags are collected from every market's final text below, so a market-only change clears its own flags only.
+  const flagSeen = new Set<string>();
+  const contentFlags: ContentFlag[] = [];
+  const collectFlags = (html: string) => {
+    for (const f of findContentFlags(html, item.legacyCode, inputs.legacyTerms)) {
+      const key = `${f.kind}|${f.text}`;
+      if (!flagSeen.has(key)) {
+        flagSeen.add(key);
+        contentFlags.push(f);
+      }
+    }
+  };
 
   // 4. market resolution, with the standard blocks plus this resource's topic blocks
   const safetyBlocks = ["general-disclaimer", "emergency-contact", ...(inputs.extraSafetyBlocks ?? [])];
@@ -330,8 +366,17 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     if (!profile) continue;
     const resolved = resolveForMarket(resource, profile, blocks);
     const gate = publishable(resolved, ["emergency-contact"]);
+    // This market's own wording: approved market changes, then proposed ones.
+    const forMarket = (list: ApprovedCopyChange[]) => list.filter((c) => c.markets?.includes(code));
+    const approvedMarket = applyCopyChanges(reskinned, forMarket(copyChanges));
+    const proposedMarket = applyCopyChanges(approvedMarket.html, forMarket(proposedCopy));
+    const marketResultsCopy = [...approvedMarket.results, ...proposedMarket.results.map((r) => ({ ...r, proposed: true }))];
+    copy.results.push(...marketResultsCopy);
+    for (const r of marketResultsCopy.filter((x) => !x.applied)) otherFindings.push(unapplied(r));
+    const marketHtml = proposedMarket.html;
+    collectFlags(marketHtml);
     const injected = injectSafetyChecked(
-      reskinned,
+      marketHtml,
       resolved.safety.map((s) => ({ id: s.id, title: s.title, body: s.body, severity: s.severity })),
     );
     const withSafety = injected.html;
@@ -399,6 +444,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   // A resource that depends on another, not-yet-published resource is held whatever else is true of it.
   const importReadiness: PrepResult["importReadiness"] = inputs.blockedBy
     ? "BLOCKED_BY_RESOURCE_DEPENDENCY"
+    : copy.results.some((r) => r.proposed)
+    ? "PREVIEW_WITH_PROPOSED_COPY"
     : !description
     ? "NEEDS_OWNER_COPY"
     : otherFindings.length || item.safetyNotes.length || contentFlags.length || missingRequired.length

@@ -134,6 +134,30 @@
         "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
         "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
       }
+    },
+    "stored-drinking-water": {
+      "id": "stored-drinking-water",
+      "title": "Storing drinking water",
+      "severity": "HIGH",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Store at least three litres of drinking water per person per day, for at least three days** — nine litres per person. Store more if you can: hot weather and hard physical work can double what you need, children, nursing mothers and people who are unwell need more, and pets need water too. Some areas could be without water for longer; your local emergency management committee can advise how much to store.\nUse clean plastic soft-drink bottles or food-grade water containers — never containers that have held milk, and not glass or cardboard. Clean them with hot (not boiling) water, fill to the top with tap water, add five drops of plain, unscented household bleach per litre, and do not drink it for at least 30 minutes. Close the containers tightly, write the date on them, and store them in a cool, dark place.\n**Check stored water every six months.** If it is not clear, throw it out and refill. Keep bought bottled water sealed and replace it by its use-by date. Disinfect collected rainwater before drinking it, and if you are unsure whether water is safe, do not drink it.",
+        "AU": "**Store at least 10 litres of drinking water per person for three days.** Your state or territory emergency service may advise more for your area.\nKeep stored water in clean containers with covers, in a cool place off the ground, and make sure the containers are mosquito-proof. Clean the containers from time to time.\n**Check your stored water whenever you review your emergency kit — at least twice a year.** If you are not sure water is safe to drink, boil it vigorously for at least one minute and let it cool, or follow your state or territory health department's advice."
+      },
+      "sources": {
+        "NZ": [
+          "Get Ready (NZ Civil Defence / NEMA) — Storing water, including 'Prepare containers of water' (read live 2026-09-22): https://getready.govt.nz/prepared/household/supplies/storing-water"
+        ],
+        "AU": [
+          "Get Ready Queensland (Queensland Government) — Emergency kit checklist ('Water for three days – 10 litres of drinking water per person at a minimum'; 'review contents at least twice a year'; read 2026-09-22): https://www.getready.qld.gov.au/sites/default/files/2023-12/GRQ%20Emergency%20Kit%20checklist.pdf",
+          "HealthyWA (WA Department of Health) — Emergency treatment of drinking water supplies (containers: clean, covered, above ground, cool, cleaned periodically, mosquito-proof; boil vigorously for at least 1 minute; read 2026-09-22): https://www.healthywa.wa.gov.au/Articles/A_E/Emergency-treatment-of-drinking-water-supplies"
+        ]
+      },
+      "sharedOrVaries": "VARIES — the official amounts differ (NZ: at least 3 L per person per day for three days; AU (Qld): at least 10 L per person for three days), and only NZ publishes a home bottle-preparation method (5 drops of unscented bleach per litre, check every 6 months). No AU source read gives a bleach ratio for home storage (WA's ratios depend on the bleach's chlorine strength), so the AU block gives boiling guidance instead. No shelf life, tank size or treatment ratio beyond these is stated.",
+      "verification": {
+        "NZ": "VERIFIED_LIVE 2026-09-22 — awaiting owner approval",
+        "AU": "VERIFIED 2026-09-22 — awaiting owner approval"
+      }
     }
   }
 }

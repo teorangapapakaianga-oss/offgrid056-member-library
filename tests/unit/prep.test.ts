@@ -116,6 +116,11 @@ describe("content flags", () => {
     expect(findContentFlags(`<p>Day 25 — A professional brief</p>`, "OG-25").map((f) => f.kind)).toEqual(["programme-sequencing"]);
   });
 
+  it("does not flag a budget table's 100% total, but still flags a percentage claim", () => {
+    expect(findContentFlags(`<table><tr><td>GRAND TOTAL</td><td>100%</td></tr></table>`, "OG-22")).toEqual([]);
+    expect(findContentFlags(`<p>Add 15% contingency.</p>`, "OG-26").map((f) => f.kind)).toEqual(["figure-needs-source"]);
+  });
+
   it("finds nothing in plain teaching copy", () => {
     expect(findContentFlags(`<p>Check the roof for loose tiles after a storm.</p>`, "OG-01")).toEqual([]);
   });
@@ -196,7 +201,7 @@ describe("prepareResource: safety", () => {
     const withTitle = DOC.replace("<!DOCTYPE html><html><head>", "<!DOCTYPE html><html><head><title>OG-27 90-Day Implementation Roadmap — OffGrid056</title>");
     const r = prep({ sourceHtml: withTitle });
     const html = fs.readFileSync(r.files[0], "utf8");
-    expect(html).toContain("<title>90-Day Implementation Roadmap</title>");
+    expect(html).toContain("<title>90-Day Implementation Roadmap — OffGrid056</title>");
     expect(html).not.toMatch(/<title>[^<]*OG-27/);
     expect(r.legacyCode).toBe("OG-27"); // kept for migration and audit history
   });
@@ -235,6 +240,34 @@ describe("prepareResource: safety", () => {
     expect(r.validation.ok).toBe(true);
     expect(r.importReadiness).toBe("BLOCKED_BY_RESOURCE_DEPENDENCY");
     expect(r.blockedBy?.dependency).toBe("OG-26 / 3-Tier Budget Planner");
+  });
+
+  it("gives every PDF the standard title '<Resource Title> — OffGrid056'", () => {
+    const withTitle = DOC.replace("<!DOCTYPE html><html><head>", "<!DOCTYPE html><html><head><title>OG-27 anything</title>");
+    const r = prep({ sourceHtml: withTitle });
+    expect(r.pdfTitle).toBe("90-Day Implementation Roadmap — OffGrid056");
+  });
+
+  it("applies a market-specific change in that market only", () => {
+    const change = { where: "costs", from: "Install the solar inverter", to: "Install the solar inverter (AU wording)", expectedMatches: 1, approvedBy: "owner", approvedOn: "2026-09-22", reason: "test", markets: ["AU"] };
+    const r = prep({ copyChanges: [change] });
+    const nz = fs.readFileSync(r.files.find((f) => f.endsWith(".NZ.html"))!, "utf8");
+    const au = fs.readFileSync(r.files.find((f) => f.endsWith(".AU.html"))!, "utf8");
+    expect(au).toContain("Install the solar inverter (AU wording)");
+    expect(nz).not.toContain("(AU wording)");
+    expect(r.copyChanges.find((c) => c.markets?.includes("AU"))?.applied).toBe(true);
+  });
+
+  it("renders proposed copy for review but never lets it count as ready", () => {
+    const clean = DOC.replace(/<p>Next:[^<]*<\/p>/, "").replace("OffGrid056 30-Day Programme", "OffGrid056").replace("OG-27 ", "");
+    const proposal = { where: "plan", from: "<h2>Plan</h2>", to: "<h2>Your plan</h2>", expectedMatches: 1, approvedBy: "NOT APPROVED — proposal", approvedOn: "", reason: "test" };
+    const r = prep({
+      sourceHtml: clean, foundation: "general", resourceType: "planner", category: "planning", estimatedTime: 30, difficulty: "intermediate",
+      extraSafetyBlocks: ["batteries-and-electrical"], requiredSafety: ["batteries-and-electrical"], proposedBlockIds: [], proposedCopy: [proposal],
+    });
+    expect(fs.readFileSync(r.files[0], "utf8")).toContain("<h2>Your plan</h2>");
+    expect(r.copyChanges.find((c) => c.where === "plan")?.proposed).toBe(true);
+    expect(r.importReadiness).toBe("PREVIEW_WITH_PROPOSED_COPY");
   });
 
   it("uses an owner-specified PDF title when one is given", () => {

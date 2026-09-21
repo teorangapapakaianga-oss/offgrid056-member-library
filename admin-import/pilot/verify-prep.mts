@@ -40,14 +40,19 @@ const blockTitles: Record<string, string> = Object.fromEntries(
 const reportFile = path.join(PREP, "prep-report.json");
 // Copy changes are recorded as HTML; a PDF only carries the visible text, so both sides are compared as text.
 const visible = (html: string) => html.replace(/<[^>]+>/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
-type ReportRow = { legacyCode: string; recordStatus?: string; safety: { blocks: string[] }; copyChanges: { from: string; to: string; applied: boolean }[] };
-const expected = new Map<string, { status: string | undefined; blocks: string[]; copy: { from: string; to: string }[] }>(
+type ReportRow = {
+  legacyCode: string;
+  recordStatus?: string;
+  safety: { blocks: string[] };
+  copyChanges: { from: string; to: string; applied: boolean; markets?: string[] }[];
+};
+const expected = new Map<string, { status: string | undefined; blocks: string[]; copy: { from: string; to: string; markets?: string[] }[] }>(
   (fs.existsSync(reportFile) ? (readJson(reportFile) as ReportRow[]) : []).map((r) => [
     r.legacyCode,
     {
       status: r.recordStatus,
       blocks: r.safety.blocks,
-      copy: r.copyChanges.filter((c) => c.applied).map((c) => ({ from: visible(c.from), to: visible(c.to) })),
+      copy: r.copyChanges.filter((c) => c.applied).map((c) => ({ from: visible(c.from), to: visible(c.to), markets: c.markets })),
     },
   ]),
 );
@@ -72,7 +77,8 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
       const title = blockTitles[id];
       if (!title || !flat.includes(norm(title))) problems.push(`safety block "${id}" missing`);
     }
-    for (const { from, to } of want?.copy ?? []) {
+    // A market-specific change is only checked in the market it belongs to.
+    for (const { from, to } of (want?.copy ?? []).filter((c) => !c.markets || c.markets.includes(market))) {
       // The new wording must be there, and the old wording gone — which is also the only way to check a removal.
       if (to && !flat.includes(norm(to))) problems.push(`approved copy missing: "${to.slice(0, 50)}"`);
       if (from && !norm(to).includes(norm(from)) && flat.includes(norm(from))) problems.push(`replaced wording still present: "${from.slice(0, 50)}"`);
@@ -88,6 +94,8 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
       // The <title> is the PDF's title bar: the member sees the resource title, never a legacy code.
       const docTitle = src.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? "";
       if (/\bOG-B?\d{2}\b/.test(docTitle)) problems.push(`legacy code in the PDF title: "${docTitle}"`);
+      // Owner standard (2026-09-22): "<Resource Title> — OffGrid056".
+      if (!/^\S.* — OffGrid056$/.test(docTitle.trim())) problems.push(`PDF title "${docTitle}" does not follow "<Resource Title> — OffGrid056"`);
     } else problems.push("source HTML missing");
 
     // No other launch market's agency or trade term.

@@ -96,8 +96,8 @@
       "descriptionStatus": "owner-approved 2026-09-22 (ruling 3: 'Day 27 —' removed)",
       "blockedBy": {
         "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
-        "dependency": "OG-26 / 3-Tier Budget Planner",
-        "reason": "OG-27 is built on the Essential / Balanced / Complete budget tiers defined in OG-26. Owner decision (Stage 9.19, option B): migrate OG-26 first; do not weaken the reference to 'your budget tier'.",
+        "dependency": "OG-22 / Resilience Product Wishlist and OG-26 / 3-Tier Budget Planner",
+        "reason": "OG-27 schedules the Essential / Balanced / Complete tiers defined in OG-26, which in turn budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): order OG-22 → OG-26 → OG-27.",
         "decidedOn": "2026-09-22"
       }
     },
@@ -161,8 +161,7 @@
       "estimatedTime": 20,
       "description": "Identify the top risks your household faces, then rank them by probability and impact so you know what to tackle first.",
       "status": "as deployed — values copied from the pilot record (admin-import/pilot/og-02.json) so prep reproduces the live resource exactly; the deployed private record is not changed",
-      "pdfTitle": "Household Risk Identifier — OffGrid056",
-      "pdfTitleStatus": "owner-specified 2026-09-22 (Stage 9.19 decision 3)",
+      "pdfTitleStatus": "standard applies (Stage 9.20): \"<Resource Title> — OffGrid056\"",
       "safetyBlocks": [],
       "approvedSafetyBlocks": []
     },
@@ -173,19 +172,18 @@
       "resourceTypeStatus": "inferred, HIGH confidence — title 'Budget Planner'",
       "category": "planning",
       "categoryStatus": "PROPOSED — same as OG-27, which depends on it",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
-      "estimatedTimeRecommendation": 45,
+      "estimatedTime": 45,
+      "estimatedTimeStatus": "owner-approved 2026-09-22",
       "estimatedTimeReasoning": "Four costing tables (Tier 1: 7 rows, Tier 2: 6, Tier 3: 6, plus subtotals and contingency) and a five-field decision section. Assumes prices or quotes are to hand; gathering them takes longer.",
-      "difficulty": null,
-      "difficultyStatus": "NEEDS_OWNER_REVIEW",
-      "difficultySource": "none — the document states no level",
-      "difficultyRecommendation": "intermediate (INFERRED) — costing, subsidies, contingency and a funding-gap decision; same level as OG-27, which builds on it",
+      "difficulty": "intermediate",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived; the document states no level",
       "safetyBlocks": [
         "batteries-and-electrical",
         "indoor-combustion",
         "carbon-monoxide",
-        "solid-fuel-heating"
+        "solid-fuel-heating",
+        "stored-drinking-water"
       ],
       "safetyReasoning": "REQUIRED by topic thresholds: batteries-and-electrical (solar/batteries/inverter ×16), solid-fuel-heating (wood burner ×4), stored-drinking-water (water storage, rainwater, bore/spring, UV treatment ×14 — NO NZ/AU-verified block exists yet, so it is reported missing). RECOMMENDED: indoor-combustion and carbon-monoxide — Tier 1 lists 'Emergency heating (gas heater / thermal blankets)' and Tier 3 a 'backup gen'.",
       "approvedSafetyBlocks": [
@@ -198,7 +196,35 @@
       "dependencies": {
         "OG-22 / Resilience Product Wishlist": "'Start with MUST items only (from OG-22)' — the MUST list is defined in OG-22, which is not in the library",
         "OG-23 / Supplier Question Bank": "'quotes from OG-23 enquiries' — a soft reference; the budget works without it"
+      },
+      "description": "Align your spend with your actual capacity",
+      "descriptionStatus": "PROPOSED — cover subtitle without 'Day 26 —'",
+      "blockedBy": {
+        "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
+        "dependency": "OG-22 / Resilience Product Wishlist",
+        "reason": "OG-26 budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): migrate OG-22 first so OG-26 references a real library resource.",
+        "decidedOn": "2026-09-22"
       }
+    },
+    "OG-22": {
+      "foundation": "general",
+      "foundationStatus": "PROPOSED — inferred (audit MEDIUM): a whole-household prioritisation tool across all foundations; matches OG-26 and OG-27",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "owner-approved at Stage 9.7 ('types OG-22 Worksheet')",
+      "category": "planning",
+      "categoryStatus": "PROPOSED — same as OG-26 and OG-27",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
+      "estimatedTimeRecommendation": 30,
+      "estimatedTimeReasoning": "Read the MoSCoW framework, score candidate items on five 1–5 criteria, then fill up to 19 wishlist rows, a budget summary and three purchase batches. Assumes rough costs are known.",
+      "difficulty": null,
+      "difficultyStatus": "NEEDS_OWNER_REVIEW",
+      "difficultySource": "none — the document states no level",
+      "difficultyRecommendation": "beginner (INFERRED) — listing, 1–5 scoring and rough costing; no technical knowledge",
+      "description": "Prioritise what to buy, when, and why",
+      "descriptionStatus": "PROPOSED — cover subtitle without 'Day 22 —'",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": []
     }
   }
 }

@@ -494,6 +494,9 @@ async function commandPrep() {
   const topicBlocks = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "safety-blocks.json"), "utf8")).blocks ?? {};
   const blocks = { ...spec.safetyBlocks, ...topicBlocks };
   const legacyTerms = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "legacy-terms.json"), "utf8"));
+  // Unapproved copy, rendered only for owner review. A resource carrying any of it cannot be ready.
+  const proposedFile = path.join(import.meta.dirname, "config", "proposed-copy.json");
+  const proposedCopy = fs.existsSync(proposedFile) ? JSON.parse(fs.readFileSync(proposedFile, "utf8")).changes ?? {} : {};
   // What each resource's topics require, so a missing CRITICAL block stops the resource — computed for every
   // resource, whichever re-skin group it is in.
   const exposureOf = (i: (typeof auditResult.items)[number]) =>
@@ -525,6 +528,7 @@ async function commandPrep() {
       legacyTerms,
       description: metadata[item.legacyCode]?.description ?? null,
       pdfTitle: metadata[item.legacyCode]?.pdfTitle ?? null,
+      proposedCopy: proposedCopy[item.legacyCode] ?? [],
       blockedBy: metadata[item.legacyCode]?.blockedBy ?? null,
     });
     results.push(result);
@@ -538,7 +542,10 @@ async function commandPrep() {
     for (const b of result.safety.missingRequired) console.log(`    ✗ required safety block missing: ${b}`);
     for (const f of result.contentFlags) console.log(`    ⚑ ${f.code} · ${f.kind}: ${f.text.slice(0, 100)}`);
     for (const m of result.markets) console.log(`    ${m.code}: ${m.publishable ? "publishable" : "blocked"} · emergency ${m.emergencyNumber}`);
-    for (const c of result.copyChanges) console.log(`    copy (${c.where}): ${c.applied ? "APPLIED" : `NOT applied — matched ${c.matched}×`}`);
+    for (const c of result.copyChanges)
+      console.log(
+        `    ${c.proposed ? "PROPOSED " : ""}copy (${c.where}${c.markets ? ` · ${c.markets.join("/")}` : ""}): ${c.applied ? "APPLIED" : `NOT applied — matched ${c.matched}×`}`,
+      );
     console.log(`    estimated time: ${result.estimatedTime ?? "unset"} min`);
     console.log(`    validation: ${result.validation.ok ? "passes" : "FAILS"}${result.validation.issues.length ? " — " + result.validation.issues[0] : ""}`);
     console.log(`    pdf title: ${result.pdfTitle}`);
