@@ -135,6 +135,8 @@ export interface PrepInputs {
   copyChanges?: ApprovedCopyChange[];
   /** owner-reviewed estimate in minutes; null means "not supported by the document — leave unset" */
   estimatedTime?: number | null;
+  /** owner-reviewed difficulty; null means "no source support and no owner decision yet" */
+  difficulty?: string | null;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -213,7 +215,9 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // fall back to their first category, which remains a placeholder for review.
     category: foundation === "general" ? "planning" : (getFoundation(foundation as never).categories[0]?.slug ?? "planning"),
     resourceType: item.resourceType.value ?? "worksheet",
-    difficulty: "beginner",
+    // Never defaulted. A silent "beginner" is how a resource titled "(Advanced)" was once mislabelled. Only a
+    // reviewed value is used; without one the field is left out and validation fails on purpose.
+    ...(inputs.difficulty ? { difficulty: inputs.difficulty } : {}),
     // Only an owner-reviewed estimate is used. When the document does not support one, the field is left out,
     // validation fails on purpose, and the resource cannot be imported until someone decides.
     ...(typeof inputs.estimatedTime === "number" ? { estimatedTime: inputs.estimatedTime } : {}),
@@ -238,7 +242,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     ? "NEEDS_OWNER_COPY"
     : otherFindings.length || item.safetyNotes.length
       ? "NEEDS_CONTENT_REVIEW"
-      : typeof inputs.estimatedTime !== "number"
+      : typeof inputs.estimatedTime !== "number" || !inputs.difficulty
         ? "NEEDS_OWNER_METADATA"
         : copyApplied
           ? "READY_AFTER_METADATA_AND_COPY_APPROVAL"

@@ -507,6 +507,7 @@ async function commandPrep() {
       outDir: path.join(WORKSPACE, "prep", item.legacyCode),
       copyChanges: approvedCopy[item.legacyCode] ?? [],
       estimatedTime: metadata[item.legacyCode]?.estimatedTime ?? null,
+      difficulty: metadata[item.legacyCode]?.difficulty ?? null,
     });
     results.push(result);
 

@@ -46,6 +46,24 @@
         "approvedBy": "owner (approach approved 2026-09-22; wording drafted to that brief)",
         "approvedOn": "2026-09-22",
         "reason": "Keeps the Member Community concept while allowing a household member, friend or support person, so the resource works before the community is active."
+      },
+      {
+        "where": "Weekly Breakdown — insight checkbox",
+        "from": "□ Post insight in community",
+        "to": "□ Share an insight (Member Community or support person)",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "reason": "Exact wording approved by the owner. Works before the Member Community is active."
+      },
+      {
+        "where": "Weekly Breakdown — results checkbox",
+        "from": "□ Post results in community",
+        "to": "□ Share results (Member Community or support person)",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "reason": "Exact wording approved by the owner. '□ Share findings' is deliberately left unchanged."
       }
     ]
   }
