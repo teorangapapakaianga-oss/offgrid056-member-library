@@ -15,6 +15,9 @@ import { scanSources, type SourceConfig } from "./scanner/scan";
 import { classify, type TextBundle } from "./mappers/classify";
 import { groupDuplicates } from "./dedupe/group";
 import { linkAssets } from "./assets/link";
+import { loadWorkspace } from "./review/store";
+import { planImport, runImport, updateLedger } from "./import/engine";
+import { buildDemo } from "./import/demo";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -154,10 +157,79 @@ function printSummary(summary: ScanSummary, candidates: Candidate[], groups: Dup
   console.log(`duplicate groups ${groups.length}: ${Object.entries(kinds).map(([k, v]) => `${k} ${v}`).join(" · ") || "none"}`);
 }
 
+/**
+ * Import (Stage 9.4).
+ *
+ *   npm run import:apply                  plan only: says what would happen, writes nothing
+ *   npm run import:apply -- --commit      carry the plan out, into the fixture library
+ *   npm run import:apply -- --commit --real    blocked: importing real resources needs owner approval
+ *
+ * The target is a sandbox library inside the workspace unless `--real` is given, and `--real` is refused
+ * until the owner approves Stage 9.5. Stage 9.4 is fixtures only, by instruction.
+ */
+async function commandApply() {
+  ensureWorkspace();
+  const commit = has("--commit");
+  const real = has("--real");
+
+  if (real) {
+    console.error(
+      "\n  Refused: --real would write into the member library.\n" +
+        "  Stage 9.4 is fixtures only; importing real OffGrid056 resources needs owner approval at Stage 9.5.\n",
+    );
+    audit("import.refused", { reason: "--real not approved until Stage 9.5" });
+    process.exit(1);
+  }
+
+  // --demo builds its own fixtures, decisions and empty library, so the chain can be exercised end to end
+  // without involving the real workspace or any OffGrid056 material.
+  const demo = has("--demo") ? buildDemo(WORKSPACE) : null;
+  const workspace = demo ? demo.workspace : WORKSPACE;
+  const libraryRoot = demo ? demo.libraryRoot : path.join(WORKSPACE, "fixture-library");
+  for (const dir of [path.join(libraryRoot, "data", "resources"), path.join(libraryRoot, "public", "resources")]) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  const ws = demo ? { candidates: demo.candidates, decisions: demo.decisions } : loadWorkspace(WORKSPACE);
+  const target = { libraryRoot, workspace };
+  const plan = planImport(ws.candidates, ws.decisions, target);
+
+  console.log(`\n  target: ${path.relative(ROOT, libraryRoot)} (sandbox — not the member library)`);
+  console.log(`  plan: create ${plan.counts.create} · replace ${plan.counts.replace} · skip ${plan.counts.skip} · reject ${plan.counts.reject}\n`);
+
+  for (const item of plan.items) {
+    const mark = { create: "+", replace: "~", skip: "=", reject: "✗" }[item.action];
+    console.log(`  ${mark} ${item.action.padEnd(7)} ${item.slug.padEnd(38)} ${item.filename}`);
+    for (const reason of item.reasons.slice(0, 4)) console.log(`      ${reason}`);
+  }
+
+  if (!plan.items.length) {
+    console.log("  Nothing is marked READY_TO_IMPORT, so there is nothing to do.\n");
+    return;
+  }
+
+  const result = runImport(plan, target, { commit, by: "cli" });
+  if (!commit) {
+    console.log("\n  Dry run: nothing was written. Add --commit to carry this out.\n");
+    return;
+  }
+
+  if (result.error) {
+    console.error(`\n  Import failed and was rolled back: ${result.error}\n`);
+    process.exit(1);
+  }
+  updateLedger(target, result.imported);
+  console.log(`\n  imported ${result.imported.length} · rejected ${result.rejected.length} · skipped ${result.skipped.length}`);
+  if (result.backupDir) console.log(`  backups: ${path.relative(ROOT, result.backupDir)}`);
+  console.log("");
+}
+
 const command = args[0] ?? "scan";
 if (command === "scan") {
   await commandScan();
+} else if (command === "apply") {
+  await commandApply();
 } else {
-  console.error(`Unknown command "${command}". Try: scan`);
+  console.error(`Unknown command "${command}". Try: scan, apply`);
   process.exit(1);
 }
