@@ -1,0 +1,123 @@
+{
+  "description": "Stage 9.6B PROPOSAL — market profiles. One file per market, shared by every resource. Figures marked VERIFY are deliberately absent: they must come from that market's own official source before publication.",
+  "markets": [
+    {
+      "code": "NZ",
+      "name": "New Zealand",
+      "emergency": {
+        "number": "111",
+        "alternatives": [],
+        "accessibility": "111 TXT service for people who are deaf or cannot speak on the phone"
+      },
+      "units": "metric",
+      "agencies": {
+        "emergencyManagement": { "name": "Civil Defence (NEMA)", "url": "https://getready.govt.nz" },
+        "fire": { "name": "Fire and Emergency New Zealand", "url": "https://www.fireandemergency.nz" },
+        "energy": { "name": "EECA", "url": "https://www.eeca.govt.nz" },
+        "housingStandard": { "name": "Healthy Homes Standards" },
+        "foodSafety": { "name": "Ministry for Primary Industries (MPI)" }
+      },
+      "figures": {
+        "waterPerPersonPerDay": "3 litres",
+        "waterThreeDays": "9 litres per person",
+        "waterOneWeek": "21 litres per person",
+        "generatorDistance": "VERIFY"
+      },
+      "terms": {
+        "emergencyManagement": "Civil Defence",
+        "electrician": "licensed electrical worker",
+        "gasfitter": "licensed gasfitter"
+      },
+      "links": {
+        "storingWater": "https://getready.govt.nz/prepared/household/supplies/storing-water",
+        "emergency": "https://www.police.govt.nz/call-111"
+      }
+    },
+    {
+      "code": "AU",
+      "name": "Australia",
+      "emergency": {
+        "number": "000",
+        "alternatives": ["112 from a mobile"],
+        "accessibility": "106 TTY via the National Relay Service"
+      },
+      "units": "metric",
+      "agencies": {
+        "emergencyManagement": { "name": "State Emergency Service (SES)" },
+        "fire": { "name": "your state fire service" },
+        "energy": { "name": "VERIFY" },
+        "foodSafety": { "name": "Food Standards Australia New Zealand (FSANZ)" }
+      },
+      "figures": {
+        "waterPerPersonPerDay": "VERIFY",
+        "generatorDistance": "VERIFY"
+      },
+      "terms": {
+        "emergencyManagement": "State Emergency Service",
+        "electrician": "licensed electrician",
+        "gasfitter": "licensed gasfitter"
+      },
+      "links": {
+        "emergency": "https://www.triplezero.gov.au/triple-zero/How-to-Call-000"
+      }
+    },
+    {
+      "code": "US",
+      "name": "United States",
+      "emergency": {
+        "number": "911",
+        "alternatives": [],
+        "accessibility": "text-to-911 where available"
+      },
+      "units": "us-customary",
+      "agencies": {
+        "emergencyManagement": { "name": "FEMA / Ready.gov", "url": "https://www.ready.gov" },
+        "fire": { "name": "your local fire department" },
+        "productSafety": { "name": "CPSC", "url": "https://www.cpsc.gov" },
+        "foodSafety": { "name": "FoodSafety.gov", "url": "https://www.foodsafety.gov" }
+      },
+      "figures": {
+        "waterPerPersonPerDay": "one gallon",
+        "waterThreeDays": "three gallons per person",
+        "generatorDistance": "at least 20 feet"
+      },
+      "terms": {
+        "emergencyManagement": "emergency management",
+        "electrician": "licensed electrician",
+        "gasfitter": "licensed gas fitter"
+      },
+      "links": {
+        "storingWater": "https://www.ready.gov/water",
+        "generators": "https://www.cpsc.gov/Safety-Education/Safety-Education-Centers/Carbon-Monoxide-Information-Center"
+      }
+    },
+    {
+      "code": "CA",
+      "name": "Canada",
+      "emergency": {
+        "number": "911",
+        "alternatives": [],
+        "accessibility": "text-to-911 where available"
+      },
+      "units": "metric",
+      "agencies": {
+        "emergencyManagement": { "name": "your provincial emergency management organisation" },
+        "fire": { "name": "your local fire department" },
+        "health": { "name": "Health Canada", "url": "https://www.canada.ca/en/health-canada.html" },
+        "foodSafety": { "name": "Canadian Food Inspection Agency (CFIA)" }
+      },
+      "figures": {
+        "waterPerPersonPerDay": "VERIFY",
+        "generatorDistance": "VERIFY"
+      },
+      "terms": {
+        "emergencyManagement": "emergency management",
+        "electrician": "licensed electrician",
+        "gasfitter": "licensed gas fitter"
+      },
+      "links": {
+        "carbonMonoxide": "https://www.canada.ca/en/health-canada/services/air-quality/pollutants/carbon-monoxide/preventing-exposure.html"
+      }
+    }
+  ]
+}

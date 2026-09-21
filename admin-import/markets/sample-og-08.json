@@ -1,0 +1,58 @@
+{
+  "description": "Stage 9.6B PROPOSAL — worked sample. ONE core document for OG-08 Water Storage Calculator, resolved into four markets. This is the resource where market variance bites hardest: the storage figure, the unit and the emergency number all differ, and the NZ agency references are valid rather than wrong. Content is illustrative of the structure, not the final approved copy.",
+
+  "resource": {
+    "id": "res-1008",
+    "legacyCode": "OG-08",
+    "slug": "water-storage-calculator",
+    "title": "Water Storage Calculator",
+    "description": "Work out how much drinking water your household needs to store, and how to store it safely.",
+    "safetyBlocks": ["emergency-contact", "stored-drinking-water"],
+    "body": "## How much water does your household need?\n\nYour {{agency.emergencyManagement}} recommends storing **{{figure.waterPerPersonPerDay}} of drinking water per person per day**, as a minimum, for at least three days — that is {{figure.waterThreeDays}}.\n\nMultiply that by everyone in the house, including pets, then add more for anyone who is pregnant, nursing, unwell, or working hard in the heat. In very hot conditions, water needs can double.\n\n### Work it out\n\n| | |\n|---|---|\n| People in the household | ____ |\n| Days of supply you want | ____ |\n| Per person per day | {{figure.waterPerPersonPerDay}} |\n| **Total to store** | ____ |\n\n### Storing it safely\n\nUse food-grade containers with tight lids. Keep them out of sunlight and off bare concrete. Label every container with the date you filled it, and replace stored tap water regularly.\n\nRainwater is not drinking water until it is treated. See {{link.storingWater}} for your area's guidance.",
+
+    "overrides": {
+      "US": {
+        "body": "## How much water does your household need?\n\n{{agency.emergencyManagement}} recommends storing **{{figure.waterPerPersonPerDay}} of water per person per day** for drinking and sanitation, for several days — that is {{figure.waterThreeDays}} for three days.\n\nMultiply that by everyone in the house, including pets, then add more for children, nursing mothers, anyone who is unwell, and hot weather: in very hot temperatures, water needs can double.\n\n### Work it out\n\n| | |\n|---|---|\n| People in the household | ____ |\n| Days of supply you want | ____ |\n| Per person per day | {{figure.waterPerPersonPerDay}} |\n| **Total to store** | ____ |\n\n### Storing it safely\n\nUse food-grade containers with tight lids. Keep them out of sunlight and off bare concrete. Label every container with the date you filled it, and replace stored tap water regularly.\n\nRainwater is not drinking water until it is treated. See {{link.storingWater}} for guidance.",
+        "note": "US override exists for one reason: the official figure is a gallon rather than litres, and Ready.gov frames it as drinking and sanitation. The teaching is identical."
+      }
+    }
+  },
+
+  "safetyBlocks": {
+    "emergency-contact": {
+      "id": "emergency-contact",
+      "title": "In an emergency",
+      "severity": "CRITICAL",
+      "body": "**In an emergency, call {{emergency.number}} now.**{{emergency.alternatives}} If you are unsure whether it is an emergency, call anyway and ask — the operator will help you decide.",
+      "marketBody": {
+        "AU": "**In an emergency, call {{emergency.number}} now.** You can also dial 112 from a mobile, which reaches the same service. If you are unsure whether it is an emergency, call anyway and ask — the operator will help you decide.",
+        "NZ": "**In an emergency, call {{emergency.number}} now.** Calls are free, and work on a mobile even with no credit. If you are unsure whether it is an emergency, call anyway and ask — the operator will help you decide."
+      },
+      "sources": [
+        "https://www.police.govt.nz/call-111",
+        "https://www.triplezero.gov.au/triple-zero/How-to-Call-000"
+      ]
+    },
+    "stored-drinking-water": {
+      "id": "stored-drinking-water",
+      "title": "Stored drinking water",
+      "severity": "HIGH",
+      "body": "Treat stored water as drinking water from the start: food-grade containers, tight lids, out of sunlight, dated and rotated.\n\nRainwater and river water are **not** drinking water until they are treated — roof water picks up droppings, dust and whatever else is on the roof.\n\nIf your supply is damaged, or you are told the water is unsafe, follow your water supplier's or {{agency.emergencyManagement}}'s instructions. Boiling is the most reliable household treatment; no household method removes chemical contamination.",
+      "sources": [
+        "https://getready.govt.nz/prepared/household/supplies/storing-water",
+        "https://www.ready.gov/water"
+      ]
+    }
+  },
+
+  "whatThisDemonstrates": {
+    "oneCoreDocument": "45 resources stay 45 documents. Four markets do not become 180.",
+    "emergencyNumber": "{{emergency.number}} resolves to 111 / 000 / 911 / 911 with no per-resource work.",
+    "agency": "{{agency.emergencyManagement}} resolves to Civil Defence (NZ), the SES (AU), FEMA / Ready.gov (US), the provincial EMO (CA).",
+    "units": "{{figure.waterPerPersonPerDay}} resolves to 3 litres (NZ) and one gallon (US). The unit is a property of the market, not of the worksheet.",
+    "terminology": "NZ references such as EECA, Healthy Homes and Civil Defence stay valid in the NZ profile instead of being deleted as 'outdated wording' — exactly as owner ruling 2 requires.",
+    "safetyBlocks": "Blocks are attached by id, so approved safety wording is written once and appears on every resource that needs it. Changing a block updates every resource at once.",
+    "overrideIsRare": "Only the US needs a body override here, and only because the official guidance is framed differently. Every other market shares the core text.",
+    "failsLoudly": "AU and CA have no verified water figure yet, so {{figure.waterPerPersonPerDay}} does not resolve there. The resolver leaves the token visible and reports it, and publishable() refuses the resource for those markets. A missing official figure can never silently render as a blank."
+  }
+}

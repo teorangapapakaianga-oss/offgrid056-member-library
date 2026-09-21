@@ -416,6 +416,20 @@ export function auditProgramme(
       affects: items.filter((i) => /emergency|72.?hour|evacuation|plan/i.test(i.title)).map((i) => i.legacyCode),
     });
   }
+  // Owner ruling 3: record the imbalance as a programme-development finding. It is explicitly NOT a licence to
+  // reclassify unrelated material into Air to even the numbers up.
+  const airResources = items.filter((i) => i.foundation.value === "air");
+  if (airResources.length <= 2) {
+    contentGaps.push({
+      gap: "AIR_CONTENT_GAP",
+      detail:
+        `Air has ${airResources.length} resource(s) of ${items.length}, against shelter, energy, water and food. ` +
+        "Recorded as a gap in the programme to be filled by writing new Air resources for the current Five Foundations framework. " +
+        "No existing resource is to be reclassified into Air to balance the count (owner ruling 3).",
+      affects: airResources.map((i) => i.legacyCode),
+    });
+  }
+
   const withSafetyGaps = items.filter((i) => i.safetyNotes.length);
   if (withSafetyGaps.length) {
     const topics = new Map<string, string[]>();
