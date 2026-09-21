@@ -134,8 +134,9 @@ th:last-child { border-top-right-radius: var(--radius); }
 th, td { text-align: left; padding: 0.5rem 0.65rem; border-bottom: 1px solid var(--line); font-size: 0.86rem; vertical-align: top; }
 th { background: #eeebe0; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--taupe); position: sticky; top: 5.4rem; z-index: 5; box-shadow: inset 0 -1px 0 var(--line); }
 tbody tr:hover { background: #f8f7f1; }
-td.file { font-weight: 600; }
-td.file small { display: block; font-weight: 400; color: var(--taupe); font-size: 0.75rem; }
+td.file { font-weight: 600; max-width: 20rem; }
+td.file a { overflow-wrap: anywhere; }
+td.file small { display: block; font-weight: 400; color: var(--taupe); font-size: 0.75rem; overflow-wrap: anywhere; }
 
 .pill {
   display: inline-block;
@@ -215,6 +216,20 @@ button:disabled { opacity: 0.45; cursor: not-allowed; }
 .excerpt { font-size: 0.8rem; color: #3c3f36; background: #f8f7f1; border-radius: 6px; padding: 0.65rem; max-height: 11rem; overflow: auto; white-space: pre-wrap; }
 .back { display: inline-block; margin-bottom: 0.5rem; font-size: 0.85rem; }
 .toast { position: fixed; right: 1rem; bottom: 1rem; background: var(--deep); color: var(--warm); padding: 0.6rem 1.1rem; border-radius: 999px; font-size: 0.85rem; z-index: 20; }
+
+/* The table must never push the page sideways. Rather than wrapping it in a horizontal scroller — which would
+   become the sticky header's containing block and break it again — the least useful columns are dropped as the
+   window narrows. Size and legacy state are both still on the candidate's own page. */
+@media (max-width: 1250px) {
+  th:nth-child(10), td:nth-child(10) { display: none; } /* size */
+  th:nth-child(7), td:nth-child(7) { display: none; } /* legacy */
+}
+@media (max-width: 1050px) {
+  th:nth-child(2), td:nth-child(2) { display: none; } /* material */
+}
+@media (max-width: 900px) {
+  th:nth-child(6), td:nth-child(6) { display: none; } /* OG code */
+}
 
 @media (max-width: 980px) {
   .detail { grid-template-columns: 1fr; }

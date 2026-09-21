@@ -97,7 +97,7 @@ async function renderDashboard() {
 /* ---------------------------------------------------------------- candidate list */
 
 let cache = null;
-const filters = { foundation: "", resourceType: "", status: "", confidence: "", legacy: "", duplicate: "", fileType: "", material: "", source: "", q: "" };
+const filters = { foundation: "", resourceType: "", status: "", confidence: "", legacy: "", duplicate: "", fileType: "", material: "", source: "", ogCode: "", q: "" };
 
 async function ensureCandidates() {
   if (!cache) cache = await api("/api/candidates");
@@ -116,6 +116,9 @@ function matches(r) {
   if (f.fileType && r.fileType !== f.fileType) return false;
   if (f.material && r.materialKind !== f.material) return false;
   if (f.source && r.sourceLabel !== f.source) return false;
+  if (f.ogCode === "(has a code)" && !r.legacyCode) return false;
+  if (f.ogCode === "(no code)" && r.legacyCode) return false;
+  if (f.ogCode && !f.ogCode.startsWith("(") && r.legacyCode !== f.ogCode) return false;
   if (f.q) {
     const hay = `${r.title} ${r.filename} ${r.legacyCode} ${r.tags.join(" ")}`.toLowerCase();
     if (!hay.includes(f.q.toLowerCase())) return false;
@@ -145,6 +148,7 @@ async function renderCandidates() {
       ${select("confidence", "Confidence", ["HIGH", "MEDIUM", "LOW"], filters.confidence)}
       ${select("legacy", "Legacy brand", ["yes", "no"], filters.legacy)}
       ${select("duplicate", "Duplicate", ["EXACT", "LIKELY", "VERSION_CANDIDATE", "none"], filters.duplicate)}
+      ${select("ogCode", "OG code", ["(has a code)", "(no code)", ...uniq((r) => r.legacyCode)], filters.ogCode)}
       ${select("fileType", "File type", uniq((r) => r.fileType), filters.fileType)}
       ${select("material", "Material", ["resource", "internal", "asset", "package"], filters.material)}
       ${select("source", "Source folder", vocab.sources, filters.source)}
@@ -170,8 +174,8 @@ async function renderCandidates() {
               <td><span class="pill ${CONF_PILL[r.confidence]}">${esc(r.confidence)}</span></td>
               <td>${esc(r.legacyCode || "—")}</td>
               <td>${r.legacyBranding ? '<span class="pill warn">legacy</span>' : "—"}</td>
-              <td>${r.duplicateKind ? `<span class="pill">${esc(r.duplicateKind)}</span>` : "—"}</td>
-              <td><span class="pill ${r.status === "READY_TO_IMPORT" ? "green" : r.status === "NEEDS_REVIEW" ? "warn" : ""}">${esc(r.status)}</span></td>
+              <td>${r.duplicateKind ? `<span class="pill" title="${esc(r.duplicateKind)}">${esc(r.duplicateKind.replace("VERSION_CANDIDATE", "VERSION"))}</span>` : "—"}</td>
+              <td><span class="pill ${r.status === "READY_TO_IMPORT" ? "green" : r.status === "NEEDS_REVIEW" ? "warn" : ""}" title="${esc(r.status)}">${esc(r.status.replace(/_/g, " ").toLowerCase())}</span></td>
               <td>${kb(r.sizeBytes)}</td>
             </tr>`,
           )

@@ -94,7 +94,7 @@ assets — by construction rather than by configuration. It binds to `127.0.0.1`
 | View | What it does |
 |---|---|
 | **Dashboard** | Totals, the "not member resources" breakdown, findings, and six breakdowns (foundation, resource type, both confidences, file type, workflow status). |
-| **Candidate list** | Nine filters (foundation, resource type, status, confidence, legacy branding, duplicate status, file type, material, source folder) and search across title, filename, OG code and tags. |
+| **Candidate list** | Ten filters — every one you listed (foundation, resource type, workflow status, confidence, legacy branding, duplicate status, file type, **OG code**, source folder) plus material — and search across title, filename, OG code and tags. The OG code filter offers "has a code", "no code" and each of the 45 codes found. |
 | **Candidate detail** | Source facts (filename, extension, size, modified, checksum, source folder), every inference with its confidence and evidence, legacy findings and migration actions, duplicate group, extracted text, and the proposed library record. |
 | **Metadata editor** | All 16 editable fields, validated against the real library schema. |
 | **Duplicate review** | Side-by-side cards with checksum, type, size, modified date, title, branding state, text length and source, with KEEP / ARCHIVE / REVIEW / IGNORE. |
@@ -199,7 +199,8 @@ In `workspace/reports/screenshots/`:
 
 Live checks against the real 329-candidate set, beyond the automated tests:
 
-- every filter returns the right subset (assets 94, internal 87, legacy 57, pdf 50, 30-Day Programme 101…);
+- every filter returns the right subset (assets 94, internal 87, legacy 57, pdf 50, 30-Day Programme 101,
+  OG code "has a code" 90 / "no code" 239, OG-08 → its PDF and HTML pair);
 - search works across title, filename, OG code and tags;
 - editing persists to `workspace/decisions.json` and reads back unchanged;
 - duplicate decisions persist and are written to the audit log;
