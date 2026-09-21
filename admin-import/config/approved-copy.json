@@ -260,6 +260,16 @@
         "approvedOn": "2026-09-22",
         "kind": "legacy-product-context",
         "reason": "Owner ruling 6: 'OffGrid056 Action Plan Plus' is legacy product context in the Member Library; here it is header branding only."
+      },
+      {
+        "where": "Budget field",
+        "from": "Contingency Reserve (10–20% of total)",
+        "to": "Contingency Reserve",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-numeric-claim",
+        "reason": "UNSUPPORTED NUMERIC CLAIM REMOVED — owner ruling 7 (preferred wording)."
       }
     ],
     "OG-B07": [
@@ -272,6 +282,108 @@
         "approvedOn": "2026-09-22",
         "kind": "legacy-product-context",
         "reason": "Owner ruling 6: header branding only. The cover subtitle sentence ('…for Action Plan Plus members') is flagged separately, not rewritten."
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "Advanced solar planning for Action Plan Plus members.",
+        "to": "Advanced solar planning for OffGrid056 members.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-product-context",
+        "reason": "LEGACY PRODUCT CONTEXT REMOVED — owner ruling 5, exact wording."
+      },
+      {
+        "where": "Page header",
+        "from": "<div class=\"page-header-right\">Bonus Asset | Tier 3</div>",
+        "to": "<div class=\"page-header-right\">Member Resource | Advanced Solar Planning</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-product-context",
+        "reason": "Old Tier 3 offer hierarchy removed — owner ruling 6, exact wording."
+      }
+    ],
+    "OG-27": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 4 — Action Plan & Pathway</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label — navigation only (owner ruling 3)."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name (owner ruling 3)."
+      },
+      {
+        "where": "Cover title",
+        "from": "<h1 class=\"cover-title\">OG-27 90-Day Implementation Roadmap</h1>",
+        "to": "<h1 class=\"cover-title\">90-Day Implementation Roadmap</h1>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal legacy code in member copy (owner ruling 3)."
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "<p class=\"cover-subtitle\">Day 27 — Turn your plan into phased action with deadlines</p>",
+        "to": "<p class=\"cover-subtitle\">Turn your plan into phased action with deadlines</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day label (owner ruling 3)."
+      },
+      {
+        "where": "Header line",
+        "from": "<div class=\"meta\">Day 27 — Week 4: Action Plan &amp; Pathway | OffGrid056 30-Day Programme</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day, week and name (owner ruling 3)."
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 27 Complete</h3>",
+        "to": "<h3>Roadmap Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day X Complete' (owner ruling 3)."
+      },
+      {
+        "where": "Closing — tomorrow teaser",
+        "from": "<p><strong>Next:</strong> Tomorrow you will assign household responsibilities so resilience is a team sport, not a solo burden.</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-day navigation (owner ruling 3)."
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<span class=\"next-link\">Next: OG-28 Household Responsibility Roster &rarr;</span>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' navigation to OG-28, not in the library (owner ruling 3)."
       }
     ]
   }

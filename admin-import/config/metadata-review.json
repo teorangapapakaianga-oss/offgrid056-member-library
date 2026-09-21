@@ -87,9 +87,13 @@
       ],
       "safetyReasoning": "batteries-and-electrical: REQUIRED by the audit (solar panels, inverter, portable power station). carbon-monoxide and indoor-combustion: RECOMMENDED — Sprint 1 buys 'emergency heating' and runs a 24-hour off-grid test, which is exactly when people bring heaters and cookers inside.",
       "approvedSafetyBlocks": [
-        "batteries-and-electrical"
+        "batteries-and-electrical",
+        "carbon-monoxide",
+        "indoor-combustion"
       ],
-      "approvedSafetyBlocksStatus": "batteries-and-electrical NZ + AU wording owner-approved 2026-09-22"
+      "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)",
+      "description": "Turn your plan into phased action with deadlines",
+      "descriptionStatus": "owner-approved 2026-09-22 (ruling 3: 'Day 27 —' removed)"
     },
     "OG-B07": {
       "foundation": "energy",
@@ -110,9 +114,12 @@
       ],
       "safetyReasoning": "batteries-and-electrical: REQUIRED by the audit (solar, inverter). working-at-height: REQUIRED by owner ruling 2026-09-22 — the roof survey asks for roof area and pitch.",
       "approvedSafetyBlocks": [
-        "batteries-and-electrical"
+        "batteries-and-electrical",
+        "working-at-height"
       ],
-      "approvedSafetyBlocksStatus": "batteries-and-electrical NZ + AU wording owner-approved 2026-09-22"
+      "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)",
+      "description": "Advanced solar planning for OffGrid056 members. Roof orientation, shading analysis, load profile, and payback estimator — everything a professional installer needs to quote accurately.",
+      "descriptionStatus": "owner-approved 2026-09-22 (ruling 5: legacy product context removed)"
     },
     "OG-15": {
       "foundation": "shelter",
@@ -133,7 +140,12 @@
         "solid-fuel-heating"
       ],
       "safetyReasoning": "None REQUIRED by the audit (its thresholds were not met), all RECOMMENDED. Question 12 names 'fireplace, wood burner, gas heater, portable' as backup heating, and the page frames cold as a survival risk.",
-      "approvedSafetyBlocks": []
+      "approvedSafetyBlocks": [
+        "carbon-monoxide",
+        "indoor-combustion",
+        "solid-fuel-heating"
+      ],
+      "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)"
     }
   }
 }

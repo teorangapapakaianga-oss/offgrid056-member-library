@@ -1,6 +1,6 @@
 {
   "description": "Topic safety blocks, written separately for New Zealand and Australia from each market's own official sources (Stage 9.17). No US or Canadian wording is used. The shared `body` is deliberately an unresolvable token, so any market without its own verified wording fails closed (publishable() = false) rather than inheriting another country's advice. Status PROPOSED: a resource using one of these is NOT ready until the owner approves the block.",
-  "status": "PROPOSED — NZ + AU architecture and electrical wording owner-approved 2026-09-22; every sentence verified against the live official page; remaining blocks awaiting owner approval",
+  "status": "OWNER-APPROVED 2026-09-22 for NZ and AU (Stage 9.18 ruling 1). US and CA remain non-publishable: no market wording.",
   "blocks": {
     "batteries-and-electrical": {
       "id": "batteries-and-electrical",
@@ -27,8 +27,8 @@
       },
       "sharedOrVaries": "VARIES — the law differs (NZ homeowners may do some wiring but not PV; in AU all DIY electrical work is illegal), the licence name differs, and the battery-fire instruction and number differ.",
       "verification": {
-        "NZ": "VERIFIED 2026-09-22 — OWNER-APPROVED 2026-09-22",
-        "AU": "VERIFIED 2026-09-22 — OWNER-APPROVED 2026-09-22"
+        "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
       }
     },
     "carbon-monoxide": {
@@ -52,8 +52,8 @@
       },
       "sharedOrVaries": "VARIES — the first aid instruction differs (NZ: get outside then call 111; AU: 000 for severe symptoms, Poisons Information Centre for mild), and only the AU sources give a servicing interval and an alarm standard. NZ sources disagree on the servicing interval (Health NZ: yearly; WorkSafe: at least every other year), so no NZ interval is stated.",
       "verification": {
-        "NZ": "VERIFIED 2026-09-22 — awaiting owner approval",
-        "AU": "VERIFIED 2026-09-22 — awaiting owner approval"
+        "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
       }
     },
     "indoor-combustion": {
@@ -81,8 +81,8 @@
       },
       "sharedOrVaries": "VARIES — the unflued-heater rules differ: NZ says never in a bedroom, bathroom, caravan or tent and service yearly; NSW says never overnight in the room where you sleep and check every two years. Neither source bans unflued heaters outright, so no ban is stated.",
       "verification": {
-        "NZ": "VERIFIED 2026-09-22 — awaiting owner approval",
-        "AU": "VERIFIED 2026-09-22 — awaiting owner approval"
+        "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
       }
     },
     "solid-fuel-heating": {
@@ -108,8 +108,8 @@
       },
       "sharedOrVaries": "MOSTLY SHAREABLE in substance (yearly chimney care, a screen, one metre clearance, cold ashes in metal), but kept per market so each sentence traces to that market's source. The five-day ash figure is NZ-only.",
       "verification": {
-        "NZ": "VERIFIED_LIVE 2026-09-22 — awaiting owner approval",
-        "AU": "VERIFIED 2026-09-22 — awaiting owner approval"
+        "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
       }
     },
     "working-at-height": {
@@ -131,8 +131,8 @@
       },
       "sharedOrVaries": "FIRST PARAGRAPH SHARED (owner-approved principle). SECOND PARAGRAPH VARIES — each market's own consumer guidance. No heights, angles or ratings are stated.",
       "verification": {
-        "NZ": "VERIFIED_LIVE 2026-09-22 — awaiting owner approval (the ACC ladder PDF could not be opened without a file download, so only the live page's wording is used)",
-        "AU": "VERIFIED 2026-09-22 — awaiting owner approval"
+        "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
       }
     }
   }

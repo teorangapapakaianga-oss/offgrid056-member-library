@@ -40,13 +40,15 @@ const blockTitles: Record<string, string> = Object.fromEntries(
 const reportFile = path.join(PREP, "prep-report.json");
 // Copy changes are recorded as HTML; a PDF only carries the visible text, so both sides are compared as text.
 const visible = (html: string) => html.replace(/<[^>]+>/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
-const expected = new Map<string, { blocks: string[]; copy: { from: string; to: string }[] }>(
-  (fs.existsSync(reportFile)
-    ? (readJson(reportFile) as { legacyCode: string; safety: { blocks: string[] }; copyChanges: { from: string; to: string; applied: boolean }[] }[])
-    : []
-  ).map((r) => [
+type ReportRow = { legacyCode: string; recordStatus?: string; safety: { blocks: string[] }; copyChanges: { from: string; to: string; applied: boolean }[] };
+const expected = new Map<string, { status: string | undefined; blocks: string[]; copy: { from: string; to: string }[] }>(
+  (fs.existsSync(reportFile) ? (readJson(reportFile) as ReportRow[]) : []).map((r) => [
     r.legacyCode,
-    { blocks: r.safety.blocks, copy: r.copyChanges.filter((c) => c.applied).map((c) => ({ from: visible(c.from), to: visible(c.to) })) },
+    {
+      status: r.recordStatus,
+      blocks: r.safety.blocks,
+      copy: r.copyChanges.filter((c) => c.applied).map((c) => ({ from: visible(c.from), to: visible(c.to) })),
+    },
   ]),
 );
 // PDF text extraction inserts spaces between styled runs ("OFFGRID056 .COM"), so phrases are compared with all
@@ -65,6 +67,7 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
     // Every safety block and every approved copy change prep recorded for this resource must have reached the PDF.
     const want = expected.get(code);
     if (!want) problems.push("not in prep-report.json — re-run import:prep");
+    if (want && want.status !== "draft") problems.push(`record status is "${want.status}", not draft`);
     for (const id of want?.blocks ?? []) {
       const title = blockTitles[id];
       if (!title || !flat.includes(norm(title))) problems.push(`safety block "${id}" missing`);
@@ -82,6 +85,9 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
       for (const m of src.matchAll(/(?:src="|url\(['"]?)((?:assets|fonts)\/[^"')]+)/g)) {
         if (!fs.existsSync(path.join(dir, m[1]))) problems.push(`broken asset ${m[1]}`);
       }
+      // The <title> is the PDF's title bar: the member sees the resource title, never a legacy code.
+      const docTitle = src.match(/<title>([\s\S]*?)<\/title>/i)?.[1] ?? "";
+      if (/\bOG-B?\d{2}\b/.test(docTitle)) problems.push(`legacy code in the PDF title: "${docTitle}"`);
     } else problems.push("source HTML missing");
 
     // No other launch market's agency or trade term.

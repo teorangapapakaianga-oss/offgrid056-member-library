@@ -46,8 +46,8 @@ export interface PrepResult {
   markets: { code: string; publishable: boolean; problems: string[]; emergencyNumber: string }[];
   validation: { ok: boolean; issues: string[] };
   importReadiness:
-    | "READY_AFTER_METADATA"
-    | "READY_AFTER_METADATA_AND_COPY_APPROVAL"
+    /** everything approved and applied: only the final validation (verify-prep, build) stands before deployment */
+    | "READY_AFTER_FINAL_VALIDATION"
     | "NEEDS_OWNER_METADATA"
     | "NEEDS_OWNER_COPY"
     | "NEEDS_SAFETY_APPROVAL"
@@ -55,6 +55,8 @@ export interface PrepResult {
   /** owner-approved copy changes, and whether each was applied */
   copyChanges: CopyChangeResult[];
   estimatedTime: number | null;
+  /** the library record's publication state — always "draft" out of prep */
+  recordStatus: string;
   files: string[];
 }
 
@@ -85,6 +87,8 @@ export interface LegacyTerms {
   productNames: string[];
   platformNames: string[];
 }
+
+const escapeHtml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -266,7 +270,6 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   const skinned = reskinHtml(sourceHtml, { strapline: "Prepare • Adapt • Thrive" });
   const { changes, warnings } = skinned;
   const copy = applyCopyChanges(skinned.html, copyChanges);
-  const reskinned = copy.html;
 
   // 2. what the document says about itself
   const described = describeFromHtml(sourceHtml);
@@ -274,6 +277,10 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   const description = inputs.description ?? described.description;
   const title = described.title ?? item.title;
   const slug = slugify(title);
+
+  // The <title> becomes the PDF's title bar. Owner rule (2026-09-22): the member sees the current resource title
+  // only — never the legacy code ("OG-15 Warm Home Scorecard — OffGrid056"), which stays in `legacyCode`.
+  const reskinned = copy.html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
 
   // 3. terminology beyond the framework phrase — checked on the MIGRATED html, so an approved copy change that
   //    removed a reference clears it, while anything still left in the member-facing document is still caught.
@@ -375,7 +382,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
 
   // 6. readiness
   const legacyIssues = item.legacyIssues.map((i) => i.issue);
-  const copyApplied = copy.results.length > 0 && copy.results.every((r) => r.applied);
+  // Every approved copy change must have applied; one that did not is already an `otherFindings` blocker.
   const importReadiness: PrepResult["importReadiness"] = !description
     ? "NEEDS_OWNER_COPY"
     : otherFindings.length || item.safetyNotes.length || contentFlags.length || missingRequired.length
@@ -384,9 +391,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
         ? "NEEDS_SAFETY_APPROVAL"
       : !parsed.success || categoryIssues.length || typeof inputs.estimatedTime !== "number" || !inputs.difficulty
         ? "NEEDS_OWNER_METADATA"
-        : copyApplied
-          ? "READY_AFTER_METADATA_AND_COPY_APPROVAL"
-          : "READY_AFTER_METADATA";
+        : "READY_AFTER_FINAL_VALIDATION";
 
   return {
     legacyCode: item.legacyCode,
@@ -413,6 +418,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     importReadiness,
     copyChanges: copy.results,
     estimatedTime: typeof inputs.estimatedTime === "number" ? inputs.estimatedTime : null,
+    recordStatus: String(record.status),
     files,
   };
 }

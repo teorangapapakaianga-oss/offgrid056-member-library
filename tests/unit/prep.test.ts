@@ -183,6 +183,32 @@ describe("prepareResource: safety", () => {
     }
   });
 
+  it("gives the PDF the member-facing title, never the legacy code", () => {
+    const withTitle = DOC.replace("<!DOCTYPE html><html><head>", "<!DOCTYPE html><html><head><title>OG-27 90-Day Implementation Roadmap — OffGrid056</title>");
+    const r = prep({ sourceHtml: withTitle });
+    const html = fs.readFileSync(r.files[0], "utf8");
+    expect(html).toContain("<title>90-Day Implementation Roadmap</title>");
+    expect(html).not.toMatch(/<title>[^<]*OG-27/);
+    expect(r.legacyCode).toBe("OG-27"); // kept for migration and audit history
+  });
+
+  it("is ready after final validation once metadata, content, safety and copy are all approved", () => {
+    const clean = DOC.replace(/<p>Next:[^<]*<\/p>/, "").replace("OffGrid056 30-Day Programme", "OffGrid056").replace("OG-27 ", "");
+    const r = prep({
+      sourceHtml: clean,
+      foundation: "general",
+      resourceType: "planner",
+      category: "planning",
+      estimatedTime: 30,
+      difficulty: "intermediate",
+      extraSafetyBlocks: ["batteries-and-electrical"],
+      requiredSafety: ["batteries-and-electrical"],
+      proposedBlockIds: [],
+    });
+    expect(r.importReadiness).toBe("READY_AFTER_FINAL_VALIDATION");
+    expect(r.recordStatus).toBe("draft");
+  });
+
   it("holds a resource whose topic blocks are still proposals", () => {
     const clean = DOC.replace(/<p>Next:[^<]*<\/p>/, "").replace("OffGrid056 30-Day Programme", "OffGrid056").replace("OG-27 ", "");
     const r = prep({
