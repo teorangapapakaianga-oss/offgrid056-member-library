@@ -97,7 +97,10 @@ describe("downloads", () => {
     expect(downloads.length).toBeGreaterThan(10);
     for (const d of downloads) {
       expect(d.sizeBytes).toBeGreaterThan(0);
-      expect(d.fileUrl.startsWith("/resources/")).toBe(true);
+      // Every demo download has one real file for everyone. (A market-specific resource has no default file,
+      // and none of those are in the demo data.)
+      expect(d.fileUrl).not.toBeNull();
+      expect(d.fileUrl!.startsWith("/resources/")).toBe(true);
       expect(["PDF", "ZIP"]).toContain(d.format);
     }
   });

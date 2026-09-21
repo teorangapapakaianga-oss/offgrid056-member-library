@@ -1,11 +1,11 @@
 {
-  "description": "Per-resource metadata PROPOSED for owner review. Estimates are rounded to the owner's scale (10 / 15 / 20 / 30 / 45 min) and assume a first pass with the needed information to hand. They exclude any time spent gathering information such as quotes or measurements. Status 'proposed' until the owner approves.",
+  "description": "Per-resource metadata for owner review. Estimates are rounded to the owner's scale (10 / 15 / 20 / 30 / 45 min) and assume a first pass with the needed information to hand. They exclude any time spent gathering information such as quotes or measurements. Estimates for OG-B04, OG-B10 and OG-25 approved by the owner on 2026-09-22.",
   "resources": {
     "OG-B04": {
       "category": "planning",
       "categoryStatus": "approved 2026-09-22",
       "estimatedTime": 15,
-      "estimatedTimeStatus": "proposed",
+      "estimatedTimeStatus": "owner-approved 2026-09-22",
       "evidence": {
         "pages": 2,
         "words": 164,
@@ -20,7 +20,7 @@
       "category": "planning",
       "categoryStatus": "approved 2026-09-22",
       "estimatedTime": 30,
-      "estimatedTimeStatus": "proposed",
+      "estimatedTimeStatus": "owner-approved 2026-09-22",
       "evidence": {
         "pages": 3,
         "words": 184,
@@ -35,7 +35,7 @@
       "category": "planning",
       "categoryStatus": "approved 2026-09-22",
       "estimatedTime": 45,
-      "estimatedTimeStatus": "proposed",
+      "estimatedTimeStatus": "owner-approved 2026-09-22",
       "evidence": {
         "pages": "6 (AU) / 7 (NZ)",
         "words": 425,

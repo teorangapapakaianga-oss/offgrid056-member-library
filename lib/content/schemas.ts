@@ -84,7 +84,11 @@ export const ResourceSchema = z
   })
   .strict()
   .superRefine((r, ctx) => {
-    if (r.downloadable && !r.fileUrl) ctx.addIssue({ code: "custom", path: ["fileUrl"], message: "downloadable resources need a fileUrl" });
+    if (r.downloadable && !r.fileUrl && !r.marketFiles) ctx.addIssue({ code: "custom", path: ["fileUrl"], message: "downloadable resources need a fileUrl or marketFiles" });
+    // A market-specific resource must NOT also carry a default file. Any page that reads `fileUrl` directly —
+    // the download centre, a programme day, a workshop — would otherwise hand every member one country's
+    // version regardless of their market. With no default, those pages have nothing to leak.
+    if (r.marketFiles && r.fileUrl) ctx.addIssue({ code: "custom", path: ["fileUrl"], message: "a resource with marketFiles must not also have a default fileUrl" });
     if (r.fileUrl && !r.fileFormat) ctx.addIssue({ code: "custom", path: ["fileFormat"], message: "fileUrl needs a fileFormat" });
     if (r.resourceType === "download-pack" && !r.packItems?.length) ctx.addIssue({ code: "custom", path: ["packItems"], message: "a download-pack needs packItems" });
   });

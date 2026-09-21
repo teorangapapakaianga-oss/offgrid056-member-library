@@ -140,7 +140,10 @@ export interface DownloadEntry {
   format: string;
   sizeBytes: number | null;
   updatedDate: string;
-  fileUrl: string;
+  /** null for a market-specific resource: its file depends on the member's market (see `marketFiles`) */
+  fileUrl: string | null;
+  /** per-market files, resolved in the browser against the member's chosen market */
+  marketFiles?: Record<string, { fileUrl: string; format: string; sizeBytes: number | null }>;
   isPlaceholder: boolean;
   /** true when the browser can show it in a tab (PDF, image); otherwise only download makes sense */
   openable: boolean;
@@ -159,19 +162,32 @@ export function fileSizeBytes(fileUrl: string, declared?: number): number | null
 /** Everything downloadable, newest update first: the Member Download Centre. */
 export function getDownloads(): DownloadEntry[] {
   return getResources()
-    .filter((r) => r.downloadable && r.fileUrl)
-    .map((r) => ({
-      id: r.id,
-      slug: r.slug,
-      title: r.title,
-      resourceType: r.resourceType,
-      foundation: r.foundation,
-      format: r.fileFormat ?? "FILE",
-      sizeBytes: fileSizeBytes(r.fileUrl!, r.fileSizeBytes),
-      updatedDate: r.updatedDate ?? r.publishedDate,
-      fileUrl: r.fileUrl!,
-      isPlaceholder: r.isPlaceholder,
-      openable: (r.fileFormat ?? "") === "PDF" || (r.fileFormat ?? "") === "PNG",
-    }))
+    .filter((r) => r.downloadable && (r.fileUrl || r.marketFiles))
+    .map((r) => {
+      // A market-specific resource has no default file on purpose: the member's own market picks the file,
+      // in the browser, and a member with no market chosen is offered none.
+      const marketFiles = r.marketFiles
+        ? Object.fromEntries(
+            Object.entries(r.marketFiles).map(([code, f]) => [
+              code,
+              { fileUrl: f.fileUrl, format: f.fileFormat, sizeBytes: fileSizeBytes(f.fileUrl, f.fileSizeBytes) },
+            ]),
+          )
+        : undefined;
+      return {
+        id: r.id,
+        slug: r.slug,
+        title: r.title,
+        resourceType: r.resourceType,
+        foundation: r.foundation,
+        format: r.fileFormat ?? (r.marketFiles ? Object.values(r.marketFiles)[0]?.fileFormat : undefined) ?? "FILE",
+        sizeBytes: r.fileUrl ? fileSizeBytes(r.fileUrl, r.fileSizeBytes) : null,
+        updatedDate: r.updatedDate ?? r.publishedDate,
+        fileUrl: r.fileUrl ?? null,
+        marketFiles,
+        isPlaceholder: r.isPlaceholder,
+        openable: ["PDF", "PNG"].includes(r.fileFormat ?? (r.marketFiles ? (Object.values(r.marketFiles)[0]?.fileFormat ?? "") : "")),
+      };
+    })
     .sort((a, b) => b.updatedDate.localeCompare(a.updatedDate) || a.title.localeCompare(b.title));
 }

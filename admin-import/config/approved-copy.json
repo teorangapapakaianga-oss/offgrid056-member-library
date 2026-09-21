@@ -19,6 +19,33 @@
         "approvedBy": "owner",
         "approvedOn": "2026-09-22",
         "reason": "Same change in the footer. OFFGRID056.COM is kept: it is OffGrid056's own domain, not an external platform."
+      },
+      {
+        "where": "Community Engagement — weekly check-in",
+        "from": "Weekly check-in day (when will you post progress?)",
+        "to": "Weekly check-in day (when will you share progress with the Member Community or your support person?)",
+        "expectedMatches": 1,
+        "approvedBy": "owner (approach approved 2026-09-22; wording drafted to that brief)",
+        "approvedOn": "2026-09-22",
+        "reason": "Works before the Member Community is active: the member can check in with the community or with a personal support person. No platform or link introduced."
+      },
+      {
+        "where": "Community Engagement — what to share",
+        "from": "What you will share (photo, score, question, win)",
+        "to": "What you will share at each check-in (photo, score, question, win)",
+        "expectedMatches": 1,
+        "approvedBy": "owner (approach approved 2026-09-22; wording drafted to that brief)",
+        "approvedOn": "2026-09-22",
+        "reason": "Ties sharing to the check-in rather than to posting, so it works with a community or a support person."
+      },
+      {
+        "where": "Community Engagement — accountability partner",
+        "from": "Accountability partner (tag someone in community)",
+        "to": "Accountability partner (someone from the Member Community, or a household member, friend or support person)",
+        "expectedMatches": 1,
+        "approvedBy": "owner (approach approved 2026-09-22; wording drafted to that brief)",
+        "approvedOn": "2026-09-22",
+        "reason": "Keeps the Member Community concept while allowing a household member, friend or support person, so the resource works before the community is active."
       }
     ]
   }

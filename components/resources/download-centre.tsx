@@ -6,6 +6,8 @@ import { getFoundation, getResourceType } from "@/lib/content/taxonomy";
 import { formatBytes, formatDate } from "@/lib/format-bytes";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Icon } from "@/components/ui/icon";
+import { useMemberState } from "@/lib/member";
+import { marketName, type MarketCode } from "@/lib/member/market";
 
 /** The filters named in the brief, mapped onto resource types. */
 const GROUPS = [
@@ -18,8 +20,74 @@ const GROUPS = [
   { id: "pack", label: "Packs", types: ["download-pack"] },
 ] as const;
 
+/**
+ * The file for one row.
+ *
+ * Most resources have one file for everyone. A market-specific resource has one per market and no default, so
+ * the member's own market picks it — and with no market chosen, or no verified file for theirs, the row offers
+ * nothing and sends them to the resource page instead. It never falls back to another country's file.
+ */
+function FileCells({ entry: d, market }: { entry: DownloadEntry; market: MarketCode | null }) {
+  const file = d.marketFiles ? (market ? d.marketFiles[market] : undefined) : d.fileUrl ? { fileUrl: d.fileUrl, format: d.format, sizeBytes: d.sizeBytes } : undefined;
+
+  if (!file) {
+    const reason = !market ? "Choose your market" : `Not yet for ${marketName(market)}`;
+    return (
+      <>
+        <td className="px-4 py-3 text-og-graphite">{d.format}</td>
+        <td className="hidden px-4 py-3 text-og-taupe sm:table-cell">—</td>
+        <td className="hidden px-4 py-3 text-og-graphite md:table-cell">{formatDate(d.updatedDate)}</td>
+        <td className="px-4 py-3 text-right">
+          <Link href={`/resources/${d.slug}/`} className="inline-flex min-h-11 items-center text-sm font-semibold text-og-deep underline-offset-2 hover:underline">
+            {reason}
+            <span className="sr-only"> for {d.title}</span>
+          </Link>
+        </td>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <td className="px-4 py-3 text-og-graphite">
+        {file.format}
+        {d.marketFiles && market && <span className="block text-xs text-og-taupe">{marketName(market)}</span>}
+      </td>
+      <td className="hidden px-4 py-3 text-og-graphite sm:table-cell">{formatBytes(file.sizeBytes)}</td>
+      <td className="hidden px-4 py-3 text-og-graphite md:table-cell">{formatDate(d.updatedDate)}</td>
+      <td className="px-4 py-3">
+        <div className="flex justify-end gap-2">
+          {d.openable && (
+            <a
+              href={file.fileUrl}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-og-deep ring-1 ring-og-taupe/35 hover:ring-og-deep"
+            >
+              Open<span className="sr-only"> {d.title} in a new tab</span>
+            </a>
+          )}
+          <a
+            href={file.fileUrl}
+            download
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-og-charcoal px-3 text-sm font-semibold text-og-white hover:bg-og-deep"
+          >
+            <Icon name="download" className="size-4" />
+            <span className="hidden sm:inline">Download</span>
+            <span className="sr-only"> {d.title}</span>
+          </a>
+        </div>
+      </td>
+    </>
+  );
+}
+
 export function DownloadCentre({ downloads }: { downloads: DownloadEntry[] }) {
   const [group, setGroup] = useState<string>("all");
+  const view = useMemberState();
+  // Until the member state has loaded, treat the market as unknown: that offers nothing market-specific, which
+  // is the safe state to render in, rather than briefly showing a default country's file.
+  const market = view.ready ? (view.state.market?.code ?? null) : null;
 
   const counts = useMemo(() => {
     const out: Record<string, number> = { all: downloads.length };
@@ -109,32 +177,8 @@ export function DownloadCentre({ downloads }: { downloads: DownloadEntry[] }) {
                       {d.isPlaceholder && " · Demo"}
                     </span>
                   </th>
-                  <td className="px-4 py-3 text-og-graphite">{d.format}</td>
-                  <td className="hidden px-4 py-3 text-og-graphite sm:table-cell">{formatBytes(d.sizeBytes)}</td>
-                  <td className="hidden px-4 py-3 text-og-graphite md:table-cell">{formatDate(d.updatedDate)}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex justify-end gap-2">
-                      {d.openable && (
-                        <a
-                          href={d.fileUrl}
-                          target="_blank"
-                          rel="noopener"
-                          className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-og-deep ring-1 ring-og-taupe/35 hover:ring-og-deep"
-                        >
-                          Open<span className="sr-only"> {d.title} in a new tab</span>
-                        </a>
-                      )}
-                      <a
-                        href={d.fileUrl}
-                        download
-                        className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-og-charcoal px-3 text-sm font-semibold text-og-white hover:bg-og-deep"
-                      >
-                        <Icon name="download" className="size-4" />
-                        <span className="hidden sm:inline">Download</span>
-                        <span className="sr-only"> {d.title}</span>
-                      </a>
-                    </div>
-                  </td>
+                  <FileCells entry={d} market={market} />
+
                 </tr>
               ))}
             </tbody>
