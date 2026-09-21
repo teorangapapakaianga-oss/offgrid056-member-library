@@ -23,7 +23,7 @@ import { renderAuditReport, renderStructure } from "./audit/report";
 import { reskinHtml } from "./reskin/reskin";
 import { runPilot, writePilot } from "./pilot/run";
 import { prepareResource } from "./pilot/prep";
-import { analyseGroupA } from "./audit/group-a";
+import { analyseGroupA, safetyExposureFor } from "./audit/group-a";
 import { assessMarket } from "./markets/readiness";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
@@ -494,8 +494,10 @@ async function commandPrep() {
   const topicBlocks = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "safety-blocks.json"), "utf8")).blocks ?? {};
   const blocks = { ...spec.safetyBlocks, ...topicBlocks };
   const legacyTerms = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "legacy-terms.json"), "utf8"));
-  // What each resource's topics require, so a missing CRITICAL block stops the resource.
-  const exposure = new Map(analyseGroupA(auditResult, ws.texts).map((r) => [r.legacyCode, r.safetyExposure]));
+  // What each resource's topics require, so a missing CRITICAL block stops the resource — computed for every
+  // resource, whichever re-skin group it is in.
+  const exposureOf = (i: (typeof auditResult.items)[number]) =>
+    safetyExposureFor([i.pdf, i.html].map((f) => (f ? ws.texts[f.candidateId] ?? "" : "")).join("\n"));
   const results = [];
 
   for (const code of codes) {
@@ -518,7 +520,7 @@ async function commandPrep() {
       resourceType: metadata[item.legacyCode]?.resourceType ?? null,
       category: metadata[item.legacyCode]?.category ?? null,
       extraSafetyBlocks: metadata[item.legacyCode]?.safetyBlocks ?? [],
-      requiredSafety: exposure.get(item.legacyCode) ?? [],
+      requiredSafety: exposureOf(item),
       proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
       legacyTerms,
       description: metadata[item.legacyCode]?.description ?? null,

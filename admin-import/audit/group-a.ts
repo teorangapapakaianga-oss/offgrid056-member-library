@@ -71,6 +71,15 @@ const MARKET_TOKENS: { pattern: RegExp; token: string }[] = [
  */
 const UNVERIFIED_FIELDS = new Set(["figure.generatorDistance"]);
 
+/**
+ * The safety blocks a resource's topics require. Exported so any resource can be checked, not only Group A:
+ * computing this only inside the Group-A analysis meant a Group-B resource reached prep with no required blocks
+ * at all — a gate that silently passes.
+ */
+export function safetyExposureFor(text: string): string[] {
+  return SAFETY_TOPICS.filter((t) => (text.match(t.pattern) ?? []).length >= t.needs).map((t) => t.block);
+}
+
 function complexityOf(layout: Omit<GroupAReport["layout"], "complexity">): Risk {
   const score =
     layout.tables * 2 + layout.formFields * 0.2 + layout.componentClasses * 0.5 + layout.pageBreaks + layout.sizeKb / 10;
@@ -88,10 +97,7 @@ export function analyseGroupA(audit: ProgrammeAudit, texts: Record<string, strin
     const text = [item.pdf, item.html].map((f) => (f ? texts[f.candidateId] ?? "" : "")).join("\n");
 
     // --- safety exposure -------------------------------------------------------------------------------
-    const safetyExposure: string[] = [];
-    for (const t of SAFETY_TOPICS) {
-      if ((text.match(t.pattern) ?? []).length >= t.needs) safetyExposure.push(t.block);
-    }
+    const safetyExposure = safetyExposureFor(text);
 
     // --- terminology -----------------------------------------------------------------------------------
     const frameworkPhrase = (html.match(/\b(5|five)\s+pillars?\b/gi) ?? []).length;

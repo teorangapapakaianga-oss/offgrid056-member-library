@@ -93,8 +93,18 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
     // No other launch market's agency or trade term.
     const own = profiles.find((p) => p.code === market);
     for (const other of profiles.filter((p) => p.code !== market && ["NZ", "AU"].includes(p.code))) {
+      // Every agency the other market's profile names (EECA, WorkSafe, Healthy Homes, the SES…), not only the
+      // emergency one: an AU file quoting NZ subsidy schemes is as wrong as one quoting 111.
+      const ownNames = new Set(Object.values(own?.agencies ?? {}).map((a) => a?.name));
+      for (const [key, agency] of Object.entries(other.agencies)) {
+        const theirs = agency?.name;
+        if (!theirs || theirs === "VERIFY" || theirs.startsWith("your ") || ownNames.has(theirs)) continue;
+        // Match the distinctive part: "Civil Defence (NEMA)" → "Civil Defence", "EECA" → "EECA".
+        const core = theirs.replace(/\s*\(.*\)$/, "");
+        if (flat.includes(norm(core))) problems.push(`contains ${other.code} ${key} agency "${core}"`);
+      }
       const theirs = other.agencies.emergencyManagement?.name;
-      if (theirs && own?.agencies.emergencyManagement?.name !== theirs && flat.includes(norm(theirs))) problems.push(`contains ${other.code} agency "${theirs}"`);
+      if (theirs && theirs.startsWith("your ") && own?.agencies.emergencyManagement?.name !== theirs && flat.includes(norm(theirs))) problems.push(`contains ${other.code} agency "${theirs}"`);
       const term = other.terms.electrician;
       if (term && own?.terms.electrician !== term && (want?.blocks ?? []).includes("batteries-and-electrical") && flat.includes(norm(term)))
         problems.push(`contains ${other.code} term "${term}"`);
@@ -108,12 +118,14 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
     if (!/in an emergency/i.test(text)) problems.push("emergency safety block missing");
     if (!/not professional advice/i.test(text)) problems.push("general disclaimer missing");
 
+    // An emergency number stands alone: "000" inside "$1,000" or "30,000" is a price, not Triple Zero.
+    const standalone = (n: string) => new RegExp(`(?<![\\d,.$])\\b${n}\\b(?![,.]?\\d)`).test(text);
     if (market === "NZ") {
-      if (!/\b111\b/.test(text)) problems.push("NZ file without 111");
-      if (/\b000\b|\b112\b/.test(text)) problems.push("NZ file contains an Australian number");
+      if (!standalone("111")) problems.push("NZ file without 111");
+      if (standalone("000") || standalone("112")) problems.push("NZ file contains an Australian number");
     } else if (market === "AU") {
-      if (!/\b000\b/.test(text) || !/\b112\b/.test(text)) problems.push("AU file without 000 and 112");
-      if (/\b111\b/.test(text)) problems.push("AU file contains the New Zealand number");
+      if (!standalone("000") || !standalone("112")) problems.push("AU file without 000 and 112");
+      if (standalone("111")) problems.push("AU file contains the New Zealand number");
     } else {
       problems.push("cannot tell which market this file is for");
     }

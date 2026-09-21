@@ -165,6 +165,40 @@
       "pdfTitleStatus": "owner-specified 2026-09-22 (Stage 9.19 decision 3)",
       "safetyBlocks": [],
       "approvedSafetyBlocks": []
+    },
+    "OG-26": {
+      "foundation": "general",
+      "foundationStatus": "PROPOSED — inferred: the audit found five foundations scoring similarly (cross-cutting); the tiers span water, food, heat, power, shelter and comms. Matches OG-27 and OG-B10.",
+      "resourceType": "planner",
+      "resourceTypeStatus": "inferred, HIGH confidence — title 'Budget Planner'",
+      "category": "planning",
+      "categoryStatus": "PROPOSED — same as OG-27, which depends on it",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
+      "estimatedTimeRecommendation": 45,
+      "estimatedTimeReasoning": "Four costing tables (Tier 1: 7 rows, Tier 2: 6, Tier 3: 6, plus subtotals and contingency) and a five-field decision section. Assumes prices or quotes are to hand; gathering them takes longer.",
+      "difficulty": null,
+      "difficultyStatus": "NEEDS_OWNER_REVIEW",
+      "difficultySource": "none — the document states no level",
+      "difficultyRecommendation": "intermediate (INFERRED) — costing, subsidies, contingency and a funding-gap decision; same level as OG-27, which builds on it",
+      "safetyBlocks": [
+        "batteries-and-electrical",
+        "indoor-combustion",
+        "carbon-monoxide",
+        "solid-fuel-heating"
+      ],
+      "safetyReasoning": "REQUIRED by topic thresholds: batteries-and-electrical (solar/batteries/inverter ×16), solid-fuel-heating (wood burner ×4), stored-drinking-water (water storage, rainwater, bore/spring, UV treatment ×14 — NO NZ/AU-verified block exists yet, so it is reported missing). RECOMMENDED: indoor-combustion and carbon-monoxide — Tier 1 lists 'Emergency heating (gas heater / thermal blankets)' and Tier 3 a 'backup gen'.",
+      "approvedSafetyBlocks": [
+        "batteries-and-electrical",
+        "indoor-combustion",
+        "carbon-monoxide",
+        "solid-fuel-heating"
+      ],
+      "approvedSafetyBlocksStatus": "wording owner-approved 2026-09-22 (Stage 9.18); use in OG-26 still subject to owner review",
+      "dependencies": {
+        "OG-22 / Resilience Product Wishlist": "'Start with MUST items only (from OG-22)' — the MUST list is defined in OG-22, which is not in the library",
+        "OG-23 / Supplier Question Bank": "'quotes from OG-23 enquiries' — a soft reference; the budget works without it"
+      }
     }
   }
 }

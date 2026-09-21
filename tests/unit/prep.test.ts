@@ -8,6 +8,7 @@ import profilesFile from "@/admin-import/markets/profiles.json";
 import pilotSpec from "@/admin-import/pilot/og-02.json";
 import topicBlocks from "@/admin-import/config/safety-blocks.json";
 import type { MarketProfile, SafetyBlock } from "@/admin-import/markets/resolve";
+import { safetyExposureFor } from "@/admin-import/audit/group-a";
 
 /**
  * Stage 9.16. Group-A batch 2 hardening: no silent metadata fallbacks, required safety blocks enforced, legacy
@@ -140,6 +141,14 @@ describe("prepareResource: no silent metadata", () => {
     const r = prep({ foundation: "energy", resourceType: "worksheet", category: "planning", estimatedTime: 30, difficulty: "advanced" });
     expect(r.validation.ok).toBe(false);
     expect(r.validation.issues.join(" ")).toContain('"planning" is not a category of the energy foundation');
+  });
+});
+
+describe("required safety for any resource", () => {
+  it("is computed from the text alone, so a Group-B resource is not waved through with no required blocks", () => {
+    const text = "Rainwater tank. Water storage (200L). Drinking water filter. Solar panel. Battery (10kWh). Inverter. Wood burner. Chimney. Flue.";
+    expect(safetyExposureFor(text)).toEqual(expect.arrayContaining(["stored-drinking-water", "batteries-and-electrical", "solid-fuel-heating"]));
+    expect(safetyExposureFor("Score each room from 1 to 5.")).toEqual([]);
   });
 });
 
