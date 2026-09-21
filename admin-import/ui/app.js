@@ -422,11 +422,22 @@ function wireDetail(id, d) {
 
 async function renderDuplicates() {
   const { groups } = await api("/api/duplicates");
+  const manual = groups.filter((g) => !g.autoResolved);
+  const auto = groups.filter((g) => g.autoResolved);
 
   view.innerHTML = `
     <h1>Duplicate review</h1>
-    <p class="count">${groups.length} groups. Nothing is deleted and no winner is chosen automatically — every group is your decision.</p>
-    ${groups
+    <p class="count">${manual.length} groups need a decision. Nothing is deleted and no winner is chosen for you.</p>
+    ${
+      auto.length
+        ? `<div class="ok-note" style="margin-bottom:1rem">
+             <strong>${auto.length} clean PDF/HTML pairs resolved automatically</strong> (owner ruling 5): both files kept — the PDF as the
+             member artefact, the HTML as the re-skinning source. They are out of this queue. Any pair whose content differs is flagged
+             CONTENT_MISMATCH and stays below.
+           </div>`
+        : ""
+    }
+    ${manual
       .map(
         (g) => `<section class="panel">
           <h3>${esc(g.groupId)} — ${esc(g.kind)}${g.pdfHtmlPair ? " · PDF/HTML pair" : ""}</h3>

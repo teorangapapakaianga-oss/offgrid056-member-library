@@ -66,6 +66,8 @@ export interface InventoryEntry {
     onlineOnly: boolean;
     /** OffGrid056 material sitting in another project's folder (owner decision D9-2) */
     misplacedSource: boolean;
+    /** the source is mostly business material: resource candidacy needs positive evidence (owner ruling 1) */
+    narrowCandidacy?: boolean;
   };
   /** Only for video: provenance for later hosting (owner decision D9-1) */
   video?: {
@@ -124,6 +126,8 @@ export interface Candidate extends InventoryEntry {
   duplicateKind: DuplicateKind;
   duplicateOf: string[];
   pairedWith: string | null;
+  /** in an auto-resolved PDF/HTML pair: which half this is (owner ruling 5) */
+  pairRole?: "member artefact" | "migration source";
   contentMismatch: boolean;
   disposition: Disposition | null;
   importNotes: string;
@@ -139,6 +143,13 @@ export interface DuplicateGroup {
   /** PDF/HTML pairs of the same document (owner decision D9-10) */
   pdfHtmlPair?: boolean;
   contentMismatch?: boolean;
+  /** how alike the two texts are, where that could be measured */
+  textSimilarity?: number | null;
+  /**
+   * A clean PDF/HTML pair, settled without a person: both kept, PDF as the member artefact and HTML as the
+   * re-skinning source (owner ruling 5). Auto-resolved groups are out of the manual duplicate queue.
+   */
+  autoResolved?: boolean;
 }
 
 export interface ScanSummary {

@@ -18,7 +18,9 @@
       "label": "Work: active project",
       "path": "C:\\Users\\jgate\\Documents\\Work\\01_ACTIVE_PROJECTS\\OffGrid056",
       "enabled": true,
-      "misplaced": false
+      "misplaced": false,
+      "resourceCandidacy": "narrow",
+      "note": "Owner ruling 1 (Stage 9.3 approval): inventory read-only, but this folder is mostly business and marketing material. A file here only becomes a member-resource candidate on positive evidence; otherwise INTERNAL, or NEEDS_REVIEW when uncertain."
     },
     {
       "label": "Ready 2 Go (inside ITEEK Docs)",

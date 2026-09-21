@@ -234,6 +234,95 @@ describe("legacy branding detection", () => {
   });
 });
 
+describe("owner rulings (Stage 9.3 approval)", () => {
+  const entryFor = (filename: string, extras: Partial<import("@/admin-import/types").InventoryEntry["source"]> = {}) => ({
+    candidateId: "cand-test",
+    source: {
+      path: `C:\\src\\${filename}`,
+      folder: "C:\\src",
+      sourceLabel: "Work: active project",
+      filename,
+      extension: path.extname(filename),
+      sizeBytes: 1000,
+      modified: "2026-05-01T00:00:00.000Z",
+      checksum: "sha256:" + "b".repeat(64),
+      fileType: "markdown" as const,
+      onlineOnly: false,
+      misplacedSource: false,
+      ...extras,
+    },
+    textLength: 0,
+    textError: null,
+  });
+
+  it("ruling 4: never falls back to Planner on body text alone", () => {
+    const c = classify(entryFor("Household_Notes.md"), {
+      text: "You should plan ahead. A good plan matters. Planning your plan is part of the plan.",
+      raw: "",
+      meta: {},
+    });
+    expect(c.inferred.resourceType.value).not.toBe("planner");
+    expect(c.reviewFlags).toContain("TYPE_REVIEW");
+    expect(c.status).toBe("NEEDS_REVIEW");
+  });
+
+  it("ruling 4: keeps Planner when the name says so", () => {
+    const c = classify(entryFor("OG-19_Battery_Backup_Planner.md"), { text: "Battery backup planner for outages.", raw: "", meta: {} });
+    expect(c.inferred.resourceType.value).toBe("planner");
+    expect(c.reviewFlags).not.toContain("TYPE_REVIEW");
+  });
+
+  it("ruling 1: business material in a narrowed source is internal, not a resource", () => {
+    const c = classify(entryFor("Q3_Sales_Funnel_Plan.md", { narrowCandidacy: true }), {
+      text: "Lead generation, ad copy and conversion rates for the campaign.",
+      raw: "",
+      meta: {},
+    });
+    expect(c.materialKind).toBe("internal");
+    expect(c.status).toBe("NEEDS_REVIEW");
+  });
+
+  it("ruling 1: a numbered programme resource still qualifies in a narrowed source", () => {
+    const c = classify(entryFor("OG-11_30Day_Pantry_Builder.md", { narrowCandidacy: true }), {
+      text: "Pantry rotation, food storage and stock levels for the household.",
+      raw: "",
+      meta: {},
+    });
+    expect(c.materialKind).toBe("resource");
+    expect(c.inferred.legacyCode.value).toBe("OG-11");
+  });
+
+  it("ruling 1: half-evidence is flagged for a person rather than filed either way", () => {
+    const c = classify(entryFor("Water_Tank_Notes.md", { narrowCandidacy: true }), {
+      text: "Rainwater tanks, litres, storage and filtration for drinking water. ".repeat(6),
+      raw: "",
+      meta: {},
+    });
+    expect(c.materialKind).toBe("internal");
+    expect(c.reviewFlags).toContain("CANDIDACY_REVIEW");
+  });
+
+  it("ruling 3: a household-wide name does not stop the content deciding the foundation", () => {
+    const c = classify(entryFor("Home_Resilience_Scorecard.md"), {
+      text: "Rainwater tank sizing, litres per person, filtration, purification, storage containers and rotation. ".repeat(8),
+      raw: "",
+      meta: {},
+    });
+    expect(c.inferred.foundation.value).toBe("water");
+    expect(c.inferred.foundation.confidence).not.toBe("LOW");
+  });
+
+  it("ruling 3: keeps General when the content really does span the foundations", () => {
+    // One distinctive word per foundation, used equally often, so nothing leads.
+    const c = classify(entryFor("Household_Readiness_Plan.md"), {
+      text: "ventilation rainwater insulation pantry solar. ".repeat(10),
+      raw: "",
+      meta: {},
+    });
+    expect(c.inferred.foundation.value).toBe("general");
+  });
+});
+
 describe("duplicate grouping", () => {
   const build = async () => {
     const { entries, texts } = await scanFixture();

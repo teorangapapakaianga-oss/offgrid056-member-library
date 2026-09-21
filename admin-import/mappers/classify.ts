@@ -167,6 +167,54 @@ function scoreKeywords(
   return results.sort((a, b) => b.score - a.score);
 }
 
+/**
+ * Owner ruling 3: rescue a specific foundation from the evidence when the filename alone would land a resource
+ * in General.
+ *
+ * One foundation has to lead clearly — a decent score and a real margin over the next — or the answer stays
+ * General. The point is not to shrink the General pile; it is to file the resources whose subject is genuinely
+ * obvious from their content, and to leave the rest for a person.
+ */
+const CONTENT_MIN_SCORE = 8;
+const CONTENT_MIN_MARGIN = 1.6;
+
+function resolveFromContent(specific: Scored[]): Inference<FoundationId> | null {
+  const [top, second] = specific;
+  if (!top || top.score < CONTENT_MIN_SCORE) return null;
+  if (top.score < (second?.score ?? 0) * CONTENT_MIN_MARGIN) return null;
+  return {
+    value: top.key as FoundationId,
+    confidence: "MEDIUM", // never HIGH: the name did not say so, the content did
+    evidence: [
+      `the name is household-wide, but the content points clearly to ${top.key} (${top.score} vs ${second?.key ?? "nothing"} ${second?.score ?? 0})`,
+      ...top.evidence.slice(0, 3),
+    ],
+  };
+}
+
+/**
+ * Owner ruling 4: Planner must never be a fallback.
+ *
+ * "Plan" appears in almost everything here, so Planner wins by default far too easily. It is only kept when the
+ * word appears in the filename or title — where a real planner announces itself — and otherwise the type is
+ * cleared so a person decides.
+ */
+function guardPlanner(type: Inference<ResourceTypeId>, planner: Scored | undefined): Inference<ResourceTypeId> {
+  if (type.value !== "planner") return type;
+  const namedInTitle = (planner?.nameWords.length ?? 0) > 0;
+  if (namedInTitle && type.confidence !== "LOW") return type;
+  return {
+    value: null,
+    confidence: "LOW",
+    evidence: [
+      namedInTitle
+        ? "looks like a planner, but the evidence is weak: left for a person to decide (owner ruling 4)"
+        : '"planner" was inferred only from body text, never from the name: Planner is not used as a fallback (owner ruling 4)',
+      ...type.evidence.slice(0, 2),
+    ],
+  };
+}
+
 export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT): Candidate {
   const filename = normalise(entry.source.filename);
   const folder = normalise(entry.source.folder.split(/[\\/]/).slice(-2).join(" "));
@@ -196,6 +244,8 @@ export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT)
   } else {
     resourceType = none<ResourceTypeId>();
   }
+  resourceType = guardPlanner(resourceType, typeScores.find((s) => s.key === "planner"));
+
   // Calculators become worksheets with a calculator tag (owner decision D9-6).
   const tags: string[] = [];
   if (isCalculator) {
@@ -229,11 +279,18 @@ export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT)
       secondaryFoundations.push(...(specific.slice(0, 3).map((s) => s.key) as FoundationId[]));
     } else if (top.key !== "general" && top.nameWords.length > 0 && top.nameWords.every((w) => BROAD_SCOPE.has(w))) {
       // Owner decision 1: the name only claims this foundation through whole-household words ("home",
-      // "resilience", "readiness"). That is a broad household resource, not a foundation-specific one.
-      foundation = {
+      // "resilience", "readiness"), so the *name* does not make it foundation-specific.
+      //
+      // Owner ruling 3: before settling for General, look past the name — at the body text and the folder it
+      // came from. A document called "Home Resilience Scorecard" that talks about litres, tanks and filtration
+      // throughout is a Water resource; one that ranges across all five foundations is not.
+      // The broad-named foundation itself is excluded: its claim came from the household-wide word we have
+      // just discounted, so letting it win again here would make the rule pointless.
+      const resolved = resolveFromContent(specific.filter((s) => s.key !== top.key));
+      foundation = resolved ?? {
         value: "general",
         confidence: "MEDIUM",
-        evidence: [`the name only matches "${top.key}" through whole-household words (${top.nameWords.join(", ")}): filed under General (owner decision 1)`],
+        evidence: [`the name only matches "${top.key}" through whole-household words (${top.nameWords.join(", ")}), and the text does not clearly favour one foundation: filed under General`],
       };
     } else {
       foundation = { value: top.key as FoundationId, confidence: scoreToConfidence(top.strong, top.weak, margin), evidence: top.evidence };
@@ -273,15 +330,23 @@ export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT)
   const { legacyIssues, migrationActions } = detectLegacy(bundle);
 
   // --- what kind of material is this? --------------------------------------------------------------------
-  const { materialKind, notes, reviewFlags } = classifyMaterial(entry, legacyCode, bundle);
+  const { materialKind, notes, reviewFlags, uncertain } = classifyMaterial(entry, legacyCode, bundle, { resourceType, foundation });
+  // Owner ruling 1: "if uncertain, NEEDS_REVIEW". Internal material is already reviewed rather than imported,
+  // but an uncertain call is recorded so it can be found and settled deliberately.
+  if (uncertain && !reviewFlags.includes("CANDIDACY_REVIEW")) reviewFlags.push("CANDIDACY_REVIEW");
   const asset =
     materialKind === "asset"
       ? { role: assetRole(entry.source.filename), scope: "resource" as const, attachTo: null, attachEvidence: [] as string[] }
       : undefined;
 
+  // Owner ruling 4: a resource whose type could not be established goes to a person, rather than carrying a
+  // guessed type into the library.
+  const untyped = materialKind === "resource" && !resourceType.value;
+  if (untyped && !reviewFlags.includes("TYPE_REVIEW")) reviewFlags.push("TYPE_REVIEW");
+
   return {
     ...entry,
-    status: materialKind === "resource" ? "CLASSIFIED" : "NEEDS_REVIEW",
+    status: materialKind === "resource" && !untyped ? "CLASSIFIED" : "NEEDS_REVIEW",
     materialKind,
     ...(asset ? { asset } : {}),
     reviewFlags,
@@ -295,7 +360,7 @@ export function classify(entry: InventoryEntry, bundle: TextBundle = EMPTY_TEXT)
     pairedWith: null,
     contentMismatch: false,
     disposition: null,
-    importNotes: notes,
+    importNotes: untyped ? "The resource type could not be established from the evidence, so none was assumed. Choose one before importing (owner ruling 4)." : notes,
     importApproved: false,
     importedAt: null,
   };
@@ -323,7 +388,42 @@ const INTERNAL_FOLDER = /(^|[\\/])(_build|_source|_source_deliveries|build|dist|
  * Flagged as internal rather than rejected, so the owner can still override any individual one.
  */
 const INTERNAL_BUSINESS =
-  /\b(business strategy|delivery model|sales system|sales page|funnel|personas?|voice guide|positioning|objections?|pricing|marketing|offer validation|customer journey|customer problems|brand pack|style guide|launch plan|content (plan|system|creator)|campaign\d*|copywriting|carousel|showcase|newsletter|ad copy|post copy|social|seo|competitor|register)\b/i;
+  /\b(business strateg\w*|delivery model|sales\w*|funnel\w*|lead gen\w*|leadgen|personas?|voice guide|positioning|objections?|pricing|marketing|promo\w*|offer validation|customer journey|customer problems|brand pack|style guide|launch plan|content (plan|system|creator)|campaign\d*|copywriting|carousel|showcase|newsletter|ad copy|post copy|social|seo|competitor|register|revenue|invoice|payroll|operations|admin)\b/i;
+
+/**
+ * Owner ruling 1: in a source marked "narrow", a file is a member-resource candidate only on positive
+ * evidence that it teaches something. Everything else is inventoried as internal, and anything genuinely
+ * uncertain is sent to a person rather than quietly filed either way.
+ *
+ * Positive evidence is an OG code (these are the numbered programme resources), or a confident resource type
+ * together with a specific foundation. "A confident guide about the household in general" is exactly what the
+ * business documents look like, so that combination deliberately does not qualify.
+ */
+function narrowCandidacy(
+  resourceType: Inference<ResourceTypeId>,
+  foundation: Inference<FoundationId>,
+  legacyCode: Inference<string>,
+): { isResource: boolean; uncertain: boolean; why: string } {
+  if (legacyCode.value) return { isResource: true, uncertain: false, why: `carries the programme code ${legacyCode.value}` };
+
+  const typedConfidently = !!resourceType.value && resourceType.confidence !== "LOW";
+  const foundationSpecific = !!foundation.value && foundation.value !== "general" && foundation.confidence !== "LOW";
+
+  if (typedConfidently && foundationSpecific) {
+    return { isResource: true, uncertain: false, why: `a ${resourceType.value} about ${foundation.value}, both inferred confidently` };
+  }
+  if (typedConfidently || foundationSpecific) {
+    // Half the evidence. Not confident enough to call it a resource, not clear enough to file away.
+    return {
+      isResource: false,
+      uncertain: true,
+      why: typedConfidently
+        ? `looks like a ${resourceType.value}, but nothing ties it to a foundation`
+        : `looks like ${foundation.value} material, but its type is unclear`,
+    };
+  }
+  return { isResource: false, uncertain: false, why: "no sign that this teaches a member anything: business or operational material" };
+}
 
 function assetRole(filename: string): AssetRole {
   const n = filename.toLowerCase();
@@ -336,7 +436,8 @@ function classifyMaterial(
   entry: InventoryEntry,
   legacyCode: Inference<string>,
   bundle: TextBundle,
-): { materialKind: MaterialKind; notes: string; reviewFlags: string[] } {
+  inferred: { resourceType: Inference<ResourceTypeId>; foundation: Inference<FoundationId> },
+): { materialKind: MaterialKind; notes: string; reviewFlags: string[]; uncertain?: boolean } {
   const { filename, folder, fileType } = entry.source;
   const flags: string[] = [];
 
@@ -389,6 +490,19 @@ function classifyMaterial(
           : "Internal or source material (working file, build output or navigation page), not a member resource.",
       reviewFlags: flags,
     };
+  }
+
+  // Owner ruling 1: sources that are mostly business material must earn resource candidacy.
+  if (entry.source.narrowCandidacy) {
+    const verdict = narrowCandidacy(inferred.resourceType, inferred.foundation, legacyCode);
+    if (!verdict.isResource) {
+      return {
+        materialKind: "internal",
+        notes: `${entry.source.sourceLabel} is mostly business and marketing material, and this file did not show it teaches members anything — ${verdict.why}.`,
+        reviewFlags: flags,
+        uncertain: verdict.uncertain,
+      };
+    }
   }
 
   return { materialKind: "resource", notes: "", reviewFlags: flags };

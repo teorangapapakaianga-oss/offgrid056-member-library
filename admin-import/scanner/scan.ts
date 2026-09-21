@@ -19,6 +19,8 @@ export interface SourceConfig {
   path: string;
   enabled: boolean;
   misplaced?: boolean;
+  /** "narrow": a file here is a member-resource candidate only on positive evidence (owner ruling 1) */
+  resourceCandidacy?: "normal" | "narrow";
 }
 
 export interface ScanOptions {
@@ -139,6 +141,7 @@ export async function scanSources(sources: SourceConfig[], options: ScanOptions)
           fileType,
           onlineOnly: isOffline,
           misplacedSource: Boolean(source.misplaced),
+          narrowCandidacy: source.resourceCandidacy === "narrow",
         },
         textLength: 0,
         textError: isOffline ? "online-only: not downloaded, content not read" : null,

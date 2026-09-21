@@ -77,7 +77,16 @@ export function groupDuplicates(
         c.duplicateKind = group.kind;
       }
       c.duplicateOf = [...new Set([...c.duplicateOf, ...group.members.filter((m) => m !== id)])];
-      if (c.status === "CLASSIFIED") c.status = "DUPLICATE";
+
+      if (group.autoResolved) {
+        // Owner ruling 5: a clean PDF/HTML pair is not a question. Both files are kept — the PDF as the
+        // member artefact, the HTML as the re-skinning source — so neither is held back from import and
+        // neither appears in the manual queue.
+        c.disposition = "KEEP";
+        c.pairRole = c.source.fileType === "pdf" ? "member artefact" : "migration source";
+      } else if (c.status === "CLASSIFIED") {
+        c.status = "DUPLICATE";
+      }
     }
   };
 
@@ -122,15 +131,19 @@ export function groupDuplicates(
     const kinds = new Set(list.map((c) => c.source.fileType));
     const isPair = kinds.has("pdf") && kinds.has("html");
     let mismatch = false;
+    let similarity: number | null = null;
     if (isPair) {
       const pdf = list.find((c) => c.source.fileType === "pdf")!;
       const html = list.find((c) => c.source.fileType === "html")!;
-      const sim = textSimilarity(texts.get(pdf.candidateId)?.text ?? "", texts.get(html.candidateId)?.text ?? "");
-      mismatch = sim > 0 && sim < options.pairMismatchBelow;
+      similarity = textSimilarity(texts.get(pdf.candidateId)?.text ?? "", texts.get(html.candidateId)?.text ?? "");
+      mismatch = similarity > 0 && similarity < options.pairMismatchBelow;
       pdf.pairedWith = html.candidateId;
       html.pairedWith = pdf.candidateId;
       pdf.contentMismatch = html.contentMismatch = mismatch;
     }
+    // Owner ruling 5: a clean pair — exactly one PDF and one HTML of the same document, whose text agrees —
+    // resolves itself. Anything else stays a question for a person.
+    const cleanPair = isPair && list.length === 2 && !mismatch;
     assign({
       groupId: nextId(),
       kind: "VERSION_CANDIDATE",
@@ -140,6 +153,8 @@ export function groupDuplicates(
         : `same name or code "${key}" with different dates or formats`,
       pdfHtmlPair: isPair,
       contentMismatch: mismatch,
+      textSimilarity: similarity,
+      autoResolved: cleanPair,
     });
   }
 
