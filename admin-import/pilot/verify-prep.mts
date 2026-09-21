@@ -38,10 +38,16 @@ const blockTitles: Record<string, string> = Object.fromEntries(
 );
 // What prep said each resource should contain: its safety blocks and the approved copy it applied.
 const reportFile = path.join(PREP, "prep-report.json");
-const expected = new Map<string, { blocks: string[]; copy: string[] }>(
-  (fs.existsSync(reportFile) ? (readJson(reportFile) as { legacyCode: string; safety: { blocks: string[] }; copyChanges: { to: string; applied: boolean }[] }[]) : []).map(
-    (r) => [r.legacyCode, { blocks: r.safety.blocks, copy: r.copyChanges.filter((c) => c.applied).map((c) => c.to) }],
-  ),
+// Copy changes are recorded as HTML; a PDF only carries the visible text, so both sides are compared as text.
+const visible = (html: string) => html.replace(/<[^>]+>/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+const expected = new Map<string, { blocks: string[]; copy: { from: string; to: string }[] }>(
+  (fs.existsSync(reportFile)
+    ? (readJson(reportFile) as { legacyCode: string; safety: { blocks: string[] }; copyChanges: { from: string; to: string; applied: boolean }[] }[])
+    : []
+  ).map((r) => [
+    r.legacyCode,
+    { blocks: r.safety.blocks, copy: r.copyChanges.filter((c) => c.applied).map((c) => ({ from: visible(c.from), to: visible(c.to) })) },
+  ]),
 );
 // PDF text extraction inserts spaces between styled runs ("OFFGRID056 .COM"), so phrases are compared with all
 // whitespace removed. That still fails if a single word or character is missing.
@@ -63,7 +69,11 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
       const title = blockTitles[id];
       if (!title || !flat.includes(norm(title))) problems.push(`safety block "${id}" missing`);
     }
-    for (const to of want?.copy ?? []) if (!flat.includes(norm(to))) problems.push(`approved copy missing: "${to.slice(0, 50)}"`);
+    for (const { from, to } of want?.copy ?? []) {
+      // The new wording must be there, and the old wording gone — which is also the only way to check a removal.
+      if (to && !flat.includes(norm(to))) problems.push(`approved copy missing: "${to.slice(0, 50)}"`);
+      if (from && !norm(to).includes(norm(from)) && flat.includes(norm(from))) problems.push(`replaced wording still present: "${from.slice(0, 50)}"`);
+    }
 
     // The HTML it was printed from must not point at assets that are not there.
     const html = path.join(dir, pdf.replace(/\.pdf$/, ".html"));

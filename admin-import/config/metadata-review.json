@@ -63,7 +63,9 @@
       "reasoning": "The longest document and the most demanding writing: a scope of works and commercial terms are substantive. 45 minutes assumes the member already knows what they want done; gathering measurements or quotes would add to it.",
       "difficulty": "intermediate",
       "difficultyStatus": "owner-approved 2026-09-22",
-      "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived. The document states no difficulty. Its only use of the word 'level' is a form field, 'Target Resilience Level (Days of autonomy desired)', which is about the household, not the document."
+      "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived. The document states no difficulty. Its only use of the word 'level' is a form field, 'Target Resilience Level (Days of autonomy desired)', which is about the household, not the document.",
+      "description": "A professional brief anyone can understand",
+      "descriptionStatus": "owner-approved 2026-09-22 (ruling 7: remove 'Day 25 —'); the deployed record still has the old description until the next approved deployment"
     },
     "OG-27": {
       "foundation": "general",
@@ -84,7 +86,10 @@
         "indoor-combustion"
       ],
       "safetyReasoning": "batteries-and-electrical: REQUIRED by the audit (solar panels, inverter, portable power station). carbon-monoxide and indoor-combustion: RECOMMENDED — Sprint 1 buys 'emergency heating' and runs a 24-hour off-grid test, which is exactly when people bring heaters and cookers inside.",
-      "approvedSafetyBlocks": []
+      "approvedSafetyBlocks": [
+        "batteries-and-electrical"
+      ],
+      "approvedSafetyBlocksStatus": "batteries-and-electrical NZ + AU wording owner-approved 2026-09-22"
     },
     "OG-B07": {
       "foundation": "energy",
@@ -104,7 +109,10 @@
         "working-at-height"
       ],
       "safetyReasoning": "batteries-and-electrical: REQUIRED by the audit (solar, inverter). working-at-height: REQUIRED by owner ruling 2026-09-22 — the roof survey asks for roof area and pitch.",
-      "approvedSafetyBlocks": []
+      "approvedSafetyBlocks": [
+        "batteries-and-electrical"
+      ],
+      "approvedSafetyBlocksStatus": "batteries-and-electrical NZ + AU wording owner-approved 2026-09-22"
     },
     "OG-15": {
       "foundation": "shelter",

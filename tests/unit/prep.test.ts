@@ -109,6 +109,12 @@ describe("content flags", () => {
     expect(flags).toEqual([]);
   });
 
+  it("does not flag a roadmap's own day milestones beyond the 30-day programme", () => {
+    const flags = findContentFlags(`<p>Day 90 — retrospective and next 90 days</p><p>Day 60 Remaining</p><p>Next week, review the plan.</p>`, "OG-B10");
+    expect(flags).toEqual([]);
+    expect(findContentFlags(`<p>Day 25 — A professional brief</p>`, "OG-25").map((f) => f.kind)).toEqual(["programme-sequencing"]);
+  });
+
   it("finds nothing in plain teaching copy", () => {
     expect(findContentFlags(`<p>Check the roof for loose tiles after a storm.</p>`, "OG-01")).toEqual([]);
   });

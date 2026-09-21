@@ -65,6 +65,214 @@
         "approvedOn": "2026-09-22",
         "reason": "Exact wording approved by the owner. '□ Share findings' is deliberately left unchanged."
       }
+    ],
+    "OG-15": [
+      {
+        "where": "Why warmth matters — claims 1 and 2",
+        "from": "In a grid-down winter scenario, hypothermia is a real threat within hours — not days. A warm home is not just about comfort; it is about survival.",
+        "to": "In a winter power cut, a cold home can become a health risk — especially for babies, older people and anyone with a health condition. A warm, dry home is about health, not just comfort.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "safety/content correction",
+        "reason": "Owner ruling 5.1 and 5.2: no official source gives 'within hours' for a cold home (removed); 'about survival' replaced with the owner's wording. Groups at risk: Health NZ and Better Health Channel (Vic)."
+      },
+      {
+        "where": "Question 3 — claim 3",
+        "from": "3. Bedrooms comfortable for sleeping (16–18°C) without excessive heating",
+        "to": "3. Bedrooms stay comfortably warm overnight without excessive heating",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "safety/content correction",
+        "reason": "Owner ruling 5.3: the 16–18°C adult-bedroom figure is unsupported (16°C appears only in guidance for a baby's room). No new figure added."
+      },
+      {
+        "where": "Heating cost reality check — claims 4 and 5",
+        "from": "Every 1°C you lower your thermostat saves approximately 10% on heating bills. A home heated to 21°C costs roughly 30% more than one heated to 18°C.",
+        "to": "Each extra degree of heating uses more energy, so heat to a healthy temperature rather than a higher one.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "safety/content correction",
+        "reason": "Owner rulings 5.4 and 5.5: the '10%' overstates energy.gov.au (5–10%) and EECA gives no percentage, so the statement is non-numeric; the derived '30%' claim is removed."
+      },
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 3 — Shelter, Heating & Energy</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name."
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-15 | Day 15</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal code and programme day."
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 15 Complete</h3>",
+        "to": "<h3>Scorecard Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day."
+      },
+      {
+        "where": "Closing — tomorrow teaser",
+        "from": " Tomorrow: what grants and programmes can help pay for the fixes.",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-day teaser for a resource (OG-16) not in the library."
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: OG-16 Grant Eligibility & Insulation Planner →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-resource navigation to OG-16, not in the library."
+      }
+    ],
+    "OG-25": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 4 — Action Plan & Pathway</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label (owner ruling 7)."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name (owner ruling 7)."
+      },
+      {
+        "where": "Cover title",
+        "from": "<h1 class=\"cover-title\">OG-25 Project Support Brief Template</h1>",
+        "to": "<h1 class=\"cover-title\">Project Support Brief Template</h1>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal legacy code in member copy (owner ruling 7)."
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "<p class=\"cover-subtitle\">Day 25 — A professional brief anyone can understand</p>",
+        "to": "<p class=\"cover-subtitle\">A professional brief anyone can understand</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day label (owner ruling 7)."
+      },
+      {
+        "where": "Header line",
+        "from": "<div class=\"meta\">Day 25 — Week 4: Action Plan &amp; Pathway | OffGrid056 30-Day Programme</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day, week and name (owner ruling 7)."
+      },
+      {
+        "where": "Field 7",
+        "from": "(from OG-01 Audit)",
+        "to": "(from your household assessment)",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Owner's preferred standalone wording; the internal code OG-01 is not exposed (owner ruling 7)."
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 25 Complete</h3>",
+        "to": "<h3>Brief Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day 25 Complete' (owner ruling 7)."
+      },
+      {
+        "where": "Closing — tomorrow teaser",
+        "from": "<p><strong>Next:</strong> Tomorrow you will build a 3-Tier Budget Planner that aligns spend with your actual financial capacity.</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-day navigation (owner ruling 7)."
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<span class=\"next-link\">Next: OG-26 3-Tier Budget Planner &rarr;</span>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-…' navigation to OG-26, not in the library (owner ruling 7)."
+      }
+    ],
+    "OG-B10": [
+      {
+        "where": "Header line",
+        "from": "<p>OffGrid056 Action Plan Plus | Automated milestone tracking",
+        "to": "<p>OffGrid056 Member Library | Automated milestone tracking",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-product-context",
+        "reason": "Owner ruling 6: 'OffGrid056 Action Plan Plus' is legacy product context in the Member Library; here it is header branding only."
+      }
+    ],
+    "OG-B07": [
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 Action Plan Plus</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-product-context",
+        "reason": "Owner ruling 6: header branding only. The cover subtitle sentence ('…for Action Plan Plus members') is flagged separately, not rewritten."
+      }
     ]
   }
 }

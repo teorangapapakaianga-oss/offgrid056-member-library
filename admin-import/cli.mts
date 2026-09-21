@@ -521,6 +521,7 @@ async function commandPrep() {
       requiredSafety: exposure.get(item.legacyCode) ?? [],
       proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
       legacyTerms,
+      description: metadata[item.legacyCode]?.description ?? null,
     });
     results.push(result);
 

@@ -104,7 +104,9 @@ const CONTENT_FLAG_PATTERNS: { code: ContentFlag["code"]; kind: ContentFlagKind;
   // The programme's week headings use a dash ("Week 4 — Action Plan & Pathway"). A colon is a resource's own
   // teaching structure ("Week 1: Learn" in a monthly template) and is not flagged.
   { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bWeek \d\s*[—–]\s*[A-Z][^|\n]*/g },
-  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bDay \d{1,2}\s*[—–]\s*[^\n|]*/g },
+  // The programme ran Day 1 to Day 30. A 90-day roadmap's own "Day 90 — retrospective" is the member's plan, not
+  // programme sequencing, so higher day numbers are not flagged.
+  { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bDay (?:[1-9]|[12]\d|30)\s*[—–]\s*[^\n|]*/g },
   { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bAsset OG-B?\d{2}[^\n]*/g },
   { code: "LEGACY_PROGRAMME_CONTEXT", kind: "programme-sequencing", pattern: /\bTier \d\b(?=[^\n]*(?:Bonus|Asset|member))|(?:Bonus Asset|Asset)\s*\|\s*Tier \d/g },
   { code: "NEEDS_SOURCE", kind: "figure-needs-source", pattern: /[^\n.]*\b\d+(?:[–-]\d+)?\s?(?:%|°C)[^\n.]*/g },
@@ -253,6 +255,8 @@ export interface PrepInputs {
   proposedBlockIds?: string[];
   /** old product and platform names to flag (config/legacy-terms.json) */
   legacyTerms?: LegacyTerms;
+  /** an owner-approved library description, replacing the one read from the document */
+  description?: string | null;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -266,6 +270,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
 
   // 2. what the document says about itself
   const described = describeFromHtml(sourceHtml);
+  // An owner-approved description replaces the document's own, which may carry legacy text ("Day 25 — …").
+  const description = inputs.description ?? described.description;
   const title = described.title ?? item.title;
   const slug = slugify(title);
 
@@ -290,7 +296,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     legacyCode: item.legacyCode,
     slug,
     title,
-    description: described.description ?? "",
+    description: description ?? "",
     body: "",
     safetyBlocks,
   };
@@ -338,7 +344,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     slug,
     legacyCode: item.legacyCode,
     title,
-    description: described.description ?? "",
+    description: description ?? "",
     learningObjectives: [],
     ...(foundation ? { foundation } : {}),
     ...(category ? { category } : {}),
@@ -370,7 +376,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   // 6. readiness
   const legacyIssues = item.legacyIssues.map((i) => i.issue);
   const copyApplied = copy.results.length > 0 && copy.results.every((r) => r.applied);
-  const importReadiness: PrepResult["importReadiness"] = !described.description
+  const importReadiness: PrepResult["importReadiness"] = !description
     ? "NEEDS_OWNER_COPY"
     : otherFindings.length || item.safetyNotes.length || contentFlags.length || missingRequired.length
       ? "NEEDS_CONTENT_REVIEW"
@@ -387,7 +393,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     proposedResourceId: item.proposedResourceId,
     slug,
     title,
-    description: described.description,
+    description,
     descriptionSource: described.source,
     foundation,
     resourceType,
