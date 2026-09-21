@@ -39,6 +39,24 @@ Then open **http://localhost:3800**. Pages reload as you edit. Content files rel
 | `npm run lint` | Code style |
 | `npm run typecheck` | Types |
 
+### Do not run the tests and a build at the same time
+
+A build rewrites `out/` while it works. Running the tests against a half-written `out/` can fail in ways that
+have nothing to do with your change.
+
+This is not theoretical: during Stage 9.7 two tests failed once while a build was writing to `out/`
+concurrently, and did not reproduce in four later runs under the same conditions. Nothing was ever found wrong
+with the code, and no cause was identified beyond the overlap.
+
+Run them one after the other, and stop any watcher before building:
+
+```
+npm run test
+npm run build
+```
+
+The same applies to `npm run serve`, which serves `out/` while a build is replacing it.
+
 ## Building for release
 
 ```
