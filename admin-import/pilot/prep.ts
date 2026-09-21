@@ -48,6 +48,8 @@ export interface PrepResult {
   importReadiness:
     /** everything approved and applied: only the final validation (verify-prep, build) stands before deployment */
     | "READY_AFTER_FINAL_VALIDATION"
+    /** held until another resource it depends on is in the library */
+    | "BLOCKED_BY_RESOURCE_DEPENDENCY"
     | "NEEDS_OWNER_METADATA"
     | "NEEDS_OWNER_COPY"
     | "NEEDS_SAFETY_APPROVAL"
@@ -57,6 +59,8 @@ export interface PrepResult {
   estimatedTime: number | null;
   /** the library record's publication state — always "draft" out of prep */
   recordStatus: string;
+  pdfTitle: string;
+  blockedBy: { dependency: string; reason?: string } | null;
   files: string[];
 }
 
@@ -261,6 +265,10 @@ export interface PrepInputs {
   legacyTerms?: LegacyTerms;
   /** an owner-approved library description, replacing the one read from the document */
   description?: string | null;
+  /** an owner-specified PDF title (the title bar); defaults to the resource title. Never carries a legacy code. */
+  pdfTitle?: string | null;
+  /** another resource this one cannot be published without */
+  blockedBy?: { dependency: string; reason?: string } | null;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -280,7 +288,12 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
 
   // The <title> becomes the PDF's title bar. Owner rule (2026-09-22): the member sees the current resource title
   // only — never the legacy code ("OG-15 Warm Home Scorecard — OffGrid056"), which stays in `legacyCode`.
-  const reskinned = copy.html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(title)}</title>`);
+  const pdfTitle = inputs.pdfTitle ?? title;
+  const titleTag = `<title>${escapeHtml(pdfTitle)}</title>`;
+  // Replace the source's title, or add one: a document without <title> prints with no title at all.
+  const reskinned = /<title>[\s\S]*?<\/title>/i.test(copy.html)
+    ? copy.html.replace(/<title>[\s\S]*?<\/title>/i, titleTag)
+    : copy.html.replace(/<head>/i, `<head>${titleTag}`);
 
   // 3. terminology beyond the framework phrase — checked on the MIGRATED html, so an approved copy change that
   //    removed a reference clears it, while anything still left in the member-facing document is still caught.
@@ -383,7 +396,10 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   // 6. readiness
   const legacyIssues = item.legacyIssues.map((i) => i.issue);
   // Every approved copy change must have applied; one that did not is already an `otherFindings` blocker.
-  const importReadiness: PrepResult["importReadiness"] = !description
+  // A resource that depends on another, not-yet-published resource is held whatever else is true of it.
+  const importReadiness: PrepResult["importReadiness"] = inputs.blockedBy
+    ? "BLOCKED_BY_RESOURCE_DEPENDENCY"
+    : !description
     ? "NEEDS_OWNER_COPY"
     : otherFindings.length || item.safetyNotes.length || contentFlags.length || missingRequired.length
       ? "NEEDS_CONTENT_REVIEW"
@@ -419,6 +435,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     copyChanges: copy.results,
     estimatedTime: typeof inputs.estimatedTime === "number" ? inputs.estimatedTime : null,
     recordStatus: String(record.status),
+    pdfTitle,
+    blockedBy: inputs.blockedBy ?? null,
     files,
   };
 }

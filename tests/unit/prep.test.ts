@@ -209,6 +209,30 @@ describe("prepareResource: safety", () => {
     expect(r.recordStatus).toBe("draft");
   });
 
+  it("holds a resource that depends on one not yet in the library, whatever else is approved", () => {
+    const clean = DOC.replace(/<p>Next:[^<]*<\/p>/, "").replace("OffGrid056 30-Day Programme", "OffGrid056").replace("OG-27 ", "");
+    const r = prep({
+      sourceHtml: clean,
+      foundation: "general",
+      resourceType: "planner",
+      category: "planning",
+      estimatedTime: 30,
+      difficulty: "intermediate",
+      extraSafetyBlocks: ["batteries-and-electrical"],
+      requiredSafety: ["batteries-and-electrical"],
+      proposedBlockIds: [],
+      blockedBy: { dependency: "OG-26 / 3-Tier Budget Planner" },
+    });
+    expect(r.validation.ok).toBe(true);
+    expect(r.importReadiness).toBe("BLOCKED_BY_RESOURCE_DEPENDENCY");
+    expect(r.blockedBy?.dependency).toBe("OG-26 / 3-Tier Budget Planner");
+  });
+
+  it("uses an owner-specified PDF title when one is given", () => {
+    const r = prep({ pdfTitle: "90-Day Implementation Roadmap — OffGrid056" });
+    expect(fs.readFileSync(r.files[0], "utf8")).toContain("<title>90-Day Implementation Roadmap — OffGrid056</title>");
+  });
+
   it("holds a resource whose topic blocks are still proposals", () => {
     const clean = DOC.replace(/<p>Next:[^<]*<\/p>/, "").replace("OffGrid056 30-Day Programme", "OffGrid056").replace("OG-27 ", "");
     const r = prep({

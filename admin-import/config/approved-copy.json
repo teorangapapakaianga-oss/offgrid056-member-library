@@ -302,6 +302,16 @@
         "approvedOn": "2026-09-22",
         "kind": "legacy-product-context",
         "reason": "Old Tier 3 offer hierarchy removed — owner ruling 6, exact wording."
+      },
+      {
+        "where": "Roof specifications note",
+        "from": "<div class=\"worksheet-subtitle\">Measure carefully or provide to installer</div>",
+        "to": "<div class=\"worksheet-subtitle\">Use existing plans, ground-based estimates, or measurements provided by your installer.</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "safety/content correction",
+        "reason": "Owner ruling 2 (Stage 9.19), preferred wording: members must not be encouraged onto the roof."
       }
     ],
     "OG-27": [
@@ -384,6 +394,58 @@
         "approvedOn": "2026-09-22",
         "kind": "legacy-programme-context",
         "reason": "'Next: OG-xx' navigation to OG-28, not in the library (owner ruling 3)."
+      }
+    ],
+    "OG-02": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 1 — Foundation</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Standing owner rule for obsolete programme navigation (Stage 9.18 rulings 3 and 7), required by the Stage 9.19 deployment validation 'no obsolete programme navigation'. Navigation only; no teaching content."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Standing owner rule for obsolete programme navigation (Stage 9.18 rulings 3 and 7), required by the Stage 9.19 deployment validation 'no obsolete programme navigation'. Navigation only; no teaching content."
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-02 | Day 2</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Standing owner rule for obsolete programme navigation (Stage 9.18 rulings 3 and 7), required by the Stage 9.19 deployment validation 'no obsolete programme navigation'. Navigation only; no teaching content."
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 2 Complete</h3>",
+        "to": "<h3>Assessment Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Standing owner rule for obsolete programme navigation (Stage 9.18 rulings 3 and 7), required by the Stage 9.19 deployment validation 'no obsolete programme navigation'. Navigation only; no teaching content."
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: OG-03 Budget Pathway Selector →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Standing owner rule for obsolete programme navigation (Stage 9.18 rulings 3 and 7), required by the Stage 9.19 deployment validation 'no obsolete programme navigation'. Navigation only; no teaching content. OG-03 is not in the library."
       }
     ]
   }

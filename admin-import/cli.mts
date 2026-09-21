@@ -522,6 +522,8 @@ async function commandPrep() {
       proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
       legacyTerms,
       description: metadata[item.legacyCode]?.description ?? null,
+      pdfTitle: metadata[item.legacyCode]?.pdfTitle ?? null,
+      blockedBy: metadata[item.legacyCode]?.blockedBy ?? null,
     });
     results.push(result);
 
@@ -537,6 +539,8 @@ async function commandPrep() {
     for (const c of result.copyChanges) console.log(`    copy (${c.where}): ${c.applied ? "APPLIED" : `NOT applied — matched ${c.matched}×`}`);
     console.log(`    estimated time: ${result.estimatedTime ?? "unset"} min`);
     console.log(`    validation: ${result.validation.ok ? "passes" : "FAILS"}${result.validation.issues.length ? " — " + result.validation.issues[0] : ""}`);
+    console.log(`    pdf title: ${result.pdfTitle}`);
+    if (result.blockedBy) console.log(`    blocked by: ${result.blockedBy.dependency}`);
     console.log(`    readiness: ${result.importReadiness}`);
   }
 

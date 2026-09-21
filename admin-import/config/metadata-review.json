@@ -93,7 +93,13 @@
       ],
       "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)",
       "description": "Turn your plan into phased action with deadlines",
-      "descriptionStatus": "owner-approved 2026-09-22 (ruling 3: 'Day 27 —' removed)"
+      "descriptionStatus": "owner-approved 2026-09-22 (ruling 3: 'Day 27 —' removed)",
+      "blockedBy": {
+        "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
+        "dependency": "OG-26 / 3-Tier Budget Planner",
+        "reason": "OG-27 is built on the Essential / Balanced / Complete budget tiers defined in OG-26. Owner decision (Stage 9.19, option B): migrate OG-26 first; do not weaken the reference to 'your budget tier'.",
+        "decidedOn": "2026-09-22"
+      }
     },
     "OG-B07": {
       "foundation": "energy",
@@ -146,6 +152,19 @@
         "solid-fuel-heating"
       ],
       "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)"
+    },
+    "OG-02": {
+      "foundation": "general",
+      "resourceType": "worksheet",
+      "category": "planning",
+      "difficulty": "beginner",
+      "estimatedTime": 20,
+      "description": "Identify the top risks your household faces, then rank them by probability and impact so you know what to tackle first.",
+      "status": "as deployed — values copied from the pilot record (admin-import/pilot/og-02.json) so prep reproduces the live resource exactly; the deployed private record is not changed",
+      "pdfTitle": "Household Risk Identifier — OffGrid056",
+      "pdfTitleStatus": "owner-specified 2026-09-22 (Stage 9.19 decision 3)",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": []
     }
   }
 }
