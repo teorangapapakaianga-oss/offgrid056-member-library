@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { CompletionButton, RecordView, SaveButton, StorageNotice } from "@/components/member/member-actions";
 import { DemoBadge, DifficultyBadge, DraftBadge, FeaturedBadge, FoundationBadge, ResourceTypeBadge } from "@/components/resources/badges";
 import { DownloadActions } from "@/components/resources/download-actions";
+import { MarketDownload } from "@/components/resources/market-download";
 import { LearningPathStrip } from "@/components/resources/learning-path-views";
 import { PlaceholderThumbnail } from "@/components/resources/placeholder-thumbnail";
 import { RecommendedNext } from "@/components/resources/recommended-next";
@@ -143,21 +144,36 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
         </div>
 
         <aside className="flex flex-col gap-4">
-          {r.fileUrl && (
+          {(r.fileUrl || r.marketFiles) && (
             <section aria-labelledby="get-this" className="rounded-xl bg-white p-5 ring-1 ring-og-line">
               <h2 id="get-this" className="font-display mb-3 text-2xl leading-none text-og-charcoal">
                 Get this {type.label.toLowerCase()}
               </h2>
-              <DownloadActions
-                file={{
-                  fileUrl: r.fileUrl,
-                  format: r.fileFormat ?? "FILE",
-                  sizeBytes: fileSizeBytes(r.fileUrl, r.fileSizeBytes),
-                  updatedDate: r.updatedDate ?? r.publishedDate,
-                  title: r.title,
-                  openable: r.fileFormat === "PDF" || r.fileFormat === "PNG",
-                }}
-              />
+              {r.marketFiles ? (
+                // The guidance differs by country, so the member is shown their market's file and no other.
+                <MarketDownload
+                  title={r.title}
+                  updatedDate={r.updatedDate ?? r.publishedDate}
+                  openable={true}
+                  files={Object.fromEntries(
+                    Object.entries(r.marketFiles).map(([code, f]) => [
+                      code,
+                      { fileUrl: f.fileUrl, format: f.fileFormat, sizeBytes: fileSizeBytes(f.fileUrl, f.fileSizeBytes) },
+                    ]),
+                  )}
+                />
+              ) : (
+                <DownloadActions
+                  file={{
+                    fileUrl: r.fileUrl!,
+                    format: r.fileFormat ?? "FILE",
+                    sizeBytes: fileSizeBytes(r.fileUrl!, r.fileSizeBytes),
+                    updatedDate: r.updatedDate ?? r.publishedDate,
+                    title: r.title,
+                    openable: r.fileFormat === "PDF" || r.fileFormat === "PNG",
+                  }}
+                />
+              )}
             </section>
           )}
 

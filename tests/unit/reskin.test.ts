@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { BRAND, COLOUR_MAP, HEADING_SCALE, reskinHtml, scaleHeadings, summariseChanges } from "@/admin-import/reskin/reskin";
-import { injectSafety } from "@/admin-import/pilot/run";
+import { injectSafety, injectSafetyChecked } from "@/admin-import/pilot/run";
 import profilesFile from "@/admin-import/markets/profiles.json";
 import { resolveTokens, publishable, resolveForMarket, UNVERIFIED, type CoreResource, type MarketProfile, type SafetyBlock } from "@/admin-import/markets/resolve";
 
@@ -168,6 +168,26 @@ describe("safety injection", () => {
     const html = injectSafety(reskinHtml(LEGACY).html, blocks);
     expect(html).toContain("<strong>Call 111 now.</strong>");
     expect(html).not.toContain("**Call 111 now.**");
+  });
+
+  it("places the critical block in a document with no .content wrapper", () => {
+    // The bonus templates use a plain header and sections. Matching only `.content` silently dropped the
+    // emergency block from every one of them — a safety block that is not there is the worst possible bug.
+    const bonus = `<!DOCTYPE html><html><head><style>body{}</style></head><body>
+<div class="header"><h1>Monthly Planning Challenge</h1><p>Reusable framework</p></div>
+<div class="section">Fill this in.</div></body></html>`;
+    const result = injectSafetyChecked(bonus, blocks);
+    expect(result.unplaced).toEqual([]);
+    expect(result.placed).toContain("emergency-contact");
+    expect(result.html).toContain("Call 111 now.");
+    // …and it must land before the teaching content, not after it.
+    expect(result.html.indexOf('data-block="emergency-contact"')).toBeLessThan(result.html.indexOf("Fill this in."));
+  });
+
+  it("reports a block it could not place instead of dropping it quietly", () => {
+    const notADocument = "<p>no body element at all</p>";
+    const result = injectSafetyChecked(notADocument, blocks);
+    expect(result.unplaced).toContain("emergency-contact");
   });
 });
 

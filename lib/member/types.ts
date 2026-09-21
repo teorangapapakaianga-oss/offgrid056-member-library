@@ -9,6 +9,7 @@
  * These are plain types and constants on purpose: this module is loaded by the browser, so it must not pull in a
  * validation library. The runtime checks live in `validate.ts` (see the note there).
  */
+import type { MarketChoice } from "./market";
 
 export const MEMBER_STORAGE_KEY = "og056.member.v1";
 export const MEMBER_CORRUPT_KEY = "og056.member.v1.corrupt";
@@ -32,6 +33,15 @@ export interface LastLocationValue {
 
 export interface MemberState {
   schemaVersion: typeof MEMBER_SCHEMA_VERSION;
+  /**
+   * The market the member chose, or null if they have not chosen yet.
+   *
+   * Optional on purpose: a V1 state saved before markets existed has no such key, and must keep working
+   * untouched. It is read as "not chosen yet", which is exactly what it means. The schema version therefore
+   * does **not** change — bumping it would make every existing member's state "unknown version" and reset
+   * their progress, which is a far worse outcome than one absent field.
+   */
+  market?: MarketChoice | null;
   /** resource id → when it was saved */
   saved: Record<string, string>;
   /** resource id → when it was completed */
@@ -60,6 +70,7 @@ export interface BackupFile {
 export function emptyState(now = new Date()): MemberState {
   return {
     schemaVersion: MEMBER_SCHEMA_VERSION,
+    market: null,
     saved: {},
     completed: {},
     recent: [],

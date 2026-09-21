@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MarketIndicator } from "@/components/member/market-controls";
 import { NavLinks } from "./nav-links";
 
 /** Desktop (≥ 1024 px) persistent sidebar. Tablet and mobile use the drawer instead. */
@@ -18,6 +19,8 @@ export function MemberSidebar() {
       <nav aria-label="Main">
         <NavLinks />
       </nav>
+      {/* Quiet, always reachable, and deliberately not styled like an account or a sign-in. */}
+      <MarketIndicator className="mt-auto px-3 pt-6" />
     </aside>
   );
 }

@@ -44,7 +44,9 @@ try {
     }
     if (r.relatedResources.includes(r.id)) errors.push(`${at}: lists itself as related`);
     if (r.learningPath && !pathIds.has(r.learningPath)) errors.push(`${at}: unknown learningPath "${r.learningPath}"`);
-    for (const url of [r.fileUrl, r.thumbnail?.src]) {
+    // Market-specific downloads are checked like any other file. A resource that promises an Australian
+    // version without shipping one would fail closed at runtime, but it should never get that far.
+    for (const url of [r.fileUrl, r.thumbnail?.src, ...Object.values(r.marketFiles ?? {}).map((f) => f.fileUrl)]) {
       if (url?.startsWith("/") && !fs.existsSync(path.join(process.cwd(), "public", url))) errors.push(`${at}: file not found: public${url}`);
     }
     if (r.fileUrl?.startsWith("https://") && !r.fileSizeBytes) warnings.push(`${at}: remote file has no fileSizeBytes`);

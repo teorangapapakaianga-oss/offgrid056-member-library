@@ -22,6 +22,7 @@ import { auditProgramme } from "./audit/programme";
 import { renderAuditReport, renderStructure } from "./audit/report";
 import { reskinHtml } from "./reskin/reskin";
 import { runPilot, writePilot } from "./pilot/run";
+import { prepareResource } from "./pilot/prep";
 import { analyseGroupA } from "./audit/group-a";
 import { assessMarket } from "./markets/readiness";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
@@ -469,8 +470,61 @@ async function commandReadiness() {
   console.log(`\n  report: ${path.relative(ROOT, file)}\n`);
 }
 
+/**
+ * Stage 9.10B — prepare Group-A resources for review. Writes to `workspace/prep/`. Deploys nothing.
+ *
+ *   npm run import:prep -- --codes OG-B04,OG-B10,OG-25
+ */
+async function commandPrep() {
+  ensureWorkspace();
+  const ws = loadWorkspace(WORKSPACE);
+  const auditResult = auditProgramme(ws.candidates, ws.texts, ws.groups);
+  const codes = (valueOf("--codes") ?? "").split(",").map((c) => c.trim()).filter(Boolean);
+  if (!codes.length) {
+    console.error("Give the resources to prepare, e.g. --codes OG-B04,OG-B10,OG-25");
+    process.exit(1);
+  }
+
+  const spec = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "pilot", "og-02.json"), "utf8"));
+  const profiles = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "markets", "profiles.json"), "utf8"));
+  const results = [];
+
+  for (const code of codes) {
+    const item = auditResult.items.find((i) => i.legacyCode === code);
+    if (!item?.html) {
+      console.log(`  ✗ ${code}: not in the audit, or has no HTML source`);
+      continue;
+    }
+    const result = prepareResource({
+      item,
+      sourceHtml: fs.readFileSync(path.join(item.html.folder, item.html.filename), "utf8"),
+      blocks: spec.safetyBlocks,
+      markets: profiles.markets,
+      launchMarkets: profiles.launchMarkets,
+      outDir: path.join(WORKSPACE, "prep", item.legacyCode),
+    });
+    results.push(result);
+
+    console.log(`\n  ${result.legacyCode} → ${result.proposedResourceId}  ${result.title}`);
+    console.log(`    description: ${result.description ?? "—"}  (${result.descriptionSource})`);
+    console.log(`    foundation ${result.foundation ?? "—"} · type ${result.resourceType ?? "—"}`);
+    console.log(`    re-skin: ${result.reskin.changes.length} kinds of change · legacy brand issues ${result.branding.legacyIssues}`);
+    for (const f of result.terminology.otherFindings) console.log(`    ⚠ ${f}`);
+    for (const m of result.markets) console.log(`    ${m.code}: ${m.publishable ? "publishable" : "blocked"} · emergency ${m.emergencyNumber}`);
+    console.log(`    validation: ${result.validation.ok ? "passes" : "FAILS"}${result.validation.issues.length ? " — " + result.validation.issues[0] : ""}`);
+    console.log(`    readiness: ${result.importReadiness}`);
+  }
+
+  fs.writeFileSync(path.join(WORKSPACE, "prep", "prep-report.json"), JSON.stringify(results, null, 1), "utf8");
+  audit("prep", { codes, prepared: results.length });
+  console.log(`\n  prepared ${results.length} resource(s) → ${path.relative(ROOT, path.join(WORKSPACE, "prep"))}`);
+  console.log("  nothing deployed, nothing imported.\n");
+}
+
 const command = args[0] ?? "scan";
-if (command === "readiness") {
+if (command === "prep") {
+  await commandPrep();
+} else if (command === "readiness") {
   await commandReadiness();
 } else if (command === "pilot") {
   await commandPilot();

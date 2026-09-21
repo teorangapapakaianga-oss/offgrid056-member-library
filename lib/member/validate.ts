@@ -7,6 +7,7 @@
  *
  * Content validation still uses the schema library, because that runs only at build time.
  */
+import { isMarketCode } from "./market";
 import { MEMBER_SCHEMA_VERSION, NOTES_MAX, PROGRAMME_DAYS, type MemberState, type ProgrammeDayState } from "./types";
 
 export type Check<T> = { ok: true; value: T } | { ok: false; path: string };
@@ -48,10 +49,21 @@ function checkDay(v: unknown, path: string): Check<ProgrammeDayState> {
 /** Full check of a stored or imported member-state document. */
 export function checkMemberState(v: unknown, path = "state"): Check<MemberState> {
   if (!isObject(v)) return fail(path);
-  const extra = onlyKeys(v, ["schemaVersion", "saved", "completed", "recent", "lastLocation", "programme", "assessments", "updatedAt"], path);
+  const extra = onlyKeys(v, ["schemaVersion", "market", "saved", "completed", "recent", "lastLocation", "programme", "assessments", "updatedAt"], path);
   if (extra) return fail(extra);
 
   if (v.schemaVersion !== MEMBER_SCHEMA_VERSION) return fail(`${path}.schemaVersion`);
+
+  // `market` is optional: state written before markets existed simply has no such key, and that is read as
+  // "not chosen yet" rather than as damage. Present but wrong is a different matter and is rejected — a
+  // nonsense market code must never reach the code that decides which emergency number to show.
+  if (v.market !== undefined && v.market !== null) {
+    if (!isObject(v.market)) return fail(`${path}.market`);
+    const badMarket = onlyKeys(v.market, ["code", "at"], `${path}.market`);
+    if (badMarket) return fail(badMarket);
+    if (!isMarketCode(v.market.code)) return fail(`${path}.market.code`);
+    if (!isIsoDate(v.market.at)) return fail(`${path}.market.at`);
+  }
 
   const saved = checkDateMap(v.saved, `${path}.saved`);
   if (!saved.ok) return saved;

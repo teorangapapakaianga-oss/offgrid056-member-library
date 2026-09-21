@@ -17,6 +17,7 @@ import {
   type MemberView,
   type StorageMode,
 } from "./types";
+import type { MarketCode } from "./market";
 import { checkMemberState } from "./validate";
 
 export interface MemberStore {
@@ -25,6 +26,8 @@ export interface MemberStore {
   setCompleted(resourceId: string, completed: boolean): Promise<void>;
   recordView(resourceId: string): Promise<void>;
   setLastLocation(loc: NonNullable<LastLocation>): Promise<void>;
+  /** The member's own choice of market. Never called by anything that guesses. */
+  setMarket(code: MarketCode): Promise<void>;
   setDayCompleted(day: number, completed: boolean): Promise<void>;
   setDayNotes(day: number, notes: string): Promise<void>;
   subscribe(listener: () => void): () => void;
@@ -102,10 +105,14 @@ function migrate(doc: unknown): unknown {
   if (!doc || typeof doc !== "object") return doc;
   const v = (doc as { schemaVersion?: unknown }).schemaVersion;
   if (v !== MEMBER_SCHEMA_VERSION) return null; // unknown version: recovered rather than guessed at
-  const d = doc as { lastLocation?: unknown };
+  const d = doc as { lastLocation?: unknown; market?: unknown };
   const loc = d.lastLocation as { at?: unknown } | null | undefined;
-  if (loc && typeof loc === "object" && typeof loc.at !== "string") return { ...d, lastLocation: null };
-  return doc;
+  const repaired = loc && typeof loc === "object" && typeof loc.at !== "string" ? { ...d, lastLocation: null } : d;
+
+  // A state written before markets existed has no `market` key. Filling it in as null here means every later
+  // read can treat it as a normal field, and the member keeps everything else they had.
+  if (!("market" in repaired)) return { ...repaired, market: null };
+  return repaired;
 }
 
 function view(state: MemberState, storage: StorageMode, recovered: boolean): MemberView {
@@ -214,6 +221,10 @@ export class LocalMemberStore implements MemberStore {
     });
   }
 
+  async setMarket(code: MarketCode): Promise<void> {
+    await this.update((s) => ({ ...s, market: { code, at: new Date().toISOString() } }));
+  }
+
   async setLastLocation(loc: NonNullable<LastLocation>): Promise<void> {
     await this.update((s) => ({ ...s, lastLocation: loc }));
   }
@@ -260,6 +271,11 @@ export class LocalMemberStore implements MemberStore {
  *                            resource for, so a retired or not-yet-imported id can never break navigation or
  *                            inflate a percentage
  *  6. lastLocation ......... the entry with the newest timestamp wins
+ *  7. market ............... the NEWEST choice wins, and a real choice always beats "not chosen yet"
+ *
+ *  Rule 7 is an addition, not a change: it follows rule 6's shape exactly, and touches no existing field. A
+ *  market is a deliberate choice, so the most recent deliberate choice is the one to keep; merging must never
+ *  quietly move a member to a different country's emergency number.
  *
  *  Nothing is ever deleted by a merge. Only "replace" discards, and only when the member chooses it.
  *
@@ -318,8 +334,13 @@ export function mergeStates(a: MemberState, b: MemberState): MemberState {
   // Rule 6: newest timestamp wins, whichever side it came from.
   const lastLocation = ms(b.lastLocation?.at, -Infinity) > ms(a.lastLocation?.at, -Infinity) ? b.lastLocation : a.lastLocation;
 
+  // Rule 7: the newest deliberate choice wins. A side that never chose has no timestamp and so always loses,
+  // which is what makes "merging an old backup" safe: it cannot unset a market the member has since chosen.
+  const market = ms(b.market?.at, -Infinity) > ms(a.market?.at, -Infinity) ? b.market : (a.market ?? b.market ?? null);
+
   return {
     schemaVersion: MEMBER_SCHEMA_VERSION,
+    market: market ?? null,
     saved: earliestDates(a.saved, b.saved),
     completed: earliestDates(a.completed, b.completed),
     recent,

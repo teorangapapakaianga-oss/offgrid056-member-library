@@ -6,6 +6,7 @@
  * same types the browser uses, so the two cannot drift apart.
  */
 import { z } from "zod";
+import { MARKET_CODES } from "@/lib/member/market";
 import {
   COLLECTION_IDS,
   COUNTRIES,
@@ -54,6 +55,23 @@ export const ResourceSchema = z
     fileUrl: localOrAbsoluteUrl.optional(),
     fileFormat: z.enum(FILE_FORMATS).optional(),
     fileSizeBytes: z.number().int().positive().optional(),
+    /**
+     * Market-specific downloads, where the guidance itself differs by country.
+     *
+     * `fileUrl` above stays the default for a resource that is the same everywhere. When `marketFiles` is
+     * present, the member is shown the file for THEIR market and no other — never a choice between two
+     * countries' emergency guidance, and never a fallback to the wrong one.
+     */
+    marketFiles: z
+      .record(
+        z.enum(MARKET_CODES),
+        z.object({
+          fileUrl: localOrAbsoluteUrl,
+          fileFormat: z.enum(FILE_FORMATS),
+          fileSizeBytes: z.number().int().positive().optional(),
+        }),
+      )
+      .optional(),
     externalUrl: z.url({ protocol: /^https$/ }).optional(),
     videoUrl: z.url({ protocol: /^https$/ }).optional(),
     downloadable: z.boolean(),

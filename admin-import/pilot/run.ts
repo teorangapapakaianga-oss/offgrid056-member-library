@@ -49,6 +49,25 @@ export interface PilotResult {
  * The emergency block goes at the top of the content, where someone skimming in a hurry will see it. The
  * disclaimer goes at the end, where it belongs. Neither is merged into the teaching copy.
  */
+export interface InjectResult {
+  html: string;
+  /** blocks that were actually placed in the document */
+  placed: string[];
+  /** blocks that could not be placed — a CRITICAL one here must stop the resource, not be shrugged off */
+  unplaced: string[];
+}
+
+export function injectSafetyChecked(
+  html: string,
+  blocks: { id: string; title: string; body: string; severity?: string }[],
+): InjectResult {
+  const out = injectSafety(html, blocks);
+  const placed: string[] = [];
+  const unplaced: string[] = [];
+  for (const b of blocks) (out.includes(`data-block="${b.id}"`) ? placed : unplaced).push(b.id);
+  return { html: out, placed, unplaced };
+}
+
 export function injectSafety(html: string, blocks: { id: string; title: string; body: string; severity?: string }[]): string {
   const style = `
 <style>
@@ -69,10 +88,25 @@ export function injectSafety(html: string, blocks: { id: string; title: string; 
   const standard = blocks.filter((b) => b.severity !== "CRITICAL").map(block).join("\n");
 
   let out = html.replace("</head>", `${style}\n</head>`);
+
   // Critical blocks go immediately inside the content, before the first teaching element.
-  out = out.replace(/(<div class="content">)/, `$1\n${critical}`);
+  //
+  // The programme has two layouts: day resources wrap everything in `<div class="content">`, and the bonus
+  // templates do not. Matching only the first silently dropped the emergency block from every bonus
+  // template — a safety block that is not there is far worse than one in a slightly odd place, so this falls
+  // back to the top of <body>, and `injectSafetyChecked` verifies the result either way.
+  if (critical) {
+    if (/<div class="content">/.test(out)) {
+      out = out.replace(/(<div class="content">)/, `$1\n${critical}`);
+    } else {
+      out = out.replace(/(<body[^>]*>)/, `$1\n${critical}`);
+    }
+  }
+
   // The disclaimer closes the document.
-  out = out.replace(/(<\/div>\s*<\/body>)/, `\n${standard}\n$1`);
+  if (standard) {
+    out = /<\/div>\s*<\/body>/.test(out) ? out.replace(/(<\/div>\s*<\/body>)/, `\n${standard}\n$1`) : out.replace(/(<\/body>)/, `\n${standard}\n$1`);
+  }
   return out;
 }
 

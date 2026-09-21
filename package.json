@@ -20,7 +20,8 @@
                     "import:reskin":  "tsx admin-import/cli.mts reskin",
                     "import:pilot":  "tsx admin-import/cli.mts pilot",
                     "import:readiness":  "tsx admin-import/cli.mts readiness",
-                    "build:preview":  "node tools/build-preview.mjs"
+                    "build:preview":  "node tools/build-preview.mjs",
+                    "import:prep":  "tsx admin-import/cli.mts prep"
                 },
     "dependencies":  {
                          "minisearch":  "7.2.0",
