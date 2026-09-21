@@ -15,7 +15,8 @@
                     "test:e2e":  "playwright test",
                     "import:scan":  "tsx admin-import/cli.mts scan",
                     "import:admin":  "tsx admin-import/ui/server.mts",
-                    "import:apply":  "tsx admin-import/cli.mts apply"
+                    "import:apply":  "tsx admin-import/cli.mts apply",
+                    "import:audit":  "tsx admin-import/cli.mts audit"
                 },
     "dependencies":  {
                          "minisearch":  "7.2.0",
@@ -41,3 +42,4 @@
                             "vitest":  "5.0.1"
                         }
 }
+

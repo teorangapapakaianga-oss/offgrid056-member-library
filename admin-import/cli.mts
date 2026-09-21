@@ -18,6 +18,8 @@ import { linkAssets } from "./assets/link";
 import { loadWorkspace } from "./review/store";
 import { planImport, runImport, updateLedger } from "./import/engine";
 import { buildDemo } from "./import/demo";
+import { auditProgramme } from "./audit/programme";
+import { renderAuditReport, renderStructure } from "./audit/report";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -224,12 +226,46 @@ async function commandApply() {
   console.log("");
 }
 
+/**
+ * Stage 9.5 — programme audit. Reads the workspace, writes a report. Imports nothing, changes nothing.
+ *
+ *   npm run import:audit
+ */
+async function commandAudit() {
+  ensureWorkspace();
+  const ws = loadWorkspace(WORKSPACE);
+  if (!ws.candidates.length) {
+    console.error("No candidates in the workspace. Run `npm run import:scan` first.");
+    process.exit(1);
+  }
+
+  const auditResult = auditProgramme(ws.candidates, ws.texts, ws.groups);
+  const markdown = renderAuditReport(auditResult) + "\n" + renderStructure(auditResult);
+
+  const reportFile = path.join(WORKSPACE, "reports", "STAGE_9.5_PROGRAMME_AUDIT.md");
+  fs.writeFileSync(reportFile, markdown, "utf8");
+  fs.writeFileSync(path.join(WORKSPACE, "reports", "programme-audit.json"), JSON.stringify(auditResult, null, 1), "utf8");
+  audit("audit.programme", { items: auditResult.items.length, core: auditResult.totals.core, bonus: auditResult.totals.bonus });
+
+  const t = auditResult.totals;
+  console.log(`\n  programme files ${t.programmeFiles} · core ${t.core} · bonus ${t.bonus}`);
+  console.log(`  pairs ${t.pairs} · pdf only ${t.pdfOnly} · html only ${t.htmlOnly} · content mismatches ${t.contentMismatches}`);
+  console.log(`  re-skin  A ${auditResult.reskin.A.length} · B ${auditResult.reskin.B.length} · C ${auditResult.reskin.C.length} · none ${auditResult.reskin.none.length}`);
+  console.log(
+    `  readiness  ${Object.entries(auditResult.readiness).filter(([, v]) => v.length).map(([k, v]) => `${k} ${v.length}`).join(" · ")}`,
+  );
+  console.log(`  days missing: ${auditResult.dayGaps.length ? auditResult.dayGaps.join(", ") : "none"}`);
+  console.log(`\n  report: ${path.relative(ROOT, reportFile)}\n`);
+}
+
 const command = args[0] ?? "scan";
 if (command === "scan") {
   await commandScan();
 } else if (command === "apply") {
   await commandApply();
+} else if (command === "audit") {
+  await commandAudit();
 } else {
-  console.error(`Unknown command "${command}". Try: scan, apply`);
+  console.error(`Unknown command "${command}". Try: scan, apply, audit`);
   process.exit(1);
 }

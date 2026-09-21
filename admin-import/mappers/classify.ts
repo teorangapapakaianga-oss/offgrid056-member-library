@@ -103,7 +103,12 @@ interface Scored {
  * Words in `GENERIC` ("home", "house", "energy" in prose) appear everywhere in this material, so they only ever
  * count as weak evidence and never make a foundation HIGH on their own.
  */
-const GENERIC = new Set(["home", "house", "household", "property", "power", "energy", "water", "food", "plan", "guide", "resilience"]);
+const GENERIC = new Set([
+  "home", "house", "household", "property", "power", "energy", "water", "food", "plan", "guide", "resilience",
+  // Naming the framework says the document belongs to the programme, not that it is a whole-household
+  // resource: almost every page mentions it once. Weak evidence only, never enough to be sure on its own.
+  "five foundations", "5 pillars", "programme", "overview", "review", "priority",
+]);
 
 /**
  * Words that describe the *whole household* rather than one foundation (owner decision 1, Stage 9.3).
