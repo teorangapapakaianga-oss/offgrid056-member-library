@@ -15,10 +15,10 @@
         "nature": "short reflective planning answers: month, theme, why it matters, check-in day, what to share, partner, how to measure, baseline, target"
       },
       "reasoning": "About a minute to read, then nine short answers of a line or two and a checklist to skim. Reused monthly, so the estimate is per month.",
-      "difficulty": null,
-      "difficultyStatus": "NEEDS_OWNER_REVIEW",
-      "difficultySource": "none — the document states no level anywhere (searched for beginner, intermediate, advanced, difficulty, level, skill, experience: zero matches)",
-      "difficultyRecommendation": "beginner — two pages, fifteen minutes, short reflective answers, and a reusable monthly template with nothing technical in it. If approved this would be an OWNER-APPROVED CLASSIFICATION, not source-derived."
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived. The source document does not state a difficulty level (searched for beginner, intermediate, advanced, difficulty, level, skill, experience: zero matches).",
+      "difficultyReason": "2 pages; approximately 15 minutes; short-answer planning activity; no technical content; no specialist knowledge required."
     },
     "OG-B10": {
       "category": "planning",
