@@ -66,7 +66,7 @@ const FONT_FACES = `
 `.trim();
 
 export interface ReskinChange {
-  kind: "colour" | "font" | "token" | "terminology" | "asset" | "brand" | "note";
+  kind: "colour" | "font" | "token" | "terminology" | "asset" | "brand" | "layout" | "note";
   from: string;
   to: string;
   count: number;
@@ -149,6 +149,29 @@ export function reskinHtml(source: string, options: ReskinOptions = {}): ReskinR
   html = scaled.html;
   record("font", "heading sizes", `×${HEADING_SCALE} to match Bebas Neue's condensed proportions`, scaled.count);
   html = html.replace(/(\.cover-title\s*\{[^}]*)\}/, "$1 letter-spacing: 0.01em; }");
+
+  // The cover's label, title and subtitle were each pinned to the bottom of the page at fixed offsets. With the
+  // larger heading, a title that wraps to a third line grows upward over the label ("OffGrid056 30-Day
+  // Programme" disappeared behind "OG-27 90-Day Implementation Roadmap"). They are stacked in one
+  // bottom-anchored column instead, so a longer title pushes the label up rather than covering it.
+  // Only that layout: the centred cover design already stacks these in normal flow, and wrapping it would break
+  // its centring.
+  const coverText = /(<div class="cover-label">[\s\S]*?<\/div>\s*<h1 class="cover-title">[\s\S]*?<\/h1>\s*<p class="cover-subtitle">[\s\S]*?<\/p>)/;
+  const pinnedLabel = /\.cover-label\s*\{[^}]*position:\s*absolute/.test(html);
+  if (pinnedLabel && coverText.test(html)) {
+    html = html.replace(coverText, '<div class="cover-text">$1</div>');
+    html = html.replace(
+      "</head>",
+      `<style>
+  .cover-text { position: absolute; left: 55px; right: 55px; bottom: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+  .cover-text > .cover-label, .cover-text > .cover-title, .cover-text > .cover-subtitle { position: static; margin: 0; }
+  .cover-text > .cover-title { max-width: 361px; }
+  .cover-text > .cover-subtitle { max-width: 480px; }
+</style>
+</head>`,
+    );
+    record("layout", "cover label, title and subtitle at fixed offsets", "one bottom-anchored column (no overlap)", 1);
+  }
 
   // --- 2. colour -------------------------------------------------------------------------------------------
   for (const [legacy, brand] of Object.entries(COLOUR_MAP)) {

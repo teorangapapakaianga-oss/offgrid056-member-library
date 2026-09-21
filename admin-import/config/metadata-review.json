@@ -2,6 +2,9 @@
   "description": "Per-resource metadata for owner review. Estimates are rounded to the owner's scale (10 / 15 / 20 / 30 / 45 min) and assume a first pass with the needed information to hand. They exclude any time spent gathering information such as quotes or measurements. Estimates for OG-B04, OG-B10 and OG-25 approved by the owner on 2026-09-22.",
   "resources": {
     "OG-B04": {
+      "foundation": "general",
+      "resourceType": "planner",
+      "foundationTypeStatus": "as deployed and approved 2026-09-22 (recorded explicitly so prep no longer relies on a MEDIUM-confidence audit value)",
       "category": "planning",
       "categoryStatus": "approved 2026-09-22",
       "estimatedTime": 15,
@@ -21,6 +24,9 @@
       "difficultyReason": "2 pages; approximately 15 minutes; short-answer planning activity; no technical content; no specialist knowledge required."
     },
     "OG-B10": {
+      "foundation": "general",
+      "resourceType": "planner",
+      "foundationTypeStatus": "as deployed and approved 2026-09-22",
       "category": "planning",
       "categoryStatus": "approved 2026-09-22",
       "estimatedTime": 30,
@@ -39,6 +45,9 @@
       "difficultySource": "SOURCE-SUPPORTED — the document's own title reads '90-Day Implementation Roadmap (Advanced)'"
     },
     "OG-25": {
+      "foundation": "general",
+      "resourceType": "template",
+      "foundationTypeStatus": "as deployed and approved 2026-09-22",
       "category": "planning",
       "categoryStatus": "approved 2026-09-22",
       "estimatedTime": 45,
@@ -55,6 +64,63 @@
       "difficulty": "intermediate",
       "difficultyStatus": "owner-approved 2026-09-22",
       "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived. The document states no difficulty. Its only use of the word 'level' is a form field, 'Target Resilience Level (Days of autonomy desired)', which is about the household, not the document."
+    },
+    "OG-27": {
+      "foundation": "general",
+      "foundationStatus": "PROPOSED — owner to confirm. Inferred: the roadmap spans water, energy, heating and shelter across three sprints, so it belongs to no single foundation. The audit's 'shelter' was MEDIUM confidence and is rejected. Matches OG-B10, its advanced companion.",
+      "resourceType": "planner",
+      "resourceTypeStatus": "inferred, HIGH confidence — title 'Roadmap'; three phased sprint tables with owners and sign-offs",
+      "category": "planning",
+      "categoryStatus": "PROPOSED — owner to confirm; same as OG-B10",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
+      "estimatedTimeRecommendation": 30,
+      "estimatedTimeReasoning": "First pass only: read the principles, then fill owners and deliverables for twelve weekly rows and note three sign-off points. The roadmap itself runs for 90 days; that is not reading time.",
+      "difficulty": null,
+      "difficultyStatus": "NEEDS_OWNER_REVIEW",
+      "difficultySource": "none — the document states no level",
+      "difficultyRecommendation": "intermediate (INFERRED) — it coordinates budget tiers, professional bookings, consents and system installs over 90 days. Its companion OG-B10 is explicitly '(Advanced)', which suggests this base version is not.",
+      "safetyBlocks": ["batteries-and-electrical", "carbon-monoxide", "indoor-combustion"],
+      "safetyReasoning": "batteries-and-electrical: REQUIRED by the audit (solar panels, inverter, portable power station). carbon-monoxide and indoor-combustion: RECOMMENDED — Sprint 1 buys 'emergency heating' and runs a 24-hour off-grid test, which is exactly when people bring heaters and cookers inside.",
+      "approvedSafetyBlocks": []
+    },
+    "OG-B07": {
+      "foundation": "energy",
+      "foundationStatus": "inferred, HIGH confidence — title 'Solar'",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "PROPOSED — owner to confirm. Source-supported: the title says 'Worksheet' and the document is fill-in fields and a table. The audit inferred 'planner' at MEDIUM confidence from the word 'plan'.",
+      "category": "solar",
+      "categoryStatus": "PROPOSED — owner to confirm",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
+      "estimatedTimeRecommendation": 30,
+      "estimatedTimeReasoning": "Fifteen fields and a three-row shading table, with a payback calculation. Assumes the roof measurements, power bills and installer quotes are already to hand; gathering them takes longer.",
+      "difficulty": "advanced",
+      "difficultyStatus": "SOURCE-SUPPORTED — owner to confirm",
+      "difficultySource": "SOURCE-SUPPORTED — the cover reads 'Advanced solar planning', the title is 'Deep Worksheet', and it asks for azimuth, pitch, kWh/year and feed-in tariffs",
+      "safetyBlocks": ["batteries-and-electrical"],
+      "safetyReasoning": "batteries-and-electrical: REQUIRED by the audit (solar, inverter). The roof survey asks the member to measure roof area and pitch, which is a working-at-height hazard. The safety standard has no block for it, so none is inserted; flagged for owner decision.",
+      "approvedSafetyBlocks": []
+    },
+    "OG-15": {
+      "foundation": "shelter",
+      "foundationStatus": "inferred, HIGH confidence",
+      "resourceType": "assessment",
+      "resourceTypeStatus": "inferred, HIGH confidence — title 'Scorecard'; sixteen scored questions and a total out of 80",
+      "category": null,
+      "categoryStatus": "NEEDS_OWNER_REVIEW",
+      "categoryRecommendation": "heating ('Staying warm, including when the power is out'). The alternative is property-assessment; the scorecard's purpose is warmth, so heating fits better.",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
+      "estimatedTimeRecommendation": 30,
+      "estimatedTimeReasoning": "A room-by-room walk-through: sixteen 1–5 scores, the hand test at windows and doors, and three short cold-zone plans.",
+      "difficulty": null,
+      "difficultyStatus": "NEEDS_OWNER_REVIEW",
+      "difficultySource": "none — the document states no level",
+      "difficultyRecommendation": "beginner (INFERRED) — observation and 1–5 scoring, no tools or technical knowledge",
+      "safetyBlocks": ["carbon-monoxide", "indoor-combustion", "solid-fuel-heating"],
+      "safetyReasoning": "None REQUIRED by the audit (its thresholds were not met), all RECOMMENDED. Question 12 names 'fireplace, wood burner, gas heater, portable' as backup heating, and the page frames cold as a survival risk.",
+      "approvedSafetyBlocks": []
     }
   }
 }

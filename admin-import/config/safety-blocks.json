@@ -1,0 +1,38 @@
+{
+  "description": "Topic safety blocks from OFFGRID056_SAFETY_CONTENT_STANDARD.md, prepared for insertion into migrated documents. Status PROPOSED: a resource using one of these is NOT ready until the owner approves the block for that resource. Wording is the standard's, with three market substitutions only: the fixed licence name becomes {{term.electrician}}, and 'call emergency services' becomes 'call {{emergency.number}}', so each market reads its own term and number. No new facts, figures or distances are introduced. Source basis per block is recorded below and is NOT all NZ/AU official guidance.",
+  "status": "PROPOSED — awaiting owner approval per resource",
+  "blocks": {
+    "batteries-and-electrical": {
+      "id": "batteries-and-electrical",
+      "title": "Batteries and electrical safety",
+      "severity": "CRITICAL",
+      "body": "**Anything that connects to your home's fixed wiring must be installed by a {{term.electrician}}.** That includes solar, battery storage, inverters, transfer switches and any way of feeding a generator into your house circuits.\n**Never plug a generator into a wall socket to power the house.** This is called backfeeding. It can electrocute line workers repairing the network, and it can destroy your wiring. Use appliance leads plugged directly into the generator, or a transfer switch installed by a {{term.electrician}}.\nTreat batteries with respect: they store a lot of energy. Do not modify, puncture or short battery packs. Follow the manufacturer's instructions for charging, ventilation and storage temperature. If a lithium battery is hot, swollen, leaking or smoking, move away from it and call {{emergency.number}} — do not carry it through the house.",
+      "sources": ["Standard Block 7 — backfeeding and transfer-switch guidance is CPSC (US); NZ/AU official source not yet cited"],
+      "substitutions": ["'licensed electrician' → {{term.electrician}} (NZ: licensed electrical worker · AU: licensed electrician)", "'an electrician' → 'a {{term.electrician}}'", "'call emergency services' → 'call {{emergency.number}}'"]
+    },
+    "carbon-monoxide": {
+      "id": "carbon-monoxide",
+      "title": "Carbon monoxide",
+      "severity": "CRITICAL",
+      "body": "**Carbon monoxide has no colour, no smell and no taste.** It is produced by anything that burns fuel: generators, gas and LPG appliances, wood burners, charcoal, petrol and diesel engines.\nEarly symptoms look like flu without the fever — headache, dizziness, nausea, weakness, confusion. If more than one person in the house feels unwell at the same time, or pets are affected too, suspect CO.\n**Fit CO alarms** adjacent to sleeping areas and on every level of the home, and test them regularly. Buy alarms carrying your country's certification mark.\n**If the alarm sounds: get everyone out immediately and call {{emergency.number}} from outside.** Do not go back in until the fire service says it is safe.",
+      "sources": ["Standard Block 3 — Health Canada, Ontario and CPSC guidance; NZ/AU official source not yet cited"],
+      "substitutions": ["'call emergency services' → 'call {{emergency.number}}'"]
+    },
+    "indoor-combustion": {
+      "id": "indoor-combustion",
+      "title": "Never bring it inside",
+      "severity": "CRITICAL",
+      "body": "**Anything designed for outdoor use stays outdoors.** Never bring a BBQ, charcoal grill, camping stove, patio heater, outdoor gas burner or generator inside to cook or to keep warm — not into the house, garage or tent. Every one of them produces carbon monoxide, and people die doing this during power cuts and storms.\nUnflued portable gas heaters release combustion products and moisture straight into the room. If you use one, follow the manufacturer's instructions exactly, never run it in a bedroom or a closed room, and keep ventilation as directed.",
+      "sources": ["Standard Block 4 — CPSC power-outage guidance (US); NZ/AU official source not yet cited; unflued-heater restrictions in NZ/AU still VERIFY"],
+      "substitutions": []
+    },
+    "solid-fuel-heating": {
+      "id": "solid-fuel-heating",
+      "title": "Wood burners and open fires",
+      "severity": "HIGH",
+      "body": "**Have the chimney or flue checked and swept at least once a year**, and before you rely on it through a winter. A blocked or damaged flue pushes smoke and carbon monoxide back into the room.\nUse a proper fireguard or screen. Keep furniture, curtains, washing and kindling well clear of the fire — follow the clearances in your appliance's manual and your local rules, not a guess.\nLet ash cool completely, then put it in a metal container with a lid, outside and away from the building. Ash can stay hot enough to start a fire for days.\nBurn only dry, untreated wood. Never burn treated timber, painted wood, plastics or rubbish: the fumes are toxic and they damage the flue.",
+      "sources": ["Standard Block 5 — Fire and Emergency New Zealand checklists; AU official source not yet cited"],
+      "substitutions": []
+    }
+  }
+}

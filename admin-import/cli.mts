@@ -490,6 +490,11 @@ async function commandPrep() {
   // Owner decisions live in config, not in code, so each one is visible and dated.
   const approvedCopy = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "approved-copy.json"), "utf8")).changes ?? {};
   const metadata = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "metadata-review.json"), "utf8")).resources ?? {};
+  // Topic safety blocks are proposals until the owner approves them for a resource.
+  const topicBlocks = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "safety-blocks.json"), "utf8")).blocks ?? {};
+  const blocks = { ...spec.safetyBlocks, ...topicBlocks };
+  // What each resource's topics require, so a missing CRITICAL block stops the resource.
+  const exposure = new Map(analyseGroupA(auditResult, ws.texts).map((r) => [r.legacyCode, r.safetyExposure]));
   const results = [];
 
   for (const code of codes) {
@@ -501,13 +506,19 @@ async function commandPrep() {
     const result = prepareResource({
       item,
       sourceHtml: fs.readFileSync(path.join(item.html.folder, item.html.filename), "utf8"),
-      blocks: spec.safetyBlocks,
+      blocks,
       markets: profiles.markets,
       launchMarkets: profiles.launchMarkets,
       outDir: path.join(WORKSPACE, "prep", item.legacyCode),
       copyChanges: approvedCopy[item.legacyCode] ?? [],
       estimatedTime: metadata[item.legacyCode]?.estimatedTime ?? null,
       difficulty: metadata[item.legacyCode]?.difficulty ?? null,
+      foundation: metadata[item.legacyCode]?.foundation ?? null,
+      resourceType: metadata[item.legacyCode]?.resourceType ?? null,
+      category: metadata[item.legacyCode]?.category ?? null,
+      extraSafetyBlocks: metadata[item.legacyCode]?.safetyBlocks ?? [],
+      requiredSafety: exposure.get(item.legacyCode) ?? [],
+      proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
     });
     results.push(result);
 
@@ -516,6 +527,9 @@ async function commandPrep() {
     console.log(`    foundation ${result.foundation ?? "—"} · type ${result.resourceType ?? "—"}`);
     console.log(`    re-skin: ${result.reskin.changes.length} kinds of change · legacy brand issues ${result.branding.legacyIssues}`);
     for (const f of result.terminology.otherFindings) console.log(`    ⚠ ${f}`);
+    console.log(`    safety blocks: ${result.safety.blocks.join(", ")}${result.safety.proposed.length ? ` (proposed: ${result.safety.proposed.join(", ")})` : ""}`);
+    for (const b of result.safety.missingRequired) console.log(`    ✗ required safety block missing: ${b}`);
+    for (const f of result.contentFlags) console.log(`    ⚑ ${f.kind}: ${f.text.slice(0, 110)}`);
     for (const m of result.markets) console.log(`    ${m.code}: ${m.publishable ? "publishable" : "blocked"} · emergency ${m.emergencyNumber}`);
     for (const c of result.copyChanges) console.log(`    copy (${c.where}): ${c.applied ? "APPLIED" : `NOT applied — matched ${c.matched}×`}`);
     console.log(`    estimated time: ${result.estimatedTime ?? "unset"} min`);

@@ -31,7 +31,18 @@ export interface PrepResult {
   reskin: { changes: string[]; warnings: string[] };
   branding: { legacyIssues: number; issues: string[] };
   terminology: { frameworkPhrase: number; barePillar: number; otherFindings: string[] };
-  safety: { blocks: string[]; exposure: string[] };
+  safety: {
+    blocks: string[];
+    exposure: string[];
+    /** blocks the audit says this resource's topics require */
+    required: string[];
+    /** required blocks that are not in the resource: the resource cannot be published while any remain */
+    missingRequired: string[];
+    /** blocks inserted as proposals, awaiting owner approval for this resource */
+    proposed: string[];
+  };
+  /** legacy programme, product and cross-reference text that may not belong in the current library */
+  contentFlags: ContentFlag[];
   markets: { code: string; publishable: boolean; problems: string[]; emergencyNumber: string }[];
   validation: { ok: boolean; issues: string[] };
   importReadiness:
@@ -39,6 +50,7 @@ export interface PrepResult {
     | "READY_AFTER_METADATA_AND_COPY_APPROVAL"
     | "NEEDS_OWNER_METADATA"
     | "NEEDS_OWNER_COPY"
+    | "NEEDS_SAFETY_APPROVAL"
     | "NEEDS_CONTENT_REVIEW";
   /** owner-approved copy changes, and whether each was applied */
   copyChanges: CopyChangeResult[];
@@ -50,6 +62,66 @@ export interface PrepResult {
 const PLATFORM_REFERENCES = /\b(skool|facebook group|discord|patreon|whatsapp group|telegram)\b/gi;
 
 const clean = (s: string) => s.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+
+export interface ContentFlag {
+  kind: "programme-structure" | "cross-reference" | "next-step-cta" | "product-tier" | "figure-needs-source" | "health-claim";
+  text: string;
+}
+
+/**
+ * Text that belonged to the 30-Day Programme or an old product, and may not survive into the current library.
+ *
+ * These are flags for the owner, not edits: some are teaching content in disguise ("Tier 1 (Essential)" is a
+ * budget tier the member chose, not a product), so nothing here changes the document.
+ */
+const CONTENT_FLAG_PATTERNS: { kind: ContentFlag["kind"]; pattern: RegExp }[] = [
+  { kind: "programme-structure", pattern: /OffGrid056 30-Day Programme/g },
+  { kind: "programme-structure", pattern: /\bWeek \d\s*—\s*[A-Z][^|\n]*/g },
+  { kind: "programme-structure", pattern: /\bDay \d{1,2}(?: Complete\b|\s*[—–]\s*[^\n|]*)/g },
+  { kind: "programme-structure", pattern: /\bAsset OG-B?\d{2}[^\n]*/g },
+  { kind: "next-step-cta", pattern: /\bNext:\s[^\n]+/g },
+  { kind: "next-step-cta", pattern: /\bTomorrow\b[^\n.]*/g },
+  { kind: "product-tier", pattern: /\bAction Plan Plus\b[^\n|]*/g },
+  { kind: "product-tier", pattern: /\bBonus Asset\b[^\n]*/g },
+  { kind: "figure-needs-source", pattern: /[^\n.]*\b\d+(?:[–-]\d+)?\s?(?:%|°C)[^\n.]*/g },
+  { kind: "health-claim", pattern: /[^\n.]*\b(?:hypothermia|survival)\b[^\n.]*/gi },
+];
+
+/** Visible text of a document, one line per block element. */
+export function visibleText(html: string): string {
+  return html
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<title[\s\S]*?<\/title>/gi, "")
+    .replace(/<(br|\/p|\/div|\/h\d|\/li|\/tr|\/td|\/th)[^>]*>/gi, "\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&rarr;/g, "→")
+    .replace(/[ \t]+/g, " ")
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .join("\n");
+}
+
+export function findContentFlags(html: string, ownCode: string): ContentFlag[] {
+  const text = visibleText(html);
+  const flags: ContentFlag[] = [];
+  const seen = new Set<string>();
+  const add = (kind: ContentFlag["kind"], raw: string) => {
+    const t = raw.trim();
+    const key = `${kind}|${t}`;
+    if (t && !seen.has(key)) {
+      seen.add(key);
+      flags.push({ kind, text: t });
+    }
+  };
+  for (const { kind, pattern } of CONTENT_FLAG_PATTERNS) for (const m of text.matchAll(pattern)) add(kind, m[0]);
+  // References to other programme resources, which may not exist in the library.
+  for (const m of text.matchAll(/\bOG-B?\d{2}\b/g)) if (m[0] !== ownCode) add("cross-reference", m[0]);
+  return flags;
+}
 
 /**
  * Some covers print the programme code in the title ("OG-25 Project Support Brief Template"). The code belongs
@@ -137,6 +209,16 @@ export interface PrepInputs {
   estimatedTime?: number | null;
   /** owner-reviewed difficulty; null means "no source support and no owner decision yet" */
   difficulty?: string | null;
+  /** reviewed foundation, type and category. Without one, only a HIGH-confidence audit value is used. */
+  foundation?: string | null;
+  resourceType?: string | null;
+  category?: string | null;
+  /** topic safety blocks beyond the disclaimer and emergency block */
+  extraSafetyBlocks?: string[];
+  /** blocks this resource's topics require (from the Group-A analysis) */
+  requiredSafety?: string[];
+  /** ids of blocks whose wording is still a proposal */
+  proposedBlockIds?: string[];
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -162,8 +244,13 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   for (const r of copy.results.filter((x) => !x.applied)) {
     otherFindings.push(`approved copy change (${r.where}) was NOT applied: expected the original wording once, found it ${r.matched} time(s)`);
   }
+  const contentFlags = findContentFlags(reskinned, item.legacyCode);
 
-  // 4. market resolution, with the standard blocks for a Group-A resource
+  // 4. market resolution, with the standard blocks plus this resource's topic blocks
+  const safetyBlocks = ["general-disclaimer", "emergency-contact", ...(inputs.extraSafetyBlocks ?? [])];
+  const requiredSafety = inputs.requiredSafety ?? [];
+  const missingRequired = requiredSafety.filter((b) => !safetyBlocks.includes(b));
+  const proposed = safetyBlocks.filter((b) => (inputs.proposedBlockIds ?? []).includes(b));
   const resource: CoreResource = {
     id: item.proposedResourceId,
     legacyCode: item.legacyCode,
@@ -171,7 +258,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     title,
     description: described.description ?? "",
     body: "",
-    safetyBlocks: ["general-disclaimer", "emergency-contact"],
+    safetyBlocks,
   };
 
   fs.mkdirSync(outDir, { recursive: true });
@@ -189,7 +276,11 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     );
     const withSafety = injected.html;
     // A safety block that could not be placed is a blocker, not a warning: the member would never see it.
-    const unplaced = injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`);
+    const unplaced = [
+      ...injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`),
+      // A topic the resource teaches without its safety block is a blocker in every market.
+      ...missingRequired.map((id) => `safety block "${id}" is required by this resource's topics but not included`),
+    ];
     const file = path.join(outDir, `${slug}.${code}.html`);
     fs.writeFileSync(file, withSafety, "utf8");
     files.push(file);
@@ -202,7 +293,12 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   }
 
   // 5. validation against the real library schema
-  const foundation = item.foundation.value ?? "general";
+  // No fallbacks. A reviewed value wins; otherwise only a HIGH-confidence audit inference is used; otherwise the
+  // field is left out, validation fails, and the resource waits for the owner. A silent "general", "planner"
+  // or first-category default would put a resource somewhere nobody decided.
+  const foundation = inputs.foundation ?? (item.foundation.confidence === "HIGH" ? item.foundation.value : null);
+  const resourceType = inputs.resourceType ?? (item.resourceType.confidence === "HIGH" ? item.resourceType.value : null);
+  const category = inputs.category ?? null;
   const record: Record<string, unknown> = {
     id: item.proposedResourceId,
     slug,
@@ -210,11 +306,9 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     title,
     description: described.description ?? "",
     learningObjectives: [],
-    foundation: foundation,
-    // Owner-approved (2026-09-22) for the General planning resources prepared so far. Other foundations still
-    // fall back to their first category, which remains a placeholder for review.
-    category: foundation === "general" ? "planning" : (getFoundation(foundation as never).categories[0]?.slug ?? "planning"),
-    resourceType: item.resourceType.value ?? "worksheet",
+    ...(foundation ? { foundation } : {}),
+    ...(category ? { category } : {}),
+    ...(resourceType ? { resourceType } : {}),
     // Never defaulted. A silent "beginner" is how a resource titled "(Advanced)" was once mislabelled. Only a
     // reviewed value is used; without one the field is left out and validation fails on purpose.
     ...(inputs.difficulty ? { difficulty: inputs.difficulty } : {}),
@@ -234,15 +328,21 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     completionAvailable: true,
   };
   const parsed = ResourceSchema.safeParse(record);
+  const categoryIssues =
+    foundation && category && !getFoundation(foundation as never)?.categories.some((c) => c.slug === category)
+      ? [`category: "${category}" is not a category of the ${foundation} foundation`]
+      : [];
 
   // 6. readiness
   const legacyIssues = item.legacyIssues.map((i) => i.issue);
   const copyApplied = copy.results.length > 0 && copy.results.every((r) => r.applied);
   const importReadiness: PrepResult["importReadiness"] = !described.description
     ? "NEEDS_OWNER_COPY"
-    : otherFindings.length || item.safetyNotes.length
+    : otherFindings.length || item.safetyNotes.length || contentFlags.length || missingRequired.length
       ? "NEEDS_CONTENT_REVIEW"
-      : typeof inputs.estimatedTime !== "number" || !inputs.difficulty
+      : proposed.length
+        ? "NEEDS_SAFETY_APPROVAL"
+      : !parsed.success || categoryIssues.length || typeof inputs.estimatedTime !== "number" || !inputs.difficulty
         ? "NEEDS_OWNER_METADATA"
         : copyApplied
           ? "READY_AFTER_METADATA_AND_COPY_APPROVAL"
@@ -255,16 +355,20 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     title,
     description: described.description,
     descriptionSource: described.source,
-    foundation: item.foundation.value,
-    resourceType: item.resourceType.value,
+    foundation,
+    resourceType,
     reskin: { changes: summariseChanges(changes), warnings },
     branding: { legacyIssues: legacyIssues.length, issues: legacyIssues },
     terminology: { frameworkPhrase: item.legacyTerminology.length, barePillar: 0, otherFindings },
-    safety: { blocks: resource.safetyBlocks, exposure: item.safetyNotes },
+    safety: { blocks: resource.safetyBlocks, exposure: item.safetyNotes, required: requiredSafety, missingRequired, proposed },
+    contentFlags,
     markets: marketResults,
     validation: {
-      ok: parsed.success,
-      issues: parsed.success ? [] : parsed.error.issues.map((i) => `${i.path.join(".") || "(root)"}: ${i.message}`),
+      ok: parsed.success && categoryIssues.length === 0,
+      issues: [
+        ...(parsed.success ? [] : parsed.error.issues.map((i) => `${i.path.join(".") || "(root)"}: ${i.message}`)),
+        ...categoryIssues,
+      ],
     },
     importReadiness,
     copyChanges: copy.results,
