@@ -1,0 +1,37 @@
+{
+  // OffGrid056 Member Resource Library — private preview deployment.
+  //
+  // Cloudflare Workers with static assets. The site is a static export, so there is no Worker script at all:
+  // Workers serves `out/` directly. No server-side code is introduced, and nothing about the build changes.
+  //
+  //   npm run build          → demo/production content only
+  //   npm run build:preview  → adds the draft resource and its download (private preview only)
+  //   npx wrangler deploy    → uploads whatever is currently in out/
+  //
+  // ⚠ `wrangler deploy` uploads the CURRENT contents of out/. Which build you ran last decides what is
+  //   published, so run the build you intend immediately before deploying, and check the pre-deploy gate.
+  //
+  // Access control is configured in the Cloudflare dashboard (Zero Trust → Access), not here: it must cover
+  // the whole hostname, including downloads and assets.
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "og056-preview",
+  "compatibility_date": "2026-09-21",
+
+  "assets": {
+    // The static export produced by `next build` with `output: "export"`.
+    "directory": "./out",
+
+    // The export writes out/404.html; serve it for unknown paths so a wrong URL gets the site's own 404
+    // rather than a bare Workers error. Not "single-page-application": this site is genuinely multi-page,
+    // and SPA handling would serve index.html for missing resources and hide real mistakes.
+    "not_found_handling": "404-page"
+  },
+
+  // Keep the deployment off the public workers.dev address once a custom domain exists. For the pilot it
+  // stays on workers.dev, behind Access (owner ruling: no branded subdomain yet).
+  "workers_dev": true,
+
+  "observability": {
+    "enabled": true
+  }
+}
