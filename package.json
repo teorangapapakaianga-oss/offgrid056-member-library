@@ -18,7 +18,8 @@
                     "import:apply":  "tsx admin-import/cli.mts apply",
                     "import:audit":  "tsx admin-import/cli.mts audit",
                     "import:reskin":  "tsx admin-import/cli.mts reskin",
-                    "import:pilot":  "tsx admin-import/cli.mts pilot"
+                    "import:pilot":  "tsx admin-import/cli.mts pilot",
+                    "import:readiness":  "tsx admin-import/cli.mts readiness"
                 },
     "dependencies":  {
                          "minisearch":  "7.2.0",

@@ -22,6 +22,8 @@ import { auditProgramme } from "./audit/programme";
 import { renderAuditReport, renderStructure } from "./audit/report";
 import { reskinHtml } from "./reskin/reskin";
 import { runPilot, writePilot } from "./pilot/run";
+import { analyseGroupA } from "./audit/group-a";
+import { assessMarket } from "./markets/readiness";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -425,8 +427,52 @@ async function commandPilot() {
   console.log(`\n  written: ${written.map((w) => path.relative(ROOT, w)).join(", ")}\n`);
 }
 
+/**
+ * Stage 9.7B/C — migration readiness. Analysis only: reads the workspace, writes a report.
+ *
+ *   npm run import:readiness
+ */
+async function commandReadiness() {
+  ensureWorkspace();
+  const ws = loadWorkspace(WORKSPACE);
+  const auditResult = auditProgramme(ws.candidates, ws.texts, ws.groups);
+  const profiles = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "markets", "profiles.json"), "utf8"));
+
+  const groupA = analyseGroupA(auditResult, ws.texts);
+  const markets = (profiles.launchMarkets as string[]).map((code: string) =>
+    assessMarket(profiles.markets.find((m: { code: string }) => m.code === code)),
+  );
+
+  console.log(`\n  GROUP-A MIGRATION ORDER (${groupA.length} resources)\n`);
+  console.log(`  #   OG       resource                              risk    layout  safety  tokens  blocked`);
+  for (const r of groupA) {
+    console.log(
+      `  ${String(r.order).padStart(2)}  ${r.legacyCode.padEnd(8)} ${r.proposedResourceId.padEnd(10)} ${(r.resourceType ?? "—").padEnd(12)} ` +
+        `${r.risk.padEnd(7)} ${r.layout.complexity.padEnd(7)} ${String(r.safetyExposure.length).padEnd(7)} ${String(r.marketTokens.length).padEnd(7)} ${r.blockedBy.join(",") || "—"}`,
+    );
+  }
+
+  console.log(`\n  LAUNCH READINESS\n`);
+  for (const m of markets) {
+    const verified = m.blocks.filter((b) => b.verified).length;
+    console.log(`  ${m.name} (${m.code})`);
+    console.log(`    emergency ${m.emergency.number}${m.emergency.alternatives !== "—" ? ` / ${m.emergency.alternatives}` : ""} · units ${m.units}`);
+    console.log(`    safety blocks verified: ${verified}/${m.blocks.length}`);
+    console.log(`    unresolved: ${m.unresolved.join(", ") || "none"}`);
+    console.log(`    publishable — baseline: ${m.publishableBaseline ? "YES" : "no"} · everything: ${m.publishableFull ? "YES" : "no"}`);
+  }
+
+  const out = { generatedAt: new Date().toISOString(), groupA, markets };
+  const file = path.join(WORKSPACE, "reports", "readiness.json");
+  fs.writeFileSync(file, JSON.stringify(out, null, 1), "utf8");
+  audit("readiness", { groupA: groupA.length, markets: markets.map((m) => m.code) });
+  console.log(`\n  report: ${path.relative(ROOT, file)}\n`);
+}
+
 const command = args[0] ?? "scan";
-if (command === "pilot") {
+if (command === "readiness") {
+  await commandReadiness();
+} else if (command === "pilot") {
   await commandPilot();
 } else if (command === "reskin") {
   await commandReskin();

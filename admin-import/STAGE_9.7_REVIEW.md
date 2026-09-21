@@ -1,0 +1,183 @@
+# STAGE 9.7 — PRIVATE DEPLOYMENT DESIGN + PILOT EXPANSION — OWNER REVIEW
+
+**Design and analysis only. Nothing deployed. Nothing bulk-migrated. `--real` still disabled.**
+**Date:** 21 September 2026
+
+---
+
+## 1. Private deployment recommendation
+
+### Recommended: Cloudflare Pages (Direct Upload) + Cloudflare Access
+
+| | |
+|---|---|
+| **Host** | Cloudflare Pages |
+| **Access control** | Cloudflare Access (Zero Trust) with **email one-time PIN**, allow-listing your addresses |
+| **Cost** | **£0** — Zero Trust free plan covers **up to 50 users**; Pages free tier covers static hosting and bandwidth |
+| **Deploy method** | **Direct Upload via Wrangler**, *not* Git integration |
+| **Rollback** | Redeploy any previous deployment from the Pages dashboard, or re-run Wrangler against the last known-good `out/` |
+
+### Why this one
+
+1. **It matches what the site already is.** V1 is a static export. Pages serves static files natively; nothing about the build changes.
+2. **Access sits in front of the whole site, not inside it.** Nobody reaches a single file without passing the gate, so there is no risk of a resource being served because a route was missed. Authentication is a property of the deployment, not of the code.
+3. **Direct Upload keeps member content out of the public repository** — which is the crux of your ruling. Wrangler pushes the built `out/` folder straight from this machine. Resource files never need to be committed to the public repo to be deployed.
+4. **Email OTP needs no identity provider.** You add your addresses; each sign-in sends a PIN that expires after 10 minutes. No passwords for you to manage, no user database.
+5. **It is disposable.** When real member authentication arrives, the Access policy is deleted and the app's own auth takes over. Nothing built now has to be unpicked.
+
+### Deployment steps (to run only on your approval)
+
+```bash
+npm run build                                  # produces out/
+npx wrangler login                             # one-time, your Cloudflare account
+npx wrangler pages project create og056-preview --production-branch main
+npx wrangler pages deploy out --project-name og056-preview
+```
+
+Then, in the Cloudflare dashboard: **Zero Trust → Access → Applications → Add a self-hosted application**,
+pointed at the Pages domain, with a policy of *Allow → Emails → your addresses* and One-time PIN as the
+identity method.
+
+### Environment separation
+
+| Environment | Project | Purpose | Access |
+|---|---|---|---|
+| **Preview** | `og056-preview` | owner testing, imported draft resources | Access, allow-listed emails |
+| **Production** *(later)* | `og056-members` | real member library | real authentication, replaces Access |
+
+Keeping these as **two separate Pages projects** rather than two branches of one means a preview deployment can never become the production site by accident.
+
+### Rollback
+
+1. **Platform-level:** every Pages deployment is retained; "Rollback to this deployment" in the dashboard is immediate.
+2. **Build-level:** `out/` is reproducible from any commit — `git checkout <sha> && npm ci && npm run build`.
+3. **Content-level:** the import engine already backs up any replaced record before writing, and the pilot's draft import went to a sandbox, not to `data/`.
+
+### Privacy implications
+
+- **noindex stays on, and is already in the build** — `robots: { index: false, follow: false }` in `app/layout.tsx`, present on **123 pages** of the current output. Access also prevents crawlers reaching the site at all, so this is belt and braces.
+- **Cloudflare sees traffic and terminates TLS**, as any host would. Access logs the email addresses that authenticate.
+- **No member data leaves the browser.** V1 keeps progress and notes in `localStorage`; there is no account, no database and no sync. That property is unchanged by hosting.
+- **The preview will hold draft member content**, so the allow-list should stay short.
+
+### One catch you should know before choosing
+
+**A Cloudflare Pages project created for Direct Upload cannot later be switched to Git integration** — you would have to create a new project. That is fine here (the public repo must not be the deployment source anyway), but it is a one-way door worth choosing deliberately.
+
+### Alternatives considered
+
+| Option | Why not |
+|---|---|
+| **GitHub Pages** | No access control at all. A private repo's Pages site is still public. Rejected outright. |
+| **Netlify** | Workable, but site-wide password protection is a paid feature, and the free tier's basic auth is weaker than Access. |
+| **Vercel** | Deployment protection is a Pro-plan feature (a monthly cost for what Cloudflare gives free at this size). |
+| **Static host + basic auth** | Cheap, but a shared password is a poor gate for member content and leaves no audit of who opened it. |
+
+**No deployment has been made. Awaiting your approval.**
+
+---
+
+## 2. Group-A migration order
+
+Generated by `npm run import:readiness` from the audit, the sources and the re-skin log.
+
+| # | OG | Resource | Foundation | Type | Safety blocks | Market tokens | Layout | Risk |
+|---:|---|---|---|---|---:|---:|---|---|
+| 1 | OG-02 | Household Risk Identifier | general | worksheet | 0 | 1 | HIGH | MEDIUM |
+| 2 | OG-B04 | Monthly Planning Challenge Template | general | planner | 0 | 1 | LOW | LOW |
+| 3 | OG-B10 | 90-Day Roadmap Advanced | general | planner | 0 | 0 | LOW | LOW |
+| 4 | OG-25 | Project Support Brief Template | general | template | 0 | 1 | MEDIUM | LOW |
+| 5 | OG-27 | 90-Day Implementation Roadmap | shelter | planner | 1 | 4 | MEDIUM | LOW |
+| 6 | OG-B07 | Solar Planning Deep Worksheet | energy | planner | 1 | 0 | MEDIUM | LOW |
+| 7 | OG-15 | Warm Home Scorecard | shelter | assessment | 0 | 2 | HIGH | MEDIUM |
+| 8 | OG-22 | Resilience Product Wishlist | general | **unresolved** | 0 | 1 | HIGH | MEDIUM |
+| 9 | OG-11 | 30-Day Pantry Builder | food | worksheet | 1 | 1 | HIGH | MEDIUM |
+| 10 | OG-19 | Battery Backup Planner | energy | planner | 2 | 2 | HIGH | MEDIUM |
+| 11 | OG-B11 | Building Consent Navigator | general | **unresolved** | 4 | 1 | MEDIUM | MEDIUM |
+
+**Ordering principle:** OG-02 leads as the proven reference. Then the simplest, safest resources — so if the pipeline breaks, it breaks where the cause is obvious. Resources carrying real safety exposure come last, by which time the safety wording will be signed off.
+
+**Notable:**
+- **None is blocked** by an unverified field. Generator distance is the only outstanding figure, and no Group-A resource depends on it.
+- **OG-B11 Building Consent Navigator carries the most safety exposure** (4 topics) *and* an unresolved type — last, deliberately.
+- **OG-22 and OG-B11 need a type decision from you** before import, though they can be re-skinned now.
+- **OG-27 needs the most market tokens (4)** — it will be the real test of the market layer beyond the pilot.
+
+---
+
+## 3–4. Launch readiness — New Zealand and Australia
+
+| | **New Zealand** | **Australia** |
+|---|---|---|
+| **Emergency number** | **111** ✅ | **000**, plus 112 from a mobile ✅ |
+| **Accessibility** | 111 TXT service | 106 TTY via the NRS |
+| **Units** | metric | metric |
+| **Safety blocks verified** | **10 / 11** | **10 / 11** |
+| **Emergency management** | Civil Defence (NEMA) | your State Emergency Service (SES) |
+| **Fire service** | Fire and Emergency New Zealand | your state fire service |
+| **Food safety authority** | New Zealand Food Safety (MPI) | your state food authority |
+| **Gas regulator** | WorkSafe New Zealand | your state gas safety regulator |
+| **Trade registration** | PGDB | your state licensing authority |
+| **Water per person** | 3 litres/day (9 for three days) ✅ | at least 10 litres for three days ✅ |
+| **Fridge without power** | less than 24 hours ✅ | about 4 hours, closed ✅ |
+| **Freezer without power** | less than 4 days, if full ✅ | about 24 hours, closed ✅ |
+| **Gas certificate** | Gas Safety Certificate ✅ | compliance certificate ✅ |
+| **Generator distance** | **UNVERIFIED** | **UNVERIFIED** |
+| **Energy agency** | EECA | *not set* |
+| **Publishable — baseline** | **YES** | **YES** |
+| **Publishable — everything** | no (generator block) | no (generator block) |
+
+**Both markets can launch today for every resource that does not teach generator siting.** All 11 Group-A resources qualify. The single blocked block is Generator Safety, and only because its distance figure has no NZ or AU official source.
+
+Two gaps worth naming:
+- **Australia's references are deliberately generic** ("your state emergency service"), because AU guidance is state-based. The figures behind them come from Queensland and NSW.
+- **Australia has no energy agency set.** NZ has EECA; AU's equivalent is state-based and was not verified. Nothing currently depends on it.
+
+---
+
+## 5. Remaining VERIFY fields
+
+| Field | NZ | AU | US | CA |
+|---|---|---|---|---|
+| `figure.generatorDistance` | **VERIFY** | **VERIFY** | 20 feet (CPSC) | VERIFY |
+| `agency.energy` | EECA | **not set** | — | — |
+| water / food / gas figures | ✅ | ✅ | partial | VERIFY |
+
+**Per your ruling, the US 20-foot figure has NOT been copied into NZ or AU.** The field stays unresolved, the token stays visible, and `publishable()` returns false for any resource that needs it. A test asserts this.
+
+---
+
+## 6. Test results
+
+| Check | Result |
+|---|---|
+| Test suite | **202 passed, 0 failed** (9 files) |
+| Member build | **800 files, 20.03 MB, 956 KB JS — unchanged** |
+| Importer isolation | No `admin-import`, `reskin`, `markets/resolve`, `household-risk-identifier`, `res-1002` or strapline content anywhere in `out/` |
+| noindex | Active — `robots: { index: false, follow: false }`, present on **123 pages** of the build |
+| Draft pilot reversible | Sandbox only. `workspace/` is git-ignored; the real library still has **30 resources** and **no** `household-risk-identifier.json`. 7 audit-log entries record the pilot. |
+| Source integrity | **22 Group-A originals checked (PDF + HTML), 0 drift** |
+| No real content exposed | Nothing deployed; the only preview was `127.0.0.1:3811`, local |
+
+---
+
+## 7. Owner decisions required
+
+1. **Approve Cloudflare Pages + Access**, or name another host. Deployment will not start until you do. Note the one-way door: Direct Upload projects cannot later switch to Git integration.
+2. **Which email addresses go on the Access allow-list?**
+3. **Do you have a Cloudflare account**, and do you want the preview on a subdomain of your own domain or on the free `*.pages.dev` address? A custom domain hints at what the site is; `pages.dev` is anonymous.
+4. **Generator distance for NZ and AU** — commission the local figure, or publish generator content citing CPSC explicitly as a US source and marking it as such? My recommendation: leave it unresolved and simply not publish generator siting guidance until a local source exists. No Group-A resource needs it.
+5. **Types for OG-22 and OG-B11.** My reading remains Worksheet and Guide.
+6. **Australia's energy agency** — set it, or leave unset until something needs it?
+7. **After Group A, do you want Group B started**, or the 34 held until the safety wording is signed off and the preview is live?
+
+---
+
+## 8. Recommended sequence
+
+1. You approve the host → I deploy the **current V1** (demo content only) to the private preview and confirm the gate works.
+2. You sign off the safety standard → the approved blocks go into the Group-A documents.
+3. Migrate Group A **in the order above**, checking each in the preview.
+4. Only then consider `--real` and Group B.
+
+**Nothing deployed. Nothing bulk-migrated. Awaiting your decisions.**
