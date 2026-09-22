@@ -1,4 +1,307 @@
 {
   "description": "PROPOSED copy changes — NOT APPROVED. prep renders them only so the owner can review the result; any resource carrying one is PREVIEW_WITH_PROPOSED_COPY and cannot be deployed. On approval each change moves to approved-copy.json unchanged. (Stage 9.38: OG-08's 20 proposals approved and moved to approved-copy.json.)",
-  "changes": {}
+  "changes": {
+    "OG-10": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 2 — Water, Food & Air</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name."
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "From roof to tap — every number you need.",
+        "to": "From roof to tank — the numbers you need to plan.",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "claim-correction",
+        "reason": "'Every number you need' overstates, and 'roof to tap' implies plumbed drinking supply, which is regulated work."
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-10 | Day 10</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "legacy-programme-context",
+        "reason": "Internal code and programme day."
+      },
+      {
+        "where": "Intro box (NZ)",
+        "from": "<p style=\"margin-bottom:0; font-size:13px;\">Every square metre of roof catches approximately 1 litre of water per millimetre of rainfall. A 150m² roof in a region with 1,000mm annual rainfall can harvest <strong>150,000 litres per year</strong>. This planner helps you size your system correctly.</p>",
+        "to": "<p style=\"margin-bottom:0; font-size:13px;\">Every square metre of roof catches about 1 litre of water per millimetre of rainfall, before losses. <em>Worked example, not your figure:</em> a 150m² roof where 1,000mm of rain falls in a year catches about 150,000 litres before losses. Use your own roof area and your own local rainfall below. <strong>Rainwater from a roof is not automatically safe to drink.</strong> If you want to use it for drinking or other household uses it has to be treated, and some councils also require testing — check your council's requirements before you start.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "The 150,000 L figure ignored losses and read as a promise; it becomes a labelled worked example, 'before losses'. Adds that roof water is not automatically drinkable: MBIE — it must be treated for drinking or other household use, and some councils require testing.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Intro box (AU)",
+        "from": "<p style=\"margin-bottom:0; font-size:13px;\">Every square metre of roof catches approximately 1 litre of water per millimetre of rainfall. A 150m² roof in a region with 1,000mm annual rainfall can harvest <strong>150,000 litres per year</strong>. This planner helps you size your system correctly.</p>",
+        "to": "<p style=\"margin-bottom:0; font-size:13px;\">Every square metre of roof catches about 1 litre of water per millimetre of rainfall, before losses. <em>Worked example, not your figure:</em> a 150m² roof where 1,000mm of rain falls in a year catches about 150,000 litres before losses. Use your own roof area and your own local rainfall below. <strong>Rainwater from a roof is not automatically safe to drink.</strong> NSW Health, for example, recommends that people in urban areas use the public water supply for drinking and cooking; if you plan to drink rainwater, check what applies where you live.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "As NZ, with AU guidance: NSW Health recommends public supply for drinking and cooking in urban areas. Named as an example, so no national rule is claimed.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Step 1 — roof measuring note",
+        "from": "<h2>Step 1: Your Catchment Area</h2>",
+        "to": "<h2>Step 1: Your Catchment Area</h2>\n<p style=\"font-size:12px;\">Use existing plans, ground-based estimates, or measurements provided by your installer.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "roof-safety",
+        "reason": "The owner-approved OG-B07 roof note, word for word: members do not need to go on the roof to measure it."
+      },
+      {
+        "where": "Efficiency placeholder",
+        "from": "<input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;border-radius:4px;\" placeholder=\"90%\">",
+        "to": "<input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;border-radius:4px;\" placeholder=\"%\">",
+        "expectedMatches": 3,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "unsupported-figure",
+        "reason": "A 90% default presented an unsourced efficiency as the answer."
+      },
+      {
+        "where": "The Math box (NZ)",
+        "from": "<p style=\"margin-bottom:0; font-size:13px;\"><span class=\"formula\">Annual Harvest (L) = Roof Area (m²) × Annual Rainfall (mm) × Efficiency (%)</span><br>Efficiency accounts for evaporation, overflow, and first-flush diversion. 85–90% is typical for a well-designed system.</p>",
+        "to": "<p style=\"margin-bottom:0; font-size:13px;\"><span class=\"formula\">Annual Harvest (L) = Roof Area (m²) × Annual Rainfall (mm) × Efficiency (%)</span><br>One square metre of roof catches one litre per millimetre of rain, so the first two numbers give the water that lands on the roof. Efficiency is what you actually capture after evaporation, overflow, gutter losses and first-flush diversion — <strong>there is no standard figure</strong>: ask your supplier or installer what allowance suits your roof, gutters and first-flush device. For annual rainfall, use local figures for your area from your regional council or NIWA.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "'85–90% is typical' is an unsourced rule of thumb: no NZ or AU official source read gives a collection-efficiency figure. Explains what efficiency means and sends the member to their supplier or installer. Rainfall: local figures (regional council, NIWA).",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "The Math box (AU)",
+        "from": "<p style=\"margin-bottom:0; font-size:13px;\"><span class=\"formula\">Annual Harvest (L) = Roof Area (m²) × Annual Rainfall (mm) × Efficiency (%)</span><br>Efficiency accounts for evaporation, overflow, and first-flush diversion. 85–90% is typical for a well-designed system.</p>",
+        "to": "<p style=\"margin-bottom:0; font-size:13px;\"><span class=\"formula\">Annual Harvest (L) = Roof Area (m²) × Annual Rainfall (mm) × Efficiency (%)</span><br>One square metre of roof catches one litre per millimetre of rain, so the first two numbers give the water that lands on the roof. Efficiency is what you actually capture after evaporation, overflow, gutter losses and first-flush diversion — <strong>there is no standard figure</strong>: ask your supplier or installer what allowance suits your roof, gutters and first-flush device. For annual rainfall, use local figures for your area from the Bureau of Meteorology or your local council.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "As NZ; rainfall from the Bureau of Meteorology or the local council.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Daily water use",
+        "from": "<p>How many litres does your household use per day? (Typical NZ home: 150–300L/day)</p>",
+        "to": "<p>How many litres does your household use per day? Use your own figure — your water bill or meter if you have one, or a supplier's estimate for a household your size.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "unsupported-figure",
+        "reason": "'Typical NZ home: 150–300L/day' is unsourced and NZ-only wording in the AU file."
+      },
+      {
+        "where": "Dry spell duration",
+        "from": "<p>How many days without rain do you want to cover? (Recommended: 21–30 days minimum)</p>",
+        "to": "<p>How many days without rain do you want to cover? Choose a length that suits your area — local rainfall records show how long dry spells usually last where you live.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "unsupported-figure",
+        "reason": "'Recommended: 21–30 days minimum' is an unsourced universal rule."
+      },
+      {
+        "where": "Tank size formula",
+        "from": "<p><span class=\"formula\">Tank Size (L) = Daily Use × Dry Spell Days</span></p>",
+        "to": "<p><span class=\"formula\">Tank Size (L) = Daily Use × Dry Spell Days</span><br><span style=\"font-size:11px;\">This is the minimum to cover that dry spell with no rain at all. What you can actually keep in the tank also depends on your roof area and rainfall (Step 1).</span></p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "calculation-input",
+        "reason": "Makes the assumption visible: the formula ignores refill during the period."
+      },
+      {
+        "where": "Tank Size Reality (NZ)",
+        "from": "<div class=\"warning-title\">Tank Size Reality</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Most households underestimate tank size. A 1,000L tank sounds big but only covers 3–7 days for a typical home. For genuine water independence, think in multiples of 5,000L or 10,000L. Two smaller tanks are often better than one giant — redundancy matters.</p>",
+        "to": "<div class=\"warning-title\">Tank Size Reality</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Tank size depends on your roof area, your local rainfall, what you will use the water for and whether you also have mains water. <strong>Building Performance (MBIE) guidance:</strong> for garden watering, a rain barrel (generally about 240 litres) or a tank of 500 litres plus; for indoor supply you need a larger tank — in areas with year-round rain a 5,000-litre tank provides a good proportion of household use, and with dry summers 10,000 litres plus; if rainwater is your only water supply, at least 30,000 litres. Talk to local suppliers about the size that suits your climate and household. Two smaller tanks can give redundancy that one large tank cannot.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "Removes the unsourced '1,000L covers 3–7 days' and 'multiples of 5,000L or 10,000L'. Replaced with MBIE's published NZ guidance (240 L barrel / 500 L+ garden; 5,000 L year-round rain; 10,000 L+ dry summers; at least 30,000 L if rainwater is the only supply).",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Tank Size Reality (AU)",
+        "from": "<div class=\"warning-title\">Tank Size Reality</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Most households underestimate tank size. A 1,000L tank sounds big but only covers 3–7 days for a typical home. For genuine water independence, think in multiples of 5,000L or 10,000L. Two smaller tanks are often better than one giant — redundancy matters.</p>",
+        "to": "<div class=\"warning-title\">Tank Size Reality</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Tank size depends on your roof area, your local rainfall, what you will use the water for and whether you also have mains water. There is no single Australian figure: ask local suppliers, and check what your council and your state or territory require. Two smaller tanks can give redundancy that one large tank cannot.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "As NZ, but **no AU figures**: no national Australian tank-size guidance was found, and requirements vary by state, territory and council. NZ's figures are not copied across.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Filtration component",
+        "from": "<input type=\"text\" style=\"width:100%;border:none;border-bottom:1px solid var(--line);padding:4px;font-size:12px;\" placeholder=\"Type from OG-09...\">",
+        "to": "<input type=\"text\" style=\"width:100%;border:none;border-bottom:1px solid var(--line);padding:4px;font-size:12px;\" placeholder=\"Type / rating...\">",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "legacy-programme-context",
+        "reason": "Visible OG-09 code, pointing at a resource that is not in the library."
+      },
+      {
+        "where": "Components — plumbing and pump note (NZ)",
+        "from": "<div class=\"worksheet-field\" style=\"margin-top:16px;\">\n    <div class=\"worksheet-label\">Total system estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>",
+        "to": "<div class=\"worksheet-field\" style=\"margin-top:16px;\">\n    <div class=\"worksheet-label\">Total system estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <p style=\"font-size:12px;\">A rainwater system that supplies the house needs a pump. Connecting it to household plumbing is work for a qualified plumber — including the backflow prevention device where there is also a mains supply — and the pump's fixed electrical work is for a licensed electrical worker.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "PLUMBING/ELECTRICAL: the component list includes a pressure pump and household supply, with no mention of who may do the work. MBIE: a system supplying the house needs a pump; a backflow prevention device must be installed by a qualified plumber. NZ electrical term (WorkSafe NZ).",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Components — plumbing and pump note (AU)",
+        "from": "<div class=\"worksheet-field\" style=\"margin-top:16px;\">\n    <div class=\"worksheet-label\">Total system estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>",
+        "to": "<div class=\"worksheet-field\" style=\"margin-top:16px;\">\n    <div class=\"worksheet-label\">Total system estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <p style=\"font-size:12px;\">A rainwater system that supplies the house needs a pump. Connecting it to household plumbing, including backflow prevention where there is also a mains supply, is work for a licensed plumber, and the pump's fixed electrical work is for a licensed electrician.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "As NZ, with AU terms: licensed plumber and licensed electrician.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Consent field (NZ)",
+        "from": "Council consent required? (Check local rules — many areas exempt under certain sizes)",
+        "to": "Council requirements checked? (Rules differ by council. Connecting rainwater to the plumbing of a house that also has mains water needs a building consent, and the law requires the mains supply to be isolated by a backflow prevention device installed by a qualified plumber. A tank on a stand over one metre high generally needs a consent too.)",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "REGULATORY: 'many areas exempt under certain sizes' is an invented compliance claim. MBIE: rules differ by council; connecting to the plumbing of a house with mains water needs a building consent and a backflow prevention device installed by a qualified plumber; a tank on a stand over one metre high generally needs a consent.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Consent field (AU)",
+        "from": "Council consent required? (Check local rules — many areas exempt under certain sizes)",
+        "to": "Council, state and territory requirements checked? (Rules differ by area — contact your local council about building or planning rules for rainwater tanks, and ask a licensed plumber about connecting to household plumbing.)",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "REGULATORY: requirements vary by council, state and territory. NSW Health directs people to their local council for building or planning rules. No national rule is claimed.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Tank placement (NZ)",
+        "from": "<div class=\"info-box-title\">Tank Placement Rules</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>1.</strong> On stable, level ground — concrete pad recommended<br><strong>2.</strong> Close to downpipes to minimise pipe runs<br><strong>3.</strong> Dark location or opaque tank — sunlight grows algae<br><strong>4.</strong> Above garden / irrigation if gravity-feeding<br><strong>5.</strong> Accessible for cleaning and maintenance</p>",
+        "to": "<div class=\"info-box-title\">Tank Placement Rules</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>1.</strong> On stable, level ground — concrete pad recommended<br><strong>2.</strong> Close to downpipes to minimise pipe runs<br><strong>3.</strong> Dark location or opaque tank — many tanks are dark-coloured to stop light getting in and encouraging algae<br><strong>4.</strong> Above garden / irrigation if gravity-feeding<br><strong>5.</strong> Accessible for cleaning and maintenance<br><strong>6.</strong> Screen the tank inlet to keep out insects, birds and animals, and keep the tank tightly covered<br><strong>7.</strong> Overflow has to be contained on your property or directed to the stormwater system — overflow that damages your property or a neighbour's can leave you liable</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "Keeps the practical points and grounds the algae one in MBIE's wording. Adds inlet screening and MBIE's overflow rule (contain on your property or direct to stormwater; damage can leave you liable).",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Tank placement (AU)",
+        "from": "<div class=\"info-box-title\">Tank Placement Rules</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>1.</strong> On stable, level ground — concrete pad recommended<br><strong>2.</strong> Close to downpipes to minimise pipe runs<br><strong>3.</strong> Dark location or opaque tank — sunlight grows algae<br><strong>4.</strong> Above garden / irrigation if gravity-feeding<br><strong>5.</strong> Accessible for cleaning and maintenance</p>",
+        "to": "<div class=\"info-box-title\">Tank Placement Rules</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>1.</strong> On stable, level ground — concrete pad recommended<br><strong>2.</strong> Close to downpipes to minimise pipe runs<br><strong>3.</strong> Dark location or opaque tank — many tanks are dark-coloured to stop light getting in and encouraging algae<br><strong>4.</strong> Above garden / irrigation if gravity-feeding<br><strong>5.</strong> Accessible for cleaning and maintenance<br><strong>6.</strong> Fit closely fitting, fine insect-proof screens (for example 1 mm) on all inlets and overflows, and clean them regularly<br><strong>7.</strong> Keep the tank sealed around pipe connections, with access hatches closed tightly</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "market-variant",
+        "reason": "As NZ, with NSW Health's wording: fine insect-proof screens (for example 1 mm) on all inlets and overflows, cleaned regularly, and tanks sealed around pipe connections.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Closing",
+        "from": "<h3>Day 10 Complete</h3>\n  <p>You now know your roof's harvest potential, your minimum tank size, and every component your system needs. The next asset turns attention to food security.</p>",
+        "to": "<h3>Rainwater Plan Complete</h3>\n  <p>You now have your roof's harvest potential, a minimum tank size to aim for, and the components to price and plan.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "legacy-programme-context",
+        "reason": "'Day 10 Complete' and the next-day teaser; 'every component your system needs' overstates a planning checklist."
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: OG-11 30-Day Pantry Builder →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-23",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' programme navigation."
+      }
+    ]
+  }
 }

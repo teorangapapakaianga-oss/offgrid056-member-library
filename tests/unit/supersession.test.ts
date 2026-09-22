@@ -44,6 +44,16 @@ describe("route supersession", () => {
     expect(resolveRouteCollisions(input, { preview: false }).aliases.size).toBe(0);
   });
 
+  it("handles the next known clash the same way, with no OG-10 exception (Stage 9.40)", () => {
+    // OG-10's record shape, against the demo placeholder it will supersede.
+    const og10 = { id: "res-1010", slug: "rainwater-harvesting-planner", isPlaceholder: false };
+    const demo = { id: "res-0016", slug: "rainwater-harvesting-planner", isPlaceholder: true };
+    const { resources, aliases } = resolveRouteCollisions([demo, og10, placeholder], { preview: true });
+    expect(resources.map((r) => r.id)).toEqual(["res-1010", "res-0015"]);
+    expect(aliasOf(aliases)("res-0016")).toBe("res-1010");
+    expect(() => resolveRouteCollisions([demo, og10], { preview: false })).toThrow(/outside the private preview/);
+  });
+
   it("keeps the public demo build unchanged: the placeholder is still there, once", () => {
     const all = loadAllResourceFiles();
     const onRoute = all.filter((r) => r.slug === "water-storage-calculator");

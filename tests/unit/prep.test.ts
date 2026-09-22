@@ -792,3 +792,62 @@ describe("OG-08 water calculator", () => {
     expect(meta["OG-26"].futureWordingReview.status).toMatch(/^QUEUED/);
   });
 });
+
+/**
+ * Stage 9.40. OG-10 plans rainwater collection: no universal efficiency, rainfall, tank size or dry spell, and each
+ * market's own regulator wording for consents, plumbing and electrical work.
+ */
+describe("OG-10 rainwater planner", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const load = (f: string) => (JSON.parse(fs.readFileSync(path.resolve(`admin-import/config/${f}`), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-10"];
+  const og10 = load("approved-copy.json") ?? load("proposed-copy.json") ?? [];
+  const forMarket = (m: string) =>
+    og10.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ")).join("\n");
+  const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources["OG-10"];
+
+  it("drops the unsourced efficiency, daily use, dry spell and tank rules of thumb", () => {
+    const to = og10.map((c) => c.to).join("\n");
+    for (const s of ["85–90%", 'placeholder="90%"', "150–300L", "21–30 days", "3–7 days", "multiples of 5,000L", "many areas exempt", "Typical NZ home"]) expect(to, s).not.toContain(s);
+    for (const m of ["NZ", "AU"]) expect(forMarket(m), m).toContain("there is no standard figure");
+  });
+
+  it("keeps the 150,000 L figure only as a labelled worked example, before losses", () => {
+    for (const m of ["NZ", "AU"]) {
+      expect(forMarket(m)).toMatch(/Worked example, not your figure/);
+      expect(forMarket(m)).toContain("catches about 150,000 litres before losses");
+      expect(forMarket(m)).not.toContain("can harvest");
+    }
+  });
+
+  it("uses each market's own regulator, rainfall source and licensed trades", () => {
+    const nz = forMarket("NZ");
+    const au = forMarket("AU");
+    expect(nz).toContain("regional council or NIWA");
+    expect(nz).toContain("backflow prevention device installed by a qualified plumber");
+    expect(nz).toContain("licensed electrical worker");
+    expect(nz).not.toMatch(/Bureau of Meteorology|NSW Health|licensed electrician|state or territory/);
+    expect(au).toContain("Bureau of Meteorology");
+    expect(au).toContain("licensed plumber");
+    expect(au).toContain("licensed electrician");
+    expect(au).not.toMatch(/NIWA|MBIE|building consent|electrical worker/);
+  });
+
+  it("keeps NZ's published tank sizes out of Australia, and claims no national AU rule", () => {
+    expect(forMarket("NZ")).toMatch(/at least 30,000 litres/);
+    expect(forMarket("AU")).not.toMatch(/30,000|5,000-litre|240 litres/);
+    expect(forMarket("AU")).toContain("no single Australian figure");
+    expect(forMarket("AU")).toContain("what your council and your state or territory require");
+  });
+
+  it("never says roof water is automatically drinkable, and keeps treatment detail out", () => {
+    for (const m of ["NZ", "AU"]) expect(forMarket(m), m).toContain("not automatically safe to drink");
+    // Treatment specifics belong to the approved blocks and the future OG-09, not to this planner.
+    expect(og10.map((c) => c.to).join("\n")).not.toMatch(/UV|chlorin|boil|micron/i);
+  });
+
+  it("uses the two approved blocks, and records why the electrical block is not used", () => {
+    expect(meta.safetyBlocks).toEqual(["stored-drinking-water", "working-at-height"]);
+    expect(meta.safetyNote).toMatch(/electrical block is NOT used/);
+    expect(meta.relatedResources).toEqual(["res-1008", "res-1512"]);
+  });
+});

@@ -569,6 +569,41 @@
       "relatedResourcesStatus": "owner-approved 2026-09-22",
       "route": "/resources/water-storage-calculator/ — in the private preview this real record supersedes the Stage 5 demo placeholder res-0015 (Stage 9.38 rulings 10–12); the public/demo build is unchanged",
       "deploymentApproved": "2026-09-22 (Stage 9.38 ruling 18, conditional on final validation)"
+    },
+    "OG-10": {
+      "foundation": "water",
+      "foundationStatus": "PROPOSED — audit HIGH",
+      "resourceType": "planner",
+      "resourceTypeStatus": "PROPOSED — audit HIGH",
+      "category": "rainwater",
+      "categoryStatus": "INFERRED — PROPOSED: 'Collecting and using rainwater, within local rules.' Alternative: water-storage.",
+      "difficulty": null,
+      "difficultyStatus": "OWNER-REVIEW REQUIRED",
+      "difficultySource": "none stated",
+      "difficultyRecommendation": "intermediate (INFERRED): roof measurements, a two-stage calculation, a component list and council requirements",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
+      "estimatedTimeRecommendation": 30,
+      "estimatedTimeReasoning": "INFERRED: three catchment rows, three tank-sizing steps, an eight-row component list and three planning fields. Excludes getting quotes and council checks.",
+      "description": "Calculate how much rainwater your roof can catch, what size tank you need, and where to put it. From roof to tank — the numbers you need to plan.",
+      "descriptionStatus": "PROPOSED — the cover subtitle with the corrected last sentence (proposed change 3)",
+      "tags": [],
+      "safetyBlocks": [
+        "stored-drinking-water",
+        "working-at-height"
+      ],
+      "approvedSafetyBlocks": [
+        "stored-drinking-water",
+        "working-at-height"
+      ],
+      "approvedSafetyBlocksStatus": "both already owner-approved for NZ and AU (Stages 9.19 and 9.21)",
+      "safetyNote": "The electrical block is NOT used: its content is solar, batteries and generators. The pump's licensed-work wording is market-specific copy instead (proposed changes 17–18). Flagged for the owner.",
+      "relatedResources": [
+        "res-1008",
+        "res-1512"
+      ],
+      "relatedResourcesStatus": "PROPOSED — Water Storage Calculator (need and storage before collection) and Off-Grid System Architecture Planner (the whole water system). OG-09 and OG-B08 are not linked: not deployed.",
+      "routeNote": "Expected to collide with the demo placeholder 'rainwater-harvesting-planner'; handled by the reusable private-preview override (Stage 9.39), with no OG-10-specific exception."
     }
   }
 }
