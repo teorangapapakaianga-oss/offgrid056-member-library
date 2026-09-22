@@ -65,6 +65,12 @@ describe("cover layout", () => {
     expect(html).not.toContain('class="cover-text"');
   });
 
+  it("keeps table rows whole across printed pages, and only where there are tables", () => {
+    const withTable = DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><table><tr><td>Week 2</td><td>Long cell</td></tr></table>");
+    expect(reskinHtml(withTable).html).toContain("tr { break-inside: avoid; page-break-inside: avoid; }");
+    expect(reskinHtml(DOC).html).not.toContain("break-inside: avoid");
+  });
+
   it("changes no cover wording", () => {
     const { html } = reskinHtml(DOC);
     for (const text of ["OffGrid056 30-Day Programme", "OG-27 90-Day Implementation Roadmap", "Turn your plan into phased action with deadlines"]) {

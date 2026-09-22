@@ -63,6 +63,7 @@ export interface PrepResult {
   recordStatus: string;
   pdfTitle: string;
   blockedBy: { dependency: string; reason?: string } | null;
+  relatedResources: string[];
   files: string[];
 }
 
@@ -283,6 +284,8 @@ export interface PrepInputs {
   pdfTitle?: string | null;
   /** unapproved copy changes, rendered only so the owner can review the result; they hold the resource */
   proposedCopy?: ApprovedCopyChange[];
+  /** library links to resources this one depends on or leads to (ids; each must exist in the same build) */
+  relatedResources?: string[];
   /** another resource this one cannot be published without */
   blockedBy?: { dependency: string; reason?: string } | null;
 }
@@ -429,7 +432,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     fileUrl: `/resources/${slug}.pdf`,
     fileFormat: "PDF",
     publishedDate: new Date().toISOString().slice(0, 10),
-    relatedResources: [],
+    relatedResources: inputs.relatedResources ?? [],
     completionAvailable: true,
   };
   const parsed = ResourceSchema.safeParse(record);
@@ -484,6 +487,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     recordStatus: String(record.status),
     pdfTitle,
     blockedBy: inputs.blockedBy ?? null,
+    relatedResources: inputs.relatedResources ?? [],
     files,
   };
 }

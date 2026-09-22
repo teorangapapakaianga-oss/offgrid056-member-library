@@ -155,9 +155,10 @@
       },
       "sharedOrVaries": "VARIES — the official amounts differ (NZ: at least 3 L per person per day for three days; AU (Qld): at least 10 L per person for three days), and only NZ publishes a home bottle-preparation method (5 drops of unscented bleach per litre, check every 6 months). No AU source read gives a bleach ratio for home storage (WA's ratios depend on the bleach's chlorine strength), so the AU block gives boiling guidance instead. No shelf life, tank size or treatment ratio beyond these is stated.",
       "verification": {
-        "NZ": "VERIFIED_LIVE 2026-09-22 — awaiting owner approval",
-        "AU": "VERIFIED 2026-09-22 — awaiting owner approval"
-      }
+        "NZ": "VERIFIED_LIVE — OWNER-APPROVED 2026-09-22",
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
+      },
+      "changeRule": "Owner ruling 9: any future change requires source re-verification; no bleach ratio, storage period or treatment instruction may move between markets."
     }
   }
 }

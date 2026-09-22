@@ -394,6 +394,36 @@
         "approvedOn": "2026-09-22",
         "kind": "legacy-programme-context",
         "reason": "'Next: OG-xx' navigation to OG-28, not in the library (owner ruling 3)."
+      },
+      {
+        "where": "Week 1 — budget tier",
+        "from": "Confirm budget tier from OG-26.",
+        "to": "Confirm the budget tier you chose in the 3-Tier Budget Planner.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "dependency-reference",
+        "reason": "Owner ruling 4, exact wording: names the library resource, not the legacy code."
+      },
+      {
+        "where": "Week 11 — budget reconciliation",
+        "from": "Compare actual spend to OG-26 budget.",
+        "to": "Compare actual spend to your 3-Tier Budget Planner budget.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "dependency-reference",
+        "reason": "Owner ruling 1: library titles in member-facing references, not OG codes."
+      },
+      {
+        "where": "Week 2 — food",
+        "from": "Place orders for emergency water storage, filtration, and 4-week food supply.",
+        "to": "Place orders for emergency water storage and filtration, and build a food reserve beyond your basic emergency supply, sized to your household, storage capacity and resilience goals.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Owner ruling 6: the same rule as OG-26 — no '4-week' requirement; a planning target instead."
       }
     ],
     "OG-02": [
@@ -446,6 +476,451 @@
         "approvedOn": "2026-09-22",
         "kind": "legacy-programme-context",
         "reason": "Standing owner rule for obsolete programme navigation (Stage 9.18 rulings 3 and 7), required by the Stage 9.19 deployment validation 'no obsolete programme navigation'. Navigation only; no teaching content. OG-03 is not in the library."
+      }
+    ],
+    "OG-22": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 4 — Action Plan & Pathway</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover title",
+        "from": "<h1 class=\"cover-title\">OG-22 Resilience Product Wishlist</h1>",
+        "to": "<h1 class=\"cover-title\">Resilience Product Wishlist</h1>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Legacy code in member copy.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "<p class=\"cover-subtitle\">Day 22 — Prioritise what to buy, when, and why</p>",
+        "to": "<p class=\"cover-subtitle\">Prioritise what to buy, when, and why</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day label.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Header line",
+        "from": "<div class=\"meta\">Day 22 — Week 4: Action Plan &amp; Pathway | OffGrid056 30-Day Programme</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day, week and name.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 1 — inputs",
+        "from": "Review your Week 1 Audit (OG-01), Week 2 Water &amp; Food plans (OG-08 to OG-14), and Week 3 Shelter &amp; Energy designs (OG-15 to OG-21).",
+        "to": "Review your household assessment and your water, food, shelter and energy plans — for example, your Household Risk Identifier results and your Warm Home Scorecard.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "dependency-reference",
+        "reason": "Replaces programme weeks and thirteen legacy codes with the inputs a member actually has; names only resources already in the library (OG-02, OG-15).",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 22 Complete</h3>",
+        "to": "<h3>Wishlist Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day X Complete'.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing — tomorrow teaser",
+        "from": "<p><strong>Next:</strong> Tomorrow you will build a Supplier Question Bank to vet sellers and installers before you spend a dollar.</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-day navigation to OG-23, not in the library.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<span class=\"next-link\">Next: OG-23 Supplier Question Bank &rarr;</span>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' navigation.",
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Wishlist tables — currency (AU)",
+        "from": "Est. Cost ($NZD)",
+        "to": "Est. Cost ($AUD)",
+        "expectedMatches": 3,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Genuine AU variant: the member budgets in their own currency.",
+        "markets": [
+          "AU"
+        ],
+        "approval": "Stage 9.21 rulings 3 (market variants) and 12 (legacy cleanup)",
+        "proposedOn": "2026-09-22"
+      }
+    ],
+    "OG-26": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 4 — Action Plan & Pathway</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover title",
+        "from": "<h1 class=\"cover-title\">OG-26 3-Tier Budget Planner</h1>",
+        "to": "<h1 class=\"cover-title\">3-Tier Budget Planner</h1>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Legacy code in member copy.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "<p class=\"cover-subtitle\">Day 26 — Align your spend with your actual capacity</p>",
+        "to": "<p class=\"cover-subtitle\">Align your spend with your actual capacity</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day label.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Header line",
+        "from": "<div class=\"meta\">Day 26 — Week 4: Action Plan &amp; Pathway | OffGrid056 30-Day Programme</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme day, week and name.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 26 Complete</h3>",
+        "to": "<h3>Budget Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day X Complete'.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing — tomorrow teaser",
+        "from": "<p><strong>Next:</strong> Tomorrow you will map your chosen tier onto a 90-Day Implementation Roadmap with clear milestones.</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-day navigation; the library links OG-26 and OG-27 as related resources instead.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<span class=\"next-link\">Next: OG-27 90-Day Implementation Roadmap &rarr;</span>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' navigation.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 1 — MUST items",
+        "from": "Start with MUST items only (from OG-22).",
+        "to": "Start with the MUST items from your Resilience Product Wishlist.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "dependency-reference",
+        "reason": "Names the canonical library source of the MUST framework (OG-22) instead of its legacy code; does not redefine MUST.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier 1 description",
+        "from": "No frills. No expansion. Just core survival.",
+        "to": "No frills. No expansion. Core household resilience essentials.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-copy",
+        "reason": "Owner direction: calmer current wording.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier 3 comms",
+        "from": "Starlink / satellite comms + HAM radio",
+        "to": "Satellite internet service (such as Starlink) + amateur (ham) radio",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "provider-reference",
+        "reason": "Owner direction: category first, provider as an example only.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 3 — contingency",
+        "from": "Add 15% contingency.",
+        "to": "Add a contingency allowance.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "15% has no authoritative source; the same class as OG-B10's removed 10–20%.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier subtotals — contingency (×3)",
+        "from": "<strong>Contingency (15%)</strong>",
+        "to": "<strong>Contingency</strong>",
+        "expectedMatches": 3,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "15% has no authoritative source.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier 1 water",
+        "from": "Emergency water storage (200L minimum)",
+        "to": "Emergency drinking water for your household (see Storing drinking water)",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "200L has no source; the official per-person amounts are in the drinking-water safety block for each market.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier 1 food",
+        "from": "4-week emergency food supply",
+        "to": "Build a food reserve beyond your basic emergency supply, sized to your household, storage capacity and resilience goals",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Owner ruling 6: a planning target, not an official requirement. The 4-week figure had no source and contradicted the tier's 72-hour scope.",
+        "approval": "Stage 9.21 ruling 6 (owner's preferred wording)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier 2 water",
+        "from": "Rainwater tank (5,000L+) + pump + filtration",
+        "to": "Rainwater tank sized for your household + pump + filtration",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "5,000L has no source; tank sizing depends on the household and site.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier 2 solar",
+        "from": "Grid-tied solar (3-5kW) + monitoring",
+        "to": "Grid-tied solar sized to your household's use + monitoring",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "3–5kW has no source; sizing is an installer's job.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Tier 3 power",
+        "from": "Off-grid solar + battery (10kWh+) + backup gen",
+        "to": "Off-grid solar + battery storage sized to your needs + backup generator",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "10kWh has no source; sizing is an installer's job.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing summary",
+        "from": "grounded in actual NZ costs and available subsidies",
+        "to": "grounded in real local costs and the assistance available to you",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Market-neutral; each market's own assistance table follows.",
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 2 — costs (NZ)",
+        "from": "Assign realistic NZ market costs.</strong> Use Trade Me, local suppliers, or quotes from OG-23 enquiries.",
+        "to": "Assign realistic local costs.</strong> Use local suppliers, second-hand listings such as Trade Me, or written quotes.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Trade Me kept as an example only (owner ruling); OG-23 is not in the library.",
+        "markets": [
+          "NZ"
+        ],
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 4 — assistance (NZ)",
+        "from": "Subtract available subsidies.</strong> Warmer Kiwi Homes, EECA grants, and council programmes reduce net cost.",
+        "to": "Subtract any assistance you are eligible for.</strong> Check current government, council or provider assistance that may apply to your household.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Owner's neutral wording; the verified programmes are in the table.",
+        "markets": [
+          "NZ"
+        ],
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Assistance table (NZ)",
+        "from": "<h2>Subsidy &amp; Grant Reference (NZ)</h2>\n  <table>\n    <tr><th>Programme</th><th>What It Covers</th><th>Approx. Value</th><th>Eligibility</th></tr>\n    <tr><td>Warmer Kiwi Homes</td><td>Insulation + heating (heat pump or wood burner)</td><td>Up to $3,000</td><td>Low-income homeowner, pre-2008 home</td></tr>\n    <tr><td>EECA Business Grants</td><td>Energy audits, efficient equipment</td><td>Varies</td><td>Business or farm energy users</td></tr>\n    <tr><td>Regional Council Rebates</td><td>Rainwater tanks, native planting, fencing</td><td>$200-$1,000</td><td>Varies by region — check your council</td></tr>\n    <tr><td>Solar Zero-Interest Loans</td><td>Solar PV and battery finance</td><td>Up to $30,000</td><td>Homeowner with acceptable credit</td></tr>\n    <tr><td>Rural Support Trust</td><td>Advisory and sometimes hardship assistance</td><td>Advisory</td><td>Rural and farming households</td></tr>\n  </table>",
+        "to": "<h2>Assistance to check (New Zealand)</h2>\n  <table>\n    <tr><th>Programme</th><th>What it covers</th><th>Amount</th><th>Who can apply</th></tr>\n    <tr><td>Warmer Kiwi Homes (EECA)</td><td>Grants towards ceiling and underfloor insulation, and heat pumps. Wood and pellet burners are no longer funded.</td><td>A share of the cost that depends on your eligibility — check with EECA</td><td>Owner-occupiers of homes built before 2008 who hold a Community Services Card or SuperGold Combo card, or live in an eligible area. Rentals are not eligible.</td></tr>\n    <tr><td>Your regional or district council</td><td>Varies by council</td><td>Varies</td><td>Check your council's website</td></tr>\n    <tr><td>Rural Support Trust</td><td>Free, confidential support for rural people, including connection to financial and other help</td><td>Free</td><td>Rural communities — 0800 787 254</td></tr>\n  </table>\n  <p style=\"font-size:12px; color:#777; margin-top:4px;\"><em>Checked 22 September 2026. Programmes and eligibility change — confirm with the provider before relying on this.</em></p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Verified 2026-09-22 against official pages. Removed: fixed amounts (depend on eligibility), EECA Business Grants (business-only), 'Solar Zero-Interest Loans' (not an official programme found). Corrected: Warmer Kiwi Homes no longer funds wood burners.",
+        "markets": [
+          "NZ"
+        ],
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 2 — costs (AU)",
+        "from": "Assign realistic NZ market costs.</strong> Use Trade Me, local suppliers, or quotes from OG-23 enquiries.",
+        "to": "Assign realistic local costs.</strong> Use local suppliers, local second-hand marketplaces, or written quotes.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "No Trade Me in AU (owner ruling); neutral marketplace wording, no commercial preference.",
+        "markets": [
+          "AU"
+        ],
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 4 — assistance (AU)",
+        "from": "Subtract available subsidies.</strong> Warmer Kiwi Homes, EECA grants, and council programmes reduce net cost.",
+        "to": "Subtract any assistance you are eligible for.</strong> Check current government, council or provider assistance that may apply to your household.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Owner's neutral wording; no NZ schemes in the AU file.",
+        "markets": [
+          "AU"
+        ],
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Assistance table (AU)",
+        "from": "<h2>Subsidy &amp; Grant Reference (NZ)</h2>\n  <table>\n    <tr><th>Programme</th><th>What It Covers</th><th>Approx. Value</th><th>Eligibility</th></tr>\n    <tr><td>Warmer Kiwi Homes</td><td>Insulation + heating (heat pump or wood burner)</td><td>Up to $3,000</td><td>Low-income homeowner, pre-2008 home</td></tr>\n    <tr><td>EECA Business Grants</td><td>Energy audits, efficient equipment</td><td>Varies</td><td>Business or farm energy users</td></tr>\n    <tr><td>Regional Council Rebates</td><td>Rainwater tanks, native planting, fencing</td><td>$200-$1,000</td><td>Varies by region — check your council</td></tr>\n    <tr><td>Solar Zero-Interest Loans</td><td>Solar PV and battery finance</td><td>Up to $30,000</td><td>Homeowner with acceptable credit</td></tr>\n    <tr><td>Rural Support Trust</td><td>Advisory and sometimes hardship assistance</td><td>Advisory</td><td>Rural and farming households</td></tr>\n  </table>",
+        "to": "<h2>Assistance to check (Australia)</h2>\n  <table>\n    <tr><th>Where to look</th><th>What you will find</th><th>Amount</th><th>Who can apply</th></tr>\n    <tr><td>energy.gov.au — Rebates and assistance</td><td>The Australian Government's search tool for federal, state and territory rebates, concessions, grants and loans. energy.gov.au does not run the programs itself.</td><td>Varies by program</td><td>Search by your state or territory and by topic (for example insulation, solar PV or batteries)</td></tr>\n    <tr><td>Your state or territory government</td><td>Rebates and concessions for eligible households, including concession-card holders</td><td>Varies</td><td>Check your state or territory's energy or concessions pages</td></tr>\n    <tr><td>Your local council</td><td>Varies by council</td><td>Varies</td><td>Check your council's website</td></tr>\n  </table>\n  <p style=\"font-size:12px; color:#777; margin-top:4px;\"><em>Checked 22 September 2026. Programmes and eligibility change — confirm with the provider before relying on this.</em></p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Genuine AU variant: the Australian Government's official rebates finder (verified live 2026-09-22) instead of NZ schemes. No amounts invented.",
+        "markets": [
+          "AU"
+        ],
+        "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
+        "proposedOn": "2026-09-22"
       }
     ]
   }

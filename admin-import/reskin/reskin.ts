@@ -154,6 +154,13 @@ export function reskinHtml(source: string, options: ReskinOptions = {}): ReskinR
   // larger heading, a title that wraps to a third line grows upward over the label ("OffGrid056 30-Day
   // Programme" disappeared behind "OG-27 90-Day Implementation Roadmap"). They are stacked in one
   // bottom-anchored column instead, so a longer title pushes the label up rather than covering it.
+  // A table row must never split across a page: a row torn between pages 3 and 4 reads as two broken rows
+  // (found when an approved, longer OG-27 cell pushed its row over a page boundary).
+  if (/<table/i.test(html)) {
+    html = html.replace("</head>", `<style>\n  tr { break-inside: avoid; page-break-inside: avoid; }\n</style>\n</head>`);
+    record("layout", "table rows could split across pages", "rows kept whole when printing", 1);
+  }
+
   // Only that layout: the centred cover design already stacks these in normal flow, and wrapping it would break
   // its centring.
   const coverText = /(<div class="cover-label">[\s\S]*?<\/div>\s*<h1 class="cover-title">[\s\S]*?<\/h1>\s*<p class="cover-subtitle">[\s\S]*?<\/p>)/;

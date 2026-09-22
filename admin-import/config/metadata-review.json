@@ -99,7 +99,11 @@
         "dependency": "OG-22 / Resilience Product Wishlist and OG-26 / 3-Tier Budget Planner",
         "reason": "OG-27 schedules the Essential / Balanced / Complete tiers defined in OG-26, which in turn budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): order OG-22 → OG-26 → OG-27.",
         "decidedOn": "2026-09-22"
-      }
+      },
+      "relatedResources": [
+        "res-1026"
+      ],
+      "relatedResourcesNote": "OG-27 → OG-26."
     },
     "OG-B07": {
       "foundation": "energy",
@@ -190,41 +194,49 @@
         "batteries-and-electrical",
         "indoor-combustion",
         "carbon-monoxide",
-        "solid-fuel-heating"
+        "solid-fuel-heating",
+        "stored-drinking-water"
       ],
-      "approvedSafetyBlocksStatus": "wording owner-approved 2026-09-22 (Stage 9.18); use in OG-26 still subject to owner review",
+      "approvedSafetyBlocksStatus": "all blocks owner-approved; stored-drinking-water NZ + AU approved 2026-09-22 (Stage 9.21 ruling 9)",
       "dependencies": {
         "OG-22 / Resilience Product Wishlist": "'Start with MUST items only (from OG-22)' — the MUST list is defined in OG-22, which is not in the library",
         "OG-23 / Supplier Question Bank": "'quotes from OG-23 enquiries' — a soft reference; the budget works without it"
       },
       "description": "Align your spend with your actual capacity",
-      "descriptionStatus": "PROPOSED — cover subtitle without 'Day 26 —'",
+      "descriptionStatus": "owner-approved 2026-09-22",
       "blockedBy": {
         "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
         "dependency": "OG-22 / Resilience Product Wishlist",
         "reason": "OG-26 budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): migrate OG-22 first so OG-26 references a real library resource.",
         "decidedOn": "2026-09-22"
-      }
+      },
+      "relatedResources": [
+        "res-1022"
+      ],
+      "relatedResourcesNote": "OG-26 → OG-22. Add res-1027 when OG-27 is deployed (the build rejects links to resources not in it)."
     },
     "OG-22": {
       "foundation": "general",
-      "foundationStatus": "PROPOSED — inferred (audit MEDIUM): a whole-household prioritisation tool across all foundations; matches OG-26 and OG-27",
+      "foundationStatus": "owner-approved 2026-09-22",
       "resourceType": "worksheet",
       "resourceTypeStatus": "owner-approved at Stage 9.7 ('types OG-22 Worksheet')",
       "category": "planning",
-      "categoryStatus": "PROPOSED — same as OG-26 and OG-27",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
-      "estimatedTimeRecommendation": 30,
+      "categoryStatus": "owner-approved 2026-09-22",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "owner-approved 2026-09-22",
       "estimatedTimeReasoning": "Read the MoSCoW framework, score candidate items on five 1–5 criteria, then fill up to 19 wishlist rows, a budget summary and three purchase batches. Assumes rough costs are known.",
-      "difficulty": null,
-      "difficultyStatus": "NEEDS_OWNER_REVIEW",
-      "difficultySource": "none — the document states no level",
-      "difficultyRecommendation": "beginner (INFERRED) — listing, 1–5 scoring and rough costing; no technical knowledge",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived; the document states no level",
       "description": "Prioritise what to buy, when, and why",
-      "descriptionStatus": "PROPOSED — cover subtitle without 'Day 22 —'",
+      "descriptionStatus": "owner-approved 2026-09-22",
       "safetyBlocks": [],
-      "approvedSafetyBlocks": []
+      "approvedSafetyBlocks": [],
+      "canonical": "Canonical Member Library source of the MoSCoW MUST-items framework (owner ruling 1, Stage 9.21). Criteria and thresholds must not be altered silently.",
+      "relatedResources": [
+        "res-1026"
+      ],
+      "relatedResourcesNote": "OG-22 → OG-26. Valid only when OG-26 is deployed in the same build."
     }
   }
 }

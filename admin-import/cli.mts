@@ -529,6 +529,7 @@ async function commandPrep() {
       description: metadata[item.legacyCode]?.description ?? null,
       pdfTitle: metadata[item.legacyCode]?.pdfTitle ?? null,
       proposedCopy: proposedCopy[item.legacyCode] ?? [],
+      relatedResources: metadata[item.legacyCode]?.relatedResources ?? [],
       blockedBy: metadata[item.legacyCode]?.blockedBy ?? null,
     });
     results.push(result);
