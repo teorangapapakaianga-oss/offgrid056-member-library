@@ -850,4 +850,32 @@ describe("OG-10 rainwater planner", () => {
     expect(meta.safetyNote).toMatch(/electrical block is NOT used/);
     expect(meta.relatedResources).toEqual(["res-1008", "res-1512"]);
   });
+
+  // Stage 9.40 rulings 4, 5, 9, 10 and 11.
+  it("presents NZ's MBIE tank figures as published guidance and examples, never as requirements", () => {
+    const nz = forMarket("NZ");
+    expect(nz).toContain("NZ published planning guidance (Building Performance, MBIE) — examples for each use, not requirements or OffGrid056 recommendations:");
+    // Each figure keeps the use it belongs to.
+    expect(nz).toMatch(/garden watering[^.]*240 litres/);
+    expect(nz).toMatch(/year-round rain a 5,000-litre tank/);
+    expect(nz).toMatch(/only water supply, at least 30,000 litres/);
+    expect(forMarket("AU")).not.toMatch(/MBIE|published planning guidance/);
+  });
+
+  it("marks the 1 mm screen figure as NSW guidance, not a national rule, and keeps it out of NZ", () => {
+    expect(forMarket("AU")).toContain("NSW Health guidance, an example rather than a national rule, suggests about 1 mm");
+    expect(forMarket("NZ")).not.toMatch(/1 mm|NSW/);
+  });
+
+  it("covers the pump with a short market-specific line, not the electrical block", () => {
+    expect(forMarket("NZ")).toContain("Fixed electrical work and the pump connection must be handled by an appropriately licensed electrical worker.");
+    expect(forMarket("AU")).toContain("Fixed electrical work and the pump connection must be handled by a licensed electrician.");
+    // No DIY wiring, and no consent claimed for every tank.
+    expect(og10.map((c) => c.to).join("\n")).not.toMatch(/wire it|wiring diagram|connect the pump yourself/i);
+    expect(forMarket("NZ")).toContain("not every tank needs a consent");
+  });
+
+  it("says plainly that roof rainfall is not usable water", () => {
+    for (const m of ["NZ", "AU"]) expect(forMarket(m), m).toContain("What lands on the roof is not what you can use");
+  });
 });

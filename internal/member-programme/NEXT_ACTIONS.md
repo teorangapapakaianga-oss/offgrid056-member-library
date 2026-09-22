@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.40.
+**As at:** 23 September 2026, after Stage 9.41.
 
 ---
 
@@ -10,9 +10,9 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **OG-10 Rainwater Harvesting Planner** — deploy as #17 | prepared and verified; 24 proposed changes | **owner decisions** (Stage 9.40 §15): the 24 changes · quoting MBIE's NZ tank sizes with no AU equivalent · whether to add the electrical block or keep market-specific pump wording · category, difficulty (intermediate) and time (30 min) |
-| 2 | On approval: re-render, verify, deploy | — | the route supersession check (OG-10 over demo placeholder `res-0016`), then rollback to `a65a1ef1` |
-| 3 | Update this workstream | — | after the stage report |
+| 1 | **Water treatment research** (gates OG-09) **or** the gas research stage | not started | owner go-ahead for a research-only stage |
+| 2 | **OG-B08 Water Tank Sizing & Placement Guide** — the next migration in the water pathway | not started | owner go-ahead; no new safety research needed |
+| 3 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; a low-risk alternative if the water run pauses |
 
 ## Water pathway
 
@@ -21,8 +21,8 @@ The order to work in, and why:
 | Order | Resource | State | Notes |
 |---|---|---|---|
 | ✅ | **OG-08** Water Storage Calculator | **live** | need and storage |
-| **now** | **OG-10** Rainwater Harvesting Planner | prepared | collection |
-| next | **OG-B08** Water Tank Sizing & Placement Guide | not started | tanks and placement; drinking-water block approved; likely working at height. Best after OG-10, so tank depth lives in one place. |
+| ✅ | **OG-10** Rainwater Harvesting Planner | **live** | collection |
+| **next** | **OG-B08** Water Tank Sizing & Placement Guide | not started | tanks and placement; drinking-water block approved; likely working at height. Best after OG-10, so tank depth lives in one place. |
 | blocked | **OG-09** Filtration Comparison Matrix | blocked | **treatment research first** |
 
 **Air still has no resource at all.** OG-13 (Healthy Home Air Audit) is the obvious candidate and needs no new safety
@@ -44,7 +44,7 @@ migrate nothing until the wording is approved.
 
 ### 2. Water treatment
 
-- **Unblocks:** OG-09, plus treatment detail in OG-10 and OG-B08
+- **Unblocks:** OG-09, plus treatment detail in the live OG-10 and in OG-B08
 - **Needed:** NZ (Taumata Arowai acceptable solutions, Health NZ, MBIE) and AU (enHealth, state health) on filtration,
   UV, chlorination and boiling — with each market's own figures kept separate
 
@@ -74,7 +74,7 @@ migrate nothing until the wording is approved.
 | **The remaining 24 not-started resources** | see `RESOURCE_REGISTER.md`. The general/planning group (OG-01, OG-03, OG-04, OG-07, OG-23, OG-24, OG-28, OG-29, OG-30) is mostly low-hazard and could move quickly. |
 | **Start Here rebuilt on real resources** | currently 6 demonstration steps |
 | **The 30-Day Programme** | 30 demonstration days; to be rebuilt on real resources, or retired in favour of the pathways |
-| **Retiring demo placeholders** | 29 remain. They are superseded one route at a time in the preview; a decision is needed before any public launch. |
+| **Retiring demo placeholders** | 28 remain. They are superseded one route at a time in the preview; a decision is needed before any public launch. |
 | **Production membership system** | accounts, progress across devices, publishing resources from draft |
 | **US and Canada** | **non-publishable** until each market has its own safety review. No US or CA wording, figures or rules are used anywhere today. |
 

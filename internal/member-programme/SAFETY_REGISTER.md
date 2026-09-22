@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.41. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -18,9 +18,9 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `batteries-and-electrical` | Batteries and electrical safety | **critical** | 22 Sep 2026 | OG-18, OG-19, OG-20, OG-21, OG-26, OG-27, OG-B07, OG-B12 |
 | `carbon-monoxide` | Carbon monoxide | **critical** | 22 Sep 2026 | OG-15, OG-20, OG-26, OG-27, OG-B12 |
 | `indoor-combustion` | Never bring it inside | **critical** | 22 Sep 2026 | OG-15, OG-26, OG-27 |
-| `working-at-height` | Stay off the roof | **critical** | 22 Sep 2026 | OG-18, OG-B07 (+ OG-10 proposed) |
+| `working-at-height` | Stay off the roof | **critical** | 22 Sep 2026 | OG-10, OG-18, OG-B07 |
 | `solid-fuel-heating` | Wood burners and open fires | high | 22 Sep 2026 | OG-15, OG-21, OG-26, OG-B12 |
-| `stored-drinking-water` | Storing drinking water | high | 22 Sep 2026 | OG-08, OG-26, OG-B12 (+ OG-10 proposed) |
+| `stored-drinking-water` | Storing drinking water | high | 22 Sep 2026 | OG-08, OG-10, OG-26, OG-B12 |
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 
@@ -40,6 +40,9 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | Food in a power cut | Get Ready order, MPI doors/refreeze/discard — **no timings, MPI publishes none** | NSW Food Authority: about 4 hours fridge, at least 24 hours freezer, eskies, 2-hour cooking rule |
 | Consents / approvals | building consent, "consents", council | permits or approvals; varies by state and territory |
 | Rainfall / weather data | regional council, NIWA | Bureau of Meteorology |
+| Rainwater tank sizes | MBIE's published figures, labelled as NZ guidance and examples for each use | **none published** — suppliers, council, state and territory |
+| Rainwater plumbing | building consent for a mains-connected system; backflow device by a qualified plumber; not every tank needs a consent | licensed plumber; council, state and territory rules |
+| Insect screens | screen the inlet; keep the tank covered | NSW Health's about-1 mm figure, **labelled NSW guidance, not a national rule** |
 
 **The invalid figure:** the old NZ fridge figure of "less than 24 hours" is **wrong and must never return**. MPI
 publishes no timings.
@@ -71,6 +74,8 @@ text changes, the exception stops applying.
 | **OG-B12** | AU: the same CO trim | same reason | Stage 9.36 |
 | **OG-15** | fuel check: exact text *"12. Backup heating exists (fireplace, wood burner, gas heater, portable)"* | list-only; no gas-use instruction; the resource already carries CO and indoor-combustion | Stage 9.36 |
 | **OG-26** | fuel check: exact text *"Emergency heating (gas heater / thermal blankets)"* | a budget line naming options; no gas-use instruction | Stage 9.36 |
+
+**Pump electrical wording (OG-10, owner ruling 9, Stage 9.40):** a resource that only mentions a pump does **not** get the solar/battery/generator electrical block. It carries a short market-specific line instead — NZ *"an appropriately licensed electrical worker"*, AU *"a licensed electrician"*. The canonical electrical block is unchanged.
 
 **Block-level trimming** (not resource-specific, but narrow): where the generator block is present, the electrical
 block drops its generator paragraph, so one point is not made twice. Every other resource keeps the full electrical

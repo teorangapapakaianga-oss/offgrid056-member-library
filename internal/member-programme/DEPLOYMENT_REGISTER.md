@@ -5,7 +5,7 @@ Every private-preview deployment: version, what went out, and what it can roll b
 **Worker:** `og056-preview` · **URL:** https://og056-preview.offgrid056-member-library.workers.dev
 **Access:** Cloudflare Access on all traffic, at every version.
 
-**As at:** 23 September 2026.
+**As at:** 23 September 2026, after Stage 9.41.
 
 ---
 
@@ -13,18 +13,19 @@ Every private-preview deployment: version, what went out, and what it can roll b
 
 | | |
 |---|---|
-| **Live version** | **`a65a1ef1-feea-4e89-9d96-c16b8db40336`** |
-| Deployed | 22 September 2026, 09:58 UTC |
-| Resources | **16** (32 market files) |
-| Stage | 9.39 — OG-08 Water Storage Calculator |
-| **Rollback** | `61d2acd0-4936-425f-a2d8-4cda5082db57` (15 resources) |
-| Private files for rollback | `workspace/backups/private-assets-61d2acd0` (45 files) |
+| **Live version** | **`d993cb64-676a-46bc-80eb-f4c9850fb0ea`** |
+| Deployed | 23 September 2026 |
+| Resources | **17** (34 market files) |
+| Stage | 9.41 — OG-10 Rainwater Harvesting Planner |
+| **Rollback** | `a65a1ef1-feea-4e89-9d96-c16b8db40336` (16 resources) |
+| Private files for rollback | `workspace/backups/private-assets-a65a1ef1` (48 files) |
 
 ## History
 
 | Version | Deployed (UTC) | Resources | Stage | What went out |
 |---|---|---|---|---|
-| `a65a1ef1` | 22 Sep 2026 09:58 | **16** | 9.39 | **OG-08** Water Storage Calculator · route supersession (real resource over demo placeholder, preview only) |
+| `d993cb64` | 23 Sep 2026 | **17** | 9.41 | **OG-10** Rainwater Harvesting Planner · second use of the route supersession (over demo placeholder res-0016) |
+| `a65a1ef1` | 22 Sep 2026 09:58 | 16 | 9.39 | **OG-08** Water Storage Calculator · route supersession (real resource over demo placeholder, preview only) |
 | `61d2acd0` | 22 Sep 2026 09:22 | 15 | 9.37 | **OG-B12** Off-Grid System Architecture Planner · fuel-detector correction (no global "gas heater" exemption) |
 | `77020e71` | 22 Sep 2026 08:29 | 14 | 9.35 | **OG-20** Alternative Energy Suitability Check · the generator-safety block · scoped AU CO trim |
 | `20a35551` | 22 Sep 2026 07:39 | 13 | 9.33 | **OG-21** Home Energy & Shelter Upgrade Plan · OG-18 back-links on OG-B07, OG-19, OG-26 (records only) |
@@ -48,8 +49,9 @@ Every deployment keeps two things:
 
 | Snapshot | Files | Matches |
 |---|---|---|
-| `private-assets-a65a1ef1` | 48 | the live build |
-| `private-assets-61d2acd0` | 45 | 15 resources — the current rollback |
+| `private-assets-d993cb64` | 51 | the live build |
+| `private-assets-a65a1ef1` | 48 | 16 resources — the current rollback |
+| `private-assets-61d2acd0` | 45 | 15 resources |
 | `private-assets-77020e71` | 42 | 14 resources |
 | `private-assets-20a35551` | 39 | 13 resources |
 | `private-assets-4daef2b4` | 36 | 12 resources, without the OG-18 back-links |

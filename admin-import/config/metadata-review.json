@@ -572,21 +572,19 @@
     },
     "OG-10": {
       "foundation": "water",
-      "foundationStatus": "PROPOSED — audit HIGH",
+      "foundationStatus": "owner-approved 2026-09-23",
       "resourceType": "planner",
-      "resourceTypeStatus": "PROPOSED — audit HIGH",
+      "resourceTypeStatus": "owner-approved 2026-09-23",
       "category": "rainwater",
-      "categoryStatus": "INFERRED — PROPOSED: 'Collecting and using rainwater, within local rules.' Alternative: water-storage.",
-      "difficulty": null,
-      "difficultyStatus": "OWNER-REVIEW REQUIRED",
-      "difficultySource": "none stated",
-      "difficultyRecommendation": "intermediate (INFERRED): roof measurements, a two-stage calculation, a component list and council requirements",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
-      "estimatedTimeRecommendation": 30,
+      "categoryStatus": "owner-approved 2026-09-23",
+      "difficulty": "intermediate",
+      "difficultyStatus": "owner-approved 2026-09-23",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "owner-approved 2026-09-23 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: three catchment rows, three tank-sizing steps, an eight-row component list and three planning fields. Excludes getting quotes and council checks.",
       "description": "Calculate how much rainwater your roof can catch, what size tank you need, and where to put it. From roof to tank — the numbers you need to plan.",
-      "descriptionStatus": "PROPOSED — the cover subtitle with the corrected last sentence (proposed change 3)",
+      "descriptionStatus": "owner-approved 2026-09-23",
       "tags": [],
       "safetyBlocks": [
         "stored-drinking-water",
@@ -597,13 +595,14 @@
         "working-at-height"
       ],
       "approvedSafetyBlocksStatus": "both already owner-approved for NZ and AU (Stages 9.19 and 9.21)",
-      "safetyNote": "The electrical block is NOT used: its content is solar, batteries and generators. The pump's licensed-work wording is market-specific copy instead (proposed changes 17–18). Flagged for the owner.",
+      "safetyNote": "The electrical block is NOT used (owner ruling 9, Stage 9.40): a short market-specific line covers the pump instead — NZ 'an appropriately licensed electrical worker', AU 'a licensed electrician'. The canonical electrical block is unchanged.",
       "relatedResources": [
         "res-1008",
         "res-1512"
       ],
-      "relatedResourcesStatus": "PROPOSED — Water Storage Calculator (need and storage before collection) and Off-Grid System Architecture Planner (the whole water system). OG-09 and OG-B08 are not linked: not deployed.",
-      "routeNote": "Expected to collide with the demo placeholder 'rainwater-harvesting-planner'; handled by the reusable private-preview override (Stage 9.39), with no OG-10-specific exception."
+      "relatedResourcesStatus": "owner-approved 2026-09-23",
+      "routeNote": "Expected to collide with the demo placeholder 'rainwater-harvesting-planner'; handled by the reusable private-preview override (Stage 9.39), with no OG-10-specific exception.",
+      "deploymentApproved": "2026-09-23 (Stage 9.40 ruling 20, conditional on final validation)"
     }
   }
 }

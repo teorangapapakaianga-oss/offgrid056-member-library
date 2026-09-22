@@ -2,18 +2,18 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 23 September 2026, after Stage 9.40.
+**As at:** 23 September 2026, after Stage 9.41.
 
 | State | Count |
 |---|---|
-| **Deployed** (private preview, draft) | **16** |
-| **Prepared** — awaiting owner approval | **1** |
+| **Deployed** (private preview, draft) | **17** |
+| **Prepared** — awaiting owner approval | **0** |
 | **Blocked** — pending research | **4** |
 | **Not started** | **24** |
 
 ---
 
-## Deployed (16)
+## Deployed (17)
 
 Each is a draft with NZ and AU files behind Cloudflare Access.
 
@@ -21,6 +21,7 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 |---|---|---|---|---|
 | OG-02 | Household Risk Identifier | general / worksheet | — | 9.13 |
 | OG-08 | Water Storage Calculator | water / worksheet | drinking water | 9.39 |
+| OG-10 | Rainwater Harvesting Planner | water / planner | drinking water · working at height | 9.41 |
 | OG-11 | 30-Day Pantry Builder | food / worksheet | food safety | 9.27 |
 | OG-15 | Warm Home Scorecard | shelter / assessment | CO · indoor combustion · solid fuel | 9.19 |
 | OG-18 | Solar Power 101 Workbook | energy / workbook | electrical · working at height | 9.31 |
@@ -36,11 +37,9 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 
-## Prepared — awaiting owner approval (1)
+## Prepared — awaiting owner approval (0)
 
-| Code | Title | State | Waiting on |
-|---|---|---|---|
-| **OG-10** | Rainwater Harvesting Planner | NZ and AU previews rendered and verified; 24 proposed changes | owner decisions (Stage 9.40 §15): the changes, NZ tank figures, the electrical-block question, metadata |
+Nothing is waiting on an owner decision. The next resource has not been started.
 
 ## Blocked — pending research (4)
 
@@ -118,7 +117,7 @@ real one supersede the placeholder **in the private preview only**.
 | Code | Route | Placeholder | State |
 |---|---|---|---|
 | OG-08 | `water-storage-calculator` | res-0015 | **resolved and live** |
-| OG-10 | `rainwater-harvesting-planner` | res-0016 | expected at deployment; tested |
+| OG-10 | `rainwater-harvesting-planner` | res-0016 | **resolved and live** (Stage 9.41) |
 | OG-01 | `home-resilience-scorecard` | res-0007 (demo) | expected |
 | OG-13 | `healthy-home-air-audit` | demo | expected |
 

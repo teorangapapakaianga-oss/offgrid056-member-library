@@ -1,49 +1,50 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.40 (OG-10 review).
+**As at:** 23 September 2026, after Stage 9.41 (OG-10 deployment).
 
 | | |
 |---|---|
-| **Protected resources in the private preview** | **16** (all draft) |
-| **Worker version** | **`a65a1ef1-feea-4e89-9d96-c16b8db40336`** |
-| **Rollback available** | `61d2acd0-4936-425f-a2d8-4cda5082db57` (15 resources) |
-| **Tests** | **324 passing** · lint clean · typecheck clean |
-| **Next resource** | **OG-10 — Rainwater Harvesting Planner** (prepared, awaiting owner approval) |
-| **Last deployment** | Stage 9.39, 22 September 2026: OG-08 Water Storage Calculator (#16) |
-| **Last report** | `admin-import/STAGE_9.40_OG10_REVIEW.md` |
+| **Protected resources in the private preview** | **17** (all draft) |
+| **Worker version** | **`d993cb64-676a-46bc-80eb-f4c9850fb0ea`** |
+| **Rollback available** | `a65a1ef1-feea-4e89-9d96-c16b8db40336` (16 resources) |
+| **Tests** | **328 passing** · lint clean · typecheck clean |
+| **Next resource** | **OG-B08 — Water Tank Sizing & Placement Guide** (not started), or **OG-13 Healthy Home Air Audit** — the first Air resource |
+| **Last deployment** | Stage 9.41, 23 September 2026: OG-10 Rainwater Harvesting Planner (#17) |
+| **Last report** | `admin-import/STAGE_9.41_OG10_DEPLOYMENT.md` |
 
-**A note on the test count.** The Stage 9.39 baseline was 317. Stage 9.40 added 7 OG-10 and supersession tests, so
-the current figure is **324**. Nothing was removed.
+**A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → **328** at Stage 9.41
+(the OG-10 ruling tests). Nothing was removed.
 
-## The 16 deployed resources
+## The 17 deployed resources
 
 | # | Code | Title | Foundation |
 |---|---|---|---|
 | 1 | OG-02 | Household Risk Identifier | general |
 | 2 | OG-08 | Water Storage Calculator | water |
-| 3 | OG-11 | 30-Day Pantry Builder | food |
-| 4 | OG-15 | Warm Home Scorecard | shelter |
-| 5 | OG-18 | Solar Power 101 Workbook | energy |
-| 6 | OG-19 | Battery Backup Planner | energy |
-| 7 | OG-20 | Alternative Energy Suitability Check | energy |
-| 8 | OG-21 | Home Energy & Shelter Upgrade Plan | shelter |
-| 9 | OG-22 | Resilience Product Wishlist | general |
-| 10 | OG-25 | Project Support Brief Template | general |
-| 11 | OG-26 | 3-Tier Budget Planner | general |
-| 12 | OG-27 | 90-Day Implementation Roadmap | shelter |
-| 13 | OG-B04 | Monthly Planning Challenge Template | general |
-| 14 | OG-B07 | Solar Planning Deep Worksheet | energy |
-| 15 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general |
-| 16 | OG-B12 | Off-Grid System Architecture Planner | general |
+| 3 | OG-10 | Rainwater Harvesting Planner | water |
+| 4 | OG-11 | 30-Day Pantry Builder | food |
+| 5 | OG-15 | Warm Home Scorecard | shelter |
+| 6 | OG-18 | Solar Power 101 Workbook | energy |
+| 7 | OG-19 | Battery Backup Planner | energy |
+| 8 | OG-20 | Alternative Energy Suitability Check | energy |
+| 9 | OG-21 | Home Energy & Shelter Upgrade Plan | shelter |
+| 10 | OG-22 | Resilience Product Wishlist | general |
+| 11 | OG-25 | Project Support Brief Template | general |
+| 12 | OG-26 | 3-Tier Budget Planner | general |
+| 13 | OG-27 | 90-Day Implementation Roadmap | shelter |
+| 14 | OG-B04 | Monthly Planning Challenge Template | general |
+| 15 | OG-B07 | Solar Planning Deep Worksheet | energy |
+| 16 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general |
+| 17 | OG-B12 | Off-Grid System Architecture Planner | general |
 
-Each has an NZ and an AU PDF: **32 market files**, 0 broken internal links.
+Each has an NZ and an AU PDF: **34 market files**, 0 broken internal links.
 
-## Controls, last checked at Stage 9.40
+## Controls, last checked at Stage 9.41
 
 | Control | State |
 |---|---|
 | Cloudflare Access on all traffic | **on** — every probe redirects (302) to the Access login |
-| All real resources draft | **yes**, 16/16 |
+| All real resources draft | **yes**, 17/17 |
 | NZ/AU routing | **working** — no market, no download; NZ gets NZ, AU gets AU |
 | Real member files in public GitHub | **none** |
 | `--real` | **refused** |
@@ -54,7 +55,6 @@ Each has an NZ and an AU PDF: **32 market files**, 0 broken internal links.
 
 | Blocker | What it holds up | Needed |
 |---|---|---|
-| **OG-10 approval** | deployment as #17 | owner decisions on 24 changes, the NZ tank figures, the electrical-block question, and metadata |
 | **Gas / LPG guidance not researched** | OG-17, OG-B09, and any gas-appliance content | verified NZ + AU gas guidance, then owner approval |
 | **Diesel guidance not researched** | diesel generator or heating content | verified NZ + AU guidance |
 | **Grants and rebates not researched** | OG-16 | current NZ programmes and AU state/territory schemes |
