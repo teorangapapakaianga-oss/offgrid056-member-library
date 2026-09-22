@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { reskinHtml } from "@/admin-import/reskin/reskin";
-import { findContentFlags, prepareResource, type PrepInputs } from "@/admin-import/pilot/prep";
+import { findContentFlags, prepareResource, unansweredSafetyNotes, type PrepInputs } from "@/admin-import/pilot/prep";
 import profilesFile from "@/admin-import/markets/profiles.json";
 import pilotSpec from "@/admin-import/pilot/og-02.json";
 import topicBlocks from "@/admin-import/config/safety-blocks.json";
@@ -160,6 +160,19 @@ describe("required safety for any resource", () => {
     const text = "Rainwater tank. Water storage (200L). Drinking water filter. Solar panel. Battery (10kWh). Inverter. Wood burner. Chimney. Flue.";
     expect(safetyExposureFor(text)).toEqual(expect.arrayContaining(["stored-drinking-water", "batteries-and-electrical", "solid-fuel-heating"]));
     expect(safetyExposureFor("Score each room from 1 to 5.")).toEqual([]);
+  });
+});
+
+describe("audit safety notes", () => {
+  it("are answered only by the safety block for their topic, and gas cannot yet be answered", () => {
+    const notes = [
+      "covers stored drinking water (6 mentions) with no potability and treatment warning",
+      "covers batteries and inverters (4 mentions) with no licensed electrician warning for fixed wiring",
+      "covers gas appliances (3 mentions) with no ventilation and certified-installer warning",
+    ];
+    expect(unansweredSafetyNotes(notes, [])).toHaveLength(3);
+    expect(unansweredSafetyNotes(notes, ["stored-drinking-water", "batteries-and-electrical", "indoor-combustion"])).toEqual([notes[2]]);
+    expect(unansweredSafetyNotes(["covers something new (3 mentions) with no warning"], ["stored-drinking-water"])).toHaveLength(1);
   });
 });
 

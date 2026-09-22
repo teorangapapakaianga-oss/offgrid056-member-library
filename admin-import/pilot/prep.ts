@@ -95,6 +95,27 @@ export interface LegacyTerms {
   platformNames: string[];
 }
 
+/**
+ * The audit notes when a SOURCE document teaches a hazardous topic without a warning ("covers stored drinking
+ * water (6 mentions) with no potability and treatment warning"). A note is answered once the migrated resource
+ * carries the safety block(s) for that topic — until then it holds the resource. Gas needs the gas-and-LPG
+ * block, which has not been verified for NZ and AU, so a gas note cannot yet be answered.
+ */
+const NOTE_ANSWERED_BY: { topic: RegExp; blocks: string[] }[] = [
+  { topic: /^covers generators\b/, blocks: ["indoor-combustion", "carbon-monoxide"] },
+  { topic: /^covers solid fuel heating\b/, blocks: ["solid-fuel-heating"] },
+  { topic: /^covers gas appliances\b/, blocks: ["gas-and-lpg"] },
+  { topic: /^covers batteries and inverters\b/, blocks: ["batteries-and-electrical"] },
+  { topic: /^covers stored drinking water\b/, blocks: ["stored-drinking-water"] },
+];
+
+export function unansweredSafetyNotes(notes: string[], blocks: string[]): string[] {
+  return notes.filter((note) => {
+    const rule = NOTE_ANSWERED_BY.find((r) => r.topic.test(note));
+    return !rule || !rule.blocks.every((b) => blocks.includes(b));
+  });
+}
+
 const escapeHtml = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -451,7 +472,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     ? "PREVIEW_WITH_PROPOSED_COPY"
     : !description
     ? "NEEDS_OWNER_COPY"
-    : otherFindings.length || item.safetyNotes.length || contentFlags.length || missingRequired.length
+    : otherFindings.length || unansweredSafetyNotes(item.safetyNotes, safetyBlocks).length || contentFlags.length || missingRequired.length
       ? "NEEDS_CONTENT_REVIEW"
       : proposed.length
         ? "NEEDS_SAFETY_APPROVAL"

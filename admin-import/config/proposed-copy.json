@@ -1,4 +1,51 @@
 {
   "description": "PROPOSED copy changes — NOT APPROVED. prep renders them only so the owner can review the result; any resource carrying one is PREVIEW_WITH_PROPOSED_COPY and cannot be deployed. On approval each change moves to approved-copy.json unchanged. (Stage 9.22: all proposals approved and moved to approved-copy.json.)",
-  "changes": {}
+  "changes": {
+    "OG-27": [
+      {
+        "where": "Week 5 — deliverable (AU)",
+        "from": "<td>All pros booked, consents lodged</td>",
+        "to": "<td>All pros booked, permits or approvals lodged</td>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "markets": [
+          "AU"
+        ],
+        "reason": "The same row's deliverable uses the NZ term 'consents'. Owner ruling 5 covered the Week 5 sentence only; this applies the same neutral AU wording to the deliverable. NZ unchanged."
+      }
+    ],
+    "OG-25": [
+      {
+        "where": "Attachments checklist — consents (AU)",
+        "from": "<td>Building consent or resource consent documents</td>",
+        "to": "<td>Building, planning or development approval documents</td>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "markets": [
+          "AU"
+        ],
+        "reason": "'Resource consent' is a New Zealand planning term (Resource Management Act). Same class as the Stage 9.22 ruling on OG-27's 'building consents'. NZ unchanged. Found while building the exact-build verifier."
+      },
+      {
+        "where": "Attachments checklist — council records (AU)",
+        "from": "<td>Council file number or property folder</td>",
+        "to": "<td>Council or property records</td>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "markets": [
+          "AU"
+        ],
+        "reason": "'Property folder' (NZ property file) is a New Zealand council term. NZ unchanged."
+      }
+    ]
+  }
 }

@@ -94,16 +94,21 @@
       "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)",
       "description": "Turn your plan into phased action with deadlines",
       "descriptionStatus": "owner-approved 2026-09-22 (ruling 3: 'Day 27 —' removed)",
-      "blockedBy": {
-        "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
-        "dependency": "OG-22 / Resilience Product Wishlist and OG-26 / 3-Tier Budget Planner",
-        "reason": "OG-27 schedules the Essential / Balanced / Complete tiers defined in OG-26, which in turn budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): order OG-22 → OG-26 → OG-27.",
-        "decidedOn": "2026-09-22"
-      },
       "relatedResources": [
-        "res-1026"
+        "res-1026",
+        "res-1022"
       ],
-      "relatedResourcesNote": "OG-27 → OG-26."
+      "relatedResourcesNote": "OG-27 → 3-Tier Budget Planner (its tiers) and → Resilience Product Wishlist (its 'Tier 1 (Essential) MUST items'). At OG-27's deployment, also add res-1027 to OG-26's record.",
+      "dependencyResolved": {
+        "was": {
+          "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
+          "dependency": "OG-22 / Resilience Product Wishlist and OG-26 / 3-Tier Budget Planner",
+          "reason": "OG-27 schedules the Essential / Balanced / Complete tiers defined in OG-26, which in turn budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): order OG-22 → OG-26 → OG-27.",
+          "decidedOn": "2026-09-22"
+        },
+        "resolvedOn": "2026-09-22",
+        "evidence": "OG-22 (res-1022) and OG-26 (res-1026) deployed together in Worker version 2aa8a131 and verified: Access 27/27, routing 27/27, exact-build verifier 16/16."
+      }
     },
     "OG-B07": {
       "foundation": "energy",
@@ -204,16 +209,24 @@
       },
       "description": "Align your spend with your actual capacity",
       "descriptionStatus": "owner-approved 2026-09-22",
-      "blockedBy": {
-        "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
-        "dependency": "OG-22 / Resilience Product Wishlist",
-        "reason": "OG-26 budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): migrate OG-22 first so OG-26 references a real library resource.",
-        "decidedOn": "2026-09-22"
-      },
       "relatedResources": [
         "res-1022"
       ],
-      "relatedResourcesNote": "OG-26 → OG-22. Add res-1027 when OG-27 is deployed (the build rejects links to resources not in it)."
+      "relatedResourcesNote": "OG-26 → OG-22. Add res-1027 when OG-27 is deployed (the build rejects links to resources not in it).",
+      "dependencyResolved": {
+        "was": {
+          "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
+          "dependency": "OG-22 / Resilience Product Wishlist",
+          "reason": "OG-26 budgets the MUST items defined in OG-22. Owner decision (Stage 9.20): migrate OG-22 first so OG-26 references a real library resource.",
+          "decidedOn": "2026-09-22"
+        },
+        "resolvedOn": "2026-09-22",
+        "evidence": "Deployed together with OG-22 in Worker version 2aa8a131 and verified."
+      },
+      "deployed": {
+        "version": "2aa8a131",
+        "on": "2026-09-22"
+      }
     },
     "OG-22": {
       "foundation": "general",
@@ -236,7 +249,11 @@
       "relatedResources": [
         "res-1026"
       ],
-      "relatedResourcesNote": "OG-22 → OG-26. Valid only when OG-26 is deployed in the same build."
+      "relatedResourcesNote": "OG-22 → OG-26. Valid only when OG-26 is deployed in the same build.",
+      "deployed": {
+        "version": "2aa8a131",
+        "on": "2026-09-22"
+      }
     }
   }
 }

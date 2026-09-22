@@ -424,6 +424,19 @@
         "approvedOn": "2026-09-22",
         "kind": "unsupported-figure",
         "reason": "Owner ruling 6: the same rule as OG-26 — no '4-week' requirement; a planning target instead."
+      },
+      {
+        "where": "Week 5 — approvals (AU)",
+        "from": "Submit any building consents.",
+        "to": "Submit any required permits or approvals.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "markets": [
+          "AU"
+        ],
+        "reason": "Owner ruling 5 (Stage 9.22): 'building consents' is the New Zealand term and is kept for NZ; Australia gets neutral wording until a specific state or territory requirement is relevant and verified."
       }
     ],
     "OG-02": [
