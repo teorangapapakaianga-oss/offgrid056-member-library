@@ -11,7 +11,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { reskinHtml, summariseChanges } from "../reskin/reskin";
+import { keepSmallTablesTogether, reskinHtml, summariseChanges } from "../reskin/reskin";
 import { resolveForMarket, publishable, type CoreResource, type MarketProfile, type SafetyBlock } from "../markets/resolve";
 import { injectSafetyChecked } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
@@ -397,7 +397,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const marketResultsCopy = [...approvedMarket.results, ...proposedMarket.results.map((r) => ({ ...r, proposed: true }))];
     copy.results.push(...marketResultsCopy);
     for (const r of marketResultsCopy.filter((x) => !x.applied)) otherFindings.push(unapplied(r));
-    const marketHtml = proposedMarket.html;
+    // Print layout that edits markup runs only after every copy change, so no approved change is disturbed.
+    const marketHtml = keepSmallTablesTogether(proposedMarket.html);
     collectFlags(marketHtml);
     const injected = injectSafetyChecked(
       marketHtml,

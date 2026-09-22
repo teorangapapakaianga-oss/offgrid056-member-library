@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { reskinHtml } from "@/admin-import/reskin/reskin";
+import { keepSmallTablesTogether, reskinHtml } from "@/admin-import/reskin/reskin";
 import { findContentFlags, prepareResource, unansweredSafetyNotes, type PrepInputs } from "@/admin-import/pilot/prep";
 import profilesFile from "@/admin-import/markets/profiles.json";
 import pilotSpec from "@/admin-import/pilot/og-02.json";
@@ -71,11 +71,32 @@ describe("cover layout", () => {
     expect(reskinHtml(DOC).html).not.toContain("break-inside: avoid");
   });
 
+  it("keeps small tables whole but lets tall tables break between rows", () => {
+    const rows = (n: number) => Array.from({ length: n }, (_, i) => `<tr><td>Row ${i}</td></tr>`).join("");
+    const doc = `<table class="calc-table">${rows(8)}</table><table>${rows(14)}</table>`;
+    const html = keepSmallTablesTogether(doc);
+    expect(html).toContain('<table class="calc-table og-keep-together">');
+    expect((html.match(/og-keep-together"/g) ?? []).length).toBe(1); // the 14-row table is left alone
+    expect(keepSmallTablesTogether(html)).toBe(html); // idempotent
+    expect(reskinHtml(DOC.replace("<h2>Plan</h2>", `<h2>Plan</h2>${doc}`)).html).toContain("table.og-keep-together { break-inside: avoid;");
+  });
+
+  it("marks tables only after copy changes, so an approved whole-table change still matches", () => {
+    const table = `<table class="calc-table"><tr><td>Old</td></tr></table>`;
+    const r = prep({
+      sourceHtml: DOC.replace("<h2>Plan</h2>", `<h2>Plan</h2>${table}`),
+      copyChanges: [{ where: "table", from: table, to: `<table class="calc-table"><tr><td>New</td></tr></table>`, expectedMatches: 1, approvedBy: "owner", approvedOn: "2026-09-22", reason: "test" }],
+    });
+    expect(r.copyChanges[0].applied).toBe(true);
+    const out = fs.readFileSync(r.files[0], "utf8");
+    expect(out).toContain('<table class="calc-table og-keep-together"><tr><td>New</td></tr></table>');
+  });
+
   it("keeps short callout boxes whole and headings with their text, but not large section containers", () => {
     const withBox = DOC.replace("<h2>Plan</h2>", '<h2>Plan</h2><div class="warning-box"><div class="warning-title">Trap</div><p>Text</p></div><div class="worksheet-box">x</div>');
     const html = reskinHtml(withBox).html;
     expect(html).toContain(".warning-box { break-inside: avoid; page-break-inside: avoid; }");
-    expect(html).toContain("h2, h3, .warning-title, .info-box-title { break-after: avoid;");
+    expect(html).toContain("h2, h3, .warning-title, .info-box-title, .tip-title { break-after: avoid;");
     expect(html).not.toMatch(/\.worksheet-box[^{]*\{\s*break-inside/);
     expect(reskinHtml(DOC).html).not.toContain(".warning-box");
   });

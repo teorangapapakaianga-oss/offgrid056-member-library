@@ -39,20 +39,26 @@ const blockTitles: Record<string, string> = Object.fromEntries(
 // What prep said each resource should contain: its safety blocks and the approved copy it applied.
 const reportFile = path.join(PREP, "prep-report.json");
 // Copy changes are recorded as HTML; a PDF only carries the visible text, so both sides are compared as text.
-const visible = (html: string) => html.replace(/<[^>]+>/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+const visible = (html: string) =>
+  html.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
 type ReportRow = {
   legacyCode: string;
   recordStatus?: string;
   safety: { blocks: string[] };
-  copyChanges: { from: string; to: string; applied: boolean; markets?: string[] }[];
+  copyChanges: { where: string; from: string; to: string; applied: boolean; markets?: string[] }[];
 };
-const expected = new Map<string, { status: string | undefined; blocks: string[]; copy: { from: string; to: string; markets?: string[] }[] }>(
+const expected = new Map<
+  string,
+  { status: string | undefined; blocks: string[]; copy: { from: string; to: string; markets?: string[] }[]; unapplied: { where: string; markets?: string[] }[] }
+>(
   (fs.existsSync(reportFile) ? (readJson(reportFile) as ReportRow[]) : []).map((r) => [
     r.legacyCode,
     {
       status: r.recordStatus,
       blocks: r.safety.blocks,
       copy: r.copyChanges.filter((c) => c.applied).map((c) => ({ from: visible(c.from), to: visible(c.to), markets: c.markets })),
+      // A recorded change that did not apply means the document is not what was approved — never a pass.
+      unapplied: r.copyChanges.filter((c) => !c.applied).map((c) => ({ where: c.where, markets: c.markets })),
     },
   ]),
 );
@@ -73,6 +79,7 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
     const want = expected.get(code);
     if (!want) problems.push("not in prep-report.json — re-run import:prep");
     if (want && want.status !== "draft") problems.push(`record status is "${want.status}", not draft`);
+    for (const u of (want?.unapplied ?? []).filter((c) => !c.markets || c.markets.includes(market))) problems.push(`recorded copy change NOT applied: ${u.where}`);
     for (const id of want?.blocks ?? []) {
       const title = blockTitles[id];
       if (!title || !flat.includes(norm(title))) problems.push(`safety block "${id}" missing`);

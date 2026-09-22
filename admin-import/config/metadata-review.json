@@ -281,6 +281,35 @@
       ],
       "approvedSafetyBlocksStatus": "food-safety-power-cut NZ + AU owner-approved 2026-09-22 (Stage 9.26)",
       "deploymentApproved": "2026-09-22 (Stage 9.26 ruling 3)"
+    },
+    "OG-19": {
+      "foundation": "energy",
+      "foundationStatus": "owner working classification 2026-09-22 (audit HIGH)",
+      "resourceType": "planner",
+      "resourceTypeStatus": "owner working classification 2026-09-22 (audit HIGH)",
+      "category": "backup-energy",
+      "difficulty": null,
+      "estimatedTime": null,
+      "safetyBlocks": [
+        "batteries-and-electrical",
+        "food-safety-power-cut"
+      ],
+      "approvedSafetyBlocks": [
+        "batteries-and-electrical",
+        "food-safety-power-cut"
+      ],
+      "approvedSafetyBlocksStatus": "both blocks already owner-approved for NZ and AU (Stages 9.18 and 9.26)",
+      "categoryStatus": "INFERRED — PROPOSED: 'Keeping essentials running when the power goes out, safely' matches an essential-loads battery backup planner. Alternative: household-energy-planning.",
+      "difficultyStatus": "OWNER-REVIEW REQUIRED",
+      "difficultySource": "none — the document states no level",
+      "difficultyRecommendation": "intermediate (INFERRED) — watt-hour load calculation, depth of discharge and a battery sizing formula",
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
+      "estimatedTimeRecommendation": 45,
+      "estimatedTimeReasoning": "INFERRED: a seven-row load table needing appliance wattages, the sizing maths for three scenarios, a comparison table filled from specifications and quotes, and a six-field decision. Excludes gathering quotes.",
+      "description": "Solar panels generate by day. Batteries store for night. This planner helps you size, cost, and select the right battery system for your home's essential loads.",
+      "descriptionStatus": "SOURCE — the cover subtitle, unchanged (no claims)",
+      "tags": [],
+      "generatorAssessment": "INCIDENTAL — the only generator mention is the legacy closing teaser 'Tomorrow: wind, generators, and hybrid systems…', removed with the navigation. No passage teaches generator operation, siting, connection, indoor/outdoor use, battery charging or reliance. No generator, carbon-monoxide or indoor-combustion block is required."
     }
   }
 }

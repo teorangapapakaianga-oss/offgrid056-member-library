@@ -116,6 +116,22 @@ export function scaleHeadings(html: string, factor: number): { html: string; cou
   return { html: out, count };
 }
 
+/**
+ * Mark small tables (up to 10 rows) to be kept whole when printing, so a table is never broken after its first row
+ * with a header and one row stranded at the foot of a page (found in OG-19's load table). Taller tables may still
+ * break between rows, which avoids large gaps.
+ *
+ * This runs LAST — after every copy change — because it edits the <table> tag: run earlier, it made approved
+ * whole-table changes (OG-26's assistance tables, OG-19's comparison table) stop matching.
+ */
+export function keepSmallTablesTogether(html: string): string {
+  return html.replace(/<table\b([^>]*)>([\s\S]*?)<\/table>/gi, (whole, attrs: string, inner: string) => {
+    if ((inner.match(/<tr\b/gi) ?? []).length > 10 || /og-keep-together/.test(attrs)) return whole;
+    const withClass = /\bclass="/.test(attrs) ? attrs.replace(/\bclass="([^"]*)"/, 'class="$1 og-keep-together"') : `${attrs} class="og-keep-together"`;
+    return `<table${withClass}>${inner}</table>`;
+  });
+}
+
 export function reskinHtml(source: string, options: ReskinOptions = {}): ReskinResult {
   const changes: ReskinChange[] = [];
   const warnings: string[] = [];
@@ -157,7 +173,7 @@ export function reskinHtml(source: string, options: ReskinOptions = {}): ReskinR
   // A table row must never split across a page: a row torn between pages 3 and 4 reads as two broken rows
   // (found when an approved, longer OG-27 cell pushed its row over a page boundary).
   if (/<table/i.test(html)) {
-    html = html.replace("</head>", `<style>\n  tr { break-inside: avoid; page-break-inside: avoid; }\n</style>\n</head>`);
+    html = html.replace("</head>", `<style>\n  tr { break-inside: avoid; page-break-inside: avoid; }\n  table.og-keep-together { break-inside: avoid; page-break-inside: avoid; }\n</style>\n</head>`);
     record("layout", "table rows could split across pages", "rows kept whole when printing", 1);
   }
 
@@ -165,12 +181,12 @@ export function reskinHtml(source: string, options: ReskinOptions = {}): ReskinR
   // page away from its text (found in OG-11: "The Expiry Date Trap" split mid-sentence in NZ, and its title was
   // left alone on the page before its text in AU). Large section containers are deliberately not included:
   // forcing a tall worksheet section whole would leave large gaps.
-  const CALLOUTS = ["warning-box", "info-box", "closing-box", "total-box"];
+  const CALLOUTS = ["warning-box", "info-box", "closing-box", "total-box", "tip-box"];
   const present = CALLOUTS.filter((c) => html.includes(`class="${c}"`));
   if (present.length) {
     html = html.replace(
       "</head>",
-      `<style>\n  ${present.map((c) => `.${c}`).join(", ")} { break-inside: avoid; page-break-inside: avoid; }\n  h2, h3, .warning-title, .info-box-title { break-after: avoid; page-break-after: avoid; }\n</style>\n</head>`,
+      `<style>\n  ${present.map((c) => `.${c}`).join(", ")} { break-inside: avoid; page-break-inside: avoid; }\n  h2, h3, .warning-title, .info-box-title, .tip-title { break-after: avoid; page-break-after: avoid; }\n</style>\n</head>`,
     );
     record("layout", "callout boxes could split across pages", "callout boxes kept whole; headings kept with their text", 1);
   }
