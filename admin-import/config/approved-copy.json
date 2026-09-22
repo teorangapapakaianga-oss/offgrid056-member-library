@@ -248,6 +248,36 @@
         "approvedOn": "2026-09-22",
         "kind": "legacy-programme-context",
         "reason": "'Next: OG-…' navigation to OG-26, not in the library (owner ruling 7)."
+      },
+      {
+        "where": "Attachments checklist — consents (AU)",
+        "from": "<td>Building consent or resource consent documents</td>",
+        "to": "<td>Building, planning or development approval documents</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "markets": [
+          "AU"
+        ],
+        "reason": "'Resource consent' is a New Zealand planning term (Resource Management Act). Same class as the Stage 9.22 ruling on OG-27's 'building consents'. NZ unchanged. Found while building the exact-build verifier.",
+        "approval": "Stage 9.23 ruling 2 (AU only; NZ keeps its NZ terminology)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Attachments checklist — council records (AU)",
+        "from": "<td>Council file number or property folder</td>",
+        "to": "<td>Council or property records</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "markets": [
+          "AU"
+        ],
+        "reason": "'Property folder' (NZ property file) is a New Zealand council term. NZ unchanged.",
+        "approval": "Stage 9.23 ruling 2 (AU only; NZ keeps its NZ terminology)",
+        "proposedOn": "2026-09-22"
       }
     ],
     "OG-B10": [
@@ -437,6 +467,21 @@
           "AU"
         ],
         "reason": "Owner ruling 5 (Stage 9.22): 'building consents' is the New Zealand term and is kept for NZ; Australia gets neutral wording until a specific state or territory requirement is relevant and verified."
+      },
+      {
+        "where": "Week 5 — deliverable (AU)",
+        "from": "<td>All pros booked, consents lodged</td>",
+        "to": "<td>All pros booked, permits or approvals lodged</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "market-variant",
+        "markets": [
+          "AU"
+        ],
+        "reason": "The same row's deliverable uses the NZ term 'consents'. Owner ruling 5 covered the Week 5 sentence only; this applies the same neutral AU wording to the deliverable. NZ unchanged.",
+        "approval": "Stage 9.23 ruling 1 (AU only; NZ keeps 'consents lodged')",
+        "proposedOn": "2026-09-22"
       }
     ],
     "OG-02": [

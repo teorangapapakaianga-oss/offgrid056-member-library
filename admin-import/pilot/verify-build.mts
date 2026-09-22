@@ -54,7 +54,11 @@ const REMOVED = [
   "Next: OG", "30-Day Programme", "Action Plan Plus", "Bonus Asset", "Just core survival", "Skool",
 ];
 /** New Zealand-only content that must never reach an Australian file. */
-const NZ_ONLY = ["Trade Me", "EECA", "Warmer Kiwi", "Rural Support", "Civil Defence", "licensed electrical worker", "NZD", "building consents"];
+const NZ_ONLY = [
+  "Trade Me", "EECA", "Warmer Kiwi", "Rural Support", "Civil Defence", "licensed electrical worker", "NZD",
+  // NZ planning and council terms (owner rulings, Stages 9.22–9.23)
+  "building consents", "consents lodged", "resource consent", "property folder",
+];
 
 let failures = 0;
 const rows: string[] = [];

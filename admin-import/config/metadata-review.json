@@ -210,9 +210,10 @@
       "description": "Align your spend with your actual capacity",
       "descriptionStatus": "owner-approved 2026-09-22",
       "relatedResources": [
-        "res-1022"
+        "res-1022",
+        "res-1027"
       ],
-      "relatedResourcesNote": "OG-26 → OG-22. Add res-1027 when OG-27 is deployed (the build rejects links to resources not in it).",
+      "relatedResourcesNote": "OG-26 → OG-22 and → OG-27 (added at OG-27's deployment, Stage 9.24).",
       "dependencyResolved": {
         "was": {
           "status": "BLOCKED_BY_RESOURCE_DEPENDENCY",
