@@ -253,7 +253,13 @@
           "reviewedOn": "2026-09-22",
           "approvalRef": "Stage 9.36 ruling 3 (resource-specific reviewed exemption; no global phrase exemption)"
         }
-      ]
+      ],
+      "futureWordingReview": {
+        "status": "QUEUED — non-urgent; do not change OG-26 until approved (Stage 9.37 ruling 3)",
+        "context": "Emergency heating (gas heater / thermal blankets)",
+        "suggestion": "A category-based line such as 'Emergency heating / thermal blankets'",
+        "note": "The exact-text fuel exemption would be removed at the same time; a reworded line with no gas appliance needs none."
+      }
     },
     "OG-22": {
       "foundation": "general",
@@ -531,6 +537,38 @@
       "relatedResourcesStatus": "owner-approved 2026-09-22",
       "hazardFlagsStatus": "owner rulings 2026-09-22: sanitation at planning level only; humanure and waste burning removed; canning kept as a method name only (no times, temperatures, pressures, recipes or shelf-life) — instructional canning would need FOOD_PRESERVATION_SAFETY_REQUIRED review first; Option A removes LPG, biogas and diesel.",
       "deploymentApproved": "2026-09-22 (Stage 9.36 ruling 17, conditional on final validation and the gas-heater review)"
+    },
+    "OG-08": {
+      "foundation": "water",
+      "foundationStatus": "PROPOSED — audit HIGH",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "PROPOSED — audit HIGH",
+      "category": "water-storage",
+      "categoryStatus": "INFERRED — PROPOSED: 'How much to store, how to store it, and how to rotate it.' Alternative: household-water-planning.",
+      "difficulty": null,
+      "difficultyStatus": "OWNER-REVIEW REQUIRED",
+      "difficultySource": "none stated",
+      "difficultyRecommendation": "beginner (INFERRED): multiply, add and subtract; no technical content",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
+      "estimatedTimeRecommendation": 20,
+      "estimatedTimeReasoning": "INFERRED: four need rows, a five-row inventory, four gap rows and six plan fields. Excludes measuring containers.",
+      "description": "Know exactly how much water your household needs, how much you currently store, and the gap between the two. No guesswork. Just numbers.",
+      "descriptionStatus": "SOURCE — the cover subtitle, unchanged (no figures)",
+      "tags": [],
+      "safetyBlocks": [
+        "stored-drinking-water"
+      ],
+      "approvedSafetyBlocks": [
+        "stored-drinking-water"
+      ],
+      "approvedSafetyBlocksStatus": "already owner-approved for NZ and AU (Stage 9.21)",
+      "relatedResources": [
+        "res-1022",
+        "res-1026",
+        "res-1512"
+      ],
+      "relatedResourcesStatus": "PROPOSED — Resilience Product Wishlist (buying containers), 3-Tier Budget Planner (costing the gap), Off-Grid System Architecture Planner (the whole water system). Future, not linked (undeployed): OG-09, OG-10, OG-B08."
     }
   }
 }

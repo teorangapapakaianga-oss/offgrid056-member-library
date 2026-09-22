@@ -1,4 +1,239 @@
 {
   "description": "PROPOSED copy changes — NOT APPROVED. prep renders them only so the owner can review the result; any resource carrying one is PREVIEW_WITH_PROPOSED_COPY and cannot be deployed. On approval each change moves to approved-copy.json unchanged. (Stage 9.36: OG-B12's 23 proposals approved and moved to approved-copy.json.)",
-  "changes": {}
+  "changes": {
+    "OG-08": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 2 — Water, Food & Air</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name."
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-08 | Day 8</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal code and programme day."
+      },
+      {
+        "where": "Intro — baseline (NZ)",
+        "from": "<p style=\"margin-bottom:0; font-size:13px;\">Most households underestimate water needs by 50–70%. This calculator uses the civil defence standard of <strong>10 litres per person per day</strong> for drinking, cooking, and basic hygiene. Fill in your numbers. The gaps will be obvious.</p>",
+        "to": "<p style=\"margin-bottom:0; font-size:13px;\">Get Ready advises storing at least <strong>3 litres of drinking water per person per day, for at least three days</strong>. That is the official emergency baseline, and the first row below. The longer periods are optional extended resilience storage. Fill in your numbers. The gaps will be obvious.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "WRONG BASELINE: '10 litres per person per day' is neither market's figure. NZ (Get Ready, approved block): at least 3 L per person per day for at least three days. Removes the unsourced '50–70%'. Hygiene/cooking water is not part of the official figure, so it is no longer claimed.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Intro — baseline (AU)",
+        "from": "<p style=\"margin-bottom:0; font-size:13px;\">Most households underestimate water needs by 50–70%. This calculator uses the civil defence standard of <strong>10 litres per person per day</strong> for drinking, cooking, and basic hygiene. Fill in your numbers. The gaps will be obvious.</p>",
+        "to": "<p style=\"margin-bottom:0; font-size:13px;\">Emergency guidance such as Get Ready Queensland advises storing at least <strong>10 litres of drinking water per person for three days</strong>, and your state or territory emergency service may advise more for your area. That is the official emergency baseline, and the first row below. The longer periods are optional extended resilience storage. Fill in your numbers. The gaps will be obvious.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "WRONG BASELINE, and 'civil defence' is NZ terminology. AU (Get Ready Queensland, approved block): at least 10 L per person FOR three days — not per day. Named as an example; no national rule claimed.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Step 1 — needs table (NZ)",
+        "from": "<table class=\"calc-table\">\n  <thead>\n    <tr><th>Scenario</th><th>Formula</th><th>Your Number</th><th>Total Litres</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>3-Day Emergency</strong><br><span style=\"font-size:11px; color:#888;\">Minimum civil defence standard</span></td>\n      <td class=\"formula\">People × 10L × 3 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>7-Day Disruption</strong><br><span style=\"font-size:11px; color:#888;\">Plumbing failure, contamination event</span></td>\n      <td class=\"formula\">People × 10L × 7 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>14-Day Supply</strong><br><span style=\"font-size:11px; color:#888;\">Major infrastructure disruption</span></td>\n      <td class=\"formula\">People × 10L × 14 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>30-Day Independence</strong><br><span style=\"font-size:11px; color:#888;\">Full month self-sufficiency target</span></td>\n      <td class=\"formula\">People × 10L × 30 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"calc-table\">\n  <thead>\n    <tr><th>Scenario</th><th>Formula</th><th>People</th><th>Total Litres</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>3-Day Emergency</strong><br><span style=\"font-size:11px; color:#888;\">OFFICIAL EMERGENCY BASELINE (Get Ready)</span></td>\n      <td class=\"formula\">People × 3 L × 3 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>7-Day Disruption</strong><br><span style=\"font-size:11px; color:#888;\">Extended — plumbing failure, contamination event</span></td>\n      <td class=\"formula\">People × 3 L × 7 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>14-Day Supply</strong><br><span style=\"font-size:11px; color:#888;\">Extended — major infrastructure disruption</span></td>\n      <td class=\"formula\">People × 3 L × 14 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>30-Day Longer-Term Goal</strong><br><span style=\"font-size:11px; color:#888;\">Extended — optional</span></td>\n      <td class=\"formula\">People × 3 L × 30 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n  </tbody>\n</table>\n\n<p style=\"font-size:12px;\">The official baseline is drinking water. Get Ready advises storing more if you can: hot weather and hard physical work can double what you need, children, nursing mothers and people who are unwell need more, and pets need water too. The 7-, 14- and 30-day rows are <strong>optional extended resilience storage</strong> — OffGrid056 planning goals, not official requirements. Round each total up to the next whole litre.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Formulas rebuilt on the NZ rate (3 L per person per day). Row 1 is labelled the official baseline; 7/14/30 days are labelled optional extended storage (OffGrid056 planning). 'Your Number' → 'People'. Adds the approved NZ 'store more if you can' line and a rounding rule.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Step 1 — needs table (AU)",
+        "from": "<table class=\"calc-table\">\n  <thead>\n    <tr><th>Scenario</th><th>Formula</th><th>Your Number</th><th>Total Litres</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>3-Day Emergency</strong><br><span style=\"font-size:11px; color:#888;\">Minimum civil defence standard</span></td>\n      <td class=\"formula\">People × 10L × 3 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>7-Day Disruption</strong><br><span style=\"font-size:11px; color:#888;\">Plumbing failure, contamination event</span></td>\n      <td class=\"formula\">People × 10L × 7 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>14-Day Supply</strong><br><span style=\"font-size:11px; color:#888;\">Major infrastructure disruption</span></td>\n      <td class=\"formula\">People × 10L × 14 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>30-Day Independence</strong><br><span style=\"font-size:11px; color:#888;\">Full month self-sufficiency target</span></td>\n      <td class=\"formula\">People × 10L × 30 days</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"calc-table\">\n  <thead>\n    <tr><th>Scenario</th><th>Formula</th><th>People</th><th>Total Litres</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>3-Day Emergency</strong><br><span style=\"font-size:11px; color:#888;\">OFFICIAL EMERGENCY BASELINE (for example Get Ready Queensland)</span></td>\n      <td class=\"formula\">People × 10 L</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>7-Day Disruption</strong><br><span style=\"font-size:11px; color:#888;\">Extended — plumbing failure, contamination event</span></td>\n      <td class=\"formula\">People × 10 L × 7 ÷ 3</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>14-Day Supply</strong><br><span style=\"font-size:11px; color:#888;\">Extended — major infrastructure disruption</span></td>\n      <td class=\"formula\">People × 10 L × 14 ÷ 3</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n    <tr>\n      <td><strong>30-Day Longer-Term Goal</strong><br><span style=\"font-size:11px; color:#888;\">Extended — optional</span></td>\n      <td class=\"formula\">People × 10 L × 30 ÷ 3</td>\n      <td><input type=\"text\" style=\"width:60px;border:1px solid var(--line);padding:4px;text-align:center;border-radius:4px;\" placeholder=\"0\"></td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ L</td>\n    </tr>\n  </tbody>\n</table>\n\n<p style=\"font-size:12px;\">The official baseline is drinking water for three days; your state or territory emergency service may advise more for your area. The 7-, 14- and 30-day rows scale that three-day amount to more days — <strong>optional extended resilience storage</strong> and an OffGrid056 planning calculation, not an official requirement. Round each total up to the next whole litre.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Formulas rebuilt on the AU figure (10 L per person for three days). Longer periods scale the three-day amount (× days ÷ 3), shown openly as an OffGrid056 calculation rather than an invented daily rate. 'Your Number' → 'People'.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Step 2 — usable water note",
+        "from": "<p style=\"margin-top:8px; font-size:13px; color:rgba(255,255,255,0.7);\">Add all \"Usable Litres\" above</p>",
+        "to": "<p style=\"margin-top:8px; font-size:13px; color:rgba(255,255,255,0.7);\">Usable litres = capacity × the share that is filled. Add all \"Usable Litres\" above. Count only water that is safe to drink, or that you will make safe before drinking — see Storing drinking water.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "calculation-input",
+        "reason": "Makes the arithmetic explicit, and separates storage from safety: a rainwater tank or hot water cylinder is not automatically drinking water (the approved blocks cover making water safe)."
+      },
+      {
+        "where": "Gap table — column",
+        "from": "<th>Gap (L)</th>",
+        "to": "<th>Gap (L) = Need − Have</th>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "calculation-input",
+        "reason": "States the formula."
+      },
+      {
+        "where": "Gap table — baseline row",
+        "from": "<td>3-Day Minimum</td>",
+        "to": "<td>3-Day Official Baseline</td>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "Matches Step 1."
+      },
+      {
+        "where": "Gap table — 7-day row",
+        "from": "<td>7-Day Target</td>",
+        "to": "<td>7-Day (extended)</td>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "Extended storage, not an official target."
+      },
+      {
+        "where": "Gap table — 14-day row",
+        "from": "<td>14-Day Target</td>",
+        "to": "<td>14-Day (extended)</td>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "As above."
+      },
+      {
+        "where": "Gap table — 30-day row",
+        "from": "<td>30-Day Goal</td>",
+        "to": "<td>30-Day (extended)</td>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "As above."
+      },
+      {
+        "where": "Reality Check",
+        "from": "If your 3-day gap is <strong>more than 50 litres</strong>, that is your highest priority this week.",
+        "to": "If you have <strong>any gap in your 3-day official baseline</strong>, close it first.",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "'more than 50 litres' is an unsourced threshold; 'this week' is programme framing."
+      },
+      {
+        "where": "Container field",
+        "from": "Container type I will buy (e.g., 20L drums, 200L barrel, 1000L IBC tote)",
+        "to": "Container type I will buy (see Storing drinking water for suitable containers)",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Removes product sizes as defaults (no universal sizes). The approved blocks say which containers are suitable in each market."
+      },
+      {
+        "where": "Storage place field",
+        "from": "Where I will store it (cool, dark, away from chemicals)",
+        "to": "Where I will store it (see Storing drinking water)",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "NZ and AU storage advice differ (NZ: cool, dark place; AU: cool place off the ground, mosquito-proof); the approved block gives each market's own."
+      },
+      {
+        "where": "Storage Tips box",
+        "from": "<div class=\"info-box-title\">Storage Tips</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>Dark + cool + sealed = safe.</strong> Store containers in a garage, shed, or cupboard away from sunlight and chemicals. Label every container with the fill date. Rotate every 6–12 months. Add 5 drops of plain unscented bleach per litre if treating uncertain water sources.</p>",
+        "to": "<div class=\"info-box-title\">Storing It Safely</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">This calculator is for <strong>how much</strong> to store. How to store it — which containers, where to keep them, how often to check them, and how to make water safe to drink — is in <strong>Storing drinking water</strong> in this resource, written for your market.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "treatment-removed",
+        "reason": "REMOVES TREATMENT MISUSE: the NZ 5-drops-per-litre bleach method is for preparing tap water for storage, not for 'treating uncertain water sources'; AU gives no bleach ratio (boiling instead). Also removes 'Dark + cool + sealed = safe' (overstates) and 'Rotate every 6–12 months' (NZ: check every six months; AU: at least twice a year). Storage planning stays separate from water safety."
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 8 Complete</h3>",
+        "to": "<h3>Water Plan Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day X Complete'."
+      },
+      {
+        "where": "Closing text",
+        "from": " The next asset shows you how to make any water safe to drink.",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Points to an undeployed resource and overstates ('any water')."
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: OG-09 Water Filtration Comparison Matrix →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' navigation to an undeployed resource."
+      }
+    ]
+  }
 }

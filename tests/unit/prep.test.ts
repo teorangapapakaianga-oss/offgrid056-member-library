@@ -734,3 +734,50 @@ describe("OG-B12 copy changes", () => {
     expect(to).not.toMatch(/\d+\s*(minutes|min|°|degrees|kPa|psi)|recipe|shelf life/i);
   });
 });
+
+/**
+ * Stage 9.38. OG-08's calculator must use each market's own approved drinking-water figure — NZ: 3 L per person per
+ * day for at least three days; AU: 10 L per person for three days — and label longer periods as optional planning.
+ */
+describe("OG-08 water calculator", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const load = (f: string) => (JSON.parse(fs.readFileSync(path.resolve(`admin-import/config/${f}`), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-08"];
+  const og08 = load("approved-copy.json") ?? load("proposed-copy.json") ?? [];
+  const forMarket = (m: string) =>
+    og08.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").replace(/ ([.,:;])/g, "$1")).join("\n");
+  const formulas = (m: string) => [...forMarket(m).matchAll(/People × \d+ L(?: × \d+ days| × \d+ ÷ 3)?/g)].map((x) => x[0]);
+
+  it("uses the NZ rate of 3 L per person per day, never 10 L", () => {
+    expect(formulas("NZ")).toEqual(["People × 3 L × 3 days", "People × 3 L × 7 days", "People × 3 L × 14 days", "People × 3 L × 30 days"]);
+    expect(forMarket("NZ")).toContain("at least 3 litres of drinking water per person per day, for at least three days");
+    expect(forMarket("NZ")).not.toMatch(/10 ?L\b|10 litres/);
+  });
+
+  it("uses the AU figure of 10 L per person for three days — not per day — and scales it openly", () => {
+    expect(formulas("AU")).toEqual(["People × 10 L", "People × 10 L × 7 ÷ 3", "People × 10 L × 14 ÷ 3", "People × 10 L × 30 ÷ 3"]);
+    expect(forMarket("AU")).toContain("at least 10 litres of drinking water per person for three days");
+    expect(forMarket("AU")).not.toMatch(/per person per day|3 L ×|civil defence|Civil Defence/);
+    // The scaled rows equal the three-day figure per three days: 10 L × days ÷ 3.
+    for (const [days, litres] of [[7, 70 / 3], [14, 140 / 3], [30, 100]] as const) expect(10 * days / 3).toBeCloseTo(litres);
+  });
+
+  it("labels the official baseline and the optional extended storage in both markets", () => {
+    for (const m of ["NZ", "AU"]) {
+      expect(forMarket(m)).toContain("OFFICIAL EMERGENCY BASELINE");
+      expect(forMarket(m)).toContain("optional extended resilience storage");
+      expect(forMarket(m)).toContain("Round each total up to the next whole litre");
+    }
+  });
+
+  it("keeps treatment out of the calculator and drops the unsourced figures", () => {
+    const to = og08.map((c) => c.to).join("\n");
+    expect(to).not.toMatch(/bleach|drops|boil/i);
+    for (const s of ["50–70%", "10 litres per person per day", "50 litres", "20L", "200L", "1000L", "IBC", "6–12 months", "Dark + cool + sealed", "Day 8", "Next:", "OG-09"]) expect(to, s).not.toContain(s);
+  });
+
+  it("uses only the approved drinking-water block", () => {
+    const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources;
+    expect(meta["OG-08"].safetyBlocks).toEqual(["stored-drinking-water"]);
+    expect(meta["OG-26"].futureWordingReview.status).toMatch(/^QUEUED/);
+  });
+});
