@@ -587,8 +587,9 @@ describe("OG-20 copy changes", () => {
   it("records the CO alarm de-duplication for OG-20's AU file only (Stage 9.34 ruling 6)", () => {
     const all = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { safetyBlockTrims?: { block: string; market: string; approvedBy: string }[] }>;
     // Owner-approved trims only; a later resource may carry one as a proposal (OG-B12, Stage 9.36).
-    const approvedTrims = Object.entries(all).filter(([, m]) => m.safetyBlockTrims?.some((t) => t.approvedBy === "owner")).map(([code]) => code);
-    expect(approvedTrims).toEqual(["OG-20"]);
+    const approvedTrims = Object.entries(all).filter(([, m]) => m.safetyBlockTrims?.some((t) => t.approvedBy === "owner")).map(([code]) => code).sort();
+    // OG-20 (Stage 9.34) and OG-B12 (Stage 9.36), each approved for its own AU file.
+    expect(approvedTrims).toEqual(["OG-20", "OG-B12"]);
     expect(meta.safetyBlockTrims).toMatchObject([{ block: "carbon-monoxide", market: "AU" }]);
   });
 });
@@ -648,10 +649,29 @@ describe("fuel checks (Stage 9.36)", () => {
     expect(fuelSafetyFindings("<p>Compost returns nutrients. Biogas provides cooking fuel.</p>").join(" ")).toContain("GAS_SAFETY_REQUIRED");
   });
 
-  it("leaves the approved OG-15 and OG-26 options lists alone", () => {
-    expect(fuelSafetyFindings("<p>Backup heating exists (fireplace, wood burner, gas heater, portable)</p>")).toEqual([]);
-    expect(fuelSafetyFindings("<p>Emergency heating (gas heater / thermal blankets)</p>")).toEqual([]);
+  // Stage 9.36 ruling 3: no phrase exemption. "Gas heater" trips the check everywhere; OG-15 and OG-26 pass only
+  // through a reviewed exemption for their own exact text.
+  const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { fuelExemptions?: Parameters<typeof fuelSafetyFindings>[1] }>;
+  const OG15 = "<td>12. Backup heating exists (fireplace, wood burner, gas heater, portable)</td>";
+  const OG26 = "<td>Emergency heating (gas heater / thermal blankets)</td>";
+
+  it("detects gas appliances — there is no global 'gas heater' exemption", () => {
+    for (const s of [OG15, OG26, "<p>Run the gas heater with a window open.</p>", "<p>Use an unflued cabinet heater.</p>", "<p>Cook on the gas cooktop.</p>"])
+      expect(fuelSafetyFindings(s).join(" "), s).toContain("GAS_SAFETY_REQUIRED");
     expect(fuelSafetyFindings("<p>Firewood — keep a dry store and rotate stock.</p>")).toEqual([]);
+    expect(fuelSafetyFindings("<p>Current power / water / gas bills (last 12 months)</p>")).toEqual([]);
+  });
+
+  it("lets OG-15 and OG-26 through only by their own reviewed exact-context exemptions", () => {
+    expect(fuelSafetyFindings(OG15, meta["OG-15"].fuelExemptions)).toEqual([]);
+    expect(fuelSafetyFindings(OG26, meta["OG-26"].fuelExemptions)).toEqual([]);
+    // Each exemption covers only its own resource's text …
+    expect(fuelSafetyFindings(OG26, meta["OG-15"].fuelExemptions)).not.toEqual([]);
+    // … and not new gas teaching added beside it, nor a reworded version of it.
+    expect(fuelSafetyFindings(OG15 + "<p>Light the gas heater and leave it on overnight.</p>", meta["OG-15"].fuelExemptions)).not.toEqual([]);
+    expect(fuelSafetyFindings("<td>Emergency heating (gas heater / blankets)</td>", meta["OG-26"].fuelExemptions)).not.toEqual([]);
+    const holders = Object.entries(meta).filter(([, m]) => m.fuelExemptions?.length).map(([code]) => code).sort();
+    expect(holders).toEqual(["OG-15", "OG-26"]);
   });
 
   it("blocks both markets when diesel appears", () => {
@@ -703,8 +723,14 @@ describe("OG-B12 copy changes", () => {
     expect(forMarket("NZ")).toContain("Can the system supply backup power during an outage?");
   });
 
-  it("uses the five approved blocks its text triggers, with the AU CO trim still a proposal", () => {
+  it("uses the five approved blocks its text triggers, with the owner-approved AU CO trim", () => {
     expect(meta.safetyBlocks).toEqual(["generator-safety", "carbon-monoxide", "batteries-and-electrical", "solid-fuel-heating", "stored-drinking-water"]);
-    expect(meta.safetyBlockTrims[0].approvedBy).not.toBe("owner");
+    expect(meta.safetyBlockTrims).toMatchObject([{ block: "carbon-monoxide", market: "AU", approvedBy: "owner" }]);
+    expect([meta.foundation, meta.category, meta.difficulty, meta.estimatedTime]).toEqual(["general", "planning", "advanced", 60]);
+  });
+
+  it("names canning only as a method: no times, temperatures, pressures or recipes", () => {
+    const to = ogb12.map((c) => c.to).join("\n");
+    expect(to).not.toMatch(/\d+\s*(minutes|min|°|degrees|kPa|psi)|recipe|shelf life/i);
   });
 });

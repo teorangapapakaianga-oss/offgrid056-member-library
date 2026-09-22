@@ -533,6 +533,7 @@ async function commandPrep() {
       blockedBy: metadata[item.legacyCode]?.blockedBy ?? null,
       safetyExemptions: metadata[item.legacyCode]?.safetyExemptions ?? [],
       safetyBlockTrims: metadata[item.legacyCode]?.safetyBlockTrims ?? [],
+      fuelExemptions: metadata[item.legacyCode]?.fuelExemptions ?? [],
     });
     results.push(result);
 

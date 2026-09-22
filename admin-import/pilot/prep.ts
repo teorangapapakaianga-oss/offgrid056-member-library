@@ -47,24 +47,43 @@ export interface SafetyBlockTrim {
 }
 
 /**
- * Fuels no approved guidance covers, in a resource's own text (the safety blocks are not part of it). Each holds the
- * resource in every market until NZ/AU guidance is researched and approved (owner rulings, Stage 9.33–9.35):
- * - gas fuels — LPG, natural gas, biogas, dual-fuel — the gas rule stays strict;
+ * Fuels and appliances no approved guidance covers, in a resource's own text (the safety blocks are not part of it).
+ * Each holds the resource in every market until NZ/AU guidance is researched and approved (owner rulings, Stage
+ * 9.33–9.36):
+ * - gas fuels (LPG, natural gas, biogas, dual-fuel) and gas appliances (gas heater, cooker, bottle, unflued heater…);
  * - diesel — the approved generator block covers petrol generators only.
- * "Gas heater" in a list of options is deliberately not matched: live, owner-approved resources (OG-15, OG-26) name one.
+ * There is no phrase exemption. An existing, reviewed mention is let through only by a FuelExemption recorded for that
+ * one resource and that exact context (OG-15 and OG-26 name a gas heater in a list); any other mention still holds it.
  */
 const FUEL_CHECKS: { code: string; pattern: RegExp; why: string }[] = [
   {
     code: "GAS_SAFETY_REQUIRED",
-    pattern: /\b(LPG|LP gas|natural gas|biogas|gas[- ]powered|gas[- ]fuelled|gas[- ]fired|dual[- ]fuel|tri[- ]fuel)\b/i,
+    pattern:
+      /\b(LPG|LP gas|natural gas|biogas|gas[- ]powered|gas[- ]fuelled|gas[- ]fired|dual[- ]fuel|tri[- ]fuel|unflued|cabinet heaters?|gas[- ](heaters?|heating|appliances?|cookers?|cooktops?|hobs?|stoves?|ovens?|fires?|fireplaces?|bottles?|cylinders?|water heaters?|hot water|barbecues?|bbqs?|lamps?|lanterns?|burners?|rings?|fridges?|refrigerators?))\b/i,
     why: "no NZ/AU gas or LPG guidance is approved",
   },
   { code: "FUEL_GUIDANCE_REQUIRED", pattern: /\bdiesel\b/i, why: "the approved generator guidance covers petrol only" },
 ];
-export function fuelSafetyFindings(html: string): string[] {
+
+/** A reviewed, resource-specific exception for one exact piece of text (Stage 9.36 ruling 3). */
+export interface FuelExemption {
+  code: string;
+  context: string;
+  classification: string;
+  reason: string;
+  reviewedOn: string;
+  approvalRef: string;
+}
+
+export function fuelSafetyFindings(html: string, exemptions: FuelExemption[] = []): string[] {
   const text = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
   return FUEL_CHECKS.flatMap(({ code, pattern, why }) => {
-    const m = text.match(pattern);
+    let own = text;
+    for (const e of exemptions.filter((x) => x.code === code)) {
+      // Only the exact reviewed text, and only once: reworded or repeated, it is checked like anything else.
+      if (own.split(e.context).length === 2) own = own.replace(e.context, " ");
+    }
+    const m = own.match(pattern);
     return m ? [`${code}: "${m[0]}" — ${why}`] : [];
   });
 }
@@ -379,6 +398,8 @@ export interface PrepInputs {
   safetyExemptions?: SafetyExemption[];
   /** owner-approved removals of a duplicated sentence from a shared block, for this resource only */
   safetyBlockTrims?: SafetyBlockTrim[];
+  /** reviewed exceptions to the fuel checks, for this resource and exact context only */
+  fuelExemptions?: FuelExemption[];
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -484,7 +505,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const marketHtml = keepSmallTablesTogether(proposedMarket.html);
     collectFlags(marketHtml);
     // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
-    const fuelFindings = fuelSafetyFindings(marketHtml);
+    const fuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []);
     for (const finding of fuelFindings) if (!otherFindings.includes(finding)) otherFindings.push(finding);
     const marketMissing = lacking.filter((b) => {
       const exemption = exemptions.find((e) => e.block === b);

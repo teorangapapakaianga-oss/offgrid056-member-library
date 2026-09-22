@@ -164,7 +164,17 @@
         "indoor-combustion",
         "solid-fuel-heating"
       ],
-      "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)"
+      "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)",
+      "fuelExemptions": [
+        {
+          "code": "GAS_SAFETY_REQUIRED",
+          "context": "12. Backup heating exists (fireplace, wood burner, gas heater, portable)",
+          "classification": "incidental / list-only",
+          "reason": "A yes/no scorecard item naming kinds of backup heating. It gives no gas-appliance use, installation or safety instruction. The resource already carries the approved carbon-monoxide and indoor-combustion blocks (which cover unflued gas heaters).",
+          "reviewedOn": "2026-09-22",
+          "approvalRef": "Stage 9.36 ruling 3 (resource-specific reviewed exemption; no global phrase exemption)"
+        }
+      ]
     },
     "OG-02": {
       "foundation": "general",
@@ -233,7 +243,17 @@
         "version": "2aa8a131",
         "on": "2026-09-22"
       },
-      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment."
+      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment.",
+      "fuelExemptions": [
+        {
+          "code": "GAS_SAFETY_REQUIRED",
+          "context": "Emergency heating (gas heater / thermal blankets)",
+          "classification": "planning reference (a Tier 1 budget line to cost)",
+          "reason": "A budget line naming emergency-heating options to price. It gives no gas-appliance use, installation or safety instruction. The resource already carries the approved carbon-monoxide and indoor-combustion blocks (which cover unflued gas heaters).",
+          "reviewedOn": "2026-09-22",
+          "approvalRef": "Stage 9.36 ruling 3 (resource-specific reviewed exemption; no global phrase exemption)"
+        }
+      ]
     },
     "OG-22": {
       "foundation": "general",
@@ -453,22 +473,20 @@
       "deploymentApproved": "2026-09-22 (Stage 9.34 ruling 11, conditional on final validation)"
     },
     "OG-B12": {
-      "foundation": "energy",
-      "foundationStatus": "PROPOSED — audit HIGH. Alternative: general (it spans energy, water, sanitation, heating and food).",
+      "foundation": "general",
+      "foundationStatus": "owner-approved 2026-09-22: it integrates energy, water, sanitation, heating, food and household-system dependencies (Stage 9.36 ruling 1)",
       "resourceType": "planner",
-      "resourceTypeStatus": "PROPOSED — audit HIGH",
-      "category": "household-energy-planning",
-      "categoryStatus": "INFERRED — PROPOSED: 'Working out what your household really needs to run.' Alternative: general → planning ('Household planning across all five foundations').",
-      "difficulty": null,
-      "difficultyStatus": "OWNER-REVIEW REQUIRED",
-      "difficultySource": "SOURCE-SUPPORTED: the source labels itself 'Tier 4 Bonus — Advanced Resources'",
-      "difficultyRecommendation": "advanced (SOURCE-SUPPORTED)",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
-      "estimatedTimeRecommendation": 60,
+      "resourceTypeStatus": "owner-approved 2026-09-22",
+      "category": "planning",
+      "categoryStatus": "owner-approved 2026-09-22",
+      "difficulty": "advanced",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "SOURCE-SUPPORTED — the source labels itself 'Tier 4 Bonus — Advanced Resources'",
+      "estimatedTime": 60,
+      "estimatedTimeStatus": "owner-approved 2026-09-22 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: five systems to read, four worksheet boxes (19 fields) and a flow sketch. Excludes the specialist resources and quotes it draws on.",
       "description": "Design integrated energy, water, and shelter systems",
-      "descriptionStatus": "PROPOSED — the cover subtitle without 'Bonus —'. Alternative: the Purpose line ('Going off-grid is not just about solar panels…').",
+      "descriptionStatus": "owner-approved 2026-09-22 (the cover subtitle without 'Bonus —')",
       "tags": [],
       "safetyBlocks": [
         "generator-safety",
@@ -484,15 +502,16 @@
         "solid-fuel-heating",
         "stored-drinking-water"
       ],
-      "approvedSafetyBlocksStatus": "All five already owner-approved for NZ and AU (Stages 9.18, 9.21, 9.34); each is triggered by OG-B12's own text (see the Stage 9.36 report).",
+      "approvedSafetyBlocksStatus": "the five triggered blocks owner-approved for OG-B12 2026-09-22 (Stage 9.36 ruling 9)",
       "safetyBlockTrims": [
         {
           "block": "carbon-monoxide",
           "market": "AU",
           "removeSentence": "Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard.",
-          "reason": "PROPOSED for OG-B12 (same as OG-20, Stage 9.34 ruling 6): the generator block already tells AU members to install a battery-operated carbon monoxide alarm.",
-          "approvedBy": "NOT APPROVED — proposal",
-          "approvedOn": ""
+          "reason": "OG-B12 only: the generator block already tells AU members to install a battery-operated carbon monoxide alarm. The CO block keeps its risk explanation, symptoms, emergency action and numbers.",
+          "approvedBy": "owner",
+          "approvedOn": "2026-09-22",
+          "approvalRef": "Stage 9.36 ruling 11"
         }
       ],
       "hazardFlags": [
@@ -509,7 +528,9 @@
         "res-1026",
         "res-1022"
       ],
-      "relatedResourcesStatus": "PROPOSED — the specialist resources it integrates (Solar Power 101, Battery Backup Planner, Alternative Energy Suitability Check) and where the plan is costed and bought (3-Tier Budget Planner, Resilience Product Wishlist)"
+      "relatedResourcesStatus": "owner-approved 2026-09-22",
+      "hazardFlagsStatus": "owner rulings 2026-09-22: sanitation at planning level only; humanure and waste burning removed; canning kept as a method name only (no times, temperatures, pressures, recipes or shelf-life) — instructional canning would need FOOD_PRESERVATION_SAFETY_REQUIRED review first; Option A removes LPG, biogas and diesel.",
+      "deploymentApproved": "2026-09-22 (Stage 9.36 ruling 17, conditional on final validation and the gas-heater review)"
     }
   }
 }
