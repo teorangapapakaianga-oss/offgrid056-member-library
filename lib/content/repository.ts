@@ -10,6 +10,7 @@ import { SupplierSchema, WorkshopSchema, type Supplier, type Workshop } from "./
 import { ProgrammeDaySchema, ProgrammeSchema, type Programme, type ProgrammeDay } from "./programme-schemas";
 import { LearningPathSchema, ResourceSchema, type LearningPath, type Resource } from "./schemas";
 import { toSummary, type ResourceSummary } from "./summaries";
+import { aliasOf, resolveRouteCollisions, RouteCollisionError } from "./supersession";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 
@@ -46,16 +47,43 @@ function parseWith<S extends z.ZodType>(schema: S) {
 }
 
 let resourceCache: Resource[] | null = null;
+let aliasCache: Map<string, string> | null = null;
 let pathCache: LearningPath[] | null = null;
 
-/** Every resource file, including drafts and archived (used by validation). */
+/**
+ * Every resource file, including drafts and archived (used by validation) — after route collisions are resolved
+ * (lib/content/supersession.ts): in the private preview a real resource replaces a demo placeholder on the same
+ * route, and references to the placeholder follow it.
+ */
 export function loadAllResourceFiles(): Resource[] {
-  resourceCache ??= readJsonDir("resources", parseWith(ResourceSchema));
+  if (!resourceCache) {
+    const raw = readJsonDir("resources", parseWith(ResourceSchema));
+    let resolved: ReturnType<typeof resolveRouteCollisions<Resource>>;
+    try {
+      resolved = resolveRouteCollisions(raw, { preview: INCLUDE_DRAFTS });
+    } catch (e) {
+      if (e instanceof RouteCollisionError) throw new ContentError(e.message);
+      throw e;
+    }
+    const alias = aliasOf(resolved.aliases);
+    aliasCache = resolved.aliases;
+    resourceCache = resolved.resources.map((r) => ({
+      ...r,
+      relatedResources: r.relatedResources.map(alias),
+      ...(r.packItems ? { packItems: r.packItems.map(alias) } : {}),
+    }));
+  }
   return resourceCache;
 }
 
+/** A resource id as it resolves in this build (a superseded placeholder's id points at the real resource). */
+export function resolveResourceId(id: string): string {
+  loadAllResourceFiles();
+  return aliasCache?.get(id) ?? id;
+}
+
 export function loadLearningPaths(): LearningPath[] {
-  pathCache ??= readJsonDir("learning-paths", parseWith(LearningPathSchema));
+  pathCache ??= readJsonDir("learning-paths", parseWith(LearningPathSchema)).map((p) => ({ ...p, steps: p.steps.map(resolveResourceId) }));
   return pathCache;
 }
 
@@ -100,7 +128,13 @@ export function getProgramme(): Programme {
 }
 
 export function getProgrammeDays(): ProgrammeDay[] {
-  programmeDayCache ??= readJsonDir("programme/days", parseWith(ProgrammeDaySchema)).sort((a, b) => a.day - b.day);
+  programmeDayCache ??= readJsonDir("programme/days", parseWith(ProgrammeDaySchema))
+    .map((d) => ({
+      ...d,
+      resourceIds: d.resourceIds.map(resolveResourceId),
+      ...(d.worksheet ? { worksheet: { ...d.worksheet, ...(d.worksheet.resourceId ? { resourceId: resolveResourceId(d.worksheet.resourceId) } : {}) } } : {}),
+    }))
+    .sort((a, b) => a.day - b.day);
   return programmeDayCache;
 }
 
@@ -123,7 +157,13 @@ export function getSuppliers(): Supplier[] {
 }
 
 export function getWorkshops(): Workshop[] {
-  workshopCache ??= readJsonDir("workshops", parseWith(WorkshopSchema)).sort((a, b) => b.startDate.localeCompare(a.startDate));
+  workshopCache ??= readJsonDir("workshops", parseWith(WorkshopSchema))
+    .map((w) => ({
+      ...w,
+      relatedResources: w.relatedResources.map(resolveResourceId),
+      downloads: w.downloads.map((d) => (d.resourceId ? { ...d, resourceId: resolveResourceId(d.resourceId) } : d)),
+    }))
+    .sort((a, b) => b.startDate.localeCompare(a.startDate));
   return workshopCache;
 }
 

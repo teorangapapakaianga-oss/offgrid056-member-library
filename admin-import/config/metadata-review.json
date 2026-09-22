@@ -540,21 +540,19 @@
     },
     "OG-08": {
       "foundation": "water",
-      "foundationStatus": "PROPOSED — audit HIGH",
+      "foundationStatus": "owner-approved 2026-09-22",
       "resourceType": "worksheet",
-      "resourceTypeStatus": "PROPOSED — audit HIGH",
+      "resourceTypeStatus": "owner-approved 2026-09-22",
       "category": "water-storage",
-      "categoryStatus": "INFERRED — PROPOSED: 'How much to store, how to store it, and how to rotate it.' Alternative: household-water-planning.",
-      "difficulty": null,
-      "difficultyStatus": "OWNER-REVIEW REQUIRED",
-      "difficultySource": "none stated",
-      "difficultyRecommendation": "beginner (INFERRED): multiply, add and subtract; no technical content",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
-      "estimatedTimeRecommendation": 20,
+      "categoryStatus": "owner-approved 2026-09-22",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "owner-approved 2026-09-22 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: four need rows, a five-row inventory, four gap rows and six plan fields. Excludes measuring containers.",
       "description": "Know exactly how much water your household needs, how much you currently store, and the gap between the two. No guesswork. Just numbers.",
-      "descriptionStatus": "SOURCE — the cover subtitle, unchanged (no figures)",
+      "descriptionStatus": "owner-approved 2026-09-22",
       "tags": [],
       "safetyBlocks": [
         "stored-drinking-water"
@@ -568,7 +566,9 @@
         "res-1026",
         "res-1512"
       ],
-      "relatedResourcesStatus": "PROPOSED — Resilience Product Wishlist (buying containers), 3-Tier Budget Planner (costing the gap), Off-Grid System Architecture Planner (the whole water system). Future, not linked (undeployed): OG-09, OG-10, OG-B08."
+      "relatedResourcesStatus": "owner-approved 2026-09-22",
+      "route": "/resources/water-storage-calculator/ — in the private preview this real record supersedes the Stage 5 demo placeholder res-0015 (Stage 9.38 rulings 10–12); the public/demo build is unchanged",
+      "deploymentApproved": "2026-09-22 (Stage 9.38 ruling 18, conditional on final validation)"
     }
   }
 }

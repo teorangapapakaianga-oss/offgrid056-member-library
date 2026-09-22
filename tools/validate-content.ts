@@ -28,7 +28,10 @@ try {
   const paths = loadLearningPaths();
   const ids = new Map<string, string>();
   const slugs = new Map<string, string>();
-  const published = new Set(all.filter((r) => r.status === "published").map((r) => r.id));
+  // What members can reach in this build: published resources, plus drafts in the private preview
+  // (OG056_INCLUDE_DRAFTS=1). A production build is unchanged: published only.
+  const preview = process.env.OG056_INCLUDE_DRAFTS === "1";
+  const published = new Set(all.filter((r) => r.status === "published" || (preview && r.status === "draft")).map((r) => r.id));
   const pathIds = new Set(paths.map((p) => p.id));
 
   for (const r of all) {
@@ -77,7 +80,9 @@ try {
     const wsId = d.worksheet?.resourceId;
     if (wsId) {
       const ws = all.find((r) => r.id === wsId);
-      if (ws && !ws.fileUrl) errors.push(`${at}: worksheet "${ws.slug}" has no file to open or download`);
+      // A market-specific worksheet has per-market files and deliberately no single file: the member opens it from
+      // its own page, where their market picks the file (no market, no file).
+      if (ws && !ws.fileUrl && !ws.marketFiles) errors.push(`${at}: worksheet "${ws.slug}" has no file to open or download`);
     }
     if (d.worksheet && !d.worksheet.resourceId && !d.worksheet.fileUrl) errors.push(`${at}: worksheet has neither a resourceId nor a fileUrl`);
     if (release && d.isPlaceholder) errors.push(`${at}: placeholder programme day in a release build`);

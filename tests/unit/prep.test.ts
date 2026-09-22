@@ -767,6 +767,17 @@ describe("OG-08 water calculator", () => {
       expect(forMarket(m)).toContain("optional extended resilience storage");
       expect(forMarket(m)).toContain("Round each total up to the next whole litre");
     }
+    // Owner rulings 3–4: the longer rows carry each market's own planning label, three times each.
+    expect(forMarket("NZ").match(/OFFGRID056 EXTENDED RESILIENCE PLANNING/g)).toHaveLength(3);
+    expect(forMarket("AU").match(/OFFGRID056 PLANNING EXTRAPOLATION BASED ON THE 3-DAY BASELINE/g)).toHaveLength(3);
+    expect(forMarket("AU")).toContain("not an official Australian daily allowance");
+    expect(forMarket("NZ")).not.toMatch(/EXTRAPOLATION/);
+    expect(forMarket("AU")).not.toMatch(/EXTENDED RESILIENCE PLANNING/);
+  });
+
+  it("never prints a negative gap, and names the surplus", () => {
+    expect(forMarket("NZ")).toContain("Gap (L) = Need − Have, never below 0");
+    expect(forMarket("NZ")).toContain("your gap is 0 L — the extra is a surplus (Have − Need)");
   });
 
   it("keeps treatment out of the calculator and drops the unsourced figures", () => {
