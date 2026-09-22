@@ -80,6 +80,12 @@ export function safetyExposureFor(text: string): string[] {
   return SAFETY_TOPICS.filter((t) => (text.match(t.pattern) ?? []).length >= t.needs).map((t) => t.block);
 }
 
+/** Every mention of the topic that pulls in `block` (none if the block has no topic). */
+export function safetyTopicMentions(text: string, block: string): string[] {
+  const topic = SAFETY_TOPICS.find((t) => t.block === block);
+  return topic ? (text.match(new RegExp(topic.pattern.source, topic.pattern.flags)) ?? []) : [];
+}
+
 function complexityOf(layout: Omit<GroupAReport["layout"], "complexity">): Risk {
   const score =
     layout.tables * 2 + layout.formFields * 0.2 + layout.componentClasses * 0.5 + layout.pageBreaks + layout.sizeKb / 10;

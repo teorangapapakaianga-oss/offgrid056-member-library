@@ -17,6 +17,28 @@ import { injectSafetyChecked } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
 import { getFoundation } from "@/lib/content/taxonomy";
 import type { ProgrammeItem } from "../audit/programme";
+import { safetyTopicMentions } from "../audit/group-a";
+
+/**
+ * An owner-approved, resource-specific exemption from a block the topic detector requires. It holds only while
+ * every mention of the topic in the member-facing text is one of `allowedMentions`: add any other mention — food
+ * guidance to a resource exempted from the food block, say — and the block is required again.
+ */
+export interface SafetyExemption {
+  block: string;
+  reason: string;
+  approvedBy: string;
+  approvedOn: string;
+  allowedMentions: string[];
+}
+
+/** Whether an exemption still holds for this member-facing HTML, and what breaks it if not. */
+export function exemptionHolds(exemption: SafetyExemption, html: string): { holds: boolean; unexpected: string[] } {
+  let text = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
+  for (const allowed of exemption.allowedMentions) text = text.split(allowed).join(" ");
+  const unexpected = safetyTopicMentions(text, exemption.block);
+  return { holds: unexpected.length === 0, unexpected };
+}
 
 export interface PrepResult {
   legacyCode: string;
@@ -40,6 +62,8 @@ export interface PrepResult {
     missingRequired: string[];
     /** blocks inserted as proposals, awaiting owner approval for this resource */
     proposed: string[];
+    /** owner-approved exemptions, and whether each still held in every market */
+    exemptions: { block: string; reason: string; holds: boolean; unexpected: string[] }[];
   };
   /** legacy programme, product and cross-reference text that may not belong in the current library */
   contentFlags: ContentFlag[];
@@ -309,6 +333,8 @@ export interface PrepInputs {
   relatedResources?: string[];
   /** another resource this one cannot be published without */
   blockedBy?: { dependency: string; reason?: string } | null;
+  /** owner-approved exemptions from detector-required blocks, for this resource only */
+  safetyExemptions?: SafetyExemption[];
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -369,7 +395,11 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   // 4. market resolution, with the standard blocks plus this resource's topic blocks
   const safetyBlocks = ["general-disclaimer", "emergency-contact", ...(inputs.extraSafetyBlocks ?? [])];
   const requiredSafety = inputs.requiredSafety ?? [];
-  const missingRequired = requiredSafety.filter((b) => !safetyBlocks.includes(b));
+  const lacking = requiredSafety.filter((b) => !safetyBlocks.includes(b));
+  // An exemption is checked against each market's final wording; a block stays required wherever it fails.
+  const exemptions = (inputs.safetyExemptions ?? []).filter((e) => lacking.includes(e.block));
+  const exemptionResults = new Map(exemptions.map((e) => [e.block, { block: e.block, reason: e.reason, holds: true, unexpected: [] as string[] }]));
+  const missing = new Set(launchMarkets.length ? [] : lacking);
   const proposed = safetyBlocks.filter((b) => (inputs.proposedBlockIds ?? []).includes(b));
   const resource: CoreResource = {
     id: item.proposedResourceId,
@@ -400,6 +430,16 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // Print layout that edits markup runs only after every copy change, so no approved change is disturbed.
     const marketHtml = keepSmallTablesTogether(proposedMarket.html);
     collectFlags(marketHtml);
+    const marketMissing = lacking.filter((b) => {
+      const exemption = exemptions.find((e) => e.block === b);
+      if (!exemption) return true;
+      const check = exemptionHolds(exemption, marketHtml);
+      const result = exemptionResults.get(b)!;
+      result.holds &&= check.holds;
+      result.unexpected.push(...check.unexpected.filter((u) => !result.unexpected.includes(u)));
+      return !check.holds;
+    });
+    for (const b of marketMissing) missing.add(b);
     const injected = injectSafetyChecked(
       marketHtml,
       resolved.safety.map((s) => ({ id: s.id, title: s.title, body: s.body, severity: s.severity })),
@@ -409,7 +449,11 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const unplaced = [
       ...injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`),
       // A topic the resource teaches without its safety block is a blocker in every market.
-      ...missingRequired.map((id) => `safety block "${id}" is required by this resource's topics but not included`),
+      ...marketMissing.map((id) =>
+        exemptionResults.has(id)
+          ? `safety block "${id}" is required again: the exemption no longer holds (new mention: ${exemptionResults.get(id)!.unexpected.join(", ")})`
+          : `safety block "${id}" is required by this resource's topics but not included`,
+      ),
     ];
     const file = path.join(outDir, `${slug}.${code}.html`);
     fs.writeFileSync(file, withSafety, "utf8");
@@ -421,6 +465,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       emergencyNumber: profile.emergency.number,
     });
   }
+
+  const missingRequired = [...missing];
 
   // 5. validation against the real library schema
   // No fallbacks. A reviewed value wins; otherwise only a HIGH-confidence audit inference is used; otherwise the
@@ -493,7 +539,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     reskin: { changes: summariseChanges(changes), warnings },
     branding: { legacyIssues: legacyIssues.length, issues: legacyIssues },
     terminology: { frameworkPhrase: item.legacyTerminology.length, barePillar: 0, otherFindings },
-    safety: { blocks: resource.safetyBlocks, exposure: item.safetyNotes, required: requiredSafety, missingRequired, proposed },
+    safety: { blocks: resource.safetyBlocks, exposure: item.safetyNotes, required: requiredSafety, missingRequired, proposed, exemptions: [...exemptionResults.values()] },
     contentFlags,
     markets: marketResults,
     validation: {

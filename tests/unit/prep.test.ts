@@ -206,6 +206,41 @@ describe("audit safety notes", () => {
   });
 });
 
+describe("prepareResource: resource-specific safety exemptions (Stage 9.30)", () => {
+  const EXEMPT = {
+    block: "food-safety-power-cut", reason: "appliance/load reference only", approvedBy: "owner", approvedOn: "2026-09-22", allowedMentions: ["Fridge / freezer"],
+  };
+  const withRow = DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><table><tr><td>Fridge / freezer</td><td>___ kWh</td></tr></table>");
+
+  it("holds while the only mention is the allowed appliance row", () => {
+    const r = prep({ sourceHtml: withRow, requiredSafety: ["food-safety-power-cut"], safetyExemptions: [EXEMPT] });
+    expect(r.safety.missingRequired).toEqual([]);
+    expect(r.safety.exemptions).toEqual([{ block: "food-safety-power-cut", reason: "appliance/load reference only", holds: true, unexpected: [] }]);
+    expect(r.markets.every((m) => m.publishable)).toBe(true);
+  });
+
+  it("lapses, and requires the block again, when food guidance is added", () => {
+    const withGuidance = withRow.replace("</div></body>", "<p>Keep the freezer closed during a power cut.</p></div></body>");
+    const r = prep({ sourceHtml: withGuidance, requiredSafety: ["food-safety-power-cut"], safetyExemptions: [EXEMPT] });
+    expect(r.safety.missingRequired).toEqual(["food-safety-power-cut"]);
+    expect(r.safety.exemptions[0].holds).toBe(false);
+    for (const m of r.markets) expect(m.problems.join(" ")).toContain("exemption no longer holds");
+  });
+
+  it("applies only to the resource that carries it: the detector still requires the block elsewhere", () => {
+    const r = prep({ sourceHtml: withRow, requiredSafety: ["food-safety-power-cut"] });
+    expect(r.safety.missingRequired).toEqual(["food-safety-power-cut"]);
+    expect(r.markets.every((m) => !m.publishable)).toBe(true);
+  });
+
+  it("is recorded for OG-18 only, with the owner's reason and allowed mention", () => {
+    const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { safetyExemptions?: typeof EXEMPT[] }>;
+    const holders = Object.entries(meta).filter(([, m]) => m.safetyExemptions?.length).map(([code]) => code);
+    expect(holders).toEqual(["OG-18"]);
+    expect(meta["OG-18"].safetyExemptions).toMatchObject([{ block: "food-safety-power-cut", reason: "appliance/load reference only; no food-safety teaching", allowedMentions: ["Fridge / freezer"] }]);
+  });
+});
+
 describe("prepareResource: safety", () => {
   it("blocks every market when a required safety block is missing", () => {
     const r = prep({ requiredSafety: ["batteries-and-electrical"] });
@@ -418,6 +453,12 @@ describe("OG-18 copy changes", () => {
       expect(text).toContain("only if the system is designed to provide backup power");
       expect(text).toContain("Solar panels on their own will not power your home during a grid outage");
     }
+  });
+
+  it("replaces the absolute 'any No is solvable' with the owner's wording", () => {
+    const to = og18.map((c) => c.to).join("\n");
+    expect(to).not.toContain("solvable");
+    expect(to).toContain('A "No" does not necessarily rule solar out — discuss the constraint with a qualified installer.');
   });
 
   it("uses only the two approved safety blocks it needs", () => {

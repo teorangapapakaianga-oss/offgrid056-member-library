@@ -312,21 +312,19 @@
     },
     "OG-18": {
       "foundation": "energy",
-      "foundationStatus": "PROPOSED — audit HIGH",
+      "foundationStatus": "owner-approved 2026-09-22",
       "resourceType": "workbook",
-      "resourceTypeStatus": "PROPOSED — audit MEDIUM; the document calls itself a workbook (title and filename)",
+      "resourceTypeStatus": "owner-approved 2026-09-22",
       "category": "solar",
-      "categoryStatus": "INFERRED — PROPOSED: 'Understanding solar for your home.' (as OG-B07)",
-      "difficulty": null,
-      "difficultyStatus": "OWNER-REVIEW REQUIRED",
-      "difficultySource": "none stated; the title '101' and 'introduces solar' indicate an entry-level resource",
-      "difficultyRecommendation": "beginner (INFERRED from the source's own framing)",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
-      "estimatedTimeRecommendation": 30,
+      "categoryStatus": "owner-approved 2026-09-22",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "owner-approved 2026-09-22 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: six roof questions, a six-row consumption estimate from a power bill, four sizing rows, a cost table and seven decision fields. Excludes gathering bills and quotes.",
       "description": "Sunlight falls on your roof every day. This workbook introduces solar: how it works, what shapes the cost, and whether your home is suitable.",
-      "descriptionStatus": "PROPOSED — matches the proposed cover subtitle (the original was 'free, infinite … what it costs')",
+      "descriptionStatus": "owner-approved 2026-09-22 (matches the approved cover subtitle)",
       "tags": [],
       "safetyBlocks": [
         "batteries-and-electrical",
@@ -338,10 +336,27 @@
       ],
       "approvedSafetyBlocksStatus": "both blocks already owner-approved for NZ and AU (Stages 9.18 and 9.19)",
       "relatedResources": [
-        "solar-planning-deep-worksheet",
-        "battery-backup-planner"
+        "res-1507",
+        "res-1019"
       ],
-      "relatedResourcesStatus": "PROPOSED — OG-18 as the introductory solar resource: OG-B07 goes deeper, OG-19 adds the battery"
+      "relatedResourcesStatus": "owner-approved 2026-09-22: OG-18 is the introductory solar resource → OG-B07 → OG-19. The live OG-B07 and OG-19 records are NOT changed (Stage 9.30 ruling 1).",
+      "safetyExemptions": [
+        {
+          "block": "food-safety-power-cut",
+          "ownerName": "food-power-cut",
+          "resource": "OG-18",
+          "reason": "appliance/load reference only; no food-safety teaching",
+          "detail": "The only trigger is the 'Fridge / freezer' row of the energy-use table. OG-18 does not teach food storage, fridge outage timing, food disposal, refreezing or food handling during outages.",
+          "allowedMentions": [
+            "Fridge / freezer"
+          ],
+          "approvedBy": "owner",
+          "approvedOn": "2026-09-22",
+          "approvalRef": "Stage 9.30 ruling 6",
+          "condition": "Resource-specific; the detector is unchanged. The exemption lapses automatically — and the approved market block is required again — if OG-18's member-facing text mentions fridge, freezer, pantry or perishable anywhere else."
+        }
+      ],
+      "deploymentApproved": "2026-09-22 (Stage 9.30 ruling 13, conditional on final validation)"
     }
   }
 }
