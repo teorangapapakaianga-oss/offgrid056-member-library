@@ -36,7 +36,7 @@
         },
         "foodSafety": {
           "name": "New Zealand Food Safety (MPI)",
-          "url": "https://www.mpi.govt.nz/food-safety-home"
+          "url": "https://www.mpi.govt.nz/food-safety-home/food-safety-in-natural-disasters-and-emergencies"
         },
         "gasRegulator": {
           "name": "WorkSafe New Zealand",
@@ -65,9 +65,9 @@
         "storingWater": "https://getready.govt.nz/prepared/household/supplies/storing-water",
         "emergency": "https://www.police.govt.nz/call-111",
         "gasWork": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/",
-        "foodInEmergencies": "https://www.mpi.govt.nz/food-business/food-safety-in-natural-disasters-and-emergencies-2"
+        "foodInEmergencies": "https://www.mpi.govt.nz/food-safety-home/food-safety-in-natural-disasters-and-emergencies"
       },
-      "figuresNote": "Stage 9.25 (2026-09-22): the NZ fridge/freezer figures ('less than 24 hours', 'less than 4 days') could not be verified — MPI's food-safety pages are behind bot protection, and the earlier values look like a misreading of search summaries. Set to VERIFY so anything using them fails closed. The foodInEmergencies link points to an MPI food-BUSINESS page."
+      "figuresNote": "Stage 9.26 (2026-09-22): MPI's household emergency food page (last reviewed 24.02.25, read live) publishes NO fridge or freezer safe-time figures. fridgeWithoutPower and freezerWithoutPower therefore stay VERIFY (fail closed); the old 'less than 24 hours' is invalid and must not return. The earlier link pointed to MPI's food-BUSINESS page; corrected to the household page."
     },
     {
       "code": "AU",

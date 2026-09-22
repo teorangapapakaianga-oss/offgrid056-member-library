@@ -980,6 +980,158 @@
         "approval": "Stage 9.21 ruling 13 (approved in principle; exact before/after verified at prep)",
         "proposedOn": "2026-09-22"
       }
+    ],
+    "OG-11": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 2 — Water, Food & Air</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label.",
+        "approval": "standing rule on obsolete programme navigation (Stage 9.18 rulings 3 and 7)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name.",
+        "approval": "standing rule on obsolete programme navigation (Stage 9.18 rulings 3 and 7)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-11 | Day 11</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal code and programme day.",
+        "approval": "standing rule on obsolete programme navigation (Stage 9.18 rulings 3 and 7)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 11 Complete</h3>",
+        "to": "<h3>Pantry Plan Complete</h3>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day X Complete'.",
+        "approval": "standing rule on obsolete programme navigation (Stage 9.18 rulings 3 and 7)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing — next-asset teaser",
+        "from": " The next asset ensures nothing goes to waste through a simple rotation system.",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-resource navigation to OG-12, not in the library.",
+        "approval": "standing rule on obsolete programme navigation (Stage 9.18 rulings 3 and 7)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: OG-12 FIFO Rotation Tracker →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' navigation.",
+        "approval": "standing rule on obsolete programme navigation (Stage 9.18 rulings 3 and 7)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "Build a 30-day food supply that your family will actually eat.",
+        "to": "Build toward a 30-day pantry that your family will actually eat.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "claim-framing",
+        "reason": "30 days is OffGrid056's planning goal, not an official requirement (owner ruling 1); 'build toward' makes it a goal.",
+        "approval": "Stage 9.25 rulings 1 (30-day positioning) and 3 (claim cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 2 target (NZ)",
+        "from": "Target: 30 days of calories per person (approx. 2,000 cal/day = 60,000 calories per person for 30 days).",
+        "to": "Build beyond the basic emergency supply toward a pantry target that suits your household, storage space, budget and resilience goals. OffGrid056's planning goal is 30 days. The official emergency baseline in New Zealand is food for at least three days (Get Ready).",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Separates the official baseline (Get Ready NZ: 'stuck at home for three days or more', read live) from the optional 30-day goal. Removes the calorie figures: 'cal' is not the unit on NZ labels (kilojoules), and the 8,700 kJ reference was not found on the FSANZ page read.",
+        "markets": [
+          "NZ"
+        ],
+        "approval": "Stage 9.25 rulings 1 (30-day positioning) and 3 (claim cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Step 2 target (AU)",
+        "from": "Target: 30 days of calories per person (approx. 2,000 cal/day = 60,000 calories per person for 30 days).",
+        "to": "Build beyond the basic emergency supply toward a pantry target that suits your household, storage space, budget and resilience goals. OffGrid056's planning goal is 30 days. Official emergency advice varies by state — from food for at least three days (Get Ready Queensland) to supplies for up to 14 days (NSW Food Authority) — so check your state's advice.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "AU baseline is state-based: Get Ready Queensland 'Non-perishable food for three days' and NSW Food Authority 'sufficient supply … for up to 14 days' (both read live). No single national figure is implied.",
+        "markets": [
+          "AU"
+        ],
+        "approval": "Stage 9.25 rulings 1 (30-day positioning) and 3 (claim cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "The Expiry Date Trap",
+        "from": "Most canned goods last 2–5 years. Dried goods last 1–2 years. Write expiry dates clearly on every item with a permanent marker. Check your pantry every 3 months. Use what expires soonest — this is the rotation principle covered in OG-12.",
+        "to": "Check the date on every item. A use-by date is about safety: don't eat food after it. A best-before date is about quality: food should still be safe for a while after it, but may not be at its best. Some canned foods with a shelf life of more than two years carry no date — write the date you bought them on the can with a permanent marker. Inspect cans as you go and don't use any that are swollen, leaking, rusted or dented. Check your pantry regularly and use what expires soonest first — the 'first in, first out' rotation principle.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Replaces unsourced shelf lives (2–5 years, 1–2 years) with FSANZ's use-by / best-before rules and can guidance (read live; FSANZ covers both NZ and AU). 'Every 3 months' → 'regularly' (NSW Food Authority: dates 'checked regularly'). Removes the OG-12 reference.",
+        "approval": "Stage 9.25 rulings 1 (30-day positioning) and 3 (claim cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Storage checklist — temperature",
+        "from": "□ Cool (under 20°C ideally)",
+        "to": "□ Cool",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "'Under 20°C' is unsourced; FSANZ: canned foods keep best 'in a cool, dry place'. 'Dry' is already its own checklist item, so the line is simply 'Cool' — the longer wording wrapped its cell across a page break.",
+        "approval": "Stage 9.25 rulings 1 (30-day positioning) and 3 (claim cleanup)",
+        "proposedOn": "2026-09-22"
+      },
+      {
+        "where": "Build Gradually",
+        "from": "Add 2–3 extra items per weekly grocery run. In 10 weeks, you have a full 30-day supply without stressing your budget.",
+        "to": "Add a few extra items to each weekly shop. Over time you will reach your pantry target without stressing your budget.",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "'2–3 items → 30 days in 10 weeks' is arithmetic that depends entirely on what is bought; non-numeric instead.",
+        "approval": "Stage 9.25 rulings 1 (30-day positioning) and 3 (claim cleanup)",
+        "proposedOn": "2026-09-22"
+      }
     ]
   }
 }

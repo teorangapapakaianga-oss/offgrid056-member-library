@@ -258,27 +258,28 @@
     },
     "OG-11": {
       "foundation": "food",
-      "foundationStatus": "inferred, HIGH confidence (title and content: pantry and food)",
+      "foundationStatus": "owner-approved 2026-09-22",
       "resourceType": "worksheet",
-      "resourceTypeStatus": "PROPOSED — audit MEDIUM: a 'Builder' made of an eating profile, a 5-category inventory table, a shopping list and a storage checklist (70 fill-in fields)",
+      "resourceTypeStatus": "owner-approved 2026-09-22",
       "category": "pantry-resilience",
-      "categoryStatus": "PROPOSED — the category is literally 'A pantry buffer built from what you already eat', which is OG-11's 'Eat-What-You-Store' rule",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "NEEDS_OWNER_REVIEW",
-      "estimatedTimeRecommendation": 30,
+      "categoryStatus": "owner-approved 2026-09-22",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "owner-approved 2026-09-22",
       "estimatedTimeReasoning": "Fill the eating profile, check the cupboards against five categories, write a six-item shopping list and tick the storage checklist. Excludes the shopping itself.",
-      "difficulty": null,
-      "difficultyStatus": "NEEDS_OWNER_REVIEW",
-      "difficultySource": "none — the document states no level",
-      "difficultyRecommendation": "beginner (INFERRED) — listing and checking what is in the cupboards; no technical content",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived; the document states no level",
       "description": "Build toward a 30-day pantry that your family will actually eat. No waste. No forgotten cans. Just a practical rotation system that works.",
-      "descriptionStatus": "PROPOSED — the cover subtitle with the 30-day figure framed as a goal ('build toward'), not a supply requirement",
+      "descriptionStatus": "owner-approved 2026-09-22 (30 days framed as an OffGrid056 planning goal)",
       "tags": [],
       "safetyBlocks": [
         "food-safety-power-cut"
       ],
       "safetyReasoning": "REQUIRED by the audit (pantry ×6). Proposed wording is verified NZ (Get Ready) and AU (NSW Food Authority).",
-      "approvedSafetyBlocks": []
+      "approvedSafetyBlocks": [
+        "food-safety-power-cut"
+      ],
+      "approvedSafetyBlocksStatus": "AU approved; NZ Get Ready order approved; NZ MPI refreeze/discard lines verified live and awaiting owner confirmation"
     }
   }
 }
