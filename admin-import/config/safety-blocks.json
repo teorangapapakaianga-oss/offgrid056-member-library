@@ -159,6 +159,30 @@
         "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
       },
       "changeRule": "Owner ruling 9: any future change requires source re-verification; no bleach ratio, storage period or treatment instruction may move between markets."
+    },
+    "food-safety-power-cut": {
+      "id": "food-safety-power-cut",
+      "title": "Food safety in a power cut",
+      "severity": "HIGH",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**If the power goes out, eat the food from your fridge first, then your freezer, then the food in your cupboard or emergency kit.**\nKeep a stock of food that doesn't need to be cooked — canned food is good — or something to cook it on, such as a gas barbecue or camp stove. Don't forget food for babies and pets.",
+        "AU": "**A closed fridge should keep food cold for about four hours, and a freezer usually won't defrost for at least 24 hours if its door stays shut** — so keep both closed as much as you can, and note the time the power went off. Eskies with ice bricks or gel packs can keep food cold for longer.\nIf frozen food has thawed, don't refreeze it: keep it cold and eat it as soon as possible. Throw out food that was being cooked when the power failed if you can't finish cooking it properly within two hours."
+      },
+      "sources": {
+        "NZ": [
+          "Get Ready (NZ Civil Defence) — No power ('Fridge first'; stock of food that doesn't need cooking; read live 2026-09-22): https://getready.govt.nz/prepared/household/impacts/no-power",
+          "VERIFY_LIVE_SOURCE — New Zealand Food Safety (MPI) power-cut timings, refreezing and discard rules: mpi.govt.nz is behind bot protection (Incapsula) and was not read. Not used."
+        ],
+        "AU": [
+          "NSW Food Authority — Food safety in emergencies ('During an emergency' and 'After a power failure'; read live 2026-09-22): https://www.foodauthority.nsw.gov.au/consumer/keeping-food-safe/flood-fire-power-cut-emergencies"
+        ]
+      },
+      "sharedOrVaries": "VARIES — only the AU source read gives timings (fridge about 4 hours, freezer at least 24 hours) and refreeze and cooking rules; the NZ source read gives the 'fridge first' order only. No AU timing is used in NZ. NSW's page contradicts itself on warmed fridge food (4 hours in one section, 2 hours in another), so neither is used. No tasting guidance: none of the sources read gives any.",
+      "verification": {
+        "NZ": "VERIFIED_LIVE 2026-09-22 (Get Ready only) — MPI detail VERIFY_LIVE_SOURCE — awaiting owner approval",
+        "AU": "VERIFIED_LIVE 2026-09-22 — awaiting owner approval"
+      }
     }
   }
 }

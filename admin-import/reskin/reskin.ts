@@ -161,6 +161,20 @@ export function reskinHtml(source: string, options: ReskinOptions = {}): ReskinR
     record("layout", "table rows could split across pages", "rows kept whole when printing", 1);
   }
 
+  // Short callout boxes must not split across a page either, and a heading must not be stranded at the foot of a
+  // page away from its text (found in OG-11: "The Expiry Date Trap" split mid-sentence in NZ, and its title was
+  // left alone on the page before its text in AU). Large section containers are deliberately not included:
+  // forcing a tall worksheet section whole would leave large gaps.
+  const CALLOUTS = ["warning-box", "info-box", "closing-box", "total-box"];
+  const present = CALLOUTS.filter((c) => html.includes(`class="${c}"`));
+  if (present.length) {
+    html = html.replace(
+      "</head>",
+      `<style>\n  ${present.map((c) => `.${c}`).join(", ")} { break-inside: avoid; page-break-inside: avoid; }\n  h2, h3, .warning-title, .info-box-title { break-after: avoid; page-break-after: avoid; }\n</style>\n</head>`,
+    );
+    record("layout", "callout boxes could split across pages", "callout boxes kept whole; headings kept with their text", 1);
+  }
+
   // Only that layout: the centred cover design already stacks these in normal flow, and wrapping it would break
   // its centring.
   const coverText = /(<div class="cover-label">[\s\S]*?<\/div>\s*<h1 class="cover-title">[\s\S]*?<\/h1>\s*<p class="cover-subtitle">[\s\S]*?<\/p>)/;

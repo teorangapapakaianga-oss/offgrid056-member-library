@@ -222,10 +222,18 @@ describe("unverified market figures fail closed", () => {
     for (const code of ["NZ", "AU"]) {
       const m = market(code);
       expect(m.figures.waterPerPersonPerDay).not.toBe(UNVERIFIED);
-      expect(m.figures.fridgeWithoutPower).not.toBe(UNVERIFIED);
-      expect(m.figures.freezerWithoutPower).not.toBe(UNVERIFIED);
       expect(m.emergency.number).toBeTruthy();
     }
+    // AU power-cut food figures were re-verified live against NSW Food Authority (Stage 9.25).
+    expect(market("AU").figures.fridgeWithoutPower).not.toBe(UNVERIFIED);
+    expect(market("AU").figures.freezerWithoutPower).not.toBe(UNVERIFIED);
+  });
+
+  it("keeps NZ power-cut food figures unverified until MPI's guidance is checked", () => {
+    // The earlier NZ values ("less than 24 hours" for a fridge) could not be verified — MPI's pages are behind bot
+    // protection — and looked like a misreading. They fail closed rather than reach a member unverified.
+    expect(market("NZ").figures.fridgeWithoutPower).toBe(UNVERIFIED);
+    expect(market("NZ").figures.freezerWithoutPower).toBe(UNVERIFIED);
   });
 
   it("keeps NZ and AU official figures distinct, never shared", () => {

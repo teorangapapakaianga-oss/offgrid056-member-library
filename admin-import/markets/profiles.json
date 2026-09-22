@@ -1,7 +1,13 @@
 {
   "description": "Stage 9.6B market profiles. One file per market, shared by every resource. A field set to VERIFY is treated as MISSING, not as a value: the token stays visible and publishable() returns false for that market. NZ and AU are the primary launch markets and are fully resolved; US and CA keep their architecture but are deliberately left partly unresolved until they are needed.",
-  "launchMarkets": ["NZ", "AU"],
-  "secondaryMarkets": ["US", "CA"],
+  "launchMarkets": [
+    "NZ",
+    "AU"
+  ],
+  "secondaryMarkets": [
+    "US",
+    "CA"
+  ],
   "markets": [
     {
       "code": "NZ",
@@ -13,20 +19,40 @@
       },
       "units": "metric",
       "agencies": {
-        "emergencyManagement": { "name": "Civil Defence (NEMA)", "url": "https://getready.govt.nz" },
-        "fire": { "name": "Fire and Emergency New Zealand", "url": "https://www.fireandemergency.nz" },
-        "energy": { "name": "EECA", "url": "https://www.eeca.govt.nz" },
-        "housingStandard": { "name": "Healthy Homes Standards" },
-        "foodSafety": { "name": "New Zealand Food Safety (MPI)", "url": "https://www.mpi.govt.nz/food-safety-home" },
-        "gasRegulator": { "name": "WorkSafe New Zealand", "url": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/" },
-        "tradeRegistration": { "name": "Plumbers, Gasfitters and Drainlayers Board (PGDB)", "url": "https://www.pgdb.co.nz" }
+        "emergencyManagement": {
+          "name": "Civil Defence (NEMA)",
+          "url": "https://getready.govt.nz"
+        },
+        "fire": {
+          "name": "Fire and Emergency New Zealand",
+          "url": "https://www.fireandemergency.nz"
+        },
+        "energy": {
+          "name": "EECA",
+          "url": "https://www.eeca.govt.nz"
+        },
+        "housingStandard": {
+          "name": "Healthy Homes Standards"
+        },
+        "foodSafety": {
+          "name": "New Zealand Food Safety (MPI)",
+          "url": "https://www.mpi.govt.nz/food-safety-home"
+        },
+        "gasRegulator": {
+          "name": "WorkSafe New Zealand",
+          "url": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/"
+        },
+        "tradeRegistration": {
+          "name": "Plumbers, Gasfitters and Drainlayers Board (PGDB)",
+          "url": "https://www.pgdb.co.nz"
+        }
       },
       "figures": {
         "waterPerPersonPerDay": "3 litres",
         "waterThreeDays": "9 litres per person",
         "waterOneWeek": "21 litres per person",
-        "fridgeWithoutPower": "less than 24 hours",
-        "freezerWithoutPower": "less than 4 days, if the freezer was full",
+        "fridgeWithoutPower": "VERIFY",
+        "freezerWithoutPower": "VERIFY",
         "gasCertificate": "a Gas Safety Certificate",
         "generatorDistance": "VERIFY"
       },
@@ -40,30 +66,48 @@
         "emergency": "https://www.police.govt.nz/call-111",
         "gasWork": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/",
         "foodInEmergencies": "https://www.mpi.govt.nz/food-business/food-safety-in-natural-disasters-and-emergencies-2"
-      }
+      },
+      "figuresNote": "Stage 9.25 (2026-09-22): the NZ fridge/freezer figures ('less than 24 hours', 'less than 4 days') could not be verified — MPI's food-safety pages are behind bot protection, and the earlier values look like a misreading of search summaries. Set to VERIFY so anything using them fails closed. The foodInEmergencies link points to an MPI food-BUSINESS page."
     },
     {
       "code": "AU",
       "name": "Australia",
       "emergency": {
         "number": "000",
-        "alternatives": ["112 from a mobile"],
+        "alternatives": [
+          "112 from a mobile"
+        ],
         "accessibility": "106 TTY via the National Relay Service"
       },
       "units": "metric",
       "agencies": {
-        "emergencyManagement": { "name": "your State Emergency Service (SES)" },
-        "fire": { "name": "your state fire service" },
-        "energy": { "name": "VERIFY" },
-        "foodSafety": { "name": "your state food authority", "url": "https://www.foodauthority.nsw.gov.au/consumer/keeping-food-safe/flood-fire-power-cut-emergencies" },
-        "gasRegulator": { "name": "your state gas safety regulator", "url": "https://www.energysafe.vic.gov.au/community-safety/working-tradespeople/gasfitters" },
-        "tradeRegistration": { "name": "your state licensing authority", "url": "https://www.fairtrading.nsw.gov.au/trades-and-businesses/licensing-and-qualifications/plumbing,-draining-and-gasfitting-licences" }
+        "emergencyManagement": {
+          "name": "your State Emergency Service (SES)"
+        },
+        "fire": {
+          "name": "your state fire service"
+        },
+        "energy": {
+          "name": "VERIFY"
+        },
+        "foodSafety": {
+          "name": "your state food authority",
+          "url": "https://www.foodauthority.nsw.gov.au/consumer/keeping-food-safe/flood-fire-power-cut-emergencies"
+        },
+        "gasRegulator": {
+          "name": "your state gas safety regulator",
+          "url": "https://www.energysafe.vic.gov.au/community-safety/working-tradespeople/gasfitters"
+        },
+        "tradeRegistration": {
+          "name": "your state licensing authority",
+          "url": "https://www.fairtrading.nsw.gov.au/trades-and-businesses/licensing-and-qualifications/plumbing,-draining-and-gasfitting-licences"
+        }
       },
       "figures": {
         "waterPerPersonPerDay": "at least 10 litres for three days",
         "waterThreeDays": "10 litres per person, minimum",
         "fridgeWithoutPower": "about 4 hours with the door kept closed",
-        "freezerWithoutPower": "about 24 hours, if the freezer stays closed",
+        "freezerWithoutPower": "at least 24 hours, if the door stays shut",
         "gasCertificate": "a compliance certificate",
         "generatorDistance": "VERIFY"
       },
@@ -78,7 +122,8 @@
         "gasWork": "https://www.fairtrading.nsw.gov.au/housing-and-property/building-and-renovating/preparing-to-build-and-renovate/using-a-gasfitter",
         "foodInEmergencies": "https://www.foodauthority.nsw.gov.au/consumer/keeping-food-safe/flood-fire-power-cut-emergencies"
       },
-      "note": "Australian emergency, food-safety and gas guidance is issued by the states, not nationally. The figures here come from Queensland (Get Ready) and New South Wales (Food Authority, Fair Trading) and are presented to members as 'your state' guidance with a link, so nobody is told a Queensland figure is a national rule."
+      "note": "Australian emergency, food-safety and gas guidance is issued by the states, not nationally. The figures here come from Queensland (Get Ready) and New South Wales (Food Authority, Fair Trading) and are presented to members as 'your state' guidance with a link, so nobody is told a Queensland figure is a national rule.",
+      "figuresNote": "Stage 9.25 (2026-09-22): fridge and freezer figures re-verified live against NSW Food Authority, 'Food safety in emergencies'."
     },
     {
       "code": "US",
@@ -90,10 +135,21 @@
       },
       "units": "us-customary",
       "agencies": {
-        "emergencyManagement": { "name": "FEMA / Ready.gov", "url": "https://www.ready.gov" },
-        "fire": { "name": "your local fire department" },
-        "productSafety": { "name": "CPSC", "url": "https://www.cpsc.gov" },
-        "foodSafety": { "name": "FoodSafety.gov", "url": "https://www.foodsafety.gov" }
+        "emergencyManagement": {
+          "name": "FEMA / Ready.gov",
+          "url": "https://www.ready.gov"
+        },
+        "fire": {
+          "name": "your local fire department"
+        },
+        "productSafety": {
+          "name": "CPSC",
+          "url": "https://www.cpsc.gov"
+        },
+        "foodSafety": {
+          "name": "FoodSafety.gov",
+          "url": "https://www.foodsafety.gov"
+        }
       },
       "figures": {
         "waterPerPersonPerDay": "one gallon",
@@ -120,10 +176,19 @@
       },
       "units": "metric",
       "agencies": {
-        "emergencyManagement": { "name": "your provincial emergency management organisation" },
-        "fire": { "name": "your local fire department" },
-        "health": { "name": "Health Canada", "url": "https://www.canada.ca/en/health-canada.html" },
-        "foodSafety": { "name": "Canadian Food Inspection Agency (CFIA)" }
+        "emergencyManagement": {
+          "name": "your provincial emergency management organisation"
+        },
+        "fire": {
+          "name": "your local fire department"
+        },
+        "health": {
+          "name": "Health Canada",
+          "url": "https://www.canada.ca/en/health-canada.html"
+        },
+        "foodSafety": {
+          "name": "Canadian Food Inspection Agency (CFIA)"
+        }
       },
       "figures": {
         "waterPerPersonPerDay": "VERIFY",

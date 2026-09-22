@@ -71,6 +71,15 @@ describe("cover layout", () => {
     expect(reskinHtml(DOC).html).not.toContain("break-inside: avoid");
   });
 
+  it("keeps short callout boxes whole and headings with their text, but not large section containers", () => {
+    const withBox = DOC.replace("<h2>Plan</h2>", '<h2>Plan</h2><div class="warning-box"><div class="warning-title">Trap</div><p>Text</p></div><div class="worksheet-box">x</div>');
+    const html = reskinHtml(withBox).html;
+    expect(html).toContain(".warning-box { break-inside: avoid; page-break-inside: avoid; }");
+    expect(html).toContain("h2, h3, .warning-title, .info-box-title { break-after: avoid;");
+    expect(html).not.toMatch(/\.worksheet-box[^{]*\{\s*break-inside/);
+    expect(reskinHtml(DOC).html).not.toContain(".warning-box");
+  });
+
   it("changes no cover wording", () => {
     const { html } = reskinHtml(DOC);
     for (const text of ["OffGrid056 30-Day Programme", "OG-27 90-Day Implementation Roadmap", "Turn your plan into phased action with deadlines"]) {
