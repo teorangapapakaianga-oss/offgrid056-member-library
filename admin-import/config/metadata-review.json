@@ -451,6 +451,65 @@
       ],
       "safetyBlockTrimsNote": "Scoped to OG-20; the canonical CO block is unchanged for every other resource. NZ CO wording unchanged: no exact duplicate (the NZ generator block has no alarm line). The electrical block's generator lines are dropped wherever the generator block is present (ruling 7) — currently OG-20 only.",
       "deploymentApproved": "2026-09-22 (Stage 9.34 ruling 11, conditional on final validation)"
+    },
+    "OG-B12": {
+      "foundation": "energy",
+      "foundationStatus": "PROPOSED — audit HIGH. Alternative: general (it spans energy, water, sanitation, heating and food).",
+      "resourceType": "planner",
+      "resourceTypeStatus": "PROPOSED — audit HIGH",
+      "category": "household-energy-planning",
+      "categoryStatus": "INFERRED — PROPOSED: 'Working out what your household really needs to run.' Alternative: general → planning ('Household planning across all five foundations').",
+      "difficulty": null,
+      "difficultyStatus": "OWNER-REVIEW REQUIRED",
+      "difficultySource": "SOURCE-SUPPORTED: the source labels itself 'Tier 4 Bonus — Advanced Resources'",
+      "difficultyRecommendation": "advanced (SOURCE-SUPPORTED)",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
+      "estimatedTimeRecommendation": 60,
+      "estimatedTimeReasoning": "INFERRED: five systems to read, four worksheet boxes (19 fields) and a flow sketch. Excludes the specialist resources and quotes it draws on.",
+      "description": "Design integrated energy, water, and shelter systems",
+      "descriptionStatus": "PROPOSED — the cover subtitle without 'Bonus —'. Alternative: the Purpose line ('Going off-grid is not just about solar panels…').",
+      "tags": [],
+      "safetyBlocks": [
+        "generator-safety",
+        "carbon-monoxide",
+        "batteries-and-electrical",
+        "solid-fuel-heating",
+        "stored-drinking-water"
+      ],
+      "approvedSafetyBlocks": [
+        "generator-safety",
+        "carbon-monoxide",
+        "batteries-and-electrical",
+        "solid-fuel-heating",
+        "stored-drinking-water"
+      ],
+      "approvedSafetyBlocksStatus": "All five already owner-approved for NZ and AU (Stages 9.18, 9.21, 9.34); each is triggered by OG-B12's own text (see the Stage 9.36 report).",
+      "safetyBlockTrims": [
+        {
+          "block": "carbon-monoxide",
+          "market": "AU",
+          "removeSentence": "Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard.",
+          "reason": "PROPOSED for OG-B12 (same as OG-20, Stage 9.34 ruling 6): the generator block already tells AU members to install a battery-operated carbon monoxide alarm.",
+          "approvedBy": "NOT APPROVED — proposal",
+          "approvedOn": ""
+        }
+      ],
+      "hazardFlags": [
+        "Sanitation (greywater, blackwater, composting toilets, septic, humanure) — no approved NZ/AU block",
+        "Waste burning — no approved block",
+        "Home preserving (water-bath and pressure canning) — listed as methods only; no approved block",
+        "Gas: LPG (generator fuel, heating fuel) and biogas (digester, cooking fuel) — GAS_SAFETY_REQUIRED unless removed (OPTION A)",
+        "Diesel (generator and heating fuel) — FUEL_GUIDANCE_REQUIRED unless removed (OPTION A)"
+      ],
+      "relatedResources": [
+        "res-1018",
+        "res-1019",
+        "res-1020",
+        "res-1026",
+        "res-1022"
+      ],
+      "relatedResourcesStatus": "PROPOSED — the specialist resources it integrates (Solar Power 101, Battery Backup Planner, Alternative Energy Suitability Check) and where the plan is costed and bought (3-Tier Budget Planner, Resilience Product Wishlist)"
     }
   }
 }

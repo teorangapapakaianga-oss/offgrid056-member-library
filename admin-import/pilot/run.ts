@@ -71,7 +71,7 @@ export function injectSafetyChecked(
 export function injectSafety(html: string, blocks: { id: string; title: string; body: string; severity?: string }[]): string {
   const style = `
 <style>
-  .og-safety { border-radius: 10px; padding: 14px 18px; margin: 0 0 18px; font-size: 13px; line-height: 1.55; }
+  .og-safety { border-radius: 10px; padding: 14px 18px; margin: 0 0 18px; font-size: 13px; line-height: 1.55; break-inside: avoid; page-break-inside: avoid; }
   .og-safety h3 { font-family: 'Bebas Neue', Impact, sans-serif; font-weight: 400; letter-spacing: .02em; font-size: 17px; margin: 0 0 6px; }
   .og-safety.critical { background: #F6DDD7; border: 1px solid #E0B3A8; color: #6D2416; }
   .og-safety.standard { background: #F1EFE6; border: 1px solid #D8D4C6; color: #242720; margin-top: 26px; }

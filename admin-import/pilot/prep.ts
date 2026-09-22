@@ -47,12 +47,26 @@ export interface SafetyBlockTrim {
 }
 
 /**
- * Generator content that runs on gas. Petrol-generator guidance does not cover it, and no LPG-generator guidance is
- * approved, so it holds the resource (owner ruling, Stage 9.33/9.34).
+ * Fuels no approved guidance covers, in a resource's own text (the safety blocks are not part of it). Each holds the
+ * resource in every market until NZ/AU guidance is researched and approved (owner rulings, Stage 9.33–9.35):
+ * - gas fuels — LPG, natural gas, biogas, dual-fuel — the gas rule stays strict;
+ * - diesel — the approved generator block covers petrol generators only.
+ * "Gas heater" in a list of options is deliberately not matched: live, owner-approved resources (OG-15, OG-26) name one.
  */
-const GAS_GENERATOR = /\b(LPG|LP gas|natural gas|gas[- ]powered|gas[- ]fuelled|dual[- ]fuel|tri[- ]fuel)\b[^.]{0,60}\bgenerators?\b|\bgenerators?\b[^.]{0,60}\b(LPG|LP gas|natural gas|gas[- ]powered|gas[- ]fuelled|dual[- ]fuel|tri[- ]fuel)\b/i;
-export function gasGeneratorMention(html: string): string | null {
-  return clean(html.replace(/<style[\s\S]*?<\/style>/gi, " ")).match(GAS_GENERATOR)?.[0] ?? null;
+const FUEL_CHECKS: { code: string; pattern: RegExp; why: string }[] = [
+  {
+    code: "GAS_SAFETY_REQUIRED",
+    pattern: /\b(LPG|LP gas|natural gas|biogas|gas[- ]powered|gas[- ]fuelled|gas[- ]fired|dual[- ]fuel|tri[- ]fuel)\b/i,
+    why: "no NZ/AU gas or LPG guidance is approved",
+  },
+  { code: "FUEL_GUIDANCE_REQUIRED", pattern: /\bdiesel\b/i, why: "the approved generator guidance covers petrol only" },
+];
+export function fuelSafetyFindings(html: string): string[] {
+  const text = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
+  return FUEL_CHECKS.flatMap(({ code, pattern, why }) => {
+    const m = text.match(pattern);
+    return m ? [`${code}: "${m[0]}" — ${why}`] : [];
+  });
 }
 
 /** Whether an exemption still holds for this member-facing HTML, and what breaks it if not. */
@@ -470,11 +484,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const marketHtml = keepSmallTablesTogether(proposedMarket.html);
     collectFlags(marketHtml);
     // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
-    const gasGenerator = gasGeneratorMention(marketHtml);
-    if (gasGenerator) {
-      const finding = `GAS_SAFETY_REQUIRED: gas-fuelled generator content ("${gasGenerator}") — no NZ/AU LPG-generator guidance is approved`;
-      if (!otherFindings.includes(finding)) otherFindings.push(finding);
-    }
+    const fuelFindings = fuelSafetyFindings(marketHtml);
+    for (const finding of fuelFindings) if (!otherFindings.includes(finding)) otherFindings.push(finding);
     const marketMissing = lacking.filter((b) => {
       const exemption = exemptions.find((e) => e.block === b);
       if (!exemption) return true;
@@ -493,7 +504,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // A safety block that could not be placed is a blocker, not a warning: the member would never see it.
     const unplaced = [
       ...trimProblems,
-      ...(gasGenerator ? [`GAS_SAFETY_REQUIRED: gas-fuelled generator content ("${gasGenerator}")`] : []),
+      ...fuelFindings,
       ...injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`),
       // A topic the resource teaches without its safety block is a blocker in every market.
       ...marketMissing.map((id) =>
@@ -562,7 +573,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   // A resource that depends on another, not-yet-published resource is held whatever else is true of it.
   const importReadiness: PrepResult["importReadiness"] = inputs.blockedBy
     ? "BLOCKED_BY_RESOURCE_DEPENDENCY"
-    : copy.results.some((r) => r.proposed)
+    : copy.results.some((r) => r.proposed) || (inputs.safetyBlockTrims ?? []).some((t) => t.approvedBy !== "owner")
     ? "PREVIEW_WITH_PROPOSED_COPY"
     : !description
     ? "NEEDS_OWNER_COPY"

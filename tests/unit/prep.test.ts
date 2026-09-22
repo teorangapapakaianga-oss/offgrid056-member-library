@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { keepSmallTablesTogether, reskinHtml } from "@/admin-import/reskin/reskin";
-import { findContentFlags, prepareResource, unansweredSafetyNotes, type PrepInputs } from "@/admin-import/pilot/prep";
+import { findContentFlags, fuelSafetyFindings, prepareResource, unansweredSafetyNotes, type PrepInputs } from "@/admin-import/pilot/prep";
 import profilesFile from "@/admin-import/markets/profiles.json";
 import pilotSpec from "@/admin-import/pilot/og-02.json";
 import topicBlocks from "@/admin-import/config/safety-blocks.json";
@@ -585,8 +585,10 @@ describe("OG-20 copy changes", () => {
   });
 
   it("records the CO alarm de-duplication for OG-20's AU file only (Stage 9.34 ruling 6)", () => {
-    const all = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { safetyBlockTrims?: { block: string; market: string }[] }>;
-    expect(Object.entries(all).filter(([, m]) => m.safetyBlockTrims?.length).map(([code]) => code)).toEqual(["OG-20"]);
+    const all = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { safetyBlockTrims?: { block: string; market: string; approvedBy: string }[] }>;
+    // Owner-approved trims only; a later resource may carry one as a proposal (OG-B12, Stage 9.36).
+    const approvedTrims = Object.entries(all).filter(([, m]) => m.safetyBlockTrims?.some((t) => t.approvedBy === "owner")).map(([code]) => code);
+    expect(approvedTrims).toEqual(["OG-20"]);
     expect(meta.safetyBlockTrims).toMatchObject([{ block: "carbon-monoxide", market: "AU" }]);
   });
 });
@@ -630,5 +632,79 @@ describe("prepareResource: scoped block trims and gas generators (Stage 9.34)", 
     const r = prep({ sourceHtml: DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><p>Run a petrol generator outside.</p>"), extraSafetyBlocks: ["carbon-monoxide"] });
     expect(r.terminology.otherFindings.join(" ")).not.toContain("GAS_SAFETY_REQUIRED");
     expect(r.markets.every((m) => m.publishable)).toBe(true);
+  });
+});
+
+/**
+ * Stage 9.36. Fuels no approved guidance covers hold a resource wherever they appear in its own text — OG-B12's gas
+ * and diesel lines are the cases — while the options lists already approved in OG-15 and OG-26 ("gas heater") stay as
+ * they are.
+ */
+describe("fuel checks (Stage 9.36)", () => {
+  it("holds OG-B12's original gas and diesel lines", () => {
+    expect(fuelSafetyFindings("<p>Storage: Lithium battery bank, generator fuel reserve (diesel/petrol/LPG).</p>").join(" ")).toMatch(/GAS_SAFETY_REQUIRED[\s\S]*FUEL_GUIDANCE_REQUIRED/);
+    expect(fuelSafetyFindings("<p>Fuel: Firewood, LPG, or diesel (store safely, rotate stock).</p>")).toHaveLength(2);
+    expect(fuelSafetyFindings("<p>Blackwater: Composting toilet, septic tank with leach field, or biogas digester.</p>").join(" ")).toContain("GAS_SAFETY_REQUIRED");
+    expect(fuelSafetyFindings("<p>Compost returns nutrients. Biogas provides cooking fuel.</p>").join(" ")).toContain("GAS_SAFETY_REQUIRED");
+  });
+
+  it("leaves the approved OG-15 and OG-26 options lists alone", () => {
+    expect(fuelSafetyFindings("<p>Backup heating exists (fireplace, wood burner, gas heater, portable)</p>")).toEqual([]);
+    expect(fuelSafetyFindings("<p>Emergency heating (gas heater / thermal blankets)</p>")).toEqual([]);
+    expect(fuelSafetyFindings("<p>Firewood — keep a dry store and rotate stock.</p>")).toEqual([]);
+  });
+
+  it("blocks both markets when diesel appears", () => {
+    const r = prep({ sourceHtml: DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><p>Keep a diesel reserve.</p>") });
+    expect(r.markets.every((m) => !m.publishable)).toBe(true);
+    expect(r.terminology.otherFindings.join(" ")).toContain("FUEL_GUIDANCE_REQUIRED");
+  });
+
+  it("holds a resource while a scoped trim is still a proposal", () => {
+    const ALARM = "Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard.";
+    const base = { block: "carbon-monoxide", market: "AU", removeSentence: ALARM, reason: "duplicate", approvedOn: "" };
+    const ready = { extraSafetyBlocks: ["carbon-monoxide"], difficulty: "beginner", estimatedTime: 10, foundation: "shelter", resourceType: "planner", category: "household-resilience", description: "d" };
+    expect(prep({ ...ready, safetyBlockTrims: [{ ...base, approvedBy: "NOT APPROVED — proposal" }] }).importReadiness).toBe("PREVIEW_WITH_PROPOSED_COPY");
+    expect(prep({ ...ready, safetyBlockTrims: [{ ...base, approvedBy: "owner" }] }).importReadiness).not.toBe("PREVIEW_WITH_PROPOSED_COPY");
+  });
+
+  it("keeps each safety block whole when printing", () => {
+    const html = fs.readFileSync(prep({ extraSafetyBlocks: ["stored-drinking-water"] }).files[0], "utf8");
+    expect(html).toMatch(/\.og-safety \{[^}]*break-inside: avoid/);
+  });
+});
+
+describe("OG-B12 copy changes", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const load = (f: string) => (JSON.parse(fs.readFileSync(path.resolve(`admin-import/config/${f}`), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-B12"];
+  const ogb12 = load("approved-copy.json") ?? load("proposed-copy.json") ?? [];
+  const forMarket = (m: string) => ogb12.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ")).join("\n");
+  const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources["OG-B12"];
+
+  it("drops unsourced figures, installation detail, legacy tiers and codes", () => {
+    const to = ogb12.map((c) => c.to).join("\n");
+    for (const s of ["10-30kWh", "20,000L", "1,000L", "100L", "3+ years", "230V", "48V", "Tier 4", "Bonus", "30-Day", "OG-B12", "Humanure", "burning", "Closed loop", "Brand"]) expect(to, s).not.toContain(s);
+  });
+
+  it("introduces no gas or diesel content of its own (Option A)", () => {
+    for (const m of ["NZ", "AU"]) expect(fuelSafetyFindings(forMarket(m)), m).toEqual([]);
+  });
+
+  it("keeps each market's licence and approval terms", () => {
+    expect(forMarket("NZ")).toContain("licensed electrical worker");
+    expect(forMarket("NZ")).not.toMatch(/licensed electrician|Permits or Approvals|water rules that apply/);
+    expect(forMarket("AU")).toContain("licensed electrician");
+    expect(forMarket("AU")).toMatch(/Permits or Approvals Needed/);
+    expect(forMarket("AU")).not.toMatch(/electrical worker|with consent/);
+  });
+
+  it("carries the OG-19 rule: power output and capacity are separate, and backup must be asked about", () => {
+    expect(forMarket("NZ")).toContain("a separate check from battery capacity (kWh)");
+    expect(forMarket("NZ")).toContain("Can the system supply backup power during an outage?");
+  });
+
+  it("uses the five approved blocks its text triggers, with the AU CO trim still a proposal", () => {
+    expect(meta.safetyBlocks).toEqual(["generator-safety", "carbon-monoxide", "batteries-and-electrical", "solid-fuel-heating", "stored-drinking-water"]);
+    expect(meta.safetyBlockTrims[0].approvedBy).not.toBe("owner");
   });
 });
