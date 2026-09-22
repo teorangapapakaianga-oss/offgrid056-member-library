@@ -501,3 +501,86 @@ describe("OG-21 copy changes", () => {
     for (const code of ["OG-B07", "OG-19", "OG-26"]) expect(meta[code].relatedResources, code).toContain("res-1018");
   });
 });
+
+/**
+ * Stage 9.34. The generator block (owner rulings, Stage 9.33): each market says only what its own official sources
+ * support, no distance anywhere, and where it is present the electrical block stops repeating it.
+ */
+describe("generator safety block", () => {
+  const gen = (topicBlocks.blocks as Record<string, { marketBody: Record<string, string> }>)["generator-safety"];
+  const nz = gen.marketBody.NZ;
+  const au = gen.marketBody.AU;
+  const html = (r: ReturnType<typeof prep>, m: string) => fs.readFileSync(r.files.find((f) => f.endsWith(`.${m}.html`))!, "utf8");
+
+  it("keeps the distance non-numeric and leaves out the US rule and workplace petrol limits", () => {
+    for (const body of [nz, au]) {
+      expect(body).not.toMatch(/\d+\s*(m|metres?|feet|ft)\b|20[- ]foot|\b20 metres|50 litres/i);
+      expect(body).toMatch(/well-ventilated/);
+      expect(body).toMatch(/garage/);
+    }
+  });
+
+  it("uses each market's own sources: NZ has the 10-minute cool-down and no rain or lead rules; AU the reverse", () => {
+    expect(nz).toContain("at least 10 minutes");
+    expect(nz).toContain("licensed electrical worker");
+    expect(nz).toContain("changeover switch");
+    expect(nz).not.toMatch(/rain|carport|veranda|extension lead|licensed electrician|carbon monoxide alarm/i);
+    expect(au).not.toMatch(/\d+ minutes|electrical worker/);
+    for (const s of ["licensed electrician", "dedicated generator inlet", "changeover switch", "do not use it in rain", "do not cover it", "extension leads", "battery-operated carbon monoxide alarm"])
+      expect(au).toContain(s);
+  });
+
+  it("is petrol-only: nothing about LPG or gas generators", () => {
+    expect(nz + au).not.toMatch(/LPG|gas generator|dual.fuel/i);
+  });
+
+  it("trims the electrical block's generator lines only where the generator block is present", () => {
+    const withGen = prep({ extraSafetyBlocks: ["generator-safety", "batteries-and-electrical"] });
+    const without = prep({ extraSafetyBlocks: ["batteries-and-electrical"] });
+    expect(html(withGen, "NZ")).not.toContain("Never connect a generator to your house wiring unless");
+    expect(html(withGen, "AU")).not.toContain("Never power the house by plugging a generator");
+    expect(html(withGen, "NZ")).toContain("Solar panels, home batteries and inverters must be installed by a licensed electrical worker");
+    // Every other resource keeps the full electrical wording.
+    expect(html(without, "NZ")).toContain("Never connect a generator to your house wiring unless");
+    expect(html(without, "AU")).toContain("Never power the house by plugging a generator");
+  });
+
+  it("answers a generator audit note with the generator block and carbon monoxide, or the old outdoor-appliance pair", () => {
+    const note = "covers generators (14 mentions) with no carbon monoxide and outdoor-use warning";
+    expect(unansweredSafetyNotes([note], ["generator-safety", "carbon-monoxide"])).toEqual([]);
+    expect(unansweredSafetyNotes([note], ["indoor-combustion", "carbon-monoxide"])).toEqual([]);
+    expect(unansweredSafetyNotes([note], ["generator-safety"])).toEqual([note]);
+  });
+
+  it("keeps a decision-flowchart box whole when printing", () => {
+    const { html: skinned } = reskinHtml(DOC.replace("<h2>Plan</h2>", '<h2>Plan</h2><div class="flow-box"><h4>Q1</h4><p>YES</p></div>'));
+    expect(skinned).toMatch(/\.flow-box[^{]*\{ break-inside: avoid/);
+  });
+});
+
+describe("OG-20 copy changes", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const load = (f: string) => (JSON.parse(fs.readFileSync(path.resolve(`admin-import/config/${f}`), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-20"];
+  const og20 = load("approved-copy.json") ?? load("proposed-copy.json") ?? [];
+  const forMarket = (m: string) => og20.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ")).join("\n");
+  const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources["OG-20"];
+
+  it("drops every unsourced figure and rule of thumb", () => {
+    const to = og20.map((c) => c.to).join("\n");
+    for (const s of ["50–70%", "4 m/s", "10m", "kW", "$", "years", "Any location", "generator shed", "Test monthly", "Keep fuel fresh", "Most reliable", "seamless", "Day 20", "Next:", "OG-2"])
+      expect(to, s).not.toContain(s);
+  });
+
+  it("names each market's electrical licence and permission terms", () => {
+    expect(forMarket("NZ")).toContain("licensed electrical worker");
+    expect(forMarket("NZ")).not.toMatch(/licensed electrician|Permits or approvals/);
+    expect(forMarket("AU")).toContain("licensed electrician");
+    expect(forMarket("AU")).toContain("Permits or approvals needed");
+    expect(forMarket("AU")).not.toMatch(/electrical worker|Consents/);
+  });
+
+  it("uses the generator block, carbon monoxide and electrical — not the generic outdoor-appliance block", () => {
+    expect(meta.safetyBlocks).toEqual(["generator-safety", "carbon-monoxide", "batteries-and-electrical"]);
+    expect(meta.approvedSafetyBlocks).not.toContain("generator-safety");
+  });
+});

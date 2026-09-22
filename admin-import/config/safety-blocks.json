@@ -29,7 +29,14 @@
       "verification": {
         "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
         "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
-      }
+      },
+      "marketBodyWhen": {
+        "generator-safety": {
+          "NZ": "**Solar panels, home batteries and inverters must be installed by a licensed electrical worker.** The rules that let homeowners do some of their own wiring do not cover solar (PV) systems, and some battery systems can give off flammable gases, so how and where they are installed matters.\nStop using any lithium-ion battery that is too hot to touch, swelling, leaking, cracked or dented. **If a battery is giving off smoke, vapour or flames, do not touch or pick it up: get out of the building and call 111.**",
+          "AU": "**Electrical work in your home — including solar, home batteries and inverters — must be done by a licensed electrician.** DIY electrical work is illegal, even for small jobs, and DIY home-battery installations are a serious fire risk.\nDo not use a lithium-ion battery that is swelling, leaking, overheating, damaged or venting gas. **If a battery is overheating, smoking or on fire, call Triple Zero (000) and get to a safe place.** Do not try to put it out with a fire extinguisher."
+        }
+      },
+      "marketBodyWhenNote": "Owner ruling 7 (Stage 9.33): where the generator block is present it carries the generator connection, plug-in and RCD guidance, so the electrical block drops those lines. Nothing else changes; every other resource keeps the full wording."
     },
     "carbon-monoxide": {
       "id": "carbon-monoxide",
@@ -184,6 +191,51 @@
         "AU": "VERIFIED_LIVE — OWNER-APPROVED 2026-09-22 (Stage 9.25 ruling 4)"
       },
       "changeRule": "No NZ fridge or freezer safe-time figures: MPI publishes none. The old NZ figure less than 24 hours is INVALID and must never return. No tasting advice (neither market source gives any)."
+    },
+    "generator-safety": {
+      "id": "generator-safety",
+      "title": "Using a generator safely",
+      "severity": "CRITICAL",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Run a generator only outside, in a well-ventilated place, with its exhaust pointing away from the house.** Never use it indoors or anywhere people are, including an internal garage: its exhaust contains carbon monoxide, a poisonous gas you cannot see, smell or taste.\nPlug appliances directly into the generator, and do not connect more than it is rated for. Use a safety switch (RCD) when equipment is outside or in a damp place.\n**Never connect a generator to your house wiring or switchboard yourself.** Connecting it is work for a licensed electrical worker, and a small generator must not be connected to the switchboard or house wiring unless a permanent connection point with a changeover switch has been installed.\nThe engine and exhaust get hot enough to start a fire, so keep fuel and anything that can burn away from them. Before refuelling, shut the engine down and let it cool for at least 10 minutes, then pour the fuel outside using a funnel.\nStore petrol only in approved containers with secure lids, out of direct sunlight, and never near a flame such as a gas water heater.",
+        "AU": "**Use a generator only outside, in a well-ventilated area — never indoors or in an enclosed space such as a garage.** It gives off carbon monoxide, which you cannot see or smell and which can kill very quickly.\nPut it on flat ground with the exhaust pointing away from the house and from anything that can burn, somewhere sheltered from the weather such as a carport or veranda. Keep it dry — do not use it in rain or wet conditions or touch it with wet hands — and do not cover it: the exhaust is very hot and can start a fire.\nPlug appliances in directly, or use heavy-duty, outdoor-rated extension leads in good condition, rated in watts or amps at least equal to the generator's rating, and protect the plug connections from the weather.\n**Never plug a generator into a power point or switchboard to power the house.** Any connection — such as a dedicated generator inlet or a changeover switch — must be installed by a licensed electrician.\nTurn the generator off and let it cool down before refuelling, avoid spilling fuel, and keep cigarettes and naked flames away. Store fuel in labelled safety containers (not glass), outside the home and away from ignition sources such as a gas water heater.\nInstall a battery-operated carbon monoxide alarm. If you feel sick, dizzy or weak while using a generator, move away immediately into fresh air."
+      },
+      "sources": {
+        "NZ": [
+          "WorkSafe NZ — Using portable generators after a natural event or emergency (last updated 18 Jul 2024; read directly 2026-09-22): https://www.worksafe.govt.nz/topic-and-industry/natural-events-and-emergencies/using-portable-generators-after-a-natural-event-or-emergency/",
+          "WorkSafe NZ — Technical bulletin: Connecting a generator to the wiring of a house or building following an emergency (3 Mar 2023; read directly 2026-09-22): https://www.worksafe.govt.nz/about-us/news-and-media/connecting-a-generator-to-the-wiring-of-a-house-or-building-following-an-emergency/",
+          "WorkSafe NZ — Petrol (read directly 2026-09-22): https://www.worksafe.govt.nz/topic-and-industry/hazardous-substances/guidance/substances/petrol/",
+          "WorkSafe NZ — Carbon monoxide poisoning from small petrol engine plant (18 Jul 2016; read directly 2026-09-22): https://www.worksafe.govt.nz/about-us/news-and-media/carbon-monoxide-poisoning-from-small-petrol-engine-plant/",
+          "Fire and Emergency NZ — Managing hazardous substances (read directly 2026-09-22): https://www.fireandemergency.nz/outdoor-and-rural-fire-safety/hazardous-substances/managing-hazardous-substances/"
+        ],
+        "AU": [
+          "Energy Safe Victoria — Using a generator safely (reviewed 16 Mar 2026; read directly 2026-09-22): https://www.energysafe.vic.gov.au/community-safety/emergencies/using-generator-safely",
+          "Electrical Safety Office Queensland — Generators; Do's and don'ts of running generators (read directly 2026-09-22): https://www.electricalsafety.qld.gov.au/dos-and-donts-running-generators"
+        ]
+      },
+      "sharedOrVaries": "VARIES. NZ has no rain-shelter or extension-lead wording (no current NZ official source); AU has no refuelling cool-down time (its sources give none). No separation distance in either market: the US 20-foot rule is not used (owner ruling 2). Workplace petrol limits (20 m smoking, 50 L storage) excluded (owner ruling 5). Petrol generators only — LPG generators are not covered (owner ruling 6).",
+      "sentenceSources": {
+        "NZ": [
+          "outside, well-ventilated, exhaust away; never indoors incl. internal garage — WorkSafe generators; CO no smell/taste/colour — WorkSafe CO alert",
+          "plug directly; rating; RCD outside/damp — WorkSafe generators",
+          "connection by licensed electrical worker; small generator only via permanent connection point with changeover switch (AS/NZS 3010) — WorkSafe bulletin",
+          "hot engine/exhaust as ignition source — FENZ; shut down, cool at least 10 minutes, pour in the open air with a funnel — WorkSafe Petrol",
+          "approved containers, secure lids, no direct sunlight, not near a flame such as a gas water heater — WorkSafe Petrol"
+        ],
+        "AU": [
+          "outside, well-ventilated, never indoors/enclosed; CO unseen, can kill very quickly — ESV; ESO Qld",
+          "flat ground; exhaust away from house and combustibles; sheltered e.g. carport/veranda; keep dry, not in rain, not with wet hands; do not cover — ESV; ESO Qld",
+          "heavy-duty, outdoor-rated leads in good condition rated at least equal to the generator's rating; protect connections from weather — ESV; ESO Qld",
+          "never into a power point/switchboard; dedicated inlet or changeover switch by a licensed electrician — ESV; ESO Qld",
+          "off and cooled before refuelling; do not spill; no smoking or naked flames; labelled non-glass safety containers, out of the home, away from ignition sources such as a gas water heater — ESV; ESO Qld",
+          "battery-operated CO alarm; sick, dizzy or weak → move away into fresh air — ESO Qld"
+        ]
+      },
+      "verification": {
+        "NZ": "POINTS OWNER-APPROVED 2026-09-22 (Stage 9.33 ruling 3); final wording PROPOSED for owner review",
+        "AU": "POINTS OWNER-APPROVED 2026-09-22 (Stage 9.33 ruling 4); final wording PROPOSED for owner review"
+      }
     }
   }
 }

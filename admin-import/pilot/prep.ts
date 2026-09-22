@@ -125,18 +125,21 @@ export interface LegacyTerms {
  * carries the safety block(s) for that topic — until then it holds the resource. Gas needs the gas-and-LPG
  * block, which has not been verified for NZ and AU, so a gas note cannot yet be answered.
  */
-const NOTE_ANSWERED_BY: { topic: RegExp; blocks: string[] }[] = [
-  { topic: /^covers generators\b/, blocks: ["indoor-combustion", "carbon-monoxide"] },
-  { topic: /^covers solid fuel heating\b/, blocks: ["solid-fuel-heating"] },
-  { topic: /^covers gas appliances\b/, blocks: ["gas-and-lpg"] },
-  { topic: /^covers batteries and inverters\b/, blocks: ["batteries-and-electrical"] },
-  { topic: /^covers stored drinking water\b/, blocks: ["stored-drinking-water"] },
+// Each rule lists the combinations of blocks that answer it; any one complete combination does. A resource that
+// teaches generator use answers the generator note with the generator block (plus carbon monoxide); one that only
+// mentions a generator in passing can still answer it with the generic outdoor-appliance block.
+const NOTE_ANSWERED_BY: { topic: RegExp; anyOf: string[][] }[] = [
+  { topic: /^covers generators\b/, anyOf: [["generator-safety", "carbon-monoxide"], ["indoor-combustion", "carbon-monoxide"]] },
+  { topic: /^covers solid fuel heating\b/, anyOf: [["solid-fuel-heating"]] },
+  { topic: /^covers gas appliances\b/, anyOf: [["gas-and-lpg"]] },
+  { topic: /^covers batteries and inverters\b/, anyOf: [["batteries-and-electrical"]] },
+  { topic: /^covers stored drinking water\b/, anyOf: [["stored-drinking-water"]] },
 ];
 
 export function unansweredSafetyNotes(notes: string[], blocks: string[]): string[] {
   return notes.filter((note) => {
     const rule = NOTE_ANSWERED_BY.find((r) => r.topic.test(note));
-    return !rule || !rule.blocks.every((b) => blocks.includes(b));
+    return !rule || !rule.anyOf.some((set) => set.every((b) => blocks.includes(b)));
   });
 }
 

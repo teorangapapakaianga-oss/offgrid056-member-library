@@ -181,7 +181,8 @@ export function reskinHtml(source: string, options: ReskinOptions = {}): ReskinR
   // page away from its text (found in OG-11: "The Expiry Date Trap" split mid-sentence in NZ, and its title was
   // left alone on the page before its text in AU). Large section containers are deliberately not included:
   // forcing a tall worksheet section whole would leave large gaps.
-  const CALLOUTS = ["warning-box", "info-box", "closing-box", "total-box", "tip-box"];
+  // flow-box: a decision-flowchart question and its answers (OG-20's Q3 "NO" answer was stranded alone on a page).
+  const CALLOUTS = ["warning-box", "info-box", "closing-box", "total-box", "tip-box", "flow-box"];
   const present = CALLOUTS.filter((c) => html.includes(`class="${c}"`));
   if (present.length) {
     html = html.replace(

@@ -65,6 +65,11 @@ export interface SafetyBlock {
   body: string;
   /** wording that replaces the shared body entirely in a given market */
   marketBody?: Partial<Record<MarketCode, string>>;
+  /**
+   * Shorter wording for when another block is also in the resource, so one point is not said twice: the electrical
+   * block drops its generator paragraph when the generator block is there. Keyed by that other block's id.
+   */
+  marketBodyWhen?: Record<string, Partial<Record<MarketCode, string>>>;
   sources: string[];
 }
 
@@ -163,7 +168,8 @@ export function resolveForMarket(
       unresolved.push(`safetyBlock:${id}`);
       return { id, title: "MISSING BLOCK", severity: "CRITICAL", body: "", sources: [] };
     }
-    const body = block.marketBody?.[market.code] ?? block.body;
+    const trimmed = Object.entries(block.marketBodyWhen ?? {}).find(([other]) => resource.safetyBlocks.includes(other))?.[1]?.[market.code];
+    const body = trimmed ?? block.marketBody?.[market.code] ?? block.body;
     return { id: block.id, title: block.title, severity: block.severity, body: take(body), sources: block.sources };
   });
 
