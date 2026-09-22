@@ -370,21 +370,19 @@
     },
     "OG-21": {
       "foundation": "shelter",
-      "foundationStatus": "PROPOSED — audit HIGH",
+      "foundationStatus": "owner-approved 2026-09-22",
       "resourceType": "planner",
-      "resourceTypeStatus": "PROPOSED — audit HIGH",
+      "resourceTypeStatus": "owner-approved 2026-09-22",
       "category": "household-resilience",
-      "categoryStatus": "INFERRED — PROPOSED: 'The home as the base of your resilience plan.' Alternative: property-assessment.",
-      "difficulty": null,
-      "difficultyStatus": "OWNER-REVIEW REQUIRED",
-      "difficultySource": "none stated",
-      "difficultyRecommendation": "beginner (INFERRED): summarising, ranking and budgeting — no calculations",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
-      "estimatedTimeRecommendation": 30,
+      "categoryStatus": "owner-approved 2026-09-22",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "owner-approved 2026-09-22 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: three summary cards, a five-row priority table, seven budget fields and a commitment. Excludes completing the resources it draws on.",
       "description": "Your complete Shelter, Heating & Energy roadmap — priorities, budgets, and timelines in one actionable document.",
-      "descriptionStatus": "PROPOSED — the cover subtitle without 'Week 3 synthesis.' (as proposed change 3)",
+      "descriptionStatus": "owner-approved 2026-09-22 (the cover subtitle without 'Week 3 synthesis.')",
       "tags": [],
       "safetyBlocks": [
         "batteries-and-electrical",
@@ -401,7 +399,9 @@
         "res-1019",
         "res-1026"
       ],
-      "relatedResourcesStatus": "PROPOSED — the resources this plan draws on (Warm Home Scorecard, Solar Power 101, Battery Backup Planner) and the budget it feeds (3-Tier Budget Planner)"
+      "relatedResourcesStatus": "owner-approved 2026-09-22: OG-21 is the summary step — it gathers the Warm Home Scorecard, Solar Power 101 and the Battery Backup Planner, and feeds the 3-Tier Budget Planner.",
+      "titleStatus": "owner-approved 2026-09-22: \"Home Energy & Shelter Upgrade Plan\" (keep the \"&\"); PDF title \"Home Energy & Shelter Upgrade Plan — OffGrid056\"; route /resources/home-energy-and-shelter-upgrade-plan/",
+      "deploymentApproved": "2026-09-22 (Stage 9.31 (OG-21) ruling 10, conditional on final validation)"
     }
   }
 }
