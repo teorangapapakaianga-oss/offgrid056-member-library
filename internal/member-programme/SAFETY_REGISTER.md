@@ -6,7 +6,7 @@ The approved safety wording, how the markets differ, what fails closed, and what
 
 ---
 
-## Approved safety blocks (8)
+## Approved safety blocks (9)
 
 Every one is owner-approved for **NZ and AU separately**, with each market's own sources. A block with no wording for
 a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}`.
@@ -23,6 +23,12 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `stored-drinking-water` | Storing drinking water | high | 22 Sep 2026 | OG-08, OG-10, OG-26, OG-B12 |
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
+| `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 (prepared, not yet deployed) |
+
+**The treatment source registry.** `admin-import/config/treatment-sources.json` holds the 21 approved treatment
+claims — 9 NZ, 12 AU — each with its market, jurisdiction, method, wording, numeric value, source, authority, date,
+household applicability, limitations and contamination exclusions. No claim serves both markets. enHealth's national
+rainwater guidance is recorded as **SOURCE_UNAVAILABLE / NOT RELIED UPON** and is cited nowhere.
 
 ## Market differences that must never be crossed
 
@@ -62,6 +68,13 @@ publishes no timings.
 | **Route collision** | real vs real, or placeholder vs placeholder, on one route fails the build; real vs placeholder fails outside the private preview | `lib/content/supersession.ts` |
 | **Unapproved trim** | a scoped trim that is still a proposal holds the resource at preview | `prep.ts` |
 | **`--real`** | refused | `admin-import/cli.mts` |
+| **`UNSOURCED_BLEACH_RATIO`** | a chlorination dose with no approved entry for that market blocks it | `admin-import/audit/treatment.ts` |
+| **`UNSOURCED_BOIL_TIME`** | a boil duration with no approved entry blocks it; **any** altitude wording near boiling blocks it | same |
+| **`UNSOURCED_FILTER_CLAIM`** | a filter efficacy claim, micron value or "makes it safe" with no approved entry blocks it (table rows count as claims) | same |
+| **`UNSOURCED_UV_CLAIM`** | a UV dose or performance claim with no approved entry blocks it; NZ may only name UV as an option | same |
+| **`UNSOURCED_TESTING_INTERVAL`** | a testing or inspection interval with no approved entry blocks it; AU operator schedules need their label | same |
+| **`UNSAFE_CONTAMINATED_SOURCE_GUIDANCE`** | contaminated-source guidance blocks the market unless the document carries that market's approved limitation | same |
+| **No registry** | with no treatment registry supplied, nothing is approved and every treatment claim fails | `prep.ts` |
 
 ## Scoped exceptions (resource-specific only)
 
@@ -90,7 +103,7 @@ Each of these blocks resources until it is researched from official NZ **and** A
 |---|---|---|
 | **Gas / LPG** | OG-17, OG-B09, any gas appliance or LPG generator | the strict gas rule stands. No NZ/AU household gas-appliance block exists. |
 | **Diesel** | diesel generators or heating | the generator block is petrol-only |
-| **Water treatment** | OG-09, and any treatment detail | **researched at Stage 9.42 — awaiting owner approval.** Draft NZ and AU blocks, a storage-vs-treatment matrix and six proposed gates are in `admin-import/STAGE_9.42_OG09_WATER_TREATMENT_RESEARCH.md`. Nothing is implemented yet, so OG-09 stays blocked. |
+| ~~Water treatment~~ | ~~OG-09~~ | **DONE.** Researched at Stage 9.42, approved and built at Stage 9.43: the `water-treatment` block, the source registry and the six gates are in place. OG-09 is prepared and waits only on the owner's content approval. |
 | **Grants and rebates** | OG-16 | NZ programmes; AU state and territory schemes |
 | **Consents and approvals** | OG-B11, and tank/plumbing wording | NZ council consents; AU state, territory and council |
 | **Generator separation distance** | any generator resource | **no NZ or AU official figure exists**; the US 20-foot rule is not used, and wording stays non-numeric |

@@ -24,6 +24,7 @@ import { reskinHtml } from "./reskin/reskin";
 import { runPilot, writePilot } from "./pilot/run";
 import { prepareResource } from "./pilot/prep";
 import { analyseGroupA, safetyExposureFor } from "./audit/group-a";
+import { loadTreatmentRegistry } from "./audit/treatment";
 import { assessMarket } from "./markets/readiness";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
@@ -494,6 +495,8 @@ async function commandPrep() {
   const topicBlocks = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "safety-blocks.json"), "utf8")).blocks ?? {};
   const blocks = { ...spec.safetyBlocks, ...topicBlocks };
   const legacyTerms = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "legacy-terms.json"), "utf8"));
+  // Owner-approved treatment claims. Every numeric or efficacy treatment claim is checked against this, per market.
+  const treatmentRegistry = loadTreatmentRegistry(path.join(import.meta.dirname, "config", "treatment-sources.json"));
   // Unapproved copy, rendered only for owner review. A resource carrying any of it cannot be ready.
   const proposedFile = path.join(import.meta.dirname, "config", "proposed-copy.json");
   const proposedCopy = fs.existsSync(proposedFile) ? JSON.parse(fs.readFileSync(proposedFile, "utf8")).changes ?? {} : {};
@@ -534,6 +537,7 @@ async function commandPrep() {
       safetyExemptions: metadata[item.legacyCode]?.safetyExemptions ?? [],
       safetyBlockTrims: metadata[item.legacyCode]?.safetyBlockTrims ?? [],
       fuelExemptions: metadata[item.legacyCode]?.fuelExemptions ?? [],
+      treatmentRegistry,
     });
     results.push(result);
 

@@ -236,6 +236,69 @@
         "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22 (Stage 9.34 ruling 3): petrol generators only",
         "AU": "VERIFIED — OWNER-APPROVED 2026-09-22 (Stage 9.34 ruling 4): petrol generators only"
       }
+    },
+    "water-treatment": {
+      "id": "water-treatment",
+      "title": "Making water safe to drink",
+      "severity": "CRITICAL",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Rainwater, stream, bore and tank water is not automatically safe to drink.** If you want to use it for drinking or other household uses, it has to be treated. If you are uncertain about the quality of the water, do not drink it.\n**Boiling is the simplest and most effective way to kill germs, including Cryptosporidium: boil the water for one minute.** A jug with an automatic cut-off switch is fine as long as the jug is full — let it turn off by itself, and never hold the switch down. Store cooled boiled water in a clean container with a lid; it is best used within 24 hours, and it can be boiled again.\nIf you cannot boil water, add 5 drops of plain, unperfumed household bleach to 1 litre of water — or half a teaspoon to 10 litres — stir, and leave it to stand for 30 minutes before drinking. Use only plain, unscented bleach: nothing with perfume, colour, surfactants or other additives, and treat words like \"thick\", \"gel\", \"foam\" or \"cleaner\" on the label as a sign the product is not suitable. **Bleach and purification tablets do not work on protozoa such as Giardia and Cryptosporidium**, which is why boiled or bottled water is recommended.\n**Do not assume a household water filter makes water safe.** Most filters only remove one or two types of impurity, and filters can become contaminated — ask the supplier what the device can and cannot do before you buy it.\n**If harmful chemicals or toxins could be in the water, boiling will not make it safe.** Use bottled or tankered water instead, and follow the advice of your water supplier or public health unit.\nFor a rainwater system used for drinking, Building Performance (MBIE) lists the options as adding chlorine, using a very fine in-line filter or purifier, boiling the water for one minute, and ultraviolet light treatment. You should have drinking water tested annually, and some councils also require periodic testing. If you are concerned about your water, contact a Health Protection Officer at your local public health unit or an Environmental Health Officer at your council; they can also advise on testing laboratories.",
+        "AU": "**Rainwater and surface water are not automatically safe to drink.** The national Australian Drinking Water Guidelines say surface water or shallow groundwater should not be used as a source of drinking water without treatment. NSW Health, for example, recommends that people in urban areas use the public water supply for drinking and cooking, and advises that water from dams, streams and rivers is not recommended as a source of drinking water unless it is filtered and disinfected — check what applies where you live.\n**If water may be contaminated with microorganisms, bring it to a rolling boil** — a kettle with an automatic shut-off switch does this — then let it cool and store it in a clean covered container in the fridge (NSW Health). WA Health advises vigorous boiling for at least one minute.\n**Bleach dosing is not the same across Australia, and it depends on the strength of the bleach.** NSW Health advises 2 drops of unscented 4–5% bleach per litre, or 4 drops if the water is cloudy, left to stand 30 minutes and longer in colder water. WA Health gives doses by strength: 10 drops per litre for 1% available chlorine, 2 drops for 4–6%, and 1 drop for 7–10%, left to stand 30 minutes. Follow the advice for your state or territory and the instructions on the product.\n**NSW Health advises that not all filters remove harmful microorganisms.** NSW Health notes that ceramic and polypropylene cartridges remove sediment and bacteria but not viruses, and that activated carbon filters treat taste, odour and some chemicals but remove no bacteria, parasites or viruses. WA Health says filters should not be relied upon to disinfect water. If a filter is being used for health reasons, look for the WaterMark or Plumbing Safety Type Test Mark and certification to AS/NZS 4348 or ANSI/NSF 53, and ask the supplier for the contaminant-removal claims and data.\n**NSW Health advises that UV disinfection works against most bacteria, viruses and protozoa, but only in clear water.** It also advises that rainwater usually has to be filtered first, that a UV unit needs a constant power supply and regular lamp and sleeve maintenance, and that UV leaves no residual disinfectant, so UV-treated water should be used straight away rather than stored.\n**Boiling and disinfection do not remove chemicals, blue-green algae toxins or metals.** If chemical contamination or an algal bloom is suspected, the water is unsuitable for drinking — use an alternative supply and follow the advice of your state or territory health department. NSW Health advises that professional advice be sought for the design and installation of a treatment system, and your local public health unit can help you find a NATA-accredited laboratory for testing."
+      },
+      "sources": {
+        "NZ": [
+          "Water Services Authority — Taumata Arowai — Stay safe during a Boil Water notice (last updated 22 Sep 2026; read live 2026-09-23): https://www.taumataarowai.govt.nz/for-the-public/drinking-water-in-an-emergency/stay-safe-during-a-boil-water-notice",
+          "Water Services Authority — Taumata Arowai — Stay safe during a Do Not Drink Water notice (last updated 22 Sep 2026; read live 2026-09-23): https://www.taumataarowai.govt.nz/for-the-public/drinking-water-in-an-emergency/stay-safe-during-a-do-not-drink-water-notice",
+          "Health New Zealand — Te Whatu Ora — During an emergency (last reviewed December 2025; read live 2026-09-23): https://www.healthnz.govt.nz/keeping-healthy/healthy-homes-environments/protecting-health-natural-disaster/during-an-emergency",
+          "HealthEd HE10148 — Water collection tanks and safe household water (revised January 2022; PDF read in full 2026-09-23): https://healthed.govt.nz/products/water-collection-tanks-and-safe-household-water",
+          "Building Performance, MBIE — Collecting and using rainwater (last updated 15 Jan 2026; read live 2026-09-23): https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+          "New Zealand Food Safety (MPI) — Food safety in natural disasters and emergencies (last reviewed 24 Oct 2024; read live 2026-09-23): https://www.mpi.govt.nz/food-business/food-safety-in-natural-disasters-and-emergencies-2",
+          "NEMA — Get Ready — Storing water (read live 2026-09-23): https://getready.govt.nz/prepared/household/supplies/storing-water"
+        ],
+        "AU": [
+          "NHMRC — Australian Drinking Water Guidelines 4.3 Individual household supplies (national; read live 2026-09-23): https://guidelines.nhmrc.gov.au/australian-drinking-water-guidelines/part-1/chapter-4/4.3-individual-household-supplies",
+          "NSW Health — What to do if a boil water alert is in place (last updated 23 May 2025; read live 2026-09-23): https://www.health.nsw.gov.au/environment/water/Pages/bwa-what-to-do.aspx",
+          "NSW Health — Rainwater Treatment Fact Sheet (PDF read in full 2026-09-23): https://www.health.nsw.gov.au/environment/water/Documents/Rainwater-Treatment-Fact-Sheet.pdf",
+          "NSW Health — Surface Water Treatment Fact Sheet (rivers, dams and streams) (PDF read in full 2026-09-23): https://www.health.nsw.gov.au/environment/water/Documents/Surface-water-Treatment-Fact-Sheet.pdf",
+          "NSW Health — NSW Private Water Supply Guidelines (PDF read in full 2026-09-23): https://www.health.nsw.gov.au/environment/water/Publications/private-water-supply-guidelines.pdf",
+          "NSW Health — Rainwater tanks (read live 2026-09-23): https://www.health.nsw.gov.au/environment/water/Pages/rainwater.aspx",
+          "WA Department of Health (HealthyWA) — Emergency treatment of drinking water supplies (read live 2026-09-23): https://www.healthywa.wa.gov.au/Articles/A_E/Emergency-treatment-of-drinking-water-supplies",
+          "WA Department of Health — Ultraviolet disinfection of drinking water (last reviewed 3 Jun 2022; read live 2026-09-23): https://www.health.wa.gov.au/Articles/U_Z/Ultraviolet-disinfection-of-drinking-water",
+          "WA Department of Health (HealthyWA) — Water filters for your home (last reviewed 17 Mar 2021; read live 2026-09-23): https://www.healthywa.wa.gov.au/Articles/U_Z/Water-filters-for-your-home"
+        ]
+      },
+      "sharedOrVaries": "VARIES, deliberately and in both directions. NZ carries one boil duration (one minute) and one bleach ratio (5 drops per litre / half a teaspoon per 10 litres); AU carries a method (rolling boil, NSW) plus one state's duration (WA) and two state ratios (NSW and WA), because no national Australian ratio exists. AU carries filter and UV detail from NSW and WA; NZ carries none, because no NZ source publishes micron ratings, removal percentages or UV specifications. NZ carries an annual testing figure; AU carries none, because NSW's frequencies are for private water supply operators. Neither market states an elevation adjustment, a fuel, saltwater or distillation method: no source read publishes one. The enHealth national rainwater guidance is recorded as SOURCE_UNAVAILABLE / NOT RELIED UPON and is not cited.",
+      "sentenceSources": {
+        "NZ": [
+          "rainwater must be treated before drinking; MBIE treatment options; tested annually; some councils require periodic testing — Building Performance, MBIE",
+          "if uncertain about the quality of water, do not drink it — Get Ready",
+          "boil for one minute; jug with automatic cut-off while full, never hold the switch; boiling kills Cryptosporidium — Health NZ; HealthEd HE10148",
+          "cooled boiled water in a covered container, best used within 24 hours, can be re-boiled — Health NZ",
+          "5 drops per litre / half a teaspoon per 10 litres, stand 30 minutes; plain unscented bleach only, no perfume, colour, surfactants or additives; thick/gel/foam/cleaner labels unsuitable — Taumata Arowai; MPI; HE10148",
+          "bleach and purification tablets do not work on protozoa (Giardia, Cryptosporidium) — Taumata Arowai",
+          "do not assume domestic filters are effective, they can become contaminated; most filters remove only one or two types of impurity; ask the supplier — Health NZ; HE10148",
+          "chemicals or toxins: boiling will not make it safe, use bottled or tankered water — Taumata Arowai (Do Not Drink notice)",
+          "Health Protection Officer / Environmental Health Officer and testing laboratories — HE10148"
+        ],
+        "AU": [
+          "surface water or shallow groundwater should not be used without treatment — NHMRC (national)",
+          "urban areas: use the public supply for drinking and cooking; dams, streams and rivers not recommended unless filtered and disinfected — NSW Health (state)",
+          "rolling boil, kettle with automatic shut off, cool, covered container, refrigerate — NSW Health (state)",
+          "vigorous boiling for at least 1 minute — WA Health (state)",
+          "2 drops of unscented 4–5% bleach per litre, 4 if cloudy, 30 minutes, longer when colder — NSW Health (state)",
+          "10 drops per litre at 1%, 2 at 4–6%, 1 at 7–10%, 30 minutes — WA Health (state)",
+          "ceramic and polypropylene remove sediment and bacteria but not viruses; carbon removes no bacteria, parasites or viruses; WaterMark, AS/NZS 4348, ANSI/NSF 53; ask for removal claims and data — NSW Health; WA Health (state)",
+          "filters should not be relied upon to disinfect water — WA Health (state)",
+          "UV effective against most bacteria, viruses and protozoa; needs clear water and pre-filtration; constant power; lamp and sleeve maintenance; no residual, use straight away not stored — NSW Health; WA Health (state)",
+          "boiling and disinfection do not remove chemicals, blue-green algae toxins or metals; unsuitable for drinking, use an alternative supply, follow state or territory health advice; professional advice for treatment system design; NATA-accredited laboratory via the public health unit — NSW Health (state)"
+        ]
+      },
+      "verification": {
+        "NZ": "VERIFIED_LIVE — OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 1: approved as drafted; NZ wording only, no AU figures or methods)",
+        "AU": "VERIFIED_LIVE — OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 2: NHMRC national, NSW labelled NSW, WA labelled WA; no state rule presented as national)"
+      },
+      "changeRule": "Owner rulings 1–11 (Stage 9.42). No figure may move between markets. No elevation or altitude boiling adjustment (no source publishes one). No NZ micron rating, removal percentage or UV specification. No national Australian bleach ratio. No household testing frequency for AU: NSW's schedules are operator guidance and must be labelled as such if used at all. No distillation method. Where no verified household method exists for a contaminant, direct the member to official or public-health advice instead. Every claim here is registered in config/treatment-sources.json, and the gates fail closed against it."
     }
   }
 }

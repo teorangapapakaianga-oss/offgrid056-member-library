@@ -1,0 +1,475 @@
+{
+  "description": "Owner-approved water-treatment claims (Stage 9.43). A numeric or efficacy treatment claim may appear in a member-facing file ONLY when a claim below matches it, in that file's own market. Nothing here may be copied between markets: an NZ figure has no AU entry and an AU figure has no NZ entry, so the gates fail closed on any crossing. Research and sources: admin-import/STAGE_9.42_OG09_WATER_TREATMENT_RESEARCH.md.",
+  "status": "OWNER-APPROVED 2026-09-23 (Stage 9.42 rulings 1-11)",
+  "unavailableSources": [
+    {
+      "id": "enhealth-rainwater-tanks",
+      "title": "enHealth guidance - The use of rainwater tanks",
+      "authority": "enHealth / Australian Centre for Disease Control",
+      "published": "2010-12-01",
+      "lastUpdated": "2025-12-03",
+      "url": "https://www.cdc.gov.au/resources/publications/enhealth-guidance-the-use-of-rainwater-tanks",
+      "status": "SOURCE_UNAVAILABLE / NOT RELIED UPON",
+      "note": "The PDF would not download (three attempts, 2026-09-23). Owner ruling 3: do not cite, do not summarise, do not infer its contents, do not treat as supporting evidence. It may be reviewed and added if it becomes readable normally."
+    }
+  ],
+  "claims": [
+    {
+      "id": "nz-boil-one-minute",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "boiling",
+      "claimType": "numeric-duration",
+      "allowedWording": "Boil the water for one minute. Boiling is the simplest and most effective method to reliably kill Cryptosporidium parasites and other germs.",
+      "numericValue": "1 minute",
+      "match": [
+        "\\bboil[a-z]*\\b[\\s\\S]{0,90}\\b(?:for )?one minute\\b",
+        "\\bone minute\\b[\\s\\S]{0,90}\\bboil"
+      ],
+      "gates": ["UNSOURCED_BOIL_TIME"],
+      "source": "https://www.healthnz.govt.nz/keeping-healthy/healthy-homes-environments/protecting-health-natural-disaster/during-an-emergency ; https://healthed.govt.nz/products/water-collection-tanks-and-safe-household-water ; https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Health New Zealand - Te Whatu Ora; HealthEd HE10148; Building Performance, MBIE",
+      "sourceDate": "2025-12 (Health NZ, last reviewed); 2022-01 (HE10148); 2026-01-15 (MBIE)",
+      "householdApplicability": "household, everyday and emergency",
+      "limitations": [
+        "A jug with an automatic cut-off may be used only while it is full, and must be allowed to switch off by itself (HE10148).",
+        "Cooled boiled water is best used within 24 hours (Health NZ).",
+        "No New Zealand source gives an altitude or elevation adjustment, so none may be written."
+      ],
+      "contaminationExclusions": [
+        "chemicals and toxins - boiling will not make the water safe (Taumata Arowai)",
+        "heavy metals, algal toxins - no NZ household source supports boiling for these"
+      ],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "nz-bleach-treatment-dose",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "chlorination",
+      "claimType": "numeric-dose",
+      "allowedWording": "Add 5 drops of plain, unperfumed household bleach to 1 litre of water, or half a teaspoon to 10 litres. Stir and leave the water to stand for 30 minutes before drinking.",
+      "numericValue": "5 drops per 1 L; 1/2 teaspoon per 10 L; 30 minutes standing time",
+      "match": [
+        "\\b(?:5|five) drops\\b[\\s\\S]{0,140}\\b(?:1 litre|per litre|litre of water)\\b",
+        "\\bhalf a teaspoon\\b[\\s\\S]{0,90}\\b10 litres\\b"
+      ],
+      "gates": ["UNSOURCED_BLEACH_RATIO"],
+      "source": "https://www.taumataarowai.govt.nz/for-the-public/drinking-water-in-an-emergency/stay-safe-during-a-boil-water-notice ; https://www.mpi.govt.nz/food-business/food-safety-in-natural-disasters-and-emergencies-2 ; https://healthed.govt.nz/products/water-collection-tanks-and-safe-household-water",
+      "authority": "Water Services Authority - Taumata Arowai; New Zealand Food Safety (MPI); HealthEd HE10148",
+      "sourceDate": "2026-09-22 (Taumata Arowai, last updated); 2024-10-24 (MPI); 2022-01 (HE10148)",
+      "householdApplicability": "household emergency treatment, when boiling is not possible",
+      "limitations": [
+        "Plain, unscented bleach only: no perfume, colour, surfactants or other additives; 'thick', 'gel', 'foam' or 'cleaner' on the label means it is not suitable.",
+        "Bleach and purification tablets do not work on protozoa such as Giardia and Cryptosporidium, so boiled or bottled water is preferred.",
+        "This is a drinking-water dose. It is not the dish-rinsing dose (1/4 cup per 10 L) or the roof-cleaning dose, and those may never be shown as drinking-water doses."
+      ],
+      "contaminationExclusions": [
+        "chemicals and toxins",
+        "protozoa (Giardia, Cryptosporidium)",
+        "any water under a Do Not Drink or Do Not Use notice"
+      ],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 7)"
+    },
+    {
+      "id": "nz-bleach-storage-dose",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "chlorination-storage",
+      "claimType": "numeric-dose",
+      "allowedWording": "Fill clean containers with tap water, add five drops of plain, unscented household bleach per litre, and do not drink it for at least 30 minutes.",
+      "numericValue": "5 drops per litre; 30 minutes",
+      "match": ["\\b(?:5|five) drops\\b[\\s\\S]{0,140}\\bper litre\\b"],
+      "gates": ["UNSOURCED_BLEACH_RATIO"],
+      "source": "https://getready.govt.nz/prepared/household/supplies/storing-water",
+      "authority": "NEMA - Get Ready (NZ Civil Defence)",
+      "sourceDate": "2026-09-22",
+      "householdApplicability": "household, preparing stored water before an emergency",
+      "limitations": [
+        "This is a storage preparation method for tap water, not a treatment for water of unknown quality.",
+        "Collected rainwater must be disinfected before drinking; if you are uncertain about the quality of water, do not drink it."
+      ],
+      "contaminationExclusions": ["chemicals", "any water under a drinking water notice"],
+      "status": "VERIFIED - OWNER-APPROVED 2026-09-22 (stored-drinking-water block)"
+    },
+    {
+      "id": "nz-filter-limitation",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "filtration",
+      "claimType": "limitation",
+      "allowedWording": "Do not assume a household water filter makes water safe. Most filters only remove one or two types of impurity, and filters can become contaminated - ask the supplier what the device can and cannot do.",
+      "numericValue": null,
+      "match": [
+        "\\bdo not assume\\b[\\s\\S]{0,120}\\bfilters?\\b",
+        "\\bmost filters\\b[\\s\\S]{0,140}\\bone or two types\\b",
+        "\\bfilters can become contaminated\\b"
+      ],
+      "gates": ["UNSOURCED_FILTER_CLAIM"],
+      "source": "https://www.healthnz.govt.nz/keeping-healthy/healthy-homes-environments/protecting-health-natural-disaster/during-an-emergency ; https://healthed.govt.nz/products/water-collection-tanks-and-safe-household-water",
+      "authority": "Health New Zealand - Te Whatu Ora; HealthEd HE10148",
+      "sourceDate": "2025-12; 2022-01",
+      "householdApplicability": "household, everyday and emergency",
+      "limitations": [
+        "No New Zealand source publishes micron ratings, pore sizes or removal percentages for household filters, so none may appear in an NZ file."
+      ],
+      "contaminationExclusions": ["microbiologically unsafe water - no NZ source supports a filter making it safe"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 9)"
+    },
+    {
+      "id": "nz-treatment-options-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "mixed",
+      "claimType": "concept-only",
+      "allowedWording": "For a rainwater system used for drinking, MBIE lists the options as adding chlorine, using a very fine in-line filter or purifier, boiling the water for one minute, and ultraviolet light treatment.",
+      "numericValue": null,
+      "match": [
+        "\\bMBIE\\b[\\s\\S]{0,300}\\b(?:in-line filter|ultraviolet light treatment)\\b",
+        "\\bvery fine in-line filter or purifier\\b"
+      ],
+      "gates": ["UNSOURCED_FILTER_CLAIM", "UNSOURCED_UV_CLAIM"],
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "2026-01-15",
+      "householdApplicability": "household rainwater supply used for drinking",
+      "limitations": [
+        "MBIE names the options only. It publishes no rating, pore size, UV dose, chlorine ratio or performance figure, and none may be added.",
+        "Ruling 10: NZ may state that UV is a treatment option and nothing more."
+      ],
+      "contaminationExclusions": ["chemicals", "anything under a drinking water notice"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "nz-testing-annual",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "testing",
+      "claimType": "interval",
+      "allowedWording": "You should have drinking water tested annually, and some councils also require periodic testing.",
+      "numericValue": "annually",
+      "match": ["\\btested annually\\b", "\\btesting\\b[\\s\\S]{0,60}\\bannually\\b"],
+      "gates": ["UNSOURCED_TESTING_INTERVAL"],
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "2026-01-15",
+      "householdApplicability": "household rainwater used for drinking",
+      "limitations": ["A test is a snapshot of one sample, not a treatment."],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "nz-tank-inspection-annual",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "testing",
+      "claimType": "interval",
+      "allowedWording": "Tanks should be inspected annually and cleaned if necessary; ideally tank cleaning is carried out by tank cleaning contractors.",
+      "numericValue": "annually",
+      "match": ["\\btanks?\\b[\\s\\S]{0,80}\\binspected annually\\b"],
+      "gates": ["UNSOURCED_TESTING_INTERVAL"],
+      "source": "https://healthed.govt.nz/products/water-collection-tanks-and-safe-household-water",
+      "authority": "HealthEd HE10148 (Health New Zealand)",
+      "sourceDate": "2022-01",
+      "householdApplicability": "household water collection tanks",
+      "limitations": ["Entering a tank needs ventilation and a second person present (HE10148)."],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "nz-contamination-limitation",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "method": "limitation",
+      "claimType": "contamination-limitation",
+      "allowedWording": "If harmful chemicals or toxins could be in the water, boiling will not make it safe - use bottled or tankered water and follow the advice of your supplier or public health unit. If you are uncertain about the quality of the water, do not drink it.",
+      "numericValue": null,
+      "match": [
+        "\\bboiling\\b[\\s\\S]{0,120}\\bwill not make it safe\\b",
+        "\\b(?:uncertain|unsure)\\b[\\s\\S]{0,140}\\bdo not drink it\\b",
+        "\\bpublic health unit\\b",
+        "\\bHealth Protection Officer\\b"
+      ],
+      "gates": ["UNSAFE_CONTAMINATED_SOURCE_GUIDANCE"],
+      "source": "https://www.taumataarowai.govt.nz/for-the-public/drinking-water-in-an-emergency/stay-safe-during-a-do-not-drink-water-notice ; https://getready.govt.nz/prepared/household/supplies/storing-water ; https://healthed.govt.nz/products/water-collection-tanks-and-safe-household-water",
+      "authority": "Water Services Authority - Taumata Arowai; NEMA - Get Ready; HealthEd HE10148",
+      "sourceDate": "2026-09-22; 2026-09-22; 2022-01",
+      "householdApplicability": "household, all sources",
+      "limitations": [
+        "Ruling 6: where no verified household treatment method exists for a contaminant, the member is directed to official or public-health advice and no treatment pathway is invented."
+      ],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 6)"
+    },
+    {
+      "id": "au-boil-rolling-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific)",
+      "method": "boiling",
+      "claimType": "concept",
+      "allowedWording": "Water used for drinking or food preparation should be brought to a rolling boil to make it safe. Kettles with automatic shut off switches can do this. Water should then be allowed to cool and stored in a clean container with a lid and refrigerated.",
+      "numericValue": null,
+      "match": ["\\brolling boil\\b"],
+      "gates": ["UNSOURCED_BOIL_TIME"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Pages/bwa-what-to-do.aspx",
+      "authority": "NSW Health",
+      "sourceDate": "2025-05-23",
+      "householdApplicability": "household, during a boil water alert",
+      "limitations": [
+        "NSW publishes no duration for a rolling boil. NSW guidance is state guidance and may not be presented as a national Australian rule."
+      ],
+      "contaminationExclusions": ["chemicals", "blue-green algae toxins"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "au-boil-one-minute-wa",
+      "market": "AU",
+      "jurisdiction": "WA (state-specific)",
+      "method": "boiling",
+      "claimType": "numeric-duration",
+      "allowedWording": "Vigorous boiling for at least 1 minute will kill any disease-causing micro-organism present in the water.",
+      "numericValue": "at least 1 minute",
+      "match": ["\\bboil[a-z]*\\b[\\s\\S]{0,80}\\bat least (?:one|1) minutes?\\b", "\\bvigorous(?:ly)?\\b[\\s\\S]{0,80}\\b(?:one|1) minutes?\\b"],
+      "gates": ["UNSOURCED_BOIL_TIME"],
+      "source": "https://www.healthywa.wa.gov.au/Articles/A_E/Emergency-treatment-of-drinking-water-supplies",
+      "authority": "WA Department of Health (HealthyWA)",
+      "sourceDate": "read live 2026-09-23 (no date shown on page)",
+      "householdApplicability": "household, emergency treatment",
+      "limitations": [
+        "WA guidance is state guidance. It may not be presented as a national Australian rule, and the New Zealand 'one minute' wording may not be substituted for it.",
+        "No Australian source read gives an altitude or elevation adjustment."
+      ],
+      "contaminationExclusions": ["chemicals", "blue-green algae toxins", "metals"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "au-bleach-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific)",
+      "method": "chlorination",
+      "claimType": "numeric-dose",
+      "allowedWording": "NSW Health advises 2 drops of unscented 4-5% bleach per litre, or 4 drops if the water is cloudy, left to stand 30 minutes, and longer in colder water.",
+      "numericValue": "2 drops per litre (4-5% available chlorine); 4 drops if cloudy; 30 minutes at 25C, 1 hour at 15C, 2 hours at 5C",
+      "match": ["\\bNSW\\b[\\s\\S]{0,240}\\b(?:2|two) drops\\b[\\s\\S]{0,120}\\bper litre\\b"],
+      "gates": ["UNSOURCED_BLEACH_RATIO"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Pages/bwa-what-to-do.aspx",
+      "authority": "NSW Health",
+      "sourceDate": "2025-05-23",
+      "householdApplicability": "household, when boiling is not possible during a boil water alert",
+      "limitations": [
+        "The dose depends on the bleach strength and the contact time depends on water temperature.",
+        "It must carry its NSW attribution: it is not a national Australian ratio, and it may not appear in an NZ file."
+      ],
+      "contaminationExclusions": ["chemicals", "blue-green algae toxins"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 8)"
+    },
+    {
+      "id": "au-bleach-wa",
+      "market": "AU",
+      "jurisdiction": "WA (state-specific)",
+      "method": "chlorination",
+      "claimType": "numeric-dose",
+      "allowedWording": "WA Health gives doses by strength: 10 drops per litre for 1% available chlorine, 2 drops for 4-6%, and 1 drop for 7-10%, left to stand 30 minutes.",
+      "numericValue": "1% -> 10 drops/L; 4-6% -> 2 drops/L; 7-10% -> 1 drop/L; 30 minutes",
+      "match": ["\\bWA\\b[\\s\\S]{0,240}\\b10 drops per litre\\b"],
+      "gates": ["UNSOURCED_BLEACH_RATIO"],
+      "source": "https://www.healthywa.wa.gov.au/Articles/A_E/Emergency-treatment-of-drinking-water-supplies",
+      "authority": "WA Department of Health (HealthyWA)",
+      "sourceDate": "read live 2026-09-23",
+      "householdApplicability": "household, emergency treatment",
+      "limitations": [
+        "Bleach must contain chlorine and no added perfumes or detergents.",
+        "WA attribution is required: it is not a national Australian ratio, and it may not appear in an NZ file."
+      ],
+      "contaminationExclusions": ["chemicals", "blue-green algae toxins"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 8)"
+    },
+    {
+      "id": "au-filter-classes-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific)",
+      "method": "filtration",
+      "claimType": "efficacy",
+      "allowedWording": "NSW Health notes that polypropylene and ceramic cartridge filters remove sediment and bacteria but will not remove viruses; activated carbon filters reduce chemicals, tastes, odours and colour but will not remove bacteria or viruses; micro/ultrafiltration membranes (0.1-0.01 micron) remove sediment and bacteria, and ultrafiltration may also remove viruses; reverse osmosis (0.001 micron) removes microorganisms and most residual chemicals.",
+      "numericValue": "0.1-0.01 micron (micro/ultrafiltration); 0.001 micron (reverse osmosis); 30 micron and 5 micron pre-filtration",
+      "match": [
+        "\\bNSW\\b[\\s\\S]{0,400}\\b(?:ceramic|carbon|membrane|reverse osmosis|micron)\\b",
+        "\\bNSW Health\\b[\\s\\S]{0,400}\\bremove"
+      ],
+      "gates": ["UNSOURCED_FILTER_CLAIM"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Documents/Rainwater-Treatment-Fact-Sheet.pdf ; https://www.health.nsw.gov.au/environment/water/Publications/private-water-supply-guidelines.pdf",
+      "authority": "NSW Health",
+      "sourceDate": "read live 2026-09-23",
+      "householdApplicability": "household rainwater and private supplies, with professional design advice",
+      "limitations": [
+        "Micron values are NSW guidance and may appear only with that attribution. They may never appear in an NZ file (no NZ source publishes them).",
+        "'Not all filters remove harmful microorganisms' - a filter may not be described as making unsafe water safe."
+      ],
+      "contaminationExclusions": ["chemicals not covered by the filter type", "blue-green algae toxins", "viruses for ceramic and carbon filters"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 9)"
+    },
+    {
+      "id": "au-filter-limitation-wa",
+      "market": "AU",
+      "jurisdiction": "WA (state-specific)",
+      "method": "filtration",
+      "claimType": "limitation",
+      "allowedWording": "WA Health says filters should not be relied upon to disinfect water, and that only a reverse osmosis system will effectively remove harmful bacteria.",
+      "numericValue": null,
+      "match": [
+        "\\bWA\\b[\\s\\S]{0,200}\\bshould not be relied upon to disinfect\\b",
+        "\\bWA\\b[\\s\\S]{0,200}\\bonly a reverse osmosis\\b"
+      ],
+      "gates": ["UNSOURCED_FILTER_CLAIM"],
+      "source": "https://www.healthywa.wa.gov.au/Articles/U_Z/Water-filters-for-your-home",
+      "authority": "WA Department of Health (HealthyWA)",
+      "sourceDate": "2021-03-17",
+      "householdApplicability": "household point-of-use filters",
+      "limitations": ["State guidance; not a national Australian rule."],
+      "contaminationExclusions": ["microbiologically unsafe water"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "au-filter-certification",
+      "market": "AU",
+      "jurisdiction": "NSW and WA (state guidance, consistent)",
+      "method": "filtration",
+      "claimType": "standard-name",
+      "allowedWording": "If a filter is being used for health reasons, look for the WaterMark or Plumbing Safety Type Test Mark and certification to AS/NZS 4348 or ANSI/NSF 53, and ask the supplier for the contaminant-removal claims and data.",
+      "numericValue": "AS/NZS 4348; ANSI/NSF 53; AS/NZS 3497 (above 150 kPa)",
+      "match": ["\\bAS/NZS ?4348\\b", "\\bANSI/NSF ?53\\b", "\\bWaterMark\\b"],
+      "gates": ["UNSOURCED_FILTER_CLAIM"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Documents/Rainwater-Treatment-Fact-Sheet.pdf ; https://www.healthywa.wa.gov.au/Articles/U_Z/Water-filters-for-your-home",
+      "authority": "NSW Health; WA Department of Health",
+      "sourceDate": "read live 2026-09-23; 2021-03-17",
+      "householdApplicability": "household treatment appliances",
+      "limitations": ["A certification is a performance standard, not a guarantee that a given water source is safe."],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "au-uv-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific)",
+      "method": "uv",
+      "claimType": "efficacy",
+      "allowedWording": "NSW Health advises that UV disinfection is effective against most bacteria, viruses and protozoa; that UV systems are most effective when the water is clear and free of particles, so rainwater may need to be filtered first; that UV does not remove chemicals; that UV systems require a power supply; and that water disinfected using UV should be used straight away, not stored in tanks.",
+      "numericValue": null,
+      "match": ["\\bNSW\\b[\\s\\S]{0,400}\\b(?:UV|ultraviolet)\\b", "\\b(?:UV|ultraviolet)\\b[\\s\\S]{0,400}\\bNSW\\b"],
+      "gates": ["UNSOURCED_UV_CLAIM", "UNSOURCED_FILTER_CLAIM"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Documents/Rainwater-Treatment-Fact-Sheet.pdf",
+      "authority": "NSW Health",
+      "sourceDate": "read live 2026-09-23",
+      "householdApplicability": "household rainwater and private supplies",
+      "limitations": [
+        "Clear water and pre-filtration are required; UV leaves no residual disinfectant; constant power and lamp and sleeve maintenance are required.",
+        "State guidance: it may not be generalised to a national Australian requirement, and it may not appear in an NZ file."
+      ],
+      "contaminationExclusions": ["chemicals", "turbid or particle-laden water without pre-filtration"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 10)"
+    },
+    {
+      "id": "au-uv-wa",
+      "market": "AU",
+      "jurisdiction": "WA (state-specific)",
+      "method": "uv",
+      "claimType": "efficacy",
+      "allowedWording": "WA Health says UV light is normally effective against all viruses, bacteria and protozoa, but that some low power UV systems cannot penetrate Cryptosporidium and Giardia; that water should be filtered before UV; that lamps and sleeves need regular replacement and cleaning; and that UV requires a continuous power supply and leaves no residual disinfectant.",
+      "numericValue": null,
+      "match": ["\\bWA\\b[\\s\\S]{0,400}\\b(?:UV|ultraviolet)\\b", "\\b(?:UV|ultraviolet)\\b[\\s\\S]{0,400}\\bWA Health\\b"],
+      "gates": ["UNSOURCED_UV_CLAIM"],
+      "source": "https://www.health.wa.gov.au/Articles/U_Z/Ultraviolet-disinfection-of-drinking-water",
+      "authority": "WA Department of Health",
+      "sourceDate": "2022-06-03",
+      "householdApplicability": "household drinking water treatment",
+      "limitations": ["State guidance; not a national Australian rule."],
+      "contaminationExclusions": ["chemicals", "unfiltered or cloudy water"],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23"
+    },
+    {
+      "id": "au-uv-standard-nsf55",
+      "market": "AU",
+      "jurisdiction": "NSW and WA (standard name)",
+      "method": "uv",
+      "claimType": "standard-name",
+      "allowedWording": "A UV unit should carry the WaterMark or Plumbing Safety Type Test Mark and at least one of ANSI/NSF Standard 55 Class A systems (40 mJ/cm2), AS/NZS 3497 or AS/NZS 4348.",
+      "numericValue": "ANSI/NSF 55 Class A (40 mJ/cm2)",
+      "match": ["\\bANSI/NSF (?:Standard )?55\\b[\\s\\S]{0,120}\\bClass A\\b"],
+      "gates": ["UNSOURCED_UV_CLAIM"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Documents/Rainwater-Treatment-Fact-Sheet.pdf",
+      "authority": "NSW Health",
+      "sourceDate": "read live 2026-09-23",
+      "householdApplicability": "household UV units",
+      "limitations": [
+        "40 mJ/cm2 is part of the name of the standard's Class A rating. It may never be written as 'the UV dose you need', and no other UV dose value may be written in either market."
+      ],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 10)"
+    },
+    {
+      "id": "au-testing-operator-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (private water supply operators)",
+      "method": "testing",
+      "claimType": "interval",
+      "allowedWording": "NSW Health's monitoring frequencies are for private water supply operators: microbiological testing monthly, chemical and physical testing annually, and free chlorine testing at least weekly where the supply is chlorinated.",
+      "numericValue": "monthly (microbiological); annually (chemical and physical); at least weekly (chlorine residual)",
+      "match": ["\\boperators?\\b[\\s\\S]{0,300}\\b(?:monthly|annually|weekly)\\b", "\\bNSW\\b[\\s\\S]{0,200}\\boperators?\\b"],
+      "gates": ["UNSOURCED_TESTING_INTERVAL"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Publications/private-water-supply-guidelines.pdf",
+      "authority": "NSW Health",
+      "sourceDate": "read live 2026-09-23",
+      "householdApplicability": "NOT household guidance - private water supply operators. It may be shown only with that label (ruling 11).",
+      "limitations": [
+        "No Australian source read publishes a household testing frequency. An operator schedule may never be presented as a household requirement."
+      ],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 11)"
+    },
+    {
+      "id": "au-contamination-limitation",
+      "market": "AU",
+      "jurisdiction": "national (NHMRC) and NSW (state)",
+      "method": "limitation",
+      "claimType": "contamination-limitation",
+      "allowedWording": "Boiling and disinfection do not remove chemicals, blue-green algae toxins or metals. If chemical contamination or an algal bloom is suspected, the water is unsuitable for drinking - use an alternative supply and follow the advice of your state or territory health department. The Australian Drinking Water Guidelines say surface water or shallow groundwater should not be used as a source of drinking water without treatment, and NSW Health advises that water from dams, streams and rivers is not recommended as a source of drinking water unless it is filtered and disinfected.",
+      "numericValue": null,
+      "match": [
+        "\\bdo not remove chemicals\\b",
+        "\\bwill not remove blue.?green algae\\b",
+        "\\bnot recommended as a source of drinking water\\b",
+        "\\bshould not be used as a source of drinking water without treatment\\b",
+        "\\bstate or territory health department\\b",
+        "\\bpublic health unit\\b"
+      ],
+      "gates": ["UNSAFE_CONTAMINATED_SOURCE_GUIDANCE", "UNSOURCED_FILTER_CLAIM"],
+      "source": "https://www.health.nsw.gov.au/environment/water/Publications/private-water-supply-guidelines.pdf ; https://www.health.nsw.gov.au/environment/water/Documents/Surface-water-Treatment-Fact-Sheet.pdf ; https://guidelines.nhmrc.gov.au/australian-drinking-water-guidelines/part-1/chapter-4/4.3-individual-household-supplies",
+      "authority": "NSW Health; NHMRC (national)",
+      "sourceDate": "read live 2026-09-23",
+      "householdApplicability": "household, all sources",
+      "limitations": [
+        "Ruling 6: where no verified household treatment method exists for a contaminant, direct the member to official or public-health advice; do not invent a treatment pathway."
+      ],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 6)"
+    },
+    {
+      "id": "au-surface-water-nhmrc",
+      "market": "AU",
+      "jurisdiction": "national",
+      "method": "source-selection",
+      "claimType": "concept",
+      "allowedWording": "The Australian Drinking Water Guidelines say the emphasis should be on selecting the best quality source water available, and that surface water or shallow groundwater should not be used as a source of drinking water without treatment.",
+      "numericValue": null,
+      "match": ["\\bAustralian Drinking Water Guidelines\\b", "\\bshould not be used as a source of drinking water without treatment\\b"],
+      "gates": ["UNSOURCED_FILTER_CLAIM", "UNSAFE_CONTAMINATED_SOURCE_GUIDANCE"],
+      "source": "https://guidelines.nhmrc.gov.au/australian-drinking-water-guidelines/part-1/chapter-4/4.3-individual-household-supplies",
+      "authority": "NHMRC",
+      "sourceDate": "read live 2026-09-23",
+      "householdApplicability": "household (individual household supplies)",
+      "limitations": ["This is the only national Australian statement relied on; every other Australian claim here is state guidance."],
+      "contaminationExclusions": [],
+      "status": "VERIFIED_LIVE - OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 2)"
+    }
+  ]
+}

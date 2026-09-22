@@ -603,6 +603,47 @@
       "relatedResourcesStatus": "owner-approved 2026-09-23",
       "routeNote": "Expected to collide with the demo placeholder 'rainwater-harvesting-planner'; handled by the reusable private-preview override (Stage 9.39), with no OG-10-specific exception.",
       "deploymentApproved": "2026-09-23 (Stage 9.40 ruling 20, conditional on final validation)"
+    },
+    "OG-09": {
+      "foundation": "water",
+      "foundationStatus": "proposed 2026-09-23 — owner review (Stage 9.42 ruling 15)",
+      "resourceType": "guide",
+      "resourceTypeStatus": "proposed 2026-09-23 — the audit inferred 'worksheet'; after the rebuild the resource is a market method table plus a decision worksheet, so 'guide' fits better",
+      "category": "water-security",
+      "categoryStatus": "proposed 2026-09-23",
+      "difficulty": "beginner",
+      "difficultyStatus": "proposed 2026-09-23",
+      "difficultySource": "INFERRED — the document states no level. The flow is six decision steps and no calculation.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "proposed 2026-09-23 (INFERRED)",
+      "estimatedTimeReasoning": "INFERRED: six worksheet steps, one market method table to read, and a maintenance and testing table. Excludes buying, installing or testing anything.",
+      "description": "Work out whether your water needs treating, whether treating it at home is appropriate at all, and which methods official guidance supports — with the limits of each, and when to ask for official advice.",
+      "descriptionStatus": "proposed 2026-09-23 — replaces the cover subtitle, which promised a buying matrix ('so you buy the right tool')",
+      "tags": [],
+      "safetyBlocks": [
+        "stored-drinking-water",
+        "water-treatment"
+      ],
+      "approvedSafetyBlocks": [
+        "stored-drinking-water",
+        "water-treatment"
+      ],
+      "approvedSafetyBlocksStatus": "stored-drinking-water: owner-approved 2026-09-22 (Stage 9.19). water-treatment: owner-approved 2026-09-23 (Stage 9.42 rulings 1 and 2).",
+      "safetyReasoning": "The resource teaches treatment from end to end, so the water-treatment block is required by the detector and carried in both markets. The storage block stays because the worksheet sends members to stored water as the fallback when household treatment is not appropriate.",
+      "hazardFlags": [
+        "Contaminated sources: chemicals, sewage, floodwater, algae, metals, agricultural spray, ash, fuel, saltwater and unknown contamination are routed to official advice, not to a method (ruling 6).",
+        "Distillation is named as outside the currently verified guidance, with no operating instructions (ruling 14).",
+        "No brand names: the Berkey-style row is removed and no replacement product is recommended (ruling 13)."
+      ],
+      "hazardFlagsStatus": "proposed 2026-09-23",
+      "relatedResources": [
+        "res-1008",
+        "res-1010"
+      ],
+      "relatedResourcesNote": "OG-08 Water Storage Calculator (the stored-water fallback) and OG-10 Rainwater Harvesting Planner (the collection system this treats water from).",
+      "relatedResourcesStatus": "proposed 2026-09-23",
+      "titleStatus": "UNCHANGED — still 'Water Filtration Comparison Matrix'. A rename to something like 'Water Treatment & Source Guide' would suit the rebuilt content but changes the slug and the route, so it is an owner decision and was not made here.",
+      "status": "PREPARED FOR OWNER REVIEW — not deployed (Stage 9.42 ruling 15: content approval before PDF approval)"
     }
   }
 }

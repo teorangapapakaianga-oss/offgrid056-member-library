@@ -43,8 +43,15 @@ export interface GroupAReport {
   order: number;
 }
 
-/** Topics that pull in a safety block, and the block each one needs. */
-const SAFETY_TOPICS: { pattern: RegExp; block: string; needs: number }[] = [
+/**
+ * Topics that pull in a safety block, and the block each one needs.
+ *
+ * `needs` is how many mentions count as teaching the topic. `teaching` is an extra condition for topics where the
+ * words alone are not enough: a budget line listing "water filter" is not treatment teaching, while a document that
+ * compares what methods remove, or gives a dose, a boil time or a rating, is. Without that second condition the
+ * water-treatment block would be demanded of every resource that mentions filtration in a shopping list.
+ */
+const SAFETY_TOPICS: { pattern: RegExp; block: string; needs: number; teaching?: RegExp }[] = [
   { pattern: /\bgenerator/gi, block: "generator-safety", needs: 3 },
   { pattern: /\b(solid fuel|wood burner|chimney|flue)/gi, block: "solid-fuel-heating", needs: 3 },
   { pattern: /\bgas\b/gi, block: "gas-and-lpg", needs: 3 },
@@ -52,6 +59,16 @@ const SAFETY_TOPICS: { pattern: RegExp; block: string; needs: number }[] = [
   { pattern: /\b(water storage|water tank|rainwater|drinking water)\b/gi, block: "stored-drinking-water", needs: 3 },
   { pattern: /\b(fridge|freezer|pantry|perishable)\b/gi, block: "food-safety-power-cut", needs: 3 },
   { pattern: /\b(fire|smoke alarm|evacuat)/gi, block: "fire-and-emergency", needs: 3 },
+  {
+    pattern:
+      /\b(water filters?|filtration|purif(?:y|ier|iers|ication)|disinfect\w*|chlorinat\w*|bleach|boil(?:ing|ed)? (?:the |your )?water|treat(?:ing|ed|ment)s? (?:the |your )?water|ultraviolet|UV (?:steril\w*|purif\w*|treatment|lamp|light))\b/gi,
+    block: "water-treatment",
+    needs: 3,
+    // It teaches treatment, rather than naming it: an efficacy claim, a dose, a boil time, a rating, or a
+    // method-versus-method comparison.
+    teaching:
+      /\b(removes?\s+(?:bacteria|viruses|virus|chemicals|sediment|protozoa)|kills?\s+(?:bacteria|viruses|germs)|drops? per litre|drops of (?:household )?bleach|per litre of water|boil(?:ing)? (?:the |your )?water for|rolling boil|micron|µm|mg\/L|comparison matrix|which (?:filter|method|treatment)|right (?:filter|method) for)\b/i,
+  },
 ];
 
 /** Market fields a resource will need resolved, inferred from what it talks about. */
@@ -77,7 +94,9 @@ const UNVERIFIED_FIELDS = new Set(["figure.generatorDistance"]);
  * at all — a gate that silently passes.
  */
 export function safetyExposureFor(text: string): string[] {
-  return SAFETY_TOPICS.filter((t) => (text.match(t.pattern) ?? []).length >= t.needs).map((t) => t.block);
+  return SAFETY_TOPICS.filter(
+    (t) => (text.match(t.pattern) ?? []).length >= t.needs && (!t.teaching || t.teaching.test(text)),
+  ).map((t) => t.block);
 }
 
 /** Every mention of the topic that pulls in `block` (none if the block has no topic). */

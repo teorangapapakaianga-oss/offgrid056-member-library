@@ -2,7 +2,7 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 23 September 2026, after Stage 9.41.
+**As at:** 23 September 2026, after Stage 9.43.
 
 | State | Count |
 |---|---|
@@ -37,15 +37,19 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 
-## Prepared — awaiting owner approval (0)
+## Prepared — awaiting owner approval (1)
 
-Nothing is waiting on an owner decision. The next resource has not been started.
+| Code | Title | Foundation / type | Safety blocks | Stage | Waiting on |
+|---|---|---|---|---|---|
+| OG-09 | Filtration Comparison Matrix | water / guide | drinking water · **water treatment** | 9.43 | owner approval of the rewritten teaching content (the efficacy matrix, brand, prices and intervals are gone; two market method tables and a six-step fail-safe worksheet replace them), the title decision, and the OG-08 block decision |
 
-## Blocked — pending research (4)
+Both PDFs are rendered and verified (NZ 8 pages, AU 9 pages), and **nothing has been deployed**: the member files are
+not in `private-assets/` and the Worker is unchanged.
+
+## Blocked — pending research (3)
 
 | Code | Title | Blocked by |
 |---|---|---|
-| OG-09 | Filtration Comparison Matrix | **water treatment research** — it teaches treatment, beyond the approved storage block |
 | OG-16 | Grant Eligibility Insulation Planner | **grants research** — NZ programmes; AU state and territory schemes |
 | OG-17 | Solid Fuel Heating Planner | **gas research** — its audit notes gas appliances (4 mentions); the gas rule is strict |
 | OG-B09 | Insulation & Heating Upgrade Checklist | **gas research** — same reason |

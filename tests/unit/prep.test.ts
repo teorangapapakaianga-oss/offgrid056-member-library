@@ -879,3 +879,118 @@ describe("OG-10 rainwater planner", () => {
     for (const m of ["NZ", "AU"]) expect(forMarket(m), m).toContain("What lands on the roof is not what you can use");
   });
 });
+
+describe("OG-09 water treatment guide (Stage 9.43)", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const og09 = (JSON.parse(fs.readFileSync(path.resolve("admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-09"] ?? [];
+  const forMarket = (m: string) =>
+    og09.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ")).join("\n");
+  const removed = og09.map((c) => c.from).join("\n");
+  const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources["OG-09"];
+  const all = og09.map((c) => c.to).join("\n");
+
+  it("removes the efficacy matrix, the brand, the prices and the invented maintenance intervals", () => {
+    // What went: every one of these is in the text being replaced, and in none of the replacements.
+    for (const s of ["Berkey-style", "$300–$600", "$20–$80", "Removes Bacteria", "Partial", "Day 9 Complete", "Next: OG-10"]) {
+      expect(removed, s).toContain(s);
+      expect(all, s).not.toContain(s);
+    }
+    expect(all).not.toMatch(/\$\d/);
+    expect(all).not.toMatch(/\b\d+[–-]\d+ months\b/);
+  });
+
+  it("replaces the creek-water shortcut with a fail-safe order", () => {
+    expect(removed).toContain("Creek / stream / lake:");
+    for (const m of ["NZ", "AU"]) {
+      expect(forMarket(m), m).toContain("Check for a warning first");
+      expect(forMarket(m), m).toMatch(/do not treat it and drink it/);
+    }
+  });
+
+  it("keeps each market's figures inside that market", () => {
+    const nz = forMarket("NZ");
+    const au = forMarket("AU");
+    expect(nz).toContain("Boil the water for one minute");
+    expect(nz).toContain("5 drops of plain, unperfumed household bleach to 1 litre");
+    expect(nz).not.toMatch(/NSW|WA Health|micron|rolling boil|Australian/);
+    expect(au).toContain("NSW Health advises 2 drops");
+    expect(au).toContain("WA Health gives doses by strength");
+    expect(au).toMatch(/micron/);
+    expect(au).not.toMatch(/MBIE|New Zealand|HE10148|Health NZ/);
+  });
+
+  it("labels Australian guidance as national or state, and never invents a national ratio", () => {
+    const au = forMarket("AU");
+    expect(au).toContain("national Australian Drinking Water Guidelines");
+    expect(au).toContain("no single national Australian ratio");
+    expect(au).toContain("(both state)");
+    expect(au).toContain("for private water supply operators, not for households");
+  });
+
+  it("says what nobody publishes, instead of filling the gap", () => {
+    expect(forMarket("NZ")).toContain("No New Zealand household source publishes a UV dose");
+    expect(forMarket("AU")).toContain("Neither state publishes an elevation adjustment");
+    for (const m of ["NZ", "AU"]) expect(forMarket(m), m).toContain("Outside the currently verified guidance");
+    expect(all).not.toMatch(/distil[^.]{0,40}(boil|condens|collect the)/i);
+  });
+
+  it("asks the six questions in order, and drops the cost fields with the price content", () => {
+    const worksheet = og09.find((c) => c.where === "Worksheet")!;
+    for (const q of [
+      "1. What is the source of the water?",
+      "2. Is there a known contamination warning?",
+      "3. Is household treatment appropriate here",
+      "4. Which verified method applies in my market?",
+      "5. What does that method NOT deal with?",
+      "6. When would I stop and get official or professional advice",
+    ]) expect(worksheet.to, q).toContain(q);
+    expect(worksheet.from).toContain("Estimated cost");
+    expect(worksheet.to).not.toContain("Estimated cost");
+    expect(worksheet.to).not.toContain("cite from matrix above");
+  });
+
+  it("carries the treatment and storage blocks, and keeps the legacy title decision visible", () => {
+    expect(meta.safetyBlocks).toEqual(["stored-drinking-water", "water-treatment"]);
+    expect(meta.approvedSafetyBlocks).toEqual(["stored-drinking-water", "water-treatment"]);
+    expect(meta.relatedResources).toEqual(["res-1008", "res-1010"]);
+    expect(meta.titleStatus).toMatch(/UNCHANGED/);
+    expect(meta.status).toMatch(/OWNER REVIEW/);
+  });
+});
+
+describe("treatment gates inside prep (Stage 9.43)", () => {
+  const registry = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/treatment-sources.json"), "utf8"));
+  const doc = DOC.replace(
+    "<p>Install the solar inverter and batteries.</p>",
+    "<p>If you cannot boil water, add 5 drops of plain, unperfumed household bleach to 1 litre of water and leave it to stand for 30 minutes.</p>",
+  );
+
+  it("blocks every market when no registry is supplied: nothing is approved by default", () => {
+    const r = prep({ sourceHtml: doc });
+    expect(r.markets.every((m) => !m.publishable)).toBe(true);
+    expect(r.markets[0].problems.join(" ")).toContain("UNSOURCED_BLEACH_RATIO");
+  });
+
+  it("passes the NZ file and blocks the AU one for the same NZ-verified sentence", () => {
+    const r = prep({ sourceHtml: doc, treatmentRegistry: registry });
+    const nz = r.markets.find((m) => m.code === "NZ")!;
+    const au = r.markets.find((m) => m.code === "AU")!;
+    expect(nz.problems.join(" ")).not.toContain("UNSOURCED_BLEACH_RATIO");
+    expect(au.problems.join(" ")).toContain("UNSOURCED_BLEACH_RATIO (AU)");
+    expect(r.importReadiness).toBe("NEEDS_CONTENT_REVIEW");
+  });
+
+  it("stops asking for a source for a figure the registry already sources", () => {
+    const withPercent = DOC.replace(
+      "<p>Install the solar inverter and batteries.</p>",
+      "<p>NSW Health advises 2 drops of unscented 4–5% bleach per litre, left to stand 30 minutes.</p>",
+    );
+    const flags = (extra: Partial<PrepInputs>) =>
+      prep({ sourceHtml: withPercent, launchMarkets: ["AU"], ...extra }).contentFlags.filter((f) => f.kind === "figure-needs-source");
+    expect(flags({}).length).toBeGreaterThan(0);
+    expect(flags({ treatmentRegistry: registry })).toEqual([]);
+    // In New Zealand the same sentence is still unsourced: the entry it matches belongs to Australia.
+    const nz = prep({ sourceHtml: withPercent, launchMarkets: ["NZ"], treatmentRegistry: registry });
+    expect(nz.contentFlags.some((f) => f.kind === "figure-needs-source")).toBe(true);
+  });
+});

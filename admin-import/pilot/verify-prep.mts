@@ -50,14 +50,27 @@ type ReportRow = {
 };
 const expected = new Map<
   string,
-  { status: string | undefined; blocks: string[]; copy: { from: string; to: string; markets?: string[] }[]; unapplied: { where: string; markets?: string[] }[] }
+  {
+    status: string | undefined;
+    blocks: string[];
+    copy: { from: string; to: string; markets?: string[]; headers: string[] }[];
+    unapplied: { where: string; markets?: string[] }[];
+  }
 >(
   (fs.existsSync(reportFile) ? (readJson(reportFile) as ReportRow[]) : []).map((r) => [
     r.legacyCode,
     {
       status: r.recordStatus,
       blocks: r.safety.blocks,
-      copy: r.copyChanges.filter((c) => c.applied).map((c) => ({ from: visible(c.from), to: visible(c.to), markets: c.markets })),
+      copy: r.copyChanges
+        .filter((c) => c.applied)
+        .map((c) => ({
+          from: visible(c.from),
+          to: visible(c.to),
+          markets: c.markets,
+          // Header rows of any table this change introduces: a browser reprints them after a page break.
+          headers: [...c.to.matchAll(/<thead>([\s\S]*?)<\/thead>/gi)].map((m) => visible(m[1])).filter(Boolean),
+        })),
       // A recorded change that did not apply means the document is not what was approved — never a pass.
       unapplied: r.copyChanges.filter((c) => !c.applied).map((c) => ({ where: c.where, markets: c.markets })),
     },
@@ -88,9 +101,18 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
       if (!title || !flat.includes(norm(title))) problems.push(`safety block "${id}" missing`);
     }
     // A market-specific change is only checked in the market it belongs to.
-    for (const { from, to } of (want?.copy ?? []).filter((c) => !c.markets || c.markets.includes(market))) {
+    for (const { from, to, headers } of (want?.copy ?? []).filter((c) => !c.markets || c.markets.includes(market))) {
+      // A table that runs over a page break has its header row printed again on the next page. That repeat is the
+      // browser's, not the document's, so it is removed — once — before the comparison, exactly as the extractor's
+      // page markers are. The first printing of the header still has to be there.
+      const withoutRepeatedHeaders = headers.reduce((text, raw) => {
+        const header = norm(raw);
+        const first = header ? text.indexOf(header) : -1;
+        // `flat` has no whitespace left, so the repeat is spliced out, not replaced by a space.
+        return first < 0 ? text : text.slice(0, first + header.length) + text.slice(first + header.length).split(header).join("");
+      }, flat);
       // The new wording must be there, and the old wording gone — which is also the only way to check a removal.
-      if (to && !flat.includes(norm(to))) problems.push(`approved copy missing: "${to.slice(0, 50)}"`);
+      if (to && !withoutRepeatedHeaders.includes(norm(to))) problems.push(`approved copy missing: "${to.slice(0, 50)}"`);
       if (from && !norm(to).includes(norm(from)) && flat.includes(norm(from))) problems.push(`replaced wording still present: "${from.slice(0, 50)}"`);
     }
 

@@ -3134,6 +3134,236 @@
         "approvedOn": "2026-09-23",
         "approvalRef": "Stage 9.40 ruling 2"
       }
+    ],
+    "OG-09": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 2 — Water, Food & Air</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Old programme week label.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Old programme name.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Cover subtitle (NZ)",
+        "from": "<p class=\"cover-subtitle\">Not all water filters do the same job. This matrix compares every major filtration method so you buy the right tool for your water source — not the most expensive one.</p>",
+        "to": "<p class=\"cover-subtitle\">Start with your water source, not the hardware. What New Zealand official guidance supports for treating household water, what each method does not do, and when to stop and get advice.</p>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "The old subtitle promised a buying matrix ('so you buy the right tool'). Ruling 12: the resource is a source-first treatment guide, and its claims are market-specific.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Cover subtitle (AU)",
+        "from": "<p class=\"cover-subtitle\">Not all water filters do the same job. This matrix compares every major filtration method so you buy the right tool for your water source — not the most expensive one.</p>",
+        "to": "<p class=\"cover-subtitle\">Start with your water source, not the hardware. What Australian official guidance supports for treating household water, what each method does not do, and when to stop and get advice.</p>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "As NZ, in the AU file's own words.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-09 | Day 9</div>",
+        "to": "<div class=\"page-header-right\">Water · Treatment</div>",
+        "expectedMatches": 2,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Legacy asset code and programme day.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Intro box",
+        "from": "<div class=\"info-box\">\n  <div class=\"info-box-title\">The Filter You Need Depends on Your Source</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">City tap water needs different treatment than rainwater, which needs different treatment than creek water. Buying the wrong filter wastes money and leaves you unprotected. Use this matrix to match your source to the right method.</p>\n</div>",
+        "to": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Start With Your Source, Not the Hardware</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Tap water, rainwater and creek water are not the same problem, and no single device solves all of them. Work through the six steps below, then use the method table — every method has limits, and <strong>some contamination cannot be treated at home at all</strong>. Where that is the case, this guide says so and sends you to official advice rather than to a product.</p>\n</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Replaces 'use this matrix to match your source to the right method' with the fail-safe order (ruling 12).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Method comparison heading",
+        "from": "<h2>Filtration Method Comparison</h2>",
+        "to": "<h2>What Each Method Does — and Does Not — Do</h2>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "The table is no longer a cross-market efficacy matrix.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Method table (NZ)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Method</th><th>Removes Bacteria</th><th>Removes Viruses</th><th>Removes Chemicals</th><th>Removes Sediment</th><th>Best For</th><th>Cost</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td class=\"method-col\">Boiling</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"no\">No</td>\n      <td class=\"no\">No</td>\n      <td>Emergency; any clear water</td>\n      <td>Free</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Ceramic Filter</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"no\">No</td>\n      <td class=\"yes\">Yes</td>\n      <td>Rainwater, tap backup</td>\n      <td>$30–$100</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Carbon Block</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"no\">No</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td>City tap; chlorine taste</td>\n      <td>$20–$80</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">UV Purification</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"no\">No</td>\n      <td class=\"no\">No</td>\n      <td>Clear water; bacteria/viruses</td>\n      <td>$80–$300</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Reverse Osmosis</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td>Full purification; drinking</td>\n      <td>$200–$800</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Distillation</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"yes\">Yes</td>\n      <td>Small batches; any source</td>\n      <td>$100–$400</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Bleach Treatment</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"no\">No</td>\n      <td class=\"no\">No</td>\n      <td>Emergency; large volumes</td>\n      <td>$5</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Gravity Filter (Berkey-style)</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td>Off-grid home; no power</td>\n      <td>$300–$600</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Portable Pump Filter</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"no\">No</td>\n      <td class=\"yes\">Yes</td>\n      <td>Camping; travel; bug-out</td>\n      <td>$50–$150</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Method</th><th>What NZ guidance supports</th><th>What it does not do</th><th>Source</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td class=\"method-col\">Boiling</td>\n      <td>Boil the water for one minute. A jug with an automatic cut-off switch is fine while the jug is full — let it turn off by itself, and never hold the switch down.</td>\n      <td>Nothing for chemicals, toxins or metals. Cooled boiled water is best used within 24 hours.</td>\n      <td>Health NZ; HealthEd HE10148; Building Performance (MBIE)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Bleach, when you cannot boil</td>\n      <td>Add 5 drops of plain, unperfumed household bleach to 1 litre of water — half a teaspoon to 10 litres — stir, and leave it to stand for 30 minutes.</td>\n      <td>Plain, unscented bleach only: nothing labelled thick, gel, foam or cleaner, and nothing with perfume, colour or surfactants. It does not deal with protozoa such as Giardia and Cryptosporidium, and it does nothing for chemicals.</td>\n      <td>Taumata Arowai; NZ Food Safety (MPI); HE10148</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Purification tablets</td>\n      <td>Follow the manufacturer's instructions.</td>\n      <td>Like bleach, tablets do not deal with protozoa — which is why boiled or bottled water is recommended.</td>\n      <td>Taumata Arowai</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Filters and purifiers</td>\n      <td>Building Performance (MBIE) lists a very fine in-line filter or purifier as one option for a rainwater supply used for drinking.</td>\n      <td><strong>Do not assume a filter makes unsafe water safe.</strong> Most filters only remove one or two types of impurity, and filters can become contaminated — ask the supplier what the device can and cannot do. No New Zealand source publishes ratings or removal figures, so none are given here.</td>\n      <td>Building Performance (MBIE); Health NZ; HE10148</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Ultraviolet (UV)</td>\n      <td>Building Performance (MBIE) lists ultraviolet light treatment as one option for a rainwater supply used for drinking.</td>\n      <td>No New Zealand household source publishes a UV dose, a pre-filtration requirement or a maintenance interval, so none is stated here. Ask the supplier what the unit does and what it needs.</td>\n      <td>Building Performance (MBIE)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Adding chlorine to a supply</td>\n      <td>Building Performance (MBIE) lists adding chlorine as one option for a rainwater supply used for drinking.</td>\n      <td>No New Zealand household source read publishes a rate for dosing a tank, so none is given here. Ask your supplier, installer or public health unit.</td>\n      <td>Building Performance (MBIE)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Testing</td>\n      <td>Have drinking water tested annually. Tanks should be inspected annually and cleaned if necessary. Some councils also require periodic testing.</td>\n      <td>A test is a snapshot of one sample. It is not a treatment, and it says nothing about the next tankful.</td>\n      <td>Building Performance (MBIE); HE10148</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Distillation</td>\n      <td class=\"no\">Outside the currently verified guidance.</td>\n      <td>No New Zealand household source read supports a distillation method, so no instructions are given here.</td>\n      <td>—</td>\n    </tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Ruling 12A and ruling 13: the nine-row efficacy matrix, its costs, the Berkey-style branded row, the all-Yes claims, carbon 'bacteria Partial', ceramic 'viruses Partial', distillation and portable-pump rows are removed. Replaced by what NZ official guidance actually supports, each row with its limits and its source.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Method table (AU)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Method</th><th>Removes Bacteria</th><th>Removes Viruses</th><th>Removes Chemicals</th><th>Removes Sediment</th><th>Best For</th><th>Cost</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td class=\"method-col\">Boiling</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"no\">No</td>\n      <td class=\"no\">No</td>\n      <td>Emergency; any clear water</td>\n      <td>Free</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Ceramic Filter</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"no\">No</td>\n      <td class=\"yes\">Yes</td>\n      <td>Rainwater, tap backup</td>\n      <td>$30–$100</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Carbon Block</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"no\">No</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td>City tap; chlorine taste</td>\n      <td>$20–$80</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">UV Purification</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"no\">No</td>\n      <td class=\"no\">No</td>\n      <td>Clear water; bacteria/viruses</td>\n      <td>$80–$300</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Reverse Osmosis</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td>Full purification; drinking</td>\n      <td>$200–$800</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Distillation</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"yes\">Yes</td>\n      <td>Small batches; any source</td>\n      <td>$100–$400</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Bleach Treatment</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"no\">No</td>\n      <td class=\"no\">No</td>\n      <td>Emergency; large volumes</td>\n      <td>$5</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Gravity Filter (Berkey-style)</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"yes\">Yes</td>\n      <td>Off-grid home; no power</td>\n      <td>$300–$600</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Portable Pump Filter</td>\n      <td class=\"yes\">Yes</td>\n      <td class=\"partial\">Partial</td>\n      <td class=\"no\">No</td>\n      <td class=\"yes\">Yes</td>\n      <td>Camping; travel; bug-out</td>\n      <td>$50–$150</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Method</th><th>What Australian guidance supports</th><th>What it does not do</th><th>Source (national or state)</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td class=\"method-col\">Choosing the source first</td>\n      <td>The national Australian Drinking Water Guidelines say surface water or shallow groundwater should not be used as a source of drinking water without treatment. NSW Health recommends that people in urban areas use the public water supply for drinking and cooking.</td>\n      <td>Treatment is not a substitute for a better source. Check what applies where you live.</td>\n      <td>NHMRC (national); NSW Health (state)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Boiling</td>\n      <td>NSW Health: bring the water to a rolling boil — a kettle with an automatic shut-off switch does this — then cool it and store it covered in the fridge. WA Health: vigorous boiling for at least one minute.</td>\n      <td>It does not remove chemicals, blue-green algae toxins or metals. Neither state publishes an elevation adjustment, so none is given here.</td>\n      <td>NSW Health; WA Health (both state)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Bleach, when you cannot boil</td>\n      <td>NSW Health advises 2 drops of unscented 4–5% bleach per litre, or 4 drops if the water is cloudy, left to stand 30 minutes and longer in colder water. WA Health gives doses by strength: 10 drops per litre at 1% available chlorine, 2 drops at 4–6%, and 1 drop at 7–10%, left to stand 30 minutes.</td>\n      <td>There is no single national Australian ratio: the dose depends on the strength of the bleach and the contact time depends on the temperature. Follow your own state or territory's advice and the instructions on the product.</td>\n      <td>NSW Health; WA Health (both state)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Sediment and cartridge filters</td>\n      <td>NSW Health: polypropylene and ceramic cartridges remove sediment and bacteria, with pre-filtration of 30 micron before membranes and 5 micron before reverse osmosis.</td>\n      <td>NSW Health: they will not remove viruses. WA Health says filters should not be relied upon to disinfect water.</td>\n      <td>NSW Health; WA Health (state)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Activated carbon</td>\n      <td>NSW Health: most effective at reducing chemicals such as iron and hydrogen sulphide, and objectionable tastes, odours and colour.</td>\n      <td>NSW Health: it will not remove bacteria, parasites or viruses.</td>\n      <td>NSW Health (state)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Membranes and reverse osmosis</td>\n      <td>NSW Health: micro and ultrafiltration membranes (0.1–0.01 micron) remove sediment and bacteria, and ultrafiltration may also remove viruses; reverse osmosis (0.001 micron) removes microorganisms and most residual chemicals.</td>\n      <td>NSW Health: installations need pre-filtration, backwashing and a way to dispose of the waste stream, and reverse osmosis needs a drain and a power supply.</td>\n      <td>NSW Health (state)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Ultraviolet (UV)</td>\n      <td>NSW Health: UV is effective against most bacteria, viruses and protozoa. Units should carry the WaterMark or Plumbing Safety Type Test Mark and a standard such as ANSI/NSF 55 Class A.</td>\n      <td>NSW Health: UV needs clear water and usually pre-filtration, needs a constant power supply, leaves no residual disinfectant — so treated water should be used straight away rather than stored — and does not remove chemicals. WA Health notes that some low-power units cannot penetrate Cryptosporidium and Giardia.</td>\n      <td>NSW Health; WA Health (state)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Testing</td>\n      <td>Have water tested through a NATA-accredited laboratory; your local public health unit can help you find one.</td>\n      <td>No Australian source read publishes a household testing frequency. NSW Health's schedules — microbiological monthly, chemical and physical yearly — are for private water supply operators, not for households.</td>\n      <td>NSW Health (state, operator guidance)</td>\n    </tr>\n    <tr>\n      <td class=\"method-col\">Distillation</td>\n      <td class=\"no\">Outside the currently verified guidance.</td>\n      <td>No Australian household source read supports a distillation method, so no instructions are given here.</td>\n      <td>—</td>\n    </tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "As NZ, from Australian sources only, with NHMRC labelled national and NSW and WA labelled by state (ruling 2).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Decision framework (NZ)",
+        "from": "<div class=\"tip-box\">\n  <div class=\"tip-title\">Quick Decision Framework</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>City tap water backup:</strong> Carbon or ceramic filter<br><strong>Rainwater for drinking:</strong> Ceramic + UV, or gravity filter<br><strong>Creek / stream / lake:</strong> Sediment filter + UV, or RO system<br><strong>Emergency only:</strong> Boiling or bleach treatment<br><strong>Off-grid daily drinking:</strong> Gravity filter or RO</p>\n</div>",
+        "to": "<div class=\"tip-box\">\n  <div class=\"tip-title\">Before You Treat Anything</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>1. Name the source.</strong> Town supply, rainwater tank, bore or spring, stream or lake, or a supply someone else controls.<br><strong>2. Check for a warning first.</strong> Under a Boil Water notice, follow the notice. Under a Do Not Drink or Do Not Use notice, harmful chemicals or toxins may be present, boiling will not make it safe, and you need bottled or tankered water.<br><strong>3. Ask whether household treatment is appropriate at all.</strong> If the source has been flooded, holds a dead animal, or may carry sewage, fuel, spray drift, ash, saltwater or anything you cannot identify, do not treat it and drink it — get advice from your public health unit.<br><strong>4. Only then choose a method</strong> from the table above: boiling first, bleach if you cannot boil.<br><strong>5. Respect the limits.</strong> Bleach does not deal with Giardia or Cryptosporidium. <strong>Do not assume a filter makes unsafe water safe.</strong> Nothing here removes chemicals.<br><strong>6. If you are uncertain about the quality of the water, do not drink it.</strong></p>\n</div>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Ruling 13: the 'Quick Decision Framework' told a member that a household rig makes creek, stream or lake water drinkable. Replaced by the fail-safe order, with the warning check before any method.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Decision framework (AU)",
+        "from": "<div class=\"tip-box\">\n  <div class=\"tip-title\">Quick Decision Framework</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>City tap water backup:</strong> Carbon or ceramic filter<br><strong>Rainwater for drinking:</strong> Ceramic + UV, or gravity filter<br><strong>Creek / stream / lake:</strong> Sediment filter + UV, or RO system<br><strong>Emergency only:</strong> Boiling or bleach treatment<br><strong>Off-grid daily drinking:</strong> Gravity filter or RO</p>\n</div>",
+        "to": "<div class=\"tip-box\">\n  <div class=\"tip-title\">Before You Treat Anything</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>1. Name the source.</strong> Mains supply, rainwater tank, bore or spring, dam, stream or river, or a supply someone else controls.<br><strong>2. Check for a warning first.</strong> Follow any boil water alert or advice from your water supplier. If chemical contamination or an algal bloom is suspected, the water is unsuitable for drinking — use an alternative supply and follow your state or territory health department's advice.<br><strong>3. Ask whether household treatment is appropriate at all.</strong> If the source has been flooded, holds a dead animal, or may carry sewage, fuel, spray drift, ash, saltwater or anything you cannot identify, do not treat it and drink it — your local public health unit can advise.<br><strong>4. Only then choose a method</strong> from the table above, remembering that surface water is not recommended for drinking unless it is filtered and disinfected.<br><strong>5. Respect the limits.</strong> WA Health says filters should not be relied upon to disinfect water, and boiling and disinfection do not remove chemicals, algal toxins or metals.<br><strong>6. If you are not sure the water is safe, do not drink it.</strong></p>\n</div>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "As NZ, with the Australian limits and the state-or-territory route for advice.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Worksheet heading",
+        "from": "<h2>My Water Source & Filter Selection</h2>",
+        "to": "<h2>My Water Source &amp; Treatment Decision</h2>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "The worksheet now decides whether to treat at all, not which filter to buy.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Worksheet",
+        "from": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">Filter Decision Worksheet</div>\n  <div class=\"worksheet-subtitle\">Match your source to your filter</div>\n  \n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">My primary water source (tick one)</div>\n    <div style=\"display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:8px;\">\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Municipal tap water</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Rainwater tank</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Bore / well water</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Creek / stream</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Neighbour / community supply</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Multiple sources</div>\n    </div>\n  </div>\n  \n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">My biggest contamination concern</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Filtration method I am choosing</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Why this method matches my source (cite from matrix above)</div>\n    <div class=\"worksheet-line\"></div>\n    <div class=\"worksheet-line\" style=\"margin-top:6px;\"></div>\n  </div>\n  \n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Replacement filter cost & frequency</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Backup method if primary filter fails</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n</div>",
+        "to": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">Source-Selection Worksheet</div>\n  <div class=\"worksheet-subtitle\">Six steps, in order — step 2 is not optional</div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">1. What is the source of the water?</div>\n    <div style=\"display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-top:8px;\">\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Town or mains supply</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Rainwater tank</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Bore, well or spring</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Creek, stream, dam or lake</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Someone else's supply</div>\n      <div style=\"padding:8px; background:var(--warm-white); border-radius:6px; font-size:13px;\">□ Unknown, or more than one</div>\n    </div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">2. Is there a known contamination warning? (a notice or alert, a flood, a dead animal, sewage, chemicals, spray drift, ash, fuel or saltwater)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">3. Is household treatment appropriate here — or does this need official advice, or a different supply?</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">4. Which verified method applies in my market? (from the table above)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">5. What does that method NOT deal with?</div>\n    <div class=\"worksheet-line\"></div>\n    <div class=\"worksheet-line\" style=\"margin-top:6px;\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">6. When would I stop and get official or professional advice — and who would I contact?</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">My backup if that method is unavailable (no power, no supplies, unit not working)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Ruling 12C: the six-step fail-safe flow. The cost and replacement-cost fields are removed with the price content (ruling 13), and 'cite from matrix above' becomes 'which verified method applies in my market'.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Maintenance heading",
+        "from": "<h2>Maintenance Reminder Schedule</h2>",
+        "to": "<h2>Maintenance and Testing</h2>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "The section no longer schedules intervals nobody published.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Maintenance table (NZ)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Filter Type</th><th>Check / Clean</th><th>Replace Element</th><th>Cost/Year</th></tr>\n  </thead>\n  <tbody>\n    <tr><td class=\"method-col\">Ceramic</td><td>Monthly scrub</td><td>6–12 months</td><td>$20–$50</td></tr>\n    <tr><td class=\"method-col\">Carbon Block</td><td>Visual check</td><td>3–6 months</td><td>$30–$80</td></tr>\n    <tr><td class=\"method-col\">UV Lamp</td><td>Clean quartz sleeve</td><td>12 months</td><td>$50–$100</td></tr>\n    <tr><td class=\"method-col\">Reverse Osmosis</td><td>Check pressure</td><td>12–24 months</td><td>$100–$200</td></tr>\n    <tr><td class=\"method-col\">Gravity Filter</td><td>Scrub elements</td><td>6–12 months</td><td>$50–$120</td></tr>\n  </tbody>\n</table>",
+        "to": "<p>Manufacturers set the cleaning and replacement intervals for treatment equipment, and no New Zealand official source publishes them, so no intervals are given here. Follow the instructions that came with your equipment and write your own dates in.</p>\n\n<table class=\"compare-table\">\n  <thead>\n    <tr><th>What</th><th>What NZ guidance says</th><th>My date</th></tr>\n  </thead>\n  <tbody>\n    <tr><td class=\"method-col\">Filter or UV unit</td><td>Follow the manufacturer's instructions. After a Boil Water notice is lifted, Taumata Arowai advises maintaining any water filters according to the manufacturer's advice.</td><td>&nbsp;</td></tr>\n    <tr><td class=\"method-col\">Tank</td><td>Tanks should be inspected annually and cleaned if necessary — ideally by a tank cleaning contractor (HE10148).</td><td>&nbsp;</td></tr>\n    <tr><td class=\"method-col\">Testing</td><td>Have drinking water tested annually; some councils also require periodic testing (MBIE).</td><td>&nbsp;</td></tr>\n    <tr><td class=\"method-col\">Roof and gutters</td><td>Keep them clear of debris and overhanging vegetation. Take care: a secure ladder, away from power lines, with someone else present (HE10148).</td><td>&nbsp;</td></tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Ruling 13: the maintenance intervals (monthly, 3–6 months, 6–12 months, 12–24 months) and the annual cost ranges are unsourced. Replaced by 'follow the manufacturer's instructions' plus the sourced NZ annual testing and annual tank inspection.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Maintenance table (AU)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Filter Type</th><th>Check / Clean</th><th>Replace Element</th><th>Cost/Year</th></tr>\n  </thead>\n  <tbody>\n    <tr><td class=\"method-col\">Ceramic</td><td>Monthly scrub</td><td>6–12 months</td><td>$20–$50</td></tr>\n    <tr><td class=\"method-col\">Carbon Block</td><td>Visual check</td><td>3–6 months</td><td>$30–$80</td></tr>\n    <tr><td class=\"method-col\">UV Lamp</td><td>Clean quartz sleeve</td><td>12 months</td><td>$50–$100</td></tr>\n    <tr><td class=\"method-col\">Reverse Osmosis</td><td>Check pressure</td><td>12–24 months</td><td>$100–$200</td></tr>\n    <tr><td class=\"method-col\">Gravity Filter</td><td>Scrub elements</td><td>6–12 months</td><td>$50–$120</td></tr>\n  </tbody>\n</table>",
+        "to": "<p>Manufacturers set the cleaning and replacement intervals for treatment equipment, and no Australian source read publishes household intervals, so no intervals are given here. Follow the instructions that came with your equipment and write your own dates in.</p>\n\n<table class=\"compare-table\">\n  <thead>\n    <tr><th>What</th><th>What Australian guidance says</th><th>My date</th></tr>\n  </thead>\n  <tbody>\n    <tr><td class=\"method-col\">Filter or UV unit</td><td>Follow the manufacturer's instructions. NSW Health advises asking the supplier for the maintenance and replacement requirements, and their costs, before buying.</td><td>&nbsp;</td></tr>\n    <tr><td class=\"method-col\">Tank and roof</td><td>NSW Health advises that tanks, plumbing and treatment systems be correctly selected, installed and regularly maintained, and that professional advice be sought for the design and installation of a treatment system.</td><td>&nbsp;</td></tr>\n    <tr><td class=\"method-col\">Testing</td><td>Use a NATA-accredited laboratory through your local public health unit. NSW Health's routine schedules are for private water supply operators, not for households.</td><td>&nbsp;</td></tr>\n    <tr><td class=\"method-col\">Roof and gutters</td><td>Keep them clear of debris and overhanging vegetation. Take care on ladders, and stay away from power lines.</td><td>&nbsp;</td></tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "As NZ. No household testing frequency exists in Australia, so NSW's schedules are named as operator guidance (ruling 11).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Closing",
+        "from": "<div class=\"closing-box\">\n  <h3>Day 9 Complete</h3>\n  <p>You now know which filtration method matches your water source, your budget, and your contamination risks. No more guessing at the hardware store.</p>\n  <p class=\"next-pointer\">Next: OG-10 Rainwater Harvesting Planner →</p>\n</div>",
+        "to": "<div class=\"closing-box\">\n  <h3>What You Have Decided</h3>\n  <p>You have named your source, checked for a warning, decided whether household treatment is appropriate at all, and chosen a method your market's official guidance actually supports — with its limits written down beside it.</p>\n  <p class=\"next-pointer\">If anything about the water is uncertain, do not drink it. Ask for official advice.</p>\n</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Removes 'Day 9 Complete', the next-day pointer and 'no more guessing at the hardware store'.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      }
     ]
   }
 }

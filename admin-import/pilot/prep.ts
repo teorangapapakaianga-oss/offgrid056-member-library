@@ -18,6 +18,7 @@ import { ResourceSchema } from "@/lib/content/schemas";
 import { getFoundation } from "@/lib/content/taxonomy";
 import type { ProgrammeItem } from "../audit/programme";
 import { safetyTopicMentions } from "../audit/group-a";
+import { isRegisteredClaim, treatmentFindings, type TreatmentRegistry } from "../audit/treatment";
 
 /**
  * An owner-approved, resource-specific exemption from a block the topic detector requires. It holds only while
@@ -400,6 +401,13 @@ export interface PrepInputs {
   safetyBlockTrims?: SafetyBlockTrim[];
   /** reviewed exceptions to the fuel checks, for this resource and exact context only */
   fuelExemptions?: FuelExemption[];
+  /**
+   * The owner-approved water-treatment claims (config/treatment-sources.json). Every numeric or efficacy treatment
+   * claim in a market's file must match an entry for that market, and contaminated-source guidance must carry that
+   * market's limitation. Without a registry the gates cannot run, so the checks are reported as unavailable rather
+   * than silently passed.
+   */
+  treatmentRegistry?: TreatmentRegistry;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -447,8 +455,17 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   // Flags are collected from every market's final text below, so a market-only change clears its own flags only.
   const flagSeen = new Set<string>();
   const contentFlags: ContentFlag[] = [];
-  const collectFlags = (html: string) => {
+  const collectFlags = (html: string, market: string) => {
     for (const f of findContentFlags(html, item.legacyCode, inputs.legacyTerms)) {
+      // A figure that matches an approved treatment claim for this market already carries its source, with the
+      // authority and date recorded in the registry. Every other figure is still flagged for the owner.
+      if (
+        f.kind === "figure-needs-source" &&
+        inputs.treatmentRegistry &&
+        isRegisteredClaim(f.text, market, inputs.treatmentRegistry)
+      ) {
+        continue;
+      }
       const key = `${f.kind}|${f.text}`;
       if (!flagSeen.has(key)) {
         flagSeen.add(key);
@@ -503,7 +520,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     for (const r of marketResultsCopy.filter((x) => !x.applied)) otherFindings.push(unapplied(r));
     // Print layout that edits markup runs only after every copy change, so no approved change is disturbed.
     const marketHtml = keepSmallTablesTogether(proposedMarket.html);
-    collectFlags(marketHtml);
+    collectFlags(marketHtml, code);
     // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
     const fuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []);
     for (const finding of fuelFindings) if (!otherFindings.includes(finding)) otherFindings.push(finding);
@@ -522,10 +539,16 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       resolved.safety.map((s) => ({ id: s.id, title: s.title, body: s.body, severity: s.severity })),
     );
     const withSafety = injected.html;
+    // Treatment claims are checked on the finished market file — the resource's own text AND its safety blocks —
+    // so a block's own figures are held to the same registry, and a figure that belongs to the other market fails
+    // here rather than in review. With no registry, nothing is approved and every claim fails: that is the point.
+    const treatment = treatmentFindings(withSafety, code, inputs.treatmentRegistry ?? { claims: [] });
+    for (const finding of treatment) if (!otherFindings.includes(finding)) otherFindings.push(finding);
     // A safety block that could not be placed is a blocker, not a warning: the member would never see it.
     const unplaced = [
       ...trimProblems,
       ...fuelFindings,
+      ...treatment,
       ...injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`),
       // A topic the resource teaches without its safety block is a blocker in every market.
       ...marketMissing.map((id) =>
