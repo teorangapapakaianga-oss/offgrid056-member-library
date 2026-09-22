@@ -32,6 +32,29 @@ export interface SafetyExemption {
   allowedMentions: string[];
 }
 
+/**
+ * An owner-approved, resource-specific removal of one exact sentence from a shared block in one market, so a point
+ * is not said twice (OG-20: the CO block's alarm sentence, already in the generator block). The shared block is not
+ * changed. If the sentence is no longer in the block exactly once, the market is blocked rather than guessed at.
+ */
+export interface SafetyBlockTrim {
+  block: string;
+  market: string;
+  removeSentence: string;
+  reason: string;
+  approvedBy: string;
+  approvedOn: string;
+}
+
+/**
+ * Generator content that runs on gas. Petrol-generator guidance does not cover it, and no LPG-generator guidance is
+ * approved, so it holds the resource (owner ruling, Stage 9.33/9.34).
+ */
+const GAS_GENERATOR = /\b(LPG|LP gas|natural gas|gas[- ]powered|gas[- ]fuelled|dual[- ]fuel|tri[- ]fuel)\b[^.]{0,60}\bgenerators?\b|\bgenerators?\b[^.]{0,60}\b(LPG|LP gas|natural gas|gas[- ]powered|gas[- ]fuelled|dual[- ]fuel|tri[- ]fuel)\b/i;
+export function gasGeneratorMention(html: string): string | null {
+  return clean(html.replace(/<style[\s\S]*?<\/style>/gi, " ")).match(GAS_GENERATOR)?.[0] ?? null;
+}
+
 /** Whether an exemption still holds for this member-facing HTML, and what breaks it if not. */
 export function exemptionHolds(exemption: SafetyExemption, html: string): { holds: boolean; unexpected: string[] } {
   let text = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
@@ -64,6 +87,8 @@ export interface PrepResult {
     proposed: string[];
     /** owner-approved exemptions, and whether each still held in every market */
     exemptions: { block: string; reason: string; holds: boolean; unexpected: string[] }[];
+    /** owner-approved, resource-scoped sentence removals, and whether each applied */
+    trims: { block: string; market: string; reason: string; applied: boolean }[];
   };
   /** legacy programme, product and cross-reference text that may not belong in the current library */
   contentFlags: ContentFlag[];
@@ -338,6 +363,8 @@ export interface PrepInputs {
   blockedBy?: { dependency: string; reason?: string } | null;
   /** owner-approved exemptions from detector-required blocks, for this resource only */
   safetyExemptions?: SafetyExemption[];
+  /** owner-approved removals of a duplicated sentence from a shared block, for this resource only */
+  safetyBlockTrims?: SafetyBlockTrim[];
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -403,6 +430,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   const exemptions = (inputs.safetyExemptions ?? []).filter((e) => lacking.includes(e.block));
   const exemptionResults = new Map(exemptions.map((e) => [e.block, { block: e.block, reason: e.reason, holds: true, unexpected: [] as string[] }]));
   const missing = new Set(launchMarkets.length ? [] : lacking);
+  const trims: PrepResult["safety"]["trims"] = [];
   const proposed = safetyBlocks.filter((b) => (inputs.proposedBlockIds ?? []).includes(b));
   const resource: CoreResource = {
     id: item.proposedResourceId,
@@ -422,6 +450,14 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const profile = markets.find((m) => m.code === code);
     if (!profile) continue;
     const resolved = resolveForMarket(resource, profile, blocks);
+    const trimProblems: string[] = [];
+    for (const t of (inputs.safetyBlockTrims ?? []).filter((x) => x.market === code)) {
+      const s = resolved.safety.find((b) => b.id === t.block);
+      const found = s ? s.body.split(t.removeSentence).length - 1 : 0;
+      if (s && found === 1) s.body = s.body.replace(t.removeSentence, "").replace(/ {2,}/g, " ").replace(/ +\n/g, "\n").replace(/\n +/g, "\n").trim();
+      else trimProblems.push(`scoped trim of "${t.block}" (${code}) could not be applied: the sentence is in the block ${found} time(s) — check the shared wording`);
+      trims.push({ block: t.block, market: code, reason: t.reason, applied: !!s && found === 1 });
+    }
     const gate = publishable(resolved, ["emergency-contact"]);
     // This market's own wording: approved market changes, then proposed ones.
     const forMarket = (list: ApprovedCopyChange[]) => list.filter((c) => c.markets?.includes(code));
@@ -433,6 +469,12 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // Print layout that edits markup runs only after every copy change, so no approved change is disturbed.
     const marketHtml = keepSmallTablesTogether(proposedMarket.html);
     collectFlags(marketHtml);
+    // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
+    const gasGenerator = gasGeneratorMention(marketHtml);
+    if (gasGenerator) {
+      const finding = `GAS_SAFETY_REQUIRED: gas-fuelled generator content ("${gasGenerator}") — no NZ/AU LPG-generator guidance is approved`;
+      if (!otherFindings.includes(finding)) otherFindings.push(finding);
+    }
     const marketMissing = lacking.filter((b) => {
       const exemption = exemptions.find((e) => e.block === b);
       if (!exemption) return true;
@@ -450,6 +492,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const withSafety = injected.html;
     // A safety block that could not be placed is a blocker, not a warning: the member would never see it.
     const unplaced = [
+      ...trimProblems,
+      ...(gasGenerator ? [`GAS_SAFETY_REQUIRED: gas-fuelled generator content ("${gasGenerator}")`] : []),
       ...injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`),
       // A topic the resource teaches without its safety block is a blocker in every market.
       ...marketMissing.map((id) =>
@@ -542,7 +586,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     reskin: { changes: summariseChanges(changes), warnings },
     branding: { legacyIssues: legacyIssues.length, issues: legacyIssues },
     terminology: { frameworkPhrase: item.legacyTerminology.length, barePillar: 0, otherFindings },
-    safety: { blocks: resource.safetyBlocks, exposure: item.safetyNotes, required: requiredSafety, missingRequired, proposed, exemptions: [...exemptionResults.values()] },
+    safety: { blocks: resource.safetyBlocks, exposure: item.safetyNotes, required: requiredSafety, missingRequired, proposed, exemptions: [...exemptionResults.values()], trims },
     contentFlags,
     markets: marketResults,
     validation: {

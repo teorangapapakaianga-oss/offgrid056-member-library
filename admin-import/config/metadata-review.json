@@ -405,21 +405,19 @@
     },
     "OG-20": {
       "foundation": "energy",
-      "foundationStatus": "PROPOSED — audit HIGH",
+      "foundationStatus": "owner-approved 2026-09-22",
       "resourceType": "assessment",
-      "resourceTypeStatus": "INFERRED — PROPOSED: the audit could not resolve a type (LOW). It is a suitability check (property checklist + decision flowchart) → assessment. Alternative: worksheet.",
+      "resourceTypeStatus": "owner-approved 2026-09-22",
       "category": "household-energy-planning",
-      "categoryStatus": "INFERRED — PROPOSED: 'Working out what your household really needs to run.' Alternative: backup-energy.",
-      "difficulty": null,
-      "difficultyStatus": "OWNER-REVIEW REQUIRED",
-      "difficultySource": "none stated",
-      "difficultyRecommendation": "beginner (INFERRED): ticking property features and answering three yes/no questions; no calculations",
-      "estimatedTime": null,
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
-      "estimatedTimeRecommendation": 20,
+      "categoryStatus": "owner-approved 2026-09-22",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "owner-approved 2026-09-22 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: eight property ticks, a three-question flowchart and seven plan fields. Excludes site assessments and quotes.",
       "description": "Solar is not the only option. Wind, micro-hydro, and generators all have their place. This flowchart helps you decide which alternatives suit your property, climate, and budget.",
-      "descriptionStatus": "SOURCE — the cover subtitle, unchanged (no claims)",
+      "descriptionStatus": "owner-approved 2026-09-22 (the cover subtitle, unchanged)",
       "tags": [],
       "safetyBlocks": [
         "generator-safety",
@@ -427,18 +425,32 @@
         "batteries-and-electrical"
       ],
       "approvedSafetyBlocks": [
+        "generator-safety",
         "carbon-monoxide",
         "batteries-and-electrical"
       ],
-      "approvedSafetyBlocksStatus": "carbon-monoxide and batteries-and-electrical owner-approved (Stage 9.18). generator-safety: points approved (Stage 9.33 rulings 3–4); final wording PROPOSED — awaiting owner review.",
+      "approvedSafetyBlocksStatus": "generator-safety NZ + AU owner-approved 2026-09-22 (Stage 9.34 rulings 3–4); carbon-monoxide and batteries-and-electrical approved at Stage 9.18.",
       "safetyNote": "indoor-combustion is not used: its generator line is covered by generator-safety and OG-20 teaches nothing about unflued heaters or outdoor gas appliances. The electrical block uses its trimmed wording (no generator lines) because generator-safety is present.",
-      "lpgStatus": "NOT PRESENT — OG-20 does not mention LPG, gas-fuelled or dual-fuel generators; no GAS_SAFETY_REQUIRED flag. If later edits add LPG generators, flag GAS_SAFETY_REQUIRED and hold that content (Stage 9.33 ruling 6).",
+      "lpgStatus": "NOT PRESENT — petrol generators only (owner-approved 2026-09-22, ruling 8). Prep raises GAS_SAFETY_REQUIRED and blocks every market if LPG, gas or dual-fuel generator content appears.",
       "relatedResources": [
         "res-1018",
         "res-1019",
         "res-1021"
       ],
-      "relatedResourcesStatus": "PROPOSED — Solar Power 101 and the Battery Backup Planner (the options it complements) and the Home Energy & Shelter Upgrade Plan (where the choice is recorded)"
+      "relatedResourcesStatus": "owner-approved 2026-09-22",
+      "safetyBlockTrims": [
+        {
+          "block": "carbon-monoxide",
+          "market": "AU",
+          "removeSentence": "Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard.",
+          "reason": "OG-20 only: the generator block already tells AU members to install a battery-operated carbon monoxide alarm (Stage 9.34 ruling 6). The CO block keeps its risk explanation, symptoms, emergency action and numbers.",
+          "approvedBy": "owner",
+          "approvedOn": "2026-09-22",
+          "approvalRef": "Stage 9.34 ruling 6"
+        }
+      ],
+      "safetyBlockTrimsNote": "Scoped to OG-20; the canonical CO block is unchanged for every other resource. NZ CO wording unchanged: no exact duplicate (the NZ generator block has no alarm line). The electrical block's generator lines are dropped wherever the generator block is present (ruling 7) — currently OG-20 only.",
+      "deploymentApproved": "2026-09-22 (Stage 9.34 ruling 11, conditional on final validation)"
     }
   }
 }

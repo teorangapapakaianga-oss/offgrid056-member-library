@@ -2019,6 +2019,251 @@
         "approvedOn": "2026-09-22",
         "approvalRef": "Stage 9.31 (OG-21) rulings 3–5"
       }
+    ],
+    "OG-20": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 3 — Shelter, Heating & Energy</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-20 | Day 20</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal code and programme day.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Intro — solar output",
+        "from": "Solar works brilliantly in summer and on clear days. But winter, storms, and extended cloudy periods reduce output by 50–70%.",
+        "to": "Solar generates most in summer and on clear days, and less in winter, storms and long cloudy spells.",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "'50–70%' is unsourced. energy.gov.au: a solar system 'will generate less electricity in winter than in summer'.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Option comparison table (NZ)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Technology</th><th>Best Conditions</th><th>Typical Output</th><th>Setup Cost</th><th>Running Cost</th><th>Lifespan</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Small Wind Turbine</strong></td>\n      <td>Average wind > 4 m/s; rural; no neighbours close</td>\n      <td>1–5 kW</td>\n      <td>$3,000–$15,000</td>\n      <td>Low</td>\n      <td>15–25 years</td>\n    </tr>\n    <tr>\n      <td><strong>Micro-Hydro</strong></td>\n      <td>Running stream; >10m head; year-round flow</td>\n      <td>0.5–5 kW</td>\n      <td>$5,000–$25,000</td>\n      <td>Very low</td>\n      <td>20–30 years</td>\n    </tr>\n    <tr>\n      <td><strong>Portable Generator</strong></td>\n      <td>Any location; occasional backup use</td>\n      <td>2–10 kW</td>\n      <td>$800–$4,000</td>\n      <td>High (fuel)</td>\n      <td>10–15 years</td>\n    </tr>\n    <tr>\n      <td><strong>Standby Generator</strong></td>\n      <td>Automatic switchover; whole-house backup</td>\n      <td>5–20 kW</td>\n      <td>$5,000–$15,000</td>\n      <td>High (fuel)</td>\n      <td>15–20 years</td>\n    </tr>\n    <tr>\n      <td><strong>Hybrid (Solar + Wind)</strong></td>\n      <td>Complementary seasons — solar summer, wind winter</td>\n      <td>Variable</td>\n      <td>$10,000–$30,000</td>\n      <td>Very low</td>\n      <td>20+ years</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Technology</th><th>Best Conditions</th><th>Running Cost</th><th>Things to Check</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Small Wind Turbine</strong></td>\n      <td>Exposed, windy site; rural; no neighbours close</td>\n      <td>Low</td>\n      <td>Have the site's wind assessed first; check your council's rules, including on noise</td>\n    </tr>\n    <tr>\n      <td><strong>Micro-Hydro</strong></td>\n      <td>Running stream with year-round flow and enough vertical drop (head)</td>\n      <td>Very low</td>\n      <td>Needs a specialist site assessment; check what rules and permissions apply</td>\n    </tr>\n    <tr>\n      <td><strong>Portable Generator</strong></td>\n      <td>Occasional backup use; run outdoors only</td>\n      <td>High (fuel)</td>\n      <td>See Using a generator safely: where to run it, fuel, and connection</td>\n    </tr>\n    <tr>\n      <td><strong>Standby Generator</strong></td>\n      <td>Automatic changeover; backup for more of the house, depending on its size</td>\n      <td>High (fuel)</td>\n      <td>Permanently connected: must be installed by a licensed electrical worker</td>\n    </tr>\n    <tr>\n      <td><strong>Hybrid (Solar + Wind)</strong></td>\n      <td>Sites where sun and wind complement each other across the seasons</td>\n      <td>Very low</td>\n      <td>Needs a design that combines both sources</td>\n    </tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Removes unsourced outputs (1–5, 0.5–5, 2–10, 5–20 kW), costs ($800–$30,000, no currency or date), lifespans (10–30 years) and the '> 4 m/s' and '> 10m head' rules of thumb. 'Any location' for a portable generator contradicted outdoor-only use (WorkSafe; ESV). Running cost kept (qualitative). The member records costs in the plan below. NZ licence term (WorkSafe bulletin).",
+        "markets": [
+          "NZ"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Option comparison table (AU)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Technology</th><th>Best Conditions</th><th>Typical Output</th><th>Setup Cost</th><th>Running Cost</th><th>Lifespan</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Small Wind Turbine</strong></td>\n      <td>Average wind > 4 m/s; rural; no neighbours close</td>\n      <td>1–5 kW</td>\n      <td>$3,000–$15,000</td>\n      <td>Low</td>\n      <td>15–25 years</td>\n    </tr>\n    <tr>\n      <td><strong>Micro-Hydro</strong></td>\n      <td>Running stream; >10m head; year-round flow</td>\n      <td>0.5–5 kW</td>\n      <td>$5,000–$25,000</td>\n      <td>Very low</td>\n      <td>20–30 years</td>\n    </tr>\n    <tr>\n      <td><strong>Portable Generator</strong></td>\n      <td>Any location; occasional backup use</td>\n      <td>2–10 kW</td>\n      <td>$800–$4,000</td>\n      <td>High (fuel)</td>\n      <td>10–15 years</td>\n    </tr>\n    <tr>\n      <td><strong>Standby Generator</strong></td>\n      <td>Automatic switchover; whole-house backup</td>\n      <td>5–20 kW</td>\n      <td>$5,000–$15,000</td>\n      <td>High (fuel)</td>\n      <td>15–20 years</td>\n    </tr>\n    <tr>\n      <td><strong>Hybrid (Solar + Wind)</strong></td>\n      <td>Complementary seasons — solar summer, wind winter</td>\n      <td>Variable</td>\n      <td>$10,000–$30,000</td>\n      <td>Very low</td>\n      <td>20+ years</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Technology</th><th>Best Conditions</th><th>Running Cost</th><th>Things to Check</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Small Wind Turbine</strong></td>\n      <td>Exposed, windy site; rural; no neighbours close</td>\n      <td>Low</td>\n      <td>Have the site's wind assessed first; check your council's rules, including on noise</td>\n    </tr>\n    <tr>\n      <td><strong>Micro-Hydro</strong></td>\n      <td>Running stream with year-round flow and enough vertical drop (head)</td>\n      <td>Very low</td>\n      <td>Needs a specialist site assessment; check what rules and permissions apply</td>\n    </tr>\n    <tr>\n      <td><strong>Portable Generator</strong></td>\n      <td>Occasional backup use; run outdoors only</td>\n      <td>High (fuel)</td>\n      <td>See Using a generator safely: where to run it, fuel, and connection</td>\n    </tr>\n    <tr>\n      <td><strong>Standby Generator</strong></td>\n      <td>Automatic changeover; backup for more of the house, depending on its size</td>\n      <td>High (fuel)</td>\n      <td>Permanently connected: must be installed by a licensed electrician</td>\n    </tr>\n    <tr>\n      <td><strong>Hybrid (Solar + Wind)</strong></td>\n      <td>Sites where sun and wind complement each other across the seasons</td>\n      <td>Very low</td>\n      <td>Needs a design that combines both sources</td>\n    </tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Removes unsourced outputs (1–5, 0.5–5, 2–10, 5–20 kW), costs ($800–$30,000, no currency or date), lifespans (10–30 years) and the '> 4 m/s' and '> 10m head' rules of thumb. 'Any location' for a portable generator contradicted outdoor-only use (WorkSafe; ESV). Running cost kept (qualitative). The member records costs in the plan below. AU licence term (ESV; ESO Qld).",
+        "markets": [
+          "AU"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Property check — elevation",
+        "from": "□ Significant elevation drop (>10m)",
+        "to": "□ Significant elevation drop along a stream",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "'>10m' head is an unsourced rule of thumb; a specialist assessment measures it.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Property check — wind",
+        "from": "□ Winter winds > 4 m/s average",
+        "to": "□ Strong, steady winter winds",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "'> 4 m/s' is an unsourced rule of thumb; a site wind assessment measures it.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Property check — generator site",
+        "from": "□ Space for generator shed",
+        "to": "□ A safe outdoor spot to run a generator (well ventilated, exhaust pointing away from the house)",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "SITING: a 'generator shed' reads as running it in an enclosed space, which both markets prohibit (WorkSafe: well-ventilated place, never indoors; ESV: never in enclosed areas).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Flowchart Q1 — answer",
+        "from": "<p><strong>YES</strong> → Measure the head (vertical drop) and flow rate. If head > 10m: micro-hydro is likely your best option. Consistent, reliable, low maintenance.</p>",
+        "to": "<p><strong>YES</strong> → Micro-hydro may suit your property. Ask a specialist to assess the head (vertical drop) and flow, and check what rules and permissions apply to using the stream.</p>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Removes the '> 10m' threshold, 'likely your best option' and 'Consistent, reliable, low maintenance' (unsourced).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Flowchart Q2 — question",
+        "from": "<h4>Q2: Is your property exposed with average winter winds > 4 m/s?</h4>",
+        "to": "<h4>Q2: Is your property exposed to strong, steady winter winds?</h4>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "'> 4 m/s' unsourced.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Flowchart Q2 — answer",
+        "from": "<p><strong>YES</strong> → Small wind turbine viable. Best paired with solar (solar summer + wind winter = balanced year). Check council noise rules.</p>",
+        "to": "<p><strong>YES</strong> → A small wind turbine may be viable — have the site's wind assessed first. Where winter winds are strong, wind can complement solar. Check your council's rules, including on noise.</p>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "'viable' and 'balanced year' overstate; a site assessment decides.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Flowchart Q3 — YES (NZ)",
+        "from": "<p><strong>YES</strong> → Standby generator with auto-transfer switch. Most reliable for whole-house backup. Higher running costs but seamless.</p>",
+        "to": "<p><strong>YES</strong> → A standby generator with an automatic changeover (transfer) switch can start supplying power when the grid fails. Its connection must be installed by a licensed electrical worker. Running costs are higher (fuel).</p>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "CONNECTION: adds that the changeover connection is licensed electrical work (WorkSafe bulletin). Removes 'Most reliable for whole-house backup' and 'seamless' (unsourced).",
+        "markets": [
+          "NZ"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Flowchart Q3 — YES (AU)",
+        "from": "<p><strong>YES</strong> → Standby generator with auto-transfer switch. Most reliable for whole-house backup. Higher running costs but seamless.</p>",
+        "to": "<p><strong>YES</strong> → A standby generator with an automatic changeover (transfer) switch can start supplying power when the grid fails. Its connection must be installed by a licensed electrician. Running costs are higher (fuel).</p>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "CONNECTION: a licensed electrician must install a changeover switch (ESO Qld; ESV). Removes 'Most reliable…' and 'seamless'.",
+        "markets": [
+          "AU"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Flowchart Q3 — NO",
+        "from": "<p><strong>NO / Budget limited</strong> → Portable generator for essential loads only. Store safely. Test monthly. Keep fuel fresh.</p>",
+        "to": "<p><strong>NO / Budget limited</strong> → A portable generator can run a few essential appliances. Use it and store its fuel safely (see Using a generator safely), and test it regularly as the manufacturer's instructions describe.</p>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "OPERATING/FUEL: 'Test monthly' and 'Keep fuel fresh' are unsourced; replaced with the manufacturer's instructions and the generator block.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Plan — permissions (AU)",
+        "from": "Consents or permits needed",
+        "to": "Permits or approvals needed",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "'Consents' is NZ terminology; AU requirements vary by state and territory (as OG-27 AU).",
+        "markets": [
+          "AU"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Hybrid principle",
+        "from": "The most resilient homes use <strong>multiple energy sources</strong>",
+        "to": "Resilient homes often use <strong>multiple energy sources</strong>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "'The most resilient homes' is absolute; the rest is kept.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Closing",
+        "from": "<h3>Day 20 Complete</h3>\n  <p>You have now explored every major energy option for your property. Tomorrow: synthesise Week 3 into your Shelter, Heating & Energy upgrade plan.</p>",
+        "to": "<h3>Energy Options Check Complete</h3>\n  <p>You have now looked at the main alternatives to solar for your property. Bring your choice into the Home Energy & Shelter Upgrade Plan.</p>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day 20 Complete' and the next-day teaser; points to the live Home Energy & Shelter Upgrade Plan by title.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: OG-21 Home Energy & Shelter Upgrade Plan →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' navigation (the library links related resources itself).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.34 ruling 2"
+      }
     ]
   }
 }

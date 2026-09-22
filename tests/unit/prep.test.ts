@@ -581,6 +581,54 @@ describe("OG-20 copy changes", () => {
 
   it("uses the generator block, carbon monoxide and electrical — not the generic outdoor-appliance block", () => {
     expect(meta.safetyBlocks).toEqual(["generator-safety", "carbon-monoxide", "batteries-and-electrical"]);
-    expect(meta.approvedSafetyBlocks).not.toContain("generator-safety");
+    expect(meta.approvedSafetyBlocks).toEqual(meta.safetyBlocks);
+  });
+
+  it("records the CO alarm de-duplication for OG-20's AU file only (Stage 9.34 ruling 6)", () => {
+    const all = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { safetyBlockTrims?: { block: string; market: string }[] }>;
+    expect(Object.entries(all).filter(([, m]) => m.safetyBlockTrims?.length).map(([code]) => code)).toEqual(["OG-20"]);
+    expect(meta.safetyBlockTrims).toMatchObject([{ block: "carbon-monoxide", market: "AU" }]);
+  });
+});
+
+describe("prepareResource: scoped block trims and gas generators (Stage 9.34)", () => {
+  const coAu = (topicBlocks.blocks as Record<string, { marketBody: Record<string, string> }>)["carbon-monoxide"].marketBody.AU;
+  const ALARM = "Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard.";
+  const trim = { block: "carbon-monoxide", market: "AU", removeSentence: ALARM, reason: "duplicate", approvedBy: "owner", approvedOn: "2026-09-22" };
+  const html = (r: ReturnType<typeof prep>, m: string) => fs.readFileSync(r.files.find((f) => f.endsWith(`.${m}.html`))!, "utf8");
+
+  it("removes the sentence from that market's block only, keeping the rest of the block", () => {
+    expect(coAu).toContain(ALARM);
+    const r = prep({ extraSafetyBlocks: ["carbon-monoxide"], safetyBlockTrims: [trim] });
+    expect(html(r, "AU")).not.toContain("Consider a carbon monoxide alarm near bedrooms");
+    expect(html(r, "AU")).toContain("Poisons Information Centre");
+    expect(html(r, "AU")).toContain("Have gas heaters checked by a licensed gasfitter");
+    expect(html(r, "NZ")).toContain("consider installing carbon monoxide alarms");
+    expect(r.safety.trims).toEqual([{ block: "carbon-monoxide", market: "AU", reason: "duplicate", applied: true }]);
+    // Another resource without the trim keeps the canonical sentence.
+    expect(html(prep({ extraSafetyBlocks: ["carbon-monoxide"] }), "AU")).toContain("Consider a carbon monoxide alarm near bedrooms");
+  });
+
+  it("blocks the market rather than guess when the shared wording has changed", () => {
+    const r = prep({ extraSafetyBlocks: ["carbon-monoxide"], safetyBlockTrims: [{ ...trim, removeSentence: "A sentence that is not in the block." }] });
+    const au = r.markets.find((m) => m.code === "AU")!;
+    expect(au.publishable).toBe(false);
+    expect(au.problems.join(" ")).toContain("scoped trim");
+    expect(r.markets.find((m) => m.code === "NZ")!.publishable).toBe(true);
+  });
+
+  it("fails closed with GAS_SAFETY_REQUIRED when generator content runs on gas", () => {
+    for (const text of ["Run an LPG generator outside.", "A dual-fuel generator can use petrol or gas.", "Standby generators can run on natural gas."]) {
+      const r = prep({ sourceHtml: DOC.replace("<h2>Plan</h2>", `<h2>Plan</h2><p>${text}</p>`) });
+      expect(r.markets.every((m) => !m.publishable), text).toBe(true);
+      expect(r.terminology.otherFindings.join(" "), text).toContain("GAS_SAFETY_REQUIRED");
+      expect(r.importReadiness).not.toBe("READY_AFTER_FINAL_VALIDATION");
+    }
+  });
+
+  it("does not trip on a petrol generator, or on the CO block's own mention of LPG heaters", () => {
+    const r = prep({ sourceHtml: DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><p>Run a petrol generator outside.</p>"), extraSafetyBlocks: ["carbon-monoxide"] });
+    expect(r.terminology.otherFindings.join(" ")).not.toContain("GAS_SAFETY_REQUIRED");
+    expect(r.markets.every((m) => m.publishable)).toBe(true);
   });
 });

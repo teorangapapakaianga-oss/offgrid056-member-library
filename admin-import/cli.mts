@@ -532,6 +532,7 @@ async function commandPrep() {
       relatedResources: metadata[item.legacyCode]?.relatedResources ?? [],
       blockedBy: metadata[item.legacyCode]?.blockedBy ?? null,
       safetyExemptions: metadata[item.legacyCode]?.safetyExemptions ?? [],
+      safetyBlockTrims: metadata[item.legacyCode]?.safetyBlockTrims ?? [],
     });
     results.push(result);
 
@@ -542,6 +543,7 @@ async function commandPrep() {
     for (const f of result.terminology.otherFindings) console.log(`    ⚠ ${f}`);
     console.log(`    safety blocks: ${result.safety.blocks.join(", ")}${result.safety.proposed.length ? ` (proposed: ${result.safety.proposed.join(", ")})` : ""}`);
     for (const b of result.safety.missingRequired) console.log(`    ✗ required safety block missing: ${b}`);
+    for (const t of result.safety.trims) console.log(`    ${t.applied ? "·" : "✗"} scoped trim of ${t.block} (${t.market}): ${t.applied ? "applied" : "NOT APPLIED"} — ${t.reason}`);
     for (const e of result.safety.exemptions)
       console.log(`    ${e.holds ? "·" : "✗"} exemption from ${e.block}: ${e.holds ? "holds" : `NO LONGER HOLDS (${e.unexpected.join(", ")})`} — ${e.reason}`);
     for (const f of result.contentFlags) console.log(`    ⚑ ${f.code} · ${f.kind}: ${f.text.slice(0, 100)}`);
