@@ -342,3 +342,44 @@ describe("prepareResource: safety", () => {
     expect(r.importReadiness).toBe("NEEDS_SAFETY_APPROVAL");
   });
 });
+
+/**
+ * Stage 9.28. OG-19's approved copy: the removed battery figures must never come back through a later edit, and the
+ * power/surge note the owner made a condition of deployment must stay — without any invented kW or surge numbers.
+ */
+describe("OG-19 approved copy", () => {
+  const approved = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/approved-copy.json"), "utf8")) as {
+    changes: Record<string, { where: string; to: string; approvedBy: string; markets?: string[] }[]>;
+  };
+  const og19 = approved.changes["OG-19"] ?? [];
+
+  it("records all 17 reviewed changes plus the power/surge note, all owner-approved", () => {
+    expect(og19).toHaveLength(18);
+    expect(og19.every((c) => c.approvedBy === "owner")).toBe(true);
+  });
+
+  it("reintroduces none of the removed figures or products", () => {
+    const to = og19.map((c) => c.to).join("\n");
+    for (const s of ["Powerwall", "Aquion", "13.5", "0.8 for", "0.5 for", "20%", "× 0.6", "× 1.2", "× 2.4", "10–15", "80–95", "50%", "100%", "Cost/kWh", "10-year", "illegal in NZ", "survival tool"])
+      expect(to, s).not.toContain(s);
+  });
+
+  it("keeps the power/surge note, with no kW value or multiplier", () => {
+    const note = og19.find((c) => /power \/ surge note/.test(c.where));
+    expect(note?.markets).toBeUndefined();
+    const text = note!.to.replace(/<[^>]+>/g, " ");
+    for (const s of ["kilowatt-hours (kWh)", "kilowatts (kW)", "motors, pumps or compressors", "continuous power output", "surge (starting) rating", "manufacturer's specifications or a qualified installer"])
+      expect(text).toContain(s);
+    // Only the planner's own formula carries digits; the note itself states no numbers.
+    expect(text.slice(text.indexOf("Energy (kWh) is not"))).not.toMatch(/\d/);
+  });
+
+  it("keeps the NZ and AU licensing wording in their own markets", () => {
+    const nz = og19.filter((c) => c.markets?.includes("NZ")).map((c) => c.to).join("\n");
+    const au = og19.filter((c) => c.markets?.includes("AU")).map((c) => c.to).join("\n");
+    expect(nz).toContain("licensed electrical worker");
+    expect(nz).not.toContain("licensed electrician");
+    expect(au).toContain("licensed electrician");
+    expect(au).not.toContain("electrical worker");
+  });
+});

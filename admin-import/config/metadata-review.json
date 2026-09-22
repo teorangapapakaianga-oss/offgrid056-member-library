@@ -284,12 +284,12 @@
     },
     "OG-19": {
       "foundation": "energy",
-      "foundationStatus": "owner working classification 2026-09-22 (audit HIGH)",
+      "foundationStatus": "owner-approved 2026-09-22",
       "resourceType": "planner",
-      "resourceTypeStatus": "owner working classification 2026-09-22 (audit HIGH)",
+      "resourceTypeStatus": "owner-approved 2026-09-22",
       "category": "backup-energy",
-      "difficulty": null,
-      "estimatedTime": null,
+      "difficulty": "intermediate",
+      "estimatedTime": 45,
       "safetyBlocks": [
         "batteries-and-electrical",
         "food-safety-power-cut"
@@ -299,17 +299,16 @@
         "food-safety-power-cut"
       ],
       "approvedSafetyBlocksStatus": "both blocks already owner-approved for NZ and AU (Stages 9.18 and 9.26)",
-      "categoryStatus": "INFERRED — PROPOSED: 'Keeping essentials running when the power goes out, safely' matches an essential-loads battery backup planner. Alternative: household-energy-planning.",
-      "difficultyStatus": "OWNER-REVIEW REQUIRED",
-      "difficultySource": "none — the document states no level",
-      "difficultyRecommendation": "intermediate (INFERRED) — watt-hour load calculation, depth of discharge and a battery sizing formula",
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
-      "estimatedTimeRecommendation": 45,
+      "categoryStatus": "owner-approved 2026-09-22",
+      "difficultyStatus": "owner-approved 2026-09-22",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level",
+      "estimatedTimeStatus": "owner-approved 2026-09-22 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: a seven-row load table needing appliance wattages, the sizing maths for three scenarios, a comparison table filled from specifications and quotes, and a six-field decision. Excludes gathering quotes.",
       "description": "Solar panels generate by day. Batteries store for night. This planner helps you size, cost, and select the right battery system for your home's essential loads.",
       "descriptionStatus": "SOURCE — the cover subtitle, unchanged (no claims)",
       "tags": [],
-      "generatorAssessment": "INCIDENTAL — the only generator mention is the legacy closing teaser 'Tomorrow: wind, generators, and hybrid systems…', removed with the navigation. No passage teaches generator operation, siting, connection, indoor/outdoor use, battery charging or reliance. No generator, carbon-monoxide or indoor-combustion block is required."
+      "generatorAssessment": "INCIDENTAL — the only generator mention is the legacy closing teaser 'Tomorrow: wind, generators, and hybrid systems…', removed with the navigation. No passage teaches generator operation, siting, connection, indoor/outdoor use, battery charging or reliance. No generator, carbon-monoxide or indoor-combustion block is required. Owner-approved 2026-09-22 (Stage 9.28). If any future edit turns OG-19 into generator-use instruction, re-run the safety requirement.",
+      "deploymentApproved": "2026-09-22 (Stage 9.28 ruling 8, conditional on final validation)"
     }
   }
 }

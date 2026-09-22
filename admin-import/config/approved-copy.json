@@ -1132,6 +1132,235 @@
         "approval": "Stage 9.25 rulings 1 (30-day positioning) and 3 (claim cleanup)",
         "proposedOn": "2026-09-22"
       }
+    ],
+    "OG-19": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 3 — Shelter, Heating & Energy</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-19 | Day 19</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal code and programme day.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Closing heading",
+        "from": "<h3>Day 19 Complete</h3>",
+        "to": "<h3>Battery Plan Complete</h3>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Day X Complete'.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Closing — tomorrow teaser",
+        "from": " Tomorrow: wind, generators, and hybrid systems for complete energy independence.",
+        "to": "",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Next-day navigation to OG-20 — and the ONLY generator mention in OG-19 (incidental).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: OG-20 Alternative Energy Suitability Check →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Next: OG-xx' navigation.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Why Batteries Change Everything",
+        "from": "Without batteries, solar panels shut down during a grid outage — even in bright sunshine. With batteries, your solar keeps running, your lights stay on, and your fridge keeps cold. Batteries turn solar from a money-saver into a survival tool.",
+        "to": "Without a battery, solar panels won't provide power during a grid outage — even in bright sunshine. A battery can keep your lights on and your fridge cold, but only if the system is designed to provide backup power: not every battery system does, so ask your installer. Batteries can turn solar from a money-saver into a source of backup power.",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "'With batteries, your solar keeps running' overstates it: backup depends on the inverter and system design (Solar Victoria, updated 3 Sep 2025; EECA: prioritise a 'backup-capable inverter'). 'Survival tool' → calmer wording (as OG-26).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Step 2 — the maths",
+        "from": "<strong>Minimum battery size (kWh) = Total daily Wh ÷ 1000 ÷ Depth of Discharge (0.8 for lithium, 0.5 for lead-acid)</strong><br>Then add 20% buffer for cold weather and battery aging.",
+        "to": "<strong>Minimum battery size (kWh) = Energy you need (Wh) ÷ 1000 ÷ the battery's usable depth of discharge</strong><br>Take the usable depth of discharge from the battery's specification, as a decimal (divide the percentage by 100). Then add a margin for inverter losses, cold weather and battery ageing — your installer or the specification can tell you how much.",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Keeps the household-load method; removes the fixed depth-of-discharge values (0.8 / 0.5) and the 20% buffer — product- and installer-specific, no NZ/AU source. Adds inverter losses, which the original ignored. No replacement numbers.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Scenario — overnight label",
+        "from": "Survive 6pm–8am without grid",
+        "to": "Evening to morning without the grid (for example 6pm–8am)",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "example",
+        "reason": "Hours kept as an example only.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Scenario — overnight",
+        "from": "<td>Daily Wh ÷ 1000 × 0.6</td>",
+        "to": "<td>Wh used overnight ÷ 1000 ÷ depth of discharge</td>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "× 0.6 assumed loads spread evenly over 24 hours and ignored depth of discharge — inconsistent with the formula above it.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Scenario — 24 hours",
+        "from": "<td>Daily Wh ÷ 1000 × 1.2</td>",
+        "to": "<td>Daily Wh ÷ 1000 ÷ depth of discharge</td>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "× 1.2 was the 20% buffer with depth of discharge ignored.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Scenario — 48 hours",
+        "from": "<td>Daily Wh ÷ 1000 × 2.4</td>",
+        "to": "<td>Daily Wh × 2 ÷ 1000 ÷ depth of discharge</td>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "× 2.4 = two days × 1.2, same problem.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Step 3 — technology comparison table",
+        "from": "<table class=\"calc-table\">\n  <thead>\n    <tr><th>Type</th><th>Lifespan</th><th>Depth of Discharge</th><th>Cost/kWh</th><th>Pros</th><th>Cons</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Lithium (LiFePO4)</strong></td>\n      <td>10–15 years</td>\n      <td>80–95%</td>\n      <td>$800–$1,200</td>\n      <td>Safe, long life, efficient</td>\n      <td>Higher upfront cost</td>\n    </tr>\n    <tr>\n      <td><strong>Lead-Acid (AGM)</strong></td>\n      <td>5–8 years</td>\n      <td>50%</td>\n      <td>$400–$600</td>\n      <td>Cheaper, proven</td>\n      <td>Heavy, shorter life, needs ventilation</td>\n    </tr>\n    <tr>\n      <td><strong>Tesla Powerwall 3</strong></td>\n      <td>10 years (warranty)</td>\n      <td>100%</td>\n      <td>$1,100–$1,400</td>\n      <td>Integrated, smart, 13.5kWh</td>\n      <td>Requires certified installer</td>\n    </tr>\n    <tr>\n      <td><strong>Saltwater (Aquion)</strong></td>\n      <td>10+ years</td>\n      <td>100%</td>\n      <td>$1,000–$1,500</td>\n      <td>Non-toxic, recyclable</td>\n      <td>Lower power density, heavier</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"calc-table\">\n  <thead>\n    <tr><th>Type</th><th>Usable depth of discharge (from the specification)</th><th>Warranty (years and terms)</th><th>Quoted cost (installed)</th><th>Pros</th><th>Cons</th></tr>\n  </thead>\n  <tbody>\n    <tr><td><strong>Lithium (for example LiFePO4)</strong></td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td>Long life, efficient</td><td>Higher upfront cost</td></tr>\n    <tr><td><strong>Lead-acid (for example AGM)</strong></td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td>Cheaper, proven</td><td>Heavy, shorter life, needs ventilation</td></tr>\n    <tr><td><strong>Other option quoted:</strong> ________</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td></tr>\n    <tr><td><strong>Other option quoted:</strong> ________</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td><td class=\"field-input\">&nbsp;</td></tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "unsupported-figure",
+        "reason": "Removes unsourced lifespans (10–15, 5–8, 10, 10+ years), depth-of-discharge percentages (80–95%, 50%, 100%, 100%), cost ranges ($400–$1,500/kWh, no currency, time-sensitive), the Tesla Powerwall 3 row (brand and 13.5 kWh spec) and the Saltwater (Aquion) row (brand; current availability unverified). Keeps the qualitative pros/cons, dropping the unsourced 'Safe'. The member fills in the specification, warranty and quoted cost.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Step 4 — installer field (NZ)",
+        "from": "Installer identified (must be certified for grid-tie systems)",
+        "to": "Installer identified (must be a licensed electrical worker for this work)",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "NZ licence term (WorkSafe NZ).",
+        "markets": [
+          "NZ"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Step 4 — installer field (AU)",
+        "from": "Installer identified (must be certified for grid-tie systems)",
+        "to": "Installer identified (must be a licensed electrician)",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "AU licence term (Energy Safe Victoria; NSW Government).",
+        "markets": [
+          "AU"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "The Non-Negotiables (NZ)",
+        "from": "<strong>1.</strong> Use a certified solar installer — DIY grid-tie is illegal in NZ<br><strong>2.</strong> All battery systems need an isolation switch and smoke detection<br><strong>3.</strong> Lithium batteries need thermal management — do not install in uninsulated sheds<br><strong>4.</strong> Warranty matters — 10-year coverage is the benchmark",
+        "to": "<strong>1.</strong> Solar and battery systems must be installed by a licensed electrical worker — the rules that let homeowners do some of their own wiring do not cover solar (PV) systems<br><strong>2.</strong> Ask your installer how the system will be isolated and protected, including smoke detection<br><strong>3.</strong> Follow the manufacturer's instructions on where the battery can be installed and the temperatures it needs<br><strong>4.</strong> Warranty matters — compare the length and terms of each battery's warranty<br><strong>5.</strong> Check the system can provide backup power during an outage — not every battery system does",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "Item 1 re-worded to WorkSafe NZ (verified). Items 2–4: the unsourced technical rules (isolation switch and smoke detection 'need', 'uninsulated sheds', '10-year benchmark') become installer questions and manufacturer instructions. Item 5 added: backup capability (EECA / Solar Victoria).",
+        "markets": [
+          "NZ"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "The Non-Negotiables (AU)",
+        "from": "<strong>1.</strong> Use a certified solar installer — DIY grid-tie is illegal in NZ<br><strong>2.</strong> All battery systems need an isolation switch and smoke detection<br><strong>3.</strong> Lithium batteries need thermal management — do not install in uninsulated sheds<br><strong>4.</strong> Warranty matters — 10-year coverage is the benchmark",
+        "to": "<strong>1.</strong> Solar and battery systems must be installed by a licensed electrician — DIY electrical work is illegal<br><strong>2.</strong> Ask your installer how the system will be isolated and protected, including smoke detection<br><strong>3.</strong> Follow the manufacturer's instructions on where the battery can be installed and the temperatures it needs<br><strong>4.</strong> Warranty matters — compare the length and terms of each battery's warranty<br><strong>5.</strong> Check the system can provide backup power during an outage — not every battery system does",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-22",
+        "kind": "market-variant",
+        "reason": "'DIY grid-tie is illegal in NZ' was New Zealand-only wording in the Australian file. Item 1 re-worded to the AU rule (ESV; NSW Government). Items 2–5 as NZ.",
+        "markets": [
+          "AU"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 1"
+      },
+      {
+        "where": "Step 2 — power / surge note (after the scenario table)",
+        "from": "<td>Daily Wh × 2 ÷ 1000 ÷ depth of discharge</td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ kWh</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<td>Daily Wh × 2 ÷ 1000 ÷ depth of discharge</td>\n      <td style=\"font-weight:700; color:var(--deep-green);\">___ kWh</td>\n    </tr>\n  </tbody>\n</table>\n\n<div class=\"info-box\">\n  <div class=\"info-box-title\">Energy (kWh) is not the same as power (kW)</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">This planner sizes <strong>energy</strong>: how much the battery can store and use over time, measured in kilowatt-hours (kWh). <strong>Power</strong> is different: it is how much the battery and inverter can deliver at any one moment, measured in kilowatts (kW). If the appliances you run at the same time need more power than the system can deliver, it cannot supply them all — even when the battery is full. Some appliances, especially those with motors, pumps or compressors such as fridges and water pumps, can need more power for a moment when they start. Before you choose a system, check its continuous power output and its surge (starting) rating against the appliances you plan to run together, using the manufacturer's specifications or a qualified installer.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-22",
+        "approvalRef": "Stage 9.28 ruling 4 (required before deployment)",
+        "kind": "accuracy-note",
+        "reason": "kWh vs kW: energy.gov.au Batteries (capacity kWh; rated power output kW; loads above the maximum power output cannot all be supplied; avoid overloading the battery inverter) and Solar Victoria 'How does a solar battery system work?' (updated 10 April 2025); NZ: EECA ('Capacity determines how much energy can be stored; power determines how fast it can charge/discharge'). Surge/starting: NO official NZ or AU source found — accurate non-numeric wording only. No kW values, multipliers, start currents or inverter sizes."
+      }
     ]
   }
 }
