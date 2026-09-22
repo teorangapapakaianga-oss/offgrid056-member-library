@@ -38,9 +38,10 @@ const blockTitles: Record<string, string> = Object.fromEntries(
 );
 // What prep said each resource should contain: its safety blocks and the approved copy it applied.
 const reportFile = path.join(PREP, "prep-report.json");
-// Copy changes are recorded as HTML; a PDF only carries the visible text, so both sides are compared as text.
+// Copy changes are recorded as HTML; a PDF only carries the visible text, so both sides are compared as text. An
+// empty input prints its placeholder, so that is the text it contributes.
 const visible = (html: string) =>
-  html.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+  html.replace(/<input\b[^>]*\bplaceholder="([^"]*)"[^>]*>/gi, " $1 ").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
 type ReportRow = {
   legacyCode: string;
   recordStatus?: string;
@@ -73,7 +74,9 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
     const file = path.join(dir, pdf);
     const { text, meta } = await extractText(file, detectFileType(file, ".pdf"), 400000);
     const problems: string[] = [];
-    const flat = norm(text);
+    // Wording that runs across a page break is interrupted by the extractor's "-- 6 of 7 --" marker and the next
+    // page's number; neither is document text.
+    const flat = norm(text.replace(/-- \d+ of \d+ --\s*\d*/g, " "));
 
     // Every safety block and every approved copy change prep recorded for this resource must have reached the PDF.
     const want = expected.get(code);
@@ -125,6 +128,12 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
         problems.push(`contains ${other.code} term "${term}"`);
     }
     if (own?.agencies.emergencyManagement?.name && !flat.includes(norm(own.agencies.emergencyManagement.name))) problems.push("own emergency agency missing");
+    // Naming the other country is as wrong as quoting its agencies (OG-18's AU file opened with "Solar in New Zealand").
+    // Headings often print in capitals ("SOLAR IN NEW ZEALAND"), so names match in any case; the two-letter codes
+    // only as capitals.
+    const [otherName, otherCode] = market === "AU" ? [/\bNew Zealand\b|\bAotearoa\b|\bKiwis?\b/i, /\bNZ\b/] : market === "NZ" ? [/\bAustralian?\b/i, /\bAU\b/] : [null, null];
+    const namesOther = otherName && otherCode ? (text.match(otherName) ?? text.match(otherCode)) : null;
+    if (namesOther) problems.push(`names the other market: "${namesOther[0]}"`);
 
     if (BROWSER_ERROR.test(text)) problems.push("contains a browser error page, not the document");
     if (text.length < 500) problems.push(`only ${text.length} characters — almost certainly not the document`);

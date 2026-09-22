@@ -374,12 +374,54 @@ describe("OG-19 approved copy", () => {
     expect(text.slice(text.indexOf("Energy (kWh) is not"))).not.toMatch(/\d/);
   });
 
-  it("keeps the NZ and AU licensing wording in their own markets", () => {
+  it("keeps the NZ and AU licensing wording in their own markets (OG-19)", () => {
     const nz = og19.filter((c) => c.markets?.includes("NZ")).map((c) => c.to).join("\n");
     const au = og19.filter((c) => c.markets?.includes("AU")).map((c) => c.to).join("\n");
     expect(nz).toContain("licensed electrical worker");
     expect(nz).not.toContain("licensed electrician");
     expect(au).toContain("licensed electrician");
     expect(au).not.toContain("electrical worker");
+  });
+});
+
+/**
+ * Stage 9.30. OG-18's copy changes, wherever they currently sit (proposed until the owner approves them): the
+ * removed solar figures stay out, each market keeps its own terms, and the OG-19 backup rule is carried forward.
+ */
+describe("OG-18 copy changes", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const load = (f: string) => (JSON.parse(fs.readFileSync(path.resolve(`admin-import/config/${f}`), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-18"];
+  const og18 = load("approved-copy.json") ?? load("proposed-copy.json") ?? [];
+  const forMarket = (m: string) => og18.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ")).join("\n");
+  const metadata = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources["OG-18"];
+
+  it("reintroduces none of the removed figures, prices or programme navigation", () => {
+    const to = og18.map((c) => c.to).join("\n");
+    for (const s of ["1,400", "6,500", "Auckland", "4 peak sun hours", "÷ 4", "× 1.5", "winter buffer", "$1,800", "$6,000", "$8,000", "7–10 years", "Offset", "OG-19", "Day 18", "Tomorrow", "Next:", "free, infinite"])
+      expect(to, s).not.toContain(s);
+  });
+
+  it("keeps each market's own terms", () => {
+    const nz = forMarket("NZ");
+    const au = forMarket("AU");
+    expect(nz).toContain("licensed electrical worker");
+    expect(nz).toContain("power company");
+    expect(nz).not.toMatch(/licensed electrician|feed-in tariff|Permits, approvals/);
+    expect(au).toContain("licensed electrician");
+    expect(au).toContain("feed-in tariff");
+    expect(au).not.toMatch(/electrical worker|power company|Consents and|30–45|New Zealand|\bNZ\b/);
+  });
+
+  it("never says solar panels alone give backup power", () => {
+    for (const m of ["NZ", "AU"]) {
+      const text = forMarket(m);
+      expect(text).toContain("only if the system is designed to provide backup power");
+      expect(text).toContain("Solar panels on their own will not power your home during a grid outage");
+    }
+  });
+
+  it("uses only the two approved safety blocks it needs", () => {
+    expect(metadata.safetyBlocks).toEqual(["batteries-and-electrical", "working-at-height"]);
+    expect(metadata.safetyBlocks).not.toContain("food-safety-power-cut");
   });
 });

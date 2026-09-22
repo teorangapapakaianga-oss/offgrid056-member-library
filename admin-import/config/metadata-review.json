@@ -309,6 +309,39 @@
       "tags": [],
       "generatorAssessment": "INCIDENTAL — the only generator mention is the legacy closing teaser 'Tomorrow: wind, generators, and hybrid systems…', removed with the navigation. No passage teaches generator operation, siting, connection, indoor/outdoor use, battery charging or reliance. No generator, carbon-monoxide or indoor-combustion block is required. Owner-approved 2026-09-22 (Stage 9.28). If any future edit turns OG-19 into generator-use instruction, re-run the safety requirement.",
       "deploymentApproved": "2026-09-22 (Stage 9.28 ruling 8, conditional on final validation)"
+    },
+    "OG-18": {
+      "foundation": "energy",
+      "foundationStatus": "PROPOSED — audit HIGH",
+      "resourceType": "workbook",
+      "resourceTypeStatus": "PROPOSED — audit MEDIUM; the document calls itself a workbook (title and filename)",
+      "category": "solar",
+      "categoryStatus": "INFERRED — PROPOSED: 'Understanding solar for your home.' (as OG-B07)",
+      "difficulty": null,
+      "difficultyStatus": "OWNER-REVIEW REQUIRED",
+      "difficultySource": "none stated; the title '101' and 'introduces solar' indicate an entry-level resource",
+      "difficultyRecommendation": "beginner (INFERRED from the source's own framing)",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
+      "estimatedTimeRecommendation": 30,
+      "estimatedTimeReasoning": "INFERRED: six roof questions, a six-row consumption estimate from a power bill, four sizing rows, a cost table and seven decision fields. Excludes gathering bills and quotes.",
+      "description": "Sunlight falls on your roof every day. This workbook introduces solar: how it works, what shapes the cost, and whether your home is suitable.",
+      "descriptionStatus": "PROPOSED — matches the proposed cover subtitle (the original was 'free, infinite … what it costs')",
+      "tags": [],
+      "safetyBlocks": [
+        "batteries-and-electrical",
+        "working-at-height"
+      ],
+      "approvedSafetyBlocks": [
+        "batteries-and-electrical",
+        "working-at-height"
+      ],
+      "approvedSafetyBlocksStatus": "both blocks already owner-approved for NZ and AU (Stages 9.18 and 9.19)",
+      "relatedResources": [
+        "solar-planning-deep-worksheet",
+        "battery-backup-planner"
+      ],
+      "relatedResourcesStatus": "PROPOSED — OG-18 as the introductory solar resource: OG-B07 goes deeper, OG-19 adds the battery"
     }
   }
 }
