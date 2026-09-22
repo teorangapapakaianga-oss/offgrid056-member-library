@@ -36,7 +36,8 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | Generator refuelling | shut down, **cool at least 10 minutes** (WorkSafe) | off and cooled — **no time given** |
 | Generator weather / leads | **no NZ wording exists** — not borrowed from AU | shelter from rain, don't cover, heavy-duty outdoor leads rated to the generator |
 | CO alarm | "consider installing carbon monoxide alarms" | battery-operated alarm; near bedrooms; UL2034/EN50291 |
-| Drinking water | **3 L per person per day for 3 days**; bleach method (5 drops/L); check every 6 months | **10 L per person for 3 days**; boil 1 minute; check twice a year; **no bleach ratio published** |
+| Drinking water (storage) | **3 L per person per day for 3 days**; bleach method (5 drops/L); check every 6 months | **10 L per person for 3 days**; boil 1 minute; check twice a year; **no single national bleach ratio** |
+| Water treatment (researched, not approved) | boil **one minute**; bleach **5 drops/L or ½ tsp/10 L, 30 min**, plain unscented; annual testing; **no micron or UV figures published** | rolling boil (NSW) / "at least 1 minute" (WA); bleach ratios **differ by state and by bleach strength**; NSW publishes micron ratings and UV requirements; **no national household frequency** |
 | Food in a power cut | Get Ready order, MPI doors/refreeze/discard — **no timings, MPI publishes none** | NSW Food Authority: about 4 hours fridge, at least 24 hours freezer, eskies, 2-hour cooking rule |
 | Consents / approvals | building consent, "consents", council | permits or approvals; varies by state and territory |
 | Rainfall / weather data | regional council, NIWA | Bureau of Meteorology |
@@ -89,7 +90,7 @@ Each of these blocks resources until it is researched from official NZ **and** A
 |---|---|---|
 | **Gas / LPG** | OG-17, OG-B09, any gas appliance or LPG generator | the strict gas rule stands. No NZ/AU household gas-appliance block exists. |
 | **Diesel** | diesel generators or heating | the generator block is petrol-only |
-| **Water treatment** | OG-09, and any treatment detail | beyond the approved storage block: filters, UV, chlorine dosing, boiling |
+| **Water treatment** | OG-09, and any treatment detail | **researched at Stage 9.42 — awaiting owner approval.** Draft NZ and AU blocks, a storage-vs-treatment matrix and six proposed gates are in `admin-import/STAGE_9.42_OG09_WATER_TREATMENT_RESEARCH.md`. Nothing is implemented yet, so OG-09 stays blocked. |
 | **Grants and rebates** | OG-16 | NZ programmes; AU state and territory schemes |
 | **Consents and approvals** | OG-B11, and tank/plumbing wording | NZ council consents; AU state, territory and council |
 | **Generator separation distance** | any generator resource | **no NZ or AU official figure exists**; the US 20-foot rule is not used, and wording stays non-numeric |

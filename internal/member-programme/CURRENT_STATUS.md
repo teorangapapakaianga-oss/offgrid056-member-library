@@ -1,6 +1,6 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.41 (OG-10 deployment).
+**As at:** 23 September 2026, after Stage 9.42 (OG-09 water-treatment research — no change to the live preview).
 
 | | |
 |---|---|
@@ -10,7 +10,7 @@
 | **Tests** | **328 passing** · lint clean · typecheck clean |
 | **Next resource** | **OG-B08 — Water Tank Sizing & Placement Guide** (not started), or **OG-13 Healthy Home Air Audit** — the first Air resource |
 | **Last deployment** | Stage 9.41, 23 September 2026: OG-10 Rainwater Harvesting Planner (#17) |
-| **Last report** | `admin-import/STAGE_9.41_OG10_DEPLOYMENT.md` |
+| **Last report** | `admin-import/STAGE_9.42_OG09_WATER_TREATMENT_RESEARCH.md` (research only — nothing built or deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → **328** at Stage 9.41
 (the OG-10 ruling tests). Nothing was removed.
@@ -59,7 +59,7 @@ Each has an NZ and an AU PDF: **34 market files**, 0 broken internal links.
 | **Diesel guidance not researched** | diesel generator or heating content | verified NZ + AU guidance |
 | **Grants and rebates not researched** | OG-16 | current NZ programmes and AU state/territory schemes |
 | **Consents and approvals not researched** | OG-B11 | NZ council consents, AU state/territory approvals |
-| **Water treatment not researched** | OG-09, and treatment detail in any water resource | verified NZ + AU treatment guidance |
+| **Water treatment researched, not approved** | OG-09, and treatment detail in any water resource | owner approval of the draft NZ/AU blocks and the six claim gates (Stage 9.42 report); enHealth's national rainwater guidance still unread |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations
