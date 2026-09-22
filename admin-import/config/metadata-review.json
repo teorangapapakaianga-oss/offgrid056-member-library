@@ -134,7 +134,11 @@
       ],
       "approvedSafetyBlocksStatus": "all topic blocks owner-approved 2026-09-22 (Stage 9.18 ruling 1: verified NZ + AU wording)",
       "description": "Advanced solar planning for OffGrid056 members. Roof orientation, shading analysis, load profile, and payback estimator — everything a professional installer needs to quote accurately.",
-      "descriptionStatus": "owner-approved 2026-09-22 (ruling 5: legacy product context removed)"
+      "descriptionStatus": "owner-approved 2026-09-22 (ruling 5: legacy product context removed)",
+      "relatedResources": [
+        "res-1018"
+      ],
+      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment."
     },
     "OG-15": {
       "foundation": "shelter",
@@ -211,7 +215,8 @@
       "descriptionStatus": "owner-approved 2026-09-22",
       "relatedResources": [
         "res-1022",
-        "res-1027"
+        "res-1027",
+        "res-1018"
       ],
       "relatedResourcesNote": "OG-26 → OG-22 and → OG-27 (added at OG-27's deployment, Stage 9.24).",
       "dependencyResolved": {
@@ -227,7 +232,8 @@
       "deployed": {
         "version": "2aa8a131",
         "on": "2026-09-22"
-      }
+      },
+      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment."
     },
     "OG-22": {
       "foundation": "general",
@@ -308,7 +314,11 @@
       "descriptionStatus": "SOURCE — the cover subtitle, unchanged (no claims)",
       "tags": [],
       "generatorAssessment": "INCIDENTAL — the only generator mention is the legacy closing teaser 'Tomorrow: wind, generators, and hybrid systems…', removed with the navigation. No passage teaches generator operation, siting, connection, indoor/outdoor use, battery charging or reliance. No generator, carbon-monoxide or indoor-combustion block is required. Owner-approved 2026-09-22 (Stage 9.28). If any future edit turns OG-19 into generator-use instruction, re-run the safety requirement.",
-      "deploymentApproved": "2026-09-22 (Stage 9.28 ruling 8, conditional on final validation)"
+      "deploymentApproved": "2026-09-22 (Stage 9.28 ruling 8, conditional on final validation)",
+      "relatedResources": [
+        "res-1018"
+      ],
+      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment."
     },
     "OG-18": {
       "foundation": "energy",
@@ -357,6 +367,41 @@
         }
       ],
       "deploymentApproved": "2026-09-22 (Stage 9.30 ruling 13, conditional on final validation)"
+    },
+    "OG-21": {
+      "foundation": "shelter",
+      "foundationStatus": "PROPOSED — audit HIGH",
+      "resourceType": "planner",
+      "resourceTypeStatus": "PROPOSED — audit HIGH",
+      "category": "household-resilience",
+      "categoryStatus": "INFERRED — PROPOSED: 'The home as the base of your resilience plan.' Alternative: property-assessment.",
+      "difficulty": null,
+      "difficultyStatus": "OWNER-REVIEW REQUIRED",
+      "difficultySource": "none stated",
+      "difficultyRecommendation": "beginner (INFERRED): summarising, ranking and budgeting — no calculations",
+      "estimatedTime": null,
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED",
+      "estimatedTimeRecommendation": 30,
+      "estimatedTimeReasoning": "INFERRED: three summary cards, a five-row priority table, seven budget fields and a commitment. Excludes completing the resources it draws on.",
+      "description": "Your complete Shelter, Heating & Energy roadmap — priorities, budgets, and timelines in one actionable document.",
+      "descriptionStatus": "PROPOSED — the cover subtitle without 'Week 3 synthesis.' (as proposed change 3)",
+      "tags": [],
+      "safetyBlocks": [
+        "batteries-and-electrical",
+        "solid-fuel-heating"
+      ],
+      "approvedSafetyBlocks": [
+        "batteries-and-electrical",
+        "solid-fuel-heating"
+      ],
+      "approvedSafetyBlocksStatus": "both blocks already owner-approved for NZ and AU (Stage 9.18)",
+      "relatedResources": [
+        "res-1015",
+        "res-1018",
+        "res-1019",
+        "res-1026"
+      ],
+      "relatedResourcesStatus": "PROPOSED — the resources this plan draws on (Warm Home Scorecard, Solar Power 101, Battery Backup Planner) and the budget it feeds (3-Tier Budget Planner)"
     }
   }
 }

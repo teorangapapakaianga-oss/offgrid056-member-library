@@ -466,3 +466,38 @@ describe("OG-18 copy changes", () => {
     expect(metadata.safetyBlocks).not.toContain("food-safety-power-cut");
   });
 });
+
+/**
+ * Stage 9.32. OG-21 was the programme's Week 3 summary. Its changes (proposed until approved) must leave no programme
+ * navigation or legacy code behind, name only resources the library has, and stay market-neutral.
+ */
+describe("OG-21 copy changes", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const load = (f: string) => (JSON.parse(fs.readFileSync(path.resolve(`admin-import/config/${f}`), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-21"];
+  const og21 = load("approved-copy.json") ?? load("proposed-copy.json") ?? [];
+  const to = og21.map((c) => c.to.replace(/<[^>]+>/g, " ")).join("\n");
+  const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources;
+
+  it("leaves no programme navigation, legacy code or old framework word", () => {
+    for (const s of ["Week 3", "Week 4", "Days 1", "Day 21", "OG-03", "OG-2", "Pillar", "Next:", "fortress", "executing", "declared tier"]) expect(to, s).not.toContain(s);
+  });
+
+  it("names only resources that are in the library", () => {
+    for (const title of ["Warm Home Scorecard", "Solar Power 101 Workbook", "Battery Backup Planner", "3-Tier Budget Planner", "Resilience Product Wishlist", "Project Support Brief Template", "90-Day Implementation Roadmap"])
+      expect(to).toContain(title);
+    expect(to).not.toMatch(/supplier questions|Alternative Energy Suitability/);
+  });
+
+  it("is market-neutral: no market-only change and no agency, programme or licence term", () => {
+    expect(og21.every((c) => !c.markets)).toBe(true);
+    expect(to).not.toMatch(/New Zealand|Australia|EECA|Warmer Kiwi|licensed electric/);
+  });
+
+  it("uses only the solid-fuel and electrical blocks the audit found", () => {
+    expect(meta["OG-21"].safetyBlocks).toEqual(["batteries-and-electrical", "solid-fuel-heating"]);
+  });
+
+  it("queues OG-18 as a related resource on OG-B07, OG-19 and OG-26 (Stage 9.31)", () => {
+    for (const code of ["OG-B07", "OG-19", "OG-26"]) expect(meta[code].relatedResources, code).toContain("res-1018");
+  });
+});

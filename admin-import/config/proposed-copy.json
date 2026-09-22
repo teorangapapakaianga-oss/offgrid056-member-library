@@ -1,4 +1,260 @@
 {
   "description": "PROPOSED copy changes — NOT APPROVED. prep renders them only so the owner can review the result; any resource carrying one is PREVIEW_WITH_PROPOSED_COPY and cannot be deployed. On approval each change moves to approved-copy.json unchanged. (Stage 9.30: OG-18's 29 proposals approved and moved to approved-copy.json.)",
-  "changes": {}
+  "changes": {
+    "OG-21": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 3 — Shelter, Heating & Energy</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme week label."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Old programme name."
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "Week 3 synthesis. Your complete Shelter",
+        "to": "Your complete Shelter",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3 synthesis' is programme sequencing; the rest of the subtitle is unchanged."
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-21 | Day 21</div>",
+        "to": "<div class=\"page-header-right\"></div>",
+        "expectedMatches": 2,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Internal code and programme day."
+      },
+      {
+        "where": "Intro box",
+        "from": "<div class=\"info-box-title\">The Week 3 Lock</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">This worksheet synthesises Days 15–20 into one coherent Shelter + Heating + Energy plan. If you only keep one document from Week 3, keep this. It is your insulation, heating, solar, battery, and alternative energy snapshot — ready to act on or share with a professional.</p>",
+        "to": "<div class=\"info-box-title\">How to Use This Plan</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">This plan brings your shelter, heating and energy planning together in one place. Fill in what you have from the Warm Home Scorecard, the Solar Power 101 Workbook and the Battery Backup Planner, and leave blank anything you have not looked at yet. It is your insulation, heating, solar, battery, and alternative energy snapshot — ready to act on or share with a professional.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Days 15–20' and 'Week 3' assume the programme order. The library resources that feed this plan are named by title instead; the last sentence is unchanged."
+      },
+      {
+        "where": "Summary heading",
+        "from": "<h2>Week 3 Pillar Summary</h2>",
+        "to": "<h2>Shelter, Heating & Energy Summary</h2>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3'; 'Pillar' is the old framework word (the library uses Foundations)."
+      },
+      {
+        "where": "Shelter card — source",
+        "from": "<p>Days 15–16</p>",
+        "to": "<p>From the Warm Home Scorecard</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme days → the live library resource. 'Warm home score ___/80' matches the Warm Home Scorecard's own /80 scale (checked)."
+      },
+      {
+        "where": "Shelter card — grants",
+        "from": "Grant eligible:",
+        "to": "Grant or rebate eligible:",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "market-neutral",
+        "reason": "No programme is named in either market; 'grant or rebate' covers NZ grants and AU state and territory rebates without implying one scheme."
+      },
+      {
+        "where": "Heating card — source",
+        "from": "<p>Days 16–17</p>",
+        "to": "<p>Main or backup heating</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme days; the heating resources for those days are not in the library yet."
+      },
+      {
+        "where": "Heating card — solid fuel fields",
+        "from": "Winter fuel stock: <span style=\"font-weight:700;\">___ m³</span></p>\n    <p>Chimney swept:",
+        "to": "Winter fuel stock (if solid fuel): <span style=\"font-weight:700;\">___ m³</span></p>\n    <p>Chimney / flue swept (if solid fuel):",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "The card assumed every member heats with solid fuel. 'Solid fuel chosen' is kept as written."
+      },
+      {
+        "where": "Energy card — source",
+        "from": "<p>Days 18–20</p>",
+        "to": "<p>From Solar Power 101 and the Battery Backup Planner</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Programme days → the live library resources."
+      },
+      {
+        "where": "Energy card — alternative",
+        "from": "<p>Alternative: ",
+        "to": "<p>Other energy option (if any): ",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "claim-correction",
+        "reason": "'Alternative' pointed at the Day 20 resource, which is not in the library; the field stays, described generically."
+      },
+      {
+        "where": "Priority intro",
+        "from": "Rank your Week 3 actions by impact, cost, and ease.",
+        "to": "Rank your shelter, heating and energy actions by impact, cost, and ease.",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3'. The rest of the sentence is unchanged."
+      },
+      {
+        "where": "Priority table — column",
+        "from": "<th>Pillar</th>",
+        "to": "<th>Area</th>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Pillar' is the old framework word; the S/H/E placeholder is kept."
+      },
+      {
+        "where": "Budget heading",
+        "from": "<h2>Consolidated Week 3 Budget</h2>",
+        "to": "<h2>Consolidated Budget</h2>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3'."
+      },
+      {
+        "where": "Budget — total",
+        "from": "Week 3 total investment",
+        "to": "Total investment",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3'."
+      },
+      {
+        "where": "Budget — tier check",
+        "from": "Still within declared tier budget? (from OG-03)",
+        "to": "Still within my budget? (see the 3-Tier Budget Planner)",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Visible OG-03 code and a programme 'declared tier'; the live 3-Tier Budget Planner is the library's budget tool."
+      },
+      {
+        "where": "Next steps heading",
+        "from": "<h2>Before You Move to Week 4</h2>",
+        "to": "<h2>Next Steps</h2>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Week 4 navigation."
+      },
+      {
+        "where": "Week 4 preview box",
+        "from": "<div class=\"info-box-title\">Week 4 Preview — Action Planning</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Week 4 is where everything comes together. You will build your complete product wishlist, prepare supplier questions, decide if you need professional help, create a 3-tier budget, and write your 90-day implementation roadmap. You are no longer learning — you are executing.</p>",
+        "to": "<div class=\"info-box-title\">Taking It Further</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">When you are ready to act, the library can help you list what to buy (Resilience Product Wishlist), brief a professional (Project Support Brief Template), set a three-tier budget (3-Tier Budget Planner) and schedule the work (90-Day Implementation Roadmap).</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Week 4 preview → the same next steps, named as live library resources. 'Prepare supplier questions' is dropped: that resource is not in the library."
+      },
+      {
+        "where": "Commitment title",
+        "from": "<div class=\"worksheet-title\">My Week 3 Commitment</div>",
+        "to": "<div class=\"worksheet-title\">My Commitment</div>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3'."
+      },
+      {
+        "where": "Commitment line",
+        "from": "I commit to starting these Week 3 actions within 14 days:",
+        "to": "I commit to starting these actions within 14 days:",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3'. '14 days' kept as the member's own commitment prompt (an example, not a claim)."
+      },
+      {
+        "where": "Closing",
+        "from": "<h3>Week 3 Complete</h3>\n  <p>You have audited your home's warmth, identified grants, planned solid fuel backup, sized a solar system, selected battery storage, and explored alternatives. Your shelter is becoming a fortress.</p>",
+        "to": "<h3>Plan Complete</h3>\n  <p>Your shelter, heating and energy priorities, budget and timeline are now in one place — ready to act on or share with a professional.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "'Week 3 Complete'; the recap assumed six programme days were done; 'fortress' overstates."
+      },
+      {
+        "where": "Closing — next link",
+        "from": "<p class=\"next-pointer\">Next: Week 4 — Action Plan & Upgrade Pathway →</p>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "NOT APPROVED — proposal",
+        "approvedOn": "",
+        "proposedOn": "2026-09-22",
+        "kind": "legacy-programme-context",
+        "reason": "Week 4 navigation."
+      }
+    ]
+  }
 }
