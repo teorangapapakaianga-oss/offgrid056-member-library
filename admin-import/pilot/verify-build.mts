@@ -52,7 +52,11 @@ function pdfTitle(file: string): string {
 const REMOVED = [
   "15%", "200L", "5,000L", "3-5kW", "10kWh", "4-week", "Up to $3,000", "$30,000", "10–20%", "within hours", "16–18", "approximately 10%", "30% more",
   "Next: OG", "30-Day Programme", "Action Plan Plus", "Bonus Asset", "Just core survival", "Skool",
+  // OG-11 (Stage 9.25–9.26): calorie targets, shelf lives, temperature and build-up arithmetic; the invalid NZ figure
+  "2,000 cal", "60,000 calories", "2–5 years", "1–2 years", "every 3 months", "under 20°C", "In 10 weeks", "less than 24 hours", "less than 4 days",
 ];
+/** Australian-only food-safety timing (NSW Food Authority). MPI publishes no NZ timings, so none may appear in NZ. */
+const AU_ONLY = ["about four hours", "at least 24 hours", "Eskies"];
 /** New Zealand-only content that must never reach an Australian file. */
 const NZ_ONLY = [
   "Trade Me", "EECA", "Warmer Kiwi", "Rural Support", "Civil Defence", "licensed electrical worker", "NZD",
@@ -84,11 +88,14 @@ for (const r of records.sort((a, b) => a.legacyCode.localeCompare(b.legacyCode))
     if (/\bVERIFY\b/.test(text)) problems.push("VERIFY marker");
     if (/this site can.t be reached|ERR_[A-Z_]+/i.test(text) || text.length < 500) problems.push("browser error page or empty file");
     if (/\bDay \d{1,2} Complete\b/.test(text)) problems.push("'Day X Complete'");
+    // No official source used (MPI, NSW Food Authority) gives tasting advice, so none may appear.
+    if (/\btast(e|ing)\s+(it|the food|food)\b|\bdo not taste\b|\bdon't taste\b/i.test(text)) problems.push("tasting advice");
     for (const s of REMOVED) if (t.includes(flat(s))) problems.push(`contains removed wording "${s}"`);
     if (market === "NZ") {
       if (!standalone(text, "111") || standalone(text, "000") || standalone(text, "112")) problems.push("NZ emergency numbers wrong");
       if (!t.includes(flat("Civil Defence"))) problems.push("NZ agency missing");
       if (t.includes(flat("State Emergency Service"))) problems.push("AU agency in an NZ file");
+      for (const s of AU_ONLY) if (t.includes(flat(s))) problems.push(`AU-only timing "${s}" in an NZ file`);
     } else if (market === "AU") {
       if (standalone(text, "111") || !standalone(text, "000") || !standalone(text, "112")) problems.push("AU emergency numbers wrong");
       if (!t.includes(flat("State Emergency Service"))) problems.push("AU agency missing");

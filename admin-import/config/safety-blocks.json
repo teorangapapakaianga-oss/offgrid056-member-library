@@ -180,9 +180,10 @@
       },
       "sharedOrVaries": "VARIES — AU (NSW Food Authority) publishes fridge/freezer timings; NZ (MPI) publishes NONE on its household page, so the NZ block has no timings at all. NZ refreeze and discard wording is MPI's; AU's is NSW's. Neither market's source gives tasting advice, so none is stated. NSW's contradictory warmed-fridge-food rule (4 vs 2 hours) is not used.",
       "verification": {
-        "NZ": "VERIFIED_LIVE 2026-09-22 — Get Ready order owner-approved (Stage 9.25 ruling 5); MPI refreeze/discard lines added after direct verification (ruling 6), for owner confirmation",
+        "NZ": "VERIFIED_LIVE — OWNER-APPROVED 2026-09-22 (Stage 9.26 ruling 1: Get Ready order + MPI refreeze/discard/doors; no NZ timings — MPI publishes none)",
         "AU": "VERIFIED_LIVE — OWNER-APPROVED 2026-09-22 (Stage 9.25 ruling 4)"
-      }
+      },
+      "changeRule": "No NZ fridge or freezer safe-time figures: MPI publishes none. The old NZ figure less than 24 hours is INVALID and must never return. No tasting advice (neither market source gives any)."
     }
   }
 }

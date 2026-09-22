@@ -279,7 +279,8 @@
       "approvedSafetyBlocks": [
         "food-safety-power-cut"
       ],
-      "approvedSafetyBlocksStatus": "AU approved; NZ Get Ready order approved; NZ MPI refreeze/discard lines verified live and awaiting owner confirmation"
+      "approvedSafetyBlocksStatus": "food-safety-power-cut NZ + AU owner-approved 2026-09-22 (Stage 9.26)",
+      "deploymentApproved": "2026-09-22 (Stage 9.26 ruling 3)"
     }
   }
 }
