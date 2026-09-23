@@ -669,6 +669,59 @@
       "pdfTitle": "Household Water Treatment Guide — OffGrid056",
       "route": "/resources/household-water-treatment-guide/",
       "routeNote": "New route. No demo placeholder holds it, so there is no supersession and no collision."
+    },
+    "OG-B08": {
+      "foundation": "water",
+      "foundationStatus": "proposed 2026-09-23 — audit HIGH confidence",
+      "resourceType": "guide",
+      "resourceTypeStatus": "proposed 2026-09-23 — audit HIGH confidence",
+      "category": "household-water-planning",
+      "categoryStatus": "proposed 2026-09-23 — OWNER-REVIEW REQUIRED",
+      "difficulty": "intermediate",
+      "difficultyStatus": "proposed 2026-09-23 — INFERRED / OWNER-REVIEW REQUIRED",
+      "difficultySource": "INFERRED — the document states no level. It involves site judgement, supplier questions and a council check, which is a step beyond the beginner storage calculator.",
+      "estimatedTime": 25,
+      "estimatedTimeStatus": "proposed 2026-09-23 — INFERRED / OWNER-REVIEW REQUIRED",
+      "estimatedTimeReasoning": "INFERRED: a five-row materials table, a ten-point site checklist and a twelve-field plan, with two numbers carried in from other resources. Excludes getting quotes, council checks and installation.",
+      "description": "Turn the litres you need into a tank you can site: materials, the base and the overflow, access for maintenance, and which parts are a supplier, plumber, professional or council job.",
+      "descriptionStatus": "proposed 2026-09-23",
+      "tags": [],
+      "safetyBlocks": [
+        "stored-drinking-water",
+        "working-at-height"
+      ],
+      "approvedSafetyBlocks": [
+        "stored-drinking-water",
+        "working-at-height"
+      ],
+      "approvedSafetyBlocksStatus": "both owner-approved earlier (Stages 9.19 and 9.21); no new safety wording is proposed",
+      "safetyReasoning": "The detector requires stored-drinking-water (7 mentions). The migrated text asks members to keep gutters and the roof catchment clear, so working-at-height is carried, exactly as in OG-10. The treatment detector finds no treatment teaching at all: 0 topic mentions and 0 teaching signals in the source, and the treatment gates return 0 findings in both markets, so the water-treatment block is NOT required — the resource points at the Household Water Treatment Guide instead.",
+      "safetyExemptions": [
+        {
+          "block": "fire-and-emergency",
+          "reason": "PROPOSED, Stage 9.45. The legacy source tripped the fire detector three times — 'Good for bushfire zones', 'fire resistance' and 'fire egress paths' — and all three are removed in migration: the bushfire and fire-resistance claims were unsourced material claims, and the egress line is rewritten as 'Not blocking escape routes or access for emergency services'. The migrated text makes no fire-safety claim and contains no fire wording, and there is no approved fire-and-emergency block to carry. Lapses automatically if any fire, smoke-alarm or evacuation wording appears.",
+          "approvedBy": "PROPOSED — owner review at Stage 9.45",
+          "approvedOn": "2026-09-23",
+          "allowedMentions": []
+        }
+      ],
+      "safetyExemptionsStatus": "PROPOSED 2026-09-23 — requires owner approval before deployment",
+      "hazardFlags": [
+        "No structural instructions: the base, stand and any fixing are routed to the manufacturer, the supplier and a qualified professional.",
+        "No universal tank size: sizing is tied to the Water Storage Calculator and the Rainwater Harvesting Planner.",
+        "No invented setbacks or clearances: the legacy '3m of downpipes' figure is removed.",
+        "Weight is stated only as the conversion (about a kilogram per litre) and never turned into a design figure."
+      ],
+      "hazardFlagsStatus": "proposed 2026-09-23",
+      "relatedResources": [
+        "res-1008",
+        "res-1010",
+        "res-1009"
+      ],
+      "relatedResourcesNote": "The water pathway in order: OG-08 Water Storage Calculator (how much), OG-10 Rainwater Harvesting Planner (how much the roof supplies), OG-09 Household Water Treatment Guide (making it safe). OG-B12 was considered and left out: it is a general architecture planner, and four links dilute the journey.",
+      "relatedResourcesStatus": "proposed 2026-09-23 — OWNER-REVIEW REQUIRED",
+      "titleStatus": "UNCHANGED — 'Water Tank Sizing & Placement Guide' still describes the rebuilt resource.",
+      "status": "PREPARED FOR OWNER REVIEW — not deployed (Stage 9.45)"
     }
   }
 }

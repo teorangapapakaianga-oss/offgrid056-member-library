@@ -236,9 +236,10 @@ describe("prepareResource: resource-specific safety exemptions (Stage 9.30)", ()
   it("is recorded for OG-18 only, with the owner's reason and allowed mention", () => {
     const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { safetyExemptions?: typeof EXEMPT[] }>;
     const holders = Object.entries(meta).filter(([, m]) => m.safetyExemptions?.length).map(([code]) => code);
-    // Two exemptions exist, each for one resource and one reviewed phrase: OG-18's fridge/freezer row (Stage 9.30)
-    // and OG-08's "filtration systems" sequencing line (Stage 9.43). There is still no global exemption.
-    expect([...holders].sort()).toEqual(["OG-08", "OG-18"]);
+    // Three exemptions exist, each for one resource: OG-18's fridge/freezer row (Stage 9.30, approved), OG-08's
+    // "filtration systems" sequencing line (Stage 9.43, approved) and OG-B08's fire wording (Stage 9.45, proposed).
+    // There is still no global exemption.
+    expect([...holders].sort()).toEqual(["OG-08", "OG-18", "OG-B08"]);
     expect(meta["OG-08"].safetyExemptions).toMatchObject([{ block: "water-treatment", allowedMentions: ["filtration systems"] }]);
     expect(meta["OG-18"].safetyExemptions).toMatchObject([{ block: "food-safety-power-cut", reason: "appliance/load reference only; no food-safety teaching", allowedMentions: ["Fridge / freezer"] }]);
   });
@@ -1023,6 +1024,92 @@ describe("treatment gates inside prep (Stage 9.43)", () => {
     // In New Zealand the same sentence is still unsourced: the entry it matches belongs to Australia.
     const nz = prep({ sourceHtml: withPercent, launchMarkets: ["NZ"], treatmentRegistry: registry });
     expect(nz.contentFlags.some((f) => f.kind === "figure-needs-source")).toBe(true);
+  });
+});
+
+describe("OG-B08 water tank sizing and placement (Stage 9.45)", () => {
+  type Change = { where: string; from: string; to: string; markets?: string[] };
+  const changes = (JSON.parse(fs.readFileSync(path.resolve("admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-B08"] ?? [];
+  const forMarket = (m: string) =>
+    changes.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ")).join("\n");
+  const all = changes.map((c) => c.to).join("\n");
+  const removed = changes.map((c) => c.from).join("\n");
+  const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources["OG-B08"];
+
+  it("drops the unsourced lifespans, costs, crane and bushfire claims", () => {
+    for (const s of ["15–20 years", "50+ years", "30–50 years", "5–10 years", "needs crane", "Good for bushfire zones", "Hygienic", "1,000L standard", "Action Plan Plus", "Tier 3"]) {
+      expect(removed, s).toContain(s);
+      expect(all, s).not.toContain(s);
+    }
+    expect(all).not.toMatch(/\$\$|\$\d/);
+  });
+
+  it("prescribes no tank size, and sends sizing back to the calculator and the planner", () => {
+    for (const m of ["NZ", "AU"]) {
+      expect(forMarket(m), m).toContain("There is no single right tank size");
+      expect(forMarket(m), m).toContain("Water Storage Calculator");
+      expect(forMarket(m), m).toContain("Rainwater Harvesting Planner");
+    }
+    expect(forMarket("AU")).toContain("no national Australian figure");
+    // No capacity figure anywhere except the weight illustration.
+    const capacities = [...all.matchAll(/\b[\d,]+\s?-?\s?(?:L\b|litres?)/gi)].map((m) => m[0].replace(/\s/g, ""));
+    expect(new Set(capacities)).toEqual(new Set(["1,000-litre"]));
+  });
+
+  it("keeps weight as a conversion, never as a design figure", () => {
+    for (const m of ["NZ", "AU"]) {
+      expect(forMarket(m), m).toContain("water weighs about a kilogram per litre");
+      expect(forMarket(m), m).toContain("not DIY engineering");
+    }
+    expect(all).not.toMatch(/slab (?:thickness|depth)|\bMPa\b|reinforc\w+ (?:mesh|bar)|footing depth|concrete mix/i);
+  });
+
+  it("invents no clearance or setback distance, and removes the legacy one", () => {
+    expect(removed).toContain("Within 3m of downpipes");
+    expect(all).not.toMatch(/\b\d+(?:\.\d+)?\s?(?:m|metres?)\b(?![a-z])/i);
+    // The only measurements left are MBIE's own stand heights, in the NZ file.
+    expect(forMarket("NZ")).toMatch(/over 30cm and under one metre/);
+    expect(forMarket("AU")).not.toMatch(/30cm|one metre/);
+  });
+
+  it("routes structure, plumbing and electrical work to the right trade in each market", () => {
+    const nz = forMarket("NZ");
+    const au = forMarket("AU");
+    expect(nz).toContain("structural engineer");
+    expect(nz).toContain("qualified plumber");
+    expect(nz).toContain("licensed electrical worker");
+    expect(nz).toContain("building consent");
+    expect(nz).not.toMatch(/NSW|WA Health|licensed electrician|state or territory|AS\/NZS/);
+    expect(au).toContain("licensed plumber");
+    expect(au).toContain("licensed electrician");
+    expect(au).toContain("council, state and territory");
+    expect(au).not.toMatch(/MBIE|building consent|electrical worker|New Zealand/);
+  });
+
+  it("labels Australian guidance as NSW, and claims no national rule", () => {
+    const au = forMarket("AU");
+    expect(au).toContain("NSW Health");
+    expect(au).toContain("NSW Health gives 1 mm as an example");
+    expect(au).not.toMatch(/Australian rule|nationally required|across Australia,? tanks must/);
+  });
+
+  it("says tank water is not automatically safe, and points at the treatment guide", () => {
+    for (const m of ["NZ", "AU"]) {
+      expect(forMarket(m), m).toMatch(/not automatically safe to drink/);
+      expect(forMarket(m), m).toContain("Household Water Treatment Guide");
+    }
+    // It teaches no treatment method of its own.
+    expect(all).not.toMatch(/\b(boil|bleach|chlorinat|disinfect|UV|micron)\w*/i);
+  });
+
+  it("carries the storage and height blocks, and proposes a narrow fire exemption", () => {
+    expect(meta.safetyBlocks).toEqual(["stored-drinking-water", "working-at-height"]);
+    expect(meta.relatedResources).toEqual(["res-1008", "res-1010", "res-1009"]);
+    const exemption = meta.safetyExemptions[0];
+    expect(exemption.block).toBe("fire-and-emergency");
+    expect(exemption.allowedMentions).toEqual([]); // no fire wording survives migration at all
+    expect(exemption.approvedBy).toMatch(/PROPOSED/);
+    expect(meta.safetyExemptionsStatus).toMatch(/requires owner approval/);
   });
 });
 

@@ -38,10 +38,16 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 
-## Prepared — awaiting owner approval (0)
+## Prepared — awaiting owner approval (1)
 
-Nothing is waiting on an owner decision. OG-09 was approved and deployed at Stage 9.44, renamed **Household Water
-Treatment Guide** (`/resources/household-water-treatment-guide/`); `legacyCode` OG-09 stays internal.
+| Code | Title | Foundation / type | Safety blocks | Stage | Waiting on |
+|---|---|---|---|---|---|
+| OG-B08 | Water Tank Sizing & Placement Guide | water / guide | drinking water · working at height | 9.45 | the **proposed** fire-and-emergency exemption, and the metadata marked owner-review (category, difficulty, time) |
+
+Both PDFs are rendered and verified (6 pages each), and nothing is staged into `private-assets/`.
+
+OG-09 was approved and deployed at Stage 9.44, renamed **Household Water Treatment Guide**
+(`/resources/household-water-treatment-guide/`); `legacyCode` OG-09 stays internal.
 
 ## Blocked — pending research (3)
 

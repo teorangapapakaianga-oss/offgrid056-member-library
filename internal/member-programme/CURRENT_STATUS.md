@@ -1,20 +1,20 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.44 (OG-09 deployed as the Household Water Treatment Guide).
+**As at:** 23 September 2026, after Stage 9.45 (OG-B08 prepared; the live preview is unchanged since Stage 9.44).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **18** (all draft) |
 | **Worker version** | **`ac0d053a-8abd-4965-8bfe-3cae8ea943a5`** |
 | **Rollback available** | `d993cb64-676a-46bc-80eb-f4c9850fb0ea` (17 resources) |
-| **Tests** | **368 passing** · lint clean · typecheck clean |
-| **Next resource** | **OG-B08 — Water Tank Sizing & Placement Guide** (not started), or **OG-13 Healthy Home Air Audit** |
+| **Tests** | **376 passing** · lint clean · typecheck clean |
+| **Next resource** | **OG-B08 — Water Tank Sizing & Placement Guide** — prepared at Stage 9.45, waiting on two approvals before deployment as #19 |
 | **Last deployment** | Stage 9.44, 23 September 2026: Household Water Treatment Guide (OG-09) (#18) |
-| **Last report** | `admin-import/STAGE_9.44_OG09_DEPLOYMENT.md` |
+| **Last report** | `admin-import/STAGE_9.45_OGB08_PREPARED.md` (prepared — nothing deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
-OG-10 ruling tests) → **361** at Stage 9.43 (23 treatment-gate tests, 7 OG-09 tests, 3 gate-inside-prep tests).
-Nothing was removed.
+OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
+rename) → **376** at Stage 9.45 (OG-B08). Nothing was removed.
 
 ## The 18 deployed resources
 

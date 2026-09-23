@@ -3388,6 +3388,212 @@
         "approvedOn": "2026-09-23",
         "approvalRef": "Stage 9.42 rulings 12-14"
       }
+    ],
+    "OG-B08": [
+      {
+        "where": "Cover image",
+        "from": "<img src=\"assets/Week3_ShelterHeatingEnergy_Cover.jpg\" class=\"cover-img\" alt=\"Week 3\">",
+        "to": "<img src=\"assets/Week2_WaterFoodAir_Cover.jpg\" class=\"cover-img\" alt=\"Water\">",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "The legacy cover used the Week 3 shelter image on a water resource, and the alt text named a programme week.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 Action Plan Plus</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "Old product name (Action Plan Plus).",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Cover subtitle (NZ)",
+        "from": "<p class=\"cover-subtitle\">Tank types, materials, placement rules, council requirements, and overflow planning — everything you need to choose and position the right water storage for your property.</p>",
+        "to": "<p class=\"cover-subtitle\">Turn the litres you need into a tank you can actually site: what the base and the overflow have to do, what to ask a supplier, and which parts are a council, plumber or professional job in New Zealand.</p>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "The old subtitle promised 'council requirements' as if one rule existed, and led with tank types. The resource plans a site; the regulatory wording is market-specific.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Cover subtitle (AU)",
+        "from": "<p class=\"cover-subtitle\">Tank types, materials, placement rules, council requirements, and overflow planning — everything you need to choose and position the right water storage for your property.</p>",
+        "to": "<p class=\"cover-subtitle\">Turn the litres you need into a tank you can actually site: what the base and the overflow have to do, what to ask a supplier, and which parts are a council, plumber or professional job where you live.</p>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "As NZ. Australian approvals differ by council, state and territory, so the wording does not promise one rule.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Page header",
+        "from": "<div class=\"page-header-right\">Bonus Asset | Tier 3</div>",
+        "to": "<div class=\"page-header-right\">Water · Tanks</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "Legacy bonus-asset and tier labels.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Intro box",
+        "from": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Tank Selection Is Critical</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">The wrong tank in the wrong place causes algae, contamination, foundation damage, and council compliance issues. The right tank in the right place gives you decades of clean, reliable water storage.</p>\n</div>",
+        "to": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Sizing Is Only Half The Decision</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">A tank has to fit the site as well as the household: a base that can carry the weight, an overflow that goes somewhere safe, room to get at it for cleaning, and whatever your local rules require. Work out <strong>how much water you need</strong> in the Water Storage Calculator and <strong>how much your roof can supply</strong> in the Rainwater Harvesting Planner — this guide turns those numbers into a tank in a place. <strong>Water stored in a tank is not automatically safe to drink</strong>: see the Household Water Treatment Guide.</p>\n</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "Replaces the unsourced hazard claim ('foundation damage') and the 'decades of clean water' promise with what the guide actually decides, and points at the three resources that carry the numbers and the treatment.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Materials heading",
+        "from": "<h2>Tank Type Comparison</h2>",
+        "to": "<h2>Tank Materials, and How Big</h2>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "The table no longer compares lifespans and costs; it sets out materials and what to ask.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Tank materials table (NZ)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Type</th><th>Material</th><th>Lifespan</th><th>Cost</th><th>Best For</th><th>Notes</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Polyethylene (Plastic)</strong></td>\n      <td>Food-grade plastic</td>\n      <td>15–20 years</td>\n      <td>$</td>\n      <td>Residential; easy install</td>\n      <td>Lightweight, UV-stabilised. Not for above 1,000L without stand.</td>\n    </tr>\n    <tr>\n      <td><strong>Concrete</strong></td>\n      <td>Reinforced concrete</td>\n      <td>50+ years</td>\n      <td>$$$</td>\n      <td>Underground; large capacity</td>\n      <td>Can be buried. pH buffering. Heavy — needs crane.</td>\n    </tr>\n    <tr>\n      <td><strong>Steel (Galvanised)</strong></td>\n      <td>Zinc-coated steel</td>\n      <td>20–30 years</td>\n      <td>$$</td>\n      <td>Rural; fire resistance</td>\n      <td>Liner required. Good for bushfire zones. Can rust if liner fails.</td>\n    </tr>\n    <tr>\n      <td><strong>Steel (Stainless)</strong></td>\n      <td>304/316 stainless</td>\n      <td>30–50 years</td>\n      <td>$$$$</td>\n      <td>Premium; food/beverage</td>\n      <td>No liner needed. Hygienic. Highest upfront cost.</td>\n    </tr>\n    <tr>\n      <td><strong>IBC Tote</strong></td>\n      <td>Plastic cage</td>\n      <td>5–10 years</td>\n      <td>$</td>\n      <td>Intermediate; temporary</td>\n      <td>1,000L standard. Good for testing before big investment.</td>\n    </tr>\n    <tr>\n      <td><strong>Bladder Tank</strong></td>\n      <td>Reinforced PVC</td>\n      <td>10–15 years</td>\n      <td>$$</td>\n      <td>Underfloor; tight spaces</td>\n      <td>Fits under deck or house. Needs protection from puncture.</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Material</th><th>What NZ guidance says</th><th>Ask the supplier</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Plastic (polyethylene)</strong></td>\n      <td>Building Performance (MBIE) lists plastic as one of the most common tank materials: tough, durable and relatively lightweight, in a wide range of sizes and shapes, including slim-line tanks for urban sections.</td>\n      <td>Whether the tank is made for drinking water, and what the warranty covers.</td>\n    </tr>\n    <tr>\n      <td><strong>Concrete</strong></td>\n      <td>Strong, and the usual choice for a tank sited below ground. MBIE says to consult a structural engineer if you are considering placing the tank in the ground.</td>\n      <td>How it will be delivered and placed, and what the site access needs to be.</td>\n    </tr>\n    <tr>\n      <td><strong>Coated steel</strong></td>\n      <td>MBIE notes that modern steel tanks have a long-life polymer coating on the inside, in a wide range of shapes and sizes.</td>\n      <td>What the internal coating is, how to check it, and what happens if it is damaged.</td>\n    </tr>\n    <tr>\n      <td><strong>Fibreglass and timber</strong></td>\n      <td>Also available. MBIE notes that timber tanks have a plastic bladder liner and generally come in larger sizes.</td>\n      <td>What the liner is, and how it is replaced.</td>\n    </tr>\n    <tr>\n      <td><strong>If the water is for drinking</strong></td>\n      <td>The tank, its coatings and the plumbing have to be suitable for drinking water, and <strong>rainwater is not automatically safe to drink</strong> — it has to be treated. Some councils also require periodic testing (MBIE).</td>\n      <td>Confirmation in writing that the tank is suitable for potable supply.</td>\n    </tr>\n  </tbody>\n</table>\n\n<p><strong>How big?</strong> That comes from two numbers you already have: what your household needs (the Water Storage Calculator) and what your roof can supply (the Rainwater Harvesting Planner). <strong>There is no single right tank size</strong> — take both numbers to local suppliers, and ask what suits your rainfall, your roof and your household. Two smaller tanks can give redundancy that one large tank cannot.</p>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "Removes the unsourced lifespans (15–20, 20–30, 30–50, 50+, 5–10, 10–15 years), the $–$$$$ cost column, 'Not for above 1,000L without stand', 'needs crane', 'Good for bushfire zones', 'No liner needed. Hygienic.' and the IBC '1,000L standard'. Replaced with MBIE's material guidance, the structural-engineer routing for in-ground tanks, and sizing tied back to OG-08 and OG-10.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Tank materials table (AU)",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Type</th><th>Material</th><th>Lifespan</th><th>Cost</th><th>Best For</th><th>Notes</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Polyethylene (Plastic)</strong></td>\n      <td>Food-grade plastic</td>\n      <td>15–20 years</td>\n      <td>$</td>\n      <td>Residential; easy install</td>\n      <td>Lightweight, UV-stabilised. Not for above 1,000L without stand.</td>\n    </tr>\n    <tr>\n      <td><strong>Concrete</strong></td>\n      <td>Reinforced concrete</td>\n      <td>50+ years</td>\n      <td>$$$</td>\n      <td>Underground; large capacity</td>\n      <td>Can be buried. pH buffering. Heavy — needs crane.</td>\n    </tr>\n    <tr>\n      <td><strong>Steel (Galvanised)</strong></td>\n      <td>Zinc-coated steel</td>\n      <td>20–30 years</td>\n      <td>$$</td>\n      <td>Rural; fire resistance</td>\n      <td>Liner required. Good for bushfire zones. Can rust if liner fails.</td>\n    </tr>\n    <tr>\n      <td><strong>Steel (Stainless)</strong></td>\n      <td>304/316 stainless</td>\n      <td>30–50 years</td>\n      <td>$$$$</td>\n      <td>Premium; food/beverage</td>\n      <td>No liner needed. Hygienic. Highest upfront cost.</td>\n    </tr>\n    <tr>\n      <td><strong>IBC Tote</strong></td>\n      <td>Plastic cage</td>\n      <td>5–10 years</td>\n      <td>$</td>\n      <td>Intermediate; temporary</td>\n      <td>1,000L standard. Good for testing before big investment.</td>\n    </tr>\n    <tr>\n      <td><strong>Bladder Tank</strong></td>\n      <td>Reinforced PVC</td>\n      <td>10–15 years</td>\n      <td>$$</td>\n      <td>Underfloor; tight spaces</td>\n      <td>Fits under deck or house. Needs protection from puncture.</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Material</th><th>What Australian guidance says</th><th>Ask the supplier</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>The materials in use</strong></td>\n      <td>NSW Health lists galvanised steel, Aquaplate, Zincalume, Colourbond, fibreglass, plastic, stainless steel and concrete, and says all can be suitable <strong>provided the tank was manufactured specifically for collecting rainwater</strong>.</td>\n      <td>What the tank was made for, and what the warranty covers.</td>\n    </tr>\n    <tr>\n      <td><strong>Standards</strong></td>\n      <td>NSW Health says tanks preferably should have been tested to AS/NZS 4020, and that plastics used for tanks should comply with AS 2070.</td>\n      <td>Written confirmation of the standards the tank was tested to.</td>\n    </tr>\n    <tr>\n      <td><strong>Light and algae</strong></td>\n      <td>NSW Health says it is useful for a tank to be made from an opaque material that excludes light, to prevent algae growing in the water.</td>\n      <td>Whether the tank excludes light, and what the outside finish needs.</td>\n    </tr>\n    <tr>\n      <td><strong>Openings</strong></td>\n      <td>NSW Health says a tank should have at least two openings — an inlet and an overflow — both screened, plus an access cover on top that seals tightly to stop animals and children getting in.</td>\n      <td>What screens and covers come with the tank, and how they are cleaned.</td>\n    </tr>\n    <tr>\n      <td><strong>If the water is for drinking</strong></td>\n      <td><strong>Rainwater is not automatically safe to drink.</strong> NSW Health recommends that people in urban areas use the public water supply for drinking and cooking; check what applies where you live.</td>\n      <td>Confirmation in writing that the tank is suitable for drinking water.</td>\n    </tr>\n  </tbody>\n</table>\n\n<p><strong>How big?</strong> That comes from two numbers you already have: what your household needs (the Water Storage Calculator) and what your roof can supply (the Rainwater Harvesting Planner). <strong>There is no single right tank size, and no national Australian figure</strong> — take both numbers to local suppliers, and check what your council and your state or territory require. Two smaller tanks can give redundancy that one large tank cannot.</p>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "As NZ, from NSW Health's rainwater tank guidance, labelled as NSW, with no national Australian figure invented.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Placement heading",
+        "from": "<h2>Placement Rules</h2>",
+        "to": "<h2>Where The Tank Goes</h2>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "'Rules' implied a single set of requirements; placement depends on the site and the local authority.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Site checklist (NZ)",
+        "from": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">Site Checklist</div>\n  <div class=\"worksheet-subtitle\">Before you pour the pad</div>\n  \n  <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0;\">\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Level ground or engineered stand</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Within 3m of downpipes (ideally)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Not blocking fire egress paths</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Accessible for cleaning and maintenance</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Overflow can drain away from foundations</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Not under overhanging trees (leaf litter)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Dark or covered to prevent algae</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Secure from tampering / children</div>\n  </div>\n</div>",
+        "to": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">Site Checklist</div>\n  <div class=\"worksheet-subtitle\">Work through this before anyone pours a base</div>\n\n  <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0;\">\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Ground that can carry the weight — water weighs about a kilogram per litre, so a full 1,000-litre tank is about a tonne (MBIE)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ On a stand? MBIE says the stand must be robust and concreted into the ground, over 30cm and under one metre — over one metre generally needs a building consent</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Below ground? MBIE says consult a structural engineer</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Dark or covered, so light cannot get in and encourage algae (MBIE)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Overflow contained on your property or diverted to the stormwater system — you can be liable for damage (MBIE)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Room to get at the tank for cleaning, desludging and checking screens</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Not under overhanging vegetation; roof and gutters kept clear — from the ground, or by a contractor</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ A lock on the tap, and a warning sign, where the water is not for drinking (MBIE)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Not blocking escape routes or access for emergency services</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Room for the pipe run, and for a pump if the system will supply the house</div>\n  </div>\n\n  <p style=\"font-size:13px; margin-bottom:0;\"><strong>The base, the stand and anything the tank is fixed to are not DIY engineering.</strong> Follow the manufacturer's requirements, ask your supplier, and use an appropriately qualified professional where the site needs one. Check your council's requirements before you commit to a position.</p>\n</div>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "Removes the invented '3m of downpipes' distance and 'engineered stand' as a DIY option. Replaced with MBIE's stand, in-ground, algae, overflow, tap-lock and weight guidance, plus the plain statement that the base is not DIY engineering. 'Fire egress' becomes escape routes and emergency access, so the resource makes no fire-safety claim.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Site checklist (AU)",
+        "from": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">Site Checklist</div>\n  <div class=\"worksheet-subtitle\">Before you pour the pad</div>\n  \n  <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0;\">\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Level ground or engineered stand</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Within 3m of downpipes (ideally)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Not blocking fire egress paths</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Accessible for cleaning and maintenance</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Overflow can drain away from foundations</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Not under overhanging trees (leaf litter)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Dark or covered to prevent algae</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px;\">□ Secure from tampering / children</div>\n  </div>\n</div>",
+        "to": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">Site Checklist</div>\n  <div class=\"worksheet-subtitle\">Work through this before anyone pours a base</div>\n\n  <div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0;\">\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Ground that can carry the weight — water weighs about a kilogram per litre, so a full 1,000-litre tank is about a tonne</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Base, stand or slab built to the manufacturer's requirements — and to a qualified professional's design where the site needs one</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ An opaque tank that excludes light, to prevent algae (NSW Health)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Closely fitting, fine insect-proof screens on every inlet and overflow — NSW Health gives 1 mm as an example — and an access cover sealed against animals and children (NSW Health)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Ground-level covers on in-ground tanks sealed so stormwater cannot get in (NSW Health)</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Overflow going somewhere it can drain safely — check what your council requires</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Room to get at the tank for inspection, desludging and screen checks</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Gutters and roof catchment kept clear — from the ground, or by a contractor</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Not blocking escape routes or access for emergency services</div>\n    <div style=\"padding: 10px; background: var(--warm-white); border-radius: 6px; font-size: 13px; break-inside: avoid; page-break-inside: avoid;\">□ Room for the pipe run, and for a pump if the system will supply the house</div>\n  </div>\n\n  <p style=\"font-size:13px; margin-bottom:0;\"><strong>The base, the stand and anything the tank is fixed to are not DIY engineering.</strong> Follow the manufacturer's requirements, ask your supplier, and use a qualified professional where the site needs one. Building and planning rules for tanks differ by council, state and territory: NSW Health says to contact your local council about the rules in your area, and that is the right first call wherever you live.</p>\n</div>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "As NZ, with NSW Health's screens, covers, in-ground seals and algae guidance labelled NSW, and council/state/territory routing for approvals.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Tank plan (NZ)",
+        "from": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Tank type chosen</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Capacity (litres)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Placement location</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Base / stand type</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Council consent required? □ Yes □ No</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Overflow destination</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Installation date target</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n</div>",
+        "to": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">My Tank Plan</div>\n  <div class=\"worksheet-subtitle\">The decisions, and who makes each one</div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Litres my household needs (from the Water Storage Calculator)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Litres my roof can supply (from the Rainwater Harvesting Planner)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Tank material and capacity my supplier recommends, and why</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Where it will stand, and what the base or stand will be</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Who designs or builds the base (supplier, installer, or a qualified professional)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Council check — is a building consent needed? (Connecting a tank to the plumbing of a house that also has mains water needs one, and so does a stand over one metre high. Not every tank does: MBIE notes there is usually no problem installing smaller tanks for garden watering only.)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Where the overflow goes, and who confirms it is allowed</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Plumbing: the qualified plumber doing the work, including the backflow prevention device where there is also a mains supply</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">If there is a pump: the appropriately licensed electrical worker doing the fixed electrical work</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Access and maintenance plan — cleaning, desludging (MBIE says annually), screens and the first-flush device</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">If this water is for drinking: how it will be treated (see the Household Water Treatment Guide) and whether the council requires testing</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Target installation date</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n</div>",
+        "expectedMatches": 1,
+        "markets": [
+          "NZ"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "The old worksheet asked for a tank type, a capacity and a yes/no on consent with nothing behind them. The new one carries the two numbers from OG-08 and OG-10, names who does each job, and records the NZ consent triggers MBIE publishes — including that not every tank needs one.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Tank plan (AU)",
+        "from": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Tank type chosen</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Capacity (litres)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Placement location</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Base / stand type</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Council consent required? □ Yes □ No</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Overflow destination</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Installation date target</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n</div>",
+        "to": "<div class=\"worksheet-box\">\n  <div class=\"worksheet-title\">My Tank Plan</div>\n  <div class=\"worksheet-subtitle\">The decisions, and who makes each one</div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Litres my household needs (from the Water Storage Calculator)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Litres my roof can supply (from the Rainwater Harvesting Planner)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Tank material and capacity my supplier recommends, and why</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Where it will stand, and what the base or stand will be</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Who designs or builds the base (supplier, installer, or a qualified professional)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Council, state and territory check — what approvals apply where I live (contact the local council first)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Where the overflow goes, and who confirms it is allowed</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Plumbing: the licensed plumber doing the work, including backflow prevention where there is also a mains supply</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">If there is a pump: the licensed electrician doing the fixed electrical work</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Access and maintenance plan — inspection, desludging, screens and the first-flush device, following NSW Health's guidance or my own state's</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">If this water is for drinking: how it will be treated (see the Household Water Treatment Guide)</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n\n  <div class=\"worksheet-field\">\n    <div class=\"worksheet-label\">Target installation date</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n</div>",
+        "expectedMatches": 1,
+        "markets": [
+          "AU"
+        ],
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "As NZ, with the licensed trades and the council/state/territory approval route for Australia.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      },
+      {
+        "where": "Closing",
+        "from": "<div class=\"closing-box\">\n  <h3>Water Tank Guide Complete</h3>\n  <p>The right tank in the right place gives you decades of reliable water storage. Get the placement right — everything else follows.</p>\n</div>",
+        "to": "<div class=\"closing-box\">\n  <h3>One Tank, One Place, One Plan</h3>\n  <p>You know what size the calculator and the planner point to, what the site has to provide, which parts are somebody else's job, and what to ask your council before anything is poured or delivered.</p>\n</div>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.45-migration",
+        "reason": "Removes 'Water Tank Guide Complete' and the 'decades of reliable storage' promise.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
+      }
     ]
   }
 }

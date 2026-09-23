@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.43.
+**As at:** 23 September 2026, after Stage 9.45.
 
 ---
 
@@ -10,10 +10,10 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **OG-09 Water treatment guide** — rebuilt, prepared, PDFs rendered | **built** at Stage 9.43 | owner approval of the rewritten teaching content, then deployment as #18 |
-| 1b | **OG-08's new block requirement** | surfaced at Stage 9.43 | owner decision: add `water-treatment` to OG-08, or record that its migrated text teaches no treatment. The live OG-08 is untouched either way. |
-| 2 | **OG-B08 Water Tank Sizing & Placement Guide** — the next migration in the water pathway | not started | owner go-ahead; no new safety research needed |
-| 3 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; a low-risk alternative if the water run pauses |
+| 1 | **OG-B08 Water Tank Sizing & Placement Guide** — prepared, PDFs rendered | **prepared** at Stage 9.45 | the proposed fire-and-emergency exemption and the owner-review metadata, then deployment as #19 |
+| 2 | **Water Basics learning path** — proposed rebuild on the four real water resources | proposal returned at Stage 9.45 | owner ruling, and a decision on how a private path is staged (public `data/` cannot name private ids) |
+| 3 | **Figure detector for capacities and distances** | proposed at Stage 9.45 | a small stage: the "needs a source" flag only catches % and °C today |
+| 4 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; the first resource in an empty foundation |
 
 ## Water pathway
 
@@ -23,8 +23,8 @@ The order to work in, and why:
 |---|---|---|---|
 | ✅ | **OG-08** Water Storage Calculator | **live** | need and storage |
 | ✅ | **OG-10** Rainwater Harvesting Planner | **live** | collection |
-| **next** | **OG-B08** Water Tank Sizing & Placement Guide | not started | tanks and placement; drinking-water block approved; likely working at height. Best after OG-10, so tank depth lives in one place. |
-| **review** | **OG-09** Filtration Comparison Matrix | **prepared, not deployed** | rebuilt at Stage 9.43 as two market method tables plus a six-step fail-safe worksheet. All 17 changes applied, both markets publishable, PDFs rendered and verified. Waiting on owner content approval. |
+| **review** | **OG-B08** Water Tank Sizing & Placement Guide | **prepared, not deployed** | tanks and placement. 15 changes applied, both markets publishable, PDFs verified. Teaches no treatment (detector and gates: 0), so it points at OG-09 instead. |
+| ✅ | **OG-09** → **Household Water Treatment Guide** | **live** | treatment: two market method tables and a six-step fail-safe worksheet (Stage 9.44) |
 
 **Air still has no resource at all.** OG-13 (Healthy Home Air Audit) is the obvious candidate and needs no new safety
 research, so it is a good low-risk stage whenever the water run pauses.
@@ -50,7 +50,7 @@ migrate nothing until the wording is approved.
 - **Still open, and said plainly in both files rather than filled in:** enHealth's national rainwater guidance is
   unreadable and not relied upon; NZ publishes no household UV specification or micron rating; neither market
   publishes an elevation adjustment, a fuel or saltwater method, or a distillation method
-- **Waiting on:** owner content approval for OG-09, the title decision, and the OG-08 block decision
+- **Closed at Stage 9.44:** OG-09 approved, renamed and deployed as #18; OG-08's audited exemption recorded
 
 ### 3. Grants and rebates
 
