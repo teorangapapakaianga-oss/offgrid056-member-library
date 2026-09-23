@@ -32,6 +32,9 @@ const ROOT = process.cwd();
 const STAGE = [
   { from: path.join(ROOT, "private-assets", "resources"), to: path.join(ROOT, "public", "resources"), what: "download" },
   { from: path.join(ROOT, "private-assets", "data-resources"), to: path.join(ROOT, "data", "resources"), what: "record" },
+  // Learning paths built on real resources. They name private ids, so a public build must never see them: staged
+  // for this build and removed again, exactly like the records and the downloads.
+  { from: path.join(ROOT, "private-assets", "data-learning-paths"), to: path.join(ROOT, "data", "learning-paths"), what: "learning path" },
 ];
 
 const staged = [];

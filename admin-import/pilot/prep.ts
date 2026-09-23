@@ -17,7 +17,7 @@ import { injectSafetyChecked } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
 import { getFoundation } from "@/lib/content/taxonomy";
 import type { ProgrammeItem } from "../audit/programme";
-import { safetyTopicMentions, treatmentTeachingSignals } from "../audit/group-a";
+import { fireTeachingSignals, safetyTopicMentions, treatmentTeachingSignals } from "../audit/group-a";
 import { isRegisteredClaim, treatmentFindings, type TreatmentRegistry } from "../audit/treatment";
 
 /**
@@ -98,11 +98,19 @@ export function fuelSafetyFindings(html: string, exemptions: FuelExemption[] = [
  * can be written without ever using one of the topic words: "the cartridge removes bacteria" names no method.
  */
 export function exemptionHolds(exemption: SafetyExemption, html: string): { holds: boolean; unexpected: string[] } {
-  let text = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
+  const full = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
+  let text = full;
   for (const allowed of exemption.allowedMentions) text = text.split(allowed).join(" ");
   const unexpected = safetyTopicMentions(text, exemption.block);
   if (exemption.block === "water-treatment") {
     for (const signal of treatmentTeachingSignals(text)) unexpected.push(`teaches treatment: "${signal}"`);
+  }
+  // The same rule for fire: an exemption that covers hazard *labels* must lapse on fire *instructions*, including
+  // ones that never use the word ("plan two exits", "defensible space"). The ambiguous ones are judged against the
+  // document as a whole — including the reviewed labels — so "escape routes" in a document that never mentions fire
+  // stays an access instruction, while the same words beside "Fire in the home" are fire-escape teaching.
+  if (exemption.block === "fire-and-emergency") {
+    for (const signal of fireTeachingSignals(text, full)) unexpected.push(`teaches fire safety: "${signal}"`);
   }
   return { holds: unexpected.length === 0, unexpected };
 }

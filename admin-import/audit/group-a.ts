@@ -113,6 +113,28 @@ export function treatmentTeachingSignals(text: string): string[] {
   return [...new Set((text.match(all) ?? []).map((s) => s.toLowerCase()))];
 }
 
+/**
+ * Signals that a document *teaches* fire safety rather than listing fire as a hazard (Stage 9.47).
+ *
+ * A risk identifier that offers "Fire in the home" and "Bushfire risk area" as things to tick is naming hazards. One
+ * that says "install smoke alarms" or "plan two exits" is giving fire instructions, and no fire guidance is approved
+ * for either market — so an exemption from the fire block has to lapse on wording like this, including wording that
+ * never uses the word "fire".
+ */
+export function fireTeachingSignals(text: string, context = text): string[] {
+  // Unambiguous: these are fire instructions whatever else the document says.
+  const always =
+    /\b(extinguishers?|fire blankets?|fire suppression|sprinklers?|defensible space|smoke alarms?|fire drills?|fire plans?|fire response|fire safety|firebreaks?|prepare for (?:bush|wild)?fires?|(?:bush|wild)fire (?:preparation|plan|planning|season|ready))\b/gi;
+  // Ambiguous on their own. "Not blocking escape routes or access for emergency services" is an access instruction
+  // about where a tank goes; the same words in a document that talks about fire are fire-escape teaching. So these
+  // count only when the document has fire wording somewhere.
+  const inFireContext = /\b(escape plans?|escape routes?|two exits|egress|shelter in place|sheltering|embers?|evacuation (?:plan|route)s?)\b/gi;
+  const hasFireContext = /\b(fire|smoke|evacuat)\w*|bushfire|wildfire/i.test(context);
+  const found = [...(text.match(always) ?? [])];
+  if (hasFireContext) found.push(...(text.match(inFireContext) ?? []));
+  return [...new Set(found.map((s) => s.toLowerCase()))];
+}
+
 /** Every mention of the topic that pulls in `block` (none if the block has no topic). */
 export function safetyTopicMentions(text: string, block: string): string[] {
   const topic = SAFETY_TOPICS.find((t) => t.block === block);

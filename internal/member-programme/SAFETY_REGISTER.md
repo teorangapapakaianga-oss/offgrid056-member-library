@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.46. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.47. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -66,6 +66,7 @@ publishes no timings.
 | **Other market named** | an AU file naming New Zealand (or an NZ file naming Australia) fails verification | `verify-prep.mts` |
 | **Scoped trim mismatch** | a resource-specific sentence removal whose source wording changed blocks that market | `prep.ts` |
 | **Route collision** | real vs real, or placeholder vs placeholder, on one route fails the build; real vs placeholder fails outside the private preview | `lib/content/supersession.ts` |
+| **Learning-path collision** | private vs private, or demo vs demo, on one path id fails the build; private vs demo fails outside the private preview. A path step that names an unknown resource, or the same step twice, fails validation | `lib/content/supersession.ts`, `tools/validate-content.ts` |
 | **Unapproved trim** | a scoped trim that is still a proposal holds the resource at preview | `prep.ts` |
 | **`--real`** | refused | `admin-import/cli.mts` |
 | **`UNSOURCED_BLEACH_RATIO`** | a chlorination dose with no approved entry for that market blocks it | `admin-import/audit/treatment.ts` |
@@ -88,6 +89,7 @@ text changes, the exception stops applying.
 | **OG-B12** | AU: the same CO trim | same reason | Stage 9.36 |
 | **OG-15** | fuel check: exact text *"12. Backup heating exists (fireplace, wood burner, gas heater, portable)"* | list-only; no gas-use instruction; the resource already carries CO and indoor-combustion | Stage 9.36 |
 | **OG-26** | fuel check: exact text *"Emergency heating (gas heater / thermal blankets)"* | a budget line naming options; no gas-use instruction | Stage 9.36 |
+| **OG-02** | exempt from `fire-and-emergency`, allowed mentions *"Fire in the home"* and *"Bushfire risk area"* | a risk identifier: the member ticks hazards. Audited in three layers — those two checklist labels are its only fire references, in the legacy source and unchanged by migration, with no fire teaching anywhere and none in the blocks. **Hazard identification only:** it lapses on any other fire or bushfire wording, and on any fire-teaching signal (extinguisher, smoke alarm, defensible space, escape planning, evacuation, suppression…), including wording that never says "fire". | Stage 9.47 |
 | **OG-B08** | exempt from `fire-and-emergency`, **zero allowed mentions** | the legacy source's three fire phrases ("Good for bushfire zones", "Rural; fire resistance", "Not blocking fire egress paths") are all removed in migration; the member-facing text carries no fire, bushfire, smoke-alarm or evacuation wording, and no approved fire block exists. **Lapses on any of that wording** — the detector now also catches "bushfire" and "wildfire". | Stage 9.46 (ruling 2) |
 | **OG-08** | exempt from `water-treatment`, allowed mention *"filtration systems"* | audited in three layers: its own migrated text has one treatment word, in a sequencing line, and no teaching signal; the legacy source's bleach dosing was removed at migration; the injected storage block's claims are registry-backed. Final-output gates: 0 findings in both markets. **Lapses automatically** on any other treatment word *or* any treatment-teaching signal, even one using no treatment word at all. | Stage 9.43 (rulings 8–10) |
 

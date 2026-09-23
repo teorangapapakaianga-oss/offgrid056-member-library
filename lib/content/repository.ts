@@ -10,7 +10,7 @@ import { SupplierSchema, WorkshopSchema, type Supplier, type Workshop } from "./
 import { ProgrammeDaySchema, ProgrammeSchema, type Programme, type ProgrammeDay } from "./programme-schemas";
 import { LearningPathSchema, ResourceSchema, type LearningPath, type Resource } from "./schemas";
 import { toSummary, type ResourceSummary } from "./summaries";
-import { aliasOf, resolveRouteCollisions, RouteCollisionError } from "./supersession";
+import { aliasOf, PathCollisionError, resolveLearningPathCollisions, resolveRouteCollisions, RouteCollisionError } from "./supersession";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 
@@ -82,8 +82,32 @@ export function resolveResourceId(id: string): string {
   return aliasCache?.get(id) ?? id;
 }
 
+/**
+ * Learning paths, after path supersession (lib/content/supersession.ts).
+ *
+ * A private path file — `<id>.private.json`, staged into `data/learning-paths/` for the preview build only —
+ * replaces the demonstration path with the same id, in the private preview and nowhere else. Steps then go through
+ * the same resource alias map as everything else, so a step naming a superseded placeholder still lands on the real
+ * resource.
+ */
 export function loadLearningPaths(): LearningPath[] {
-  pathCache ??= readJsonDir("learning-paths", parseWith(LearningPathSchema)).map((p) => ({ ...p, steps: p.steps.map(resolveResourceId) }));
+  if (!pathCache) {
+    const files = readJsonDir("learning-paths", (raw, file) => ({
+      path: parseWith(LearningPathSchema)(raw, file),
+      isPrivate: file.endsWith(".private.json"),
+    }));
+    let resolved: { path: LearningPath; isPrivate: boolean }[];
+    try {
+      resolved = resolveLearningPathCollisions(
+        files.map((f) => ({ ...f, id: f.path.id })),
+        { preview: INCLUDE_DRAFTS },
+      );
+    } catch (e) {
+      if (e instanceof PathCollisionError) throw new ContentError(e.message);
+      throw e;
+    }
+    pathCache = resolved.map(({ path: p }) => ({ ...p, steps: p.steps.map(resolveResourceId) }));
+  }
   return pathCache;
 }
 

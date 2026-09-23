@@ -55,6 +55,10 @@ public/resources/private/
 # without ever publishing them (Stage 9.7 owner ruling).
 data/resources/*.private.json
 
+# Learning paths built on those real resources. They name private resource ids, so they are staged into
+# data/learning-paths only by `npm run build:preview` and removed again — never committed (Stage 9.47).
+data/learning-paths/*.private.json
+
 # Real member downloads live OUTSIDE public/, because public/ is copied wholesale into every build. They are
 # staged into public/resources only by `npm run build:preview`, and removed again afterwards, so a plain
 # production build cannot pick them up even by accident.

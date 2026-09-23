@@ -57,6 +57,13 @@ try {
   }
   for (const p of paths) {
     for (const id of p.steps) if (!published.has(id)) errors.push(`learning-paths/${p.id}.json: step "${id}" is not a published resource`);
+    // A pathway is an order to walk. The same resource twice is either a mistake or a loop, and neither should
+    // reach a member: a private path staged for the preview is held to this as strictly as a demonstration one.
+    const seen = new Set<string>();
+    for (const id of p.steps) {
+      if (seen.has(id)) errors.push(`learning-paths/${p.id}.json: step "${id}" appears more than once`);
+      seen.add(id);
+    }
   }
 
   // 30-Day Programme: all 30 days present exactly once, every linked resource real

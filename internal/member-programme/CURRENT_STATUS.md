@@ -1,20 +1,20 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.46 (OG-B08 deployed; the water pathway is complete).
+**As at:** 23 September 2026, after Stage 9.47 (the Water Basics pathway now runs on the four real water resources).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **19** (all draft) |
-| **Worker version** | **`7eee1f48-82c3-483f-8d0b-4b2d4c47e586`** |
-| **Rollback available** | `ac0d053a-8abd-4965-8bfe-3cae8ea943a5` (18 resources) |
-| **Tests** | **377 passing** · lint clean · typecheck clean |
+| **Worker version** | **`1e4ab83b-4086-4c18-bf09-f6024152abbb`** |
+| **Rollback available** | `7eee1f48-82c3-483f-8d0b-4b2d4c47e586` (19 resources, demo pathway) |
+| **Tests** | **390 passing** · lint clean · typecheck clean |
 | **Next resource** | **OG-13 Healthy Home Air Audit** — the first Air resource (not started) |
-| **Last deployment** | Stage 9.46, 23 September 2026: Water Tank Sizing & Placement Guide (OG-B08) (#19) |
-| **Last report** | `admin-import/STAGE_9.46_OGB08_DEPLOYMENT.md` |
+| **Last deployment** | Stage 9.47, 23 September 2026: the private Water Basics pathway (no new resource) |
+| **Last report** | `admin-import/STAGE_9.47_WATER_PATH_AND_OG02.md` |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
-rename) → 376 at Stage 9.45 (OG-B08) → **377** at Stage 9.46 (the fire-exemption lapse test). Nothing was removed.
+rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → **390** at Stage 9.47 (path supersession, the private path, and OG-02's fire exemption). Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -42,7 +42,7 @@ rename) → 376 at Stage 9.45 (OG-B08) → **377** at Stage 9.46 (the fire-exemp
 
 Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 
-## Controls, last checked at Stage 9.46
+## Controls, last checked at Stage 9.47
 
 | Control | State |
 |---|---|
@@ -63,8 +63,8 @@ Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 | **Grants and rebates not researched** | OG-16 | current NZ programmes and AU state/territory schemes |
 | **Consents and approvals not researched** | OG-B11 | NZ council consents, AU state/territory approvals |
 | ~~OG-09 and the OG-08 block question~~ | — | **both resolved at Stage 9.44**: OG-09 is deployed as the Household Water Treatment Guide, and OG-08 carries an audited, resource-specific exemption that lapses the moment it teaches treatment |
-| **OG-02 now requires the fire block on re-preparation** | re-preparing or re-deploying OG-02 (the live copy is untouched) | owner decision: an audited OG-02-specific exemption for its two risk-checklist items ("Fire", "□ Bushfire risk area"), or leave it blocked until fire guidance is researched |
-| **Water Basics learning path** | a pathway built on the four real water resources | the private learning-path override design (Stage 9.46 report, item 12) |
+| ~~OG-02's fire-block requirement~~ | — | **resolved at Stage 9.47**: an audited, hazard-identification-only exemption covering exactly "Fire in the home" and "Bushfire risk area", which lapses on any fire teaching |
+| ~~Water Basics learning path~~ | — | **resolved at Stage 9.47**: the private path override is built, tested and deployed; the public demonstration path is untouched |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations

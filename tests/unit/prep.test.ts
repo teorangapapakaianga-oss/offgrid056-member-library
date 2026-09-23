@@ -239,7 +239,7 @@ describe("prepareResource: resource-specific safety exemptions (Stage 9.30)", ()
     // Three exemptions exist, each for one resource: OG-18's fridge/freezer row (Stage 9.30, approved), OG-08's
     // "filtration systems" sequencing line (Stage 9.43, approved) and OG-B08's fire wording (Stage 9.45, proposed).
     // There is still no global exemption.
-    expect([...holders].sort()).toEqual(["OG-08", "OG-18", "OG-B08"]);
+    expect([...holders].sort()).toEqual(["OG-02", "OG-08", "OG-18", "OG-B08"]);
     expect(meta["OG-08"].safetyExemptions).toMatchObject([{ block: "water-treatment", allowedMentions: ["filtration systems"] }]);
     expect(meta["OG-18"].safetyExemptions).toMatchObject([{ block: "food-safety-power-cut", reason: "appliance/load reference only; no food-safety teaching", allowedMentions: ["Fridge / freezer"] }]);
   });
@@ -1129,6 +1129,63 @@ describe("OG-B08 water tank sizing and placement (Stage 9.45)", () => {
       expect(check.holds, added).toBe(false);
       expect(check.unexpected.length, added).toBeGreaterThan(0);
     }
+  });
+});
+
+describe("OG-02 fire exemption — hazard identification only (Stage 9.47)", () => {
+  const resources = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<
+    string,
+    { safetyExemptions?: SafetyExemption[]; safetyExemptionsAudit?: Record<string, string>; safetyExemptionsStatus?: string }
+  >;
+  const meta = resources["OG-02"];
+  const exemption = meta.safetyExemptions!.find((e) => e.block === "fire-and-emergency")!;
+  // The two audited labels, as OG-02 actually writes them: hazards to tick, not instructions.
+  const checklist = `<div class="content"><h2>Household risks</h2>
+    <p>__ Fire in the home __ Mould / dampness affecting health</p>
+    <p>__ Bushfire risk area __ Flooding</p></div>`;
+
+  it("covers exactly the two audited hazard labels, and records the three layers", () => {
+    expect(exemption.allowedMentions).toEqual(["Fire in the home", "Bushfire risk area"]);
+    expect(exemption.approvedBy).toBe("owner");
+    for (const layer of ["A_resourceOwnText", "B_injectedSafetyBlockText", "C_legacySourceText", "finalOutputCheck"]) {
+      expect(meta.safetyExemptionsAudit![layer], layer).toBeTruthy();
+    }
+    expect(meta.safetyExemptionsStatus).toMatch(/hazard identification ONLY/i);
+  });
+
+  it("holds while fire is only something to tick", () => {
+    expect(exemptionHolds(exemption, checklist)).toEqual({ holds: true, unexpected: [] });
+  });
+
+  it("lapses the moment OG-02 starts teaching fire safety", () => {
+    for (const added of [
+      "<p>Install smoke alarms in every bedroom.</p>",
+      "<p>Plan two exits from each room.</p>",
+      "<p>Prepare for bushfires before summer.</p>",
+      "<p>Use a fire extinguisher on small fires.</p>",
+      "<p>Clear a defensible space around the house.</p>",
+      "<p>Write an evacuation plan.</p>",
+    ]) {
+      const check = exemptionHolds(exemption, checklist.replace("</div>", `${added}</div>`));
+      expect(check.holds, added).toBe(false);
+      expect(check.unexpected.length, added).toBeGreaterThan(0);
+    }
+  });
+
+  it("lapses on any other fire wording, even without instructions", () => {
+    const check = exemptionHolds(exemption, checklist.replace("</div>", "<p>Fire risk is highest in summer.</p></div>"));
+    expect(check.holds).toBe(false);
+  });
+
+  it("is scoped to OG-02: no other resource is exempted from the fire block by a shared phrase", () => {
+    const holders = Object.entries(resources)
+      .filter(([, r]) => (r.safetyExemptions ?? []).some((e) => e.block === "fire-and-emergency"))
+      .map(([code]) => code)
+      .sort();
+    expect(holders).toEqual(["OG-02", "OG-B08"]);
+    // OG-B08's exemption allows nothing at all; OG-02's allows only its two labels.
+    const ogb08 = resources["OG-B08"].safetyExemptions!.find((e) => e.block === "fire-and-emergency")!;
+    expect(ogb08.allowedMentions).toEqual([]);
   });
 });
 

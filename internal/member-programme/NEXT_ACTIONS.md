@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.46.
+**As at:** 23 September 2026, after Stage 9.47.
 
 ---
 
@@ -10,10 +10,10 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **Private learning-path override** — then the Water Basics pathway on the four real water resources | **approved in principle** (Stage 9.46 ruling 9) | owner go-ahead for the design in the Stage 9.46 report: one private path file, one staging step, one loader rule, tests |
-| 2 | **OG-02's fire-block requirement** | surfaced at Stage 9.46 | owner decision: an audited OG-02-specific exemption for its two risk-checklist items, or leave OG-02 blocked from re-preparation. The live OG-02 is untouched. |
-| 3 | **Numeric-claim registry and detector** | recorded at Stage 9.46 ruling 10 | its own stage: a `numeric-claims.json` on the treatment-registry pattern, seeded from the 19 live resources |
-| 4 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; the first resource in an empty foundation |
+| 1 | **Numeric-claim registry** (`numeric-claims.json`) | proposal returned at Stage 9.47 | owner approval of the schema, categories, matching strategy and the five-step seeding plan |
+| 2 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; the first resource in an empty foundation |
+| 3 | **Other pathways on real resources** | possible now that the override exists | Energy Basics and Start Here could follow the same private-path pattern once their resources are live |
+| 4 | **Retiring demo placeholders** | 28 remain | a decision before any public launch |
 
 ## Water pathway
 

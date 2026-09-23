@@ -186,7 +186,30 @@
       "status": "as deployed — values copied from the pilot record (admin-import/pilot/og-02.json) so prep reproduces the live resource exactly; the deployed private record is not changed",
       "pdfTitleStatus": "standard applies (Stage 9.20): \"<Resource Title> — OffGrid056\"",
       "safetyBlocks": [],
-      "approvedSafetyBlocks": []
+      "approvedSafetyBlocks": [],
+      "safetyExemptions": [
+        {
+          "block": "fire-and-emergency",
+          "reason": "Audited 2026-09-23 (Stage 9.47 Part A). OG-02 is a risk identifier: the member ticks hazards that apply to their household. Its only fire references, in the legacy source and unchanged by migration, are the checklist labels 'Fire in the home' and 'Bushfire risk area'. There is no fire teaching of any kind — no response, evacuation, egress, alarm, extinguisher, suppression or preparation wording — in the member-facing text or the injected blocks, and the treatment of fire is identification only. The requirement was raised because the audit text counts the PDF and HTML copies of the source together.",
+          "approvedBy": "owner",
+          "approvedOn": "2026-09-23",
+          "approvalRef": "Stage 9.47 Part A",
+          "allowedMentions": [
+            "Fire in the home",
+            "Bushfire risk area"
+          ]
+        }
+      ],
+      "safetyExemptionsStatus": "owner-approved 2026-09-23 (Stage 9.47) — hazard identification ONLY. Resource-specific, exact-context, fails closed: any other fire or bushfire wording lapses it, and so does any fire-teaching signal (response, evacuation, egress, smoke alarms, extinguishers, suppression, defensible space, escape planning, sheltering, bushfire or wildfire preparation) even where the word 'fire' never appears.",
+      "safetyExemptionsAudit": {
+        "ruling": "Stage 9.47 Part A",
+        "auditedOn": "2026-09-23",
+        "A_resourceOwnText": "2 fire references in both markets, both checklist labels: 'Fire in the home' (household risk list) and 'Bushfire risk area' (property risk list). 0 fire-teaching signals.",
+        "B_injectedSafetyBlockText": "0 fire references in either market.",
+        "C_legacySourceText": "The same 2 labels, and nothing else. Nothing fire-related was removed during migration.",
+        "finalOutputCheck": "Run against the FINAL migrated NZ and AU files: 2 allowed mentions, 0 unexpected mentions, 0 teaching signals — the exemption holds.",
+        "lapses": "Automatically, on any fire or bushfire wording outside those two exact labels, or on any fire-teaching signal. Scoped to OG-02 alone; there is no global fire exemption and the fire detector was not weakened (it was strengthened at Stage 9.46 to catch 'bushfire' and 'wildfire')."
+      }
     },
     "OG-26": {
       "foundation": "general",
