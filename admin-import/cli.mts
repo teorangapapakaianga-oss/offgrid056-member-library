@@ -25,6 +25,7 @@ import { runPilot, writePilot } from "./pilot/run";
 import { prepareResource } from "./pilot/prep";
 import { analyseGroupA, safetyExposureFor } from "./audit/group-a";
 import { loadTreatmentRegistry } from "./audit/treatment";
+import { loadNumericRegistry } from "./audit/numeric";
 import { assessMarket } from "./markets/readiness";
 import type { Candidate, DuplicateGroup, ScanSummary } from "./types";
 
@@ -497,6 +498,9 @@ async function commandPrep() {
   const legacyTerms = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "legacy-terms.json"), "utf8"));
   // Owner-approved treatment claims. Every numeric or efficacy treatment claim is checked against this, per market.
   const treatmentRegistry = loadTreatmentRegistry(path.join(import.meta.dirname, "config", "treatment-sources.json"));
+  // Numeric claims outside treatment. The file carries its own mode, so switching blocking on or off is an owner
+  // decision recorded in config rather than a code change.
+  const numericRegistry = loadNumericRegistry(path.join(import.meta.dirname, "config", "numeric-claims.json"));
   // Unapproved copy, rendered only for owner review. A resource carrying any of it cannot be ready.
   const proposedFile = path.join(import.meta.dirname, "config", "proposed-copy.json");
   const proposedCopy = fs.existsSync(proposedFile) ? JSON.parse(fs.readFileSync(proposedFile, "utf8")).changes ?? {} : {};
@@ -539,6 +543,7 @@ async function commandPrep() {
       safetyBlockTrims: metadata[item.legacyCode]?.safetyBlockTrims ?? [],
       fuelExemptions: metadata[item.legacyCode]?.fuelExemptions ?? [],
       treatmentRegistry,
+      numericRegistry,
     });
     results.push(result);
 

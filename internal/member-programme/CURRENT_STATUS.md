@@ -1,20 +1,20 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.49 (the one unsourced figure resolved; numeric baseline is zero findings).
+**As at:** 23 September 2026, after Stage 9.50 (numeric claim blocking enabled; the library stays green).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **19** (all draft) |
 | **Worker version** | **`0aff3fcd-7080-4ae7-bf28-c5d09414b90a`** |
 | **Rollback available** | `1e4ab83b-4086-4c18-bf09-f6024152abbb` (19 resources, OG-08 AU before the Queensland attribution) |
-| **Tests** | **410 passing** · lint clean · typecheck clean |
-| **Next resource** | **OG-13 Healthy Home Air Audit** — the first Air resource (not started) |
+| **Tests** | **417 passing** · lint clean · typecheck clean |
+| **Next resource** | **OG-13 Healthy Home Air Audit** — needs a fire-alarm and mould research stage first (Stage 9.50 report, item 12) |
 | **Last deployment** | Stage 9.49, 23 September 2026: OG-08's AU three-day figure attributed to Get Ready Queensland |
-| **Last report** | `admin-import/STAGE_9.49_BUCKET_C_RESOLVED.md` |
+| **Last report** | `admin-import/STAGE_9.50_NUMERIC_BLOCKING.md` (validation system — nothing deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
-rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → **410** at Stage 9.49 (the Queensland attribution tests). Nothing was removed.
+rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → 410 at Stage 9.49 → **417** at Stage 9.50 (numeric blocking). Nothing was removed.
 
 ## The 19 deployed resources
 

@@ -19,6 +19,7 @@ import { getFoundation } from "@/lib/content/taxonomy";
 import type { ProgrammeItem } from "../audit/programme";
 import { fireTeachingSignals, safetyTopicMentions, treatmentTeachingSignals } from "../audit/group-a";
 import { isRegisteredClaim, treatmentFindings, type TreatmentRegistry } from "../audit/treatment";
+import { numericBlockingFindings, type NumericRegistry } from "../audit/numeric";
 
 /**
  * An owner-approved, resource-specific exemption from a block the topic detector requires. It holds only while
@@ -432,6 +433,12 @@ export interface PrepInputs {
    * than silently passed.
    */
   treatmentRegistry?: TreatmentRegistry;
+  /**
+   * Owner-approved numeric claims outside treatment (config/numeric-claims.json). It carries its own mode: in
+   * "blocking" mode an unexplained figure fails the market; in "report-only" it changes nothing here. Without a
+   * registry nothing is approved, so a blocking build cannot be passed by leaving the file out.
+   */
+  numericRegistry?: NumericRegistry;
 }
 
 export function prepareResource(inputs: PrepInputs): PrepResult {
@@ -566,13 +573,24 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // Treatment claims are checked on the finished market file — the resource's own text AND its safety blocks —
     // so a block's own figures are held to the same registry, and a figure that belongs to the other market fails
     // here rather than in review. With no registry, nothing is approved and every claim fails: that is the point.
-    const treatment = treatmentFindings(withSafety, code, inputs.treatmentRegistry ?? { claims: [] });
+    const treatmentRegistry = inputs.treatmentRegistry ?? { claims: [] };
+    const treatment = treatmentFindings(withSafety, code, treatmentRegistry);
     for (const finding of treatment) if (!otherFindings.includes(finding)) otherFindings.push(finding);
+    // Numeric claims outside treatment (Stage 9.50). Blocking only when the registry says so, and only in the
+    // categories this activation covers; a missing registry approves nothing, exactly as treatment's does.
+    const numeric = numericBlockingFindings(withSafety, {
+      resource: item.legacyCode,
+      market: code,
+      registry: inputs.numericRegistry ?? { claims: [], mode: "report-only" },
+      treatment: treatmentRegistry,
+    });
+    for (const finding of numeric) if (!otherFindings.includes(finding)) otherFindings.push(finding);
     // A safety block that could not be placed is a blocker, not a warning: the member would never see it.
     const unplaced = [
       ...trimProblems,
       ...fuelFindings,
       ...treatment,
+      ...numeric,
       ...injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`),
       // A topic the resource teaches without its safety block is a blocker in every market.
       ...marketMissing.map((id) =>

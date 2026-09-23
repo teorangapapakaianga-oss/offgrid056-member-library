@@ -1,7 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { blockingFindings, loadNumericRegistry, scanNumericClaims, type NumericCandidate } from "@/admin-import/audit/numeric";
+import {
+  blockingFindings,
+  loadNumericRegistry,
+  numericBlockingFindings,
+  scanNumericClaims,
+  type NumericCandidate,
+  type NumericRegistry,
+} from "@/admin-import/audit/numeric";
 import { loadTreatmentRegistry } from "@/admin-import/audit/treatment";
 
 /**
@@ -155,14 +162,86 @@ describe("OG-08's Australian three-day figure", () => {
   });
 });
 
-describe("report-only, and what blocking would do", () => {
-  it("is not wired into preparation: no build can fail on it yet", () => {
+describe("blocking mode (Stage 9.50)", () => {
+  const blocking: NumericRegistry = { ...registry, mode: "blocking", blockingExcludes: registry.blockingExcludes ?? [] };
+  const findings = (text: string, market: string, resource: string, reg: NumericRegistry = blocking) =>
+    numericBlockingFindings(`<div class="content"><p>${text}</p></div>`, { resource, market, registry: reg, treatment });
+
+  it("is the active mode, and is wired into preparation", () => {
+    const config = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/numeric-claims.json"), "utf8"));
+    expect(config.mode).toBe("blocking");
+    expect(config.blockingExcludes).toEqual(["percentage", "currency"]);
     const prep = fs.readFileSync(path.join(root, "admin-import/pilot/prep.ts"), "utf8");
-    expect(prep).not.toMatch(/scanNumericClaims|numeric-claims/);
-    expect(JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/numeric-claims.json"), "utf8")).mode).toBe("report-only");
+    expect(prep).toContain("numericBlockingFindings");
   });
 
-  it("approves nothing with an empty registry — which is what blocking mode would enforce", () => {
+  it("passes a known sourced claim, and fails an unregistered one", () => {
+    expect(findings("Store at least 3 litres of drinking water per person per day.", "NZ", "OG-08")).toEqual([]);
+    const unregistered = findings("Keep the tank at least 4 metres from the boundary.", "NZ", "OG-B08");
+    expect(unregistered.length).toBe(1);
+    expect(unregistered[0]).toContain("UNSOURCED_NUMERIC_CLAIM (NZ)");
+    expect(unregistered[0]).toContain("4 metres");
+  });
+
+  it("fails the wrong market, the wrong resource and a missing jurisdiction label", () => {
+    expect(findings("Store at least 3 litres of drinking water per person per day.", "AU", "OG-08").length).toBe(1);
+    expect(findings("NZ published planning guidance (Building Performance, MBIE) — at least 30,000 litres as a sole supply.", "NZ", "OG-B08").length).toBe(1);
+    expect(findings("Fit fine insect-proof screens on all inlets, about 1 mm.", "AU", "OG-B08").length).toBe(1);
+    expect(findings("Fit fine insect-proof screens on all inlets — NSW Health gives 1 mm as an example.", "AU", "OG-B08")).toEqual([]);
+  });
+
+  it("never blocks structure, member inputs or treatment figures", () => {
+    // B: a standard's number. D: a planning horizon. E: a bleach ratio.
+    expect(findings("Look for certification to AS/NZS 4348 or ANSI/NSF 53.", "AU", "OG-B08")).toEqual([]);
+    expect(findings("Target to close first (3-day / 7-day / 14-day / 30-day)", "NZ", "OG-08")).toEqual([]);
+    expect(findings("Add 5 drops of plain, unperfumed household bleach to 1 litre of water.", "NZ", "OG-09")).toEqual([]);
+  });
+
+  it("holds percentages and currency out of this first activation, while still detecting them", () => {
+    const percent = "A collection efficiency of 90% is typical for this roof.";
+    expect(findings(percent, "NZ", "OG-10")).toEqual([]);
+    // Still found and classified — it simply does not block yet.
+    expect(bucketOf(percent, "NZ", "OG-10")).toContain("C_NEEDS_SOURCE");
+    expect(blockingFindings(scan(percent, "NZ", "OG-10")).length).toBe(1);
+  });
+
+  it("blocks everything factual when the registry is empty or missing", () => {
+    const sourced = "Store at least 3 litres of drinking water per person per day.";
+    expect(findings(sourced, "NZ", "OG-08", { claims: [], mode: "blocking" }).length).toBe(1);
+    // A registry left in report-only cannot be used to slip a figure through prep unnoticed either: prep passes the
+    // real config, and the real config is blocking.
+    expect(findings(sourced, "NZ", "OG-08", { claims: [], mode: "report-only" })).toEqual([]);
+  });
+
+  it("leaves the whole live library green: every prepared file has zero blocking findings", () => {
+    const prepDir = path.join(root, "workspace/prep");
+    if (!fs.existsSync(prepDir)) return; // the prepared workspace is local and git-ignored
+    const problems: string[] = [];
+    for (const dir of fs.readdirSync(prepDir, { withFileTypes: true }).filter((d) => d.isDirectory())) {
+      for (const file of fs.readdirSync(path.join(prepDir, dir.name)).filter((f) => f.endsWith(".html"))) {
+        const market = file.includes(".NZ.") ? "NZ" : "AU";
+        const html = fs.readFileSync(path.join(prepDir, dir.name, file), "utf8");
+        problems.push(...numericBlockingFindings(html, { resource: dir.name, market, registry: blocking, treatment }));
+      }
+    }
+    expect(problems).toEqual([]);
+  });
+});
+
+describe("report-only behaviour, still available", () => {
+  it("changes nothing when the registry says report-only", () => {
+    const reportOnly = { ...registry, mode: "report-only" as const };
+    expect(
+      numericBlockingFindings('<div class="content"><p>Keep the tank at least 4 metres from the boundary.</p></div>', {
+        resource: "OG-B08",
+        market: "NZ",
+        registry: reportOnly,
+        treatment,
+      }),
+    ).toEqual([]);
+  });
+
+  it("approves nothing with an empty registry — which is what blocking mode enforces", () => {
     const sourced = "Store at least 3 litres of drinking water per person per day.";
     expect(bucketOf(sourced, "NZ", "OG-08", empty)).toContain("C_NEEDS_SOURCE");
     expect(blockingFindings(scan(sourced, "NZ", "OG-08", empty)).length).toBeGreaterThan(0);

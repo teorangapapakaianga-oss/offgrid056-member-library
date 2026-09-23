@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.49. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.50. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -25,7 +25,7 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 | `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
 
-**The numeric claim registry (report-only).** `admin-import/config/numeric-claims.json` holds 17 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks nothing yet** (report-only). As at Stage 9.49 the scan across all 19 resources and 38 market files returns **zero** NEEDS_SOURCE findings, which is the baseline a blocking switch would inherit.
+**The numeric claim registry (report-only).** `admin-import/config/numeric-claims.json` holds 17 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks from Stage 9.50**: an unexplained figure fails preparation for that market, exactly as the treatment gates do. Structure, member inputs and treatment-owned figures never block, an empty registry approves nothing, and percentages and currency are detected but held out of this first activation. The live library returns **zero** findings.
 
 **The treatment source registry.** `admin-import/config/treatment-sources.json` holds the 21 approved treatment
 claims — 9 NZ, 12 AU — each with its market, jurisdiction, method, wording, numeric value, source, authority, date,
@@ -78,6 +78,7 @@ publishes no timings.
 | **`UNSOURCED_TESTING_INTERVAL`** | a testing or inspection interval with no approved entry blocks it; AU operator schedules need their label | same |
 | **`UNSAFE_CONTAMINATED_SOURCE_GUIDANCE`** | contaminated-source guidance blocks the market unless the document carries that market's approved limitation | same |
 | **No registry** | with no treatment registry supplied, nothing is approved and every treatment claim fails | `prep.ts` |
+| **`UNSOURCED_NUMERIC_CLAIM`** | a capacity, distance, height, weight, pressure, interval, temperature, area or power figure with no approved entry for that market **and** that resource blocks the market; percentages and currency are reported but do not block in this first activation | `admin-import/audit/numeric.ts`, `prep.ts` |
 
 ## Scoped exceptions (resource-specific only)
 

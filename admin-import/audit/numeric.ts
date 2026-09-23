@@ -65,6 +65,17 @@ export interface NumericClaim {
 
 export interface NumericRegistry {
   claims: NumericClaim[];
+  /**
+   * "report-only" records findings without stopping anything; "blocking" makes an unexplained figure fail the
+   * market, as the treatment gates do. The config states which it is, so the file cannot disagree with the code.
+   */
+  mode?: "report-only" | "blocking";
+  /**
+   * Categories held out of the first activation (Stage 9.50): percentages, because no live claim has ever exercised
+   * that path, and currency, because prices need a freshness system rather than a safety gate. They are still
+   * detected and reported — they simply do not block.
+   */
+  blockingExcludes?: NumericCategory[];
 }
 
 export interface NumericCandidate {
@@ -120,6 +131,9 @@ const STRUCTURAL: { pattern: RegExp; why: string }[] = [
 /** Worksheet furniture: a blank for the member to fill in, or a formula's variable. */
 const NOT_A_CLAIM: { pattern: RegExp; why: string }[] = [
   { pattern: /^[_\s.·—–-]*$/, why: "an empty worksheet line" },
+  // The TOTAL row of a table the member fills in: their own percentages add to 100. Prep's figure flag has always
+  // treated a bare "100%" this way; the numeric classifier agrees rather than contradicting it.
+  { pattern: /^\s*100\s?%\s*$/, why: "a column total — the member's own percentages add to 100%" },
   { pattern: /\b(?:your|my|own)\s+(?:figure|number|total|answer)\b/i, why: "the member's own figure" },
   { pattern: /=\s*[A-Za-z][A-Za-z ()]*\s*[×x*]\s*[A-Za-z]/, why: "a formula written in variables, not fixed numbers" },
 ];
@@ -189,8 +203,10 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
   for (const { pattern, unit, category } of UNITS) {
     // Digits may run straight into the unit ("30cm", "5L"); a spelled-out number may not, or "ten" + "t" would
     // read "tent" as ten tonnes. Spelled-out numbers therefore need a space or hyphen before the unit.
+    // The unit ends the match, so the boundary is "not followed by another letter or digit" rather than \b — a
+    // trailing \b after "%" would never fire, which is how "90%" went undetected.
     const re = new RegExp(
-      `\\b(?:\\d[\\d,]*(?:\\.\\d+)?(?:\\s?[–-]\\s?\\d[\\d,]*(?:\\.\\d+)?)?\\s?-?\\s?${pattern}|${NUMBER}[\\s-]+${pattern})\\b`,
+      `\\b(?:\\d[\\d,]*(?:\\.\\d+)?(?:\\s?[–-]\\s?\\d[\\d,]*(?:\\.\\d+)?)?\\s?-?\\s?${pattern}|${NUMBER}[\\s-]+${pattern})(?![A-Za-z0-9])`,
       "gi",
     );
     for (const m of sentence.matchAll(re)) {
@@ -287,12 +303,36 @@ export function scanNumericClaims(
   );
 }
 
-/** In blocking mode (not enabled yet), these are the candidates that would stop a build. */
-export const blockingFindings = (candidates: NumericCandidate[]): NumericCandidate[] =>
-  candidates.filter((c) => c.bucket === "C_NEEDS_SOURCE");
+/**
+ * The candidates that stop a build: only `C_NEEDS_SOURCE`, and only in categories this activation covers.
+ *
+ * Structure, member inputs and treatment-owned figures never block — a page number is not a claim, a member's own
+ * total is not a claim, and a bleach ratio is the treatment gates' business.
+ */
+export const blockingFindings = (candidates: NumericCandidate[], excludes: NumericCategory[] = []): NumericCandidate[] =>
+  candidates.filter((c) => c.bucket === "C_NEEDS_SOURCE" && !excludes.includes(c.category));
+
+/**
+ * Numeric findings that must fail this market's file, as strings in the same shape as the fuel and treatment checks.
+ *
+ * Fail-closed: with no registry, or an empty one, nothing is approved and every unexplained figure fails. "The
+ * registry was missing" is not a pass condition (Stage 9.50 ruling 4).
+ */
+export function numericBlockingFindings(
+  html: string,
+  options: { resource: string; market: string; registry: NumericRegistry; treatment: TreatmentRegistry },
+): string[] {
+  const { registry, market } = options;
+  if (registry.mode !== "blocking") return [];
+  const found = blockingFindings(scanNumericClaims(html, options), registry.blockingExcludes ?? []);
+  return found.map((c) => {
+    const short = c.sentence.length > 160 ? `${c.sentence.slice(0, 157)}…` : c.sentence;
+    return `UNSOURCED_NUMERIC_CLAIM (${market}): "${c.figure}" in "${short}" — a ${c.category} figure with no approved entry for this market and resource. Add a verified entry to config/numeric-claims.json, or remove the figure.`;
+  });
+}
 
 export function loadNumericRegistry(file: string): NumericRegistry {
   if (!fs.existsSync(file)) return { claims: [] };
   const parsed = JSON.parse(fs.readFileSync(file, "utf8")) as NumericRegistry;
-  return { claims: parsed.claims ?? [] };
+  return { claims: parsed.claims ?? [], mode: parsed.mode ?? "report-only", blockingExcludes: parsed.blockingExcludes ?? [] };
 }
