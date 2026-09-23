@@ -2,7 +2,7 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 23 September 2026, after Stage 9.43.
+**As at:** 23 September 2026, after Stage 9.44.
 
 | State | Count |
 |---|---|
@@ -13,14 +13,15 @@ All 45 legacy resources and where each one stands.
 
 ---
 
-## Deployed (17)
+## Deployed (18)
 
 Each is a draft with NZ and AU files behind Cloudflare Access.
 
 | Code | Title | Foundation / type | Safety blocks | Stage |
 |---|---|---|---|---|
 | OG-02 | Household Risk Identifier | general / worksheet | — | 9.13 |
-| OG-08 | Water Storage Calculator | water / worksheet | drinking water | 9.39 |
+| OG-08 | Water Storage Calculator | water / worksheet | drinking water (audited exemption from water treatment) | 9.39 |
+| OG-09 | **Household Water Treatment Guide** | water / guide | drinking water · **water treatment** | 9.44 |
 | OG-10 | Rainwater Harvesting Planner | water / planner | drinking water · working at height | 9.41 |
 | OG-11 | 30-Day Pantry Builder | food / worksheet | food safety | 9.27 |
 | OG-15 | Warm Home Scorecard | shelter / assessment | CO · indoor combustion · solid fuel | 9.19 |
@@ -37,14 +38,10 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 
-## Prepared — awaiting owner approval (1)
+## Prepared — awaiting owner approval (0)
 
-| Code | Title | Foundation / type | Safety blocks | Stage | Waiting on |
-|---|---|---|---|---|---|
-| OG-09 | Filtration Comparison Matrix | water / guide | drinking water · **water treatment** | 9.43 | owner approval of the rewritten teaching content (the efficacy matrix, brand, prices and intervals are gone; two market method tables and a six-step fail-safe worksheet replace them), the title decision, and the OG-08 block decision |
-
-Both PDFs are rendered and verified (NZ 8 pages, AU 9 pages), and **nothing has been deployed**: the member files are
-not in `private-assets/` and the Worker is unchanged.
+Nothing is waiting on an owner decision. OG-09 was approved and deployed at Stage 9.44, renamed **Household Water
+Treatment Guide** (`/resources/household-water-treatment-guide/`); `legacyCode` OG-09 stays internal.
 
 ## Blocked — pending research (3)
 

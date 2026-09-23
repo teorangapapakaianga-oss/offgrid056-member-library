@@ -568,7 +568,28 @@
       ],
       "relatedResourcesStatus": "owner-approved 2026-09-22",
       "route": "/resources/water-storage-calculator/ — in the private preview this real record supersedes the Stage 5 demo placeholder res-0015 (Stage 9.38 rulings 10–12); the public/demo build is unchanged",
-      "deploymentApproved": "2026-09-22 (Stage 9.38 ruling 18, conditional on final validation)"
+      "deploymentApproved": "2026-09-22 (Stage 9.38 ruling 18, conditional on final validation)",
+      "safetyExemptions": [
+        {
+          "block": "water-treatment",
+          "reason": "Audited 2026-09-23 (Stage 9.43 ruling 8). The LEGACY source taught treatment — 'Add 5 drops of plain unscented bleach per litre if treating uncertain water sources' — and that wording was removed during migration. The MIGRATED member-facing teaching is storage calculation only: its single treatment word is the sequencing line 'Do not plan rainwater tanks or filtration systems before you have basic stored water covered', which tells a member what to do first and teaches no method. The approved stored-drinking-water block stays, and its bleach method is a registered storage claim, so no full water-treatment block is required.",
+          "approvedBy": "owner",
+          "approvedOn": "2026-09-23",
+          "allowedMentions": [
+            "filtration systems"
+          ]
+        }
+      ],
+      "safetyExemptionsAudit": {
+        "ruling": "Stage 9.43 rulings 8, 9 and 10",
+        "auditedOn": "2026-09-23",
+        "A_resourceOwnText": "1 treatment mention ('filtration', in the sequencing line), 0 treatment-teaching signals. On its own text alone OG-08 requires only stored-drinking-water.",
+        "B_injectedSafetyBlockText": "NZ: the stored-drinking-water block's storage method (five drops of unscented bleach per litre, 30 minutes) and 'Disinfect collected rainwater before drinking it…'. AU: 'boil it vigorously for at least one minute…'. Both match approved registry claims (nz-bleach-storage-dose, au-boil-one-minute-wa).",
+        "C_legacySourceText": "3 treatment mentions and 1 teaching signal: the removed bleach dosing line, the sequencing line, and the 'Next: OG-09 Water Filtration Comparison Matrix' navigation. This layer is what raises the detector, and it is not member-facing.",
+        "finalOutputGates": "treatmentFindings on the FINAL rendered NZ and AU files: 0 findings in each (ruling 10).",
+        "lapses": "Automatically. The exemption holds only while every treatment word in OG-08's own text is 'filtration systems'; any bleach, chlorination, boiling, filter, UV, purification or disinfection wording breaks it, and so does any treatment-teaching signal (an efficacy claim, a dose, a boil time, a micron rating, a method comparison) even when no treatment word is used. It is scoped to OG-08 alone: there is no global exemption and no exempted phrase anywhere else."
+      },
+      "safetyExemptionsStatus": "owner-approved 2026-09-23 (Stage 9.43 rulings 8 and 9)"
     },
     "OG-10": {
       "foundation": "water",
@@ -606,19 +627,19 @@
     },
     "OG-09": {
       "foundation": "water",
-      "foundationStatus": "proposed 2026-09-23 — owner review (Stage 9.42 ruling 15)",
+      "foundationStatus": "owner-approved 2026-09-23",
       "resourceType": "guide",
-      "resourceTypeStatus": "proposed 2026-09-23 — the audit inferred 'worksheet'; after the rebuild the resource is a market method table plus a decision worksheet, so 'guide' fits better",
+      "resourceTypeStatus": "owner-approved 2026-09-23 (guide)",
       "category": "water-security",
-      "categoryStatus": "proposed 2026-09-23",
+      "categoryStatus": "owner-approved 2026-09-23",
       "difficulty": "beginner",
-      "difficultyStatus": "proposed 2026-09-23",
-      "difficultySource": "INFERRED — the document states no level. The flow is six decision steps and no calculation.",
+      "difficultyStatus": "owner-approved 2026-09-23",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level; the flow is six decision steps and no calculation.",
       "estimatedTime": 20,
-      "estimatedTimeStatus": "proposed 2026-09-23 (INFERRED)",
+      "estimatedTimeStatus": "owner-approved 2026-09-23 (OWNER-APPROVED / INFERRED)",
       "estimatedTimeReasoning": "INFERRED: six worksheet steps, one market method table to read, and a maintenance and testing table. Excludes buying, installing or testing anything.",
       "description": "Work out whether your water needs treating, whether treating it at home is appropriate at all, and which methods official guidance supports — with the limits of each, and when to ask for official advice.",
-      "descriptionStatus": "proposed 2026-09-23 — replaces the cover subtitle, which promised a buying matrix ('so you buy the right tool')",
+      "descriptionStatus": "owner-approved 2026-09-23",
       "tags": [],
       "safetyBlocks": [
         "stored-drinking-water",
@@ -635,15 +656,19 @@
         "Distillation is named as outside the currently verified guidance, with no operating instructions (ruling 14).",
         "No brand names: the Berkey-style row is removed and no replacement product is recommended (ruling 13)."
       ],
-      "hazardFlagsStatus": "proposed 2026-09-23",
+      "hazardFlagsStatus": "owner-approved 2026-09-23",
       "relatedResources": [
         "res-1008",
         "res-1010"
       ],
       "relatedResourcesNote": "OG-08 Water Storage Calculator (the stored-water fallback) and OG-10 Rainwater Harvesting Planner (the collection system this treats water from).",
-      "relatedResourcesStatus": "proposed 2026-09-23",
-      "titleStatus": "UNCHANGED — still 'Water Filtration Comparison Matrix'. A rename to something like 'Water Treatment & Source Guide' would suit the rebuilt content but changes the slug and the route, so it is an owner decision and was not made here.",
-      "status": "PREPARED FOR OWNER REVIEW — not deployed (Stage 9.42 ruling 15: content approval before PDF approval)"
+      "relatedResourcesStatus": "owner-approved 2026-09-23",
+      "titleStatus": "owner-approved 2026-09-23 (Stage 9.43 ruling 4) — renamed from 'Water Filtration Comparison Matrix'. Slug, route, PDF title and running header follow it; legacyCode OG-09 stays internal.",
+      "status": "APPROVED FOR PRIVATE PREVIEW DEPLOYMENT as #18 (Stage 9.43 ruling 13)",
+      "title": "Household Water Treatment Guide",
+      "pdfTitle": "Household Water Treatment Guide — OffGrid056",
+      "route": "/resources/household-water-treatment-guide/",
+      "routeNote": "New route. No demo placeholder holds it, so there is no supersession and no collision."
     }
   }
 }

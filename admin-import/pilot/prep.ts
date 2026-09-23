@@ -17,7 +17,7 @@ import { injectSafetyChecked } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
 import { getFoundation } from "@/lib/content/taxonomy";
 import type { ProgrammeItem } from "../audit/programme";
-import { safetyTopicMentions } from "../audit/group-a";
+import { safetyTopicMentions, treatmentTeachingSignals } from "../audit/group-a";
 import { isRegisteredClaim, treatmentFindings, type TreatmentRegistry } from "../audit/treatment";
 
 /**
@@ -89,11 +89,21 @@ export function fuelSafetyFindings(html: string, exemptions: FuelExemption[] = [
   });
 }
 
-/** Whether an exemption still holds for this member-facing HTML, and what breaks it if not. */
+/**
+ * Whether an exemption still holds for this member-facing HTML, and what breaks it if not.
+ *
+ * Two things break it. A mention of the topic that the owner did not review — the general rule — and, for the
+ * water-treatment block, any sign that the resource has started *teaching* treatment: an efficacy claim, a dose, a
+ * boil time, a rating, a method comparison (Stage 9.43 ruling 9). The second test exists because treatment teaching
+ * can be written without ever using one of the topic words: "the cartridge removes bacteria" names no method.
+ */
 export function exemptionHolds(exemption: SafetyExemption, html: string): { holds: boolean; unexpected: string[] } {
   let text = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
   for (const allowed of exemption.allowedMentions) text = text.split(allowed).join(" ");
   const unexpected = safetyTopicMentions(text, exemption.block);
+  if (exemption.block === "water-treatment") {
+    for (const signal of treatmentTeachingSignals(text)) unexpected.push(`teaches treatment: "${signal}"`);
+  }
   return { holds: unexpected.length === 0, unexpected };
 }
 
@@ -385,6 +395,12 @@ export interface PrepInputs {
   proposedBlockIds?: string[];
   /** old product and platform names to flag (config/legacy-terms.json) */
   legacyTerms?: LegacyTerms;
+  /**
+   * An owner-approved title, replacing the one read from the document's cover. The slug, the route and the default
+   * PDF title all follow it, so a rename stays in one piece. The document's own cover and running header are changed
+   * by approved copy changes, which is what keeps the page and the record saying the same thing.
+   */
+  title?: string | null;
   /** an owner-approved library description, replacing the one read from the document */
   description?: string | null;
   /** an owner-specified PDF title (the title bar); defaults to "<title> — OffGrid056". Never carries a legacy code. */
@@ -431,7 +447,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   const described = describeFromHtml(sourceHtml);
   // An owner-approved description replaces the document's own, which may carry legacy text ("Day 25 — …").
   const description = inputs.description ?? described.description;
-  const title = described.title ?? item.title;
+  const title = inputs.title ?? described.title ?? item.title;
   const slug = slugify(title);
 
   // The <title> becomes the PDF's title bar. Owner standard (2026-09-22): "<Resource Title> — OffGrid056", never

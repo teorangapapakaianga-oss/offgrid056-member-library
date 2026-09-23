@@ -99,6 +99,18 @@ export function safetyExposureFor(text: string): string[] {
   ).map((t) => t.block);
 }
 
+/**
+ * Signals that a document *teaches* water treatment rather than naming it: an efficacy claim, a dose, a boil time, a
+ * rating, or a method-versus-method comparison. Exported so an exemption from the treatment block can be held to the
+ * same test the detector uses — a resource that starts teaching treatment loses the exemption automatically.
+ */
+export function treatmentTeachingSignals(text: string): string[] {
+  const topic = SAFETY_TOPICS.find((t) => t.block === "water-treatment");
+  if (!topic?.teaching) return [];
+  const all = new RegExp(topic.teaching.source, `${topic.teaching.flags.replace("g", "")}g`);
+  return [...new Set((text.match(all) ?? []).map((s) => s.toLowerCase()))];
+}
+
 /** Every mention of the topic that pulls in `block` (none if the block has no topic). */
 export function safetyTopicMentions(text: string, block: string): string[] {
   const topic = SAFETY_TOPICS.find((t) => t.block === block);

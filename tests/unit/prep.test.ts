@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { keepSmallTablesTogether, reskinHtml } from "@/admin-import/reskin/reskin";
-import { findContentFlags, fuelSafetyFindings, prepareResource, unansweredSafetyNotes, type PrepInputs } from "@/admin-import/pilot/prep";
+import { exemptionHolds, findContentFlags, fuelSafetyFindings, prepareResource, unansweredSafetyNotes, type PrepInputs, type SafetyExemption } from "@/admin-import/pilot/prep";
 import profilesFile from "@/admin-import/markets/profiles.json";
 import pilotSpec from "@/admin-import/pilot/og-02.json";
 import topicBlocks from "@/admin-import/config/safety-blocks.json";
@@ -236,7 +236,10 @@ describe("prepareResource: resource-specific safety exemptions (Stage 9.30)", ()
   it("is recorded for OG-18 only, with the owner's reason and allowed mention", () => {
     const meta = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<string, { safetyExemptions?: typeof EXEMPT[] }>;
     const holders = Object.entries(meta).filter(([, m]) => m.safetyExemptions?.length).map(([code]) => code);
-    expect(holders).toEqual(["OG-18"]);
+    // Two exemptions exist, each for one resource and one reviewed phrase: OG-18's fridge/freezer row (Stage 9.30)
+    // and OG-08's "filtration systems" sequencing line (Stage 9.43). There is still no global exemption.
+    expect([...holders].sort()).toEqual(["OG-08", "OG-18"]);
+    expect(meta["OG-08"].safetyExemptions).toMatchObject([{ block: "water-treatment", allowedMentions: ["filtration systems"] }]);
     expect(meta["OG-18"].safetyExemptions).toMatchObject([{ block: "food-safety-power-cut", reason: "appliance/load reference only; no food-safety teaching", allowedMentions: ["Fridge / freezer"] }]);
   });
 });
@@ -881,7 +884,7 @@ describe("OG-10 rainwater planner", () => {
 });
 
 describe("OG-09 water treatment guide (Stage 9.43)", () => {
-  type Change = { where: string; from: string; to: string; markets?: string[] };
+  type Change = { where: string; from: string; to: string; markets?: string[]; expectedMatches?: number };
   const og09 = (JSON.parse(fs.readFileSync(path.resolve("admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-09"] ?? [];
   const forMarket = (m: string) =>
     og09.filter((c) => !c.markets || c.markets.includes(m)).map((c) => c.to.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ")).join("\n");
@@ -949,12 +952,40 @@ describe("OG-09 water treatment guide (Stage 9.43)", () => {
     expect(worksheet.to).not.toContain("cite from matrix above");
   });
 
-  it("carries the treatment and storage blocks, and keeps the legacy title decision visible", () => {
+  it("carries the treatment and storage blocks", () => {
     expect(meta.safetyBlocks).toEqual(["stored-drinking-water", "water-treatment"]);
     expect(meta.approvedSafetyBlocks).toEqual(["stored-drinking-water", "water-treatment"]);
     expect(meta.relatedResources).toEqual(["res-1008", "res-1010"]);
-    expect(meta.titleStatus).toMatch(/UNCHANGED/);
-    expect(meta.status).toMatch(/OWNER REVIEW/);
+  });
+
+  // Stage 9.43 ruling 4: renamed, with nothing left saying the old name.
+  it("is renamed everywhere at once: record, slug, route, PDF title, cover and running header", () => {
+    expect(meta.title).toBe("Household Water Treatment Guide");
+    expect(meta.pdfTitle).toBe("Household Water Treatment Guide — OffGrid056");
+    expect(meta.route).toBe("/resources/household-water-treatment-guide/");
+    const cover = og09.find((c) => c.where === "Cover title")!;
+    const header = og09.find((c) => c.where === "Page header titles (both pages)")!;
+    expect(cover.to).toContain("Household Water<br>Treatment Guide");
+    expect(header.to).toContain("Household Water Treatment Guide");
+    expect(header.expectedMatches ?? 1).toBe(2);
+    // No mixed naming: the old name survives only in the text being replaced.
+    expect(all).not.toMatch(/Filtration Comparison Matrix|Water Filtration/);
+    expect(removed).toContain("Filtration Comparison Matrix");
+  });
+
+  it("renames the record and the slug from the metadata title, not from the cover", () => {
+    const r = prepareResource({
+      item: item({ legacyCode: "OG-09", proposedResourceId: "res-1009", title: "Water Filtration Comparison Matrix" }),
+      sourceHtml: DOC.replace('<h1 class="cover-title">OG-27 90-Day Implementation Roadmap</h1>', '<h1 class="cover-title">Water Filtration Comparison Matrix</h1>'),
+      blocks,
+      markets,
+      launchMarkets: ["NZ"],
+      outDir: fs.mkdtempSync(path.join(os.tmpdir(), "og056-prep-")),
+      title: "Household Water Treatment Guide",
+    });
+    expect(r.title).toBe("Household Water Treatment Guide");
+    expect(r.slug).toBe("household-water-treatment-guide");
+    expect(r.pdfTitle).toBe("Household Water Treatment Guide — OffGrid056");
   });
 });
 
@@ -992,5 +1023,56 @@ describe("treatment gates inside prep (Stage 9.43)", () => {
     // In New Zealand the same sentence is still unsourced: the entry it matches belongs to Australia.
     const nz = prep({ sourceHtml: withPercent, launchMarkets: ["NZ"], treatmentRegistry: registry });
     expect(nz.contentFlags.some((f) => f.kind === "figure-needs-source")).toBe(true);
+  });
+});
+
+describe("OG-08 water-treatment exemption (Stage 9.43 rulings 8-10)", () => {
+  const resources = JSON.parse(fs.readFileSync(path.resolve("admin-import/config/metadata-review.json"), "utf8")).resources as Record<
+    string,
+    { safetyExemptions?: SafetyExemption[]; safetyExemptionsAudit?: Record<string, string> }
+  >;
+  const meta = resources["OG-08"];
+  const exemption = meta.safetyExemptions!.find((e) => e.block === "water-treatment")!;
+  const storage = `<div class="content"><h2>Storage</h2>
+    <p>Do not plan rainwater tanks or filtration systems before you have basic stored water covered.</p>
+    <p>Work out how many litres your household needs for three days.</p></div>`;
+
+  it("is scoped to one resource and one reviewed phrase, and records all three audited layers", () => {
+    expect(exemption.allowedMentions).toEqual(["filtration systems"]);
+    expect(exemption.approvedBy).toBe("owner");
+    for (const layer of ["A_resourceOwnText", "B_injectedSafetyBlockText", "C_legacySourceText", "finalOutputGates"]) {
+      expect(meta.safetyExemptionsAudit![layer], layer).toBeTruthy();
+    }
+    const exempted = Object.entries(resources).filter(([, r]) => (r.safetyExemptions ?? []).some((e) => e.block === "water-treatment"));
+    expect(exempted.map(([code]) => code)).toEqual(["OG-08"]);
+  });
+
+  it("holds while the resource only sequences filtration and teaches no method", () => {
+    expect(exemptionHolds(exemption, storage)).toEqual({ holds: true, unexpected: [] });
+  });
+
+  it("lapses the moment treatment is taught — dosing, boiling, UV or a filter", () => {
+    for (const added of [
+      "<p>Add 5 drops of bleach per litre of stored water.</p>",
+      "<p>Boil the water for one minute before drinking.</p>",
+      "<p>A UV unit disinfects the tank supply.</p>",
+      "<p>Fit a carbon filter to purify the water.</p>",
+    ]) {
+      const check = exemptionHolds(exemption, storage.replace("</div>", `${added}</div>`));
+      expect(check.holds, added).toBe(false);
+      expect(check.unexpected.length, added).toBeGreaterThan(0);
+    }
+  });
+
+  it("lapses on a treatment claim that never uses a treatment word", () => {
+    // "the cartridge removes bacteria" names no method, so the topic detector alone would miss it.
+    const check = exemptionHolds(exemption, storage.replace("</div>", "<p>The cartridge removes bacteria from the tank.</p></div>"));
+    expect(check.holds).toBe(false);
+    expect(check.unexpected.join(" ")).toContain("teaches treatment");
+  });
+
+  it("exempts nothing beyond that phrase: the same wording plus a dose still fails", () => {
+    const withTreatment = storage.replace("</div>", "<p>Filtration systems: add 5 drops of bleach per litre.</p></div>");
+    expect(exemptionHolds(exemption, withTreatment).holds).toBe(false);
   });
 });

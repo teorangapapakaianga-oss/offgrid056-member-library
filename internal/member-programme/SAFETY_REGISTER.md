@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.41. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.44. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -23,7 +23,7 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `stored-drinking-water` | Storing drinking water | high | 22 Sep 2026 | OG-08, OG-10, OG-26, OG-B12 |
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
-| `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 (prepared, not yet deployed) |
+| `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
 
 **The treatment source registry.** `admin-import/config/treatment-sources.json` holds the 21 approved treatment
 claims — 9 NZ, 12 AU — each with its market, jurisdiction, method, wording, numeric value, source, authority, date,
@@ -43,7 +43,7 @@ rainwater guidance is recorded as **SOURCE_UNAVAILABLE / NOT RELIED UPON** and i
 | Generator weather / leads | **no NZ wording exists** — not borrowed from AU | shelter from rain, don't cover, heavy-duty outdoor leads rated to the generator |
 | CO alarm | "consider installing carbon monoxide alarms" | battery-operated alarm; near bedrooms; UL2034/EN50291 |
 | Drinking water (storage) | **3 L per person per day for 3 days**; bleach method (5 drops/L); check every 6 months | **10 L per person for 3 days**; boil 1 minute; check twice a year; **no single national bleach ratio** |
-| Water treatment (researched, not approved) | boil **one minute**; bleach **5 drops/L or ½ tsp/10 L, 30 min**, plain unscented; annual testing; **no micron or UV figures published** | rolling boil (NSW) / "at least 1 minute" (WA); bleach ratios **differ by state and by bleach strength**; NSW publishes micron ratings and UV requirements; **no national household frequency** |
+| Water treatment (approved, live in OG-09) | boil **one minute**; bleach **5 drops/L or ½ tsp/10 L, 30 min**, plain unscented; annual testing; **no micron or UV figures published** | rolling boil (NSW) / "at least 1 minute" (WA); bleach ratios **differ by state and by bleach strength**; NSW publishes micron ratings and UV requirements; **no national household frequency** |
 | Food in a power cut | Get Ready order, MPI doors/refreeze/discard — **no timings, MPI publishes none** | NSW Food Authority: about 4 hours fridge, at least 24 hours freezer, eskies, 2-hour cooking rule |
 | Consents / approvals | building consent, "consents", council | permits or approvals; varies by state and territory |
 | Rainfall / weather data | regional council, NIWA | Bureau of Meteorology |
@@ -88,6 +88,7 @@ text changes, the exception stops applying.
 | **OG-B12** | AU: the same CO trim | same reason | Stage 9.36 |
 | **OG-15** | fuel check: exact text *"12. Backup heating exists (fireplace, wood burner, gas heater, portable)"* | list-only; no gas-use instruction; the resource already carries CO and indoor-combustion | Stage 9.36 |
 | **OG-26** | fuel check: exact text *"Emergency heating (gas heater / thermal blankets)"* | a budget line naming options; no gas-use instruction | Stage 9.36 |
+| **OG-08** | exempt from `water-treatment`, allowed mention *"filtration systems"* | audited in three layers: its own migrated text has one treatment word, in a sequencing line, and no teaching signal; the legacy source's bleach dosing was removed at migration; the injected storage block's claims are registry-backed. Final-output gates: 0 findings in both markets. **Lapses automatically** on any other treatment word *or* any treatment-teaching signal, even one using no treatment word at all. | Stage 9.43 (rulings 8–10) |
 
 **Pump electrical wording (OG-10, owner ruling 9, Stage 9.40):** a resource that only mentions a pump does **not** get the solar/battery/generator electrical block. It carries a short market-specific line instead — NZ *"an appropriately licensed electrical worker"*, AU *"a licensed electrician"*. The canonical electrical block is unchanged.
 

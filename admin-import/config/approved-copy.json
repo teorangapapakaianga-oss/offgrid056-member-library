@@ -3203,6 +3203,30 @@
         "approvalRef": "Stage 9.42 rulings 12-14"
       },
       {
+        "where": "Cover title",
+        "from": "<h1 class=\"cover-title\">Water Filtration<br>Comparison Matrix</h1>",
+        "to": "<h1 class=\"cover-title\">Household Water<br>Treatment Guide</h1>",
+        "expectedMatches": 1,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "Renamed (ruling 4): the rebuilt resource is not primarily a filter comparison matrix.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
+        "where": "Page header titles (both pages)",
+        "from": "<span class=\"page-header-title\">Filtration Comparison Matrix</span>",
+        "to": "<span class=\"page-header-title\">Household Water Treatment Guide</span>",
+        "expectedMatches": 2,
+        "proposedOn": "2026-09-23",
+        "kind": "stage-9.42-rebuild",
+        "reason": "The running header follows the new title (ruling 4): no mixed naming.",
+        "approvedBy": "owner",
+        "approvedOn": "2026-09-23",
+        "approvalRef": "Stage 9.42 rulings 12-14"
+      },
+      {
         "where": "Intro box",
         "from": "<div class=\"info-box\">\n  <div class=\"info-box-title\">The Filter You Need Depends on Your Source</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">City tap water needs different treatment than rainwater, which needs different treatment than creek water. Buying the wrong filter wastes money and leaves you unprotected. Use this matrix to match your source to the right method.</p>\n</div>",
         "to": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Start With Your Source, Not the Hardware</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Tap water, rainwater and creek water are not the same problem, and no single device solves all of them. Work through the six steps below, then use the method table — every method has limits, and <strong>some contamination cannot be treated at home at all</strong>. Where that is the case, this guide says so and sends you to official advice rather than to a product.</p>\n</div>",

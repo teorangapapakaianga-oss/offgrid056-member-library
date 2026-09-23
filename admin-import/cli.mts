@@ -529,6 +529,7 @@ async function commandPrep() {
       requiredSafety: exposureOf(item),
       proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
       legacyTerms,
+      title: metadata[item.legacyCode]?.title ?? null,
       description: metadata[item.legacyCode]?.description ?? null,
       pdfTitle: metadata[item.legacyCode]?.pdfTitle ?? null,
       proposedCopy: proposedCopy[item.legacyCode] ?? [],
