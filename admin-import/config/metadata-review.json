@@ -672,19 +672,19 @@
     },
     "OG-B08": {
       "foundation": "water",
-      "foundationStatus": "proposed 2026-09-23 — audit HIGH confidence",
+      "foundationStatus": "owner-approved 2026-09-23 (Stage 9.46)",
       "resourceType": "guide",
-      "resourceTypeStatus": "proposed 2026-09-23 — audit HIGH confidence",
+      "resourceTypeStatus": "owner-approved 2026-09-23 (Stage 9.46)",
       "category": "household-water-planning",
-      "categoryStatus": "proposed 2026-09-23 — OWNER-REVIEW REQUIRED",
+      "categoryStatus": "owner-approved 2026-09-23 (Stage 9.46)",
       "difficulty": "intermediate",
-      "difficultyStatus": "proposed 2026-09-23 — INFERRED / OWNER-REVIEW REQUIRED",
-      "difficultySource": "INFERRED — the document states no level. It involves site judgement, supplier questions and a council check, which is a step beyond the beginner storage calculator.",
+      "difficultyStatus": "owner-approved 2026-09-23 (Stage 9.46) — OWNER-APPROVED / INFERRED",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level. It involves site judgement, supplier questions and a council check, a step beyond the beginner storage calculator.",
       "estimatedTime": 25,
-      "estimatedTimeStatus": "proposed 2026-09-23 — INFERRED / OWNER-REVIEW REQUIRED",
+      "estimatedTimeStatus": "owner-approved 2026-09-23 (Stage 9.46) — OWNER-APPROVED / INFERRED",
       "estimatedTimeReasoning": "INFERRED: a five-row materials table, a ten-point site checklist and a twelve-field plan, with two numbers carried in from other resources. Excludes getting quotes, council checks and installation.",
       "description": "Turn the litres you need into a tank you can site: materials, the base and the overflow, access for maintenance, and which parts are a supplier, plumber, professional or council job.",
-      "descriptionStatus": "proposed 2026-09-23",
+      "descriptionStatus": "owner-approved 2026-09-23 (Stage 9.46)",
       "tags": [],
       "safetyBlocks": [
         "stored-drinking-water",
@@ -699,29 +699,30 @@
       "safetyExemptions": [
         {
           "block": "fire-and-emergency",
-          "reason": "PROPOSED, Stage 9.45. The legacy source tripped the fire detector three times — 'Good for bushfire zones', 'fire resistance' and 'fire egress paths' — and all three are removed in migration: the bushfire and fire-resistance claims were unsourced material claims, and the egress line is rewritten as 'Not blocking escape routes or access for emergency services'. The migrated text makes no fire-safety claim and contains no fire wording, and there is no approved fire-and-emergency block to carry. Lapses automatically if any fire, smoke-alarm or evacuation wording appears.",
-          "approvedBy": "PROPOSED — owner review at Stage 9.45",
+          "reason": "Approved 2026-09-23 (Stage 9.46 ruling 2). The legacy source carries three fire phrases — 'Good for bushfire zones', 'Rural; fire resistance' and 'Not blocking fire egress paths' — and all three are removed in migration: the bushfire and fire-resistance claims were unsourced material claims, and the egress line is rewritten as 'Not blocking escape routes or access for emergency services'. The migrated member-facing text makes no fire-safety claim and contains no fire, bushfire, smoke-alarm or evacuation wording at all, and no approved fire-and-emergency block exists to carry. Zero-mention: the exemption lapses the moment any of that wording appears — including 'bushfire', which the detector now catches.",
+          "approvedBy": "owner",
           "approvedOn": "2026-09-23",
-          "allowedMentions": []
+          "allowedMentions": [],
+          "approvalRef": "Stage 9.46 ruling 2"
         }
       ],
-      "safetyExemptionsStatus": "PROPOSED 2026-09-23 — requires owner approval before deployment",
+      "safetyExemptionsStatus": "owner-approved 2026-09-23 (Stage 9.46 ruling 2) — resource-specific, zero-mention, fails closed: any fire, smoke-alarm or evacuation wording lapses it. No global fire exemption exists, and no fire wording is approved through it.",
       "hazardFlags": [
         "No structural instructions: the base, stand and any fixing are routed to the manufacturer, the supplier and a qualified professional.",
         "No universal tank size: sizing is tied to the Water Storage Calculator and the Rainwater Harvesting Planner.",
         "No invented setbacks or clearances: the legacy '3m of downpipes' figure is removed.",
         "Weight is stated only as the conversion (about a kilogram per litre) and never turned into a design figure."
       ],
-      "hazardFlagsStatus": "proposed 2026-09-23",
+      "hazardFlagsStatus": "owner-approved 2026-09-23 (Stage 9.46)",
       "relatedResources": [
         "res-1008",
         "res-1010",
         "res-1009"
       ],
       "relatedResourcesNote": "The water pathway in order: OG-08 Water Storage Calculator (how much), OG-10 Rainwater Harvesting Planner (how much the roof supplies), OG-09 Household Water Treatment Guide (making it safe). OG-B12 was considered and left out: it is a general architecture planner, and four links dilute the journey.",
-      "relatedResourcesStatus": "proposed 2026-09-23 — OWNER-REVIEW REQUIRED",
-      "titleStatus": "UNCHANGED — 'Water Tank Sizing & Placement Guide' still describes the rebuilt resource.",
-      "status": "PREPARED FOR OWNER REVIEW — not deployed (Stage 9.45)"
+      "relatedResourcesStatus": "owner-approved 2026-09-23 (Stage 9.46) — the water pathway only; OG-B12 deliberately excluded",
+      "titleStatus": "owner-approved 2026-09-23 (Stage 9.46) — 'Water Tank Sizing & Placement Guide' kept",
+      "status": "APPROVED FOR PRIVATE PREVIEW DEPLOYMENT as #19 (Stage 9.46 ruling 13)"
     }
   }
 }

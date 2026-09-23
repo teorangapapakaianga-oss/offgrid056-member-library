@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.44. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.46. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -18,9 +18,9 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `batteries-and-electrical` | Batteries and electrical safety | **critical** | 22 Sep 2026 | OG-18, OG-19, OG-20, OG-21, OG-26, OG-27, OG-B07, OG-B12 |
 | `carbon-monoxide` | Carbon monoxide | **critical** | 22 Sep 2026 | OG-15, OG-20, OG-26, OG-27, OG-B12 |
 | `indoor-combustion` | Never bring it inside | **critical** | 22 Sep 2026 | OG-15, OG-26, OG-27 |
-| `working-at-height` | Stay off the roof | **critical** | 22 Sep 2026 | OG-10, OG-18, OG-B07 |
+| `working-at-height` | Stay off the roof | **critical** | 22 Sep 2026 | OG-10, OG-18, OG-B07, OG-B08 |
 | `solid-fuel-heating` | Wood burners and open fires | high | 22 Sep 2026 | OG-15, OG-21, OG-26, OG-B12 |
-| `stored-drinking-water` | Storing drinking water | high | 22 Sep 2026 | OG-08, OG-10, OG-26, OG-B12 |
+| `stored-drinking-water` | Storing drinking water | high | 22 Sep 2026 | OG-08, OG-10, OG-26, OG-B08, OG-B12 |
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 | `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
@@ -88,6 +88,7 @@ text changes, the exception stops applying.
 | **OG-B12** | AU: the same CO trim | same reason | Stage 9.36 |
 | **OG-15** | fuel check: exact text *"12. Backup heating exists (fireplace, wood burner, gas heater, portable)"* | list-only; no gas-use instruction; the resource already carries CO and indoor-combustion | Stage 9.36 |
 | **OG-26** | fuel check: exact text *"Emergency heating (gas heater / thermal blankets)"* | a budget line naming options; no gas-use instruction | Stage 9.36 |
+| **OG-B08** | exempt from `fire-and-emergency`, **zero allowed mentions** | the legacy source's three fire phrases ("Good for bushfire zones", "Rural; fire resistance", "Not blocking fire egress paths") are all removed in migration; the member-facing text carries no fire, bushfire, smoke-alarm or evacuation wording, and no approved fire block exists. **Lapses on any of that wording** — the detector now also catches "bushfire" and "wildfire". | Stage 9.46 (ruling 2) |
 | **OG-08** | exempt from `water-treatment`, allowed mention *"filtration systems"* | audited in three layers: its own migrated text has one treatment word, in a sequencing line, and no teaching signal; the legacy source's bleach dosing was removed at migration; the injected storage block's claims are registry-backed. Final-output gates: 0 findings in both markets. **Lapses automatically** on any other treatment word *or* any treatment-teaching signal, even one using no treatment word at all. | Stage 9.43 (rulings 8–10) |
 
 **Pump electrical wording (OG-10, owner ruling 9, Stage 9.40):** a resource that only mentions a pump does **not** get the solar/battery/generator electrical block. It carries a short market-specific line instead — NZ *"an appropriately licensed electrical worker"*, AU *"a licensed electrician"*. The canonical electrical block is unchanged.

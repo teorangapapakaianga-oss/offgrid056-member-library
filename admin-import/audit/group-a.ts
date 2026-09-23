@@ -58,7 +58,9 @@ const SAFETY_TOPICS: { pattern: RegExp; block: string; needs: number; teaching?:
   { pattern: /\b(batter(y|ies)|inverter|solar)\b/gi, block: "batteries-and-electrical", needs: 3 },
   { pattern: /\b(water storage|water tank|rainwater|drinking water)\b/gi, block: "stored-drinking-water", needs: 3 },
   { pattern: /\b(fridge|freezer|pantry|perishable)\b/gi, block: "food-safety-power-cut", needs: 3 },
-  { pattern: /\b(fire|smoke alarm|evacuat)/gi, block: "fire-and-emergency", needs: 3 },
+  // "bushfire" and "wildfire" carry no word boundary before "fire", so they were invisible to the plain \bfire
+  // pattern. A resource that recommends a tank for bushfire zones is making a fire-safety claim (Stage 9.46).
+  { pattern: /\b(fire|smoke alarm|evacuat)|bushfire|wildfire/gi, block: "fire-and-emergency", needs: 3 },
   {
     pattern:
       /\b(water filters?|filtration|purif(?:y|ier|iers|ication)|disinfect\w*|chlorinat\w*|bleach|boil(?:ing|ed)? (?:the |your )?water|treat(?:ing|ed|ment)s? (?:the |your )?water|ultraviolet|UV (?:steril\w*|purif\w*|treatment|lamp|light))\b/gi,

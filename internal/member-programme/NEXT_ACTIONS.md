@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.45.
+**As at:** 23 September 2026, after Stage 9.46.
 
 ---
 
@@ -10,9 +10,9 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **OG-B08 Water Tank Sizing & Placement Guide** — prepared, PDFs rendered | **prepared** at Stage 9.45 | the proposed fire-and-emergency exemption and the owner-review metadata, then deployment as #19 |
-| 2 | **Water Basics learning path** — proposed rebuild on the four real water resources | proposal returned at Stage 9.45 | owner ruling, and a decision on how a private path is staged (public `data/` cannot name private ids) |
-| 3 | **Figure detector for capacities and distances** | proposed at Stage 9.45 | a small stage: the "needs a source" flag only catches % and °C today |
+| 1 | **Private learning-path override** — then the Water Basics pathway on the four real water resources | **approved in principle** (Stage 9.46 ruling 9) | owner go-ahead for the design in the Stage 9.46 report: one private path file, one staging step, one loader rule, tests |
+| 2 | **OG-02's fire-block requirement** | surfaced at Stage 9.46 | owner decision: an audited OG-02-specific exemption for its two risk-checklist items, or leave OG-02 blocked from re-preparation. The live OG-02 is untouched. |
+| 3 | **Numeric-claim registry and detector** | recorded at Stage 9.46 ruling 10 | its own stage: a `numeric-claims.json` on the treatment-registry pattern, seeded from the 19 live resources |
 | 4 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; the first resource in an empty foundation |
 
 ## Water pathway
@@ -23,10 +23,10 @@ The order to work in, and why:
 |---|---|---|---|
 | ✅ | **OG-08** Water Storage Calculator | **live** | need and storage |
 | ✅ | **OG-10** Rainwater Harvesting Planner | **live** | collection |
-| **review** | **OG-B08** Water Tank Sizing & Placement Guide | **prepared, not deployed** | tanks and placement. 15 changes applied, both markets publishable, PDFs verified. Teaches no treatment (detector and gates: 0), so it points at OG-09 instead. |
 | ✅ | **OG-09** → **Household Water Treatment Guide** | **live** | treatment: two market method tables and a six-step fail-safe worksheet (Stage 9.44) |
+| ✅ | **OG-B08** Water Tank Sizing & Placement Guide | **live** | tanks and placement (Stage 9.46). Teaches no treatment — it points at OG-09 instead. |
 
-**Air still has no resource at all.** OG-13 (Healthy Home Air Audit) is the obvious candidate and needs no new safety
+**The water pathway is complete** — OG-08, OG-10, OG-09 and OG-B08 are all live. **Air still has no resource at all.** OG-13 (Healthy Home Air Audit) is the obvious candidate and needs no new safety
 research, so it is a good low-risk stage whenever the water run pauses.
 
 ## Research stages (each gates resources)

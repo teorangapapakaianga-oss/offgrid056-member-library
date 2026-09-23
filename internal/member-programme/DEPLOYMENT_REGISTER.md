@@ -5,7 +5,7 @@ Every private-preview deployment: version, what went out, and what it can roll b
 **Worker:** `og056-preview` · **URL:** https://og056-preview.offgrid056-member-library.workers.dev
 **Access:** Cloudflare Access on all traffic, at every version.
 
-**As at:** 23 September 2026, after Stage 9.44.
+**As at:** 23 September 2026, after Stage 9.46.
 
 ---
 
@@ -13,18 +13,19 @@ Every private-preview deployment: version, what went out, and what it can roll b
 
 | | |
 |---|---|
-| **Live version** | **`ac0d053a-8abd-4965-8bfe-3cae8ea943a5`** |
+| **Live version** | **`7eee1f48-82c3-483f-8d0b-4b2d4c47e586`** |
 | Deployed | 23 September 2026 |
-| Resources | **18** (36 market files) |
-| Stage | 9.44 — Household Water Treatment Guide (OG-09) |
-| **Rollback** | `d993cb64-676a-46bc-80eb-f4c9850fb0ea` (17 resources) |
-| Private files for rollback | `workspace/backups/private-assets-d993cb64` (51 files) |
+| Resources | **19** (38 market files) |
+| Stage | 9.46 — Water Tank Sizing & Placement Guide (OG-B08) |
+| **Rollback** | `ac0d053a-8abd-4965-8bfe-3cae8ea943a5` (18 resources) |
+| Private files for rollback | `workspace/backups/private-assets-ac0d053a` (54 files) |
 
 ## History
 
 | Version | Deployed (UTC) | Resources | Stage | What went out |
 |---|---|---|---|---|
-| `ac0d053a` | 23 Sep 2026 | **18** | 9.44 | **OG-09** rebuilt and renamed **Household Water Treatment Guide** · the `water-treatment` safety block, the treatment source registry and six fail-closed gates · OG-08's audited treatment exemption |
+| `7eee1f48` | 23 Sep 2026 | **19** | 9.46 | **OG-B08** Water Tank Sizing & Placement Guide · the water pathway completed · fire detector strengthened to catch "bushfire" |
+| `ac0d053a` | 23 Sep 2026 | 18 | 9.44 | **OG-09** rebuilt and renamed **Household Water Treatment Guide** · the `water-treatment` safety block, the treatment source registry and six fail-closed gates · OG-08's audited treatment exemption |
 | `d993cb64` | 23 Sep 2026 | **17** | 9.41 | **OG-10** Rainwater Harvesting Planner · second use of the route supersession (over demo placeholder res-0016) |
 | `a65a1ef1` | 22 Sep 2026 09:58 | 16 | 9.39 | **OG-08** Water Storage Calculator · route supersession (real resource over demo placeholder, preview only) |
 | `61d2acd0` | 22 Sep 2026 09:22 | 15 | 9.37 | **OG-B12** Off-Grid System Architecture Planner · fuel-detector correction (no global "gas heater" exemption) |
@@ -50,8 +51,9 @@ Every deployment keeps two things:
 
 | Snapshot | Files | Matches |
 |---|---|---|
-| `private-assets-ac0d053a` | 54 | the live build |
-| `private-assets-d993cb64` | 51 | 17 resources — the current rollback |
+| `private-assets-7eee1f48` | 57 | the live build |
+| `private-assets-ac0d053a` | 54 | 18 resources — the current rollback |
+| `private-assets-d993cb64` | 51 | 17 resources |
 | `private-assets-a65a1ef1` | 48 | 16 resources |
 | `private-assets-61d2acd0` | 45 | 15 resources |
 | `private-assets-77020e71` | 42 | 14 resources |

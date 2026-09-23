@@ -1102,14 +1102,33 @@ describe("OG-B08 water tank sizing and placement (Stage 9.45)", () => {
     expect(all).not.toMatch(/\b(boil|bleach|chlorinat|disinfect|UV|micron)\w*/i);
   });
 
-  it("carries the storage and height blocks, and proposes a narrow fire exemption", () => {
+  it("carries the storage and height blocks, and an approved zero-mention fire exemption", () => {
     expect(meta.safetyBlocks).toEqual(["stored-drinking-water", "working-at-height"]);
     expect(meta.relatedResources).toEqual(["res-1008", "res-1010", "res-1009"]);
     const exemption = meta.safetyExemptions[0];
     expect(exemption.block).toBe("fire-and-emergency");
     expect(exemption.allowedMentions).toEqual([]); // no fire wording survives migration at all
-    expect(exemption.approvedBy).toMatch(/PROPOSED/);
-    expect(meta.safetyExemptionsStatus).toMatch(/requires owner approval/);
+    expect(exemption.approvedBy).toBe("owner");
+    expect(exemption.approvalRef).toMatch(/Stage 9.46/);
+    // The migrated copy really does carry no fire wording — that is what makes a zero-mention exemption honest.
+    expect(all).not.toMatch(/\bfire\b|smoke alarm|evacuat/i);
+    expect(forMarket("NZ")).toContain("emergency services");
+  });
+
+  it("lapses the fire exemption on any fire, smoke-alarm or evacuation wording (Stage 9.46 ruling 2)", () => {
+    const exemption = meta.safetyExemptions[0] as SafetyExemption;
+    const page = '<div class="content"><p>Not blocking escape routes or access for emergency services.</p></div>';
+    expect(exemptionHolds(exemption, page)).toEqual({ holds: true, unexpected: [] });
+    for (const added of [
+      "<p>Keep the tank clear of fire egress paths.</p>",
+      "<p>Steel tanks suit bushfire zones.</p>",
+      "<p>Fit a smoke alarm in the pump shed.</p>",
+      "<p>Plan your evacuation route past the tank.</p>",
+    ]) {
+      const check = exemptionHolds(exemption, page.replace("</div>", `${added}</div>`));
+      expect(check.holds, added).toBe(false);
+      expect(check.unexpected.length, added).toBeGreaterThan(0);
+    }
   });
 });
 

@@ -1,22 +1,22 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.45 (OG-B08 prepared; the live preview is unchanged since Stage 9.44).
+**As at:** 23 September 2026, after Stage 9.46 (OG-B08 deployed; the water pathway is complete).
 
 | | |
 |---|---|
-| **Protected resources in the private preview** | **18** (all draft) |
-| **Worker version** | **`ac0d053a-8abd-4965-8bfe-3cae8ea943a5`** |
-| **Rollback available** | `d993cb64-676a-46bc-80eb-f4c9850fb0ea` (17 resources) |
-| **Tests** | **376 passing** · lint clean · typecheck clean |
-| **Next resource** | **OG-B08 — Water Tank Sizing & Placement Guide** — prepared at Stage 9.45, waiting on two approvals before deployment as #19 |
-| **Last deployment** | Stage 9.44, 23 September 2026: Household Water Treatment Guide (OG-09) (#18) |
-| **Last report** | `admin-import/STAGE_9.45_OGB08_PREPARED.md` (prepared — nothing deployed) |
+| **Protected resources in the private preview** | **19** (all draft) |
+| **Worker version** | **`7eee1f48-82c3-483f-8d0b-4b2d4c47e586`** |
+| **Rollback available** | `ac0d053a-8abd-4965-8bfe-3cae8ea943a5` (18 resources) |
+| **Tests** | **377 passing** · lint clean · typecheck clean |
+| **Next resource** | **OG-13 Healthy Home Air Audit** — the first Air resource (not started) |
+| **Last deployment** | Stage 9.46, 23 September 2026: Water Tank Sizing & Placement Guide (OG-B08) (#19) |
+| **Last report** | `admin-import/STAGE_9.46_OGB08_DEPLOYMENT.md` |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
-rename) → **376** at Stage 9.45 (OG-B08). Nothing was removed.
+rename) → 376 at Stage 9.45 (OG-B08) → **377** at Stage 9.46 (the fire-exemption lapse test). Nothing was removed.
 
-## The 18 deployed resources
+## The 19 deployed resources
 
 | # | Code | Title | Foundation |
 |---|---|---|---|
@@ -36,17 +36,18 @@ rename) → **376** at Stage 9.45 (OG-B08). Nothing was removed.
 | 14 | OG-27 | 90-Day Implementation Roadmap | shelter |
 | 15 | OG-B04 | Monthly Planning Challenge Template | general |
 | 16 | OG-B07 | Solar Planning Deep Worksheet | energy |
-| 17 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general |
-| 18 | OG-B12 | Off-Grid System Architecture Planner | general |
+| 17 | OG-B08 | **Water Tank Sizing & Placement Guide** | water |
+| 18 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general |
+| 19 | OG-B12 | Off-Grid System Architecture Planner | general |
 
-Each has an NZ and an AU PDF: **36 market files**, 0 broken internal links.
+Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 
-## Controls, last checked at Stage 9.44
+## Controls, last checked at Stage 9.46
 
 | Control | State |
 |---|---|
 | Cloudflare Access on all traffic | **on** — every probe redirects (302) to the Access login |
-| All real resources draft | **yes**, 18/18 |
+| All real resources draft | **yes**, 19/19 |
 | NZ/AU routing | **working** — no market, no download; NZ gets NZ, AU gets AU |
 | Real member files in public GitHub | **none** |
 | `--real` | **refused** |
@@ -62,6 +63,8 @@ Each has an NZ and an AU PDF: **36 market files**, 0 broken internal links.
 | **Grants and rebates not researched** | OG-16 | current NZ programmes and AU state/territory schemes |
 | **Consents and approvals not researched** | OG-B11 | NZ council consents, AU state/territory approvals |
 | ~~OG-09 and the OG-08 block question~~ | — | **both resolved at Stage 9.44**: OG-09 is deployed as the Household Water Treatment Guide, and OG-08 carries an audited, resource-specific exemption that lapses the moment it teaches treatment |
+| **OG-02 now requires the fire block on re-preparation** | re-preparing or re-deploying OG-02 (the live copy is untouched) | owner decision: an audited OG-02-specific exemption for its two risk-checklist items ("Fire", "□ Bushfire risk area"), or leave it blocked until fire guidance is researched |
+| **Water Basics learning path** | a pathway built on the four real water resources | the private learning-path override design (Stage 9.46 report, item 12) |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations
