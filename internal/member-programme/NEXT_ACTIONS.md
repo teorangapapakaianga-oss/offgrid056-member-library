@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.50.
+**As at:** 23 September 2026, after Stage 9.51.
 
 ---
 
@@ -10,8 +10,8 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **Air research: smoke alarms and mould** | needed before OG-13 | FENZ and each AU state fire service on alarms (no fire block exists in either market), plus NZ/AU health guidance on mould, dampness and ventilation |
-| 2 | **OG-13 Healthy Home Air Audit** | blocked behind that research | its audit asks about smoke alarms, CO, wood-burner flues and mould, and carries alarm lifespans and prices |
+| 1 | **Three Air safety blocks** — fire-and-smoke-alarms, mould-and-dampness, home-ventilation | **researched and drafted** at Stage 9.51 | owner approval of the drafted NZ/AU wording, then one build stage (blocks + numeric registry entries + a ratio claim type + a full 19-resource re-run) |
+| 2 | **OG-13 Healthy Home Air Audit** | blocked behind those blocks | 24 claim groups classified; 5 prices, 3 health claims and 3 unsourced figures to remove; gas wording must be avoided until the gas stage |
 | 3 | **Other pathways on real resources** | possible now that the override exists | Energy Basics and Start Here could follow the same private-path pattern once their resources are live |
 | 4 | **Retiring demo placeholders** | 28 remain | a decision before any public launch |
 
@@ -26,8 +26,14 @@ The order to work in, and why:
 | ✅ | **OG-09** → **Household Water Treatment Guide** | **live** | treatment: two market method tables and a six-step fail-safe worksheet (Stage 9.44) |
 | ✅ | **OG-B08** Water Tank Sizing & Placement Guide | **live** | tanks and placement (Stage 9.46). Teaches no treatment — it points at OG-09 instead. |
 
-**The water pathway is complete** — OG-08, OG-10, OG-09 and OG-B08 are all live. **Air still has no resource at all.** OG-13 (Healthy Home Air Audit) is the obvious candidate and needs no new safety
-research, so it is a good low-risk stage whenever the water run pauses.
+**The water pathway is complete** — OG-08, OG-10, OG-09 and OG-B08 are all live.
+
+## Air pathway
+
+**Air still has no resource.** OG-13 (Healthy Home Air Audit) is the entry assessment, and Stage 9.51's research
+found it needs **three safety blocks that do not exist yet** — fire and smoke alarms, mould and dampness, home
+ventilation — plus numeric registry entries for a dozen figures. It is a three-stage job (approve the wording, build
+the blocks and entries, then migrate), not the low-risk stage it looked like from the outside.
 
 ## Research stages (each gates resources)
 

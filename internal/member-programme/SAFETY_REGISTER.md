@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.50. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.51. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -25,7 +25,7 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 | `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
 
-**The numeric claim registry (report-only).** `admin-import/config/numeric-claims.json` holds 17 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks from Stage 9.50**: an unexplained figure fails preparation for that market, exactly as the treatment gates do. Structure, member inputs and treatment-owned figures never block, an empty registry approves nothing, and percentages and currency are detected but held out of this first activation. The live library returns **zero** findings.
+**The numeric claim registry (blocking since Stage 9.50).** `admin-import/config/numeric-claims.json` holds 17 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks from Stage 9.50**: an unexplained figure fails preparation for that market, exactly as the treatment gates do. Structure, member inputs and treatment-owned figures never block, an empty registry approves nothing, and percentages and currency are detected but held out of this first activation. The live library returns **zero** findings.
 
 **The treatment source registry.** `admin-import/config/treatment-sources.json` holds the 21 approved treatment
 claims — 9 NZ, 12 AU — each with its market, jurisdiction, method, wording, numeric value, source, authority, date,
@@ -108,9 +108,12 @@ Each of these blocks resources until it is researched from official NZ **and** A
 
 | Research | Needed for | Notes |
 |---|---|---|
-| **Gas / LPG** | OG-17, OG-B09, any gas appliance or LPG generator | the strict gas rule stands. No NZ/AU household gas-appliance block exists. |
+| **Gas / LPG** | OG-17, OG-B09, any gas appliance or LPG generator | the strict gas rule stands. No NZ/AU household gas-appliance block exists. **It also blocks MBIE's unflued-gas advice in any Air resource.** |
 | **Diesel** | diesel generators or heating | the generator block is petrol-only |
-| ~~Water treatment~~ | ~~OG-09~~ | **DONE.** Researched at Stage 9.42, approved and built at Stage 9.43: the `water-treatment` block, the source registry and the six gates are in place. OG-09 is prepared and waits only on the owner's content approval. |
+| **Fire and smoke alarms** | OG-13, and any alarm guidance | **researched and drafted at Stage 9.51** — FENZ and Tenancy Services (NZ); Fire and Rescue NSW and the Queensland Fire Department (AU, state-labelled; Queensland's is law, staged to 1 Jan 2027). No block exists yet, so the fire detector still fails closed. |
+| **Mould and dampness** | OG-13, and any mould guidance | **researched and drafted at Stage 9.51** — Tenancy Services (NZ: vinegar half and half, or 1 part bleach to 3 parts water); NSW Health (AU: 4:1 vinegar, or 250 mL bleach in 4 L). **The dilutions differ by market and may not cross.** |
+| **Home ventilation** | OG-13, and any ventilation guidance | **researched and drafted at Stage 9.51** — MBIE (NZ: 18–22 °C, airing ~15 minutes several times a day, vent outside not into the roof space). **AU stays non-numeric:** no Australian source read publishes airing times, humidity targets or extraction rates. |
+| ~~Water treatment~~ | ~~OG-09~~ | **DONE.** Researched at Stage 9.42, approved and built at Stage 9.43: the `water-treatment` block, the source registry and the six gates are in place. OG-09 is live as the Household Water Treatment Guide. |
 | **Grants and rebates** | OG-16 | NZ programmes; AU state and territory schemes |
 | **Consents and approvals** | OG-B11, and tank/plumbing wording | NZ council consents; AU state, territory and council |
 | **Generator separation distance** | any generator resource | **no NZ or AU official figure exists**; the US 20-foot rule is not used, and wording stays non-numeric |
