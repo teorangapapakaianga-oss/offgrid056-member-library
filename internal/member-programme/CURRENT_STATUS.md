@@ -1,20 +1,20 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.47 (the Water Basics pathway now runs on the four real water resources).
+**As at:** 23 September 2026, after Stage 9.48 (numeric claim discovery — report-only, nothing deployed).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **19** (all draft) |
 | **Worker version** | **`1e4ab83b-4086-4c18-bf09-f6024152abbb`** |
 | **Rollback available** | `7eee1f48-82c3-483f-8d0b-4b2d4c47e586` (19 resources, demo pathway) |
-| **Tests** | **390 passing** · lint clean · typecheck clean |
+| **Tests** | **404 passing** · lint clean · typecheck clean |
 | **Next resource** | **OG-13 Healthy Home Air Audit** — the first Air resource (not started) |
 | **Last deployment** | Stage 9.47, 23 September 2026: the private Water Basics pathway (no new resource) |
-| **Last report** | `admin-import/STAGE_9.47_WATER_PATH_AND_OG02.md` |
+| **Last report** | `admin-import/STAGE_9.48_NUMERIC_DISCOVERY.md` (report-only — nothing deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
-rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → **390** at Stage 9.47 (path supersession, the private path, and OG-02's fire exemption). Nothing was removed.
+rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → **404** at Stage 9.48 (the numeric detector and registry). Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -65,6 +65,7 @@ Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 | ~~OG-09 and the OG-08 block question~~ | — | **both resolved at Stage 9.44**: OG-09 is deployed as the Household Water Treatment Guide, and OG-08 carries an audited, resource-specific exemption that lapses the moment it teaches treatment |
 | ~~OG-02's fire-block requirement~~ | — | **resolved at Stage 9.47**: an audited, hazard-identification-only exemption covering exactly "Fire in the home" and "Bushfire risk area", which lapses on any fire teaching |
 | ~~Water Basics learning path~~ | — | **resolved at Stage 9.47**: the private path override is built, tested and deployed; the public demonstration path is untouched |
+| **One unsourced live figure** | switching numeric blocking on | OG-08's AU sentence "The official baseline is drinking water for three days" — label it as Get Ready Queensland's, or verify a national source |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations

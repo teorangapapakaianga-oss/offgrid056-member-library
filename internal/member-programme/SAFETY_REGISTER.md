@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.47. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.48. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -24,6 +24,8 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 | `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
+
+**The numeric claim registry (report-only).** `admin-import/config/numeric-claims.json` holds 16 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks nothing yet** (Stage 9.48 is discovery); one live figure remains unsourced, recorded in `CURRENT_STATUS.md`.
 
 **The treatment source registry.** `admin-import/config/treatment-sources.json` holds the 21 approved treatment
 claims — 9 NZ, 12 AU — each with its market, jurisdiction, method, wording, numeric value, source, authority, date,

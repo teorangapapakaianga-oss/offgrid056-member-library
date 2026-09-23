@@ -1,0 +1,346 @@
+{
+  "description": "Owner-approved numeric claims outside the treatment architecture (Stage 9.48). A figure in a member-facing file is explained by an entry here only when the entry's market, owning resource, context patterns and label requirement all match the sentence it appears in. Treatment figures are NOT here: admin-import/config/treatment-sources.json owns them, and the scanner defers to it. Figures inside an owner-approved safety block are covered by that block's own recorded sources in safety-blocks.json.",
+  "status": "SEEDED 2026-09-23 (Stage 9.48) — REPORT-ONLY. Blocking mode is not enabled.",
+  "mode": "report-only",
+  "seedingRule": "Seeded only from Bucket A: figures whose source is recorded in approved stage work. Nothing is seeded from memory, nothing from Bucket C, and no citation is invented.",
+  "claims": [
+    {
+      "id": "nz-storage-litres-per-person-per-day",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": ["OG-08"],
+      "category": "capacity",
+      "claimType": "threshold",
+      "unit": "L",
+      "value": { "exact": 3 },
+      "allowedWording": "at least three litres of drinking water per person per day, for at least three days (nine litres per person)",
+      "match": [
+        "\\b(?:3|three) litres\\b[\\s\\S]{0,80}\\bper person per day\\b",
+        "\\bPeople × 3 L\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://getready.govt.nz/prepared/household/supplies/storing-water",
+      "authority": "NEMA — Get Ready (NZ Civil Defence)",
+      "sourceDate": "read live 2026-09-22 (Stage 9.37)",
+      "limitations": [
+        "This is the NZ emergency baseline for drinking and basic hygiene. It is not an Australian figure and must not appear in an AU file.",
+        "Get Ready says to store more where you can: heat, hard work, children, nursing mothers, illness and pets all increase it."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-22 (Stage 9.38)"
+    },
+    {
+      "id": "nz-storage-days",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": ["OG-08"],
+      "category": "interval",
+      "claimType": "threshold",
+      "unit": "days",
+      "value": { "exact": 3 },
+      "allowedWording": "for at least three days",
+      "match": ["\\b(?:3|three) days\\b[\\s\\S]{0,120}\\b(?:drinking water|per person|stored water)\\b", "\\bPeople × 3 L × 3 days\\b"],
+      "requiresLabel": null,
+      "source": "https://getready.govt.nz/prepared/household/supplies/storing-water",
+      "authority": "NEMA — Get Ready (NZ Civil Defence)",
+      "sourceDate": "read live 2026-09-22 (Stage 9.37)",
+      "limitations": ["Some parts of New Zealand could be without water for longer; the local emergency management committee advises."],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-22 (Stage 9.38)"
+    },
+    {
+      "id": "au-storage-litres-per-person-qld",
+      "market": "AU",
+      "jurisdiction": "QLD (state-specific, used as a labelled example)",
+      "owningResources": ["OG-08"],
+      "category": "capacity",
+      "claimType": "example",
+      "unit": "L",
+      "value": { "exact": 10 },
+      "allowedWording": "Emergency guidance such as Get Ready Queensland advises storing at least 10 litres of drinking water per person for three days, and your state or territory emergency service may advise more for your area.",
+      "match": ["\\b10 litres\\b[\\s\\S]{0,120}\\bper person\\b", "\\bPeople × 10 L\\b"],
+      "requiresLabel": null,
+      "source": "https://www.getready.qld.gov.au/sites/default/files/2023-12/GRQ%20Emergency%20Kit%20checklist.pdf",
+      "authority": "Get Ready Queensland (Queensland Government)",
+      "sourceDate": "read 2026-09-22 (Stage 9.37)",
+      "limitations": [
+        "A state example, not a national Australian rule: the wording must keep 'your state or territory emergency service may advise more'.",
+        "It is not a New Zealand figure and must not appear in an NZ file."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-22 (Stage 9.38)"
+    },
+    {
+      "id": "au-storage-days-qld",
+      "market": "AU",
+      "jurisdiction": "QLD (state-specific, used as a labelled example)",
+      "owningResources": ["OG-08", "OG-11"],
+      "category": "interval",
+      "claimType": "example",
+      "unit": "days",
+      "value": { "exact": 3 },
+      "allowedWording": "at least three days (Get Ready Queensland)",
+      "match": ["\\bthree days\\b[\\s\\S]{0,160}\\bGet Ready Queensland\\b", "\\bGet Ready Queensland\\b[\\s\\S]{0,160}\\bthree days\\b"],
+      "requiresLabel": "Get Ready Queensland",
+      "source": "https://www.getready.qld.gov.au/sites/default/files/2023-12/GRQ%20Emergency%20Kit%20checklist.pdf",
+      "authority": "Get Ready Queensland (Queensland Government)",
+      "sourceDate": "read 2026-09-22 (Stages 9.27 and 9.37)",
+      "limitations": ["State guidance. The attribution must stay in the sentence."],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-22"
+    },
+    {
+      "id": "au-pantry-days-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific, used as a labelled example)",
+      "owningResources": ["OG-11"],
+      "category": "interval",
+      "claimType": "example",
+      "unit": "days",
+      "value": { "exact": 14 },
+      "allowedWording": "supplies for up to 14 days (NSW Food Authority)",
+      "match": ["\\b14 days\\b[\\s\\S]{0,80}\\bNSW Food Authority\\b", "\\bNSW Food Authority\\b[\\s\\S]{0,80}\\b14 days\\b"],
+      "requiresLabel": "NSW Food Authority",
+      "source": "https://www.foodauthority.nsw.gov.au/consumers/food-poisoning-and-contamination/food-safety-emergencies",
+      "authority": "NSW Food Authority",
+      "sourceDate": "read 2026-09-22 (Stage 9.27)",
+      "limitations": [
+        "State guidance shown beside the Queensland figure precisely to show that Australian advice varies; neither may be presented as national."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-22 (Stage 9.27)"
+    },
+    {
+      "id": "nz-food-days-getready",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": ["OG-11"],
+      "category": "interval",
+      "claimType": "threshold",
+      "unit": "days",
+      "value": { "exact": 3 },
+      "allowedWording": "The official emergency baseline in New Zealand is food for at least three days (Get Ready).",
+      "match": ["\\bfood\\b[\\s\\S]{0,80}\\bthree days\\b[\\s\\S]{0,40}\\bGet Ready\\b", "\\bGet Ready\\b[\\s\\S]{0,80}\\bfood\\b[\\s\\S]{0,60}\\bthree days\\b"],
+      "requiresLabel": "Get Ready",
+      "source": "https://getready.govt.nz/prepared/household/supplies",
+      "authority": "NEMA — Get Ready (NZ Civil Defence)",
+      "sourceDate": "read live 2026-09-23 (first used at Stage 9.27)",
+      "limitations": [
+        "A minimum, and NZ only: Get Ready says to store more where you can, and the Australian figures are state-level and different."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-22 (Stage 9.27)"
+    },
+    {
+      "id": "shared-roof-litre-per-mm-per-m2",
+      "market": "NZ",
+      "jurisdiction": "arithmetic (not jurisdictional)",
+      "owningResources": ["OG-10"],
+      "category": "capacity",
+      "claimType": "conversion",
+      "unit": "L",
+      "value": { "exact": 1, "text": "1 litre per square metre per millimetre of rain" },
+      "allowedWording": "Every square metre of roof catches about 1 litre of water per millimetre of rainfall, before losses.",
+      "match": [
+        "\\b(?:1|one) litre\\b[\\s\\S]{0,60}\\bper millimetre\\b",
+        "\\b(?:One|one) square metre\\b[\\s\\S]{0,80}\\b(?:1|one) litre\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE (and the definition of a millimetre of rain over a square metre)",
+      "sourceDate": "2026-01-15 (read live 2026-09-23)",
+      "limitations": [
+        "It describes what lands on the roof, not what is collected: the wording must keep 'before losses' and the statement that what lands on the roof is not what you can use.",
+        "No collection efficiency is approved — there is no published standard figure."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.40)"
+    },
+    {
+      "id": "shared-roof-litre-per-mm-per-m2-au",
+      "market": "AU",
+      "jurisdiction": "arithmetic (not jurisdictional)",
+      "owningResources": ["OG-10"],
+      "category": "capacity",
+      "claimType": "conversion",
+      "unit": "L",
+      "value": { "exact": 1, "text": "1 litre per square metre per millimetre of rain" },
+      "allowedWording": "Every square metre of roof catches about 1 litre of water per millimetre of rainfall, before losses.",
+      "match": [
+        "\\b(?:1|one) litre\\b[\\s\\S]{0,60}\\bper millimetre\\b",
+        "\\b(?:One|one) square metre\\b[\\s\\S]{0,80}\\b(?:1|one) litre\\b"
+      ],
+      "requiresLabel": null,
+      "source": "arithmetic: one millimetre of rain over one square metre is one litre",
+      "authority": "definitional — no jurisdictional source is claimed for Australia",
+      "sourceDate": "2026-09-23 (Stage 9.40)",
+      "limitations": [
+        "Recorded separately from the NZ entry on purpose: the conversion is arithmetic, but no Australian authority is cited for it, and none is implied.",
+        "Same wording rule: 'before losses', and no efficiency figure."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.40)"
+    },
+    {
+      "id": "nz-tank-size-examples-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": ["OG-10"],
+      "category": "capacity",
+      "claimType": "example",
+      "unit": "L",
+      "value": { "text": "240 L rain barrel; 500 L+ garden tank; 5,000 L indoor supply with year-round rain; 10,000 L+ with dry summers; at least 30,000 L as a sole supply" },
+      "allowedWording": "NZ published planning guidance (Building Performance, MBIE) — examples for each use, not requirements or OffGrid056 recommendations",
+      "match": ["\\bMBIE\\b[\\s\\S]{0,600}\\b(?:240 litres|500 litres|5,000-litre|10,000 litres|30,000 litres)\\b"],
+      "requiresLabel": "MBIE",
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "2026-01-15 (read live 2026-09-23)",
+      "limitations": [
+        "Published planning guidance and examples, each tied to the use it belongs to (garden, indoor supply, sole supply). Not requirements, and not OffGrid056 recommendations.",
+        "NZ only. No Australian figure exists and the AU file carries none.",
+        "Owned by OG-10: repeating them in another resource would turn a labelled example into a rule (Stage 9.45 decision for OG-B08)."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.40 ruling 5)"
+    },
+    {
+      "id": "shared-roof-worked-example",
+      "market": "NZ",
+      "jurisdiction": "arithmetic (a labelled worked example)",
+      "owningResources": ["OG-10"],
+      "category": "capacity",
+      "claimType": "example",
+      "unit": "L",
+      "value": { "text": "150 m² roof × 1,000 mm rain = about 150,000 litres before losses" },
+      "allowedWording": "Worked example, not your figure: a 150m² roof where 1,000mm of rain falls in a year catches about 150,000 litres before losses.",
+      "match": ["\\bWorked example, not your figure\\b[\\s\\S]{0,240}\\b150,000 litres\\b"],
+      "requiresLabel": "Worked example",
+      "source": "arithmetic from the litre-per-millimetre-per-square-metre conversion",
+      "authority": "definitional, labelled as an example in the resource",
+      "sourceDate": "2026-09-23 (Stage 9.40)",
+      "limitations": [
+        "The label is part of the claim: it must stay 'Worked example, not your figure', and it must keep 'before losses'.",
+        "No collection efficiency is approved, so this is what lands on the roof, not what a member can use."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.40 ruling 4)"
+    },
+    {
+      "id": "shared-roof-worked-example-au",
+      "market": "AU",
+      "jurisdiction": "arithmetic (a labelled worked example)",
+      "owningResources": ["OG-10"],
+      "category": "capacity",
+      "claimType": "example",
+      "unit": "L",
+      "value": { "text": "150 m² roof × 1,000 mm rain = about 150,000 litres before losses" },
+      "allowedWording": "Worked example, not your figure: a 150m² roof where 1,000mm of rain falls in a year catches about 150,000 litres before losses.",
+      "match": ["\\bWorked example, not your figure\\b[\\s\\S]{0,240}\\b150,000 litres\\b"],
+      "requiresLabel": "Worked example",
+      "source": "arithmetic from the litre-per-millimetre-per-square-metre conversion",
+      "authority": "definitional, labelled as an example in the resource",
+      "sourceDate": "2026-09-23 (Stage 9.40)",
+      "limitations": ["As the NZ entry. No Australian authority is cited, and none is implied."],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.40 ruling 4)"
+    },
+    {
+      "id": "au-insect-screen-mm-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific, used as a labelled example)",
+      "owningResources": ["OG-10", "OG-B08"],
+      "category": "distance",
+      "claimType": "example",
+      "unit": "mm",
+      "value": { "exact": 1 },
+      "allowedWording": "closely fitting, fine insect-proof screens on all inlets and overflows — NSW Health gives about 1 mm as an example",
+      "match": ["\\b1 ?mm\\b[\\s\\S]{0,200}\\b(?:screen|insect)\\b", "\\b(?:screen|insect)[\\s\\S]{0,200}\\b1 ?mm\\b"],
+      "requiresLabel": "NSW Health",
+      "source": "https://www.health.nsw.gov.au/environment/water/Pages/rainwater.aspx",
+      "authority": "NSW Health",
+      "sourceDate": "current as at 2026-09-11 (read live 2026-09-23)",
+      "limitations": [
+        "NSW guidance, and an example: it may not be presented as a national Australian requirement, and it may not appear in an NZ file.",
+        "It is a screen aperture. It does not approve '1 mm' of anything else — a clearance, a gap or a tolerance."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.40 ruling 11)"
+    },
+    {
+      "id": "nz-tank-stand-height-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": ["OG-10", "OG-B08"],
+      "category": "height",
+      "claimType": "range",
+      "unit": "m",
+      "value": { "min": 0.3, "max": 1.0 },
+      "allowedWording": "a stand over 30cm and under one metre; a tank on a stand over one metre high generally needs a building consent",
+      "match": [
+        "\\b30 ?cm\\b[\\s\\S]{0,80}\\bone metre\\b",
+        "\\bstand\\b[\\s\\S]{0,120}\\bover one metre\\b",
+        "\\bone metre high\\b[\\s\\S]{0,80}\\bconsent\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "2026-01-15 (read live 2026-09-23)",
+      "limitations": [
+        "A consent threshold and a stand description, not a structural design: the base and the stand stay with the manufacturer, the supplier and a qualified professional.",
+        "NZ only. No Australian equivalent is published, and the AU files carry none."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stages 9.40 and 9.45)"
+    },
+    {
+      "id": "nz-water-weight-conversion-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": ["OG-B08"],
+      "category": "weight",
+      "claimType": "conversion",
+      "unit": "kg",
+      "value": { "exact": 1, "text": "about a kilogram per litre — a full 1,000-litre tank is about a tonne" },
+      "allowedWording": "water weighs about a kilogram per litre, so a full 1,000-litre tank is about a tonne (MBIE)",
+      "match": ["\\bkilogram per litre\\b[\\s\\S]{0,120}\\b1,000-litre\\b", "\\ba litre of water weighs a kilogram\\b"],
+      "requiresLabel": null,
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE ('Because a litre of water weighs a kilogram…')",
+      "sourceDate": "2026-01-15 (read live 2026-09-23)",
+      "limitations": [
+        "A conversion so a member can ask the right question of a supplier. It is **not** a design figure: no slab, footing, reinforcement or load specification may be derived from it in the resource.",
+        "The 1,000-litre tank is an illustration, not a recommended size."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.46 ruling 6)"
+    },
+    {
+      "id": "au-water-weight-conversion",
+      "market": "AU",
+      "jurisdiction": "arithmetic (not jurisdictional)",
+      "owningResources": ["OG-B08"],
+      "category": "weight",
+      "claimType": "conversion",
+      "unit": "kg",
+      "value": { "exact": 1, "text": "about a kilogram per litre — a full 1,000-litre tank is about a tonne" },
+      "allowedWording": "water weighs about a kilogram per litre, so a full 1,000-litre tank is about a tonne",
+      "match": ["\\bkilogram per litre\\b[\\s\\S]{0,120}\\b1,000-litre\\b"],
+      "requiresLabel": null,
+      "source": "arithmetic: one litre of water has a mass of about one kilogram",
+      "authority": "definitional — no Australian authority is cited, and none is implied",
+      "sourceDate": "2026-09-23 (Stage 9.46)",
+      "limitations": [
+        "As the NZ entry: a conversion for asking the right question, never a design figure, and the 1,000-litre tank is an illustration rather than a recommended size."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.46 ruling 6)"
+    },
+    {
+      "id": "nz-tank-desludge-annually-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": ["OG-B08"],
+      "category": "interval",
+      "claimType": "interval",
+      "unit": "years",
+      "value": { "exact": 1, "text": "annually" },
+      "allowedWording": "desludging the tank annually (MBIE)",
+      "match": ["\\bdesludg\\w*\\b[\\s\\S]{0,60}\\bannually\\b", "\\bannually\\b[\\s\\S]{0,60}\\bdesludg\\w*"],
+      "requiresLabel": "MBIE",
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "2026-01-15 (read live 2026-09-23)",
+      "limitations": [
+        "Maintenance of a tank, not a treatment or testing interval — testing intervals belong to the treatment registry.",
+        "NZ only: no Australian household interval is published, and the AU file carries none."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.45)"
+    }
+  ]
+}

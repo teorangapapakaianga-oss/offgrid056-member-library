@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.47.
+**As at:** 23 September 2026, after Stage 9.48.
 
 ---
 
@@ -10,7 +10,8 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **Numeric-claim registry** (`numeric-claims.json`) | proposal returned at Stage 9.47 | owner approval of the schema, categories, matching strategy and the five-step seeding plan |
+| 1 | **OG-08's one unsourced figure** | found at Stage 9.48 | owner ruling: label the AU "official baseline … three days" sentence as Get Ready Queensland's, or verify a national source |
+| 1b | **Numeric blocking mode** | registry seeded and tested at Stage 9.48 (report-only) | owner go-ahead after item 1: wire the scanner into prep, failing on NEEDS_SOURCE only |
 | 2 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; the first resource in an empty foundation |
 | 3 | **Other pathways on real resources** | possible now that the override exists | Energy Basics and Start Here could follow the same private-path pattern once their resources are live |
 | 4 | **Retiring demo placeholders** | 28 remain | a decision before any public launch |
