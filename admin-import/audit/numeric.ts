@@ -143,6 +143,22 @@ const PLANNING_HORIZON = [
  */
 const INTERVAL_CLAIM = /\b(check|checked|replace|replaced|inspect|inspected|test|tested|service|serviced|clean|cleaned|desludg\w+|maintain\w*|review\w*|every|at least|rotate|refresh)\b/i;
 
+/**
+ * A duration is also a claim when the sentence *asserts* it — "the official baseline is three days", "Get Ready
+ * Queensland advises three days". Stage 9.49: without this, an unattributed baseline sentence read as a duration in
+ * passing and was filed as harmless, which is exactly the wording the stage existed to catch.
+ */
+const CLAIM_ASSERTION = /\b(baseline|advises|advise|recommends?|recommended|guidance|official|requires?|required|must|should store|store at least|supply for)\b/i;
+/** …unless the sentence is denying it ("not an official Australian daily allowance", "not official NZ requirements"). */
+const CLAIM_DENIAL = /\b(?:not|no|never|rather than)\s+(?:an?\s+|the\s+)?(?:official|national|required|recommended)\b/i;
+
+/**
+ * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
+ * pointer back to it ("any gap in your 3-day official baseline"). It asserts nothing new, so it is judged once,
+ * where the figure is actually made.
+ */
+const BACK_REFERENCE = /\bbaseline\b/i;
+
 /** Arithmetic being explained, not a figure being asserted. */
 const ARITHMETIC = /\b(?:gap|surplus|difference|total|subtotal|result)\b[^.]{0,40}\b(?:is|=)\b/i;
 
@@ -249,14 +265,26 @@ export function scanNumericClaims(
       else if (structural) out.push({ ...base, bucket: "B_STRUCTURAL", why: structural.why });
       else if (notAClaim) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: notAClaim.why });
       else if (hit.category === "interval" && horizon) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: horizon.why });
-      else if (hit.category === "interval" && !INTERVAL_CLAIM.test(sentence))
-        out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: "a duration in passing, with nothing recommended" });
+      else if (
+        hit.category === "interval" &&
+        !INTERVAL_CLAIM.test(sentence) &&
+        !(CLAIM_ASSERTION.test(sentence) && !CLAIM_DENIAL.test(sentence))
+      )
+        out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: "a duration in passing: nothing recommended, and nothing asserted" });
       else if (hit.value === 0 || ARITHMETIC.test(sentence))
         out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: "arithmetic being explained, not a figure asserted" });
       else out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a member-facing figure with no approved entry for this market and resource" });
     }
   }
-  return out;
+
+  // Second pass: a back-reference to a baseline this document has already sourced is not a second claim. It is only
+  // downgraded when the document really does carry a sourced figure of the same kind — otherwise it stays a finding.
+  const hasSourcedInterval = out.some((c) => c.bucket === "A_ALREADY_SOURCED" && c.category === "interval");
+  return out.map((c) =>
+    c.bucket === "C_NEEDS_SOURCE" && c.category === "interval" && BACK_REFERENCE.test(c.sentence) && hasSourcedInterval
+      ? { ...c, bucket: "D_NOT_A_CLAIM" as Bucket, why: "restates a baseline this document sources elsewhere" }
+      : c,
+  );
 }
 
 /** In blocking mode (not enabled yet), these are the candidates that would stop a build. */

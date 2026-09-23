@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.48.
+**As at:** 23 September 2026, after Stage 9.49.
 
 ---
 
@@ -10,8 +10,8 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **OG-08's one unsourced figure** | found at Stage 9.48 | owner ruling: label the AU "official baseline … three days" sentence as Get Ready Queensland's, or verify a national source |
-| 1b | **Numeric blocking mode** | registry seeded and tested at Stage 9.48 (report-only) | owner go-ahead after item 1: wire the scanner into prep, failing on NEEDS_SOURCE only |
+| 1 | **Numeric blocking mode** | registry seeded, Bucket C cleared at Stage 9.49 | owner go-ahead: one hook beside the treatment gates, failing on NEEDS_SOURCE only. Expected result on the current library: zero findings. |
+| 1b | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; the first resource in an empty foundation |
 | 2 | **OG-13 Healthy Home Air Audit** — the first Air resource | not started | owner go-ahead; the first resource in an empty foundation |
 | 3 | **Other pathways on real resources** | possible now that the override exists | Energy Basics and Start Here could follow the same private-path pattern once their resources are live |
 | 4 | **Retiring demo placeholders** | 28 remain | a decision before any public launch |

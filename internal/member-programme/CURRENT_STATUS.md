@@ -1,20 +1,20 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.48 (numeric claim discovery — report-only, nothing deployed).
+**As at:** 23 September 2026, after Stage 9.49 (the one unsourced figure resolved; numeric baseline is zero findings).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **19** (all draft) |
-| **Worker version** | **`1e4ab83b-4086-4c18-bf09-f6024152abbb`** |
-| **Rollback available** | `7eee1f48-82c3-483f-8d0b-4b2d4c47e586` (19 resources, demo pathway) |
-| **Tests** | **404 passing** · lint clean · typecheck clean |
+| **Worker version** | **`0aff3fcd-7080-4ae7-bf28-c5d09414b90a`** |
+| **Rollback available** | `1e4ab83b-4086-4c18-bf09-f6024152abbb` (19 resources, OG-08 AU before the Queensland attribution) |
+| **Tests** | **410 passing** · lint clean · typecheck clean |
 | **Next resource** | **OG-13 Healthy Home Air Audit** — the first Air resource (not started) |
-| **Last deployment** | Stage 9.47, 23 September 2026: the private Water Basics pathway (no new resource) |
-| **Last report** | `admin-import/STAGE_9.48_NUMERIC_DISCOVERY.md` (report-only — nothing deployed) |
+| **Last deployment** | Stage 9.49, 23 September 2026: OG-08's AU three-day figure attributed to Get Ready Queensland |
+| **Last report** | `admin-import/STAGE_9.49_BUCKET_C_RESOLVED.md` |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
-rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → **404** at Stage 9.48 (the numeric detector and registry). Nothing was removed.
+rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → **410** at Stage 9.49 (the Queensland attribution tests). Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -42,7 +42,7 @@ rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.
 
 Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 
-## Controls, last checked at Stage 9.47
+## Controls, last checked at Stage 9.49
 
 | Control | State |
 |---|---|
@@ -65,7 +65,7 @@ Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 | ~~OG-09 and the OG-08 block question~~ | — | **both resolved at Stage 9.44**: OG-09 is deployed as the Household Water Treatment Guide, and OG-08 carries an audited, resource-specific exemption that lapses the moment it teaches treatment |
 | ~~OG-02's fire-block requirement~~ | — | **resolved at Stage 9.47**: an audited, hazard-identification-only exemption covering exactly "Fire in the home" and "Bushfire risk area", which lapses on any fire teaching |
 | ~~Water Basics learning path~~ | — | **resolved at Stage 9.47**: the private path override is built, tested and deployed; the public demonstration path is untouched |
-| **One unsourced live figure** | switching numeric blocking on | OG-08's AU sentence "The official baseline is drinking water for three days" — label it as Get Ready Queensland's, or verify a national source |
+| ~~One unsourced live figure~~ | — | **resolved at Stage 9.49**: OG-08's AU sentence now says "Get Ready Queensland advises storing drinking water for three days", and the numeric scan is **zero findings** across all 19 resources |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations

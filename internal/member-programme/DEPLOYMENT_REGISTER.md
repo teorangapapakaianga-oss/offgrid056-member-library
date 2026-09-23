@@ -5,7 +5,7 @@ Every private-preview deployment: version, what went out, and what it can roll b
 **Worker:** `og056-preview` · **URL:** https://og056-preview.offgrid056-member-library.workers.dev
 **Access:** Cloudflare Access on all traffic, at every version.
 
-**As at:** 23 September 2026, after Stage 9.47.
+**As at:** 23 September 2026, after Stage 9.49.
 
 ---
 
@@ -13,17 +13,18 @@ Every private-preview deployment: version, what went out, and what it can roll b
 
 | | |
 |---|---|
-| **Live version** | **`1e4ab83b-4086-4c18-bf09-f6024152abbb`** |
+| **Live version** | **`0aff3fcd-7080-4ae7-bf28-c5d09414b90a`** |
 | Deployed | 23 September 2026 |
 | Resources | **19** (38 market files) |
-| Stage | 9.47 — the private Water Basics pathway (no new resource) |
-| **Rollback** | `7eee1f48-82c3-483f-8d0b-4b2d4c47e586` (19 resources, demonstration pathway) |
-| Private files for rollback | `workspace/backups/private-assets-7eee1f48` (57 files) |
+| Stage | 9.49 — OG-08 AU: the three-day figure attributed to Queensland |
+| **Rollback** | `1e4ab83b-4086-4c18-bf09-f6024152abbb` (19 resources, OG-08 AU before the attribution) |
+| Private files for rollback | `workspace/backups/private-assets-1e4ab83b` (58 files) |
 
 ## History
 
 | Version | Deployed (UTC) | Resources | Stage | What went out |
 |---|---|---|---|---|
+| `0aff3fcd` | 23 Sep 2026 | 19 | 9.49 | **OG-08 AU wording only**: "Get Ready Queensland advises storing drinking water for three days" replaces an unattributed "official baseline" · numeric scan now zero findings · one PDF changed |
 | `1e4ab83b` | 23 Sep 2026 | 19 | 9.47 | **The private Water Basics pathway** — OG-08 → OG-10 → OG-09 → OG-B08, superseding the demonstration path in the preview only · OG-02's audited fire exemption · no resource changed |
 | `7eee1f48` | 23 Sep 2026 | **19** | 9.46 | **OG-B08** Water Tank Sizing & Placement Guide · the water pathway completed · fire detector strengthened to catch "bushfire" |
 | `ac0d053a` | 23 Sep 2026 | 18 | 9.44 | **OG-09** rebuilt and renamed **Household Water Treatment Guide** · the `water-treatment` safety block, the treatment source registry and six fail-closed gates · OG-08's audited treatment exemption |
@@ -52,8 +53,9 @@ Every deployment keeps two things:
 
 | Snapshot | Files | Matches |
 |---|---|---|
-| `private-assets-1e4ab83b` | 58 | the live build (the extra file is the private pathway) |
-| `private-assets-7eee1f48` | 57 | 19 resources, demonstration pathway — the current rollback |
+| `private-assets-0aff3fcd` | 58 | the live build |
+| `private-assets-1e4ab83b` | 58 | 19 resources, OG-08 AU before the attribution — the current rollback |
+| `private-assets-7eee1f48` | 57 | 19 resources, demonstration pathway |
 | `private-assets-ac0d053a` | 54 | 18 resources |
 | `private-assets-d993cb64` | 51 | 17 resources |
 | `private-assets-a65a1ef1` | 48 | 16 resources |

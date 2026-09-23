@@ -100,6 +100,61 @@ describe("formulas, blanks and furniture", () => {
   });
 });
 
+/**
+ * Stage 9.49 — the one Bucket C finding, resolved. Three days is Get Ready Queensland's figure, and the wording now
+ * says so; an unattributed or nationalised version of the same sentence must still fail.
+ */
+describe("OG-08's Australian three-day figure", () => {
+  const attributed = "Get Ready Queensland advises storing drinking water for three days. Check your own state or territory emergency service for the advice that applies where you live.";
+
+  it("passes when it is attributed to Queensland", () => {
+    expect(bucketOf(attributed, "AU", "OG-08")).toContain("A_ALREADY_SOURCED");
+    expect(blockingFindings(scan(attributed, "AU", "OG-08"))).toEqual([]);
+  });
+
+  it("fails when the same figure is presented as national Australian guidance", () => {
+    for (const national of [
+      "The Australian official baseline is drinking water for three days.",
+      "The national baseline is drinking water for three days.",
+      "Australia's baseline is drinking water for three days.",
+    ]) {
+      expect(bucketOf(national, "AU", "OG-08"), national).toContain("C_NEEDS_SOURCE");
+    }
+  });
+
+  it("fails without the Queensland attribution — the exact sentence Stage 9.48 found", () => {
+    const before = "The official baseline is drinking water for three days; your state or territory emergency service may advise more for your area.";
+    expect(bucketOf(before, "AU", "OG-08")).toContain("C_NEEDS_SOURCE");
+  });
+
+  it("does not validate New Zealand, even attributed", () => {
+    expect(bucketOf(attributed, "NZ", "OG-08")).toContain("C_NEEDS_SOURCE");
+  });
+
+  it("does not carry over to another Australian resource on its own", () => {
+    expect(bucketOf(attributed, "AU", "OG-10")).toContain("C_NEEDS_SOURCE");
+    // OG-11's three days is food, and has its own Queensland entry.
+    const food = "Official emergency advice varies by state — from food for at least three days (Get Ready Queensland) to supplies for up to 14 days (NSW Food Authority).";
+    expect(bucketOf(food, "AU", "OG-11")).toContain("A_ALREADY_SOURCED");
+    expect(bucketOf(food, "AU", "OG-08")).toContain("C_NEEDS_SOURCE");
+  });
+
+  it("is what the live OG-08 copy actually says", () => {
+    const changes = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/approved-copy.json"), "utf8")) as {
+      changes: Record<string, { where: string; to: string; markets?: string[] }[]>;
+    }).changes["OG-08"];
+    const au = changes.find((c) => c.where === "Step 1 — needs table (AU)")!;
+    expect(au.markets).toEqual(["AU"]);
+    expect(au.to).toContain("Get Ready Queensland advises storing drinking water for three days.");
+    expect(au.to).not.toContain("The official baseline is drinking water for three days");
+    expect(au.to).not.toMatch(/Australian official baseline|national baseline|Australia's baseline/);
+    // The NZ change is untouched: its figure is Get Ready's, not Queensland's.
+    const nz = changes.find((c) => c.where === "Step 1 — needs table (NZ)")!;
+    expect(nz.to).toContain("People × 3 L × 3 days");
+    expect(nz.to).not.toMatch(/Queensland/);
+  });
+});
+
 describe("report-only, and what blocking would do", () => {
   it("is not wired into preparation: no build can fail on it yet", () => {
     const prep = fs.readFileSync(path.join(root, "admin-import/pilot/prep.ts"), "utf8");
