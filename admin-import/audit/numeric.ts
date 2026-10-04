@@ -48,7 +48,12 @@ export interface NumericClaim {
   /** the resources this figure is approved for; [] means any resource in that market (used sparingly) */
   owningResources: string[];
   category: NumericCategory;
-  claimType: "value" | "range" | "threshold" | "conversion" | "interval" | "example";
+  /**
+   * "ratio" is the unitless case (Stage 9.52): "four parts vinegar to one part water", "half and half". It is a
+   * claim *type*, not a category — the candidate is still measured in parts of volume, so it is classified as a
+   * capacity claim and blocks under the capacity activation rather than needing a new blocking category.
+   */
+  claimType: "value" | "range" | "threshold" | "conversion" | "interval" | "example" | "ratio";
   unit: string;
   value: { exact?: number; min?: number; max?: number; text?: string };
   allowedWording: string;
@@ -114,6 +119,42 @@ const NUMBER = "(?:\\d[\\d,]*(?:\\.\\d+)?|one|two|three|four|five|six|seven|eigh
 const WORD_INTERVAL = /\b(annually|yearly|monthly|weekly|daily|fortnightly|twice a year|every (?:six|three|twelve) months)\b/gi;
 const CURRENCY = /(?:NZ\$|AU\$|\$)\s?\d[\d,]*(?:\.\d+)?(?:\s?[–-]\s?(?:NZ\$|AU\$|\$)?\d[\d,]*)?/g;
 const FLOW = /\b\d[\d,]*\s?(?:L|litres?)\s?\/\s?(?:h|hr|hour|min|minute|day)\b/gi;
+
+/**
+ * Mixing and dilution ratios — "four parts vinegar to one part water", "one part bleach to three parts water",
+ * "half and half", "1:3".
+ *
+ * They carry no unit, so the unit scanner above cannot see them: Stage 9.51 found that a cleaning dilution would
+ * have reached a member with nothing checking it. A ratio is recorded as a **capacity** claim measured in parts,
+ * with `claimType: "ratio"` on the registry entry that explains it — a claim type rather than a new blocking
+ * category, because a ratio of volumes is still a volume claim.
+ *
+ * Two guards keep it narrow, and they matter more than the patterns do:
+ *
+ * - the sentence must be about **mixing or diluting** something, so a bare "1:3" in prose is not chemistry; and
+ * - it must not be a **scoring instrument**. OG-13's audit scores each room 1–5 and bands the total ("10–20 =
+ *   Critical"); OG-02 and OG-18 score the same way. None of that is a dilution, and reading it as one would put
+ *   a chemical gate in front of a worksheet.
+ */
+const RATIO_MIXING = /\b(dilut\w*|mix(?:es|ed|ing|ture)?s?|solution)\b/i;
+const RATIO_NOT_CHEMISTRY = /\b(scor\w+|scale|rating|ranked?|ranking|points?|out of \d|priorit\w+|tier|weighting)\b/i;
+const RATIO_PATTERNS: RegExp[] = [
+  new RegExp(`\\b${NUMBER}\\s+parts?\\s+[a-z][a-z ]{0,24}?\\s+to\\s+${NUMBER}\\s+parts?\\s+[a-z]+`, "gi"),
+  /\bhalf and half\b/gi,
+  /\b\d{1,3}\s?:\s?\d{1,3}\b/g,
+];
+
+function ratioMatches(sentence: string): { figure: string; value: number | null; unit: string; category: NumericCategory }[] {
+  if (!RATIO_MIXING.test(sentence) || RATIO_NOT_CHEMISTRY.test(sentence)) return [];
+  const found: { figure: string; value: number | null; unit: string; category: NumericCategory }[] = [];
+  for (const re of RATIO_PATTERNS) {
+    for (const m of sentence.matchAll(re)) {
+      const figure = clean(m[0]);
+      if (!found.some((f) => f.figure === figure)) found.push({ figure, value: null, unit: "parts", category: "capacity" });
+    }
+  }
+  return found;
+}
 
 /** Things that are numbers on the page but never claims. */
 const STRUCTURAL: { pattern: RegExp; why: string }[] = [
@@ -222,6 +263,7 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
   }
   for (const m of sentence.matchAll(CURRENCY)) found.push({ figure: clean(m[0]), value: null, unit: "$", category: "currency" });
   for (const m of sentence.matchAll(WORD_INTERVAL)) found.push({ figure: clean(m[0]), value: null, unit: "time", category: "interval" });
+  for (const r of ratioMatches(sentence)) if (!found.some((f) => f.figure === r.figure)) found.push(r);
   return found;
 }
 

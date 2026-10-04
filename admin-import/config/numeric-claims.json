@@ -1,6 +1,6 @@
 {
-  "description": "Owner-approved numeric claims outside the treatment architecture (Stage 9.48). A figure in a member-facing file is explained by an entry here only when the entry's market, owning resource, context patterns and label requirement all match the sentence it appears in. Treatment figures are NOT here: admin-import/config/treatment-sources.json owns them, and the scanner defers to it. Figures inside an owner-approved safety block are covered by that block's own recorded sources in safety-blocks.json.",
-  "status": "OWNER-APPROVED 2026-09-23 (Stage 9.50) - BLOCKING for the approved first activation. Percentage and currency are detected and reported but do not block.",
+  "description": "Owner-approved numeric claims outside the treatment architecture (Stage 9.48). A figure in a member-facing file is explained by an entry here only when the entry's market, owning resource, context patterns and label requirement all match the sentence it appears in. Treatment figures are NOT here: admin-import/config/treatment-sources.json owns them, and the scanner defers to it. Figures inside an owner-approved safety block are covered by that block's own recorded sources in safety-blocks.json. Stage 9.52 adds the \"ratio\" claim type for unitless dilution ratios (\"four parts vinegar to one part water\", \"half and half\"): a ratio of volumes is still a volume claim, so it is detected as a capacity candidate and blocks under the capacity activation rather than needing a new blocking category. Ratio detection requires a mixing or diluting context and refuses to read a scoring instrument — a 1-5 room score, a \"10-20 = Critical\" band, \"out of 5\" — as chemistry.",
+  "status": "OWNER-APPROVED 2026-09-23 (Stage 9.50) - BLOCKING for the approved first activation. Percentage and currency are detected and reported but do not block. Extended 2026-09-23 (Stage 9.52) with the ratio claim type and the twelve Air-block figures.",
   "mode": "blocking",
   "seedingRule": "Seeded only from Bucket A: figures whose source is recorded in approved stage work. Nothing is seeded from memory, nothing from Bucket C, and no citation is invented.",
   "claims": [
@@ -480,6 +480,351 @@
         "NZ only: no Australian household interval is published, and the AU file carries none."
       ],
       "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (Stage 9.45)"
+    },
+    {
+      "id": "nz-smoke-alarm-maintenance-fenz",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "interval",
+      "claimType": "interval",
+      "unit": "time",
+      "value": {
+        "text": "test monthly; vacuum or dust every six months; check the expiry date and replace a 9V battery every year; replace the alarm every ten years"
+      },
+      "allowedWording": "Fire and Emergency New Zealand's maintenance routine: once a month press the test button; every six months vacuum or dust; every year check the expiry date and replace a 9V battery; every ten years replace the alarm.",
+      "match": [
+        "\\bOnce a month,? press the test button\\b",
+        "\\bEvery six months,? vacuum or dust\\b",
+        "\\bEvery year,? check the expiry date\\b",
+        "\\bEvery ten years,? replace your smoke alarms\\b",
+        "\\bFire and Emergency New Zealand\\b[\\s\\S]{0,400}\\b(?:once a month|every six months|every ten years)\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.fireandemergency.nz/home-fire-safety/smoke-alarms/",
+      "authority": "Fire and Emergency New Zealand",
+      "sourceDate": "read live 2026-09-23 (Stage 9.51)",
+      "limitations": [
+        "New Zealand only. The Australian intervals are published by state fire services, differ in detail (a five-second test hold, 12-monthly batteries) and must not be merged with these.",
+        "The ten-year figure is a REPLACEMENT interval, not an age pass/fail test: the legacy 'under 10 years old' wording is not what FENZ publishes and must not be reinstated.",
+        "Hard-wired alarms follow the installer's schedule; this routine does not override a manufacturer's instructions.",
+        "The routine is written one instruction per sentence and must be introduced by Fire and Emergency New Zealand in the same block; the patterns match FENZ's own wording, not any monthly or six-monthly interval."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "nz-smoke-alarm-9v-battery-fenz",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "power",
+      "claimType": "value",
+      "unit": "V",
+      "value": {
+        "exact": 9
+      },
+      "allowedWording": "if the alarm takes a 9V battery, replace the battery every year (Fire and Emergency New Zealand)",
+      "match": [
+        "\\b9V battery\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.fireandemergency.nz/home-fire-safety/smoke-alarms/",
+      "authority": "Fire and Emergency New Zealand",
+      "sourceDate": "read live 2026-09-23 (Stage 9.51)",
+      "limitations": [
+        "A battery type named by the source, not a recommendation to buy a 9V alarm — FENZ recommends long-life photoelectric alarms.",
+        "It approves no other voltage anywhere in the library."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "nz-rental-alarm-3m-tenancy",
+      "market": "NZ",
+      "jurisdiction": "national (tenancy law)",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "distance",
+      "claimType": "threshold",
+      "unit": "m",
+      "value": {
+        "exact": 3
+      },
+      "allowedWording": "Tenancy Services requires an alarm in every room where someone sleeps, or within three metres of each bedroom door, and on every level of the home.",
+      "match": [
+        "\\bTenancy Services\\b[\\s\\S]{0,200}\\bthree metres\\b",
+        "\\bthree metres of each bedroom door\\b"
+      ],
+      "requiresLabel": "Tenancy Services",
+      "source": "https://www.tenancy.govt.nz/maintenance-and-inspections/smoke-alarms/",
+      "authority": "Tenancy Services (MBIE)",
+      "sourceDate": "last updated 6 Sep 2023 (read live 2026-09-23)",
+      "limitations": [
+        "A legal requirement for RENTAL homes in New Zealand, not general advice for an owner-occupier, and not an Australian rule.",
+        "It is a placement distance from a bedroom door. It approves 'three metres' of nothing else — not a clearance, not a setback, not a generator distance."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "nz-airing-15-minutes-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "interval",
+      "claimType": "example",
+      "unit": "minutes",
+      "value": {
+        "exact": 15
+      },
+      "allowedWording": "ventilate regularly — for example, by opening windows several times each day for 15 minutes (MBIE)",
+      "match": [
+        "\\bopening windows several times each day for 15 minutes\\b",
+        "\\bMBIE\\b[\\s\\S]{0,160}\\b15 minutes\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/air-quality-moisture-and-ventilation/controlling-moisture-and-damp",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "last updated 9 Aug 2023 (read live 2026-09-23)",
+      "limitations": [
+        "MBIE offers it as an example of regular ventilation, not as a required duration.",
+        "New Zealand only: no Australian source read publishes an airing time, and the AU ventilation wording is deliberately non-numeric.",
+        "It is not a clearance time for shower steam. The legacy 'shower steam clears within 10 minutes' has no source in either market."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "nz-indoor-temperature-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "temperature",
+      "claimType": "range",
+      "unit": "°C",
+      "value": {
+        "min": 18,
+        "max": 22
+      },
+      "allowedWording": "heating the home to 18–22°C (MBIE)",
+      "match": [
+        "\\b18\\s?[–-]\\s?22\\s?°C\\b",
+        "\\bheat(?:ing)? (?:the )?home to 18\\s?[–-]\\s?22\\s?°C\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/air-quality-moisture-and-ventilation/controlling-moisture-and-damp",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "last updated 9 Aug 2023 (read live 2026-09-23)",
+      "limitations": [
+        "MBIE's healthy indoor temperature range for controlling moisture and damp. It is not a World Health Organization figure and is not presented as one.",
+        "New Zealand only. No Australian source read publishes an indoor temperature target.",
+        "It is not a food, water or appliance temperature, and approves none."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "nz-ground-moisture-litres-mbie",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "capacity",
+      "claimType": "threshold",
+      "unit": "L",
+      "value": {
+        "exact": 40
+      },
+      "allowedWording": "up to 40 litres of moisture a day can rise from the ground under a home with no ground vapour barrier (MBIE)",
+      "match": [
+        "\\bup to 40 litres\\b[\\s\\S]{0,120}\\b(?:ground|vapour barrier)\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/air-quality-moisture-and-ventilation/controlling-moisture-and-damp",
+      "authority": "Building Performance, MBIE",
+      "sourceDate": "last updated 9 Aug 2023 (read live 2026-09-23)",
+      "limitations": [
+        "An upper figure for an unprotected sub-floor, published to explain why a ground vapour barrier matters. It is not a measurement of any particular home.",
+        "It is a moisture figure, not a water supply or storage figure, and must not be read beside the drinking-water litres in OG-08.",
+        "New Zealand only."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "nz-mould-vinegar-half-and-half-tenancy",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "capacity",
+      "claimType": "ratio",
+      "unit": "parts",
+      "value": {
+        "text": "half and half — equal parts white vinegar and water, on painted surfaces"
+      },
+      "allowedWording": "Tenancy Services says white vinegar is a cheap and effective way to clean mould, and that on painted surfaces you should dilute the vinegar with water, half and half, to avoid damaging the paint.",
+      "match": [
+        "\\bvinegar\\b[\\s\\S]{0,120}\\bhalf and half\\b",
+        "\\bdilute the vinegar with water, half and half\\b"
+      ],
+      "requiresLabel": "Tenancy Services",
+      "source": "https://www.tenancy.govt.nz/maintenance-and-inspections/mould-and-dampness/",
+      "authority": "Tenancy Services (MBIE)",
+      "sourceDate": "last updated 12 May 2022 (read live 2026-09-23)",
+      "limitations": [
+        "New Zealand's dilution. New South Wales publishes a different one (four parts vinegar to one part water) and the two must never cross.",
+        "It is a dilution to protect PAINT, in a method whose purpose is removing mould. It carries no efficacy claim: no 'kills mould' wording may be attached to it.",
+        "It approves no bleach ratio. Tenancy Services' bleach alternative (one part bleach to three parts water) is WITHHELD pending an owner ruling and has no entry here."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "au-smoke-alarm-maintenance-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific, attributed in the sentence)",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "interval",
+      "claimType": "interval",
+      "unit": "time",
+      "value": {
+        "text": "test every month; vacuum every six months; replace lead or alkaline batteries every 12 months; replace alarms every ten years"
+      },
+      "allowedWording": "Fire and Rescue NSW advises testing your smoke alarms every month, vacuuming dust off them every six months, replacing lead or alkaline batteries every 12 months, and replacing the alarms themselves every ten years.",
+      "match": [
+        "\\bFire and Rescue NSW\\b[\\s\\S]{0,240}\\b(?:every month|every six months|every 12 months|every ten years)\\b"
+      ],
+      "requiresLabel": "Fire and Rescue NSW",
+      "source": "https://www.fire.nsw.gov.au/fire-safety/home-fire-safety/smoke-alarms/smoke-alarm-maintenance-guide",
+      "authority": "Fire and Rescue NSW",
+      "sourceDate": "read live 2026-09-23 (Stage 9.51)",
+      "limitations": [
+        "New South Wales guidance. There is no national Australian household smoke alarm rule, and this must never be written as one — Queensland's requirements differ and are legislation.",
+        "The attribution is part of the claim: the sentence must name Fire and Rescue NSW.",
+        "Not a New Zealand figure. FENZ's routine differs (no five-second hold, yearly expiry check) and the two must not be merged."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "au-smoke-alarm-test-seconds-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific, attributed in the sentence)",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "interval",
+      "claimType": "threshold",
+      "unit": "seconds",
+      "value": {
+        "exact": 5
+      },
+      "allowedWording": "Fire and Rescue NSW advises testing by pressing and holding the test button for at least five seconds.",
+      "match": [
+        "\\bFire and Rescue NSW\\b[\\s\\S]{0,240}\\bat least five seconds\\b",
+        "\\bholding the test button for at least five seconds\\b"
+      ],
+      "requiresLabel": "Fire and Rescue NSW",
+      "source": "https://www.fire.nsw.gov.au/fire-safety/home-fire-safety/smoke-alarms/smoke-alarm-maintenance-guide",
+      "authority": "Fire and Rescue NSW",
+      "sourceDate": "read live 2026-09-23 (Stage 9.51)",
+      "limitations": [
+        "NSW guidance about how to press a test button. It is not a New Zealand instruction — FENZ publishes no hold time — and must not appear in an NZ file.",
+        "It approves 'five seconds' of nothing else."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "au-smoke-alarm-ten-years-law-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state law, attributed in the sentence)",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "interval",
+      "claimType": "threshold",
+      "unit": "years",
+      "value": {
+        "exact": 10
+      },
+      "allowedWording": "NSW law requires a smoke alarm to be replaced within 10 years of manufacture, or earlier if the manufacturer specifies.",
+      "match": [
+        "\\bNSW law\\b[\\s\\S]{0,160}\\bwithin 10 years of manufacture\\b",
+        "\\bwithin 10 years of manufacture\\b"
+      ],
+      "requiresLabel": "NSW",
+      "source": "https://www.fire.nsw.gov.au/fire-safety/home-fire-safety/smoke-alarms/smoke-alarms-what-is-the-law",
+      "authority": "Fire and Rescue NSW",
+      "sourceDate": "read 2026-09-23 (Stage 9.51)",
+      "limitations": [
+        "New South Wales law. It is not a national Australian requirement and it is not New Zealand's rule.",
+        "It is measured from MANUFACTURE, not from installation, and it is a replacement rule rather than an age test to pass or fail."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "au-qld-alarm-ten-year-battery-qfd",
+      "market": "AU",
+      "jurisdiction": "QLD (state legislation, attributed in the sentence)",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "interval",
+      "claimType": "threshold",
+      "unit": "years",
+      "value": {
+        "exact": 10
+      },
+      "allowedWording": "The Queensland Fire Department requires interconnected photoelectric smoke alarms, hard-wired or powered by a non-removable ten-year battery.",
+      "match": [
+        "\\bQueensland Fire Department\\b[\\s\\S]{0,400}\\bnon-removable ten-year battery\\b",
+        "\\bnon-removable ten-year battery\\b"
+      ],
+      "requiresLabel": "Queensland",
+      "source": "https://www.fire.qld.gov.au/about-us/corporate-knowledge-centre/qfdlegislation/smoke-alarm-reforms",
+      "authority": "Queensland Fire Department",
+      "sourceDate": "read 2026-09-23 (Stage 9.51)",
+      "limitations": [
+        "Queensland legislation, staged to 1 January 2027 for all remaining domestic dwellings. The attribution and the staging must stay in the sentence.",
+        "It is a battery type required by law in one state, not a national Australian rule and not a New Zealand one."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "au-mould-vinegar-ratio-nsw",
+      "market": "AU",
+      "jurisdiction": "NSW (state-specific, attributed in the sentence)",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "capacity",
+      "claimType": "ratio",
+      "unit": "parts",
+      "value": {
+        "text": "4 parts vinegar to 1 part water"
+      },
+      "allowedWording": "For routine clean-up of mouldy surfaces, NSW Health advises mild detergent, or vinegar diluted in water at four parts vinegar to one part water.",
+      "match": [
+        "\\bNSW Health\\b[\\s\\S]{0,200}\\bfour parts vinegar to one part water\\b",
+        "\\bfour parts vinegar to one part water\\b"
+      ],
+      "requiresLabel": "NSW Health",
+      "source": "https://www.health.nsw.gov.au/environment/factsheets/Pages/mould.aspx",
+      "authority": "NSW Health",
+      "sourceDate": "current as at 20 December 2022 (read live 2026-09-23)",
+      "limitations": [
+        "New South Wales' dilution. New Zealand's is different (half and half on painted surfaces) and the two must never cross.",
+        "Routine clean-up only, and it carries no efficacy claim: NSW Health does not say it kills mould, and no such wording may be attached.",
+        "It approves no bleach ratio. NSW Health's bleach step (250 mL of bleach in 4 litres of water) is WITHHELD pending an owner ruling and has no entry here — nor does the PPE list that belongs to it."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
     }
   ],
   "blockingExcludes": [
@@ -499,6 +844,12 @@
       "percentage",
       "currency"
     ],
-    "emptyRegistry": "approves nothing"
+    "emptyRegistry": "approves nothing",
+    "extendedBy": {
+      "stage": "9.52",
+      "added": "the ratio claim type, and registry entries for the figures used by the fire-and-smoke-alarms, mould-and-dampness and home-ventilation blocks",
+      "ratioRule": "A ratio is a capacity claim measured in parts, explained only by an entry whose claimType is \"ratio\". Fail-closed as every other category: no entry, no figure. A bleach ratio still belongs to config/treatment-sources.json and the numeric scanner defers to it.",
+      "withheld": "No bleach dilution entry exists in either market. NSW Health's 250 mL in 4 litres and Tenancy Services' one-part-bleach-to-three-parts-water are withheld pending an owner ruling on the exact source wording."
+    }
   }
 }

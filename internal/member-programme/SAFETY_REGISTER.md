@@ -2,11 +2,11 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.51. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 23 September 2026, after Stage 9.52. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
-## Approved safety blocks (9)
+## Approved safety blocks (12)
 
 Every one is owner-approved for **NZ and AU separately**, with each market's own sources. A block with no wording for
 a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}`.
@@ -24,8 +24,38 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 | `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
+| `fire-and-smoke-alarms` | Smoke alarms and fire safety | **critical** | 23 Sep 2026 (Stage 9.52) | none yet — built for OG-13 |
+| `mould-and-dampness` | Mould and dampness | high | 23 Sep 2026 (Stage 9.52) | none yet — built for OG-13 |
+| `home-ventilation` | Ventilation and moisture | standard | 23 Sep 2026 (Stage 9.52) | none yet — built for OG-13 |
 
-**The numeric claim registry (blocking since Stage 9.50).** `admin-import/config/numeric-claims.json` holds 17 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks from Stage 9.50**: an unexplained figure fails preparation for that market, exactly as the treatment gates do. Structure, member inputs and treatment-owned figures never block, an empty registry approves nothing, and percentages and currency are detected but held out of this first activation. The live library returns **zero** findings.
+**The three Air blocks (Stage 9.52).** Built, tested and unused: no resource carries them yet, because OG-13 is not
+migrated. Three things about them matter beyond their wording:
+
+- **`fire-and-smoke-alarms` answers the detector without renaming it.** The topic detector asks for
+  `fire-and-emergency`; the block declares `answers: ["fire-and-emergency"]`, and prep treats a requirement as met by
+  an included block that declares it. The two reviewed hazard-label exemptions (OG-02, OG-B08) therefore still point
+  at the requirement they were approved against. The mechanism can satisfy a requirement, never suppress one.
+- **No national Australian alarm rule is stated.** NSW and Queensland differ materially, Queensland's is legislation
+  staged to **1 January 2027**, and every Australian sentence names its state.
+- **The bleach step is WITHHELD in both markets' mould wording**, pending an owner ruling: NSW Health's reads as a
+  sequence after vinegar, Tenancy Services' as an alternative, and wording that places the two together risks a
+  member mixing them. Each market's vinegar dilution is approved and registered; neither bleach dilution has a
+  registry entry, so neither can pass anything. The only mention of bleach anywhere is the Victorian never-mix
+  caution in the AU block, which instructs nobody to use it. The NZ block does not mention bleach at all.
+  **`home-ventilation` AU is deliberately non-numeric** and says so in the member-facing text — no Australian source
+  read publishes an airing time, humidity target or extraction rate, and New Zealand's figures may not be borrowed.
+
+**The numeric claim registry (blocking since Stage 9.50; 29 claims since Stage 9.52).** `admin-import/config/numeric-claims.json` holds 29 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks from Stage 9.50**: an unexplained figure fails preparation for that market, exactly as the treatment gates do. Structure, member inputs and treatment-owned figures never block, an empty registry approves nothing, and percentages and currency are detected but held out of this first activation. The live library returns **zero** findings.
+
+**The ratio claim type (Stage 9.52).** A dilution carries no unit, so the unit scanner could never see one: "one part
+bleach to three parts water" would have reached a member with nothing checking it. `claimType: "ratio"` closes that.
+A ratio is detected as a **capacity** candidate measured in **parts** — a ratio of volumes is still a volume claim —
+so it blocks under the existing capacity activation rather than needing a new blocking category. Two guards keep it
+narrow: the sentence must be about mixing or diluting, and a scoring instrument is refused outright, so a 1–5 room
+score or a "10–20 = Critical" band is never read as chemistry. A **bleach** ratio still belongs to
+`treatment-sources.json`; the numeric scanner defers to it and offers no second opinion. Nothing in the live 19
+resources carries a dilution outside treatment, so the path is exercised by tests and by the new blocks' own wording,
+not yet by live member content.
 
 **The treatment source registry.** `admin-import/config/treatment-sources.json` holds the 21 approved treatment
 claims — 9 NZ, 12 AU — each with its market, jurisdiction, method, wording, numeric value, source, authority, date,
@@ -110,9 +140,9 @@ Each of these blocks resources until it is researched from official NZ **and** A
 |---|---|---|
 | **Gas / LPG** | OG-17, OG-B09, any gas appliance or LPG generator | the strict gas rule stands. No NZ/AU household gas-appliance block exists. **It also blocks MBIE's unflued-gas advice in any Air resource.** |
 | **Diesel** | diesel generators or heating | the generator block is petrol-only |
-| **Fire and smoke alarms** | OG-13, and any alarm guidance | **researched and drafted at Stage 9.51** — FENZ and Tenancy Services (NZ); Fire and Rescue NSW and the Queensland Fire Department (AU, state-labelled; Queensland's is law, staged to 1 Jan 2027). No block exists yet, so the fire detector still fails closed. |
-| **Mould and dampness** | OG-13, and any mould guidance | **researched and drafted at Stage 9.51** — Tenancy Services (NZ: vinegar half and half, or 1 part bleach to 3 parts water); NSW Health (AU: 4:1 vinegar, or 250 mL bleach in 4 L). **The dilutions differ by market and may not cross.** |
-| **Home ventilation** | OG-13, and any ventilation guidance | **researched and drafted at Stage 9.51** — MBIE (NZ: 18–22 °C, airing ~15 minutes several times a day, vent outside not into the roof space). **AU stays non-numeric:** no Australian source read publishes airing times, humidity targets or extraction rates. |
+| ~~Fire and smoke alarms~~ | ~~OG-13~~ | **DONE.** Researched at Stage 9.51, built at Stage 9.52 as `fire-and-smoke-alarms`: FENZ and Tenancy Services (NZ); Fire and Rescue NSW and the Queensland Fire Department (AU, each state-labelled; Queensland's is law, staged to 1 Jan 2027). **No national Australian rule is stated.** The block answers the fire detector's `fire-and-emergency` requirement via `answers`, so the two reviewed hazard-label exemptions are untouched. |
+| **Mould and dampness** | OG-13, and any mould guidance | **BUILT at Stage 9.52 with the bleach step WITHHELD.** Approved and registered: white vinegar half and half on painted surfaces (NZ, Tenancy Services); mild detergent or four parts vinegar to one part water (AU, NSW Health). **Still needs an owner ruling:** NSW Health's bleach step reads as a sequence after vinegar and Tenancy Services' as an alternative, so neither bleach dilution is implemented or registered. The dilutions differ by market and may not cross. NSW's PPE list belongs to bleach cleaning, not to vinegar. |
+| ~~Home ventilation~~ | ~~OG-13~~ | **DONE.** Built at Stage 9.52 as `home-ventilation`: MBIE for NZ (18–22°C, airing about 15 minutes several times a day, up to 40 litres a day of ground moisture without a vapour barrier, vent outside not into the roof space). **AU is non-numeric and says so in the member-facing text** — no Australian source read publishes an airing time, humidity target or extraction rate, and NZ's figures may not be borrowed. No gas appliance is named in either market. |
 | ~~Water treatment~~ | ~~OG-09~~ | **DONE.** Researched at Stage 9.42, approved and built at Stage 9.43: the `water-treatment` block, the source registry and the six gates are in place. OG-09 is live as the Household Water Treatment Guide. |
 | **Grants and rebates** | OG-16 | NZ programmes; AU state and territory schemes |
 | **Consents and approvals** | OG-B11, and tank/plumbing wording | NZ council consents; AU state, territory and council |

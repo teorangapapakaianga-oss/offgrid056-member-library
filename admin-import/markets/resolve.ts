@@ -70,6 +70,15 @@ export interface SafetyBlock {
    * block drops its generator paragraph when the generator block is there. Keyed by that other block's id.
    */
   marketBodyWhen?: Record<string, Partial<Record<MarketCode, string>>>;
+  /**
+   * Topic-detector requirements this block satisfies, where the block's own id is not the detector's id.
+   *
+   * The fire detector asks for "fire-and-emergency"; the approved wording is `fire-and-smoke-alarms`. Declaring the
+   * answer here — rather than renaming the detector — keeps the two reviewed hazard-label exemptions (OG-02 and
+   * OG-B08) pointing at the requirement the owner approved them against. It can only ever *satisfy* a requirement,
+   * and only for a resource that actually carries the block: it cannot remove one.
+   */
+  answers?: string[];
   sources: string[];
 }
 

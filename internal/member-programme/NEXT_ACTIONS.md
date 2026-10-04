@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 23 September 2026, after Stage 9.51.
+**As at:** 23 September 2026, after Stage 9.52.
 
 ---
 
@@ -10,10 +10,12 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **Three Air safety blocks** — fire-and-smoke-alarms, mould-and-dampness, home-ventilation | **researched and drafted** at Stage 9.51 | owner approval of the drafted NZ/AU wording, then one build stage (blocks + numeric registry entries + a ratio claim type + a full 19-resource re-run) |
-| 2 | **OG-13 Healthy Home Air Audit** | blocked behind those blocks | 24 claim groups classified; 5 prices, 3 health claims and 3 unsourced figures to remove; gas wording must be avoided until the gas stage |
-| 3 | **Other pathways on real resources** | possible now that the override exists | Energy Basics and Start Here could follow the same private-path pattern once their resources are live |
-| 4 | **Retiring demo placeholders** | 28 remain | a decision before any public launch |
+| 1 | **Two owner rulings on OG-13** | **blocking** | (a) the **mould bleach wording** — withheld in both markets; the exact NSW Health and Tenancy Services wording and three options are in `STAGE_9.52_AIR_SAFETY_ARCHITECTURE.md` §5. (b) the **category slug** — "air-quality" is not a category of the air foundation; `indoor-air-quality` is recorded as the nearest match, `healthy-home-checks` is the alternative |
+| 2 | ~~Three Air safety blocks~~ | **built at Stage 9.52** | `fire-and-smoke-alarms`, `mould-and-dampness` (bleach withheld), `home-ventilation` (AU non-numeric), plus 12 numeric entries and the ratio claim type. Full 19-resource re-run green, Bucket C = 0, no member content changed |
+| 3 | **OG-13 Healthy Home Air Audit — migration** | ready once the two rulings land | carry the three blocks plus `carbon-monoxide` and `solid-fuel-heating` explicitly in metadata (the detectors' mention thresholds do not require them); remove 5 prices, 3 health claims and 3 unsourced figures; rewrite the alarm and mask rows around the blocks; keep every sentence clear of the treatment gate's testing-interval trap; gas wording avoided until the gas stage |
+| 4 | **Other pathways on real resources** | possible now that the override exists | Energy Basics and Start Here could follow the same private-path pattern once their resources are live |
+| 5 | **Retiring demo placeholders** | 28 remain | a decision before any public launch |
+| 6 | **`UNSOURCED_TESTING_INTERVAL` scope** | **raised, not changed** | the water-treatment gate has no topic context, so it fires on any "test … every six months" sentence — including a smoke alarm routine. It is working in our favour today (it is what blocks OG-13's two legacy alarm rows), so it was deliberately left alone. Whether it should gain a water-topic condition is an owner decision, and not one to take during a migration |
 
 ## Water pathway
 
@@ -30,10 +32,14 @@ The order to work in, and why:
 
 ## Air pathway
 
-**Air still has no resource.** OG-13 (Healthy Home Air Audit) is the entry assessment, and Stage 9.51's research
-found it needs **three safety blocks that do not exist yet** — fire and smoke alarms, mould and dampness, home
-ventilation — plus numeric registry entries for a dozen figures. It is a three-stage job (approve the wording, build
-the blocks and entries, then migrate), not the low-risk stage it looked like from the outside.
+**Air still has no resource, but its safety architecture now exists.** OG-13 (Healthy Home Air Audit) is the entry
+assessment. Stage 9.51 researched it; **Stage 9.52 built all three blocks, their twelve numeric entries and the
+ratio claim type**, and proved the whole library stays green. What is left is the migration itself, and it is held
+by two small rulings rather than by missing research.
+
+**No Air learning path yet, on purpose.** A one-resource pathway is not a pathway. Steps 2–4 of the proposed Air
+order (ventilation and moisture, mould and dampness, smoke and combustion safety) are *safety blocks* today, not
+resources, so the path waits until a second Air resource exists.
 
 ## Research stages (each gates resources)
 

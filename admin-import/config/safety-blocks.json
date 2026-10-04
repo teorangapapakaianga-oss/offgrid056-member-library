@@ -299,6 +299,128 @@
         "AU": "VERIFIED_LIVE — OWNER-APPROVED 2026-09-23 (Stage 9.42 ruling 2: NHMRC national, NSW labelled NSW, WA labelled WA; no state rule presented as national)"
       },
       "changeRule": "Owner rulings 1–11 (Stage 9.42). No figure may move between markets. No elevation or altitude boiling adjustment (no source publishes one). No NZ micron rating, removal percentage or UV specification. No national Australian bleach ratio. No household testing frequency for AU: NSW's schedules are operator guidance and must be labelled as such if used at all. No distillation method. Where no verified household method exists for a contaminant, direct the member to official or public-health advice instead. Every claim here is registered in config/treatment-sources.json, and the gates fail closed against it."
+    },
+    "fire-and-smoke-alarms": {
+      "id": "fire-and-smoke-alarms",
+      "title": "Smoke alarms and fire safety",
+      "severity": "CRITICAL",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "answers": [
+        "fire-and-emergency"
+      ],
+      "marketBody": {
+        "NZ": "**Working smoke alarms are the difference between a fire you escape and one you do not.** Fire and Emergency New Zealand recommends long-life photoelectric smoke alarms, and interconnected alarms where you can — if one detects smoke they all sound, which matters most in multi-storey homes and homes with long hallways.\nFire and Emergency New Zealand advises a smoke alarm in every bedroom, hallway and living area. Do not put one in the kitchen, where cooking smoke will set it off — use a heat alarm there instead.\nFire and Emergency New Zealand publishes a maintenance routine for home smoke alarms. Once a month, press the test button. Every six months, vacuum or dust your alarms. Every year, check the expiry date on the alarm — if there is no expiry date, Fire and Emergency New Zealand says it is best to replace the alarm — and replace the battery if your alarm takes a 9V battery. Every ten years, replace your smoke alarms.\n**If you rent or let a home, working smoke alarms are compulsory.** Tenancy Services requires an alarm in every room where someone sleeps, or within three metres of each bedroom door, and on every level of the home; alarms installed since 1 July 2016 must be long-life photoelectric and meet the standard.",
+        "AU": "**Working smoke alarms are the difference between a fire you escape and one you do not — and the rules differ by state and territory.** There is no single national household smoke alarm rule in Australia, so check what applies where you live.\nFire and Rescue NSW advises testing your smoke alarms every month, by pressing and holding the test button for at least five seconds. Fire and Rescue NSW advises vacuuming dust off them every six months. Fire and Rescue NSW advises replacing lead or alkaline batteries every 12 months, and replacing the alarms themselves every ten years. NSW law requires a smoke alarm to be replaced within 10 years of manufacture, or earlier if the manufacturer specifies.\n**In Queensland it is legislation, and it is stricter.** The Queensland Fire Department requires interconnected photoelectric smoke alarms in every bedroom, in hallways connecting bedrooms, and on every storey — hard-wired or powered by a non-removable ten-year battery. This has applied to new and substantially renovated homes since 2017, to homes when they are sold or leased since 2022, and applies to all remaining domestic dwellings from 1 January 2027.\nFire and Rescue NSW notes that the critical factor is not a specific sensor technology, but the number of alarms, where they are placed, and whether they are interconnected."
+      },
+      "sources": {
+        "NZ": [
+          "Fire and Emergency New Zealand — Smoke alarms (read live 2026-09-23): https://www.fireandemergency.nz/home-fire-safety/smoke-alarms/",
+          "Tenancy Services (MBIE) — Smoke alarms in rental properties (last updated 6 Sep 2023; read live 2026-09-23): https://www.tenancy.govt.nz/maintenance-and-inspections/smoke-alarms/"
+        ],
+        "AU": [
+          "Fire and Rescue NSW — Smoke alarm maintenance guide (NSW; read live 2026-09-23): https://www.fire.nsw.gov.au/fire-safety/home-fire-safety/smoke-alarms/smoke-alarm-maintenance-guide",
+          "Fire and Rescue NSW — Smoke alarms: what is the law (NSW; read 2026-09-23): https://www.fire.nsw.gov.au/fire-safety/home-fire-safety/smoke-alarms/smoke-alarms-what-is-the-law",
+          "Queensland Fire Department — Smoke alarm reforms (QLD; read 2026-09-23): https://www.fire.qld.gov.au/about-us/corporate-knowledge-centre/qfdlegislation/smoke-alarm-reforms"
+        ]
+      },
+      "sharedOrVaries": "VARIES — and it varies inside Australia as well as between the markets. New Zealand has one national position (FENZ guidance, plus a legal requirement for rentals). Australia has no national household rule: NSW and Queensland differ materially, and Queensland's is legislation staged to 1 January 2027. Every Australian sentence is therefore labelled with the state it comes from, and no state figure is presented as national.",
+      "sentenceSources": {
+        "NZ": [
+          "long-life photoelectric recommended; interconnected better, especially multi-storey homes and long hallways — FENZ",
+          "every bedroom, hallway and living area; not the kitchen, use a heat alarm — FENZ",
+          "monthly test; six-monthly vacuum or dust; yearly expiry check, replace if no expiry date; yearly 9V battery; ten-year replacement — FENZ",
+          "compulsory in rentals; every room where someone sleeps or within 3 m of each bedroom door; every level; alarms installed since 1 July 2016 long-life photoelectric to the standard — Tenancy Services (MBIE)"
+        ],
+        "AU": [
+          "no national household rule; the rules differ by state and territory — the position that follows from FRNSW and QFD differing, stated as a limitation rather than as advice",
+          "monthly test holding the button at least five seconds; six-monthly vacuum; 12-monthly lead or alkaline batteries; ten-year replacement; NSW law requires replacement within 10 years of manufacture — Fire and Rescue NSW (NSW)",
+          "interconnected photoelectric in every bedroom, connecting hallways and every storey; hard-wired or non-removable ten-year battery; 2017 new and renovated, 2022 on sale or lease, 1 January 2027 all remaining dwellings — Queensland Fire Department (QLD)",
+          "the critical factor is the number of alarms, their location and interconnection rather than sensor technology — Fire and Rescue NSW (NSW)"
+        ]
+      },
+      "verification": {
+        "NZ": "VERIFIED_LIVE 2026-09-23 (Stage 9.51 research; built Stage 9.52)",
+        "AU": "VERIFIED_LIVE 2026-09-23 (Stage 9.51 research; built Stage 9.52) — NSW labelled NSW, Queensland labelled Queensland"
+      },
+      "changeRule": "No national Australian smoke alarm rule may ever be written here: NSW and Queensland differ, and the Queensland requirement is legislation with a 1 January 2027 deadline. No figure crosses markets. No carbon monoxide wording belongs in this block — CO stays in the approved carbon-monoxide block, which this stage did not change — and no CO alarm lifespan may be written in either market, because no source publishes one. The legacy 'under 10 years old' pass/fail test is not what either agency publishes and must not be reinstated: both publish replacement at ten years, and New Zealand adds an annual expiry check. Every figure used here is registered in config/numeric-claims.json."
+    },
+    "mould-and-dampness": {
+      "id": "mould-and-dampness",
+      "title": "Mould and dampness",
+      "severity": "HIGH",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Mould is a sign of moisture, and the moisture is the thing to fix.** Tenancy Services advises keeping the home dry and well aired: open windows and doors whenever you can, use extractor fans when cooking, bathing or drying clothes, keep lids on pots, wipe condensation off walls and windows, hang washing outside, and pull beds and furniture away from walls.\nRemove mould as soon as it appears. Tenancy Services says white vinegar is a cheap and effective way to clean mould, and that on painted surfaces you should dilute the vinegar with water, half and half, to avoid damaging the paint; leave it for a few days, then wipe off the dead mould with soap and water using a clean cloth. Use a clean sponge or cloth and rinse it often — this reduces the risk of spreading the mould.\nTenancy Services advises wearing gloves, eye protection and a safety mask when dealing with cleaning products and mould.\nIf you are doing all the right things and the home is still damp and mouldy, Tenancy Services says a qualified building surveyor may need to check the property for a hidden source of dampness. If you rent, talk to your landlord.",
+        "AU": "**Mould grows in wet or moist areas that lack adequate ventilation**, so NSW Health advises fixing the source of the moisture: repair water leaks and plumbing problems, and completely clean and dry water-damaged carpets and building materials, discarding anything that cannot be dried completely.\nFor routine clean-up of mouldy surfaces, NSW Health advises mild detergent, or vinegar diluted in water at four parts vinegar to one part water. Better Health Channel (Victorian Department of Health) advises using a microfibre cloth and rinsing it regularly in a separate container of clean water to stop the mould spreading, applying the cleaner and giving it time to work before you mop or sponge it up, avoiding getting areas too wet, and drying afterwards where possible.\n**Do not mix bleach with ammonia, acids or other cleaners — Better Health Channel warns this can release hazardous chlorine or chloramine fumes.** If you use a commercially available product, check the label for how much to use and which surfaces it can be used on, and always read and follow its safety instructions.\nNSW Health advises that absorbent materials such as carpet may need to be professionally cleaned or replaced if they are contaminated with mould, and that since most mould is visible it is generally not necessary to test for it — though mould can be present in cavities or the ceiling. If you cannot find the source of the problem, you could employ an occupational hygienist.\nMould may cause health problems for people who are sensitive or allergic to it, and for people with asthma it may trigger an asthma attack — but most people will not experience any health problems. For advice about the health risks of mould, contact your local public health unit; in NSW, call 1300 066 055. If you rent and mould is still growing after you have made sure the home is properly ventilated, NSW Health says to raise it with the owner or agent."
+      },
+      "sources": {
+        "NZ": [
+          "Tenancy Services (MBIE) — Mould and dampness (last updated 12 May 2022; read live 2026-09-23): https://www.tenancy.govt.nz/maintenance-and-inspections/mould-and-dampness/"
+        ],
+        "AU": [
+          "NSW Health — Mould fact sheet (NSW; current as at 20 December 2022; read live 2026-09-23): https://www.health.nsw.gov.au/environment/factsheets/Pages/mould.aspx",
+          "Better Health Channel, Victorian Department of Health — Mould removal at home (VIC; read live 2026-09-23): https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/mould-removal-at-home"
+        ]
+      },
+      "sharedOrVaries": "VARIES — and the cleaning dilutions vary, which is the reason this block is market-split rather than shared. New Zealand's routine method is white vinegar, diluted half and half on painted surfaces (Tenancy Services). New South Wales' is mild detergent or vinegar at four parts vinegar to one part water (NSW Health). Neither dilution may appear in the other market's file. The PPE lists also differ, and NSW's list (PVC or nitrate rubber gloves, safety glasses, safety shoes) is written for cleaning with bleach specifically, so it is not attached to vinegar cleaning here.",
+      "sentenceSources": {
+        "NZ": [
+          "keep the home dry and aired; open windows and doors; extractor fans when cooking, bathing or drying clothes; lids on pots; wipe condensation; hang washing outside; furniture away from walls — Tenancy Services",
+          "white vinegar is a cheap and effective way to clean mould; dilute half and half with water on painted surfaces to avoid damaging paint; leave a few days then wipe off with soap and water; rinse the cloth often to reduce spreading — Tenancy Services",
+          "wear gloves, eye protection and a safety mask when dealing with cleaning products and mould — Tenancy Services",
+          "if the home is still damp and mouldy, a qualified building surveyor may need to check for a hidden source; tell the landlord — Tenancy Services"
+        ],
+        "AU": [
+          "mould grows in wet or moist areas that lack adequate ventilation; repair leaks and plumbing problems; completely clean and dry water-damaged carpets and building materials, discard what cannot be dried — NSW Health (NSW)",
+          "routine clean-up: mild detergent or vinegar diluted in water, 4 parts vinegar to 1 part water — NSW Health (NSW)",
+          "microfibre cloth rinsed regularly in a separate container; apply the cleaner and give it time to work; avoid getting areas too wet; dry afterwards where possible — Better Health Channel, Victorian Department of Health (VIC)",
+          "do not mix bleach with ammonia, acids or other cleaners — this can release hazardous chlorine or chloramine fumes; check a commercial product's label for quantity and surfaces, and follow its safety instructions — Better Health Channel, Victorian Department of Health (VIC)",
+          "absorbent materials such as carpet may need professional cleaning or replacement; most mould is visible so testing is generally unnecessary, though mould may be in cavities or the ceiling; an occupational hygienist can help if the source cannot be found — NSW Health (NSW)",
+          "health problems for people sensitive or allergic; may trigger an asthma attack; most people will not experience any health problems; local public health unit, 1300 066 055 in NSW; renters raise it with the owner or agent — NSW Health (NSW)"
+        ]
+      },
+      "verification": {
+        "NZ": "VERIFIED_LIVE 2026-09-23 (Stage 9.51 research; built Stage 9.52) — bleach option WITHHELD pending an owner ruling",
+        "AU": "VERIFIED_LIVE 2026-09-23 (Stage 9.51 research; built Stage 9.52) — bleach step WITHHELD pending an owner ruling"
+      },
+      "changeRule": "**No sequential vinegar-then-bleach method may be written, in either market.** Both markets' sources name bleach, and in both it is separate from the vinegar method — New Zealand offers it as an alternative ('You can also use diluted household bleach'), New South Wales as a second step if the mould is not readily removed. Because wording that places the two together risks a member mixing them, the bleach option is withheld from both markets' bodies until the owner rules on the exact source wording (returned at Stage 9.52). The dilutions are market-specific and must never cross: half-and-half vinegar and one-part-bleach-to-three-parts-water are New Zealand's; four-parts-vinegar-to-one-part-water and 250 mL of bleach in 4 litres of water are New South Wales'. No surface-area threshold, severity scale, humidity figure or remediation limit may be invented — no source read publishes one. No PPE beyond what the source names, and NSW's PPE list belongs to bleach cleaning, not to vinegar. No 'kills mould' efficacy claim: the agencies' own wording stands. Every figure used here is registered in config/numeric-claims.json."
+    },
+    "home-ventilation": {
+      "id": "home-ventilation",
+      "title": "Ventilation and moisture",
+      "severity": "STANDARD",
+      "body": "{{safety.notVerifiedForMarket}}",
+      "marketBody": {
+        "NZ": "**Ventilation is how moisture leaves a home, and moisture is what makes a home damp, cold and mouldy.** Building Performance (MBIE) advises venting moisture at the source: the kitchen, bathroom and laundry should have range hoods or extractor fans, and the moist air needs to be vented to the outside, not into the roof space. Vent a clothes dryer outside, or use a condensing or heat-pump dryer.\nMBIE advises ventilating regularly — for example, by opening windows several times each day for 15 minutes — and heating the home to 18–22°C.\nMake less moisture in the first place: dry washing outside rather than inside, keep lids on pots when cooking, and fix leaks promptly. MBIE notes that up to 40 litres of moisture a day can rise from the ground under a home with no ground vapour barrier.\nMBIE says that if you eliminate moisture sources, heat to healthy temperatures and improve ventilation, you should not need a dehumidifier. If you do use one, close the windows in that room while it runs, and empty it regularly.",
+        "AU": "**No Australian source read for this guidance publishes an airing time, an indoor humidity target or an extraction rate for homes, so none is given here** — and a New Zealand figure must not be borrowed for an Australian home.\nNSW Health advises that mould grows in wet or moist areas that lack adequate ventilation, so ventilate wet areas, use extraction where you have it, and open windows when you can and when the outdoor air is not smoky.\nAfter a leak or water damage, NSW Health advises completely cleaning and drying water-damaged carpets and building materials, and discarding anything that cannot be cleaned and dried completely. For guidance that applies where you live, check your state or territory health department."
+      },
+      "sources": {
+        "NZ": [
+          "Building Performance, MBIE — Controlling moisture and damp (last updated 9 Aug 2023; read live 2026-09-23): https://www.building.govt.nz/getting-started/smarter-homes-guides/air-quality-moisture-and-ventilation/controlling-moisture-and-damp"
+        ],
+        "AU": [
+          "NSW Health — Mould fact sheet (NSW; current as at 20 December 2022; read live 2026-09-23): https://www.health.nsw.gov.au/environment/factsheets/Pages/mould.aspx"
+        ]
+      },
+      "sharedOrVaries": "VARIES, and asymmetrically. New Zealand publishes household figures — 18–22°C, airing for about 15 minutes several times a day, up to 40 litres a day of ground moisture without a vapour barrier — so the NZ body uses them. No Australian source read publishes any equivalent, so the AU body is deliberately non-numeric and says so. The gap is stated in the member-facing wording rather than filled with a New Zealand figure.",
+      "sentenceSources": {
+        "NZ": [
+          "kitchen, bathroom and laundry should have range hoods or extractor fans; the moist air needs to be vented to the outside, not into the roof space; vent the dryer outside or use a condensing or heat-pump dryer — Building Performance, MBIE",
+          "ventilate regularly, for example by opening windows several times each day for 15 minutes; heat to 18–22°C — Building Performance, MBIE",
+          "dry washing outside; lids on pots; fix leaks; up to 40 litres a day can come from the ground with no ground vapour barrier — Building Performance, MBIE",
+          "if you eliminate moisture sources, heat to healthy temperatures and improve ventilation you should not need a dehumidifier; close windows in the room while one runs — Building Performance, MBIE"
+        ],
+        "AU": [
+          "no Australian airing time, humidity target or extraction rate is published in the sources read — stated as a limitation, not as advice",
+          "mould grows in wet or moist areas that lack adequate ventilation — NSW Health (NSW)",
+          "completely clean and dry water-damaged carpets and building materials; discard what cannot be cleaned and dried completely — NSW Health (NSW)"
+        ]
+      },
+      "verification": {
+        "NZ": "VERIFIED_LIVE 2026-09-23 (Stage 9.51 research; built Stage 9.52)",
+        "AU": "VERIFIED_LIVE 2026-09-23 (Stage 9.51 research; built Stage 9.52) — non-numeric by ruling"
+      },
+      "changeRule": "**The AU body stays non-numeric.** No airing time, indoor humidity target, temperature range, air-change rate or extraction rate may be written for Australia until an Australian source publishing one is read live; the New Zealand figures may not be borrowed. The legacy 'shower steam clears within 10 minutes' has no source in either market and must not be reinstated. No gas appliance wording belongs here: MBIE's damp guidance advises against unflued gas heaters, and gas remains blocked under GAS_SAFETY_REQUIRED until the gas research stage. No dehumidifier 'mould threshold' figure — no source publishes one. Every NZ figure used here is registered in config/numeric-claims.json."
     }
   }
 }

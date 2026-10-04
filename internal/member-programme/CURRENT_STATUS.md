@@ -1,20 +1,22 @@
 # Current status
 
-**As at:** 23 September 2026, after Stage 9.51 (OG-13 Air research — nothing migrated or deployed).
+**As at:** 23 September 2026, after Stage 9.52 (the three Air safety blocks and the ratio claim type built — nothing
+migrated or deployed).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **19** (all draft) |
 | **Worker version** | **`0aff3fcd-7080-4ae7-bf28-c5d09414b90a`** |
 | **Rollback available** | `1e4ab83b-4086-4c18-bf09-f6024152abbb` (19 resources, OG-08 AU before the Queensland attribution) |
-| **Tests** | **417 passing** · lint clean · typecheck clean |
-| **Next resource** | **OG-13 Healthy Home Air Audit** — researched at Stage 9.51; blocked until three new safety blocks and their numeric entries are approved and built |
+| **Tests** | **429 passing** · lint clean · typecheck clean |
+| **Next resource** | **OG-13 Healthy Home Air Audit** — its three safety blocks and numeric entries are built (Stage 9.52); the migration waits on two owner rulings: the mould bleach wording, and the category slug |
 | **Last deployment** | Stage 9.49, 23 September 2026: OG-08's AU three-day figure attributed to Get Ready Queensland |
-| **Last report** | `admin-import/STAGE_9.51_OG13_AIR_RESEARCH.md` (research only — nothing migrated or deployed) |
+| **Last report** | `admin-import/STAGE_9.52_AIR_SAFETY_ARCHITECTURE.md` (architecture only — nothing migrated or deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
-rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → 410 at Stage 9.49 → **417** at Stage 9.50 (numeric blocking). Nothing was removed.
+rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → 410 at Stage 9.49 → 417 at Stage 9.50 (numeric blocking) → **429** at Stage 9.52 (the Air blocks and the ratio
+claim type). Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -66,6 +68,7 @@ Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 | ~~OG-02's fire-block requirement~~ | — | **resolved at Stage 9.47**: an audited, hazard-identification-only exemption covering exactly "Fire in the home" and "Bushfire risk area", which lapses on any fire teaching |
 | ~~Water Basics learning path~~ | — | **resolved at Stage 9.47**: the private path override is built, tested and deployed; the public demonstration path is untouched |
 | ~~One unsourced live figure~~ | — | **resolved at Stage 9.49**: OG-08's AU sentence now says "Get Ready Queensland advises storing drinking water for three days", and the numeric scan is **zero findings** across all 19 resources |
+| **Two OG-13 rulings outstanding** | OG-13's migration | (1) the **mould bleach wording** — withheld in both markets because NSW Health's reads as a sequence and NZ's as an alternative; the exact source wording is in `STAGE_9.52_AIR_SAFETY_ARCHITECTURE.md` §5 with three options. (2) the **category slug** — the approved label "air-quality" is not a category of the air foundation; `indoor-air-quality` is recorded as the nearest match and `healthy-home-checks` is the alternative |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations

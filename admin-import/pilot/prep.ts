@@ -508,7 +508,11 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   // 4. market resolution, with the standard blocks plus this resource's topic blocks
   const safetyBlocks = ["general-disclaimer", "emergency-contact", ...(inputs.extraSafetyBlocks ?? [])];
   const requiredSafety = inputs.requiredSafety ?? [];
-  const lacking = requiredSafety.filter((b) => !safetyBlocks.includes(b));
+  // A requirement is met by the block with that id, or by an included block that declares it in `answers` — the
+  // approved `fire-and-smoke-alarms` wording answers the detector's "fire-and-emergency". Only blocks this resource
+  // actually carries are consulted, so declaring an answer can satisfy a requirement but never suppress one.
+  const answered = new Set(safetyBlocks.flatMap((id) => [id, ...(blocks[id]?.answers ?? [])]));
+  const lacking = requiredSafety.filter((b) => !answered.has(b));
   // An exemption is checked against each market's final wording; a block stays required wherever it fails.
   const exemptions = (inputs.safetyExemptions ?? []).filter((e) => lacking.includes(e.block));
   const exemptionResults = new Map(exemptions.map((e) => [e.block, { block: e.block, reason: e.reason, holds: true, unexpected: [] as string[] }]));

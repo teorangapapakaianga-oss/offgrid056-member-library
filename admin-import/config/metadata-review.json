@@ -746,6 +746,24 @@
       "relatedResourcesStatus": "owner-approved 2026-09-23 (Stage 9.46) — the water pathway only; OG-B12 deliberately excluded",
       "titleStatus": "owner-approved 2026-09-23 (Stage 9.46) — 'Water Tank Sizing & Placement Guide' kept",
       "status": "APPROVED FOR PRIVATE PREVIEW DEPLOYMENT as #19 (Stage 9.46 ruling 13)"
+    },
+    "OG-13": {
+      "foundation": "air",
+      "foundationStatus": "owner-approved 2026-09-23 (Stage 9.52)",
+      "resourceType": "assessment",
+      "resourceTypeStatus": "owner-approved 2026-09-23 (Stage 9.52)",
+      "category": "indoor-air-quality",
+      "categoryStatus": "NEEDS OWNER CONFIRMATION — the owner approved the label \"air-quality\", which is not a category slug of the air foundation. The existing slugs are ventilation, dampness-moisture, indoor-air-quality, healthy-home-checks, air-worksheets and air-checklists. \"indoor-air-quality\" is recorded as the nearest match to what was approved; \"healthy-home-checks\" (\"Walk-through checks for a drier, healthier home\") is the alternative, and arguably the better fit for a room-by-room audit. Confirm before OG-13 is prepared.",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-09-23 (Stage 9.52) — OWNER-APPROVED / INFERRED",
+      "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level; it is a walk-through checklist with no calculation.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "owner-approved 2026-09-23 (Stage 9.52) — OWNER-APPROVED / INFERRED",
+      "estimatedTimeReasoning": "INFERRED from the document's own claim, which is plausible for ten rooms or checks. Kept as the metadata estimate only; it is not restated as a claim in the copy.",
+      "tags": [],
+      "recordStatus": "draft",
+      "recordStatusNote": "owner-approved 2026-09-23 (Stage 9.52): draft, as every real resource is.",
+      "migrationState": "NOT MIGRATED. Stage 9.52 built the three Air safety blocks and the ratio claim type but deliberately did not migrate OG-13, generate its PDFs or deploy anything. Blocks, safety exemptions and copy changes are still to be decided in the migration stage."
     }
   }
 }

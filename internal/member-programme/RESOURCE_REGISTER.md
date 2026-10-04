@@ -2,7 +2,7 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 23 September 2026, after Stage 9.46.
+**As at:** 23 September 2026, after Stage 9.52.
 
 | State | Count |
 |---|---|
@@ -73,7 +73,7 @@ would need.
 
 | Code | Title | Notes |
 |---|---|---|
-| OG-13 | Healthy Home Air Audit | — · **the first Air resource** |
+| OG-13 | Healthy Home Air Audit | **the first Air resource.** Metadata approved (assessment · air · beginner · 20 min · draft) at Stage 9.52; its three safety blocks — `fire-and-smoke-alarms`, `mould-and-dampness`, `home-ventilation` — and twelve numeric entries are **built**. **Not migrated:** waiting on two owner rulings (the mould bleach wording, and the category slug — "air-quality" is not a category of the air foundation). 5 prices, 3 health claims and 3 unsourced figures to remove; gas wording must be avoided until the gas stage. |
 
 ### Food
 
