@@ -79,7 +79,68 @@ export interface SafetyBlock {
    * and only for a resource that actually carries the block: it cannot remove one.
    */
   answers?: string[];
+  /**
+   * Researched claims that are specific to ONE Australian state or territory (Stage 9.62).
+   *
+   * The library routes NZ or AU, never an Australian state, so none of these is ever resolved into a member-facing
+   * body: `resolveForMarket` reads only `marketBody`/`body`, and a test proves no override's wording reaches any
+   * served file. They are stored so that (a) the research is not lost, (b) each claim's category is explicit, and
+   * (c) a future state-routing stage has a typed, source-backed starting point rather than prose.
+   */
+  stateOverrides?: StateOverride[];
+  /**
+   * Wording drafted for a market whose block deliberately FAILS CLOSED (Stage 9.62). It is never served; it exists so
+   * the owner can approve it as written, rather than a compromise being improvised later.
+   */
+  draftedNotServed?: Partial<Record<MarketCode, string>>;
   sources: string[];
+}
+
+/** A, B or C: who may be shown this, and when. See the Stage 9.62 report. */
+export type StateOverrideCategory = "A" | "B" | "C";
+
+export interface StateOverride {
+  id: string;
+  /** state or territory code: NSW, VIC, QLD, SA, WA, TAS, ACT, NT */
+  jurisdiction: string;
+  /** the words that MUST appear beside the claim for it to be safe to show: the agency, by name */
+  label: string;
+  /**
+   * A — safe for every Australian member (these live in the served AU core, not here).
+   * B — informational, safe if labelled with the state, but not served yet.
+   * C — must NOT be served unless the member's state is known.
+   */
+  category: StateOverrideCategory;
+  topic: string;
+  /** the appliance or thing the claim is scoped to — "gas water heater" is not "gas heater" */
+  appliance?: string;
+  claim: string;
+  figure?: { value?: number; unit: string; text?: string } | null;
+  source: string;
+  authority: string;
+  sourceDate: string;
+  /** "state-routing" for C; "state-label" for B */
+  servedWhen: "state-label" | "state-routing";
+  /** claims in the same topic that CONFLICT with this one, by override id — never to be merged */
+  conflictsWith?: string[];
+}
+
+/**
+ * Whether a state override may be shown to a member (Stage 9.62). Nothing calls this yet — the library routes NZ or AU,
+ * never an Australian state — but the rule is written down and tested now so a state-routing stage inherits a decision
+ * rather than inventing one:
+ *
+ * - **A** is already in the served AU core, so it is always servable (and has no business being stored as an override).
+ * - **B** may be shown to anyone ONLY with its state label attached — the agency's name in the sentence it is shown in.
+ * - **C** may be shown ONLY to a member whose state is KNOWN and equals the override's jurisdiction. An unknown state
+ *   never receives it, and another state's member never receives it: that is the whole point of the category.
+ * - An override with no jurisdiction or no label is never servable.
+ */
+export function overrideServable(override: StateOverride, member: { state?: string | null; renderedWith?: string }): boolean {
+  if (!override.jurisdiction || !override.label) return false;
+  if (override.category === "A") return true;
+  if (override.category === "B") return !!member.renderedWith && member.renderedWith.includes(override.label);
+  return !!member.state && member.state.toUpperCase() === override.jurisdiction.toUpperCase();
 }
 
 export interface ResolvedResource {
@@ -177,7 +238,14 @@ export function resolveForMarket(
       unresolved.push(`safetyBlock:${id}`);
       return { id, title: "MISSING BLOCK", severity: "CRITICAL", body: "", sources: [] };
     }
-    const trimmed = Object.entries(block.marketBodyWhen ?? {}).find(([other]) => resource.safetyBlocks.includes(other))?.[1]?.[market.code];
+    // A key names the other block(s) whose presence trims this one. "a+b" means BOTH must be carried (Stage 9.62):
+    // two blocks can each repeat a different paragraph of a third, and a single-id key cannot express "drop both".
+    // The most specific matching key wins; single-id keys behave exactly as before.
+    const trimmed = Object.entries(block.marketBodyWhen ?? {})
+      // Only entries that carry wording for THIS market compete: the NZ and AU variants of a block can be keyed by
+      // different sets of blocks, and an AU-only key must not out-rank (and so silently discard) a valid NZ one.
+      .filter(([key, bodies]) => bodies?.[market.code] !== undefined && key.split("+").every((other) => resource.safetyBlocks.includes(other)))
+      .sort((a, b) => b[0].split("+").length - a[0].split("+").length)[0]?.[1]?.[market.code];
     const body = trimmed ?? block.marketBody?.[market.code] ?? block.body;
     return { id: block.id, title: block.title, severity: block.severity, body: take(body), sources: block.sources };
   });

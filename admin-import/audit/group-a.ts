@@ -146,6 +146,36 @@ const SAFETY_TOPICS: { pattern: RegExp; block: string; needs: number; teaching?:
     // instruction. See GAS_TEACHING for what does count.
     teaching: GAS_TEACHING,
   },
+  // The four specialised gas blocks (Stage 9.62). Each is a narrow subject that a document can teach on its own, so
+  // each needs only ONE mention — but every one still sits behind GAS_TEACHING, so none of them can be reached by a
+  // bare word, a narrative supply reference or a fuel listed among options. `gas supply` is in none of them.
+  {
+    // Unflued, cabinet, patio and portable LPG heaters. A FLUED heater is deliberately not here: the block is about
+    // what an unflued heater does to the room, and OG-B09's "Flued gas" row must not demand it.
+    pattern: /\b(?:unflued|cabinet heaters?|patio heaters?|portable (?:gas|LPG) heaters?|LPG heaters?)\b/gi,
+    block: "unflued-gas-heating",
+    needs: 1,
+    teaching: GAS_TEACHING,
+  },
+  {
+    pattern: /\b(?:(?:LPG|LP gas|gas|propane|butane) (?:cylinders?|bottles?)|cylinders? of (?:LPG|gas)|LCC27|POL valves?|butane cartridges?|camping (?:stoves?|cookers?))\b/gi,
+    block: "gas-cylinder-safety",
+    needs: 1,
+    teaching: GAS_TEACHING,
+  },
+  {
+    pattern: /\b(?:gas leaks?|(?:smell|smells|smelling) (?:of )?(?:gas|LPG)|leaking (?:gas|LPG)|suspected (?:gas )?leak)\b/gi,
+    block: "gas-leak-response",
+    needs: 1,
+    teaching: GAS_TEACHING,
+  },
+  {
+    pattern:
+      /\b(?:gas ?fitters?|licensed gas workers?|certifying gasfitters?|gas fitting|(?:servic\w+|install\w*)[^.\n]{0,40}\bgas (?:heaters?|cookers?|cooktops?|appliances?|water heaters?))\b/gi,
+    block: "gas-installation-and-servicing",
+    needs: 1,
+    teaching: GAS_TEACHING,
+  },
   { pattern: /\b(batter(y|ies)|inverter|solar)\b/gi, block: "batteries-and-electrical", needs: 3 },
   { pattern: /\b(water storage|water tank|rainwater|drinking water)\b/gi, block: "stored-drinking-water", needs: 3 },
   { pattern: /\b(fridge|freezer|pantry|perishable)\b/gi, block: "food-safety-power-cut", needs: 3 },

@@ -106,3 +106,10 @@ migrate nothing until the wording is approved.
 - **Update this workstream** when a stage report lands: `CURRENT_STATUS.md`, `RESOURCE_REGISTER.md`, and
   `SAFETY_REGISTER.md` / `DEPLOYMENT_REGISTER.md` when they apply.
 - **Keep unrelated OffGrid056 work out of this folder.**
+
+## After Stage 9.62
+
+1. Owner reviews/approves the five gas blocks and the AU leak decision.
+2. Stage 9.63: OG-B09 claims-first migration (no deploy).
+3. OG-24 also requires gas blocks.
+

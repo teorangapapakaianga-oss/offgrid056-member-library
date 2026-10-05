@@ -264,7 +264,9 @@ export interface LegacyTerms {
 const NOTE_ANSWERED_BY: { topic: RegExp; block: string; anyOf: string[][] }[] = [
   { topic: /^covers generators\b/, block: "generator-safety", anyOf: [["generator-safety", "carbon-monoxide"], ["indoor-combustion", "carbon-monoxide"]] },
   { topic: /^covers solid fuel heating\b/, block: "solid-fuel-heating", anyOf: [["solid-fuel-heating"]] },
-  { topic: /^covers gas appliances\b/, block: "gas-and-lpg", anyOf: [["gas-and-lpg"]] },
+  // The note reads "…with no ventilation and certified-installer warning", so it needs both the general gas block
+  // and the installation block. `gas-and-lpg-general` answers the detector's `gas-and-lpg` through `answers`.
+  { topic: /^covers gas appliances\b/, block: "gas-and-lpg", anyOf: [["gas-and-lpg-general", "gas-installation-and-servicing"]] },
   { topic: /^covers batteries and inverters\b/, block: "batteries-and-electrical", anyOf: [["batteries-and-electrical"]] },
   { topic: /^covers stored drinking water\b/, block: "stored-drinking-water", anyOf: [["stored-drinking-water"]] },
 ];
@@ -673,7 +675,14 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const marketHtml = keepSmallTablesTogether(proposedMarket.html);
     collectFlags(marketHtml, code);
     // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
-    const fuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []);
+    // GAS_SAFETY_REQUIRED means "no gas guidance is approved". Stage 9.62 built that guidance, so the check can now be
+    // released — but only by a resource that carries `gas-and-lpg-general` AND has had it approved by the owner. A
+    // block that is still a proposal (not in the resource's approvedSafetyBlocks) releases nothing, so this stays
+    // fail-closed until the owner signs the wording off. Diesel is a different fuel and is never released here.
+    const gasApproved = safetyBlocks.includes("gas-and-lpg-general") && !proposed.includes("gas-and-lpg-general");
+    const fuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []).filter(
+      (f) => !(gasApproved && f.startsWith("GAS_SAFETY_REQUIRED")),
+    );
     for (const finding of fuelFindings) if (!otherFindings.includes(finding)) otherFindings.push(finding);
     // Prices, on the resource's OWN text and before the blocks go in (Stage 9.58/9.61). No approved block carries
     // a price; if one ever does, that block owns it and the resource is not asked to dispose of it.

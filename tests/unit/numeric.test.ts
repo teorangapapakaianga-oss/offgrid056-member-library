@@ -19,6 +19,7 @@ import { loadTreatmentRegistry } from "@/admin-import/audit/treatment";
  * legitimise the same number somewhere else, and the same number in a different context is a different claim.
  */
 const root = process.cwd();
+const topicBlocks = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/safety-blocks.json"), "utf8")) as { blocks: unknown };
 const registry = loadNumericRegistry(path.join(root, "admin-import/config/numeric-claims.json"));
 const treatment = loadTreatmentRegistry(path.join(root, "admin-import/config/treatment-sources.json"));
 const empty = { claims: [] };
@@ -253,12 +254,26 @@ describe("report-only behaviour, still available", () => {
     expect(registry.claims.length).toBeGreaterThan(0);
     for (const claim of registry.claims) {
       expect(claim.market, claim.id).toMatch(/^(NZ|AU)$/);
-      expect(claim.owningResources.length, claim.id).toBeGreaterThan(0);
       expect(claim.source.length, claim.id).toBeGreaterThan(0);
       expect(claim.authority.length, claim.id).toBeGreaterThan(0);
       expect(claim.sourceDate.length, claim.id).toBeGreaterThan(0);
       expect(claim.limitations.length, claim.id).toBeGreaterThan(0);
-      expect(claim.status, claim.id).toMatch(/OWNER-APPROVED/);
+      if (claim.owningBlock) {
+        // Stage 9.62. A figure that belongs to a safety BLOCK rather than a resource is registered when the block is
+        // built, but the block's wording is only approved when a resource carrying it is approved. Until then the
+        // claim is VERIFIED and OWNER-AUTHORISED to be registered — and it must say so, name its block, and that block
+        // must itself still be marked pending. It may NOT claim OWNER-APPROVED, and it may not be resource-less
+        // without a block. When the block is approved, this exception disappears and the claim becomes OWNER-APPROVED.
+        expect(claim.status, claim.id).toMatch(/PENDING OWNER APPROVAL/i);
+        for (const blockId of claim.owningBlock.split(";").map((s) => s.trim())) {
+          const block = (topicBlocks.blocks as Record<string, { verification?: Record<string, string> }>)[blockId];
+          expect(block, `${claim.id}: owning block ${blockId} does not exist`).toBeDefined();
+          expect(JSON.stringify(block.verification), `${claim.id}: ${blockId} is no longer pending`).toMatch(/PENDING OWNER APPROVAL/i);
+        }
+      } else {
+        expect(claim.owningResources.length, claim.id).toBeGreaterThan(0);
+        expect(claim.status, claim.id).toMatch(/OWNER-APPROVED/);
+      }
     }
   });
 });

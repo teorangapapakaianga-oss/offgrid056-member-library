@@ -188,3 +188,8 @@ Each of these blocks resources until it is researched from official NZ **and** A
 - **Workplace rules are not household rules.** WorkSafe's petrol limits (20 m smoking, 50 L storage) are excluded
   until a household-specific source supports them.
 - **Do not bypass bot protection** to read a source. If a page cannot be read, the figure stays unresolved.
+
+## Stage 9.62 - gas blocks
+
+gas-and-lpg-general, unflued-gas-heating, gas-cylinder-safety, gas-leak-response, gas-installation-and-servicing built. AU core non-numeric; AU state figures are category B/C overrides, never served. AU gas-leak-response has no body (fails closed; ACT has no published procedure). All pending owner approval.
+

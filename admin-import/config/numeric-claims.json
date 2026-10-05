@@ -825,6 +825,87 @@
         "It approves no bleach ratio. NSW Health's bleach step (250 mL of bleach in 4 litres of water) is WITHHELD pending an owner ruling and has no entry here — nor does the PPE list that belongs to it."
       ],
       "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-09-23 (Stage 9.52)"
+    },
+    {
+      "id": "nz-gas-heater-clearance-one-metre-worksafe",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningBlock": "unflued-gas-heating",
+      "owningResources": [],
+      "category": "distance",
+      "claimType": "threshold",
+      "unit": "m",
+      "value": {
+        "exact": 1
+      },
+      "allowedWording": "WorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source; keep an unflued heater at least one metre from anything that could catch fire.",
+      "match": [
+        "\\bHeater Metre Rule\\b[\\s\\S]{0,120}\\bone metre\\b",
+        "\\bunflued heater at least one metre\\b"
+      ],
+      "requiresLabel": null,
+      "source": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/cabinet-heater-safety/",
+      "authority": "WorkSafe New Zealand",
+      "sourceDate": "read live 2026-10-05",
+      "limitations": [
+        "A clearance for a heater in use, from WorkSafe's cabinet-heater page. NZ only: it is not an Australian figure and must not appear in an AU file.",
+        "It approves 'one metre' of nothing else — not a cylinder clearance, a flue clearance or a generator distance."
+      ],
+      "status": "VERIFIED_LIVE 2026-10-05 — built 2026-10-06 (Stage 9.62); wording pending owner approval with the block"
+    },
+    {
+      "id": "nz-lpg-cabinet-heater-service-12-months-worksafe",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningBlock": "unflued-gas-heating; gas-installation-and-servicing",
+      "owningResources": [],
+      "category": "interval",
+      "claimType": "interval",
+      "unit": "months",
+      "value": {
+        "exact": 12,
+        "text": "annually"
+      },
+      "allowedWording": "WorkSafe New Zealand advises that an LPG cabinet heater should be serviced every 12 months; flame effect heaters and LPG cabinet heaters should be serviced annually.",
+      "match": [
+        "\\bLPG cabinet heater\\b[\\s\\S]{0,80}\\bevery 12 months\\b",
+        "\\bflame effect heaters and LPG cabinet heaters should be serviced annually\\b"
+      ],
+      "requiresLabel": "WorkSafe New Zealand",
+      "source": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/",
+      "authority": "WorkSafe New Zealand",
+      "sourceDate": "read live 2026-10-05",
+      "limitations": [
+        "SCOPED TO flame effect heaters and LPG cabinet heaters. It is not an interval for water heaters or other space heaters.",
+        "NZ only. Australia has no national interval: NSW publishes one annual figure for gas WATER heaters only, Victoria two years, WA two years or annually over ten years old, and five jurisdictions none."
+      ],
+      "status": "VERIFIED_LIVE 2026-10-05 — built 2026-10-06 (Stage 9.62); wording pending owner approval with the block"
+    },
+    {
+      "id": "nz-gas-other-heater-service-two-years-worksafe",
+      "market": "NZ",
+      "jurisdiction": "national",
+      "owningBlock": "gas-installation-and-servicing",
+      "owningResources": [],
+      "category": "interval",
+      "claimType": "interval",
+      "unit": "years",
+      "value": {
+        "exact": 2
+      },
+      "allowedWording": "WorkSafe New Zealand also advises that other space heaters and water heaters should be serviced at least every two years.",
+      "match": [
+        "\\bother space heaters and water heaters should be serviced at least every two years\\b"
+      ],
+      "requiresLabel": "WorkSafe New Zealand",
+      "source": "https://www.worksafe.govt.nz/managing-health-and-safety/consumers/safe-living-with-gas/getting-gas-work-done/",
+      "authority": "WorkSafe New Zealand",
+      "sourceDate": "read live 2026-10-05",
+      "limitations": [
+        "SCOPED TO space heaters other than flame effect and cabinet heaters, and to water heaters. Cabinet and flame effect heaters are the annual entry, not this one.",
+        "NZ only. It must never appear in an AU file, and the Victorian two-year figure must never be read as supporting it: they are different agencies' advice for different appliances in different countries."
+      ],
+      "status": "VERIFIED_LIVE 2026-10-05 — built 2026-10-06 (Stage 9.62); wording pending owner approval with the block"
     }
   ],
   "blockingExcludes": [

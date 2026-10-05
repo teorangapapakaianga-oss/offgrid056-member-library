@@ -45,6 +45,8 @@ export interface NumericClaim {
   id: string;
   market: string;
   jurisdiction: string;
+  /** the safety block that owns this figure, where it belongs to a block rather than to a resource (Stage 9.62) */
+  owningBlock?: string;
   /** the resources this figure is approved for; [] means any resource in that market (used sparingly) */
   owningResources: string[];
   category: NumericCategory;

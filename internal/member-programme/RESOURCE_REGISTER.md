@@ -132,3 +132,8 @@ NOT STARTED
 ```
 
 Anything that cannot be verified from an official NZ or AU source **blocks** the resource instead of being guessed.
+
+## Stage 9.62 note
+
+No resource changed. OG-B09 expected blocks: gas-and-lpg-general, gas-installation-and-servicing (recommended), carbon-monoxide. OG-24 requires gas-and-lpg + gas-installation-and-servicing. OG-17 negative control confirmed.
+

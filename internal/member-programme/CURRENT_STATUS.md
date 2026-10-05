@@ -86,3 +86,8 @@ Each has an NZ and an AU PDF: **42 market files**, 0 broken internal links.
 - **Demo placeholders still fill most of the library.** the public build is **30** demonstration placeholders and no real resources; 28 of those routes are still
   unsuperseded in the preview. Real resources supersede them
   one route at a time (see `SAFETY_REGISTER.md` → route supersession).
+
+## Stage 9.62 (6 October 2026) - gas architecture built, nothing deployed
+
+Five gas blocks built (PENDING OWNER APPROVAL), AU leak response FAILS CLOSED, 551 tests passing, Worker unchanged (fa23ec74), 21 resources unchanged. Report: admin-import/STAGE_9.62_GAS_ARCHITECTURE.md.
+
