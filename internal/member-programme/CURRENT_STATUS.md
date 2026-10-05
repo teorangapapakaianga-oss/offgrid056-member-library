@@ -1,6 +1,6 @@
 # Current status
 
-**As at:** 5 October 2026, after Stage 9.54 (OG-13 deployed as resource #20).
+**As at:** 5 October 2026, after Stage 9.55 (Gas / LPG research — nothing built, nothing deployed).
 
 | | |
 |---|---|
@@ -10,7 +10,7 @@
 | **Tests** | **436 passing** · lint clean · typecheck clean |
 | **Next resource** | **not chosen.** Air has one resource and no pathway; the recommended next stage is the Gas / LPG research that unblocks OG-17 and OG-B09 — see `NEXT_ACTIONS.md` |
 | **Last deployment** | Stage 9.54, 5 October 2026: **OG-13 Healthy Home Air Audit as resource #20** |
-| **Last report** | `admin-import/STAGE_9.54_OG13_DEPLOYED.md` |
+| **Last report** | `admin-import/STAGE_9.55_GAS_LPG_RESEARCH.md` (research only — nothing built or deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
@@ -61,7 +61,7 @@ Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
 
 | Blocker | What it holds up | Needed |
 |---|---|---|
-| **Gas / LPG guidance not researched** | OG-17, OG-B09, and any gas-appliance content | verified NZ + AU gas guidance, then owner approval |
+| **Gas / LPG guidance part-researched** | OG-B09, and any gas-appliance content | **Stage 9.55 read NZ in full and 5 of 8 AU jurisdictions live.** Still needed: TAS, ACT and NT read live, four search-only AU pages re-read, and an owner decision on how an AU body can be shaped when the jurisdictions contradict each other. **OG-17 looks like a detector false positive and may not need this at all** |
 | **Diesel guidance not researched** | diesel generator or heating content | verified NZ + AU guidance |
 | **Grants and rebates not researched** | OG-16 | current NZ programmes and AU state/territory schemes |
 | **Consents and approvals not researched** | OG-B11 | NZ council consents, AU state/territory approvals |
@@ -70,6 +70,7 @@ Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
 | ~~Water Basics learning path~~ | — | **resolved at Stage 9.47**: the private path override is built, tested and deployed; the public demonstration path is untouched |
 | ~~One unsourced live figure~~ | — | **resolved at Stage 9.49**: OG-08's AU sentence now says "Get Ready Queensland advises storing drinking water for three days", and the numeric scan is **zero findings** across all 19 resources |
 | ~~Two OG-13 rulings outstanding~~ | — | **both answered at Stage 9.53.** Bleach is removed from both markets' mould wording, and `healthy-home-air` was added to the air taxonomy. OG-13 is prepared and verified. Three one-line preferences remain, none of them blocking: the category overlap with `healthy-home-checks`, whether OG-13 keeps `indoor-combustion` (it carries approved gas/LPG wording into an Air resource), and whether the never-mix caution returns — all three in `STAGE_9.53_OG13_PREPARED.md` §11 |
+| **Unlabelled Victorian servicing interval** | correctness of 5 live resources | the AU `carbon-monoxide` and `indoor-combustion` blocks say gas heaters should be checked "at least every two years", which is Victoria's figure written as if Australian. NSW says annually; WA says two years unless the appliance is over ten years old; Queensland publishes no interval. An owner ruling is needed — see `STAGE_9.55_GAS_LPG_RESEARCH.md` §16 |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations
