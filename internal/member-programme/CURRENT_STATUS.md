@@ -1,21 +1,22 @@
 # Current status
 
-**As at:** 5 October 2026, after Stage 9.53 (OG-13 prepared for owner review — nothing deployed).
+**As at:** 5 October 2026, after Stage 9.54 (OG-13 deployed as resource #20).
 
 | | |
 |---|---|
-| **Protected resources in the private preview** | **19** (all draft) |
-| **Worker version** | **`0aff3fcd-7080-4ae7-bf28-c5d09414b90a`** |
-| **Rollback available** | `1e4ab83b-4086-4c18-bf09-f6024152abbb` (19 resources, OG-08 AU before the Queensland attribution) |
-| **Tests** | **434 passing** · lint clean · typecheck clean |
-| **Next resource** | **OG-13 Healthy Home Air Audit** — **prepared and verified** at Stage 9.53 (NZ 8 pages, AU 9 pages). Awaiting owner approval to deploy as #20 |
-| **Last deployment** | Stage 9.49, 23 September 2026: OG-08's AU three-day figure attributed to Get Ready Queensland |
-| **Last report** | `admin-import/STAGE_9.53_OG13_PREPARED.md` (prepared for review — nothing deployed) |
+| **Protected resources in the private preview** | **20** (all draft) |
+| **Worker version** | **`776e704a-0f69-4c86-b80f-8b08da7880cb`** |
+| **Rollback available** | `0aff3fcd-7080-4ae7-bf28-c5d09414b90a` (19 resources, before OG-13) · private files in `workspace/backups/private-assets-pre-og13` |
+| **Tests** | **436 passing** · lint clean · typecheck clean |
+| **Next resource** | **not chosen.** Air has one resource and no pathway; the recommended next stage is the Gas / LPG research that unblocks OG-17 and OG-B09 — see `NEXT_ACTIONS.md` |
+| **Last deployment** | Stage 9.54, 5 October 2026: **OG-13 Healthy Home Air Audit as resource #20** |
+| **Last report** | `admin-import/STAGE_9.54_OG13_DEPLOYED.md` |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
 rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → 410 at Stage 9.49 → 417 at Stage 9.50 (numeric blocking) → 429 at Stage 9.52 (the Air blocks and the ratio
-claim type) → **434** at Stage 9.53 (OG-13 and owner ruling 1). Nothing was removed.
+claim type) → 434 at Stage 9.53 (OG-13 and owner ruling 1) → **436** at Stage 9.54 (the category revert and the
+block selection). Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -40,15 +41,16 @@ claim type) → **434** at Stage 9.53 (OG-13 and owner ruling 1). Nothing was re
 | 17 | OG-B08 | **Water Tank Sizing & Placement Guide** | water |
 | 18 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general |
 | 19 | OG-B12 | Off-Grid System Architecture Planner | general |
+| 20 | **OG-13** | **Healthy Home Air Audit** — the first Air resource | air |
 
-Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
+Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
 
-## Controls, last checked at Stage 9.49
+## Controls, last checked at Stage 9.54
 
 | Control | State |
 |---|---|
 | Cloudflare Access on all traffic | **on** — every probe redirects (302) to the Access login |
-| All real resources draft | **yes**, 19/19 |
+| All real resources draft | **yes**, 20/20 |
 | NZ/AU routing | **working** — no market, no download; NZ gets NZ, AU gets AU |
 | Real member files in public GitHub | **none** |
 | `--real` | **refused** |

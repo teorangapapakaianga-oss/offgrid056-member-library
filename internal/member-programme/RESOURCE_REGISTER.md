@@ -2,18 +2,18 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 5 October 2026, after Stage 9.53.
+**As at:** 5 October 2026, after Stage 9.54.
 
 | State | Count |
 |---|---|
-| **Deployed** (private preview, draft) | **19** |
-| **Prepared** — awaiting owner approval | **1** |
+| **Deployed** (private preview, draft) | **20** |
+| **Prepared** — awaiting owner approval | **0** |
 | **Blocked** — pending research | **3** |
 | **Not started** | **22** |
 
 ---
 
-## Deployed (19)
+## Deployed (20)
 
 Each is a draft with NZ and AU files behind Cloudflare Access.
 
@@ -38,10 +38,11 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B08 | **Water Tank Sizing & Placement Guide** | water / guide | drinking water · working at height (audited exemption from fire-and-emergency) | 9.46 |
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
+| **OG-13** | **Healthy Home Air Audit** | air / assessment | **smoke alarms · mould & dampness · ventilation** · CO · solid fuel | 9.54 |
 
-## Prepared — awaiting owner approval (1)
+## Prepared — awaiting owner approval (0)
 
-**OG-13 Healthy Home Air Audit** — prepared at Stage 9.53, NZ 8 pages and AU 9 pages, both rendered and verified, `READY_AFTER_FINAL_VALIDATION`. It carries eight safety blocks (the most of any resource), needs no exemption, and leaves Bucket C at zero in both markets. Three one-line owner preferences are open before deployment: the `healthy-home-air` category against the existing `healthy-home-checks`, whether to keep `indoor-combustion` (which brings approved gas/LPG wording into an Air resource), and whether to restore the never-mix caution removed under ruling 1. See `admin-import/STAGE_9.53_OG13_PREPARED.md`. OG-B08 was approved and deployed at Stage 9.46, completing the water
+Nothing is waiting on an owner decision. OG-13 was approved and deployed at Stage 9.54 as resource #20 (NZ 7 pages, AU 8 pages), with the `healthy-home-air` category reverted to `healthy-home-checks` and `indoor-combustion` not carried. OG-B08 was approved and deployed at Stage 9.46, completing the water
 pathway; OG-09 was approved and deployed at Stage 9.44, renamed **Household Water Treatment Guide**
 (`/resources/household-water-treatment-guide/`). `legacyCode` stays internal in both cases.
 
@@ -71,9 +72,7 @@ would need.
 
 ### Air
 
-| Code | Title | Notes |
-|---|---|---|
-| OG-13 | Healthy Home Air Audit | **the first Air resource.** Metadata approved (assessment · air · beginner · 20 min · draft) at Stage 9.52; its three safety blocks — `fire-and-smoke-alarms`, `mould-and-dampness`, `home-ventilation` — and twelve numeric entries are **built**. **Not migrated:** waiting on two owner rulings (the mould bleach wording, and the category slug — "air-quality" is not a category of the air foundation). 5 prices, 3 health claims and 3 unsourced figures to remove; gas wording must be avoided until the gas stage. |
+**None.** OG-13 is live. There is no second Air resource yet, so there is no Air pathway.
 
 ### Food
 
@@ -120,7 +119,7 @@ real one supersede the placeholder **in the private preview only**.
 | OG-08 | `water-storage-calculator` | res-0015 | **resolved and live** |
 | OG-10 | `rainwater-harvesting-planner` | res-0016 | **resolved and live** (Stage 9.41) |
 | OG-01 | `home-resilience-scorecard` | res-0007 (demo) | expected |
-| OG-13 | `healthy-home-air-audit` | demo | **prepared; supersession applies on deployment** |
+| OG-13 | `healthy-home-air-audit` | demo | **resolved and live** (Stage 9.54) |
 
 ## How a resource moves through this register
 

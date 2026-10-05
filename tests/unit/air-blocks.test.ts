@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { prepareResource, type PrepInputs } from "@/admin-import/pilot/prep";
+import { prepareResource, visibleText, type PrepInputs } from "@/admin-import/pilot/prep";
 import profilesFile from "@/admin-import/markets/profiles.json";
 import pilotSpec from "@/admin-import/pilot/og-02.json";
 import topicBlocks from "@/admin-import/config/safety-blocks.json";
@@ -213,23 +213,32 @@ describe("Stage 9.52 · the three Air blocks", () => {
 });
 
 describe("Stage 9.53 · OG-13", () => {
-  it("13. has healthy-home-air as a real category of the air foundation", () => {
-    const air = getFoundation("air");
-    const slugs = air.categories.map((c) => c.slug);
-    expect(slugs).toContain("healthy-home-air");
+  it("13. uses an existing air category, and the Stage 9.53 slug stays reverted", () => {
+    const slugs = getFoundation("air").categories.map((c) => c.slug);
+    // Owner ruling 1 (Stage 9.54): healthy-home-air was reverted because healthy-home-checks already says it.
+    expect(slugs, "healthy-home-air must not come back").not.toContain("healthy-home-air");
+    expect(slugs).toContain("healthy-home-checks");
     expect(new Set(slugs).size, "category slugs must stay unique").toBe(slugs.length);
-    // The resource's recorded category must be one the taxonomy actually holds, or validation fails.
     const og13 = (metadataReview.resources as Record<string, { category: string; foundation: string }>)["OG-13"];
     expect(og13.foundation).toBe("air");
-    expect(slugs).toContain(og13.category);
+    expect(og13.category).toBe("healthy-home-checks");
+    expect(slugs, "the recorded category must exist, or validation fails").toContain(og13.category);
   });
 
-  it("14. carries all six approved blocks, and answers every block its topics require", () => {
+  it("14. carries five blocks, keeps carbon-monoxide, and drops indoor-combustion", () => {
     const og13 = (metadataReview.resources as unknown as Record<string, { safetyBlocks: string[]; approvedSafetyBlocks: string[] }>)["OG-13"];
-    for (const id of [...AIR_BLOCKS, "carbon-monoxide", "solid-fuel-heating", "indoor-combustion"]) {
+    for (const id of [...AIR_BLOCKS, "carbon-monoxide", "solid-fuel-heating"]) {
       expect(og13.safetyBlocks, id).toContain(id);
       expect(og13.approvedSafetyBlocks, id).toContain(id);
     }
+    // Owner ruling 2 (Stage 9.54): the audit has no row that needs it, and its unflued-LPG paragraph would put
+    // gas wording in an Air resource before the gas research stage. A resource-level choice only — the block
+    // itself still exists and is still carried by the resources that do need it.
+    expect(og13.safetyBlocks, "indoor-combustion is not carried by OG-13").not.toContain("indoor-combustion");
+    expect(og13.approvedSafetyBlocks).not.toContain("indoor-combustion");
+    expect(blocks["indoor-combustion"], "the global block must be untouched").toBeDefined();
+    expect(og13.safetyBlocks).toHaveLength(5);
+
     const r = prep({
       requiredSafety: ["fire-and-emergency", "solid-fuel-heating"],
       extraSafetyBlocks: og13.safetyBlocks,
@@ -266,6 +275,47 @@ describe("Stage 9.53 · OG-13", () => {
       expect(html, `${market}: bleach`).not.toMatch(/bleach/i);
       // The scoring instrument stays, labelled as ours rather than as official guidance.
       expect(html, `${market}: scale label`).toContain("not an official standard");
+    }
+  });
+
+  it("16. carries no indoor-combustion block and no unflued-gas paragraph in either market file", () => {
+    const dir = path.join(root, "workspace/prep/OG-13");
+    if (!fs.existsSync(dir)) return;
+    for (const market of ["NZ", "AU"] as const) {
+      const file = path.join(dir, `healthy-home-air-audit.${market}.html`);
+      if (!fs.existsSync(file)) continue;
+      const html = fs.readFileSync(file, "utf8");
+      const carried = [...html.matchAll(/data-block="([^"]+)"/g)].map((m) => m[1]);
+      expect(carried, `${market}: blocks`).not.toContain("indoor-combustion");
+      expect(carried, `${market}: carbon-monoxide is kept — row 2 asks about it`).toContain("carbon-monoxide");
+      expect(new Set(carried).size, `${market}: no block injected twice`).toBe(carried.length);
+      // The paragraph ruling 2 was about.
+      expect(html, `${market}: unflued gas`).not.toMatch(/unflued gas heater|cabinet heater|patio heater/i);
+      expect(html, `${market}: outdoor appliance teaching`).not.toContain("Outdoor appliances stay outdoors");
+    }
+  });
+
+  it("17. keeps the two market files clear of each other's agencies and figures", () => {
+    const dir = path.join(root, "workspace/prep/OG-13");
+    if (!fs.existsSync(dir)) return;
+    const cross = {
+      NZ: /\b(NSW|New South Wales|Queensland|Better Health Channel|Triple Zero|four parts vinegar)\b/,
+      AU: /\b(New Zealand|FENZ|Tenancy Services|MBIE|Civil Defence|half and half)\b/,
+    } as const;
+    for (const market of ["NZ", "AU"] as const) {
+      const file = path.join(dir, `healthy-home-air-audit.${market}.html`);
+      if (!fs.existsSync(file)) continue;
+      const text = visibleText(fs.readFileSync(file, "utf8"));
+      expect(text, `${market}: other market's wording`).not.toMatch(cross[market]);
+    }
+    // And the one claim that is market-specific by design: no NZ mask instruction, an AU one with its conditions.
+    const nz = path.join(dir, "healthy-home-air-audit.NZ.html");
+    const au = path.join(dir, "healthy-home-air-audit.AU.html");
+    if (fs.existsSync(nz)) expect(visibleText(fs.readFileSync(nz, "utf8"))).not.toMatch(/P2|N95/);
+    if (fs.existsSync(au)) {
+      const text = visibleText(fs.readFileSync(au, "utf8"));
+      expect(text).toMatch(/P2 or N95 masks/);
+      expect(text).toContain("forms a tight seal");
     }
   });
 });

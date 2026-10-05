@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 5 October 2026, after Stage 9.53. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 5 October 2026, after Stage 9.54. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -24,9 +24,9 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 | `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
-| `fire-and-smoke-alarms` | Smoke alarms and fire safety | **critical** | 23 Sep 2026 (Stage 9.52) | OG-13 (prepared) |
-| `mould-and-dampness` | Mould and dampness | high | 23 Sep 2026 (Stage 9.52), bleach removed 5 Oct 2026 (Stage 9.53 ruling 1) | OG-13 (prepared) |
-| `home-ventilation` | Ventilation and moisture | standard | 23 Sep 2026 (Stage 9.52), AU body corrected 5 Oct 2026 | OG-13 (prepared) |
+| `fire-and-smoke-alarms` | Smoke alarms and fire safety | **critical** | 23 Sep 2026 (Stage 9.52) | OG-13 |
+| `mould-and-dampness` | Mould and dampness | high | 23 Sep 2026 (Stage 9.52), bleach removed 5 Oct 2026 (Stage 9.53 ruling 1) | OG-13 |
+| `home-ventilation` | Ventilation and moisture | standard | 23 Sep 2026 (Stage 9.52), AU body corrected 5 Oct 2026 | OG-13 |
 
 **The three Air blocks (Stage 9.52).** Built, tested and unused: no resource carries them yet, because OG-13 is not
 migrated. Three things about them matter beyond their wording:
@@ -45,7 +45,7 @@ migrated. Three things about them matter beyond their wording:
   **`home-ventilation` AU is deliberately non-numeric** and says so in the member-facing text — no Australian source
   read publishes an airing time, humidity target or extraction rate, and New Zealand's figures may not be borrowed.
 
-**What Stage 9.53 changed in them (owner ruling 1, and two fixes found by reading the rendered files).**
+**All three went live with OG-13 at Stage 9.54.** What Stage 9.53 changed in them (owner ruling 1, and two fixes found by reading the rendered files):
 
 - **Bleach is gone from both markets.** Stage 9.52 withheld every bleach *instruction*; the ruling removes bleach
   entirely, so the Victorian never-mix caution went too — it was the only sentence left in either market that named
@@ -58,6 +58,7 @@ migrated. Three things about them matter beyond their wording:
 - **`home-ventilation` AU named New Zealand** in an internal rule written into member-facing wording by mistake.
   `verify-prep` caught it. It is removed, and a test now asserts no AU block names NZ, FENZ, Tenancy Services or
   MBIE, and no NZ block names Australia, NSW, Queensland or Victoria.
+- **`indoor-combustion` is deliberately NOT carried by OG-13** (owner ruling 2, Stage 9.54). The audit has no row about bringing an outdoor appliance inside, `carbon-monoxide` covers the risk row 2 asks about, and that block's unflued-LPG paragraph would put gas wording in an Air resource before the gas research stage. **The block and the detector are unchanged** — this is a resource-level selection, recorded in `metadata-review.json`, and the resources that need it still carry it.
 - **A sentence printed twice** when both blocks were carried. `home-ventilation` AU now drops NSW Health's
   lacking-ventilation clause **only when `mould-and-dampness` is also present**, through the existing
   `marketBodyWhen` mechanism. Carried alone, it keeps the full wording.

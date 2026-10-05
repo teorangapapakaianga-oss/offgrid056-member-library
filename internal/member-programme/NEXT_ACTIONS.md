@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 5 October 2026, after Stage 9.53.
+**As at:** 5 October 2026, after Stage 9.54.
 
 ---
 
@@ -10,9 +10,9 @@ What happens next, and what is waiting on research.
 
 | # | Action | State | Waiting on |
 |---|---|---|---|
-| 1 | **Deploy OG-13 as resource #20** | **prepared and verified** at Stage 9.53 (NZ 8 pages, AU 9 pages) | owner approval, plus three one-line preferences: the `healthy-home-air` category against the existing `healthy-home-checks`, whether to keep `indoor-combustion` (approved gas/LPG wording in an Air resource — recommend dropping), and whether to restore the never-mix bleach caution. `STAGE_9.53_OG13_PREPARED.md` §11 and §13 |
+| 1 | **Gas / LPG research** | **recommended next stage** | the largest remaining blocker: it holds OG-17 and OG-B09, and it is the reason approved CO and indoor-combustion wording is the only gas content the library can carry. Research only — read NZ (WorkSafe, Health NZ) and AU (state gas regulators) live, quote, return for approval |
 | 2 | ~~Three Air safety blocks~~ | **built at Stage 9.52** | `fire-and-smoke-alarms`, `mould-and-dampness` (bleach withheld), `home-ventilation` (AU non-numeric), plus 12 numeric entries and the ratio claim type. Full 19-resource re-run green, Bucket C = 0, no member content changed |
-| 3 | ~~OG-13 migration preparation~~ | **done at Stage 9.53** | 22 copy changes applied, all eight blocks carried, no exemption used, Bucket C = 0 in both markets, 40/40 prepared files verified. The first live exercise of the ratio claim type and of a temperature claim |
+| 3 | ~~OG-13~~ | **live as resource #20 (Stage 9.54)** | 22 copy changes applied, all eight blocks carried, no exemption used, Bucket C = 0 in both markets, 40/40 prepared files verified. The first live exercise of the ratio claim type and of a temperature claim |
 | 3b | **A second Air resource, then the Air pathway** | not started | a one-resource pathway is not a pathway. Candidates: ventilation and moisture control, or mould and dampness — both exist only as safety blocks today |
 | 4 | **Other pathways on real resources** | possible now that the override exists | Energy Basics and Start Here could follow the same private-path pattern once their resources are live |
 | 5 | **Retiring demo placeholders** | 28 remain | a decision before any public launch |

@@ -752,8 +752,8 @@
       "foundationStatus": "owner-approved 2026-09-23 (Stage 9.52)",
       "resourceType": "assessment",
       "resourceTypeStatus": "owner-approved 2026-09-23 (Stage 9.52)",
-      "category": "healthy-home-air",
-      "categoryStatus": "owner-approved 2026-10-05 (Stage 9.53 ruling 2). The slug did not exist and was added to the air foundation in data/taxonomy/foundations.json as { slug: healthy-home-air, name: Healthy Home Air }. Additive: content validation passes, and an Air category with no resources renders its own empty state.",
+      "category": "healthy-home-checks",
+      "categoryStatus": "owner-approved 2026-10-05 (Stage 9.54 ruling 1). The healthy-home-air slug added at Stage 9.53 was REVERTED from data/taxonomy/foundations.json: healthy-home-checks ('Walk-through checks for a drier, healthier home') already describes this resource, and the air foundation is not to carry two near-synonym categories. The air foundation is back to its original six categories.",
       "difficulty": "beginner",
       "difficultyStatus": "owner-approved 2026-09-23 (Stage 9.52) — OWNER-APPROVED / INFERRED",
       "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level; it is a walk-through checklist with no calculation.",
@@ -763,7 +763,7 @@
       "tags": [],
       "recordStatus": "draft",
       "recordStatusNote": "owner-approved 2026-09-23 (Stage 9.52): draft, as every real resource is.",
-      "migrationState": "PREPARED for owner review 2026-10-05 (Stage 9.53). Not deployed. No PDFs published to private-assets.",
+      "migrationState": "PREPARED and approved for deployment 2026-10-05 (Stage 9.54). Deployed as private-preview resource #20, status draft.",
       "description": "Walk through your home and score the ten things that decide the air you breathe — alarms, damp, mould, ventilation and smoke — then fix the three that score worst.",
       "descriptionStatus": "owner-approved 2026-10-05 (Stage 9.53)",
       "relatedResources": [
@@ -775,19 +775,17 @@
         "mould-and-dampness",
         "home-ventilation",
         "carbon-monoxide",
-        "solid-fuel-heating",
-        "indoor-combustion"
+        "solid-fuel-heating"
       ],
       "approvedSafetyBlocks": [
         "fire-and-smoke-alarms",
         "mould-and-dampness",
         "home-ventilation",
         "carbon-monoxide",
-        "solid-fuel-heating",
-        "indoor-combustion"
+        "solid-fuel-heating"
       ],
-      "approvedSafetyBlocksStatus": "fire-and-smoke-alarms, mould-and-dampness, home-ventilation: owner-approved 2026-09-23 (Stage 9.52), carried here by owner ruling 2026-10-05 (Stage 9.53). carbon-monoxide, solid-fuel-heating, indoor-combustion: owner-approved 2026-09-22 (Stage 9.19).",
-      "safetyReasoning": "The audit asks about alarms, mould, ventilation, a wood burner and carbon monoxide, and rows 1, 6, 7 and 10 give instructions rather than labels, so no hazard-identification exemption could hold. All six blocks are carried deliberately in this file rather than relied on from the detectors: the source's fire mentions (2) and flue mentions (2) are below the detector's three-mention threshold, and carbon monoxide has no topic detector at all. The OG-02 fire exemption is not stretched and is not referenced."
+      "approvedSafetyBlocksStatus": "fire-and-smoke-alarms, mould-and-dampness, home-ventilation: owner-approved 2026-09-23 (Stage 9.52), carried here 2026-10-05. carbon-monoxide, solid-fuel-heating: owner-approved 2026-09-22 (Stage 9.19). indoor-combustion was carried at Stage 9.53 and REMOVED by owner ruling 2 (Stage 9.54).",
+      "safetyReasoning": "The audit asks about alarms, mould, ventilation, a wood burner and carbon monoxide, and rows 1, 6, 7 and 10 give instructions rather than labels, so no hazard-identification exemption could hold. All five blocks are carried deliberately in this file rather than relied on from the detectors: the source's fire mentions (in the audit's extracted text) require fire-and-emergency, which fire-and-smoke-alarms answers, and solid-fuel-heating is required too, but carbon-monoxide has no topic detector at all. indoor-combustion is NOT carried (owner ruling 2, Stage 9.54): the audit has no row about bringing an outdoor appliance inside, carbon-monoxide already covers the risk row 2 asks about, and that block's unflued-LPG paragraph would put gas wording in an Air resource before the gas research stage. The global indoor-combustion block and detector are unchanged — this is a resource-level selection only. The OG-02 fire exemption is not referenced and not stretched."
     }
   }
 }
