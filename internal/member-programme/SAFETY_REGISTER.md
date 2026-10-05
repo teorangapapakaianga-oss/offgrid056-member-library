@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 5 October 2026, after Stage 9.56. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 5 October 2026, after Stage 9.57. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -81,6 +81,8 @@ not yet by live member content.
 claims — 9 NZ, 12 AU — each with its market, jurisdiction, method, wording, numeric value, source, authority, date,
 household applicability, limitations and contamination exclusions. No claim serves both markets. enHealth's national
 rainwater guidance is recorded as **SOURCE_UNAVAILABLE / NOT RELIED UPON** and is cited nowhere.
+
+**The gas topic detector reads teaching, not word count (Stage 9.57).** It used to require a gas safety block from any resource using the bare word three times, with no teaching condition — which demanded one from OG-17, a wood-burner planner whose only gas content is "the gas stops flowing" and "Gas supplies can be disrupted". It now requires the block only when a document names a gas appliance beside an action or a figure, names a fuel beside gas equipment, or routes a member to a licensed gasfitter. `gas supply` is deliberately not a subject; fuels are held to a stricter test than appliances, because listing a fuel among options is how planning documents work (OG-B12 and OG-26 both do it, and both are live); and proximity never crosses a sentence or line, because PDF-extracted tables flatten into long runs. `fuelTeachingSignals()` is exported so any future gas exemption lapses automatically, as the treatment and fire ones do. The compound fuel check `GAS_SAFETY_REQUIRED` gained propane, butane, mains and reticulated gas, patio heater, camping stove, flued gas, gas leak/meter/line/fitting, LCC27 and POL valve — but **not** `gasfitter`, which is approved, universal and printed in the disclaimer on all 20 live resources.
 
 ## Market differences that must never be crossed
 

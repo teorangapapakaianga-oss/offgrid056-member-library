@@ -44,6 +44,86 @@ export interface GroupAReport {
 }
 
 /**
+ * Gas, in three parts (Stage 9.57).
+ *
+ * The old rule was `\bgas\b` three times. It could not tell a wood-burner planner saying "the gas stops flowing"
+ * from a document explaining how to service an LPG heater, and it demanded a safety block from the first. These
+ * three pieces replace the word count with a reading of what the document actually does.
+ *
+ * `GAS_SUBJECT` — the things a document must NAME. Deliberately absent: **"gas supply"**. A sentence about mains
+ * gas failing in an outage is a narrative premise, not gas teaching, and it is the exact phrase that trapped
+ * OG-17. A bare "cylinder", "bottle" or "regulator" is absent for the same reason in reverse: the library is full
+ * of water tanks and electrical regulators.
+ */
+const GAS_APPLIANCE =
+  "(?:gas[- ]?(?:heater|heating|cooker|cooktop|hob|stove|oven|fire|fireplace|bottle|cylinder|water heater|hot water|" +
+  "barbecue|bbq|lamp|lantern|burner|ring|fridge|refrigerator|appliance|meter|line|leak|fitting)s?|" +
+  "(?:un)?flued gas|cabinet heater|patio heater|camping (?:stove|cooker)s?|gas ?fitters?|unflued|dual[- ]fuel)";
+
+/**
+ * Fuels. Held to a stricter test than appliances, because a fuel NAME is how every planning document lists its
+ * options — OG-B12 writes "generator fuel reserve (diesel/petrol/LPG)" and "Firewood, LPG, or diesel", and OG-15
+ * and OG-26 do the same with gas heaters. Naming a fuel among alternatives is not teaching gas, so a fuel only
+ * counts when it appears beside gas EQUIPMENT or a gas-specific action.
+ */
+const GAS_FUEL = "(?:LPG|LP gas|natural gas|mains gas|reticulated gas|biogas|propane|butane)";
+const GAS_FUEL_CONTEXT =
+  "(?:cylinder|bottle|regulator|hose|valve|fitting|appliance|heater|cook(?:er|top)|refill\\w*|connect\\w*|" +
+  "disconnect\\w*|leak\\w*|ventilat\\w*|servic\\w+|install\\w*)";
+
+/** Doing something with it: the verbs that turn a name into an instruction. */
+const GAS_ACTION =
+  "(?:use|using|operat\\w+|install\\w*|connect\\w*|disconnect\\w*|servic\\w+|inspect\\w*|repair\\w*|ventilat\\w*|" +
+  "stor(?:e|ed|ing|age)|plac(?:e|ed|ing|ement)|shut off|turn(?:ing|ed)? off|leak\\w*|test\\w*|replac\\w*|" +
+  "maintain\\w*|maintenance|check\\w*|clean\\w*|refill\\w*|transport\\w*|handl\\w*|secure|vent\\w*)";
+
+/**
+ * A figure beside the name — what a comparison table does without ever writing a verb.
+ *
+ * Stage 9.56 identified table-shaped teaching as the likely false negative, and OG-B09 is the live example:
+ * "Flued gas | $1,500–$4,000 | Moderate | 80–90% | No (gas supply)". There is no instruction in that row, but
+ * naming an appliance beside a price and an efficiency band is comparing it, and comparing is teaching.
+ *
+ * A bare number is NOT a figure here, on purpose: OG-15's scorecard row ends in a score and OG-26's budget row in
+ * empty "$ $ $" placeholders, and neither is a specification.
+ */
+const GAS_FIGURE =
+  "(?:\\$\\s?\\d|\\d+\\s?%|\\d+\\s?(?:kW|MJ|kPa|kg|mm|cm|metres?|litres?)\\b|" +
+  "every\\s+(?:\\d+|one|two|three|six|ten|twelve)[\\s-]*(?:year|month|week|day))";
+
+/** Routing a member to a professional is itself gas guidance. */
+const GAS_LICENSING = "(?:(?:licensed|certifying|qualified|registered)[^.\\n]{0,20}gas\\s?(?:fitter|worker))";
+
+/**
+ * A document teaches gas when it names a gas subject AND does something with it — acts on it, or puts a figure
+ * beside it — or when it tells the member who may legally touch it. Proximity in either direction, because
+ * "service your gas heater" and "the gas heater should be serviced" are the same instruction.
+ *
+ * **Proximity stays inside one sentence or line** (`[^.\n]`, never `[\s\S]`). The audit reads text extracted from
+ * PDFs, where a table flattens into long runs and unrelated rows end up adjacent; an unbounded window made a
+ * checklist's "Replace…" on one row teach the "gas heater" on the next. A line is the honest unit here.
+ */
+const GAS_SUBJECT = `(?:${GAS_APPLIANCE}|${GAS_FUEL})`;
+/**
+ * Every part is word-anchored. Without it, `plac(e|ing)` matched inside **fire**place**, so a checklist row
+ * reading "Fireplace, wood burner, gas heater" looked like an instruction about a gas heater — in OG-15, which is
+ * live. The mention count happened to save it; a word boundary is the thing that should.
+ */
+const w = (s: string) => `\\b${s}\\b`;
+const GAS_TEACHING = new RegExp(
+  [
+    `${w(GAS_APPLIANCE)}[^.\\n]{0,80}?${w(GAS_ACTION)}`,
+    `${w(GAS_ACTION)}[^.\\n]{0,80}?${w(GAS_APPLIANCE)}`,
+    `${w(GAS_APPLIANCE)}[^.\\n]{0,60}?${GAS_FIGURE}`,
+    `${GAS_FIGURE}[^.\\n]{0,60}?${w(GAS_APPLIANCE)}`,
+    `${w(GAS_FUEL)}[^.\\n]{0,60}?${w(GAS_FUEL_CONTEXT)}`,
+    `${w(GAS_FUEL_CONTEXT)}[^.\\n]{0,60}?${w(GAS_FUEL)}`,
+    GAS_LICENSING,
+  ].join("|"),
+  "i",
+);
+
+/**
  * Topics that pull in a safety block, and the block each one needs.
  *
  * `needs` is how many mentions count as teaching the topic. `teaching` is an extra condition for topics where the
@@ -54,7 +134,18 @@ export interface GroupAReport {
 const SAFETY_TOPICS: { pattern: RegExp; block: string; needs: number; teaching?: RegExp }[] = [
   { pattern: /\bgenerator/gi, block: "generator-safety", needs: 3 },
   { pattern: /\b(solid fuel|wood burner|chimney|flue)/gi, block: "solid-fuel-heating", needs: 3 },
-  { pattern: /\bgas\b/gi, block: "gas-and-lpg", needs: 3 },
+  {
+    // Fuels, appliances and fittings as well as the bare word, so a document that teaches entirely in compounds
+    // ("refill the LPG cylinder, check the regulator") reaches the threshold. Stage 9.57.
+    pattern: new RegExp(`\\b(?:gas|${GAS_SUBJECT})\\b`, "gi"),
+    block: "gas-and-lpg",
+    needs: 3,
+    // The word alone is not enough. OG-17 is a solid-fuel planner that says "the gas stops flowing" and "Gas
+    // supplies can be disrupted" — mains gas as an example of something that fails in an outage. Four bare
+    // mentions used to demand a gas safety block from a document that names no appliance and gives no
+    // instruction. See GAS_TEACHING for what does count.
+    teaching: GAS_TEACHING,
+  },
   { pattern: /\b(batter(y|ies)|inverter|solar)\b/gi, block: "batteries-and-electrical", needs: 3 },
   { pattern: /\b(water storage|water tank|rainwater|drinking water)\b/gi, block: "stored-drinking-water", needs: 3 },
   { pattern: /\b(fridge|freezer|pantry|perishable)\b/gi, block: "food-safety-power-cut", needs: 3 },
@@ -106,6 +197,18 @@ export function safetyExposureFor(text: string): string[] {
  * rating, or a method-versus-method comparison. Exported so an exemption from the treatment block can be held to the
  * same test the detector uses — a resource that starts teaching treatment loses the exemption automatically.
  */
+/**
+ * Signals that a document *teaches* gas or LPG rather than mentioning it (Stage 9.57).
+ *
+ * Exported for the same reason `treatmentTeachingSignals` is: any future exemption from the gas block can be held
+ * to the test the detector itself uses, so a resource that starts instructing loses the exemption automatically
+ * rather than by someone noticing.
+ */
+export function fuelTeachingSignals(text: string): string[] {
+  const all = new RegExp(GAS_TEACHING.source, "gi");
+  return [...new Set((text.match(all) ?? []).map((s) => s.replace(/\s+/g, " ").trim().toLowerCase()))];
+}
+
 export function treatmentTeachingSignals(text: string): string[] {
   const topic = SAFETY_TOPICS.find((t) => t.block === "water-treatment");
   if (!topic?.teaching) return [];

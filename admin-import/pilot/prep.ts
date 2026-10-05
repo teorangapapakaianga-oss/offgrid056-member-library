@@ -60,8 +60,18 @@ export interface SafetyBlockTrim {
 const FUEL_CHECKS: { code: string; pattern: RegExp; why: string }[] = [
   {
     code: "GAS_SAFETY_REQUIRED",
+    // Stage 9.57 added: propane, butane, mains/reticulated gas, patio heater, camping stove/cooker, flued gas,
+    // gas leak/meter/line/fitting, and the two cylinder valve types. Stage 9.56's detector audit found every one of
+    // them invisible here — "patio heater" most sharply, because the approved indoor-combustion block names it
+    // while a resource could write it and pass. Still compound-only: a bare "cylinder" or "regulator" would catch
+    // OG-10's tanks and OG-19's electrical gear, and "gas supply" is narrative (the OG-17 pattern).
+    //
+    // "gasfitter" is deliberately NOT here, though it IS a gas-teaching signal for the topic detector. Telling a
+    // member to use a licensed gasfitter is the one piece of gas wording that is already approved, universal
+    // across all eight Australian jurisdictions and New Zealand, and printed in the general disclaimer on all 20
+    // live resources. Blocking on it would make the library's own standing safety sentence a blocker.
     pattern:
-      /\b(LPG|LP gas|natural gas|biogas|gas[- ]powered|gas[- ]fuelled|gas[- ]fired|dual[- ]fuel|tri[- ]fuel|unflued|cabinet heaters?|gas[- ](heaters?|heating|appliances?|cookers?|cooktops?|hobs?|stoves?|ovens?|fires?|fireplaces?|bottles?|cylinders?|water heaters?|hot water|barbecues?|bbqs?|lamps?|lanterns?|burners?|rings?|fridges?|refrigerators?))\b/i,
+      /\b(LPG|LP gas|natural gas|mains gas|reticulated gas|biogas|propane|butane|gas[- ]powered|gas[- ]fuelled|gas[- ]fired|dual[- ]fuel|tri[- ]fuel|unflued|(?:un)?flued gas|cabinet heaters?|patio heaters?|camping (?:stoves?|cookers?)|LCC27|POL valves?|gas[- ](heaters?|heating|appliances?|cookers?|cooktops?|hobs?|stoves?|ovens?|fires?|fireplaces?|bottles?|cylinders?|water heaters?|hot water|barbecues?|bbqs?|lamps?|lanterns?|burners?|rings?|fridges?|refrigerators?|leaks?|meters?|lines?|fittings?))\b/i,
     why: "no NZ/AU gas or LPG guidance is approved",
   },
   { code: "FUEL_GUIDANCE_REQUIRED", pattern: /\bdiesel\b/i, why: "the approved generator guidance covers petrol only" },

@@ -1,22 +1,23 @@
 # Current status
 
-**As at:** 5 October 2026, after Stage 9.56 (AU gas research completed; the nationalised Victorian interval corrected and deployed).
+**As at:** 5 October 2026, after Stage 9.57 (gas detector hardened; OG-17 released. Nothing deployed).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **20** (all draft) |
 | **Worker version** | **`1922f7ba-a0b3-4a7b-ba01-593b3df6a160`** |
 | **Rollback available** | `776e704a-0f69-4c86-b80f-8b08da7880cb` (20 resources, before the gas correction — it restores the incorrect AU guidance) · private files in `workspace/backups/private-assets-776e704a` |
-| **Tests** | **441 passing** · lint clean · typecheck clean |
-| **Next resource** | **not chosen.** Air has one resource and no pathway; the recommended next stage is the Gas / LPG research that unblocks OG-17 and OG-B09 — see `NEXT_ACTIONS.md` |
+| **Tests** | **456 passing** · lint clean · typecheck clean |
+| **Next resource** | **OG-17 Solid Fuel Heating Planner** — unblocked on gas at Stage 9.57. Blocked on claims: 10 prices, 6 unsourced efficiency percentages, an unsourced CO five-year lifespan and an epidemiological claim |
 | **Last deployment** | Stage 9.56, 5 October 2026: **the AU gas servicing correction** — 6 AU PDFs re-rendered, no NZ file touched |
-| **Last report** | `admin-import/STAGE_9.56_AU_GAS_COMPLETION.md` |
+| **Last report** | `admin-import/STAGE_9.57_GAS_DETECTOR_HARDENING.md` (detector only — nothing deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
 rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → 410 at Stage 9.49 → 417 at Stage 9.50 (numeric blocking) → 429 at Stage 9.52 (the Air blocks and the ratio
 claim type) → 434 at Stage 9.53 (OG-13 and owner ruling 1) → 436 at Stage 9.54 (the category revert and the
-block selection) → **441** at Stage 9.56 (the Australian gas wording). Nothing was removed.
+block selection) → 441 at Stage 9.56 (the Australian gas wording) → **456** at Stage 9.57 (the gas detector).
+Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -61,7 +62,7 @@ Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
 
 | Blocker | What it holds up | Needed |
 |---|---|---|
-| **Gas / LPG blocks not built** | OG-B09, and any gas-appliance content | **Research is complete: NZ in full, and all 8 AU jurisdictions read live (Stage 9.56).** What remains is drafting blocks A–E with a non-numeric Australian core plus labelled state overrides, and **no shared Australian leak sentence** — four jurisdictional framings exist and NSW's own two pages differ. **OG-17 is confirmed a detector false positive and needs no gas wording at all** |
+| **Gas / LPG blocks not built** | **OG-B09 only** | **Research complete (Stage 9.56); the detector now reads teaching rather than counting the word (Stage 9.57).** What remains is drafting blocks A–E with a non-numeric Australian core plus labelled state overrides, and **no shared Australian leak sentence**. **OG-17 is released — it needed no gas wording and no exemption** |
 | **Diesel guidance not researched** | diesel generator or heating content | verified NZ + AU guidance |
 | **Grants and rebates not researched** | OG-16 | current NZ programmes and AU state/territory schemes |
 | **Consents and approvals not researched** | OG-B11 | NZ council consents, AU state/territory approvals |
@@ -71,6 +72,7 @@ Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
 | ~~One unsourced live figure~~ | — | **resolved at Stage 9.49**: OG-08's AU sentence now says "Get Ready Queensland advises storing drinking water for three days", and the numeric scan is **zero findings** across all 19 resources |
 | ~~Two OG-13 rulings outstanding~~ | — | **both answered at Stage 9.53.** Bleach is removed from both markets' mould wording, and `healthy-home-air` was added to the air taxonomy. OG-13 is prepared and verified. Three one-line preferences remain, none of them blocking: the category overlap with `healthy-home-checks`, whether OG-13 keeps `indoor-combustion` (it carries approved gas/LPG wording into an Air resource), and whether the never-mix caution returns — all three in `STAGE_9.53_OG13_PREPARED.md` §11 |
 | ~~Unlabelled Victorian servicing interval~~ | — | **corrected and deployed at Stage 9.56** (it affected 6 resources, not 5 — OG-13 joined at Stage 9.54). The Australian wording now carries no interval and points the member at their own state or territory's regulator. A test checks every prepared AU file, not just the config |
+| **`requiredSafety` is computed from the legacy source** | nothing today, but it will surprise someone | every other gate runs on the migrated output. A resource can be held for a safety block because of a sentence that migration removed — Stage 9.57 nearly did this to OG-B12, which is live. Conservative failure direction, left alone, worth a small stage of its own |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations
