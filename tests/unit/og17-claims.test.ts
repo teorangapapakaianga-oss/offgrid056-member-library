@@ -84,26 +84,25 @@ describe("Stage 9.59 · the percentage backstop", () => {
     expect(r.importReadiness).toBe("READY_AFTER_FINAL_VALIDATION");
   });
 
-  it("4. a PRICE has no gate at all — neither numeric blocking nor the content flag catches it", () => {
-    // Stated plainly because it is easy to assume otherwise. `currency` is excluded from numeric blocking by the
-    // Stage 9.50 activation, and the figure-needs-source flag matches only % and °C — not "$". A price is removed
-    // by an approved copy change and proved absent by inspection (test 5), not by a gate.
+  it("4. a PRICE is caught by the price gate — the two gates that still miss it are named here", () => {
+    // Written at Stage 9.59 to record that nothing stopped a price. Stage 9.61 built the gate, so this now
+    // asserts the opposite outcome — while keeping the two facts that made the gate necessary, because they are
+    // still true: numeric blocking excludes `currency`, and the figure-needs-source flag matches only % and °C.
+    const body = "<p>A modern wood burner costs $2,000-$5,000 installed.</p>";
     const registry = loadNumericRegistry(path.join(root, "admin-import/config/numeric-claims.json"));
     const treatment = loadTreatmentRegistry(path.join(root, "admin-import/config/treatment-sources.json"));
     expect(numericRegistryFile.blockingExcludes).toContain("currency");
     expect(
-      numericBlockingFindings('<div class="content"><p>A modern wood burner costs $2,000-$5,000 installed.</p></div>', {
-        resource: "OG-17",
-        market: "NZ",
-        registry,
-        treatment,
-      }),
+      numericBlockingFindings(`<div class="content">${body}</div>`, { resource: "OG-17", market: "NZ", registry, treatment }),
+      "numeric blocking is still silent on currency",
     ).toEqual([]);
-    const r = prep({ sourceHtml: doc("<p>A modern wood burner costs $2,000-$5,000 installed.</p>") });
-    expect(r.contentFlags.filter((f) => f.kind === "figure-needs-source")).toEqual([]);
-    expect(r.importReadiness, "nothing stops it — this is why price removal is verified by assertion").toBe(
-      "READY_AFTER_FINAL_VALIDATION",
-    );
+
+    const r = prep({ sourceHtml: doc(body) });
+    expect(r.contentFlags.filter((f) => f.kind === "figure-needs-source"), "the content flag still only sees % and °C").toEqual([]);
+    // But the price gate does see it, and it blocks.
+    expect(r.terminology.otherFindings.join(" ")).toContain("UNDISPOSED_PRICE");
+    expect(r.importReadiness).not.toBe("READY_AFTER_FINAL_VALIDATION");
+    expect(r.markets.every((m) => !m.publishable)).toBe(true);
   });
 });
 

@@ -2,7 +2,7 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 6 October 2026, after Stage 9.60.
+**As at:** 6 October 2026, after Stage 9.61.
 
 ---
 
@@ -13,7 +13,8 @@ What happens next, and what is waiting on research.
 | 1 | **Finish the gas evidence base** | **Stage 9.55 did NZ in full and 5 of 8 AU jurisdictions** | read TAS, ACT and NT live; re-read the four search-only AU pages (ESV heating, NSW gasfitter and gas water heaters, WA servicing) and FENZ; then an owner decision on the AU body shape, because NSW and Queensland give contradictory leak instructions and four jurisdictions give four different servicing intervals |
 | 1b | **Rule on the unlabelled Victorian two-year servicing interval** | **live in 5 resources now** | a correctness issue in deployed content, not a future-stage issue. `STAGE_9.55_GAS_LPG_RESEARCH.md` §16 |
 | 1c | ~~Deploy OG-17~~ | **live as resource #21 (Stage 9.60)** | shelter / heating, intermediate, 25 minutes, NZ 7 pages and AU 7 pages |
-| 1d | **Price-presence gate** | **recommended next stage (9.61)** | a member-facing price currently passes every gate: `currency` is excluded from numeric blocking and the `figure-needs-source` flag matches only `%` and `°C`. A presence-and-review gate, NOT a freshness validator — each detected price needs a disposition of REMOVE, CURRENT-SOURCE-REQUIRED or OWNER-APPROVED-LIVE-PRICE. `STAGE_9.60_OG17_DEPLOYED.md` §17 |
+| 1d | ~~Price-presence gate~~ | **built and green at Stage 9.61** | 0 true prices across 42 files; 55 legacy prices recorded as removed across 7 migrations. No freshness system was built |
+| 1e | **Gas / LPG block architecture** | **recommended next stage (9.62)** | the only thing still blocking a resource. Research is complete (NZ in full, all 8 AU jurisdictions read live) and the shape is settled: non-numeric Australian core plus labelled state overrides, **no shared Australian leak sentence**. Draft blocks A–E for approval, then build, then OG-B09. Parts of the evidence are already dated — Tasmania 2018/2021, ESV GIS 36 reviewed 1 Jan 2025 |
 | 2 | ~~Three Air safety blocks~~ | **built at Stage 9.52** | `fire-and-smoke-alarms`, `mould-and-dampness` (bleach withheld), `home-ventilation` (AU non-numeric), plus 12 numeric entries and the ratio claim type. Full 19-resource re-run green, Bucket C = 0, no member content changed |
 | 3 | ~~OG-13~~ | **live as resource #20 (Stage 9.54)** | 22 copy changes applied, all eight blocks carried, no exemption used, Bucket C = 0 in both markets, 40/40 prepared files verified. The first live exercise of the ratio claim type and of a temperature claim |
 | 3b | **A second Air resource, then the Air pathway** | not started | a one-resource pathway is not a pathway. Candidates: ventilation and moisture control, or mould and dampness — both exist only as safety blocks today |

@@ -20,6 +20,7 @@ import type { ProgrammeItem } from "../audit/programme";
 import { fireTeachingSignals, safetyExposureFor, safetyTopicMentions, treatmentTeachingSignals } from "../audit/group-a";
 import { isRegisteredClaim, treatmentFindings, type TreatmentRegistry } from "../audit/treatment";
 import { numericBlockingFindings, type NumericRegistry } from "../audit/numeric";
+import { priceFindings, type PriceCandidate, type PriceRecord } from "../audit/price";
 
 /**
  * An owner-approved, resource-specific exemption from a block the topic detector requires. It holds only while
@@ -188,6 +189,14 @@ export interface PrepResult {
     exemptions: { block: string; reason: string; holds: boolean; unexpected: string[] }[];
     /** owner-approved, resource-scoped sentence removals, and whether each applied */
     trims: { block: string; market: string; reason: string; applied: boolean }[];
+  };
+  /**
+   * Prices (Stage 9.61). `inOutput` is what the member-facing text carries and what each disposition is;
+   * `legacyOnly` is what the legacy source carried and migration removed — evidence, never blocking.
+   */
+  prices: {
+    inOutput: (PriceCandidate & { market: string; disposition?: PriceRecord["disposition"] })[];
+    legacyOnly: PriceCandidate[];
   };
   /** legacy programme, product and cross-reference text that may not belong in the current library */
   contentFlags: ContentFlag[];
@@ -490,6 +499,15 @@ export interface PrepInputs {
    * preparation fails — a safety topic may leave a resource, but it may not leave quietly.
    */
   safetyTopicDispositions?: Record<string, SafetyTopicDisposition>;
+  /**
+   * What accounts for each member-facing price (Stage 9.61).
+   *
+   * `currency` is excluded from numeric blocking and the figure-needs-source flag matches only `%` and `°C`, so
+   * until this stage a price passed every gate in the pipeline. Every price in the migrated text now needs a
+   * recorded disposition — REMOVE, CURRENT-SOURCE-REQUIRED or OWNER-APPROVED-LIVE-PRICE — or preparation fails.
+   * An empty or missing list approves nothing.
+   */
+  priceDispositions?: PriceRecord[];
   /** ids of blocks whose wording is still a proposal */
   proposedBlockIds?: string[];
   /** old product and platform names to flag (config/legacy-terms.json) */
@@ -611,6 +629,8 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   const dispositions = inputs.safetyTopicDispositions ?? {};
   const removalRecords: PrepResult["safety"]["removedTopics"] = [];
   const outputTopicsSeen = new Set<string>();
+  const priceCandidates: PrepResult["prices"]["inOutput"] = [];
+  const legacyPriceEvidence: PriceCandidate[] = [];
   const exemptionResults = new Map(exemptions.map((e) => [e.block, { block: e.block, reason: e.reason, holds: true, unexpected: [] as string[] }]));
   const missing = new Set(launchMarkets.length ? [] : lacking);
   const trims: PrepResult["safety"]["trims"] = [];
@@ -655,6 +675,18 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
     const fuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []);
     for (const finding of fuelFindings) if (!otherFindings.includes(finding)) otherFindings.push(finding);
+    // Prices, on the resource's OWN text and before the blocks go in (Stage 9.58/9.61). No approved block carries
+    // a price; if one ever does, that block owns it and the resource is not asked to dispose of it.
+    const prices = priceFindings(marketHtml, {
+      market: code,
+      records: inputs.priceDispositions ?? [],
+      legacyHtml: sourceHtml,
+    });
+    for (const c of prices.output) priceCandidates.push({ market: code, ...c.candidate, disposition: c.record?.disposition });
+    for (const c of prices.legacyOnly) {
+      if (!legacyPriceEvidence.some((p) => p.figure === c.figure)) legacyPriceEvidence.push(c);
+    }
+    for (const finding of prices.problems) if (!otherFindings.includes(finding)) otherFindings.push(finding);
     // --- the two-layer safety check (Stage 9.58) -----------------------------------------------------------
     // Layer B: what this market's MEMBER-FACING text actually teaches, read before the safety blocks go in, so a
     // block's own wording can never create a requirement (the CO block names gas heaters).
@@ -717,6 +749,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const unplaced = [
       ...trimProblems,
       ...fuelFindings,
+      ...prices.problems,
       ...treatment,
       ...numeric,
       ...injected.unplaced.map((id) => `safety block "${id}" could not be placed in this layout`),
@@ -826,6 +859,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       exemptions: [...exemptionResults.values()],
       trims,
     },
+    prices: { inOutput: priceCandidates, legacyOnly: legacyPriceEvidence },
     contentFlags,
     markets: marketResults,
     validation: {

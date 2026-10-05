@@ -534,6 +534,8 @@ async function commandPrep() {
       // REQUIRED to carry is read from its migrated member-facing output, inside prepareResource, per market.
       sourceSafetyTopics: exposureOf(item),
       safetyTopicDispositions: metadata[item.legacyCode]?.safetyTopicDispositions ?? {},
+      // Stage 9.61: every member-facing price needs a recorded disposition. An empty list approves nothing.
+      priceDispositions: metadata[item.legacyCode]?.priceDispositions ?? [],
       proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
       legacyTerms,
       title: metadata[item.legacyCode]?.title ?? null,

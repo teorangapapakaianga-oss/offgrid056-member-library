@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 5 October 2026, after Stage 9.58. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 6 October 2026, after Stage 9.61. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -87,6 +87,10 @@ rainwater guidance is recorded as **SOURCE_UNAVAILABLE / NOT RELIED UPON** and i
 **Safety enforcement reads the migrated output, not the legacy source (Stage 9.58).** Until this stage a resource could be held for a safety block because of a sentence migration had already removed — every other gate read the member-facing file, and safety requirements alone read the source. There are now two layers. **`sourceSafetyTopics`** is what the legacy document taught: migration evidence, used for comparison and removal tracking, and it requires nothing by itself. **`requiredSafety`** is what the migrated market file teaches, read per market before the blocks are injected so a block's own wording can never create a requirement; a topic taught without its block still fails closed, and teaching *introduced* during migration is now caught, which the old rule could not see at all.
 
 The balancing rule is **removal accountability**: a safety topic may leave a resource, but not quietly. A removal is accounted for automatically when the resource still carries that topic's block (`REPLACED_BY_BLOCK`) or holds an owner-approved exemption for it (`OWNER_APPROVED_REMOVAL`, which keeps the owner's own reason, approver and date). Anything else needs a written `safetyTopicDispositions` entry — `REMOVED`, `REWRITTEN`, `REPLACED_BY_BLOCK`, `NON_TEACHING_CONTEXT` or `OWNER_APPROVED_REMOVAL` — and without one preparation fails with `SAFETY_TOPIC_REMOVED_WITHOUT_RECORD` and the topic stays required. A disposition can never hide teaching that is still present. Eight of the twenty live resources have such a removal (OG-02, OG-08, OG-13, OG-18, OG-26, OG-B08 and OG-B12 twice); all eight were already accounted for by a carried block or a reviewed exemption, so no disposition had to be written and no resource lost a block it needed.
+
+**Prices need a disposition (Stage 9.61).** `currency` is held out of numeric blocking by the Stage 9.50 activation and prep's `figure-needs-source` flag matches only `%` and `°C`, so a member-facing price used to pass every gate — 55 of them were removed across seven migrations by a person reading the document. `admin-import/audit/price.ts` now scans each resource's own text, before blocks are injected, for currency symbols and codes with amounts, amounts written in words, and numeric cells under a cost-like table header. Each price found needs a recorded `priceDisposition` — **REMOVE**, **CURRENT-SOURCE-REQUIRED** (with source, authority, date checked, scope and freshness) or **OWNER-APPROVED-LIVE-PRICE** (owner, date, owning product, and only for a price OffGrid056 itself controls) — or preparation fails. REMOVE fails if the price is still present. Market scoping is strict: an NZ approval does not validate an AU file, and no currency is converted. A missing or empty list approves nothing.
+
+It deliberately does not fire on a currency symbol with no amount (OG-26's budget tiers, OG-17's worksheet line, OG-20's and OG-21's blanks), a percentage in a cost column, a date, a standard's number, a resource id or a helpline number — and it skips any table row whose cell count differs from the header's, because a colspan makes the column index meaningless. **It is a presence-and-review gate, not a freshness validator:** it never judges whether a price is correct or current.
 
 ## Market differences that must never be crossed
 
