@@ -786,6 +786,44 @@
       ],
       "approvedSafetyBlocksStatus": "fire-and-smoke-alarms, mould-and-dampness, home-ventilation: owner-approved 2026-09-23 (Stage 9.52), carried here 2026-10-05. carbon-monoxide, solid-fuel-heating: owner-approved 2026-09-22 (Stage 9.19). indoor-combustion was carried at Stage 9.53 and REMOVED by owner ruling 2 (Stage 9.54).",
       "safetyReasoning": "The audit asks about alarms, mould, ventilation, a wood burner and carbon monoxide, and rows 1, 6, 7 and 10 give instructions rather than labels, so no hazard-identification exemption could hold. All five blocks are carried deliberately in this file rather than relied on from the detectors: the source's fire mentions (in the audit's extracted text) require fire-and-emergency, which fire-and-smoke-alarms answers, and solid-fuel-heating is required too, but carbon-monoxide has no topic detector at all. indoor-combustion is NOT carried (owner ruling 2, Stage 9.54): the audit has no row about bringing an outdoor appliance inside, carbon-monoxide already covers the risk row 2 asks about, and that block's unflued-LPG paragraph would put gas wording in an Air resource before the gas research stage. The global indoor-combustion block and detector are unchanged — this is a resource-level selection only. The OG-02 fire exemption is not referenced and not stretched."
+    },
+    "OG-17": {
+      "title": "Solid Fuel Heating Planner",
+      "titleStatus": "from the document's own cover — accurate, no legacy code",
+      "resourceType": "planner",
+      "resourceTypeStatus": "OWNER-REVIEW REQUIRED — audit inference, MEDIUM confidence. It compares options and ends in a plan, like OG-21 (planner), rather than scoring like OG-15 (assessment).",
+      "foundation": "shelter",
+      "foundationStatus": "OWNER-REVIEW REQUIRED — audit confidence MEDIUM ('text mentions shelter 1x'). Heating sits in shelter today: OG-15 and OG-21 are both there.",
+      "category": "heating",
+      "categoryStatus": "OWNER-REVIEW REQUIRED — proposed to match OG-15 Warm Home Scorecard, which is the shelter foundation's other heating resource. The slug exists.",
+      "difficulty": "intermediate",
+      "difficultyStatus": "OWNER-REVIEW REQUIRED / INFERRED",
+      "difficultySource": "INFERRED: the document states no level. It is proposed one step above its siblings (OG-15 and OG-21 are both beginner) because it asks a member to choose between six systems, plan a flue and hearth, and deal with a local authority — decisions with cost and consent consequences rather than observations.",
+      "estimatedTime": 25,
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED / INFERRED",
+      "estimatedTimeReasoning": "INFERRED: one comparison table to read, a seven-field decision worksheet, a five-step seasonal checklist and a fuel storage table. Sits between OG-13 (20 minutes) and OG-15/OG-21 (30). Excludes getting quotes, contacting a council or buying anything.",
+      "description": "Compare the solid fuel heating options, plan the one you choose, and keep it safe season to season — with the approval and installation questions to put to your local authority before you commit.",
+      "descriptionStatus": "OWNER-REVIEW REQUIRED — written for this migration; the legacy cover subtitle named gas and called solid fuel 'the ultimate resilience heating'.",
+      "tags": [],
+      "tagsStatus": "the convention across all 20 live resources",
+      "relatedResources": [
+        "res-1015",
+        "res-1021"
+      ],
+      "safetyBlocks": [
+        "solid-fuel-heating",
+        "fire-and-smoke-alarms",
+        "carbon-monoxide"
+      ],
+      "approvedSafetyBlocks": [
+        "solid-fuel-heating",
+        "fire-and-smoke-alarms",
+        "carbon-monoxide"
+      ],
+      "approvedSafetyBlocksStatus": "solid-fuel-heating and carbon-monoxide: owner-approved 2026-09-22 (Stage 9.19). fire-and-smoke-alarms: owner-approved 2026-09-23 (Stage 9.52), carried here to answer the detector's fire-and-emergency requirement.",
+      "safetyReasoning": "The migrated text teaches solid fuel heating (45 mentions) and fire safety, so both are required by the detector reading the member-facing output. carbon-monoxide is carried deliberately: the seasonal checklist has a CO alarm step, and no topic detector exists for CO. Gas is NOT carried and NOT required — Stage 9.57 established that OG-17's gas mentions are narrative, and the migration removes them entirely.",
+      "recordStatus": "draft",
+      "migrationState": "PREPARED for owner review 2026-10-06 (Stage 9.59). Not deployed, not staged into private-assets."
     }
   }
 }

@@ -2,13 +2,13 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 5 October 2026, after Stage 9.54.
+**As at:** 6 October 2026, after Stage 9.59.
 
 | State | Count |
 |---|---|
 | **Deployed** (private preview, draft) | **20** |
-| **Prepared** — awaiting owner approval | **0** |
-| **Blocked** — pending research | **3** |
+| **Prepared** — awaiting owner approval | **1** |
+| **Blocked** — pending research | **2** |
 | **Not started** | **22** |
 
 ---
@@ -40,19 +40,16 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 | **OG-13** | **Healthy Home Air Audit** | air / assessment | **smoke alarms · mould & dampness · ventilation** · CO · solid fuel | 9.54 |
 
-## Prepared — awaiting owner approval (0)
+## Prepared — awaiting owner approval (1)
 
-Nothing is waiting on an owner decision. OG-13 was approved and deployed at Stage 9.54 as resource #20 (NZ 7 pages, AU 8 pages), with the `healthy-home-air` category reverted to `healthy-home-checks` and `indoor-combustion` not carried. OG-B08 was approved and deployed at Stage 9.46, completing the water
-pathway; OG-09 was approved and deployed at Stage 9.44, renamed **Household Water Treatment Guide**
-(`/resources/household-water-treatment-guide/`). `legacyCode` stays internal in both cases.
+**OG-17 Solid Fuel Heating Planner** — prepared at Stage 9.59, NZ 7 pages and AU 7 pages, both rendered and verified, `READY_AFTER_FINAL_VALIDATION`, **not staged into `private-assets/`**. The heaviest claims removal the project has done: 10 prices, 6 efficiency percentages, an unsourced CO five-year lifespan, a comparative mortality claim, seven consent assertions, four unsourced durations, two distances and a heading ("The 3-Metre Rule") that described nothing in its own box. Four metadata decisions are open — foundation, category, difficulty and estimated time — all with proposals. See `admin-import/STAGE_9.59_OG17_PREPARED.md`.
 
-## Blocked — pending research (3)
+## Blocked — pending research (2)
 
 | Code | Title | Blocked by |
 |---|---|---|
 | OG-16 | Grant Eligibility Insulation Planner | **grants research** — NZ programmes; AU state and territory schemes |
-| OG-17 | Solid Fuel Heating Planner | **gas research** — its audit notes gas appliances (4 mentions); the gas rule is strict |
-| OG-B09 | Insulation & Heating Upgrade Checklist | **gas research** — same reason |
+| OG-B09 | Insulation & Heating Upgrade Checklist | **gas research** — its heating comparison table prices a "Flued gas" option and gives it an efficiency band, which the Stage 9.57 detector reads as genuine gas teaching. The last real gas resource |
 
 ## Not started (22)
 

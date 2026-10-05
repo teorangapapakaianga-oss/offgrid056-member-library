@@ -252,18 +252,30 @@ export interface LegacyTerms {
 // Each rule lists the combinations of blocks that answer it; any one complete combination does. A resource that
 // teaches generator use answers the generator note with the generator block (plus carbon monoxide); one that only
 // mentions a generator in passing can still answer it with the generic outdoor-appliance block.
-const NOTE_ANSWERED_BY: { topic: RegExp; anyOf: string[][] }[] = [
-  { topic: /^covers generators\b/, anyOf: [["generator-safety", "carbon-monoxide"], ["indoor-combustion", "carbon-monoxide"]] },
-  { topic: /^covers solid fuel heating\b/, anyOf: [["solid-fuel-heating"]] },
-  { topic: /^covers gas appliances\b/, anyOf: [["gas-and-lpg"]] },
-  { topic: /^covers batteries and inverters\b/, anyOf: [["batteries-and-electrical"]] },
-  { topic: /^covers stored drinking water\b/, anyOf: [["stored-drinking-water"]] },
+const NOTE_ANSWERED_BY: { topic: RegExp; block: string; anyOf: string[][] }[] = [
+  { topic: /^covers generators\b/, block: "generator-safety", anyOf: [["generator-safety", "carbon-monoxide"], ["indoor-combustion", "carbon-monoxide"]] },
+  { topic: /^covers solid fuel heating\b/, block: "solid-fuel-heating", anyOf: [["solid-fuel-heating"]] },
+  { topic: /^covers gas appliances\b/, block: "gas-and-lpg", anyOf: [["gas-and-lpg"]] },
+  { topic: /^covers batteries and inverters\b/, block: "batteries-and-electrical", anyOf: [["batteries-and-electrical"]] },
+  { topic: /^covers stored drinking water\b/, block: "stored-drinking-water", anyOf: [["stored-drinking-water"]] },
 ];
 
-export function unansweredSafetyNotes(notes: string[], blocks: string[]): string[] {
+/**
+ * Audit notes the migrated resource has not answered.
+ *
+ * A note says what the SOURCE document taught without a warning, so it is the same kind of evidence as
+ * `sourceSafetyTopics` and Stage 9.58's ruling applies to it too: pass `outputTopics` and a note about a topic the
+ * member-facing text no longer teaches is answered. It cannot let anything through — a topic the output DOES teach
+ * is in `requiredSafety`, and a removal nobody has accounted for fails the market before this is reached.
+ *
+ * Omitting `outputTopics` keeps the original behaviour, so existing callers and tests are unaffected.
+ */
+export function unansweredSafetyNotes(notes: string[], blocks: string[], outputTopics?: string[]): string[] {
   return notes.filter((note) => {
     const rule = NOTE_ANSWERED_BY.find((r) => r.topic.test(note));
-    return !rule || !rule.anyOf.some((set) => set.every((b) => blocks.includes(b)));
+    if (!rule) return true;
+    if (rule.anyOf.some((set) => set.every((b) => blocks.includes(b)))) return false;
+    return !outputTopics || outputTopics.includes(rule.block);
   });
 }
 
@@ -779,7 +791,10 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     ? "PREVIEW_WITH_PROPOSED_COPY"
     : !description
     ? "NEEDS_OWNER_COPY"
-    : otherFindings.length || unansweredSafetyNotes(item.safetyNotes, safetyBlocks).length || contentFlags.length || missingRequired.length
+    : otherFindings.length ||
+        unansweredSafetyNotes(item.safetyNotes, safetyBlocks, [...outputTopicsSeen]).length ||
+        contentFlags.length ||
+        missingRequired.length
       ? "NEEDS_CONTENT_REVIEW"
       : proposed.length
         ? "NEEDS_SAFETY_APPROVAL"

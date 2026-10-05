@@ -3836,6 +3836,155 @@
           "AU"
         ]
       }
+    ],
+    "OG-17": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 3 — Shelter, Heating & Energy</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "Legacy programme week label. Standard removal across every migration."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "A library resource, not a programme day."
+      },
+      {
+        "where": "Cover image alt",
+        "from": "<img src=\"assets/Week3_ShelterHeatingEnergy_Cover.jpg\" class=\"cover-img\" alt=\"Week 3\">",
+        "to": "<img src=\"assets/Week3_ShelterHeatingEnergy_Cover.jpg\" class=\"cover-img\" alt=\"Heating\">",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "The alt text named the programme week."
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-17 | Day 17</div>",
+        "to": "<div class=\"page-header-right\">Shelter · Heating</div>",
+        "expectedMatches": 2,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "No visible legacy OG code or programme day; the code stays in legacyCode."
+      },
+      {
+        "where": "Closing box",
+        "from": "<div class=\"closing-box\">\n  <h3>Day 17 Complete</h3>\n  <p>You now have a solid fuel heating plan, safety checklist, and fuel storage strategy. Tomorrow: the sun — free energy that falls on your roof every day.</p>\n  <p class=\"next-pointer\">Next: OG-18 Solar Power 101 Workbook →</p>\n</div>",
+        "to": "<div class=\"closing-box\">\n  <h3>What You Have Planned</h3>\n  <p>You have chosen a system, written down what it will take to install it safely, and set out the checks to run before every burning season.</p>\n  <p class=\"next-pointer\">Before you commit: get quotes, and ask your local authority what applies where you live.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "Removes 'Day 17 Complete' and the next-asset pointer."
+      },
+      {
+        "where": "Cover subtitle",
+        "from": "<p class=\"cover-subtitle\">Fireplaces, wood burners, and firebacks — the original off-grid heating. Plan your solid fuel system for when the power goes out and the gas stops flowing.</p>",
+        "to": "<p class=\"cover-subtitle\">Fireplaces, wood burners and firebacks. Compare the options, plan the one you choose, and keep it safe season to season.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "Removes the narrative gas reference and the 'original off-grid heating' framing. Gas is not reintroduced anywhere in this resource."
+      },
+      {
+        "where": "Intro box",
+        "from": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Why Solid Fuel Matters</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">When the grid fails in winter, electric heaters stop. Gas supplies can be disrupted. But a wood burner with a dry wood supply keeps burning. Solid fuel heating is the ultimate resilience heating — independent of infrastructure, fuelled by a renewable resource you can stockpile.</p>\n</div>",
+        "to": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Why Solid Fuel Is Worth Planning</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">A wood burner with a dry wood supply keeps working when the power is off, and the fuel is something you can store yourself. It also has to be installed properly, kept clear, and maintained before every season — which is what the rest of this planner is for.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "Removes the narrative gas reference and the unsupported 'ultimate resilience heating' claim. The replacement states what the member can act on."
+      },
+      {
+        "where": "Option comparison table",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>System</th><th>Setup Cost</th><th>Running Cost</th><th>Efficiency</th><th>Consent Needed</th><th>Best For</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Open Fireplace</strong></td>\n      <td>$0 (existing)</td>\n      <td>High wood use</td>\n      <td>10–15%</td>\n      <td>No</td>\n      <td>Ambiance, occasional use</td>\n    </tr>\n    <tr>\n      <td><strong>Fireback + Insert</strong></td>\n      <td>$500–$1,500</td>\n      <td>Moderate</td>\n      <td>30–50%</td>\n      <td>No (retrofit)</td>\n      <td>Improving existing fireplace</td>\n    </tr>\n    <tr>\n      <td><strong>Wood Burner (modern)</strong></td>\n      <td>$2,000–$5,000</td>\n      <td>Low</td>\n      <td>65–85%</td>\n      <td>Yes</td>\n      <td>Primary heating, severe winters</td>\n    </tr>\n    <tr>\n      <td><strong>Pellet Burner</strong></td>\n      <td>$3,000–$6,000</td>\n      <td>Moderate</td>\n      <td>80–90%</td>\n      <td>Yes</td>\n      <td>Convenience, automated feed</td>\n    </tr>\n    <tr>\n      <td><strong>Multi-Fuel Burner</strong></td>\n      <td>$2,500–$4,500</td>\n      <td>Low–Moderate</td>\n      <td>70–80%</td>\n      <td>Yes</td>\n      <td>Flexibility (wood + coal)</td>\n    </tr>\n    <tr>\n      <td><strong>Cooking Range (AGA-style)</strong></td>\n      <td>$5,000–$15,000</td>\n      <td>High</td>\n      <td>60–70%</td>\n      <td>Yes</td>\n      <td>Heating + cooking combined</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<p style=\"font-size:12px; color:#888;\">Setup costs and efficiency figures have been removed: the legacy versions were vendor-style performance numbers, and no official source publishes efficiency bands for classes of solid fuel appliance. Get written quotes and the manufacturer's own efficiency rating for the specific model you are considering.</p>\n\n<table class=\"compare-table\">\n  <thead>\n    <tr><th>System</th><th>Fuel use</th><th>Approval and installation</th><th>Best for</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Open Fireplace</strong></td>\n      <td>High wood use</td>\n      <td>Ask your local authority what applies to an existing fireplace</td>\n      <td>Ambiance, occasional use</td>\n    </tr>\n    <tr>\n      <td><strong>Fireback + Insert</strong></td>\n      <td>Moderate</td>\n      <td>Ask your local authority before retrofitting</td>\n      <td>Improving an existing fireplace</td>\n    </tr>\n    <tr>\n      <td><strong>Wood Burner (modern)</strong></td>\n      <td>Low</td>\n      <td>Ask your local authority before you install — rules differ by area</td>\n      <td>Primary heating, severe winters</td>\n    </tr>\n    <tr>\n      <td><strong>Pellet Burner</strong></td>\n      <td>Moderate</td>\n      <td>Ask your local authority before you install — rules differ by area</td>\n      <td>Convenience, automated feed</td>\n    </tr>\n    <tr>\n      <td><strong>Multi-Fuel Burner</strong></td>\n      <td>Low to moderate</td>\n      <td>Ask your local authority before you install — rules differ by area</td>\n      <td>Flexibility (wood and coal)</td>\n    </tr>\n    <tr>\n      <td><strong>Cooking Range (AGA-style)</strong></td>\n      <td>High</td>\n      <td>Ask your local authority before you install — rules differ by area</td>\n      <td>Heating and cooking combined</td>\n    </tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "REMOVES six prices ($0, $500–$1,500, $2,000–$5,000, $3,000–$6,000, $2,500–$4,500, $5,000–$15,000) and all six efficiency percentages (10–15%, 30–50%, 65–85%, 80–90%, 70–80%, 60–70%): no official source in either market publishes efficiency bands for classes of solid fuel appliance, and the figures read as vendor performance claims. ALSO replaces the Yes/No 'Consent Needed' column, which asserted a universal consent rule per system while the consents research stage is unfinished; every row now sends the member to their local authority instead."
+      },
+      {
+        "where": "Safety framing box",
+        "from": "<div class=\"warning-box\">\n  <div class=\"warning-title\">Safety First — Every Time</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Solid fuel heating kills more people than grid failures. Carbon monoxide, chimney fires, and ember escape are real risks. Every installation needs a building consent, professional flue installation, and annual chimney sweep. The cost of doing it right is far less than the cost of a house fire.</p>\n</div>",
+        "to": "<div class=\"warning-box\">\n  <div class=\"warning-title\">Get It Installed Properly</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Carbon monoxide, chimney fires and ember escape are the three things that go wrong with solid fuel heating, and all three are addressed by installation and maintenance rather than by how you light the fire. Have the flue installed by a qualified professional, check with your local authority what approvals apply where you live, and work through the seasonal checks below. The safety guidance at the end of this resource sets out the clearances and the maintenance.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "REMOVES the unsourced comparative mortality claim ('kills more people than grid failures') — no source supports it, and it is replaced with calm framing rather than another statistic. ALSO removes 'Every installation needs a building consent', which asserts a universal rule across two countries while the consents research is unfinished."
+      },
+      {
+        "where": "Step 1 — chimney sweep",
+        "from": "<div class=\"step-content\">\n      <h4>Chimney Sweep</h4>\n      <p>Book a professional sweep every 12 months. Creosote buildup causes chimney fires.</p>\n    </div>",
+        "to": "<div class=\"step-content\">\n      <h4>Chimney Sweep</h4>\n      <p>Book a professional sweep before every burning season, at the interval the safety guidance below gives. Creosote build-up causes chimney fires.</p>\n    </div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "The '12 months' figure is removed from the resource's own text. The approved solid-fuel-heating block carries the interval for each market — NZ 'cleaned every year', AU 'inspected and cleaned every year' — so the member still gets it, from a sourced block."
+      },
+      {
+        "where": "Step 3 — CO alarm",
+        "from": "<div class=\"step-content\">\n      <h4>CO Detector Test</h4>\n      <p>Press the test button. Replace if it does not beep. Replace unit if over 5 years old.</p>\n    </div>",
+        "to": "<div class=\"step-content\">\n      <h4>Carbon Monoxide Alarm</h4>\n      <p>Press the test button. If it does not beep, replace it. Follow the manufacturer's instructions for how long your alarm lasts and when to replace it.</p>\n    </div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "REMOVES 'Replace unit if over 5 years old'. Stages 9.52, 9.55 and 9.56 established across both markets that NO source publishes a carbon monoxide alarm lifespan; the only statement anywhere is Victoria's 'around 2 to 7 years, will vary', which is a range with a dependency. No replacement lifespan is given, and the member is routed to the manufacturer rather than to an invented rule."
+      },
+      {
+        "where": "Step 4 — fire extinguisher",
+        "from": "<div class=\"step-content\">\n      <h4>Fire Extinguisher Check</h4>\n      <p>Verify pressure gauge is in green zone. Accessible within 3 metres of the burner.</p>\n    </div>",
+        "to": "<div class=\"step-content\">\n      <h4>Fire Extinguisher Check</h4>\n      <p>Check the pressure gauge is in the green zone, and keep the extinguisher where you can reach it quickly without passing the burner.</p>\n    </div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "REMOVES 'within 3 metres'. No NZ or AU source read publishes an extinguisher placement distance for a domestic burner, so the figure is replaced with the thing it was trying to achieve."
+      },
+      {
+        "where": "Step 5 — hearth clearance",
+        "from": "<div class=\"step-content\">\n      <h4>Hearth Clearance</h4>\n      <p>Remove combustible materials within 1 metre. Rugs, furniture, curtains checked.</p>\n    </div>",
+        "to": "<div class=\"step-content\">\n      <h4>Hearth Clearance</h4>\n      <p>Clear anything that can burn away from the fire, to the clearance the safety guidance below gives. Rugs, furniture and curtains checked.</p>\n    </div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "The one-metre figure is removed from the resource's own text. The approved solid-fuel-heating block carries it in both markets ('at least one metre'), sourced to FENZ in NZ, so the member still gets the figure from approved wording."
+      },
+      {
+        "where": "Fuel storage table",
+        "from": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Fuel Type</th><th>Storage Needs</th><th>Shelf Life</th><th>Cost per Unit</th><th>Notes</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Firewood (seasoned)</strong></td>\n      <td>Dry, covered, ventilated shed</td>\n      <td>2–3 years (if kept dry)</td>\n      <td>$80–$120/m³</td>\n      <td>Hardwood burns longer. Season for 12+ months.</td>\n    </tr>\n    <tr>\n      <td><strong>Wood Pellets</strong></td>\n      <td>Dry shed, raised off ground</td>\n      <td>Indefinite (if dry)</td>\n      <td>$15–$25/bag</td>\n      <td>Clean, efficient. Need pellet-specific burner.</td>\n    </tr>\n    <tr>\n      <td><strong>Coal</strong></td>\n      <td>Dry bunker or bin</td>\n      <td>Indefinite</td>\n      <td>$300–$500/tonne</td>\n      <td>High heat, long burn. Messier than wood.</td>\n    </tr>\n    <tr>\n      <td><strong>Kindling / Fire Starters</strong></td>\n      <td>Dry box near burner</td>\n      <td>Indefinite</td>\n      <td>$5–$15/box</td>\n      <td>Essential for easy lighting. Make your own from scrap.</td>\n    </tr>\n  </tbody>\n</table>",
+        "to": "<table class=\"compare-table\">\n  <thead>\n    <tr><th>Fuel type</th><th>Storage needs</th><th>Keeping quality</th><th>Notes</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><strong>Firewood (seasoned)</strong></td>\n      <td>Dry, covered, ventilated shed</td>\n      <td>Keeps well while it stays dry</td>\n      <td>Hardwood burns longer. Season it thoroughly before burning — burn only dry, clean wood.</td>\n    </tr>\n    <tr>\n      <td><strong>Wood Pellets</strong></td>\n      <td>Dry shed, raised off the ground</td>\n      <td>Keeps well while it stays dry</td>\n      <td>Clean and convenient. Needs a pellet-specific burner.</td>\n    </tr>\n    <tr>\n      <td><strong>Coal</strong></td>\n      <td>Dry bunker or bin</td>\n      <td>Keeps well while it stays dry</td>\n      <td>High heat, long burn. Messier than wood, and only in an appliance made for it.</td>\n    </tr>\n    <tr>\n      <td><strong>Kindling / Fire Starters</strong></td>\n      <td>Dry box, clear of the burner</td>\n      <td>Keeps well while it stays dry</td>\n      <td>Essential for easy lighting. Make your own from scrap.</td>\n    </tr>\n  </tbody>\n</table>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "REMOVES four prices ($80–$120/m³, $15–$25/bag, $300–$500/tonne, $5–$15/box) with the whole Cost per Unit column, and the unsourced durations '2–3 years (if kept dry)' and 'Season for 12+ months'. Keeping quality is stated as the condition that actually matters — staying dry."
+      },
+      {
+        "where": "Fuel storage box",
+        "from": "<div class=\"info-box\">\n  <div class=\"info-box-title\">The 3-Metre Rule</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Store at least one full winter's worth of fuel. For a typical home in a cold NZ climate, that is 6–8 cubic metres of firewood. Stack it neatly under cover, off the ground, with airflow around the stack. Buy in spring when prices are lowest and wood has time to dry further.</p>\n</div>",
+        "to": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Storing Your Fuel</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Work out one full winter's worth of fuel for your own home and your own system, and write it in the worksheet above — the amount depends on your climate, your house and what you are burning. Stack it neatly under cover, off the ground, with airflow around the stack, and buy well ahead of winter so it has time to dry further.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "REMOVES the heading 'The 3-Metre Rule', which described nothing in its own box — the body is about fuel quantity, and the only other '3 metres' in the document was the fire extinguisher line. ALSO removes '6–8 cubic metres' (unsourced, and tied to 'a typical home in a cold NZ climate', which is NZ wording in shared copy) and 'when prices are lowest' (a price claim)."
+      },
+      {
+        "where": "Worksheet — setup cost line (AU)",
+        "from": "<div class=\"worksheet-label\">Estimated setup cost (including flue, hearth, consent)</div>",
+        "to": "<div class=\"worksheet-label\">Estimated setup cost (including flue, hearth, approvals)</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-06",
+        "reason": "Terminology only: 'consent' is the New Zealand word for it. The Australian file says 'approvals'. No rule changes and no rule crosses markets — the resource asserts no consent requirement in either.",
+        "markets": [
+          "AU"
+        ]
+      }
     ]
   }
 }
