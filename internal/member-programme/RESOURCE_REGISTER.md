@@ -53,7 +53,7 @@ pathway; OG-09 was approved and deployed at Stage 9.44, renamed **Household Wate
 | OG-17 | Solid Fuel Heating Planner | **gas research** — its audit notes gas appliances (4 mentions); the gas rule is strict |
 | OG-B09 | Insulation & Heating Upgrade Checklist | **gas research** — same reason |
 
-## Not started (24)
+## Not started (23)
 
 Ordered by foundation. "Notes" are the audit's safety exposure, which tells you which approved blocks a migration
 would need.

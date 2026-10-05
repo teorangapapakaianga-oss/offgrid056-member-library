@@ -76,5 +76,6 @@ Each has an NZ and an AU PDF: **38 market files**, 0 broken internal links.
 - **Market-specific resources have no single download.** A worksheet with per-market files deliberately offers no
   market-less file, so a programme day's worksheet link or a workshop handout is omitted rather than offering the
   wrong market's file. Members reach the resource from its own page.
-- **Demo placeholders still fill most of the library.** 29 remain in the public build; real resources supersede them
+- **Demo placeholders still fill most of the library.** the public build is **30** demonstration placeholders and no real resources; 28 of those routes are still
+  unsuperseded in the preview. Real resources supersede them
   one route at a time (see `SAFETY_REGISTER.md` → route supersession).
