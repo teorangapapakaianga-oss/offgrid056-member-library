@@ -211,9 +211,13 @@ describe("prepareResource: resource-specific safety exemptions (Stage 9.30)", ()
     block: "food-safety-power-cut", reason: "appliance/load reference only", approvedBy: "owner", approvedOn: "2026-09-22", allowedMentions: ["Fridge / freezer"],
   };
   const withRow = DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><table><tr><td>Fridge / freezer</td><td>___ kWh</td></tr></table>");
+  // The fixture itself teaches electrical ("Install the solar inverter and batteries"). Since Stage 9.58 the
+  // requirement is read from the MIGRATED output, so that block has to be carried for these tests to be about the
+  // food exemption rather than about the electrical topic.
+  const electrical = { extraSafetyBlocks: ["batteries-and-electrical"] };
 
   it("holds while the only mention is the allowed appliance row", () => {
-    const r = prep({ sourceHtml: withRow, requiredSafety: ["food-safety-power-cut"], safetyExemptions: [EXEMPT] });
+    const r = prep({ ...electrical, sourceHtml: withRow, sourceSafetyTopics: ["food-safety-power-cut"], safetyExemptions: [EXEMPT] });
     expect(r.safety.missingRequired).toEqual([]);
     expect(r.safety.exemptions).toEqual([{ block: "food-safety-power-cut", reason: "appliance/load reference only", holds: true, unexpected: [] }]);
     expect(r.markets.every((m) => m.publishable)).toBe(true);
@@ -221,14 +225,14 @@ describe("prepareResource: resource-specific safety exemptions (Stage 9.30)", ()
 
   it("lapses, and requires the block again, when food guidance is added", () => {
     const withGuidance = withRow.replace("</div></body>", "<p>Keep the freezer closed during a power cut.</p></div></body>");
-    const r = prep({ sourceHtml: withGuidance, requiredSafety: ["food-safety-power-cut"], safetyExemptions: [EXEMPT] });
+    const r = prep({ ...electrical, sourceHtml: withGuidance, sourceSafetyTopics: ["food-safety-power-cut"], safetyExemptions: [EXEMPT] });
     expect(r.safety.missingRequired).toEqual(["food-safety-power-cut"]);
     expect(r.safety.exemptions[0].holds).toBe(false);
     for (const m of r.markets) expect(m.problems.join(" ")).toContain("exemption no longer holds");
   });
 
   it("applies only to the resource that carries it: the detector still requires the block elsewhere", () => {
-    const r = prep({ sourceHtml: withRow, requiredSafety: ["food-safety-power-cut"] });
+    const r = prep({ ...electrical, sourceHtml: withRow, sourceSafetyTopics: ["food-safety-power-cut"] });
     expect(r.safety.missingRequired).toEqual(["food-safety-power-cut"]);
     expect(r.markets.every((m) => !m.publishable)).toBe(true);
   });
@@ -619,7 +623,9 @@ describe("prepareResource: scoped block trims and gas generators (Stage 9.34)", 
   });
 
   it("blocks the market rather than guess when the shared wording has changed", () => {
-    const r = prep({ extraSafetyBlocks: ["carbon-monoxide"], safetyBlockTrims: [{ ...trim, removeSentence: "A sentence that is not in the block." }] });
+    // The electrical block is carried because the fixture teaches electrical; since Stage 9.58 that is read from
+    // the migrated output, and this test is about the trim, not about the electrical topic.
+    const r = prep({ extraSafetyBlocks: ["carbon-monoxide", "batteries-and-electrical"], safetyBlockTrims: [{ ...trim, removeSentence: "A sentence that is not in the block." }] });
     const au = r.markets.find((m) => m.code === "AU")!;
     expect(au.publishable).toBe(false);
     expect(au.problems.join(" ")).toContain("scoped trim");
@@ -636,7 +642,7 @@ describe("prepareResource: scoped block trims and gas generators (Stage 9.34)", 
   });
 
   it("does not trip on a petrol generator, or on the CO block's own mention of LPG heaters", () => {
-    const r = prep({ sourceHtml: DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><p>Run a petrol generator outside.</p>"), extraSafetyBlocks: ["carbon-monoxide"] });
+    const r = prep({ sourceHtml: DOC.replace("<h2>Plan</h2>", "<h2>Plan</h2><p>Run a petrol generator outside.</p>"), extraSafetyBlocks: ["carbon-monoxide", "batteries-and-electrical"] });
     expect(r.terminology.otherFindings.join(" ")).not.toContain("GAS_SAFETY_REQUIRED");
     expect(r.markets.every((m) => m.publishable)).toBe(true);
   });

@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 5 October 2026, after Stage 9.57. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 5 October 2026, after Stage 9.58. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -83,6 +83,10 @@ household applicability, limitations and contamination exclusions. No claim serv
 rainwater guidance is recorded as **SOURCE_UNAVAILABLE / NOT RELIED UPON** and is cited nowhere.
 
 **The gas topic detector reads teaching, not word count (Stage 9.57).** It used to require a gas safety block from any resource using the bare word three times, with no teaching condition — which demanded one from OG-17, a wood-burner planner whose only gas content is "the gas stops flowing" and "Gas supplies can be disrupted". It now requires the block only when a document names a gas appliance beside an action or a figure, names a fuel beside gas equipment, or routes a member to a licensed gasfitter. `gas supply` is deliberately not a subject; fuels are held to a stricter test than appliances, because listing a fuel among options is how planning documents work (OG-B12 and OG-26 both do it, and both are live); and proximity never crosses a sentence or line, because PDF-extracted tables flatten into long runs. `fuelTeachingSignals()` is exported so any future gas exemption lapses automatically, as the treatment and fire ones do. The compound fuel check `GAS_SAFETY_REQUIRED` gained propane, butane, mains and reticulated gas, patio heater, camping stove, flued gas, gas leak/meter/line/fitting, LCC27 and POL valve — but **not** `gasfitter`, which is approved, universal and printed in the disclaimer on all 20 live resources.
+
+**Safety enforcement reads the migrated output, not the legacy source (Stage 9.58).** Until this stage a resource could be held for a safety block because of a sentence migration had already removed — every other gate read the member-facing file, and safety requirements alone read the source. There are now two layers. **`sourceSafetyTopics`** is what the legacy document taught: migration evidence, used for comparison and removal tracking, and it requires nothing by itself. **`requiredSafety`** is what the migrated market file teaches, read per market before the blocks are injected so a block's own wording can never create a requirement; a topic taught without its block still fails closed, and teaching *introduced* during migration is now caught, which the old rule could not see at all.
+
+The balancing rule is **removal accountability**: a safety topic may leave a resource, but not quietly. A removal is accounted for automatically when the resource still carries that topic's block (`REPLACED_BY_BLOCK`) or holds an owner-approved exemption for it (`OWNER_APPROVED_REMOVAL`, which keeps the owner's own reason, approver and date). Anything else needs a written `safetyTopicDispositions` entry — `REMOVED`, `REWRITTEN`, `REPLACED_BY_BLOCK`, `NON_TEACHING_CONTEXT` or `OWNER_APPROVED_REMOVAL` — and without one preparation fails with `SAFETY_TOPIC_REMOVED_WITHOUT_RECORD` and the topic stays required. A disposition can never hide teaching that is still present. Eight of the twenty live resources have such a removal (OG-02, OG-08, OG-13, OG-18, OG-26, OG-B08 and OG-B12 twice); all eight were already accounted for by a carried block or a reviewed exemption, so no disposition had to be written and no resource lost a block it needed.
 
 ## Market differences that must never be crossed
 

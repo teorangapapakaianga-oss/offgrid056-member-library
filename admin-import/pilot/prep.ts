@@ -17,7 +17,7 @@ import { injectSafetyChecked } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
 import { getFoundation } from "@/lib/content/taxonomy";
 import type { ProgrammeItem } from "../audit/programme";
-import { fireTeachingSignals, safetyTopicMentions, treatmentTeachingSignals } from "../audit/group-a";
+import { fireTeachingSignals, safetyExposureFor, safetyTopicMentions, treatmentTeachingSignals } from "../audit/group-a";
 import { isRegisteredClaim, treatmentFindings, type TreatmentRegistry } from "../audit/treatment";
 import { numericBlockingFindings, type NumericRegistry } from "../audit/numeric";
 
@@ -76,6 +76,28 @@ const FUEL_CHECKS: { code: string; pattern: RegExp; why: string }[] = [
   },
   { code: "FUEL_GUIDANCE_REQUIRED", pattern: /\bdiesel\b/i, why: "the approved generator guidance covers petrol only" },
 ];
+
+/**
+ * What happened to a safety topic that the legacy source taught and the migrated resource does not (Stage 9.58).
+ *
+ * The architecture ruling is that the **migrated member-facing output** is what safety enforcement reads, because
+ * a member cannot be endangered by a sentence they will never see. The cost of that ruling is that teaching could
+ * disappear without anyone noticing, so the balancing rule is this record: a topic may leave, but somebody has to
+ * say why.
+ */
+export type SafetyTopicDispositionKind =
+  | "REMOVED"
+  | "REWRITTEN"
+  | "REPLACED_BY_BLOCK"
+  | "NON_TEACHING_CONTEXT"
+  | "OWNER_APPROVED_REMOVAL";
+
+export interface SafetyTopicDisposition {
+  disposition: SafetyTopicDispositionKind;
+  reason: string;
+  approvedBy?: string;
+  approvedOn?: string;
+}
 
 /** A reviewed, resource-specific exception for one exact piece of text (Stage 9.36 ruling 3). */
 export interface FuelExemption {
@@ -142,7 +164,21 @@ export interface PrepResult {
   safety: {
     blocks: string[];
     exposure: string[];
-    /** blocks the audit says this resource's topics require */
+    /** safety topics detected in the LEGACY SOURCE — migration evidence, not the enforcement target */
+    sourceTopics: string[];
+    /** safety topics detected in the MIGRATED member-facing output — what enforcement actually reads */
+    outputTopics: string[];
+    /** legacy topics the migrated text no longer teaches, and what happened to each */
+    removedTopics: {
+      topic: string;
+      market: string;
+      accounted: boolean;
+      disposition?: SafetyTopicDispositionKind;
+      reason?: string;
+      approvedBy?: string;
+      approvedOn?: string;
+    }[];
+    /** blocks this resource's migrated output requires (plus any unaccounted removal) */
     required: string[];
     /** required blocks that are not in the resource: the resource cannot be published while any remain */
     missingRequired: string[];
@@ -280,6 +316,21 @@ export function visibleText(html: string): string {
     .join("\n");
 }
 
+/**
+ * The member-facing text, as the safety topic detectors need to read it: **one line per table ROW**, not per cell.
+ *
+ * `visibleText` ends a line at every `</td>`, which is right for flagging legacy copy but wrong here. The gas rule
+ * built at Stage 9.57 recognises a comparison table by an appliance sitting beside a price — "Flued gas |
+ * $1,500–$4,000 | 80–90%" — and it deliberately refuses to look across a line break, because PDF-extracted text
+ * puts unrelated rows next to each other. Split cell by cell, that row becomes four lines and the appliance never
+ * meets its figure, so the table teaching that Stage 9.57 proved on the audit's text would have been invisible on
+ * the migrated output this stage makes the enforcement target. Rows still end a line, so nothing bleeds between
+ * them.
+ */
+export function memberFacingText(html: string): string {
+  return visibleText(html.replace(/<\/(td|th)>/gi, " "));
+}
+
 export function findContentFlags(html: string, ownCode: string, terms: LegacyTerms = DEFAULT_LEGACY_TERMS): ContentFlag[] {
   const text = visibleText(html);
   const flags: ContentFlag[] = [];
@@ -408,8 +459,25 @@ export interface PrepInputs {
   category?: string | null;
   /** topic safety blocks beyond the disclaimer and emergency block */
   extraSafetyBlocks?: string[];
-  /** blocks this resource's topics require (from the Group-A analysis) */
+  /**
+   * Safety topics detected in the **legacy source** (the audit's extracted PDF + HTML text).
+   *
+   * This is migration evidence, not the enforcement target. Until Stage 9.58 it was both, which meant a resource
+   * could be held for a safety block because of a sentence that migration had already removed — the member-facing
+   * file said nothing about the topic, and nothing in the pipeline noticed. What it is used for now is removal
+   * accountability: every topic here that is NOT in the migrated output has to be accounted for.
+   */
+  sourceSafetyTopics?: string[];
+  /** @deprecated Stage 9.58 renamed this to `sourceSafetyTopics`. Accepted so existing callers keep working. */
   requiredSafety?: string[];
+  /**
+   * How a legacy safety topic that no longer appears in the member-facing output was dealt with.
+   *
+   * Two dispositions are established automatically and need no record: the resource still carries that topic's
+   * block, or it holds an owner-approved exemption from it. Anything else must be written down here, or
+   * preparation fails — a safety topic may leave a resource, but it may not leave quietly.
+   */
+  safetyTopicDispositions?: Record<string, SafetyTopicDisposition>;
   /** ids of blocks whose wording is still a proposal */
   proposedBlockIds?: string[];
   /** old product and platform names to flag (config/legacy-terms.json) */
@@ -517,14 +585,20 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
 
   // 4. market resolution, with the standard blocks plus this resource's topic blocks
   const safetyBlocks = ["general-disclaimer", "emergency-contact", ...(inputs.extraSafetyBlocks ?? [])];
-  const requiredSafety = inputs.requiredSafety ?? [];
+  const sourceTopics = inputs.sourceSafetyTopics ?? inputs.requiredSafety ?? [];
   // A requirement is met by the block with that id, or by an included block that declares it in `answers` — the
   // approved `fire-and-smoke-alarms` wording answers the detector's "fire-and-emergency". Only blocks this resource
   // actually carries are consulted, so declaring an answer can satisfy a requirement but never suppress one.
   const answered = new Set(safetyBlocks.flatMap((id) => [id, ...(blocks[id]?.answers ?? [])]));
-  const lacking = requiredSafety.filter((b) => !answered.has(b));
+  // Exemptions are still judged against what the LEGACY source taught, so a reviewed exemption keeps running its
+  // lapse test even once output-derived enforcement would not have asked for the block at all. Defence in depth:
+  // the exemption can only ever let something through that the output check has already cleared.
+  const lacking = sourceTopics.filter((b) => !answered.has(b));
   // An exemption is checked against each market's final wording; a block stays required wherever it fails.
   const exemptions = (inputs.safetyExemptions ?? []).filter((e) => lacking.includes(e.block));
+  const dispositions = inputs.safetyTopicDispositions ?? {};
+  const removalRecords: PrepResult["safety"]["removedTopics"] = [];
+  const outputTopicsSeen = new Set<string>();
   const exemptionResults = new Map(exemptions.map((e) => [e.block, { block: e.block, reason: e.reason, holds: true, unexpected: [] as string[] }]));
   const missing = new Set(launchMarkets.length ? [] : lacking);
   const trims: PrepResult["safety"]["trims"] = [];
@@ -569,7 +643,35 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
     const fuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []);
     for (const finding of fuelFindings) if (!otherFindings.includes(finding)) otherFindings.push(finding);
-    const marketMissing = lacking.filter((b) => {
+    // --- the two-layer safety check (Stage 9.58) -----------------------------------------------------------
+    // Layer B: what this market's MEMBER-FACING text actually teaches, read before the safety blocks go in, so a
+    // block's own wording can never create a requirement (the CO block names gas heaters).
+    const outputTopics = safetyExposureFor(memberFacingText(marketHtml));
+    for (const t of outputTopics) outputTopicsSeen.add(t);
+    // Layer A: a legacy topic that is no longer taught has to be accounted for. Two dispositions are established
+    // by the resource itself; anything else must be written down, or the topic stays required and the market fails.
+    const unaccounted: string[] = [];
+    for (const topic of sourceTopics.filter((t) => !outputTopics.includes(t))) {
+      if (removalRecords.some((r) => r.topic === topic && r.market === code)) continue;
+      const exemption = exemptions.find((e) => e.block === topic);
+      const recorded = dispositions[topic];
+      const disposition = answered.has(topic)
+        ? { disposition: "REPLACED_BY_BLOCK" as const, reason: `the resource still carries the "${topic}" block, so the member still gets that safety wording` }
+        : exemption
+          ? { disposition: "OWNER_APPROVED_REMOVAL" as const, reason: exemption.reason, approvedBy: exemption.approvedBy, approvedOn: exemption.approvedOn }
+          : recorded;
+      removalRecords.push({ topic, market: code, accounted: !!disposition, ...(disposition ?? {}) });
+      if (!disposition) unaccounted.push(topic);
+    }
+    for (const topic of unaccounted) {
+      trimProblems.push(
+        `SAFETY_TOPIC_REMOVED_WITHOUT_RECORD (${code}): the legacy source teaches "${topic}" and the migrated text does not, with no block carried, no exemption and no recorded disposition. Record one of REMOVED, REWRITTEN, REPLACED_BY_BLOCK, NON_TEACHING_CONTEXT or OWNER_APPROVED_REMOVAL, or restore the block.`,
+      );
+    }
+    // Enforcement reads the output, plus any removal nobody has accounted for — fail closed, never fail silent.
+    const marketRequired = [...new Set([...outputTopics, ...unaccounted])];
+    const marketMissing = marketRequired.filter((b) => {
+      if (answered.has(b)) return false;
       const exemption = exemptions.find((e) => e.block === b);
       if (!exemption) return true;
       const check = exemptionHolds(exemption, marketHtml);
@@ -697,7 +799,18 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     reskin: { changes: summariseChanges(changes), warnings },
     branding: { legacyIssues: legacyIssues.length, issues: legacyIssues },
     terminology: { frameworkPhrase: item.legacyTerminology.length, barePillar: 0, otherFindings },
-    safety: { blocks: resource.safetyBlocks, exposure: item.safetyNotes, required: requiredSafety, missingRequired, proposed, exemptions: [...exemptionResults.values()], trims },
+    safety: {
+      blocks: resource.safetyBlocks,
+      exposure: item.safetyNotes,
+      sourceTopics,
+      outputTopics: [...outputTopicsSeen],
+      removedTopics: removalRecords,
+      required: [...new Set([...outputTopicsSeen, ...removalRecords.filter((r) => !r.accounted).map((r) => r.topic)])],
+      missingRequired,
+      proposed,
+      exemptions: [...exemptionResults.values()],
+      trims,
+    },
     contentFlags,
     markets: marketResults,
     validation: {

@@ -530,7 +530,10 @@ async function commandPrep() {
       resourceType: metadata[item.legacyCode]?.resourceType ?? null,
       category: metadata[item.legacyCode]?.category ?? null,
       extraSafetyBlocks: metadata[item.legacyCode]?.safetyBlocks ?? [],
-      requiredSafety: exposureOf(item),
+      // Stage 9.58: the legacy source is migration evidence, not the enforcement target. What a resource is
+      // REQUIRED to carry is read from its migrated member-facing output, inside prepareResource, per market.
+      sourceSafetyTopics: exposureOf(item),
+      safetyTopicDispositions: metadata[item.legacyCode]?.safetyTopicDispositions ?? {},
       proposedBlockIds: Object.keys(topicBlocks).filter((id) => !(metadata[item.legacyCode]?.approvedSafetyBlocks ?? []).includes(id)),
       legacyTerms,
       title: metadata[item.legacyCode]?.title ?? null,

@@ -1,23 +1,23 @@
 # Current status
 
-**As at:** 5 October 2026, after Stage 9.57 (gas detector hardened; OG-17 released. Nothing deployed).
+**As at:** 5 October 2026, after Stage 9.58 (safety enforcement aligned to the migrated output. Nothing deployed).
 
 | | |
 |---|---|
 | **Protected resources in the private preview** | **20** (all draft) |
 | **Worker version** | **`1922f7ba-a0b3-4a7b-ba01-593b3df6a160`** |
 | **Rollback available** | `776e704a-0f69-4c86-b80f-8b08da7880cb` (20 resources, before the gas correction — it restores the incorrect AU guidance) · private files in `workspace/backups/private-assets-776e704a` |
-| **Tests** | **456 passing** · lint clean · typecheck clean |
+| **Tests** | **467 passing** · lint clean · typecheck clean |
 | **Next resource** | **OG-17 Solid Fuel Heating Planner** — unblocked on gas at Stage 9.57. Blocked on claims: 10 prices, 6 unsourced efficiency percentages, an unsourced CO five-year lifespan and an epidemiological claim |
 | **Last deployment** | Stage 9.56, 5 October 2026: **the AU gas servicing correction** — 6 AU PDFs re-rendered, no NZ file touched |
-| **Last report** | `admin-import/STAGE_9.57_GAS_DETECTOR_HARDENING.md` (detector only — nothing deployed) |
+| **Last report** | `admin-import/STAGE_9.58_SAFETY_ENFORCEMENT_ALIGNMENT.md` (architecture only — nothing deployed) |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
 rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → 410 at Stage 9.49 → 417 at Stage 9.50 (numeric blocking) → 429 at Stage 9.52 (the Air blocks and the ratio
 claim type) → 434 at Stage 9.53 (OG-13 and owner ruling 1) → 436 at Stage 9.54 (the category revert and the
-block selection) → 441 at Stage 9.56 (the Australian gas wording) → **456** at Stage 9.57 (the gas detector).
-Nothing was removed.
+block selection) → 441 at Stage 9.56 (the Australian gas wording) → 456 at Stage 9.57 (the gas detector) →
+**467** at Stage 9.58 (safety enforcement). Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -72,7 +72,7 @@ Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
 | ~~One unsourced live figure~~ | — | **resolved at Stage 9.49**: OG-08's AU sentence now says "Get Ready Queensland advises storing drinking water for three days", and the numeric scan is **zero findings** across all 19 resources |
 | ~~Two OG-13 rulings outstanding~~ | — | **both answered at Stage 9.53.** Bleach is removed from both markets' mould wording, and `healthy-home-air` was added to the air taxonomy. OG-13 is prepared and verified. Three one-line preferences remain, none of them blocking: the category overlap with `healthy-home-checks`, whether OG-13 keeps `indoor-combustion` (it carries approved gas/LPG wording into an Air resource), and whether the never-mix caution returns — all three in `STAGE_9.53_OG13_PREPARED.md` §11 |
 | ~~Unlabelled Victorian servicing interval~~ | — | **corrected and deployed at Stage 9.56** (it affected 6 resources, not 5 — OG-13 joined at Stage 9.54). The Australian wording now carries no interval and points the member at their own state or territory's regulator. A test checks every prepared AU file, not just the config |
-| **`requiredSafety` is computed from the legacy source** | nothing today, but it will surprise someone | every other gate runs on the migrated output. A resource can be held for a safety block because of a sentence that migration removed — Stage 9.57 nearly did this to OG-B12, which is live. Conservative failure direction, left alone, worth a small stage of its own |
+| ~~`requiredSafety` is computed from the legacy source~~ | — | **resolved at Stage 9.58.** Enforcement now reads the migrated member-facing output, per market, before blocks are injected. The legacy source became `sourceSafetyTopics` — migration evidence — and any topic that leaves must be accounted for by a carried block, an owner-approved exemption, or a written disposition, or preparation fails. 8 of the 20 live resources had such a removal; all 8 were already accounted for |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations
