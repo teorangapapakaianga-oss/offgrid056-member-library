@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 5 October 2026, after Stage 9.54. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 5 October 2026, after Stage 9.56. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -16,8 +16,10 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `general-disclaimer` | Before you start | standard | all | every resource |
 | `emergency-contact` | In an emergency | critical | all | every resource |
 | `batteries-and-electrical` | Batteries and electrical safety | **critical** | 22 Sep 2026 | OG-18, OG-19, OG-20, OG-21, OG-26, OG-27, OG-B07, OG-B12 |
-| `carbon-monoxide` | Carbon monoxide | **critical** | 22 Sep 2026 | OG-15, OG-20, OG-26, OG-27, OG-B12 |
-| `indoor-combustion` | Never bring it inside | **critical** | 22 Sep 2026 | OG-15, OG-26, OG-27 |
+| `carbon-monoxide` | Carbon monoxide | **critical** | 22 Sep 2026; AU servicing sentence corrected 5 Oct 2026 (Stage 9.56) | OG-13, OG-15, OG-20, OG-26, OG-27, OG-B12 |
+| `indoor-combustion` | Never bring it inside | **critical** | 22 Sep 2026; AU servicing clause corrected 5 Oct 2026 (Stage 9.56) | OG-15, OG-26, OG-27 |
+
+**No Australian gas figure without its jurisdiction (Stage 9.56).** All eight Australian jurisdictions were read live at Stages 9.55 and 9.56. Three publish a gas servicing interval and the three differ — NSW annually and only for gas water heaters, Victoria every two years, WA every two years or annually over ten years old — and five publish none. The cylinder test interval is ten years in QLD and SA but "no more than 10 or 15 years" in NSW. Only SA publishes a hose interval. The jurisdictions give at least four different instructions about electrical switches during a gas leak, and **NSW's own two pages differ from each other**. The Australian bodies therefore carry **no gas interval and no leak-switch instruction**; anything beyond the shared floor must name the state it comes from, in the shape `fire-and-smoke-alarms` already uses. New Zealand is unaffected: it is one jurisdiction, and its figures are verified and stay.
 | `working-at-height` | Stay off the roof | **critical** | 22 Sep 2026 | OG-10, OG-18, OG-B07, OG-B08 |
 | `solid-fuel-heating` | Wood burners and open fires | high | 22 Sep 2026 | OG-15, OG-21, OG-26, OG-B12 |
 | `stored-drinking-water` | Storing drinking water | high | 22 Sep 2026 | OG-08, OG-10, OG-26, OG-B08, OG-B12 |

@@ -45,7 +45,7 @@
       "body": "{{safety.notVerifiedForMarket}}",
       "marketBody": {
         "NZ": "**Carbon monoxide (CO) is a poisonous gas you cannot see or smell.** It comes from anything that burns fuel — gas and LPG heaters, wood burners, barbecues, generators and vehicle engines.\nSymptoms include headache, dizziness, weakness, confusion and feeling sick. **If you suspect CO poisoning, get outside into fresh air immediately, then call 111 for an ambulance.**\nSigns a gas appliance is not burning properly include a yellow rather than blue flame (unless it is a flame-effect heater designed that way), soot around it, or a smell like car exhaust. Turn it off and contact a licensed gas worker. Have heating appliances serviced by a qualified person, and consider installing carbon monoxide alarms.",
-        "AU": "**Carbon monoxide (CO) is a dangerous gas you cannot see or smell.** It is made by burning fuels such as gas, petrol, wood and charcoal, and it can build up inside when doors and windows are closed.\nSmall amounts can cause headaches, nausea, vomiting and weakness; larger amounts cause dizziness, fainting and loss of consciousness. **If someone is dizzy, fainting or unconscious, call Triple Zero (000).** If people have milder symptoms, get everyone out into fresh air and call the Poisons Information Centre on 13 11 26.\nHave gas heaters checked by a licensed gasfitter at least every two years. Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard."
+        "AU": "**Carbon monoxide (CO) is a dangerous gas you cannot see or smell.** It is made by burning fuels such as gas, petrol, wood and charcoal, and it can build up inside when doors and windows are closed.\nSmall amounts can cause headaches, nausea, vomiting and weakness; larger amounts cause dizziness, fainting and loss of consciousness. **If someone is dizzy, fainting or unconscious, call Triple Zero (000).** If people have milder symptoms, get everyone out into fresh air and call the Poisons Information Centre on 13 11 26.\nHave gas appliances serviced regularly by a licensed gasfitter, and never attempt gas work yourself. **How often depends on where you live:** servicing intervals differ between states and territories, and several publish none at all, so follow your appliance's instructions and check your own state or territory's energy safety regulator. Consider a carbon monoxide alarm near bedrooms and rooms with gas heaters; NSW Health advises choosing one that meets the US (UL2034) or European (EN50291) standard."
       },
       "sources": {
         "NZ": [
@@ -54,14 +54,19 @@
         ],
         "AU": [
           "NSW Health — Carbon monoxide safety factsheet (May 2025): https://www.health.nsw.gov.au/environment/factsheets/Factsheets/carbon-monoxide.pdf",
-          "Victorian Department of Health — Carbon monoxide poisoning in the home: https://www.health.vic.gov.au/environmental-health/carbon-monoxide-poisoning-in-the-home"
+          "Victorian Department of Health — Carbon monoxide poisoning in the home: https://www.health.vic.gov.au/environmental-health/carbon-monoxide-poisoning-in-the-home",
+          "Energy Safe Victoria — Heating your home with gas (VIC; read live 2026-10-05): https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/heating-your-home-gas",
+          "NSW Government — Gas water heaters (NSW; read live 2026-10-05): https://www.nsw.gov.au/legal-and-justice/consumer-rights-and-protection/safety/gas-safety-requirements-and-consumer-rights/gas-water-heaters",
+          "Building and Energy, WA — Winter gas safety (WA; 18 June 2025, read live 2026-10-05): https://www.wa.gov.au/government/announcements/winter-gas-safety",
+          "Queensland Government — Using natural gas and LPG safely (QLD; read live 2026-10-05): https://www.qld.gov.au/emergency/safety/home/gas/gas-safety"
         ]
       },
       "sharedOrVaries": "VARIES — the first aid instruction differs (NZ: get outside then call 111; AU: 000 for severe symptoms, Poisons Information Centre for mild), and only the AU sources give a servicing interval and an alarm standard. NZ sources disagree on the servicing interval (Health NZ: yearly; WorkSafe: at least every other year), so no NZ interval is stated.",
       "verification": {
         "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
-        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
-      }
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22; servicing sentence CORRECTED 2026-10-05 (Stage 9.56 owner ruling). The previous wording gave Energy Safe Victoria's two-year interval as if it applied across Australia. It does not: NSW publishes an annual interval and only for gas water heaters, WA publishes two years or annually over ten years old, and QLD, TAS, SA, ACT and NT publish no household interval. The replacement carries no figure and is supported in all eight jurisdictions read."
+      },
+      "changeRule": "**No Australian gas servicing interval, cylinder test interval, hose replacement interval or leak-response electrical instruction may be written without naming the state or territory it comes from (Stage 9.56).** Research at Stages 9.55 and 9.56 read all eight jurisdictions: three publish a servicing interval and the three differ, five publish none; the cylinder test interval is ten years in QLD and SA but 'no more than 10 or 15 years' in NSW; only SA publishes a hose interval; and the jurisdictions give at least four different instructions about electrical switches during a gas leak. One Australian sentence cannot be right in all of them."
     },
     "indoor-combustion": {
       "id": "indoor-combustion",
@@ -70,7 +75,7 @@
       "body": "{{safety.notVerifiedForMarket}}",
       "marketBody": {
         "NZ": "**Outdoor appliances stay outdoors.** Never use a barbecue, patio heater, camping cooker or generator inside your home or garage — they are not built for indoor use and they produce carbon monoxide. Run a generator only outside in a well-ventilated place, with its exhaust directed away from the house.\nIf you use an unflued gas heater, such as an LPG cabinet heater: never use it in a bedroom, bathroom, caravan or tent; keep internal doors and at least one window open; have it serviced by a qualified person at least once a year; and use it for as short a time as you can. LPG cabinet heaters are not recommended in homes where someone has a respiratory condition.",
-        "AU": "**Outdoor appliances stay outdoors.** Never bring barbecues, grills, outdoor gas heaters or patio heaters inside, and never run a generator or other petrol engine inside your home or garage — even with the doors or windows open. Use a portable generator only outside, in a well-ventilated area.\nIf you use an unflued gas heater: check its instructions allow indoor use, never use it overnight in the room where you sleep, keep the room's air vents clear (or a door or window open if it has none), and have it checked by a licensed gasfitter at least every two years."
+        "AU": "**Outdoor appliances stay outdoors.** Never bring barbecues, grills, outdoor gas heaters or patio heaters inside, and never run a generator or other petrol engine inside your home or garage — even with the doors or windows open. Use a portable generator only outside, in a well-ventilated area.\nIf you use an unflued gas heater: check its instructions allow indoor use, never use it overnight in the room where you sleep, keep the room's air vents clear (or a door or window open if it has none), and have it serviced regularly by a licensed gasfitter, at the interval your state or territory's energy safety regulator and the manufacturer's instructions give."
       },
       "sources": {
         "NZ": [
@@ -89,8 +94,9 @@
       "sharedOrVaries": "VARIES — the unflued-heater rules differ: NZ says never in a bedroom, bathroom, caravan or tent and service yearly; NSW says never overnight in the room where you sleep and check every two years. Neither source bans unflued heaters outright, so no ban is stated.",
       "verification": {
         "NZ": "VERIFIED — OWNER-APPROVED 2026-09-22",
-        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22"
-      }
+        "AU": "VERIFIED — OWNER-APPROVED 2026-09-22; servicing clause CORRECTED 2026-10-05 (Stage 9.56 owner ruling), for the same reason as the carbon-monoxide block. No numeric interval is stated for Australia."
+      },
+      "changeRule": "**No Australian gas servicing interval, cylinder test interval, hose replacement interval or leak-response electrical instruction may be written without naming the state or territory it comes from (Stage 9.56).** Research at Stages 9.55 and 9.56 read all eight jurisdictions: three publish a servicing interval and the three differ, five publish none; the cylinder test interval is ten years in QLD and SA but 'no more than 10 or 15 years' in NSW; only SA publishes a hose interval; and the jurisdictions give at least four different instructions about electrical switches during a gas leak. One Australian sentence cannot be right in all of them."
     },
     "solid-fuel-heating": {
       "id": "solid-fuel-heating",

@@ -609,7 +609,9 @@ describe("prepareResource: scoped block trims and gas generators (Stage 9.34)", 
     const r = prep({ extraSafetyBlocks: ["carbon-monoxide"], safetyBlockTrims: [trim] });
     expect(html(r, "AU")).not.toContain("Consider a carbon monoxide alarm near bedrooms");
     expect(html(r, "AU")).toContain("Poisons Information Centre");
-    expect(html(r, "AU")).toContain("Have gas heaters checked by a licensed gasfitter");
+    // The servicing sentence must survive the trim. Its wording changed at Stage 9.56, when Victoria's two-year
+    // interval was removed from the Australian body — the trim still must not take this sentence with it.
+    expect(html(r, "AU")).toContain("Have gas appliances serviced regularly by a licensed gasfitter");
     expect(html(r, "NZ")).toContain("consider installing carbon monoxide alarms");
     expect(r.safety.trims).toEqual([{ block: "carbon-monoxide", market: "AU", reason: "duplicate", applied: true }]);
     // Another resource without the trim keeps the canonical sentence.

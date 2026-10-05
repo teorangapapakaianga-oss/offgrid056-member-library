@@ -5,7 +5,7 @@ Every private-preview deployment: version, what went out, and what it can roll b
 **Worker:** `og056-preview` · **URL:** https://og056-preview.offgrid056-member-library.workers.dev
 **Access:** Cloudflare Access on all traffic, at every version.
 
-**As at:** 5 October 2026, after Stage 9.54.
+**As at:** 5 October 2026, after Stage 9.56.
 
 ---
 
@@ -13,17 +13,18 @@ Every private-preview deployment: version, what went out, and what it can roll b
 
 | | |
 |---|---|
-| **Live version** | **`776e704a-0f69-4c86-b80f-8b08da7880cb`** |
+| **Live version** | **`1922f7ba-a0b3-4a7b-ba01-593b3df6a160`** |
 | Deployed | 5 October 2026 |
 | Resources | **20** (40 market files) |
-| Stage | 9.54 — OG-13 Healthy Home Air Audit, the first Air resource |
-| **Rollback** | `0aff3fcd-7080-4ae7-bf28-c5d09414b90a` (19 resources, before OG-13) |
-| Private files for rollback | `workspace/backups/private-assets-pre-og13` (58 files) |
+| Stage | 9.56 — Victoria's gas servicing interval removed from the Australian wording |
+| **Rollback** | `776e704a-0f69-4c86-b80f-8b08da7880cb` (20 resources, before the gas correction — **note: it restores the incorrect Australian guidance**) |
+| Private files for rollback | `workspace/backups/private-assets-776e704a` (61 files) |
 
 ## History
 
 | Version | Deployed (UTC) | Resources | Stage | What went out |
 |---|---|---|---|---|
+| `1922f7ba` | 5 Oct 2026 | 20 | 9.56 | **Correctness fix, AU only.** Energy Safe Victoria's "at least every two years" gas servicing interval was being presented as Australian guidance in the `carbon-monoxide` and `indoor-combustion` blocks. Replaced with jurisdiction-neutral wording carrying no figure · **6 AU PDFs re-rendered** (OG-13, OG-15, OG-20, OG-26, OG-27, OG-B12), page counts unchanged · **all 19 NZ PDFs byte-identical** · no record, route or metadata changed |
 | `776e704a` | 5 Oct 2026 | **20** | 9.54 | **OG-13** Healthy Home Air Audit — the first Air resource · five topic safety blocks, three of them used for the first time (`fire-and-smoke-alarms`, `mould-and-dampness`, `home-ventilation`) · bleach removed from both markets by owner ruling · `indoor-combustion` deliberately not carried · the `healthy-home-air` taxonomy slug reverted · first live use of the ratio and temperature claim types · third use of route supersession over a demonstration placeholder |
 | `0aff3fcd` | 23 Sep 2026 | 19 | 9.49 | **OG-08 AU wording only**: "Get Ready Queensland advises storing drinking water for three days" replaces an unattributed "official baseline" · numeric scan now zero findings · one PDF changed |
 | `1e4ab83b` | 23 Sep 2026 | 19 | 9.47 | **The private Water Basics pathway** — OG-08 → OG-10 → OG-09 → OG-B08, superseding the demonstration path in the preview only · OG-02's audited fire exemption · no resource changed |
