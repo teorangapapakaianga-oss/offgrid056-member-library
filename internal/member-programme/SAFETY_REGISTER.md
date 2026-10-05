@@ -2,7 +2,7 @@
 
 The approved safety wording, how the markets differ, what fails closed, and what still needs research.
 
-**As at:** 23 September 2026, after Stage 9.52. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
+**As at:** 5 October 2026, after Stage 9.53. Config: `admin-import/config/safety-blocks.json`, `admin-import/config/metadata-review.json`.
 
 ---
 
@@ -24,9 +24,9 @@ a market fails closed there: the shared body is `{{safety.notVerifiedForMarket}}
 | `food-safety-power-cut` | Food safety in a power cut | high | 22 Sep 2026 | OG-11, OG-19 |
 | `generator-safety` | Using a generator safely | **critical** | 22 Sep 2026 (Stage 9.34) | OG-20, OG-B12 |
 | `water-treatment` | Making water safe to drink | **critical** | 23 Sep 2026 (Stage 9.42 rulings 1–2) | OG-09 |
-| `fire-and-smoke-alarms` | Smoke alarms and fire safety | **critical** | 23 Sep 2026 (Stage 9.52) | none yet — built for OG-13 |
-| `mould-and-dampness` | Mould and dampness | high | 23 Sep 2026 (Stage 9.52) | none yet — built for OG-13 |
-| `home-ventilation` | Ventilation and moisture | standard | 23 Sep 2026 (Stage 9.52) | none yet — built for OG-13 |
+| `fire-and-smoke-alarms` | Smoke alarms and fire safety | **critical** | 23 Sep 2026 (Stage 9.52) | OG-13 (prepared) |
+| `mould-and-dampness` | Mould and dampness | high | 23 Sep 2026 (Stage 9.52), bleach removed 5 Oct 2026 (Stage 9.53 ruling 1) | OG-13 (prepared) |
+| `home-ventilation` | Ventilation and moisture | standard | 23 Sep 2026 (Stage 9.52), AU body corrected 5 Oct 2026 | OG-13 (prepared) |
 
 **The three Air blocks (Stage 9.52).** Built, tested and unused: no resource carries them yet, because OG-13 is not
 migrated. Three things about them matter beyond their wording:
@@ -44,6 +44,23 @@ migrated. Three things about them matter beyond their wording:
   caution in the AU block, which instructs nobody to use it. The NZ block does not mention bleach at all.
   **`home-ventilation` AU is deliberately non-numeric** and says so in the member-facing text — no Australian source
   read publishes an airing time, humidity target or extraction rate, and New Zealand's figures may not be borrowed.
+
+**What Stage 9.53 changed in them (owner ruling 1, and two fixes found by reading the rendered files).**
+
+- **Bleach is gone from both markets.** Stage 9.52 withheld every bleach *instruction*; the ruling removes bleach
+  entirely, so the Victorian never-mix caution went too — it was the only sentence left in either market that named
+  bleach at all. A test asserts no mention in either body and none in the numeric registry. The withheld dilutions
+  (one part bleach to three parts water, NZ; 250 mL in 4 litres, NSW) remain unregistered and cannot pass anything.
+- **AU gained PPE.** NSW Health's PPE list is written for cleaning *with bleach*, so it cannot be attached to the
+  vinegar method. Better Health Channel's non-bleach mould-removal guidance supplies AU's instead — ventilation,
+  shower cap, rubber gloves, eye protection, overalls, footwear, a P1 or P2 face mask, who should not do the work,
+  the P2 medical caveat, no dry brushing, HEPA-only vacuuming. NZ's (Tenancy Services) is unchanged.
+- **`home-ventilation` AU named New Zealand** in an internal rule written into member-facing wording by mistake.
+  `verify-prep` caught it. It is removed, and a test now asserts no AU block names NZ, FENZ, Tenancy Services or
+  MBIE, and no NZ block names Australia, NSW, Queensland or Victoria.
+- **A sentence printed twice** when both blocks were carried. `home-ventilation` AU now drops NSW Health's
+  lacking-ventilation clause **only when `mould-and-dampness` is also present**, through the existing
+  `marketBodyWhen` mechanism. Carried alone, it keeps the full wording.
 
 **The numeric claim registry (blocking since Stage 9.50; 29 claims since Stage 9.52).** `admin-import/config/numeric-claims.json` holds 29 approved non-treatment figures — the storage and pantry baselines, the roof conversion and its worked example, MBIE's tank sizes, stand heights and annual desludging, NSW's 1 mm screen example and the water-weight conversion. Each carries its market, jurisdiction, owning resources, context patterns, required label, source, authority, date and limitations. **It blocks from Stage 9.50**: an unexplained figure fails preparation for that market, exactly as the treatment gates do. Structure, member inputs and treatment-owned figures never block, an empty registry approves nothing, and percentages and currency are detected but held out of this first activation. The live library returns **zero** findings.
 

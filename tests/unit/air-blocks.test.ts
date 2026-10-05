@@ -11,6 +11,7 @@ import type { MarketProfile, SafetyBlock } from "@/admin-import/markets/resolve"
 import { loadNumericRegistry, scanNumericClaims, numericBlockingFindings } from "@/admin-import/audit/numeric";
 import { loadTreatmentRegistry } from "@/admin-import/audit/treatment";
 import { safetyExposureFor } from "@/admin-import/audit/group-a";
+import { getFoundation } from "@/lib/content/taxonomy";
 
 /**
  * Stage 9.52 — the three Air safety blocks, and the ratio claim type they needed.
@@ -167,15 +168,35 @@ describe("Stage 9.52 · the three Air blocks", () => {
     expect(bodyOf("fire-and-smoke-alarms", "NZ")).not.toMatch(/NSW|Queensland/);
   });
 
-  it("11. instructs no bleach cleaning method while the owner ruling is outstanding", () => {
+  it("11. names bleach nowhere in either market (Stage 9.53 owner ruling 1)", () => {
+    // The ruling removes bleach from the member-facing resource outright. That includes the Victorian never-mix
+    // caution, which was the only sentence left in either market that named bleach at all.
     for (const market of ["NZ", "AU"] as const) {
-      const body = bodyOf("mould-and-dampness", market);
-      // The only permitted mention of bleach anywhere is the Victorian never-mix caution, which instructs nobody
-      // to use it. No dilution, no "use bleach", and nothing that could read as vinegar-then-bleach.
-      expect(body, market).not.toMatch(/use (?:diluted )?(?:household )?bleach|bleach solution|parts? bleach|mL of bleach/i);
+      expect(bodyOf("mould-and-dampness", market), market).not.toMatch(/bleach/i);
     }
-    expect(bodyOf("mould-and-dampness", "AU")).toContain("Do not mix bleach with ammonia, acids or other cleaners");
-    expect(bodyOf("mould-and-dampness", "NZ")).not.toMatch(/bleach/i);
+    // And no bleach dilution may be registered, in either market.
+    for (const claim of registry.claims) {
+      expect(`${claim.allowedWording} ${claim.match.join(" ")}`, claim.id).not.toMatch(/bleach/i);
+    }
+  });
+
+  it("11b. still gives each market its own sourced PPE for mould work", () => {
+    // The ruling asks for suitable PPE. NSW Health's PPE list belongs to cleaning with bleach, so AU's comes from
+    // Better Health Channel's ordinary mould-removal guidance instead — and it must carry the P2 medical caveat.
+    expect(bodyOf("mould-and-dampness", "NZ")).toContain("gloves, eye protection and a safety mask");
+    const au = bodyOf("mould-and-dampness", "AU");
+    expect(au).toMatch(/rubber gloves, eye protection, overalls, suitable footwear and a P1 or P2 face mask/);
+    expect(au).toContain("seek medical advice before using a P2 mask");
+    // NSW's bleach-specific list must not have been attached to the vinegar method.
+    expect(au).not.toMatch(/nitrate rubber gloves/i);
+  });
+
+  it("11c. keeps the AU ventilation wording free of the other market's name", () => {
+    // verify-prep rejects a market file that names the other market; the block body is where that leaked in.
+    for (const id of AIR_BLOCKS) {
+      expect(bodyOf(id, "AU"), id).not.toMatch(/New Zealand|FENZ|Tenancy Services|MBIE/);
+      expect(bodyOf(id, "NZ"), id).not.toMatch(/Australia|NSW|Queensland|Victoria/);
+    }
   });
 
   it("12. writes no carbon monoxide alarm lifespan anywhere, in either market", () => {
@@ -187,6 +208,64 @@ describe("Stage 9.52 · the three Air blocks", () => {
     const co = (topicBlocks.blocks as Record<string, { marketBody: Record<string, string> }>)["carbon-monoxide"];
     for (const market of ["NZ", "AU"] as const) {
       expect(co.marketBody[market], market).not.toMatch(/under (?:five|5) years old|\b(?:five|5)[- ]year (?:life|lifespan)/i);
+    }
+  });
+});
+
+describe("Stage 9.53 · OG-13", () => {
+  it("13. has healthy-home-air as a real category of the air foundation", () => {
+    const air = getFoundation("air");
+    const slugs = air.categories.map((c) => c.slug);
+    expect(slugs).toContain("healthy-home-air");
+    expect(new Set(slugs).size, "category slugs must stay unique").toBe(slugs.length);
+    // The resource's recorded category must be one the taxonomy actually holds, or validation fails.
+    const og13 = (metadataReview.resources as Record<string, { category: string; foundation: string }>)["OG-13"];
+    expect(og13.foundation).toBe("air");
+    expect(slugs).toContain(og13.category);
+  });
+
+  it("14. carries all six approved blocks, and answers every block its topics require", () => {
+    const og13 = (metadataReview.resources as unknown as Record<string, { safetyBlocks: string[]; approvedSafetyBlocks: string[] }>)["OG-13"];
+    for (const id of [...AIR_BLOCKS, "carbon-monoxide", "solid-fuel-heating", "indoor-combustion"]) {
+      expect(og13.safetyBlocks, id).toContain(id);
+      expect(og13.approvedSafetyBlocks, id).toContain(id);
+    }
+    const r = prep({
+      requiredSafety: ["fire-and-emergency", "solid-fuel-heating"],
+      extraSafetyBlocks: og13.safetyBlocks,
+    });
+    expect(r.safety.missingRequired).toEqual([]);
+    // No exemption is used or needed: OG-02's fire exemption is not stretched to reach this resource.
+    expect(r.safety.exemptions).toEqual([]);
+    expect(r.markets.every((m) => m.publishable)).toBe(true);
+  });
+
+  it("15. leaves no price, legacy code or removed claim in either prepared market file", () => {
+    const dir = path.join(root, "workspace/prep/OG-13");
+    if (!fs.existsSync(dir)) return; // prep output is a working artefact, not committed
+    for (const market of ["NZ", "AU"] as const) {
+      const file = path.join(dir, `healthy-home-air-audit.${market}.html`);
+      if (!fs.existsSync(file)) continue;
+      const html = fs.readFileSync(file, "utf8");
+      for (const gone of [
+        "3 minutes without clean air",
+        "more hospitalisations than power outages",
+        "under 5 years old",
+        "under 10 years old",
+        "shower steam clears within 10 minutes",
+        "Quick Wins Under $50",
+        "life-saving ROI",
+        "mould threshold",
+        "Day 13",
+        "OG-13",
+        "30-Day Programme",
+      ]) {
+        expect(html, `${market}: ${gone}`).not.toContain(gone);
+      }
+      expect(html, `${market}: prices`).not.toMatch(/\$\s?\d/);
+      expect(html, `${market}: bleach`).not.toMatch(/bleach/i);
+      // The scoring instrument stays, labelled as ours rather than as official guidance.
+      expect(html, `${market}: scale label`).toContain("not an official standard");
     }
   });
 });

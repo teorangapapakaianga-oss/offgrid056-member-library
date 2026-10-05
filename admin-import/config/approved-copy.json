@@ -3594,6 +3594,248 @@
         "approvedOn": "2026-09-23",
         "approvalRef": "Stage 9.44 rulings 1-15 (returned for owner review)"
       }
+    ],
+    "OG-13": [
+      {
+        "where": "Cover week label",
+        "from": "<div class=\"cover-foundation\">Week 2 — Water, Food & Air</div>",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Legacy programme week label. Standard removal across every migration."
+      },
+      {
+        "where": "Cover label",
+        "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
+        "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "The resource is a library resource, not a programme day. Standard across every migration."
+      },
+      {
+        "where": "Cover image alt",
+        "from": "<img src=\"assets/Week2_WaterFoodAir_Cover.jpg\" class=\"cover-img\" alt=\"Week 2\">",
+        "to": "<img src=\"assets/Week2_WaterFoodAir_Cover.jpg\" class=\"cover-img\" alt=\"Air\">",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "The alt text named the programme week. The image itself is kept."
+      },
+      {
+        "where": "Page headers (both pages)",
+        "from": "<div class=\"page-header-right\">Asset OG-13 | Day 13</div>",
+        "to": "<div class=\"page-header-right\">Air · Healthy Home</div>",
+        "expectedMatches": 2,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "No visible legacy OG code or programme day. The code stays in legacyCode."
+      },
+      {
+        "where": "Scoring scale label",
+        "from": "<h2>Scoring Scale</h2>",
+        "to": "<h2>Scoring Scale</h2>\n\n<p style=\"font-size:12px; color:#888;\">This 1–5 scale, and the score bands further on, are OffGrid056's own way of ranking what to fix first. They are not an official standard, and no agency publishes them.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Owner ruling: the scoring instrument is kept as an OffGrid056 example and must be labelled as one, so a member cannot mistake it for official guidance."
+      },
+      {
+        "where": "Score summary subtitle",
+        "from": "<div class=\"worksheet-subtitle\">Add all 10 scores above</div>",
+        "to": "<div class=\"worksheet-subtitle\">Add all 10 scores above — OffGrid056's own scale, not an official standard</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "The same labelling, where the bands are actually read."
+      },
+      {
+        "where": "Quick Wins box",
+        "from": "<div class=\"info-box\">\n  <div class=\"info-box-title\">Quick Wins Under $50</div>\n  <p style=\"margin-bottom:0; font-size:13px;\"><strong>Smoke/CO alarms:</strong> $15–$30 each — highest life-saving ROI in your entire home<br><strong>Window vents:</strong> $10–$20 — trickle vents stop condensation<br><strong>Dehumidifier (small):</strong> $40–$80 — drops humidity below mould threshold<br><strong>Bleach + spray bottle:</strong> $5 — kills visible mould on hard surfaces</p>\n</div>\n\n",
+        "to": "",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Removed whole: five prices ($50, $15–$30, $10–$20, $40–$80, $5), the 'highest life-saving ROI' claim, the unsupported 'drops humidity below mould threshold' claim, and the bleach line. Owner rulings: all prices out, no pricing registry entry, and no bleach instruction (Stage 9.53 ruling 1)."
+      },
+      {
+        "where": "Closing box",
+        "from": "<div class=\"closing-box\">\n  <h3>Day 13 Complete</h3>\n  <p>You have now audited the most critical survival system in your home — the air you breathe. The next asset synthesises everything from Week 2 into one actionable plan.</p>\n  <p class=\"next-pointer\">Next: OG-14 Basic Survival Systems Mini-Plan →</p>\n</div>",
+        "to": "<div class=\"closing-box\">\n  <h3>What You Have Found</h3>\n  <p>You have walked the house and scored the ten things that decide the air in it — alarms, damp, mould, ventilation and smoke. Your three lowest scores are your list.</p>\n  <p class=\"next-pointer\">Start with anything you scored 1 or 2.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Removes 'Day 13 Complete', the next-asset pointer and the 'most critical survival system' claim."
+      },
+      {
+        "where": "Cover subtitle (NZ)",
+        "from": "<p class=\"cover-subtitle\">You can survive 3 weeks without food but only 3 minutes without clean air. This audit identifies the invisible threats in your home — dampness, mould, smoke, and CO — then tells you exactly how to fix them.</p>",
+        "to": "<p class=\"cover-subtitle\">Score the ten things that decide the air you breathe — alarms, damp, mould, ventilation and smoke — then fix the three that score worst. New Zealand guidance throughout.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Removes the unsourced survival claim ('3 weeks without food, 3 minutes without clean air') and the promise to tell a member 'exactly how to fix' anything.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Health framing (NZ)",
+        "from": "<div class=\"warning-box\">\n  <div class=\"warning-title\">Air Quality Is Invisible — Until It Is Not</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Mould, carbon monoxide, and poor ventilation cause more hospitalisations than power outages. The damage is cumulative — you do not feel it day to day, but your lungs do. This audit takes 20 minutes and could prevent years of health problems.</p>\n</div>",
+        "to": "<div class=\"warning-box\">\n  <div class=\"warning-title\">Air Is Easy to Live With and Easy to Miss</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Damp, mould, smoke and carbon monoxide are all easy to get used to. Health New Zealand advises that smoke can make it hard for some people to breathe, and that older people, pregnant people, young children and people with asthma or heart disease are most at risk. Work through the ten checks below, then fix the three that score worst.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Removes the unsourced hospitalisations comparison, the 'damage is cumulative' claim and 'could prevent years of health problems'. Replaced with Health New Zealand's own wording about smoke and who is most at risk.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Row 1 smoke alarms (NZ)",
+        "from": "<td class=\"question-col\"><strong>1. Smoke alarms</strong><br>Working on every level, tested monthly, under 10 years old</td>",
+        "to": "<td class=\"question-col\"><strong>1. Smoke alarms</strong><br>One in every bedroom, hallway and living area. Fire and Emergency New Zealand advises testing once a month, checking the expiry date every year, and replacing alarms every ten years.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "'Under 10 years old' is not the test FENZ publishes: it publishes replacement at ten years plus an annual expiry check. The monthly test is verified. Attributed in the cell so the numeric registry entry can match it.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Row 2 CO alarms (NZ)",
+        "from": "<td class=\"question-col\"><strong>2. CO detectors</strong><br>Near sleeping areas, tested monthly, under 5 years old</td>",
+        "to": "<td class=\"question-col\"><strong>2. Carbon monoxide alarms</strong><br>Considered or installed, near sleeping areas</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "'Under 5 years old' has no source in either market and is removed with no replacement lifespan (Stage 9.52). No CO test frequency is published either, so it goes too. What remains matches the approved carbon-monoxide block, which says 'consider installing carbon monoxide alarms' for New Zealand.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Row 6 kitchen ventilation (NZ)",
+        "from": "<td class=\"question-col\"><strong>6. Kitchen ventilation</strong><br>Range hood works; cooking fumes extracted, not recirculated</td>",
+        "to": "<td class=\"question-col\"><strong>6. Kitchen ventilation</strong><br>Range hood works, and the moist air is vented to the outside — not into the roof space, which is what Building Performance (MBIE) asks for.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Strengthened with MBIE's own requirement, which the legacy row only half said.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Row 7 bathroom ventilation (NZ)",
+        "from": "<td class=\"question-col\"><strong>7. Bathroom ventilation</strong><br>Fan works; shower steam clears within 10 minutes</td>",
+        "to": "<td class=\"question-col\"><strong>7. Bathroom ventilation</strong><br>Extractor fan works and vents to the outside, and windows are opened after showering.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "'Shower steam clears within 10 minutes' has no source in either market and is removed. Replaced with MBIE's vent-to-the-outside requirement, which is sourced.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Row 10 smoke events (NZ)",
+        "from": "<td class=\"question-col\"><strong>10. Emergency masks</strong><br>N95 or P2 masks available for dust/smoke events</td>",
+        "to": "<td class=\"question-col\"><strong>10. Smoke event plan</strong><br>In a smoke event you can shut the house up, switch any air conditioning to recirculate, and follow official advice — which is what Health New Zealand advises.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "No New Zealand household source read recommends a P2 or N95 mask, so no NZ mask claim is made. Health New Zealand's actual advice is to stay indoors and shut the house up, and that is what the row now asks about. Occupational respirator guidance is not borrowed for household use.",
+        "markets": [
+          "NZ"
+        ]
+      },
+      {
+        "where": "Cover subtitle (AU)",
+        "from": "<p class=\"cover-subtitle\">You can survive 3 weeks without food but only 3 minutes without clean air. This audit identifies the invisible threats in your home — dampness, mould, smoke, and CO — then tells you exactly how to fix them.</p>",
+        "to": "<p class=\"cover-subtitle\">Score the ten things that decide the air you breathe — alarms, damp, mould, ventilation and smoke — then fix the three that score worst. Australian guidance throughout, labelled by state where the rules differ.</p>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "As the NZ change, and it says plainly that Australian rules differ by state.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Health framing (AU)",
+        "from": "<div class=\"warning-box\">\n  <div class=\"warning-title\">Air Quality Is Invisible — Until It Is Not</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Mould, carbon monoxide, and poor ventilation cause more hospitalisations than power outages. The damage is cumulative — you do not feel it day to day, but your lungs do. This audit takes 20 minutes and could prevent years of health problems.</p>\n</div>",
+        "to": "<div class=\"warning-box\">\n  <div class=\"warning-title\">Air Is Easy to Live With and Easy to Miss</div>\n  <p style=\"margin-bottom:0; font-size:13px;\">Damp, mould, smoke and carbon monoxide are all easy to get used to. NSW Health advises that mould may cause health problems for people who are sensitive or allergic to it — a runny or blocked nose, irritated eyes and skin, sometimes wheezing — and that for someone with asthma it may trigger an attack, though most people will not experience any health problems. Work through the ten checks below, then fix the three that score worst.</p>\n</div>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Removes the unsourced hospitalisations comparison, the 'damage is cumulative' claim and 'could prevent years of health problems'. Replaced with NSW Health's own wording, including its own reassurance that most people are unaffected.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Row 1 smoke alarms (AU)",
+        "from": "<td class=\"question-col\"><strong>1. Smoke alarms</strong><br>Working on every level, tested monthly, under 10 years old</td>",
+        "to": "<td class=\"question-col\"><strong>1. Smoke alarms</strong><br>Working on every level. Fire and Rescue NSW advises testing every month by holding the test button for at least five seconds, and replacing alarms every ten years. In Queensland, interconnected photoelectric alarms are required by law — check what applies where you live.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "'Under 10 years old' is not what any Australian service publishes. NSW's routine is attributed to Fire and Rescue NSW and Queensland's requirement is named as Queensland law, so no state rule reads as national.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Row 2 CO alarms (AU)",
+        "from": "<td class=\"question-col\"><strong>2. CO detectors</strong><br>Near sleeping areas, tested monthly, under 5 years old</td>",
+        "to": "<td class=\"question-col\"><strong>2. Carbon monoxide alarms</strong><br>Installed near bedrooms</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "'Under 5 years old' has no source in either market and is removed with no replacement lifespan (Stage 9.52). No CO test frequency is published either. What remains matches the approved carbon-monoxide block, which carries the standard to look for.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Row 6 kitchen ventilation (AU)",
+        "from": "<td class=\"question-col\"><strong>6. Kitchen ventilation</strong><br>Range hood works; cooking fumes extracted, not recirculated</td>",
+        "to": "<td class=\"question-col\"><strong>6. Kitchen ventilation</strong><br>Range hood works, and cooking fumes go outside rather than being recirculated.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Kept as an observation. No Australian source read publishes an extraction requirement, so none is added.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Row 7 bathroom ventilation (AU)",
+        "from": "<td class=\"question-col\"><strong>7. Bathroom ventilation</strong><br>Fan works; shower steam clears within 10 minutes</td>",
+        "to": "<td class=\"question-col\"><strong>7. Bathroom ventilation</strong><br>Extractor fan works, and the bathroom is ventilated during and after showering.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "'Shower steam clears within 10 minutes' has no source in either market and is removed. The Australian replacement stays non-numeric: no Australian source read publishes an airing time.",
+        "markets": [
+          "AU"
+        ]
+      },
+      {
+        "where": "Row 10 masks (AU)",
+        "from": "<td class=\"question-col\"><strong>10. Emergency masks</strong><br>N95 or P2 masks available for dust/smoke events</td>",
+        "to": "<td class=\"question-col\"><strong>10. P2 or N95 masks</strong><br>Available for smoke events, and you know a mask only works if it forms a tight seal — which is what NSW Health advises. They are not designed to fit a child's face.</td>",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-05",
+        "reason": "Supportable in Australia and attributed to NSW Health, with the fit condition and the children limitation kept, because the claim is useless and misleading without them.",
+        "markets": [
+          "AU"
+        ]
+      }
     ]
   }
 }

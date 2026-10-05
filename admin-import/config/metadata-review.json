@@ -752,8 +752,8 @@
       "foundationStatus": "owner-approved 2026-09-23 (Stage 9.52)",
       "resourceType": "assessment",
       "resourceTypeStatus": "owner-approved 2026-09-23 (Stage 9.52)",
-      "category": "indoor-air-quality",
-      "categoryStatus": "NEEDS OWNER CONFIRMATION — the owner approved the label \"air-quality\", which is not a category slug of the air foundation. The existing slugs are ventilation, dampness-moisture, indoor-air-quality, healthy-home-checks, air-worksheets and air-checklists. \"indoor-air-quality\" is recorded as the nearest match to what was approved; \"healthy-home-checks\" (\"Walk-through checks for a drier, healthier home\") is the alternative, and arguably the better fit for a room-by-room audit. Confirm before OG-13 is prepared.",
+      "category": "healthy-home-air",
+      "categoryStatus": "owner-approved 2026-10-05 (Stage 9.53 ruling 2). The slug did not exist and was added to the air foundation in data/taxonomy/foundations.json as { slug: healthy-home-air, name: Healthy Home Air }. Additive: content validation passes, and an Air category with no resources renders its own empty state.",
       "difficulty": "beginner",
       "difficultyStatus": "owner-approved 2026-09-23 (Stage 9.52) — OWNER-APPROVED / INFERRED",
       "difficultySource": "OWNER-APPROVED / INFERRED — the document states no level; it is a walk-through checklist with no calculation.",
@@ -763,7 +763,31 @@
       "tags": [],
       "recordStatus": "draft",
       "recordStatusNote": "owner-approved 2026-09-23 (Stage 9.52): draft, as every real resource is.",
-      "migrationState": "NOT MIGRATED. Stage 9.52 built the three Air safety blocks and the ratio claim type but deliberately did not migrate OG-13, generate its PDFs or deploy anything. Blocks, safety exemptions and copy changes are still to be decided in the migration stage."
+      "migrationState": "PREPARED for owner review 2026-10-05 (Stage 9.53). Not deployed. No PDFs published to private-assets.",
+      "description": "Walk through your home and score the ten things that decide the air you breathe — alarms, damp, mould, ventilation and smoke — then fix the three that score worst.",
+      "descriptionStatus": "owner-approved 2026-10-05 (Stage 9.53)",
+      "relatedResources": [
+        "res-1002",
+        "res-1015"
+      ],
+      "safetyBlocks": [
+        "fire-and-smoke-alarms",
+        "mould-and-dampness",
+        "home-ventilation",
+        "carbon-monoxide",
+        "solid-fuel-heating",
+        "indoor-combustion"
+      ],
+      "approvedSafetyBlocks": [
+        "fire-and-smoke-alarms",
+        "mould-and-dampness",
+        "home-ventilation",
+        "carbon-monoxide",
+        "solid-fuel-heating",
+        "indoor-combustion"
+      ],
+      "approvedSafetyBlocksStatus": "fire-and-smoke-alarms, mould-and-dampness, home-ventilation: owner-approved 2026-09-23 (Stage 9.52), carried here by owner ruling 2026-10-05 (Stage 9.53). carbon-monoxide, solid-fuel-heating, indoor-combustion: owner-approved 2026-09-22 (Stage 9.19).",
+      "safetyReasoning": "The audit asks about alarms, mould, ventilation, a wood burner and carbon monoxide, and rows 1, 6, 7 and 10 give instructions rather than labels, so no hazard-identification exemption could hold. All six blocks are carried deliberately in this file rather than relied on from the detectors: the source's fire mentions (2) and flue mentions (2) are below the detector's three-mention threshold, and carbon monoxide has no topic detector at all. The OG-02 fire exemption is not stretched and is not referenced."
     }
   }
 }

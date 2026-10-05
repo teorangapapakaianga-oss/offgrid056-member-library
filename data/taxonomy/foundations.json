@@ -11,6 +11,7 @@
         { "slug": "dampness-moisture", "name": "Dampness & Moisture", "description": "Finding and reducing condensation, damp and mould." },
         { "slug": "indoor-air-quality", "name": "Indoor Air Quality", "description": "What affects the air inside your home, and what helps." },
         { "slug": "healthy-home-checks", "name": "Healthy Home Checks", "description": "Walk-through checks for a drier, healthier home." },
+        { "slug": "healthy-home-air", "name": "Healthy Home Air", "description": "The air inside your home: alarms, damp, mould, ventilation and smoke." },
         { "slug": "air-worksheets", "name": "Air Worksheets", "description": "Every Air worksheet in one place.", "matchTypes": ["worksheet"] },
         { "slug": "air-checklists", "name": "Air Checklists", "description": "Every Air checklist in one place.", "matchTypes": ["checklist"] }
       ]

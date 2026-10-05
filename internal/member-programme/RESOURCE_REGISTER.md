@@ -2,14 +2,14 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 23 September 2026, after Stage 9.52.
+**As at:** 5 October 2026, after Stage 9.53.
 
 | State | Count |
 |---|---|
 | **Deployed** (private preview, draft) | **19** |
-| **Prepared** — awaiting owner approval | **0** |
+| **Prepared** — awaiting owner approval | **1** |
 | **Blocked** — pending research | **3** |
-| **Not started** | **23** |
+| **Not started** | **22** |
 
 ---
 
@@ -39,9 +39,9 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 
-## Prepared — awaiting owner approval (0)
+## Prepared — awaiting owner approval (1)
 
-Nothing is waiting on an owner decision. OG-B08 was approved and deployed at Stage 9.46, completing the water
+**OG-13 Healthy Home Air Audit** — prepared at Stage 9.53, NZ 8 pages and AU 9 pages, both rendered and verified, `READY_AFTER_FINAL_VALIDATION`. It carries eight safety blocks (the most of any resource), needs no exemption, and leaves Bucket C at zero in both markets. Three one-line owner preferences are open before deployment: the `healthy-home-air` category against the existing `healthy-home-checks`, whether to keep `indoor-combustion` (which brings approved gas/LPG wording into an Air resource), and whether to restore the never-mix caution removed under ruling 1. See `admin-import/STAGE_9.53_OG13_PREPARED.md`. OG-B08 was approved and deployed at Stage 9.46, completing the water
 pathway; OG-09 was approved and deployed at Stage 9.44, renamed **Household Water Treatment Guide**
 (`/resources/household-water-treatment-guide/`). `legacyCode` stays internal in both cases.
 
@@ -53,7 +53,7 @@ pathway; OG-09 was approved and deployed at Stage 9.44, renamed **Household Wate
 | OG-17 | Solid Fuel Heating Planner | **gas research** — its audit notes gas appliances (4 mentions); the gas rule is strict |
 | OG-B09 | Insulation & Heating Upgrade Checklist | **gas research** — same reason |
 
-## Not started (23)
+## Not started (22)
 
 Ordered by foundation. "Notes" are the audit's safety exposure, which tells you which approved blocks a migration
 would need.
@@ -120,7 +120,7 @@ real one supersede the placeholder **in the private preview only**.
 | OG-08 | `water-storage-calculator` | res-0015 | **resolved and live** |
 | OG-10 | `rainwater-harvesting-planner` | res-0016 | **resolved and live** (Stage 9.41) |
 | OG-01 | `home-resilience-scorecard` | res-0007 (demo) | expected |
-| OG-13 | `healthy-home-air-audit` | demo | expected |
+| OG-13 | `healthy-home-air-audit` | demo | **prepared; supersession applies on deployment** |
 
 ## How a resource moves through this register
 
