@@ -2,18 +2,18 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 6 October 2026, after Stage 9.59.
+**As at:** 6 October 2026, after Stage 9.60.
 
 | State | Count |
 |---|---|
-| **Deployed** (private preview, draft) | **20** |
-| **Prepared** — awaiting owner approval | **1** |
+| **Deployed** (private preview, draft) | **21** |
+| **Prepared** — awaiting owner approval | **0** |
 | **Blocked** — pending research | **2** |
 | **Not started** | **22** |
 
 ---
 
-## Deployed (20)
+## Deployed (21)
 
 Each is a draft with NZ and AU files behind Cloudflare Access.
 
@@ -39,10 +39,11 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 | **OG-13** | **Healthy Home Air Audit** | air / assessment | **smoke alarms · mould & dampness · ventilation** · CO · solid fuel | 9.54 |
+| **OG-17** | **Solid Fuel Heating Planner** | shelter / planner | solid fuel · smoke alarms · CO | 9.60 |
 
-## Prepared — awaiting owner approval (1)
+## Prepared — awaiting owner approval (0)
 
-**OG-17 Solid Fuel Heating Planner** — prepared at Stage 9.59, NZ 7 pages and AU 7 pages, both rendered and verified, `READY_AFTER_FINAL_VALIDATION`, **not staged into `private-assets/`**. The heaviest claims removal the project has done: 10 prices, 6 efficiency percentages, an unsourced CO five-year lifespan, a comparative mortality claim, seven consent assertions, four unsourced durations, two distances and a heading ("The 3-Metre Rule") that described nothing in its own box. Four metadata decisions are open — foundation, category, difficulty and estimated time — all with proposals. See `admin-import/STAGE_9.59_OG17_PREPARED.md`.
+Nothing is waiting on an owner decision. OG-17 was approved and deployed at Stage 9.60 as resource #21 (shelter / heating, intermediate, 25 minutes, NZ 7 pages and AU 7 pages).
 
 ## Blocked — pending research (2)
 

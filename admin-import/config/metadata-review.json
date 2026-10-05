@@ -791,19 +791,19 @@
       "title": "Solid Fuel Heating Planner",
       "titleStatus": "from the document's own cover — accurate, no legacy code",
       "resourceType": "planner",
-      "resourceTypeStatus": "OWNER-REVIEW REQUIRED — audit inference, MEDIUM confidence. It compares options and ends in a plan, like OG-21 (planner), rather than scoring like OG-15 (assessment).",
+      "resourceTypeStatus": "owner-approved 2026-10-06 (Stage 9.60) — planner, as proposed at Stage 9.59",
       "foundation": "shelter",
-      "foundationStatus": "OWNER-REVIEW REQUIRED — audit confidence MEDIUM ('text mentions shelter 1x'). Heating sits in shelter today: OG-15 and OG-21 are both there.",
+      "foundationStatus": "owner-approved 2026-10-06 (Stage 9.60). The audit inferred it at MEDIUM confidence; heating sits in shelter today (OG-15, OG-21).",
       "category": "heating",
-      "categoryStatus": "OWNER-REVIEW REQUIRED — proposed to match OG-15 Warm Home Scorecard, which is the shelter foundation's other heating resource. The slug exists.",
+      "categoryStatus": "owner-approved 2026-10-06 (Stage 9.60). `heating` was confirmed an existing category of the shelter foundation before approval — no taxonomy slug was added. It is where OG-15 Warm Home Scorecard sits.",
       "difficulty": "intermediate",
-      "difficultyStatus": "OWNER-REVIEW REQUIRED / INFERRED",
+      "difficultyStatus": "owner-approved 2026-10-06 (Stage 9.60)",
       "difficultySource": "INFERRED: the document states no level. It is proposed one step above its siblings (OG-15 and OG-21 are both beginner) because it asks a member to choose between six systems, plan a flue and hearth, and deal with a local authority — decisions with cost and consent consequences rather than observations.",
       "estimatedTime": 25,
-      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED / INFERRED",
+      "estimatedTimeStatus": "owner-approved 2026-10-06 (Stage 9.60)",
       "estimatedTimeReasoning": "INFERRED: one comparison table to read, a seven-field decision worksheet, a five-step seasonal checklist and a fuel storage table. Sits between OG-13 (20 minutes) and OG-15/OG-21 (30). Excludes getting quotes, contacting a council or buying anything.",
       "description": "Compare the solid fuel heating options, plan the one you choose, and keep it safe season to season — with the approval and installation questions to put to your local authority before you commit.",
-      "descriptionStatus": "OWNER-REVIEW REQUIRED — written for this migration; the legacy cover subtitle named gas and called solid fuel 'the ultimate resilience heating'.",
+      "descriptionStatus": "owner-approved 2026-10-06 (Stage 9.60)",
       "tags": [],
       "tagsStatus": "the convention across all 20 live resources",
       "relatedResources": [
@@ -823,7 +823,13 @@
       "approvedSafetyBlocksStatus": "solid-fuel-heating and carbon-monoxide: owner-approved 2026-09-22 (Stage 9.19). fire-and-smoke-alarms: owner-approved 2026-09-23 (Stage 9.52), carried here to answer the detector's fire-and-emergency requirement.",
       "safetyReasoning": "The migrated text teaches solid fuel heating (45 mentions) and fire safety, so both are required by the detector reading the member-facing output. carbon-monoxide is carried deliberately: the seasonal checklist has a CO alarm step, and no topic detector exists for CO. Gas is NOT carried and NOT required — Stage 9.57 established that OG-17's gas mentions are narrative, and the migration removes them entirely.",
       "recordStatus": "draft",
-      "migrationState": "PREPARED for owner review 2026-10-06 (Stage 9.59). Not deployed, not staged into private-assets."
+      "migrationState": "APPROVED and deployed 2026-10-06 (Stage 9.60) as private-preview resource #21, status draft.",
+      "foundationBasis": "OWNER-APPROVED / INFERRED",
+      "categoryBasis": "OWNER-APPROVED / INFERRED",
+      "difficultyBasis": "OWNER-APPROVED / INFERRED",
+      "timeBasis": "OWNER-APPROVED / INFERRED",
+      "recordStatusNote": "owner-approved 2026-10-06 (Stage 9.60): draft, as every real resource is.",
+      "gasRuling": "OWNER RULING 2026-10-06 (Stage 9.60): the two legacy narrative gas sentences stay REMOVED and must not be restored. OG-17 carries no member-facing gas wording of its own. The only gas words in the finished files come from the approved carbon-monoxide block and the standing disclaimer sentence, both owner-approved since Stage 9.19. No Gas/LPG block is required and no gas exemption exists."
     }
   }
 }

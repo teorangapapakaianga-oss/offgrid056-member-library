@@ -1,23 +1,24 @@
 # Current status
 
-**As at:** 6 October 2026, after Stage 9.59 (OG-17 prepared for owner review. Nothing deployed).
+**As at:** 6 October 2026, after Stage 9.60 (OG-17 deployed as resource #21).
 
 | | |
 |---|---|
-| **Protected resources in the private preview** | **20** (all draft) |
-| **Worker version** | **`1922f7ba-a0b3-4a7b-ba01-593b3df6a160`** |
-| **Rollback available** | `776e704a-0f69-4c86-b80f-8b08da7880cb` (20 resources, before the gas correction — it restores the incorrect AU guidance) · private files in `workspace/backups/private-assets-776e704a` |
-| **Tests** | **475 passing** · lint clean · typecheck clean |
-| **Next resource** | **OG-17 Solid Fuel Heating Planner** — **prepared and verified** at Stage 9.59 (NZ 7 pages, AU 7 pages). Awaiting four metadata decisions and owner approval to deploy as #21 |
-| **Last deployment** | Stage 9.56, 5 October 2026: **the AU gas servicing correction** — 6 AU PDFs re-rendered, no NZ file touched |
-| **Last report** | `admin-import/STAGE_9.59_OG17_PREPARED.md` (prepared for review — nothing deployed) |
+| **Protected resources in the private preview** | **21** (all draft) |
+| **Worker version** | **`fa23ec74-85d2-4d91-b484-3f037ccbe38b`** |
+| **Rollback available** | `1922f7ba-a0b3-4a7b-ba01-593b3df6a160` (20 resources, before OG-17) · private files in `workspace/backups/private-assets-1922f7ba` |
+| **Tests** | **477 passing** · lint clean · typecheck clean |
+| **Next resource** | **not chosen.** Stage 9.61 is a validation stage, not a migration: the price-presence gate. OG-B09 is the last gas-blocked resource |
+| **Last deployment** | Stage 9.60, 6 October 2026: **OG-17 Solid Fuel Heating Planner as resource #21** |
+| **Last report** | `admin-import/STAGE_9.60_OG17_DEPLOYED.md` |
 
 **A note on the test count.** 317 at Stage 9.39 → 324 at Stage 9.40 (OG-10 and supersession) → 328 at Stage 9.41 (the
 OG-10 ruling tests) → 361 at Stage 9.43 (treatment gates and OG-09) → 368 at Stage 9.44 (the OG-08 exemption and the
 rename) → 376 at Stage 9.45 (OG-B08) → 377 at Stage 9.46 → 390 at Stage 9.47 → 404 at Stage 9.48 → 410 at Stage 9.49 → 417 at Stage 9.50 (numeric blocking) → 429 at Stage 9.52 (the Air blocks and the ratio
 claim type) → 434 at Stage 9.53 (OG-13 and owner ruling 1) → 436 at Stage 9.54 (the category revert and the
 block selection) → 441 at Stage 9.56 (the Australian gas wording) → 456 at Stage 9.57 (the gas detector) →
-467 at Stage 9.58 (safety enforcement) → **475** at Stage 9.59 (OG-17's claims). Nothing was removed.
+467 at Stage 9.58 (safety enforcement) → 475 at Stage 9.59 (OG-17's claims) → **477** at Stage 9.60 (OG-17's
+currency and metadata). Nothing was removed.
 
 ## The 19 deployed resources
 
@@ -43,15 +44,16 @@ block selection) → 441 at Stage 9.56 (the Australian gas wording) → 456 at S
 | 18 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general |
 | 19 | OG-B12 | Off-Grid System Architecture Planner | general |
 | 20 | **OG-13** | **Healthy Home Air Audit** — the first Air resource | air |
+| 21 | **OG-17** | **Solid Fuel Heating Planner** | shelter |
 
-Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
+Each has an NZ and an AU PDF: **42 market files**, 0 broken internal links.
 
-## Controls, last checked at Stage 9.56
+## Controls, last checked at Stage 9.60
 
 | Control | State |
 |---|---|
 | Cloudflare Access on all traffic | **on** — every probe redirects (302) to the Access login |
-| All real resources draft | **yes**, 20/20 |
+| All real resources draft | **yes**, 21/21 |
 | NZ/AU routing | **working** — no market, no download; NZ gets NZ, AU gets AU |
 | Real member files in public GitHub | **none** |
 | `--real` | **refused** |
@@ -73,7 +75,7 @@ Each has an NZ and an AU PDF: **40 market files**, 0 broken internal links.
 | ~~Two OG-13 rulings outstanding~~ | — | **both answered at Stage 9.53.** Bleach is removed from both markets' mould wording, and `healthy-home-air` was added to the air taxonomy. OG-13 is prepared and verified. Three one-line preferences remain, none of them blocking: the category overlap with `healthy-home-checks`, whether OG-13 keeps `indoor-combustion` (it carries approved gas/LPG wording into an Air resource), and whether the never-mix caution returns — all three in `STAGE_9.53_OG13_PREPARED.md` §11 |
 | ~~Unlabelled Victorian servicing interval~~ | — | **corrected and deployed at Stage 9.56** (it affected 6 resources, not 5 — OG-13 joined at Stage 9.54). The Australian wording now carries no interval and points the member at their own state or territory's regulator. A test checks every prepared AU file, not just the config |
 | ~~`requiredSafety` is computed from the legacy source~~ | — | **resolved at Stage 9.58.** Enforcement now reads the migrated member-facing output, per market, before blocks are injected. The legacy source became `sourceSafetyTopics` — migration evidence — and any topic that leaves must be accounted for by a carried block, an owner-approved exemption, or a written disposition, or preparation fails. 8 of the 20 live resources had such a removal; all 8 were already accounted for |
-| **A price has no automatic gate** | any resource that mentions money | `currency` is excluded from numeric blocking (Stage 9.50) and the `figure-needs-source` content flag matches only `%` and `°C`. Prices are removed by approved copy change and proved absent by assertion — not caught by a gate. Adding currency to the flag pattern is a decision, not a cleanup: `STAGE_9.59_OG17_PREPARED.md` §11 |
+| **A price has no automatic gate** | any resource that mentions money | `currency` is excluded from numeric blocking (Stage 9.50) and the `figure-needs-source` content flag matches only `%` and `°C`. **Stage 9.61 is the price-presence gate that closes this**: a presence-and-review gate, not a freshness validator — see `STAGE_9.60_OG17_DEPLOYED.md` §17 |
 | **US and CA markets** | publishing outside NZ/AU | their own safety review; **non-publishable until then** |
 
 ## Known, accepted limitations

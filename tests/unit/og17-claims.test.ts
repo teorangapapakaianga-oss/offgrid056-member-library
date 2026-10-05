@@ -160,6 +160,41 @@ describe("Stage 9.59 · OG-17's removed claims stay removed", () => {
     }
   });
 
+  it("8b. carries no currency in any form, in either market", () => {
+    // Stage 9.60. Written as the shapes a price actually takes, because nothing in the pipeline gates on them:
+    // currency is excluded from numeric blocking and the figure-needs-source flag matches only % and °C.
+    if (!files.length) return;
+    for (const file of files) {
+      const text = visibleText(fs.readFileSync(path.join(dir, file), "utf8"));
+      expect(text, `${file}: $`).not.toMatch(/\$/);
+      expect(text, `${file}: currency codes`).not.toMatch(/\b(NZD|AUD|USD|CAD)\b/);
+      expect(text, `${file}: dollars in words`).not.toMatch(/\b\d[\d,]*\s?dollars\b/i);
+      // The dollar sign is required: "from 1 January 2027" is Queensland's alarm deadline, not a price.
+      expect(text, `${file}: from $…`).not.toMatch(/\bfrom\s+\$\s?\d/i);
+    }
+  });
+
+  it("8c. records the owner-approved metadata, with every inferred field marked", () => {
+    const meta = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/metadata-review.json"), "utf8")) as {
+      resources: Record<string, Record<string, string | number>>;
+    };
+    const og17 = meta.resources["OG-17"];
+    expect(og17.foundation).toBe("shelter");
+    expect(og17.category).toBe("heating");
+    expect(og17.difficulty).toBe("intermediate");
+    expect(og17.estimatedTime).toBe(25);
+    expect(og17.recordStatus).toBe("draft");
+    for (const field of ["foundationBasis", "categoryBasis", "difficultyBasis", "timeBasis"]) {
+      expect(og17[field], field).toBe("OWNER-APPROVED / INFERRED");
+    }
+    // The category must be one the taxonomy already held — no slug was added for this resource.
+    const taxonomy = JSON.parse(fs.readFileSync(path.join(root, "data/taxonomy/foundations.json"), "utf8")) as {
+      foundations: { id: string; categories: { slug: string }[] }[];
+    };
+    const shelter = taxonomy.foundations.find((f) => f.id === "shelter")!;
+    expect(shelter.categories.map((cat) => cat.slug)).toContain("heating");
+  });
+
   it("8. solid fuel and fire safety are not weakened by the gas classification", () => {
     const report = path.join(root, "workspace/prep/prep-report.json");
     if (!fs.existsSync(report)) return;
