@@ -24,6 +24,7 @@ if (!fs.existsSync(PREP)) {
   process.exit(1);
 }
 
+const SAFETY_NOTES_MARKER = "<!-- og056:safety-notes -->";
 const readJson = (p: string) => JSON.parse(fs.readFileSync(p, "utf8"));
 const ADMIN = path.join(ROOT, "admin-import");
 const profiles = readJson(path.join(ADMIN, "markets", "profiles.json")).markets as {
@@ -55,7 +56,7 @@ const expected = new Map<
   {
     status: string | undefined;
     blocks: string[];
-    copy: { from: string; to: string; markets?: string[]; headers: string[] }[];
+    copy: { from: string; to: string; parts: string[]; markets?: string[]; headers: string[] }[];
     unapplied: { where: string; markets?: string[] }[];
   }
 >(
@@ -69,6 +70,9 @@ const expected = new Map<
         .map((c) => ({
           from: visible(c.from),
           to: visible(c.to),
+          // Stage 9.69: a resource that places its topic safety blocks at a marker has those blocks injected into the middle
+          // of its copy, so its text is not contiguous in the PDF. Each stretch between markers must still be there, in order.
+          parts: c.to.split(SAFETY_NOTES_MARKER).map(visible).filter(Boolean),
           markets: c.markets,
           // Header rows of any table this change introduces: a browser reprints them after a page break.
           headers: [...c.to.matchAll(/<thead>([\s\S]*?)<\/thead>/gi)].map((m) => visible(m[1])).filter(Boolean),
@@ -103,7 +107,7 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
       if (!title || !flat.includes(norm(title))) problems.push(`safety block "${id}" missing`);
     }
     // A market-specific change is only checked in the market it belongs to.
-    for (const { from, to, headers } of (want?.copy ?? []).filter((c) => !c.markets || c.markets.includes(market))) {
+    for (const { from, to, parts, headers } of (want?.copy ?? []).filter((c) => !c.markets || c.markets.includes(market))) {
       // A table that runs over a page break has its header row printed again on the next page. That repeat is the
       // browser's, not the document's, so it is removed — once — before the comparison, exactly as the extractor's
       // page markers are. The first printing of the header still has to be there.
@@ -114,7 +118,14 @@ for (const code of fs.readdirSync(PREP).filter((d) => fs.statSync(path.join(PREP
         return first < 0 ? text : text.slice(0, first + header.length) + text.slice(first + header.length).split(header).join("");
       }, flat);
       // The new wording must be there, and the old wording gone — which is also the only way to check a removal.
-      if (to && !withoutRepeatedHeaders.includes(norm(to))) problems.push(`approved copy missing: "${to.slice(0, 50)}"`);
+      if (to && parts.length > 1) {
+        let cursor = 0;
+        for (const part of parts) {
+          const at = withoutRepeatedHeaders.indexOf(norm(part), cursor);
+          if (at < 0) { problems.push(`approved copy missing (or out of order): "${part.slice(0, 50)}"`); break; }
+          cursor = at + norm(part).length;
+        }
+      } else if (to && !withoutRepeatedHeaders.includes(norm(to))) problems.push(`approved copy missing: "${to.slice(0, 50)}"`);
       if (from && !norm(to).includes(norm(from)) && flat.includes(norm(from))) problems.push(`replaced wording still present: "${from.slice(0, 50)}"`);
     }
 
