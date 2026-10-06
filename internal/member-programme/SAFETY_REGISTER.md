@@ -203,3 +203,8 @@ AU common core: national source or 4+ independent jurisdictions, none contradict
 
 Numeric block ownership is exact (a figure inside block A is not credited to block B or to resource text). OG-27 weekly-review cadence = OWNER-DEFINED SCHEDULE, OG-27 only, not safety guidance.
 
+
+## Stage 9.62D
+
+Gas blocks: AU approved (general, cylinder, installation); AU unflued + leak fail closed; NZ pending for all five. OG-B09 = general only (no editorial additions); OG-24 = general + installation; OG-17 = none.
+

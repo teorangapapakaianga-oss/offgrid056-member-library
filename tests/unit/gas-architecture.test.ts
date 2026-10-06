@@ -518,11 +518,33 @@ describe("Stage 9.62A · detected gas topic → required block SET → every blo
   });
 
   it("a block that is carried but PENDING OWNER APPROVAL satisfies nothing", () => {
-    const r = prep({ sourceHtml: BASE(TEACH.install), extraSafetyBlocks: [GENERAL, "gas-installation-and-servicing"] }); // the real blocks: all pending
+    // the real blocks: NZ wording of all five is still pending (Stage 9.62D)
+    const r = prep({ sourceHtml: BASE(TEACH.install), extraSafetyBlocks: [GENERAL, "gas-installation-and-servicing"] });
     expect(unavailableIds(r, "NZ").sort()).toEqual([GENERAL, "gas-installation-and-servicing"].sort());
     expect(gas(r, "NZ").unavailable.every((u) => /PENDING OWNER APPROVAL/.test(u.reason))).toBe(true);
     expect(publishable(r, "NZ")).toBe(false);
-    expect(publishable(r, "AU")).toBe(false);
+  });
+
+  it("Stage 9.62D approval state: AU wording approved for three blocks, AU unflued and AU leak fail closed, NZ pending for all five", () => {
+    const pending = (id: string) => (blocks[id].pendingOwnerApproval ?? []) as string[];
+    for (const id of ["gas-and-lpg-general", "gas-cylinder-safety", "gas-installation-and-servicing"]) {
+      expect(pending(id), `${id}: AU approved, NZ not`).toEqual(["NZ"]);
+      expect(body(id, "AU"), id).toBeTruthy();
+      expect(JSON.stringify((blocks[id] as unknown as { verification: Record<string, string> }).verification.AU), id).toMatch(/OWNER-APPROVED 2026-10-06/);
+    }
+    for (const id of ["unflued-gas-heating", "gas-leak-response"]) {
+      expect(body(id, "AU"), `${id}: no served AU body`).toBeUndefined();
+      expect(pending(id), id).toEqual(["NZ", "AU"]);
+      expect(JSON.stringify((blocks[id] as unknown as { verification: Record<string, string> }).verification.AU), id).toMatch(/FAIL/);
+    }
+    expect(JSON.stringify((blocks["gas-leak-response"] as unknown as { verification: Record<string, string> }).verification.AU)).toMatch(/NOT approved as AU common-core wording/);
+    // AU approval never releases NZ, and NZ stays unavailable until its own approval
+    const r = prep({ sourceHtml: BASE(GENERIC), extraSafetyBlocks: [GENERAL] });
+    expect(unavailableIds(r, "AU")).toEqual([]);
+    expect(unavailableIds(r, "NZ")).toEqual([GENERAL]);
+    // and the AU leak / unflued blocks stay unavailable in AU even though they are carried
+    const leak = prep({ sourceHtml: BASE(TEACH.leak), extraSafetyBlocks: [GENERAL, "gas-leak-response"] });
+    expect(unavailableIds(leak, "AU")).toEqual(["gas-leak-response"]);
   });
 
   it("a block that is only a PROPOSAL for this resource satisfies nothing", () => {

@@ -125,3 +125,9 @@ migrate nothing until the wording is approved.
 1. Owner approves/changes/rejects the five gas blocks' NZ and AU wording, and the three NZ numeric claims.
 2. Only then Stage 9.63 (OG-B09 claims-first).
 
+
+## After Stage 9.62D
+
+1. Owner decides NZ wording of the five gas blocks and the three NZ numeric claims.
+2. Then OG-B09 claims-first (general block only). Not started.
+

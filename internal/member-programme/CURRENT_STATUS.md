@@ -101,3 +101,8 @@ Tests 576, lint/typecheck clean. Tightened AU common-core rule (4+ jurisdictions
 
 587 tests; 21/21 ready, 42/42 files, Bucket C 0. Numeric scan now credits a figure to a safety block only inside that block's own content. OG-27 '15 minutes every Sunday' registered as an owner-defined schedule (OG-27 only). Five gas blocks still PENDING OWNER APPROVAL. Report: admin-import/STAGE_9.62C_OWNER_REVIEW.md. Worker unchanged.
 
+
+## Stage 9.62D (6 October 2026) - gas AU approval state recorded
+
+AU wording OWNER-APPROVED for gas-and-lpg-general, gas-cylinder-safety, gas-installation-and-servicing; AU unflued and AU leak fail closed (drafted leak wording unserved). NZ wording of all five and the three NZ numeric claims remain PENDING OWNER APPROVAL. 588 tests. Nothing deployed. Report: admin-import/STAGE_9.62D_GAS_CLOSEOUT.md.
+

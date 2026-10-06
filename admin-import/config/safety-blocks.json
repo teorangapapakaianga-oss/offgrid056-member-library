@@ -514,7 +514,7 @@
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. WORDING PENDING OWNER APPROVAL."
+        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. AU WORDING OWNER-APPROVED 2026-10-06 (Stage 9.62D) as member-facing wording, subject to the recorded provenance remaining valid and unchanged."
       },
       "triggers": {
         "topic": "gas-and-lpg",
@@ -529,8 +529,7 @@
       },
       "changeRule": "LOCKED: AU = non-numeric common core (Category A only) + labelled records. A claim enters the AU core only by classifyCommonClaim: a national source, or 4+ independent official jurisdictions with no contradiction and no state-specific limitation. Two jurisdictions never suffice. No AU servicing interval, cylinder interval, clearance or leak instruction may be written here. NZ figures live only in NZ sentences and are registered in numeric-claims.json. Do not duplicate carbon-monoxide or indoor-combustion wording: use marketBodyWhen.",
       "pendingOwnerApproval": [
-        "NZ",
-        "AU"
+        "NZ"
       ],
       "commonCoreClaims": [
         {
@@ -1010,7 +1009,7 @@
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "FAILS CLOSED 2026-10-06 (Stage 9.62A). Under the owner's tightened Category-A rule no claim about this block's own topic is stated by four or more independent official jurisdictions or by a national source, so there is no common AU core. Every claim is kept as a labelled category-B record in stateOverrides, not served. WORDING PENDING OWNER APPROVAL (there is nothing to approve for AU until a state-routing stage or a second evidence round)."
+        "AU": "FAILS CLOSED 2026-10-06 (Stage 9.62A). Under the owner's tightened Category-A rule no claim about this block's own topic is stated by four or more independent official jurisdictions or by a national source, so there is no common AU core. Every claim is kept as a labelled category-B record in stateOverrides, not served. FAIL-CLOSED confirmed by owner ruling Stage 9.62D: no served AU body, nothing to approve for AU, and no further AU research to enlarge it."
       },
       "triggers": {
         "topic": "unflued-gas-heating",
@@ -1469,7 +1468,7 @@
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. WORDING PENDING OWNER APPROVAL."
+        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. AU WORDING OWNER-APPROVED 2026-10-06 (Stage 9.62D) as member-facing wording, subject to the recorded provenance remaining valid and unchanged."
       },
       "triggers": {
         "topic": "gas-cylinder-safety",
@@ -1482,8 +1481,7 @@
       },
       "changeRule": "LOCKED: no national AU cylinder-testing interval, hose interval, clearance or distance. Each of those exists only as a stateOverride keyed by jurisdiction and appliance, and is NOT served. NSW's '10 or 15 years' must never be merged with QLD's and SA's '10 years'.",
       "pendingOwnerApproval": [
-        "NZ",
-        "AU"
+        "NZ"
       ],
       "commonCoreClaims": [
         {
@@ -1783,7 +1781,7 @@
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "FAILS CLOSED 2026-10-06 (Stage 9.62). Seven of eight Australian jurisdictions give a leak procedure (read live) and they conflict on electrical switches, power isolation, evacuation and when to call 000; the ACT gives none. Under the owner's rule that incomplete evidence fails closed, no AU body is served. The limited wording that could be defended is in draftedNotServed.AU for owner approval as written."
+        "AU": "FAILS CLOSED 2026-10-06 (Stage 9.62A; confirmed by owner ruling Stage 9.62D). Seven of eight Australian jurisdictions give a leak procedure and they conflict; the ACT gives none. NO AU body is served. The drafted wording in draftedNotServed.AU is NOT approved as AU common-core wording and stays UNSERVED; it may only be reconsidered later as jurisdiction-specific wording with valid sources, or as AU common-core wording if the 4-jurisdiction / national-source threshold is met."
       },
       "triggers": {
         "topic": "gas-leak-response",
@@ -2044,7 +2042,7 @@
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. WORDING PENDING OWNER APPROVAL."
+        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. AU WORDING OWNER-APPROVED 2026-10-06 (Stage 9.62D) as member-facing wording, subject to the recorded provenance remaining valid and unchanged."
       },
       "triggers": {
         "topic": "gas-installation-and-servicing",
@@ -2056,8 +2054,7 @@
       },
       "changeRule": "LOCKED: the 'at least every two years' sentence removed from the AU carbon-monoxide and indoor-combustion blocks at Stage 9.56 must NOT be restored here, nor any other single Australian interval. NSW's interval is for gas WATER heaters only and must never become general gas-heater guidance. Each interval is STATE-SPECIFIC and APPLIANCE-SPECIFIC and exists only as a stateOverride.",
       "pendingOwnerApproval": [
-        "NZ",
-        "AU"
+        "NZ"
       ],
       "commonCoreClaims": [
         {
