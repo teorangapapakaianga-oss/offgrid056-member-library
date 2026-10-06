@@ -445,32 +445,34 @@
       ],
       "marketBody": {
         "NZ": "**Gas and LPG appliances are safe when they are installed, used and serviced properly.** Use each appliance only for what it is designed for, and follow the manufacturer's instructions. A cooker, griller or barbecue is not a heater.\n**Outdoor gas appliances — patio heaters, barbecues and camping cookers — must never be used indoors.** They do not have the safety systems that shut off the gas when oxygen runs low or carbon monoxide builds up.\nGas appliances that are faulty, badly installed, used in a small space or short of ventilation can produce dangerous levels of carbon monoxide. Keep ventilation inlets clear.\nSigns that a gas appliance is not working properly or its flue is blocked: a yellow flame rather than a blue one (unless it is a flame-effect heater designed that way), soot in or around the appliance, or an unusual smell like car exhaust. If you notice any of these, turn it off and contact a licensed gas worker immediately.\nIf you smell LPG or fumes from an appliance, turn it off — and turn off the cylinder — straight away, and have it checked by an appliance service agent or a gasfitter.\nTurn a gas appliance off completely after use. A control knob that is not fully off can allow \"light back\", a dangerous fault that releases carbon monoxide.",
-        "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nAppliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter.\nNever tamper with safety valves or fittings, and never try to repair a gas appliance yourself.\nGas safety rules — including how often an appliance must be serviced — differ between states and territories, so check with your state or territory's energy safety regulator."
+        "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nGas safety rules — including how often an appliance must be serviced — differ between states and territories, so check with your state or territory's energy safety regulator."
       },
       "marketBodyWhen": {
         "indoor-combustion": {
           "NZ": "**Gas and LPG appliances are safe when they are installed, used and serviced properly.** Use each appliance only for what it is designed for, and follow the manufacturer's instructions. A cooker, griller or barbecue is not a heater.\nGas appliances that are faulty, badly installed, used in a small space or short of ventilation can produce dangerous levels of carbon monoxide. Keep ventilation inlets clear.\nSigns that a gas appliance is not working properly or its flue is blocked: a yellow flame rather than a blue one (unless it is a flame-effect heater designed that way), soot in or around the appliance, or an unusual smell like car exhaust. If you notice any of these, turn it off and contact a licensed gas worker immediately.\nIf you smell LPG or fumes from an appliance, turn it off — and turn off the cylinder — straight away, and have it checked by an appliance service agent or a gasfitter.\nTurn a gas appliance off completely after use. A control knob that is not fully off can allow \"light back\", a dangerous fault that releases carbon monoxide.",
-          "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter.\nNever tamper with safety valves or fittings, and never try to repair a gas appliance yourself."
+          "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space."
         },
         "carbon-monoxide": {
           "NZ": "**Gas and LPG appliances are safe when they are installed, used and serviced properly.** Use each appliance only for what it is designed for, and follow the manufacturer's instructions. A cooker, griller or barbecue is not a heater.\n**Outdoor gas appliances — patio heaters, barbecues and camping cookers — must never be used indoors.** They do not have the safety systems that shut off the gas when oxygen runs low or carbon monoxide builds up.\nGas appliances that are faulty, badly installed, used in a small space or short of ventilation can produce dangerous levels of carbon monoxide. Keep ventilation inlets clear.\nIf you smell LPG or fumes from an appliance, turn it off — and turn off the cylinder — straight away, and have it checked by an appliance service agent or a gasfitter.\nTurn a gas appliance off completely after use. A control knob that is not fully off can allow \"light back\", a dangerous fault that releases carbon monoxide.",
-          "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nAppliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter."
+          "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space."
         },
         "indoor-combustion+carbon-monoxide": {
-          "NZ": "**Gas and LPG appliances are safe when they are installed, used and serviced properly.** Use each appliance only for what it is designed for, and follow the manufacturer's instructions. A cooker, griller or barbecue is not a heater.\nGas appliances that are faulty, badly installed, used in a small space or short of ventilation can produce dangerous levels of carbon monoxide. Keep ventilation inlets clear.\nIf you smell LPG or fumes from an appliance, turn it off — and turn off the cylinder — straight away, and have it checked by an appliance service agent or a gasfitter.\nTurn a gas appliance off completely after use. A control knob that is not fully off can allow \"light back\", a dangerous fault that releases carbon monoxide.",
-          "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter."
+          "NZ": "**Gas and LPG appliances are safe when they are installed, used and serviced properly.** Use each appliance only for what it is designed for, and follow the manufacturer's instructions. A cooker, griller or barbecue is not a heater.\nGas appliances that are faulty, badly installed, used in a small space or short of ventilation can produce dangerous levels of carbon monoxide. Keep ventilation inlets clear.\nIf you smell LPG or fumes from an appliance, turn it off — and turn off the cylinder — straight away, and have it checked by an appliance service agent or a gasfitter.\nTurn a gas appliance off completely after use. A control knob that is not fully off can allow \"light back\", a dangerous fault that releases carbon monoxide."
+        },
+        "carbon-monoxide+indoor-combustion": {
+          "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space."
         },
         "gas-installation-and-servicing": {
-          "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nAppliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter."
-        },
-        "indoor-combustion+gas-installation-and-servicing": {
-          "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter."
+          "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space."
         },
         "carbon-monoxide+gas-installation-and-servicing": {
-          "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nAppliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter."
+          "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space."
         },
-        "indoor-combustion+carbon-monoxide+gas-installation-and-servicing": {
-          "AU": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.\nGas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.\nKeep clothing, paper and anything else that can burn well away from gas appliances.\nIf an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter."
+        "indoor-combustion+gas-installation-and-servicing": {
+          "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space."
+        },
+        "carbon-monoxide+indoor-combustion+gas-installation-and-servicing": {
+          "AU": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space."
         }
       },
       "sources": {
@@ -487,7 +489,7 @@
           "WorkSafe ACT — Liquid petroleum gas (LPG) safety (ACT; read live 2026-10-05): https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety"
         ]
       },
-      "sharedOrVaries": "VARIES. New Zealand is one jurisdiction with one regulator (WorkSafe), so its body is specific. Australia has eight regulators that agree on the shape — use appliances as intended, keep outdoor appliances outdoors, keep ventilation clear, use a licensed gasfitter — and disagree on every number, so the AU body carries none.",
+      "sharedOrVaries": "VARIES. New Zealand is one jurisdiction with one regulator (WorkSafe), so its body is specific. Australia has eight regulators and no national source that could be read, so the AU body carries only what four or more jurisdictions state and no number; everything else is a labelled state record that is not served.",
       "sentenceSources": {
         "NZ": [
           "intended use, manufacturer instructions, a cooker griller or barbecue is not a heater — WorkSafe NZ (Keep yourself safe from carbon monoxide)",
@@ -498,18 +500,18 @@
           "turn off completely; light back — WorkSafe NZ (Carbon monoxide)"
         ],
         "AU": [
-          "intended purpose and manufacturer's instructions; a cooker or oven is not a heater — Energy Safe Victoria (VIC) and Consumer Affairs Tasmania (TAS)",
-          "outdoor-use appliances are not brought inside — Energy Safe Victoria (VIC), Consumer Affairs Tasmania (TAS), WorkSafe ACT (ACT)",
-          "ventilation clear; never in an unventilated space — Energy Safe Victoria (VIC), Consumer Affairs Tasmania (TAS), Building and Energy (WA), WorkSafe ACT (ACT)",
-          "keep things that can burn away from appliances — Energy Safe Victoria (VIC), Queensland Government (QLD)",
-          "flame change, soot or poor lighting → stop, licensed gasfitter — Energy Safe Victoria (VIC), Queensland Government (QLD), Building and Energy (WA)",
-          "never tamper with safety valves; no DIY — Energy Safe Victoria (VIC), SA.GOV.AU (SA), Building and Energy (WA)",
-          "rules differ by state or territory — the stated limitation, from the Stage 9.56 research"
+          "NOT SERVED (B) · Gas and LPG appliances are safe when they are installed, used and main… — Energy Safe Victoria (VIC), Consumer Affairs Tasmania (TAS) — only 2 recorded jurisdictions (VIC, TAS); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Appliances made for outdoor use — such as barbecues, patio heaters and… — Energy Safe Victoria (VIC), Consumer Affairs Tasmania (TAS), WorkSafe ACT (ACT) — only 3 recorded jurisdictions (VIC, TAS, ACT); common core needs 4+ or a national source",
+          "SERVED (A) · Gas appliances that are faulty, poorly maintained or short of fresh ai… — Energy Safe Victoria (VIC), Consumer Affairs Tasmania (TAS), Building and Energy (WA) (WA), WorkSafe ACT (ACT) — 4 independent official jurisdictions (VIC, TAS, WA, ACT), none contradicting, no state-specific limitation",
+          "NOT SERVED (B) · Keep clothing, paper and anything else that can burn well away from ga… — Energy Safe Victoria (VIC), Queensland Government (QLD) — only 2 recorded jurisdictions (VIC, QLD); common core needs 4+ or a national source",
+          "NOT SERVED (B) · If an appliance's flame changes, soot appears, or it will not light pr… — Energy Safe Victoria (VIC), Queensland Government (QLD), Building and Energy (WA) (WA) — only 3 recorded jurisdictions (VIC, QLD, WA); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Never tamper with safety valves or fittings, and never try to repair a… — Energy Safe Victoria (VIC), SA.GOV.AU (SA), Building and Energy (WA) (WA) — only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source",
+          "SERVED (A) · Gas safety rules — including how often an appliance must be serviced —… — Energy Safe Victoria (VIC), NSW Government (NSW), Queensland Government (QLD), SA.GOV.AU (SA), Building and Energy (WA) (WA), Consumer Affairs Tasmania (TAS), WorkSafe ACT (ACT), NT WorkSafe (NT) — 8 independent official jurisdictions (VIC, NSW, QLD, SA, WA, TAS, ACT, NT), none contradicting, no state-specific limitation — a limitation disclosure, evidenced by the eight jurisdictions' differing servicing, cylinder and leak rules"
         ]
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "BUILT 2026-10-06 (Stage 9.62). NON-NUMERIC core: every sentence is protective-only (a precaution that cannot cause harm if followed anywhere), stated by at least two Australian jurisdictions read live, and contradicted by none. Gas is the one topic where every Australian number differs. WORDING PENDING OWNER APPROVAL."
+        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. WORDING PENDING OWNER APPROVAL."
       },
       "triggers": {
         "topic": "gas-and-lpg",
@@ -520,9 +522,308 @@
           "a fuel listed among options",
           "a fireplace row"
         ],
-        "relationship": "answers the detector's gas-and-lpg requirement. Drops its outdoor-appliance paragraph beside indoor-combustion, its flame-signs paragraph beside carbon-monoxide, and its no-DIY paragraph beside the installation block."
+        "relationship": "answers the detector's gas-and-lpg requirement ONLY. It does not satisfy cylinder, unflued-heater, leak or installation teaching: each of those needs its own block as well (Stage 9.62A required-block sets). Its outdoor-appliance paragraph (NZ) is dropped beside indoor-combustion, its flame-signs paragraph (NZ) beside carbon-monoxide, and the AU limitation paragraph beside the CO, indoor-combustion or installation blocks."
       },
-      "changeRule": "LOCKED by the Stage 9.56 ruling: AU = non-numeric core + labelled overrides. No AU servicing interval, cylinder interval, clearance or leak instruction may be written here. NZ figures live only in NZ sentences and are registered in numeric-claims.json. Do not duplicate carbon-monoxide or indoor-combustion wording: use marketBodyWhen."
+      "changeRule": "LOCKED: AU = non-numeric common core (Category A only) + labelled records. A claim enters the AU core only by classifyCommonClaim: a national source, or 4+ independent official jurisdictions with no contradiction and no state-specific limitation. Two jurisdictions never suffice. No AU servicing interval, cylinder interval, clearance or leak instruction may be written here. NZ figures live only in NZ sentences and are registered in numeric-claims.json. Do not duplicate carbon-monoxide or indoor-combustion wording: use marketBodyWhen.",
+      "pendingOwnerApproval": [
+        "NZ",
+        "AU"
+      ],
+      "commonCoreClaims": [
+        {
+          "id": "gen-intended-use",
+          "text": "**Gas and LPG appliances are safe when they are installed, used and maintained as intended.** Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "TAS"
+            ]
+          },
+          "category": "B",
+          "reason": "only 2 recorded jurisdictions (VIC, TAS); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "gen-outdoor-appliances",
+          "text": "Appliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "TAS",
+              "ACT"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (VIC, TAS, ACT); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "gen-ventilation",
+          "text": "Gas appliances that are faulty, poorly maintained or short of fresh air can produce carbon monoxide. Keep permanent ventilation clear, and never use a gas appliance in an unventilated space.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "TAS",
+              "WA",
+              "ACT"
+            ]
+          },
+          "category": "A",
+          "reason": "4 independent official jurisdictions (VIC, TAS, WA, ACT), none contradicting, no state-specific limitation",
+          "served": true
+        },
+        {
+          "id": "gen-combustibles",
+          "text": "Keep clothing, paper and anything else that can burn well away from gas appliances.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "QLD"
+            ]
+          },
+          "category": "B",
+          "reason": "only 2 recorded jurisdictions (VIC, QLD); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "gen-flame-signs",
+          "text": "If an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "QLD",
+              "WA"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (VIC, QLD, WA); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "gen-no-tampering",
+          "text": "Never tamper with safety valves or fittings, and never try to repair a gas appliance yourself.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "SA",
+              "WA"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "gen-rules-differ",
+          "text": "Gas safety rules — including how often an appliance must be serviced — differ between states and territories, so check with your state or territory's energy safety regulator.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "NSW",
+              "QLD",
+              "SA",
+              "WA",
+              "TAS",
+              "ACT",
+              "NT"
+            ]
+          },
+          "category": "A",
+          "reason": "8 independent official jurisdictions (VIC, NSW, QLD, SA, WA, TAS, ACT, NT), none contradicting, no state-specific limitation",
+          "served": true
+        }
+      ],
+      "stateOverrides": [
+        {
+          "id": "gen-intended-use-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Gas and LPG appliances are safe when they are installed, used and maintained as intended. Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (VIC, TAS); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-intended-use-tas",
+          "jurisdiction": "TAS",
+          "label": "Consumer Affairs Tasmania",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Gas and LPG appliances are safe when they are installed, used and maintained as intended. Use each appliance only for its intended purpose and follow the manufacturer's instructions. A gas cooker or oven is not a heater.",
+          "figure": null,
+          "source": "https://consumeraffairs.tas.gov.au/topics/technical-regulation/gas-standards-safety/carbon-monoxide/preventing-carbon-monoxide-poisoning",
+          "authority": "Consumer Affairs Tasmania",
+          "sourceDate": "updated 29 January 2021 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (VIC, TAS); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Consumer Affairs Tasmania's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-outdoor-appliances-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Appliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, TAS, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-outdoor-appliances-tas",
+          "jurisdiction": "TAS",
+          "label": "Consumer Affairs Tasmania",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Appliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.",
+          "figure": null,
+          "source": "https://consumeraffairs.tas.gov.au/topics/technical-regulation/gas-standards-safety/carbon-monoxide/preventing-carbon-monoxide-poisoning",
+          "authority": "Consumer Affairs Tasmania",
+          "sourceDate": "updated 29 January 2021 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, TAS, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Consumer Affairs Tasmania's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-outdoor-appliances-act",
+          "jurisdiction": "ACT",
+          "label": "WorkSafe ACT",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Appliances made for outdoor use — such as barbecues, patio heaters and camping stoves — are for outdoor use only. Do not bring them inside a home, caravan, car or tent.",
+          "figure": null,
+          "source": "https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety",
+          "authority": "WorkSafe ACT",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, TAS, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not WorkSafe ACT's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-combustibles-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Keep clothing, paper and anything else that can burn well away from gas appliances.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (VIC, QLD); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-combustibles-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Keep clothing, paper and anything else that can burn well away from gas appliances.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (VIC, QLD); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-flame-signs-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "If an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, QLD, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-flame-signs-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "If an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, QLD, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-flame-signs-wa",
+          "jurisdiction": "WA",
+          "label": "Building and Energy (WA)",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "If an appliance's flame changes, soot appears, or it will not light properly, stop using it and call a licensed gasfitter.",
+          "figure": null,
+          "source": "https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
+          "authority": "Building and Energy (WA)",
+          "sourceDate": "updated 2 April 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, QLD, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Building and Energy (WA)'s own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-no-tampering-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Never tamper with safety valves or fittings, and never try to repair a gas appliance yourself.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-no-tampering-sa",
+          "jurisdiction": "SA",
+          "label": "SA.GOV.AU",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Never tamper with safety valves or fittings, and never try to repair a gas appliance yourself.",
+          "figure": null,
+          "source": "https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/using-gas-appliances-safely/lpg-cylinders-and-fittings",
+          "authority": "SA.GOV.AU",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not SA.GOV.AU's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "gen-no-tampering-wa",
+          "jurisdiction": "WA",
+          "label": "Building and Energy (WA)",
+          "category": "B",
+          "topic": "gas-and-lpg-general",
+          "claim": "Never tamper with safety valves or fittings, and never try to repair a gas appliance yourself.",
+          "figure": null,
+          "source": "https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
+          "authority": "Building and Energy (WA)",
+          "sourceDate": "updated 2 April 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Building and Energy (WA)'s own sentence; not re-verified word by word."
+        }
+      ]
     },
     "unflued-gas-heating": {
       "id": "unflued-gas-heating",
@@ -530,33 +831,17 @@
       "severity": "CRITICAL",
       "body": "{{safety.notVerifiedForMarket}}",
       "marketBody": {
-        "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nDo not use an unflued gas heater in a bedroom, a bathroom or any small or confined room, or in a caravan or tent. Never use one in the room where you sleep.\nWhile it is on, keep internal doors and at least one window open, and check that room vents are not blocked.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nUse it for as short a time as you can, follow the manufacturer's instructions, and do not carry out maintenance on it yourself.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nWorkSafe New Zealand advises that an LPG cabinet heater should be serviced every 12 months by a service agent or gasfitter, before winter.\nLPG cabinet heaters are not recommended in homes where someone has a respiratory condition.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner.",
-        "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nDo not leave a gas heater on overnight or while you sleep.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide.\nHave a gas heater serviced regularly by a licensed gasfitter, at the interval the manufacturer and your state or territory's energy safety regulator give."
+        "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nDo not use an unflued gas heater in a bedroom, a bathroom or any small or confined room, or in a caravan or tent. Never use one in the room where you sleep.\nWhile it is on, keep internal doors and at least one window open, and check that room vents are not blocked.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nUse it for as short a time as you can, follow the manufacturer's instructions, and do not carry out maintenance on it yourself.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nWorkSafe New Zealand advises that an LPG cabinet heater should be serviced every 12 months by a service agent or gasfitter, before winter.\nLPG cabinet heaters are not recommended in homes where someone has a respiratory condition.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner."
       },
       "marketBodyWhen": {
         "indoor-combustion": {
-          "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner.",
-          "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide."
+          "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner."
         },
         "gas-installation-and-servicing": {
-          "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nDo not use an unflued gas heater in a bedroom, a bathroom or any small or confined room, or in a caravan or tent. Never use one in the room where you sleep.\nWhile it is on, keep internal doors and at least one window open, and check that room vents are not blocked.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nUse it for as short a time as you can, follow the manufacturer's instructions, and do not carry out maintenance on it yourself.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nLPG cabinet heaters are not recommended in homes where someone has a respiratory condition.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner.",
-          "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nDo not leave a gas heater on overnight or while you sleep.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide."
+          "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nDo not use an unflued gas heater in a bedroom, a bathroom or any small or confined room, or in a caravan or tent. Never use one in the room where you sleep.\nWhile it is on, keep internal doors and at least one window open, and check that room vents are not blocked.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nUse it for as short a time as you can, follow the manufacturer's instructions, and do not carry out maintenance on it yourself.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nLPG cabinet heaters are not recommended in homes where someone has a respiratory condition.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner."
         },
         "indoor-combustion+gas-installation-and-servicing": {
-          "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner.",
-          "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide."
-        },
-        "carbon-monoxide": {
-          "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nDo not leave a gas heater on overnight or while you sleep.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide."
-        },
-        "indoor-combustion+carbon-monoxide": {
-          "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide."
-        },
-        "carbon-monoxide+gas-installation-and-servicing": {
-          "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nDo not leave a gas heater on overnight or while you sleep.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide."
-        },
-        "indoor-combustion+carbon-monoxide+gas-installation-and-servicing": {
-          "AU": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.\nIf a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide."
+          "NZ": "**Unflued gas heaters need special care.** An unflued heater — including an LPG cabinet heater — has no flue or chimney. It draws the air it needs from the room and releases its combustion products straight back into it. A flued heater carries them outside.\nUnflued gas heaters release nitrogen dioxide and carbon monoxide, and they release water vapour that can feed mould and dust mites. People with asthma are particularly affected by nitrogen dioxide.\nWorkSafe New Zealand's 'Heater Metre Rule' is to keep at least one metre from any heat source. Keep an unflued heater at least one metre from anything that could catch fire — curtains, clothes, furniture and rugs — never dry clothing on it, and use a fireguard around it if there are children.\nIf you are choosing a heater, Health New Zealand points to options that do not release pollutants into the room: flued gas heating, central heating, an electric heater or a reverse cycle air conditioner."
         }
       },
       "stateOverrides": [
@@ -572,6 +857,118 @@
           "authority": "Energy Safe Victoria",
           "sourceDate": "read live 2026-10-05",
           "servedWhen": "state-label"
+        },
+        {
+          "id": "unf-combustion-products-tas",
+          "jurisdiction": "TAS",
+          "label": "Consumer Affairs Tasmania",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "An unflued or portable gas heater releases its combustion products into the room it heats. Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.",
+          "figure": null,
+          "source": "https://consumeraffairs.tas.gov.au/topics/technical-regulation/gas-standards-safety/carbon-monoxide/preventing-carbon-monoxide-poisoning",
+          "authority": "Consumer Affairs Tasmania",
+          "sourceDate": "updated 29 January 2021 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (TAS, VIC, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Consumer Affairs Tasmania's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "unf-combustion-products-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "An unflued or portable gas heater releases its combustion products into the room it heats. Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (TAS, VIC, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "unf-combustion-products-wa",
+          "jurisdiction": "WA",
+          "label": "Building and Energy (WA)",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "An unflued or portable gas heater releases its combustion products into the room it heats. Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.",
+          "figure": null,
+          "source": "https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
+          "authority": "Building and Energy (WA)",
+          "sourceDate": "updated 2 April 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (TAS, VIC, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Building and Energy (WA)'s own sentence; not re-verified word by word."
+        },
+        {
+          "id": "unf-overnight-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "Do not leave a gas heater on overnight or while you sleep.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (VIC, NSW); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word. NSW's evidence is the existing indoor-combustion wording (NSW Health), not a page read for this block."
+        },
+        {
+          "id": "unf-overnight-nsw",
+          "jurisdiction": "NSW",
+          "label": "NSW Government",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "Do not leave a gas heater on overnight or while you sleep.",
+          "figure": null,
+          "source": "https://www.nsw.gov.au/legal-and-justice/consumer-rights-and-protection/safety/gas-safety-requirements-and-consumer-rights",
+          "authority": "NSW Government",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (VIC, NSW); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not NSW Government's own sentence; not re-verified word by word. NSW's evidence is the existing indoor-combustion wording (NSW Health), not a page read for this block."
+        },
+        {
+          "id": "unf-flame-signs-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "If a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, WA, QLD); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "unf-flame-signs-wa",
+          "jurisdiction": "WA",
+          "label": "Building and Energy (WA)",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "If a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide.",
+          "figure": null,
+          "source": "https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
+          "authority": "Building and Energy (WA)",
+          "sourceDate": "updated 2 April 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, WA, QLD); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Building and Energy (WA)'s own sentence; not re-verified word by word."
+        },
+        {
+          "id": "unf-flame-signs-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "unflued-gas-heating",
+          "claim": "If a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, WA, QLD); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
         }
       ],
       "sources": {
@@ -587,7 +984,7 @@
           "Building and Energy, WA — Gas cylinder safety WA (WA; updated 2 April 2026; read live 2026-10-05): https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa"
         ]
       },
-      "sharedOrVaries": "VARIES, and asymmetrically. New Zealand states the whole rule set (never in a bedroom, bathroom or small room; windows open; serviced yearly; a one-metre rule; moisture and nitrogen dioxide) and Health NZ ties it to mould. Australia's household guidance read is thinner and written heater-generally, so the AU body carries only what is common.",
+      "sharedOrVaries": "VARIES, and asymmetrically. New Zealand states the whole rule set; Australia's household guidance read is thinner and written heater-generally, and no unflued-heater claim reaches four jurisdictions, so Australia has NO common core for this block and it fails closed there.",
       "sentenceSources": {
         "NZ": [
           "what an unflued heater is; flued carries products outside — WorkSafe NZ (Gas heating); Health NZ",
@@ -601,15 +998,14 @@
           "alternatives that do not release pollutants — Health NZ"
         ],
         "AU": [
-          "combustion products into the room; instructions allow indoor use; never unventilated; keep ventilation clear — Consumer Affairs Tasmania (TAS), Energy Safe Victoria (VIC), Building and Energy (WA)",
-          "not on overnight or while sleeping — Energy Safe Victoria (VIC); NSW Health (existing indoor-combustion wording)",
-          "flame change, soot, not working normally → stop, gasfitter, CO check — Energy Safe Victoria (VIC), Building and Energy (WA), Queensland Government (QLD)",
-          "serviced regularly at the manufacturer's and regulator's interval — stated limitation"
+          "NOT SERVED (B) · An unflued or portable gas heater releases its combustion products int… — Consumer Affairs Tasmania (TAS), Energy Safe Victoria (VIC), Building and Energy (WA) (WA) — only 3 recorded jurisdictions (TAS, VIC, WA); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Do not leave a gas heater on overnight or while you sleep.… — Energy Safe Victoria (VIC), NSW Government (NSW) — only 2 recorded jurisdictions (VIC, NSW); common core needs 4+ or a national source — NSW's evidence is the existing indoor-combustion wording (NSW Health), not a page read for this block",
+          "NOT SERVED (B) · If a gas heater's flame changes colour, soot appears or it is not work… — Energy Safe Victoria (VIC), Building and Energy (WA) (WA), Queensland Government (QLD) — only 3 recorded jurisdictions (VIC, WA, QLD); common core needs 4+ or a national source"
         ]
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "BUILT 2026-10-06 (Stage 9.62). NON-NUMERIC core: every sentence is protective-only (a precaution that cannot cause harm if followed anywhere), stated by at least two Australian jurisdictions read live, and contradicted by none. No second jurisdiction was read that publishes household unflued-heater guidance beyond ventilation, so no AU rule about bedrooms or bathrooms is stated here. WORDING PENDING OWNER APPROVAL."
+        "AU": "FAILS CLOSED 2026-10-06 (Stage 9.62A). Under the owner's tightened Category-A rule no claim about this block's own topic is stated by four or more independent official jurisdictions or by a national source, so there is no common AU core. Every claim is kept as a labelled category-B record in stateOverrides, not served. WORDING PENDING OWNER APPROVAL (there is nothing to approve for AU until a state-routing stage or a second evidence round)."
       },
       "triggers": {
         "topic": "unflued-gas-heating",
@@ -620,7 +1016,57 @@
         ],
         "relationship": "overlaps indoor-combustion heavily: beside it, every paragraph indoor-combustion already says is dropped. Beside the installation block, the yearly servicing sentence is dropped."
       },
-      "changeRule": "LOCKED: AU body non-numeric. Do not state a bedroom or bathroom rule for Australia — only the NSW Health wording already inside indoor-combustion says anything on sleeping areas, and that is that block's. The Victorian rangehood/exhaust-fan advice is a labelled override and is not served."
+      "changeRule": "LOCKED: AU body non-numeric. Do not state a bedroom or bathroom rule for Australia — only the NSW Health wording already inside indoor-combustion says anything on sleeping areas, and that is that block's. The Victorian rangehood/exhaust-fan advice is a labelled override and is not served.",
+      "pendingOwnerApproval": [
+        "NZ",
+        "AU"
+      ],
+      "commonCoreClaims": [
+        {
+          "id": "unf-combustion-products",
+          "text": "**An unflued or portable gas heater releases its combustion products into the room it heats.** Check that the manufacturer's instructions allow indoor use, never use one in an unventilated space, and keep the room's ventilation clear.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "TAS",
+              "VIC",
+              "WA"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (TAS, VIC, WA); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "unf-overnight",
+          "text": "Do not leave a gas heater on overnight or while you sleep.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "NSW"
+            ]
+          },
+          "category": "B",
+          "reason": "only 2 recorded jurisdictions (VIC, NSW); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "unf-flame-signs",
+          "text": "If a gas heater's flame changes colour, soot appears or it is not working normally, stop using it and have a licensed gasfitter inspect it and check it for carbon monoxide.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "WA",
+              "QLD"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (VIC, WA, QLD); common core needs 4+ or a national source",
+          "served": false
+        }
+      ]
     },
     "gas-cylinder-safety": {
       "id": "gas-cylinder-safety",
@@ -629,7 +1075,7 @@
       "body": "{{safety.notVerifiedForMarket}}",
       "marketBody": {
         "NZ": "**LPG cylinders hold gas under pressure, so handle them with care.** To stop the gas flow from an LPG cylinder, close the valve on top of it. If more than one cylinder is connected, close every valve.\nAfter you fill or change a cylinder on a portable LPG heater such as a cabinet heater, test the connections for leaks. Spread soapy water on the cylinder connections and turn the cylinder valve on. If bubbles appear there is a leak: close the valve and contact your LPG service agent.\nWhen you carry LPG cylinders in a vehicle: they should be in good condition; secured upright, to stop liquid leaking — which is even more dangerous than a gas leak; with every control valve protected from damage; not connected to any appliance; and with no smoking. Never leave a cylinder unattended in a vehicle, particularly in hot weather.\nStore a portable LPG appliance that you only use in some seasons, such as a cabinet heater or a barbecue, under cover, so debris, insects or spiders cannot get into the area around the burner.",
-        "AU": "**LPG cylinders hold gas under pressure.** Keep a cylinder upright — when you store it and when you carry it — and make sure it is secured when you carry it.\nKeep cylinders cool and away from heat, flames and sparks.\nCheck the test date stamped on a cylinder. Do not use or refill a cylinder that is out of test date or that is damaged or corroded. How long a test date lasts is set by your state or territory.\nNever tamper with a cylinder valve or force it, and do not try to repair or remove a cylinder valve yourself.\nUse an LPG cylinder only with an appliance made for LPG, and only with a certified regulator and hose made for it. Check hoses and seals for damage.\nCheck the connections for leaks with soapy water or detergent and water. If bubbles appear there is a leak: turn the gas off, do not use the appliance, and call a licensed gasfitter.\nTurn the cylinder valve off before you disconnect a cylinder.\nDo not leave or carry LPG cylinders loose in a closed vehicle, even when they seem empty."
+        "AU": "**LPG cylinders hold gas under pressure.** Keep a cylinder upright — when you store it and when you carry it — and make sure it is secured when you carry it.\nKeep cylinders cool and away from heat, flames and sparks."
       },
       "marketBodyWhen": {},
       "stateOverrides": [
@@ -757,6 +1203,230 @@
           "authority": "SA.GOV.AU",
           "sourceDate": "read live 2026-10-05",
           "servedWhen": "state-label"
+        },
+        {
+          "id": "cyl-test-date-nsw",
+          "jurisdiction": "NSW",
+          "label": "NSW Government",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Check the test date stamped on a cylinder. Do not use or refill a cylinder that is out of test date or that is damaged or corroded. How long a test date lasts is set by your state or territory.",
+          "figure": null,
+          "source": "https://www.nsw.gov.au/legal-and-justice/consumer-rights-and-protection/safety/gas-safety-requirements-and-consumer-rights",
+          "authority": "NSW Government",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (NSW, QLD, SA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not NSW Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-test-date-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Check the test date stamped on a cylinder. Do not use or refill a cylinder that is out of test date or that is damaged or corroded. How long a test date lasts is set by your state or territory.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (NSW, QLD, SA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-test-date-sa",
+          "jurisdiction": "SA",
+          "label": "SA.GOV.AU",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Check the test date stamped on a cylinder. Do not use or refill a cylinder that is out of test date or that is damaged or corroded. How long a test date lasts is set by your state or territory.",
+          "figure": null,
+          "source": "https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/using-gas-appliances-safely/lpg-cylinders-and-fittings",
+          "authority": "SA.GOV.AU",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (NSW, QLD, SA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not SA.GOV.AU's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-no-tampering-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Never tamper with a cylinder valve or force it, and do not try to repair or remove a cylinder valve yourself.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (QLD, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-no-tampering-sa",
+          "jurisdiction": "SA",
+          "label": "SA.GOV.AU",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Never tamper with a cylinder valve or force it, and do not try to repair or remove a cylinder valve yourself.",
+          "figure": null,
+          "source": "https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/using-gas-appliances-safely/lpg-cylinders-and-fittings",
+          "authority": "SA.GOV.AU",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (QLD, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not SA.GOV.AU's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-no-tampering-wa",
+          "jurisdiction": "WA",
+          "label": "Building and Energy (WA)",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Never tamper with a cylinder valve or force it, and do not try to repair or remove a cylinder valve yourself.",
+          "figure": null,
+          "source": "https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
+          "authority": "Building and Energy (WA)",
+          "sourceDate": "updated 2 April 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (QLD, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Building and Energy (WA)'s own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-appliance-hose-sa",
+          "jurisdiction": "SA",
+          "label": "SA.GOV.AU",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Use an LPG cylinder only with an appliance made for LPG, and only with a certified regulator and hose made for it. Check hoses and seals for damage.",
+          "figure": null,
+          "source": "https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/using-gas-appliances-safely/lpg-cylinders-and-fittings",
+          "authority": "SA.GOV.AU",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not SA.GOV.AU's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-appliance-hose-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Use an LPG cylinder only with an appliance made for LPG, and only with a certified regulator and hose made for it. Check hoses and seals for damage.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-appliance-hose-act",
+          "jurisdiction": "ACT",
+          "label": "WorkSafe ACT",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Use an LPG cylinder only with an appliance made for LPG, and only with a certified regulator and hose made for it. Check hoses and seals for damage.",
+          "figure": null,
+          "source": "https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety",
+          "authority": "WorkSafe ACT",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not WorkSafe ACT's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-soapy-water-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Check the connections for leaks with soapy water or detergent and water. If bubbles appear there is a leak: turn the gas off, do not use the appliance, and call a licensed gasfitter.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-soapy-water-act",
+          "jurisdiction": "ACT",
+          "label": "WorkSafe ACT",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Check the connections for leaks with soapy water or detergent and water. If bubbles appear there is a leak: turn the gas off, do not use the appliance, and call a licensed gasfitter.",
+          "figure": null,
+          "source": "https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety",
+          "authority": "WorkSafe ACT",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not WorkSafe ACT's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-valve-off-sa",
+          "jurisdiction": "SA",
+          "label": "SA.GOV.AU",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Turn the cylinder valve off before you disconnect a cylinder.",
+          "figure": null,
+          "source": "https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/using-gas-appliances-safely/lpg-cylinders-and-fittings",
+          "authority": "SA.GOV.AU",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not SA.GOV.AU's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-valve-off-qld",
+          "jurisdiction": "QLD",
+          "label": "Queensland Government",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Turn the cylinder valve off before you disconnect a cylinder.",
+          "figure": null,
+          "source": "https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "authority": "Queensland Government",
+          "sourceDate": "cylinder page updated 3 September 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Queensland Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-valve-off-act",
+          "jurisdiction": "ACT",
+          "label": "WorkSafe ACT",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Turn the cylinder valve off before you disconnect a cylinder.",
+          "figure": null,
+          "source": "https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety",
+          "authority": "WorkSafe ACT",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not WorkSafe ACT's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-closed-vehicle-nsw",
+          "jurisdiction": "NSW",
+          "label": "NSW Government",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Do not leave or carry LPG cylinders loose in a closed vehicle, even when they seem empty.",
+          "figure": null,
+          "source": "https://www.nsw.gov.au/legal-and-justice/consumer-rights-and-protection/safety/gas-safety-requirements-and-consumer-rights",
+          "authority": "NSW Government",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (NSW, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not NSW Government's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "cyl-closed-vehicle-act",
+          "jurisdiction": "ACT",
+          "label": "WorkSafe ACT",
+          "category": "B",
+          "topic": "gas-cylinder-safety",
+          "claim": "Do not leave or carry LPG cylinders loose in a closed vehicle, even when they seem empty.",
+          "figure": null,
+          "source": "https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety",
+          "authority": "WorkSafe ACT",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 2 recorded jurisdictions (NSW, ACT); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not WorkSafe ACT's own sentence; not re-verified word by word."
         }
       ],
       "sources": {
@@ -782,19 +1452,19 @@
           "store seasonal portable LPG appliances under cover — WorkSafe NZ (Carbon monoxide)"
         ],
         "AU": [
-          "upright in storage and carriage — Queensland Government (QLD), SA.GOV.AU (SA), Building and Energy (WA), WorkSafe ACT (ACT)",
-          "cool, away from heat, flames and sparks — Queensland Government (QLD), Building and Energy (WA), WorkSafe ACT (ACT), SA.GOV.AU (SA)",
-          "check the stamped test date; not out of date, damaged or corroded; duration set by the state — NSW Government (NSW), Queensland Government (QLD), SA.GOV.AU (SA)",
-          "no tampering with valves; no DIY valve repair — Queensland Government (QLD), SA.GOV.AU (SA), Building and Energy (WA)",
-          "LPG appliances only; certified regulator and hose; check seals — SA.GOV.AU (SA), Queensland Government (QLD), WorkSafe ACT (ACT)",
-          "soapy water or detergent leak check; gas off; licensed gasfitter — Queensland Government (QLD), WorkSafe ACT (ACT)",
-          "valve off before disconnecting — SA.GOV.AU (SA), Queensland Government (QLD), WorkSafe ACT (ACT)",
-          "not loose in a closed vehicle — NSW Government (NSW), WorkSafe ACT (ACT)"
+          "SERVED (A) · LPG cylinders hold gas under pressure. Keep a cylinder upright — when … — Queensland Government (QLD), SA.GOV.AU (SA), Building and Energy (WA) (WA), WorkSafe ACT (ACT) — 4 independent official jurisdictions (QLD, SA, WA, ACT), none contradicting, no state-specific limitation",
+          "SERVED (A) · Keep cylinders cool and away from heat, flames and sparks.… — Queensland Government (QLD), Building and Energy (WA) (WA), WorkSafe ACT (ACT), SA.GOV.AU (SA) — 4 independent official jurisdictions (QLD, WA, ACT, SA), none contradicting, no state-specific limitation",
+          "NOT SERVED (B) · Check the test date stamped on a cylinder. Do not use or refill a cyli… — NSW Government (NSW), Queensland Government (QLD), SA.GOV.AU (SA) — only 3 recorded jurisdictions (NSW, QLD, SA); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Never tamper with a cylinder valve or force it, and do not try to repa… — Queensland Government (QLD), SA.GOV.AU (SA), Building and Energy (WA) (WA) — only 3 recorded jurisdictions (QLD, SA, WA); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Use an LPG cylinder only with an appliance made for LPG, and only with… — SA.GOV.AU (SA), Queensland Government (QLD), WorkSafe ACT (ACT) — only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Check the connections for leaks with soapy water or detergent and wate… — Queensland Government (QLD), WorkSafe ACT (ACT) — only 2 recorded jurisdictions (QLD, ACT); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Turn the cylinder valve off before you disconnect a cylinder.… — SA.GOV.AU (SA), Queensland Government (QLD), WorkSafe ACT (ACT) — only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source",
+          "NOT SERVED (B) · Do not leave or carry LPG cylinders loose in a closed vehicle, even wh… — NSW Government (NSW), WorkSafe ACT (ACT) — only 2 recorded jurisdictions (NSW, ACT); common core needs 4+ or a national source"
         ]
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "BUILT 2026-10-06 (Stage 9.62). NON-NUMERIC core: every sentence is protective-only (a precaution that cannot cause harm if followed anywhere), stated by at least two Australian jurisdictions read live, and contradicted by none. Every interval, size and distance is a labelled override that is NOT served. WORDING PENDING OWNER APPROVAL."
+        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. WORDING PENDING OWNER APPROVAL."
       },
       "triggers": {
         "topic": "gas-cylinder-safety",
@@ -805,7 +1475,133 @@
         ],
         "relationship": "no overlap with the existing blocks; carries the NZ soapy-water test that the unflued block does not."
       },
-      "changeRule": "LOCKED: no national AU cylinder-testing interval, hose interval, clearance or distance. Each of those exists only as a stateOverride keyed by jurisdiction and appliance, and is NOT served. NSW's '10 or 15 years' must never be merged with QLD's and SA's '10 years'."
+      "changeRule": "LOCKED: no national AU cylinder-testing interval, hose interval, clearance or distance. Each of those exists only as a stateOverride keyed by jurisdiction and appliance, and is NOT served. NSW's '10 or 15 years' must never be merged with QLD's and SA's '10 years'.",
+      "pendingOwnerApproval": [
+        "NZ",
+        "AU"
+      ],
+      "commonCoreClaims": [
+        {
+          "id": "cyl-upright",
+          "text": "**LPG cylinders hold gas under pressure.** Keep a cylinder upright — when you store it and when you carry it — and make sure it is secured when you carry it.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "QLD",
+              "SA",
+              "WA",
+              "ACT"
+            ]
+          },
+          "category": "A",
+          "reason": "4 independent official jurisdictions (QLD, SA, WA, ACT), none contradicting, no state-specific limitation",
+          "served": true
+        },
+        {
+          "id": "cyl-cool",
+          "text": "Keep cylinders cool and away from heat, flames and sparks.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "QLD",
+              "WA",
+              "ACT",
+              "SA"
+            ]
+          },
+          "category": "A",
+          "reason": "4 independent official jurisdictions (QLD, WA, ACT, SA), none contradicting, no state-specific limitation",
+          "served": true
+        },
+        {
+          "id": "cyl-test-date",
+          "text": "Check the test date stamped on a cylinder. Do not use or refill a cylinder that is out of test date or that is damaged or corroded. How long a test date lasts is set by your state or territory.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "NSW",
+              "QLD",
+              "SA"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (NSW, QLD, SA); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "cyl-no-tampering",
+          "text": "Never tamper with a cylinder valve or force it, and do not try to repair or remove a cylinder valve yourself.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "QLD",
+              "SA",
+              "WA"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (QLD, SA, WA); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "cyl-appliance-hose",
+          "text": "Use an LPG cylinder only with an appliance made for LPG, and only with a certified regulator and hose made for it. Check hoses and seals for damage.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "SA",
+              "QLD",
+              "ACT"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "cyl-soapy-water",
+          "text": "Check the connections for leaks with soapy water or detergent and water. If bubbles appear there is a leak: turn the gas off, do not use the appliance, and call a licensed gasfitter.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "QLD",
+              "ACT"
+            ]
+          },
+          "category": "B",
+          "reason": "only 2 recorded jurisdictions (QLD, ACT); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "cyl-valve-off",
+          "text": "Turn the cylinder valve off before you disconnect a cylinder.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "SA",
+              "QLD",
+              "ACT"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (SA, QLD, ACT); common core needs 4+ or a national source",
+          "served": false
+        },
+        {
+          "id": "cyl-closed-vehicle",
+          "text": "Do not leave or carry LPG cylinders loose in a closed vehicle, even when they seem empty.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "NSW",
+              "ACT"
+            ]
+          },
+          "category": "B",
+          "reason": "only 2 recorded jurisdictions (NSW, ACT); common core needs 4+ or a national source",
+          "served": false
+        }
+      ]
     },
     "gas-leak-response": {
       "id": "gas-leak-response",
@@ -992,7 +1788,11 @@
         ],
         "relationship": "no overlap with the existing blocks, but the emergency-contact block already says 111/000: the NZ body repeats 111 once, deliberately, because it is the instruction a member needs in the moment."
       },
-      "changeRule": "LOCKED: NEVER write one Australian leak instruction. The AU body stays failed-closed until the owner approves draftedNotServed.AU or a state-routing stage exists. Never merge two jurisdictions' leak instructions — a merged sentence about electrical switches is the one outcome this block exists to prevent. Never copy NZ's 'never operate any electrical switch' into AU: NZ's rule is NZ's."
+      "changeRule": "LOCKED: NEVER write one Australian leak instruction. The AU body stays failed-closed until the owner approves draftedNotServed.AU or a state-routing stage exists. Never merge two jurisdictions' leak instructions — a merged sentence about electrical switches is the one outcome this block exists to prevent. Never copy NZ's 'never operate any electrical switch' into AU: NZ's rule is NZ's.",
+      "pendingOwnerApproval": [
+        "NZ",
+        "AU"
+      ]
     },
     "gas-installation-and-servicing": {
       "id": "gas-installation-and-servicing",
@@ -1001,14 +1801,14 @@
       "body": "{{safety.notVerifiedForMarket}}",
       "marketBody": {
         "NZ": "**Only a licensed gasfitter may do gas work.** Have any gasfitting — pipework, gas appliances and flues, and any addition or alteration — done by a currently licensed gasfitter or certifying gasfitter, and ask to see their current practising licence ID card.\nGasfitting done since 1 July 2013 has to be certified. Once the work is connected, the person responsible must issue a Gas Safety Certificate that says the installation is safe to use. Ask for it and keep it.\nOwners, landlords and tenants are responsible for the safe operation and maintenance of their gas appliances. Have them checked regularly by an authorised and competent person.\nWorkSafe New Zealand advises that flame effect heaters and LPG cabinet heaters should be serviced annually. WorkSafe New Zealand also advises that other space heaters and water heaters should be serviced at least every two years.\nWhenever a licensed gas worker is in your home, ask them to check that your gas appliances and installation are safe. Consider replacing old appliances, and avoid buying second-hand ones.\nIf the gas supply to your property has been interrupted, or an appliance may have been left on, a certifying gasfitter must be involved in turning the gas back on, because the pipes may have filled with air.",
-        "AU": "**Gas work must be done by a licensed gasfitter** — installing, altering, relocating, repairing, servicing or testing gas appliances, pipework and connections, and replacing a gas appliance. Ask to see the licence, and check it with your state or territory's regulator.\nAfter gas work, ask the gasfitter for the compliance certificate, inspection certificate or service record that applies where you live, and keep it.\nHave gas appliances serviced regularly by a licensed gasfitter. How often depends on the appliance, the manufacturer's instructions and your state or territory — some set an interval and some do not — so check your state or territory's energy safety regulator.\nNever attempt gas work yourself, and never tamper with safety valves or fittings."
+        "AU": "**Gas work must be done by a licensed gasfitter** — installing, altering, relocating, repairing, servicing or testing gas appliances, pipework and connections, and replacing a gas appliance. Ask to see the licence, and check it with your state or territory's regulator.\nAfter gas work, ask the gasfitter for the compliance certificate, inspection certificate or service record that applies where you live, and keep it.\nHave gas appliances serviced regularly by a licensed gasfitter. How often depends on the appliance, the manufacturer's instructions and your state or territory — some set an interval and some do not — so check your state or territory's energy safety regulator."
       },
       "marketBodyWhen": {
         "carbon-monoxide": {
           "AU": "**Gas work must be done by a licensed gasfitter** — installing, altering, relocating, repairing, servicing or testing gas appliances, pipework and connections, and replacing a gas appliance. Ask to see the licence, and check it with your state or territory's regulator.\nAfter gas work, ask the gasfitter for the compliance certificate, inspection certificate or service record that applies where you live, and keep it."
         },
         "indoor-combustion": {
-          "AU": "**Gas work must be done by a licensed gasfitter** — installing, altering, relocating, repairing, servicing or testing gas appliances, pipework and connections, and replacing a gas appliance. Ask to see the licence, and check it with your state or territory's regulator.\nAfter gas work, ask the gasfitter for the compliance certificate, inspection certificate or service record that applies where you live, and keep it.\nNever attempt gas work yourself, and never tamper with safety valves or fittings."
+          "AU": "**Gas work must be done by a licensed gasfitter** — installing, altering, relocating, repairing, servicing or testing gas appliances, pipework and connections, and replacing a gas appliance. Ask to see the licence, and check it with your state or territory's regulator.\nAfter gas work, ask the gasfitter for the compliance certificate, inspection certificate or service record that applies where you live, and keep it."
         },
         "carbon-monoxide+indoor-combustion": {
           "AU": "**Gas work must be done by a licensed gasfitter** — installing, altering, relocating, repairing, servicing or testing gas appliances, pipework and connections, and replacing a gas appliance. Ask to see the licence, and check it with your state or territory's regulator.\nAfter gas work, ask the gasfitter for the compliance certificate, inspection certificate or service record that applies where you live, and keep it."
@@ -1160,6 +1960,48 @@
           "authority": "Building and Energy (WA)",
           "sourceDate": "2 April 2026 (read live 2026-10-05)",
           "servedWhen": "state-label"
+        },
+        {
+          "id": "ins-no-diy-vic",
+          "jurisdiction": "VIC",
+          "label": "Energy Safe Victoria",
+          "category": "B",
+          "topic": "gas-installation-and-servicing",
+          "claim": "Never attempt gas work yourself, and never tamper with safety valves or fittings.",
+          "figure": null,
+          "source": "https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "authority": "Energy Safe Victoria",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Energy Safe Victoria's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "ins-no-diy-sa",
+          "jurisdiction": "SA",
+          "label": "SA.GOV.AU",
+          "category": "B",
+          "topic": "gas-installation-and-servicing",
+          "claim": "Never attempt gas work yourself, and never tamper with safety valves or fittings.",
+          "figure": null,
+          "source": "https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/using-gas-appliances-safely/lpg-cylinders-and-fittings",
+          "authority": "SA.GOV.AU",
+          "sourceDate": "read live 2026-10-05",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not SA.GOV.AU's own sentence; not re-verified word by word."
+        },
+        {
+          "id": "ins-no-diy-wa",
+          "jurisdiction": "WA",
+          "label": "Building and Energy (WA)",
+          "category": "B",
+          "topic": "gas-installation-and-servicing",
+          "claim": "Never attempt gas work yourself, and never tamper with safety valves or fittings.",
+          "figure": null,
+          "source": "https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
+          "authority": "Building and Energy (WA)",
+          "sourceDate": "updated 2 April 2026 (read live 2026-10-05)",
+          "servedWhen": "state-label",
+          "note": "Demoted from the AU common core by the Stage 9.62A rule: only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source. Wording is the generic proposal that this jurisdiction was recorded as supporting, not Building and Energy (WA)'s own sentence; not re-verified word by word."
         }
       ],
       "sources": {
@@ -1189,15 +2031,15 @@
           "a certifying gasfitter turns the gas back on after an interruption — WorkSafe NZ (Gas supply to your property)"
         ],
         "AU": [
-          "licensed gasfitter for all gas work; check the licence — all eight jurisdictions read (VIC, NSW, QLD, SA, WA, TAS, ACT, NT)",
-          "certificate or service record that applies where you live — NSW Government (NSW), Consumer Affairs Tasmania (TAS), NT WorkSafe (NT), Energy Safe Victoria (VIC)",
-          "serviced regularly; interval depends on the appliance, manufacturer and state — stated limitation",
-          "no DIY; no tampering with safety valves — Energy Safe Victoria (VIC), SA.GOV.AU (SA), Building and Energy (WA)"
+          "SERVED (A) · Gas work must be done by a licensed gasfitter — installing, altering, … — Energy Safe Victoria (VIC), NSW Government (NSW), Queensland Government (QLD), SA.GOV.AU (SA), Building and Energy (WA) (WA), Consumer Affairs Tasmania (TAS), WorkSafe ACT (ACT), NT WorkSafe (NT) — 8 independent official jurisdictions (VIC, NSW, QLD, SA, WA, TAS, ACT, NT), none contradicting, no state-specific limitation — the list of kinds of work is recorded at paragraph level, not verified verb by verb per jurisdiction",
+          "SERVED (A) · After gas work, ask the gasfitter for the compliance certificate, insp… — NSW Government (NSW), Consumer Affairs Tasmania (TAS), NT WorkSafe (NT), Energy Safe Victoria (VIC) — 4 independent official jurisdictions (NSW, TAS, NT, VIC), none contradicting, no state-specific limitation",
+          "SERVED (A) · Have gas appliances serviced regularly by a licensed gasfitter. How of… — Energy Safe Victoria (VIC), NSW Government (NSW), Building and Energy (WA) (WA), Queensland Government (QLD), Consumer Affairs Tasmania (TAS) — 5 independent official jurisdictions (VIC, NSW, WA, QLD, TAS), none contradicting, no state-specific limitation — NSW's evidence is gas WATER heaters only; the claim is non-numeric ('regularly') and the interval is left to the regulator. Without NSW it is still 4",
+          "NOT SERVED (B) · Never attempt gas work yourself, and never tamper with safety valves o… — Energy Safe Victoria (VIC), SA.GOV.AU (SA), Building and Energy (WA) (WA) — only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source"
         ]
       },
       "verification": {
         "NZ": "BUILT 2026-10-06 (Stage 9.62). Every sentence traces to WorkSafe New Zealand and/or Health New Zealand pages read live 2026-10-05. WORDING PENDING OWNER APPROVAL — it becomes approved when OG-B09 (or another resource) carries it and the owner approves that resource.",
-        "AU": "BUILT 2026-10-06 (Stage 9.62). NON-NUMERIC core: every sentence is protective-only (a precaution that cannot cause harm if followed anywhere), stated by at least two Australian jurisdictions read live, and contradicted by none. The VIC, NSW and WA servicing intervals are labelled overrides that are NOT served. WORDING PENDING OWNER APPROVAL."
+        "AU": "BUILT 2026-10-06 (Stage 9.62), RE-CLASSIFIED Stage 9.62A under the tightened rule: a claim is in the common AU core only with an authoritative national source (none readable: AS/NZS 5601 is paywalled) or four or more independent official jurisdictions, none contradicting, no state-specific limitation. Two jurisdictions are NOT enough. Non-numeric. Claims short of that are labelled category-B records in stateOverrides and are not served. WORDING PENDING OWNER APPROVAL."
       },
       "triggers": {
         "topic": "gas-installation-and-servicing",
@@ -1207,7 +2049,81 @@
         ],
         "relationship": "overlaps carbon-monoxide and indoor-combustion on servicing: beside either, its servicing paragraph is dropped; beside carbon-monoxide its no-DIY paragraph is dropped."
       },
-      "changeRule": "LOCKED: the 'at least every two years' sentence removed from the AU carbon-monoxide and indoor-combustion blocks at Stage 9.56 must NOT be restored here, nor any other single Australian interval. NSW's interval is for gas WATER heaters only and must never become general gas-heater guidance. Each interval is STATE-SPECIFIC and APPLIANCE-SPECIFIC and exists only as a stateOverride."
+      "changeRule": "LOCKED: the 'at least every two years' sentence removed from the AU carbon-monoxide and indoor-combustion blocks at Stage 9.56 must NOT be restored here, nor any other single Australian interval. NSW's interval is for gas WATER heaters only and must never become general gas-heater guidance. Each interval is STATE-SPECIFIC and APPLIANCE-SPECIFIC and exists only as a stateOverride.",
+      "pendingOwnerApproval": [
+        "NZ",
+        "AU"
+      ],
+      "commonCoreClaims": [
+        {
+          "id": "ins-licensed",
+          "text": "**Gas work must be done by a licensed gasfitter** — installing, altering, relocating, repairing, servicing or testing gas appliances, pipework and connections, and replacing a gas appliance. Ask to see the licence, and check it with your state or territory's regulator.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "NSW",
+              "QLD",
+              "SA",
+              "WA",
+              "TAS",
+              "ACT",
+              "NT"
+            ]
+          },
+          "category": "A",
+          "reason": "8 independent official jurisdictions (VIC, NSW, QLD, SA, WA, TAS, ACT, NT), none contradicting, no state-specific limitation",
+          "served": true
+        },
+        {
+          "id": "ins-certificate",
+          "text": "After gas work, ask the gasfitter for the compliance certificate, inspection certificate or service record that applies where you live, and keep it.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "NSW",
+              "TAS",
+              "NT",
+              "VIC"
+            ]
+          },
+          "category": "A",
+          "reason": "4 independent official jurisdictions (NSW, TAS, NT, VIC), none contradicting, no state-specific limitation",
+          "served": true
+        },
+        {
+          "id": "ins-servicing",
+          "text": "Have gas appliances serviced regularly by a licensed gasfitter. How often depends on the appliance, the manufacturer's instructions and your state or territory — some set an interval and some do not — so check your state or territory's energy safety regulator.",
+          "topicCore": true,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "NSW",
+              "WA",
+              "QLD",
+              "TAS"
+            ]
+          },
+          "category": "A",
+          "reason": "5 independent official jurisdictions (VIC, NSW, WA, QLD, TAS), none contradicting, no state-specific limitation",
+          "served": true
+        },
+        {
+          "id": "ins-no-diy",
+          "text": "Never attempt gas work yourself, and never tamper with safety valves or fittings.",
+          "topicCore": false,
+          "evidence": {
+            "jurisdictions": [
+              "VIC",
+              "SA",
+              "WA"
+            ]
+          },
+          "category": "B",
+          "reason": "only 3 recorded jurisdictions (VIC, SA, WA); common core needs 4+ or a national source",
+          "served": false
+        }
+      ]
     }
   }
 }

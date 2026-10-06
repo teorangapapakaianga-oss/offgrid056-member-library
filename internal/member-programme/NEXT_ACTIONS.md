@@ -113,3 +113,9 @@ migrate nothing until the wording is approved.
 2. Stage 9.63: OG-B09 claims-first migration (no deploy).
 3. OG-24 also requires gas blocks.
 
+
+## After Stage 9.62A
+
+1. Owner rules on: the numeric block-span weakness (reported, unchanged); whether to run an AU evidence round to promote category-B claims; approval of the five gas blocks' wording.
+2. Stage 9.63 (only after approval): OG-B09 claims-first migration.
+

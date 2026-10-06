@@ -2,13 +2,13 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { prepareResource, type PrepInputs } from "@/admin-import/pilot/prep";
+import { GAS_BLOCK_SET, fuelSafetyFindings, gasBlockAvailability, memberFacingText, prepareResource, requiredGasBlocks, type PrepInputs } from "@/admin-import/pilot/prep";
 import profilesFile from "@/admin-import/markets/profiles.json";
 import pilotSpec from "@/admin-import/pilot/og-02.json";
 import topicBlocks from "@/admin-import/config/safety-blocks.json";
-import { overrideServable, type MarketProfile, type SafetyBlock, type StateOverride } from "@/admin-import/markets/resolve";
+import { COMMON_CORE_MIN_JURISDICTIONS, classifyCommonClaim, overrideServable, type CommonCoreClaim, type MarketProfile, type SafetyBlock, type StateOverride } from "@/admin-import/markets/resolve";
 import { safetyExposureFor } from "@/admin-import/audit/group-a";
-import { loadNumericRegistry, numericBlockingFindings, scanNumericClaims } from "@/admin-import/audit/numeric";
+import { SPELLED_NUMBER_LIMITS, loadNumericRegistry, numericBlockingFindings, scanNumericClaims } from "@/admin-import/audit/numeric";
 import { loadTreatmentRegistry } from "@/admin-import/audit/treatment";
 import { scanPrices } from "@/admin-import/audit/price";
 
@@ -27,6 +27,7 @@ const markets = profilesFile.markets as unknown as MarketProfile[];
 const registry = loadNumericRegistry(path.join(root, "admin-import/config/numeric-claims.json"));
 const treatment = loadTreatmentRegistry(path.join(root, "admin-import/config/treatment-sources.json"));
 
+const GENERAL_ID = "gas-and-lpg-general";
 const GAS_BLOCKS = ["gas-and-lpg-general", "unflued-gas-heating", "gas-cylinder-safety", "gas-leak-response", "gas-installation-and-servicing"] as const;
 const body = (id: string, market: "NZ" | "AU") => blocks[id].marketBody?.[market];
 const overrides = (id: string) => (blocks[id].stateOverrides ?? []) as StateOverride[];
@@ -56,6 +57,10 @@ const fileOf = (r: ReturnType<typeof prep>, m: string) => fs.readFileSync(r.file
 const scan = (text: string, market: string, resource = "OG-B09") =>
   scanNumericClaims(`<div class="content"><p>${text}</p></div>`, { resource, market, registry, treatment });
 const buckets = (text: string, market: string) => scan(text, market).map((c) => c.bucket);
+/** A sentence as it appears INSIDE an injected safety block (the only place a block-owned numeric claim applies). */
+const inBlock = (id: string, text: string) => `<div class="og-safety standard" data-block="${id}"><h3>Block</h3><p style="margin:0">${text}</p></div>`;
+const bucketsHtml = (html: string, market: string, resource = "OG-B09") =>
+  scanNumericClaims(html, { resource, market, registry, treatment }).map((c) => c.bucket);
 const requires = (t: string) => safetyExposureFor(t);
 // Emergency numbers are structural, not claims: AU bodies may name 000 and nothing else numeric.
 const withoutEmergency = (s: string) => s.replace(/\b000\b|\b111\b|\b112\b/g, "");
@@ -85,7 +90,7 @@ describe("Stage 9.62 · Australia is a non-numeric core", () => {
   const AU_SERVED = GAS_BLOCKS.filter((id) => body(id, "AU") !== undefined);
 
   it("4. contains no national numeric servicing interval — or any figure at all", () => {
-    expect(AU_SERVED.length).toBe(4);
+    // Stage 9.62A: three blocks keep a common core under the tightened Category-A rule; unflued heating and leak response fail closed.\n    expect(AU_SERVED.sort()).toEqual(["gas-and-lpg-general", "gas-cylinder-safety", "gas-installation-and-servicing"]);
     for (const id of AU_SERVED) {
       const text = withoutEmergency(body(id, "AU")!);
       expect(text, `${id}: a digit`).not.toMatch(/\d/);
@@ -109,7 +114,7 @@ describe("Stage 9.62 · Australia is a non-numeric core", () => {
   });
 
   it("restores neither the Victorian interval nor any other single Australian interval", () => {
-    for (const id of ["gas-installation-and-servicing", "unflued-gas-heating", "gas-and-lpg-general"]) {
+    for (const id of ["gas-installation-and-servicing", "gas-and-lpg-general"]) {
       expect(body(id, "AU")!, id).not.toMatch(/every two years|at least every|twice a year/i);
     }
     expect(body("gas-installation-and-servicing", "AU")).toMatch(/some set an interval and some do not/);
@@ -121,10 +126,25 @@ describe("Stage 9.62 · New Zealand figures are registered, scoped and never val
   const NZ_TWO = "WorkSafe New Zealand also advises that other space heaters and water heaters should be serviced at least every two years.";
 
   it("1. an NZ gas rule is sourced in NZ and is NOT sourced in AU", () => {
-    expect(buckets(NZ_ANNUAL, "NZ")).toContain("A_ALREADY_SOURCED");
-    expect(buckets(NZ_ANNUAL, "AU")).toContain("C_NEEDS_SOURCE");
-    expect(buckets(NZ_TWO, "NZ")).toContain("A_ALREADY_SOURCED");
+    const annual = inBlock("gas-installation-and-servicing", NZ_ANNUAL);
+    const two = inBlock("gas-installation-and-servicing", NZ_TWO);
+    expect(bucketsHtml(annual, "NZ")).toContain("A_ALREADY_SOURCED");
+    expect(buckets(NZ_ANNUAL, "AU"), "the same sentence in an Australian file is not sourced").toContain("C_NEEDS_SOURCE");
+    expect(bucketsHtml(two, "NZ")).toContain("A_ALREADY_SOURCED");
     expect(buckets(NZ_TWO, "AU")).toContain("C_NEEDS_SOURCE");
+  });
+
+  it("11. a block-owned claim validates ONLY its own block's sentence, never a resource's own wording or another block's", () => {
+    // Stage 9.62A: owningResources is [] for these claims, which used to mean "any resource". They are scoped to the block.
+    const oneMetre = "Keep an unflued heater at least one metre from anything that could catch fire.";
+    expect(bucketsHtml(inBlock("unflued-gas-heating", oneMetre), "NZ")).toContain("A_ALREADY_SOURCED");
+    expect(bucketsHtml(`<div class="content"><p>${oneMetre}</p></div>`, "NZ"), "the resource's OWN sentence is not validated").toContain("C_NEEDS_SOURCE");
+    expect(bucketsHtml(`<div class="content"><p>${NZ_ANNUAL}</p></div>`, "NZ"), "an own-text annual interval is not validated").toContain("C_NEEDS_SOURCE");
+    expect(bucketsHtml(`<div class="content"><p>${NZ_TWO}</p></div>`, "NZ"), "an own-text two-year interval is not validated").toContain("C_NEEDS_SOURCE");
+    for (const claim of registry.claims.filter((c) => c.owningBlock)) {
+      expect(claim.market, claim.id).toBe("NZ");
+      expect(claim.limitations.join(" "), `${claim.id} states its scope`).toMatch(/NZ only|SCOPED/);
+    }
   });
 
   it("2. the Victorian interval does not validate NSW — or anything else", () => {
@@ -162,13 +182,17 @@ describe("Stage 9.62 · New Zealand figures are registered, scoped and never val
     // NOT a statement that this is acceptable. Stage 9.62 found that the numeric detector does not see these
     // phrasings, and the detector is on the locked list, so it was reported rather than changed. If a later stage
     // closes the gap, THIS TEST SHOULD FAIL — and be rewritten to assert the opposite, as Stage 9.59's price test was.
-    const blind = [
+    // Stage 9.62A CLOSED the gap this test used to record: annual phrasing and spelled numbers above twelve are seen.
+    const seen = [
       "Have your gas heater serviced once a year.",
       "Have your gas heater serviced every year.",
+      "The gas heater is checked each year.",
+      "Have your gas heater serviced annually.",
+      "Have your gas heater serviced yearly.",
       "An LPG cylinder is valid for fifteen years from its test date.",
       "Replace the LPG hose after twenty years.",
     ];
-    for (const text of blind) expect(buckets(text, "AU"), `currently invisible: ${text}`).not.toContain("C_NEEDS_SOURCE");
+    for (const text of seen) expect(buckets(text, "AU"), `now seen: ${text}`).toContain("C_NEEDS_SOURCE");
     // The AU gas bodies themselves are clean of every one of these shapes, which is what actually protects members.
     for (const id of GAS_BLOCKS) {
       const au = body(id, "AU");
@@ -388,7 +412,7 @@ describe("Stage 9.62 · overlap and deduplication with the existing blocks", () 
     // A key that exists only for AU must not out-rank, and so discard, a valid NZ key.
     const r = prep({ extraSafetyBlocks: ["gas-and-lpg-general", "carbon-monoxide", "gas-installation-and-servicing"] });
     expect(sentence(fileOf(r, "NZ"), "Signs that a gas appliance is not working properly"), "NZ still trims beside carbon-monoxide").toBe(false);
-    expect(sentence(fileOf(r, "AU"), "Never tamper with safety valves or fittings, and never try to repair"), "AU trims too").toBe(false);
+    // The AU limitation is already said by the carbon-monoxide block, so the general block drops it: AU trims too.\n    expect(sentence(fileOf(r, "AU"), "Gas safety rules — including how often an appliance must be serviced — differ"), "AU trims too").toBe(false);\n    expect(sentence(fileOf(r, "AU"), "servicing intervals differ between states and territories"), "and the member still gets the point, once").toBe(true);
   });
 
   it("never loses the licensed-gasfitter routing, however the blocks are combined", () => {
@@ -410,40 +434,288 @@ describe("Stage 9.62 · overlap and deduplication with the existing blocks", () 
   });
 });
 
-describe("Stage 9.62 · the fuel check is released only by an APPROVED gas block", () => {
-  const GAS_OWN = `<!DOCTYPE html><html><head></head><body><div class="cover-page"><div class="cover-label">OffGrid056</div><h1 class="cover-title">Heating Checklist</h1><p class="cover-subtitle">A checklist.</p></div><div class="content"><h2>Plan</h2><p>Compare a flued gas heater with a heat pump before you decide.</p></div></body></html>`;
-  const findings = (r: ReturnType<typeof prep>) => r.terminology.otherFindings.filter((f) => f.startsWith("GAS_SAFETY_REQUIRED"));
+describe("Stage 9.62A · detected gas topic → required block SET → every block available and approved", () => {
+  const BASE = (p: string) =>
+    `<!DOCTYPE html><html><head></head><body><div class="cover-page"><div class="cover-label">OffGrid056</div><h1 class="cover-title">Heating Checklist</h1><p class="cover-subtitle">A checklist.</p></div><div class="content"><h2>Plan</h2><p>${p}</p></div></body></html>`;
+  const GENERIC = "Compare a flued gas heater with a heat pump before you decide.";
+  const TEACH = {
+    cylinder: "Check the LPG cylinder test date and keep the LPG cylinder upright.",
+    unflued: "Use an unflued gas heater only in a ventilated room and keep the room's vents clear.",
+    leak: "If you smell gas, turn off the gas at the meter and leave the building.",
+    install: "Have a licensed gasfitter install the gas heater.",
+  };
+  const GENERAL = "gas-and-lpg-general";
+  /** The blocks as the owner would have them once approved (the real file marks every gas block pending). */
+  const approve = (ids: readonly string[]) =>
+    Object.fromEntries(Object.entries(blocks).map(([k, b]) => [k, ids.includes(k) ? ({ ...b, pendingOwnerApproval: undefined } as SafetyBlock) : b])) as Record<string, SafetyBlock>;
+  const run = (text: string, carried: string[], approved: readonly string[], extra: Partial<PrepInputs> = {}) =>
+    prep({ sourceHtml: BASE(text), blocks: approve(approved), extraSafetyBlocks: carried, ...extra });
+  const gas = (r: ReturnType<typeof prep>, m: string) => r.safety.gas.find((g) => g.market === m)!;
+  const unavailableIds = (r: ReturnType<typeof prep>, m: string) => gas(r, m).unavailable.map((u) => u.id);
+  const publishable = (r: ReturnType<typeof prep>, m: string) => r.markets.find((x) => x.code === m)!.publishable;
+  const gasFindings = (r: ReturnType<typeof prep>) => r.terminology.otherFindings.filter((f) => /^GAS_/.test(f));
 
-  it("still holds a gas resource that carries no gas block", () => {
-    expect(findings(prep({ sourceHtml: GAS_OWN })).length).toBeGreaterThan(0);
+  it("maps each detected gas topic to the general block PLUS its own", () => {
+    expect(GAS_BLOCK_SET).toEqual({
+      "gas-and-lpg": [GENERAL],
+      "unflued-gas-heating": [GENERAL, "unflued-gas-heating"],
+      "gas-cylinder-safety": [GENERAL, "gas-cylinder-safety"],
+      "gas-leak-response": [GENERAL, "gas-leak-response"],
+      "gas-installation-and-servicing": [GENERAL, "gas-installation-and-servicing"],
+    });
+    expect(requiredGasBlocks(["gas-cylinder-safety", "gas-leak-response"], false).sort()).toEqual([GENERAL, "gas-cylinder-safety", "gas-leak-response"]);
+    expect(requiredGasBlocks([], true), "a gas FUEL finding with no detected topic is generic gas teaching").toEqual([GENERAL]);
+    expect(requiredGasBlocks([], false), "nothing detected, nothing required").toEqual([]);
   });
 
-  it("still holds it while the block is only a PROPOSAL", () => {
-    // proposedBlockIds is what the CLI derives for any block not in the resource's approvedSafetyBlocks.
-    const r = prep({ sourceHtml: GAS_OWN, extraSafetyBlocks: ["gas-and-lpg-general"], proposedBlockIds: ["gas-and-lpg-general"] });
-    expect(findings(r).length, "an unapproved block releases nothing").toBeGreaterThan(0);
+  it("detects the specific topic from the member-facing text, before any block is considered", () => {
+    expect(requires(TEACH.cylinder)).toContain("gas-cylinder-safety");
+    expect(requires(TEACH.unflued)).toContain("unflued-gas-heating");
+    expect(requires(TEACH.leak)).toContain("gas-leak-response");
+    expect(requires(TEACH.install)).toContain("gas-installation-and-servicing");
+  });
+
+  it("the general block does NOT satisfy cylinder teaching", () => {
+    const r = run(TEACH.cylinder, [GENERAL], [GENERAL]);
+    expect(gas(r, "NZ").required).toEqual(expect.arrayContaining([GENERAL, "gas-cylinder-safety"]));
+    expect(unavailableIds(r, "NZ")).toEqual(["gas-cylinder-safety"]);
+    expect(publishable(r, "NZ")).toBe(false);
+    expect(r.safety.missingRequired).toContain("gas-cylinder-safety");
+  });
+
+  it("the general block does NOT satisfy unflued-heater teaching", () => {
+    const r = run(TEACH.unflued, [GENERAL], [GENERAL]);
+    expect(gas(r, "NZ").required).toEqual(expect.arrayContaining([GENERAL, "unflued-gas-heating"]));
+    expect(unavailableIds(r, "NZ")).toEqual(["unflued-gas-heating"]);
+    expect(publishable(r, "NZ")).toBe(false);
+  });
+
+  it("the general block does NOT satisfy leak-response teaching", () => {
+    const r = run(TEACH.leak, [GENERAL], [GENERAL]);
+    expect(gas(r, "NZ").required).toEqual(expect.arrayContaining([GENERAL, "gas-leak-response"]));
+    expect(unavailableIds(r, "NZ")).toEqual(["gas-leak-response"]);
+    expect(publishable(r, "NZ")).toBe(false);
+  });
+
+  it("installation teaching requires the installation/servicing block as well as the general block", () => {
+    const only = run(TEACH.install, [GENERAL], [GENERAL]);
+    expect(unavailableIds(only, "NZ")).toEqual(["gas-installation-and-servicing"]);
+    expect(publishable(only, "NZ")).toBe(false);
+    const both = run(TEACH.install, [GENERAL, "gas-installation-and-servicing"], [GENERAL, "gas-installation-and-servicing"]);
+    expect(unavailableIds(both, "NZ")).toEqual([]);
+    expect(unavailableIds(both, "AU")).toEqual([]);
+    expect(gasFindings(both)).toEqual([]);
+  });
+
+  it("a missing CRITICAL block fails closed in every market", () => {
+    // unflued heating and leak response are CRITICAL; neither is carried.
+    for (const text of [TEACH.unflued, TEACH.leak]) {
+      const r = run(text, [GENERAL], [GENERAL]);
+      expect(publishable(r, "NZ"), text).toBe(false);
+      expect(publishable(r, "AU"), text).toBe(false);
+      expect(r.importReadiness, text).not.toBe("READY_AFTER_FINAL_VALIDATION");
+    }
+  });
+
+  it("a block that is carried but PENDING OWNER APPROVAL satisfies nothing", () => {
+    const r = prep({ sourceHtml: BASE(TEACH.install), extraSafetyBlocks: [GENERAL, "gas-installation-and-servicing"] }); // the real blocks: all pending
+    expect(unavailableIds(r, "NZ").sort()).toEqual([GENERAL, "gas-installation-and-servicing"].sort());
+    expect(gas(r, "NZ").unavailable.every((u) => /PENDING OWNER APPROVAL/.test(u.reason))).toBe(true);
+    expect(publishable(r, "NZ")).toBe(false);
+    expect(publishable(r, "AU")).toBe(false);
+  });
+
+  it("a block that is only a PROPOSAL for this resource satisfies nothing", () => {
+    const r = run(GENERIC, [GENERAL], [GENERAL], { proposedBlockIds: [GENERAL] });
+    expect(unavailableIds(r, "NZ")).toEqual([GENERAL]);
+    expect(gasFindings(r).length).toBeGreaterThan(0);
     expect(r.importReadiness).not.toBe("READY_AFTER_FINAL_VALIDATION");
   });
 
-  it("releases it once the owner has approved the block for that resource", () => {
-    const r = prep({ sourceHtml: GAS_OWN, extraSafetyBlocks: ["gas-and-lpg-general"], proposedBlockIds: [] });
-    expect(findings(r)).toEqual([]);
+  it("AU leak response remains unavailable even when the block is carried and approved", () => {
+    const r = run(TEACH.leak, [GENERAL, "gas-leak-response"], [GENERAL, "gas-leak-response"]);
+    expect(unavailableIds(r, "NZ"), "NZ has verified wording, so it is satisfied").toEqual([]);
+    expect(unavailableIds(r, "AU")).toEqual(["gas-leak-response"]);
+    expect(gas(r, "AU").unavailable[0].reason).toMatch(/FAILS CLOSED in AU/);
+    expect(publishable(r, "AU")).toBe(false);
+  });
+
+  it("AU unflued-heater teaching also fails closed: no claim reaches the common core", () => {
+    const r = run(TEACH.unflued, [GENERAL, "unflued-gas-heating"], [GENERAL, "unflued-gas-heating"]);
+    expect(unavailableIds(r, "NZ")).toEqual([]);
+    expect(unavailableIds(r, "AU")).toEqual(["unflued-gas-heating"]);
+    expect(publishable(r, "AU")).toBe(false);
+  });
+
+  it("generic gas teaching is released by the general block alone, once it is approved", () => {
+    const r = run(GENERIC, [GENERAL], [GENERAL]);
+    expect(unavailableIds(r, "NZ")).toEqual([]);
+    expect(unavailableIds(r, "AU")).toEqual([]);
+    expect(gasFindings(r)).toEqual([]);
+  });
+
+  it("still holds a gas resource that carries no gas block", () => {
+    const r = run(GENERIC, [], []);
+    expect(unavailableIds(r, "NZ")).toEqual([GENERAL]);
+    expect(gasFindings(r).length).toBeGreaterThan(0);
   });
 
   it("never releases the DIESEL check, whatever gas block is carried", () => {
-    const diesel = GAS_OWN.replace("a flued gas heater", "a diesel heater");
-    const r = prep({ sourceHtml: diesel, extraSafetyBlocks: ["gas-and-lpg-general"], proposedBlockIds: [] });
+    const r = run("Compare a diesel heater with a heat pump before you decide.", [GENERAL], [GENERAL]);
     expect(r.terminology.otherFindings.some((f) => f.startsWith("FUEL_GUIDANCE_REQUIRED"))).toBe(true);
   });
+});
+describe("Stage 9.62A · the tightened Category-A rule", () => {
+  it("two jurisdictions alone never create Category A, however clean they are", () => {
+    expect(classifyCommonClaim({ jurisdictions: ["VIC", "TAS"] }).category).toBe("B");
+    expect(classifyCommonClaim({ jurisdictions: ["VIC", "QLD", "WA"] }).category, "three is still not enough").toBe("B");
+    expect(classifyCommonClaim({ jurisdictions: ["VIC", "vic", "TAS", "WA"] }).category, "the same jurisdiction twice counts once").toBe("B");
+    expect(classifyCommonClaim({ jurisdictions: [] }).category, "no recorded evidence is not evidence").toBe("B");
+  });
 
-  it("does not release an unflued-heater requirement merely because the general block is approved", () => {
-    const unflued = GAS_OWN.replace("a flued gas heater", "an unflued gas heater and teach how to use the LPG cabinet heater safely");
-    const r = prep({ sourceHtml: unflued, extraSafetyBlocks: ["gas-and-lpg-general"], proposedBlockIds: [] });
-    expect(r.safety.outputTopics).toContain("unflued-gas-heating");
-    expect(r.safety.missingRequired, "the specialised block is still required").toContain("unflued-gas-heating");
+  it("enters Category A only with a national source or four or more independent jurisdictions", () => {
+    expect(COMMON_CORE_MIN_JURISDICTIONS).toBe(4);
+    expect(classifyCommonClaim({ jurisdictions: ["VIC", "TAS", "WA", "ACT"] }).category).toBe("A");
+    expect(classifyCommonClaim({ jurisdictions: ["VIC"], nationalSource: true }).category).toBe("A");
+  });
+
+  it("is never Category A when the claim is numeric, contradicted or state-limited", () => {
+    const four = ["VIC", "TAS", "WA", "ACT"];
+    expect(classifyCommonClaim({ jurisdictions: four, numeric: true }).category).toBe("C");
+    expect(classifyCommonClaim({ jurisdictions: four, contradictedBy: ["NSW"] }).category).toBe("C");
+    expect(classifyCommonClaim({ jurisdictions: four, jurisdictionSpecificLimitation: true }).category).toBe("C");
+    expect(classifyCommonClaim({ jurisdictions: four, nationalSource: true, numeric: true }).category, "a national source does not make a number common").toBe("C");
+  });
+
+  it("every served AU line traces to a Category-A claim with enough recorded evidence", () => {
+    for (const id of GAS_BLOCKS) {
+      const claims = (blocks[id].commonCoreClaims ?? []) as CommonCoreClaim[];
+      const au = body(id, "AU");
+      if (!au) {
+        // fails closed: nothing is served, so nothing may be marked served
+        expect(claims.filter((c) => c.served), `${id} serves nothing`).toEqual([]);
+        continue;
+      }
+      const served = claims.filter((c) => c.served);
+      expect(served.length, id).toBeGreaterThan(0);
+      for (const c of served) {
+        expect(c.category, `${id}/${c.id}`).toBe("A");
+        expect(new Set(c.evidence.jurisdictions).size, `${id}/${c.id} evidence`).toBeGreaterThanOrEqual(COMMON_CORE_MIN_JURISDICTIONS);
+        expect(classifyCommonClaim(c.evidence).category, `${id}/${c.id} recomputed`).toBe(c.category);
+      }
+      for (const line of au.split("\n")) expect(served.map((c) => c.text), `${id}: an AU line with no Category-A claim behind it`).toContain(line);
+      // and no claim that was NOT served leaks in
+      for (const c of claims.filter((x) => !x.served)) expect(au, `${id}/${c.id} leaked`).not.toContain(c.text);
+    }
+    expect(blocks["unflued-gas-heating"].marketBody?.AU, "no unflued claim reaches the common core, so there is no AU body").toBeUndefined();
+  });
+
+  it("keeps every demoted claim as a labelled category-B record, per jurisdiction, not served", () => {
+    const demoted = GAS_BLOCKS.flatMap((id) => ((blocks[id].commonCoreClaims ?? []) as CommonCoreClaim[]).filter((c) => !c.served).map((c) => ({ id, c })));
+    expect(demoted.length).toBeGreaterThan(10);
+    for (const { id, c } of demoted) {
+      const records = overrides(id).filter((o) => o.id.startsWith(`${c.id}-`));
+      expect(records.map((r) => r.jurisdiction).sort(), `${id}/${c.id}`).toEqual([...new Set(c.evidence.jurisdictions)].sort());
+      for (const r of records) {
+        expect(r.category, r.id).toBe("B");
+        expect(r.servedWhen, r.id).toBe("state-label");
+        expect(r.label, r.id).toBeTruthy();
+        expect(overrideServable(r, { renderedWith: undefined }), `${r.id} is not servable unlabelled`).toBe(false);
+      }
+    }
   });
 });
 
+describe("Stage 9.62A · recurring intervals and spelled numbers are detected, and fail unless registered", () => {
+  it("reads annual wording as an interval claim, with no digit and no unit-with-number", () => {
+    for (const text of ["Have the heater serviced once a year.", "Have the heater serviced annually.", "Have the heater serviced yearly.", "The cylinder is checked each year.", "Check the hose every year.", "Replace the regulator every other year.", "Service it two or three times a year."]) {
+      expect(buckets(text, "NZ"), text).toContain("C_NEEDS_SOURCE");
+      expect(buckets(text, "AU"), text).toContain("C_NEEDS_SOURCE");
+    }
+  });
+
+  it("'every year' cannot bypass interval checking by omitting a verb the gate knows", () => {
+    // "flushed" and "topped up" are not in the interval-verb list; the recurrence itself makes it a claim.
+    for (const text of ["The tank is flushed every year.", "The unit is topped up once a year.", "It is replaced each year."]) expect(buckets(text, "AU"), text).toContain("C_NEEDS_SOURCE");
+  });
+
+  it("an unregistered recurrence still FAILS the blocking gate; nothing is registered automatically", () => {
+    const findings = numericBlockingFindings(`<div class="content"><p>Have the gas heater serviced once a year.</p></div>`, { resource: "OG-B09", market: "NZ", registry, treatment });
+    expect(findings.join(" ")).toContain("UNSOURCED_NUMERIC_CLAIM");
+    expect(registry.claims.filter((c) => /once-a-year|every-year|each-year|yearly/.test(c.id))).toEqual([]);
+  });
+
+  it("does not read 'yearly' as an interval when it is only an adjective on a noun", () => {
+    expect(buckets("Compare the estimated yearly generation and savings.", "NZ")).not.toContain("C_NEEDS_SOURCE");
+  });
+
+  it("reads spelled numbers above twelve beside a unit", () => {
+    for (const text of ["A cylinder is valid for twenty years.", "Keep the cylinder fifteen metres from the house.", "Test the alarm every fourteen days.", "Stay twenty-five metres away."]) {
+      expect(buckets(text, "AU"), text).toContain("C_NEEDS_SOURCE");
+    }
+  });
+
+  it("documents what the spelled-number reader does NOT see, instead of pretending to cover it", () => {
+    expect(SPELLED_NUMBER_LIMITS).toMatch(/couple of|dozen|several/);
+    expect(buckets("Replace it after a couple of years.", "AU"), "recorded limitation: vague quantities are not read").not.toContain("C_NEEDS_SOURCE");
+  });
+
+  it("the NZ gas intervals are still approved ONLY inside their own blocks", () => {
+    const annual = inBlock("gas-installation-and-servicing", "WorkSafe New Zealand advises that flame effect heaters and LPG cabinet heaters should be serviced annually.");
+    expect(bucketsHtml(annual, "NZ")).toContain("A_ALREADY_SOURCED");
+  });
+});
+
+/** Real legacy sources, when the working copy has them (they are private and git-ignored). */
+describe("Stage 9.62A · OG-B09, OG-24 and OG-17 against the required-block mechanism", () => {
+  const candidatesFile = path.join(root, "workspace/candidates.json");
+  const have = fs.existsSync(candidatesFile);
+  const htmlOf = (code: string) => {
+    const cands = JSON.parse(fs.readFileSync(candidatesFile, "utf8")) as { source: { path: string; filename: string; extension: string } }[];
+    const f = cands.find((c) => c.source.filename.startsWith(`${code}_`) && /\.html?$/i.test(c.source.extension));
+    return f ? fs.readFileSync(f.source.path, "utf8") : null;
+  };
+  const textOf = (code: string) => {
+    const cands = JSON.parse(fs.readFileSync(candidatesFile, "utf8")) as { candidateId: string; source: { filename: string } }[];
+    const store = JSON.parse(fs.readFileSync(path.join(root, "workspace/text/extracted.json"), "utf8")) as Record<string, unknown>;
+    const texts = ("texts" in store ? (store as { texts: Record<string, string> }).texts : store) as Record<string, string>;
+    return cands.filter((c) => c.source.filename.startsWith(`${code}_`)).map((c) => texts[c.candidateId] ?? "").join("\n");
+  };
+  const GASSET = (t: string, fuel: boolean) => requiredGasBlocks(safetyExposureFor(t).filter((x) => x in GAS_BLOCK_SET), fuel);
+
+  it("OG-B09: the heating table row is gas teaching, and the required set is the general block ALONE", () => {
+    if (!have) return;
+    const html = htmlOf("OG-B09");
+    if (!html) return;
+    const fuel = fuelSafetyFindings(html).some((f) => f.startsWith("GAS_SAFETY_REQUIRED"));
+    expect(fuel, "the own-text fuel check fires on 'Flued gas'").toBe(true);
+    expect(safetyExposureFor(textOf("OG-B09")), "the source teaches gas through table figures").toContain("gas-and-lpg");
+    expect(GASSET(memberFacingText(html), fuel)).toEqual([GENERAL_ID]);
+    for (const not of ["unflued-gas-heating", "gas-cylinder-safety", "gas-leak-response", "gas-installation-and-servicing"]) {
+      expect(safetyExposureFor(textOf("OG-B09")), `OG-B09 does not require ${not}`).not.toContain(not);
+    }
+    // today it could not be released: the block is PENDING OWNER APPROVAL
+    expect(gasBlockAvailability(GENERAL_ID, "NZ", blocks, [GENERAL_ID], []).available).toBe(false);
+  });
+
+  it("OG-24: 'Certifying Plumber / Gasfitter' and 'gas appliance install' are licensing routing, and need general + installation", () => {
+    if (!have) return;
+    const html = htmlOf("OG-24");
+    if (!html) return;
+    const set = GASSET(memberFacingText(html), true);
+    expect(set.sort()).toEqual([GENERAL_ID, "gas-installation-and-servicing"].sort());
+    expect(safetyExposureFor(textOf("OG-24"))).toEqual(expect.arrayContaining(["gas-and-lpg", "gas-installation-and-servicing"]));
+    expect(safetyExposureFor(textOf("OG-24")), "OG-24 teaches no leak, cylinder or unflued content").not.toEqual(expect.arrayContaining(["gas-leak-response"]));
+  });
+
+  it("OG-17 remains a negative control: no gas block required, no fuel finding", () => {
+    if (!have) return;
+    const html = htmlOf("OG-17");
+    if (!html) return;
+    expect(GASSET(memberFacingText(html), false)).toEqual([]);
+    expect(fuelSafetyFindings(html).filter((f) => f.startsWith("GAS_"))).toEqual([]);
+  });
+});
 describe("Stage 9.62 · the live library is unchanged", () => {
   it("14. no existing resource carries or requires a Gas/LPG block, and every one is still ready", () => {
     const report = path.join(root, "workspace/prep/prep-report.json");

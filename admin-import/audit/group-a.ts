@@ -124,6 +124,20 @@ const GAS_TEACHING = new RegExp(
 );
 
 /**
+ * Leak-response teaching (Stage 9.62A). "If you smell gas, turn off the gas at the meter and leave the building" names
+ * no appliance, so GAS_TEACHING never saw it: the most natural leak instruction was invisible to the detector built to
+ * catch it. A leak phrase beside a leak-response ACTION (turn off, leave, ventilate, call, flames, switches…) is teaching,
+ * in either order and inside one sentence or line. A heading that merely names the topic still is not.
+ */
+const GAS_LEAK_PHRASE = "(?:smell(?:s|ed|ing)? (?:of )?(?:gas|LPG)|gas leaks?|leaking (?:gas|LPG)|suspected (?:gas )?leak)";
+const GAS_LEAK_ACTION =
+  "(?:turn(?:ing)? off|shut off|evacuat\\w+|leave|exit|open (?:the )?(?:doors?|windows?)|ventilat\\w+|call|ring|phone|contact|report|" +
+  "switch\\w*|flames?|ignit\\w+|sparks?|smok\\w+|meter|isolat\\w+|avoid|do not|don't|never|outside)";
+const GAS_LEAK_TEACHING = new RegExp(
+  `\\b${GAS_LEAK_PHRASE}\\b[^.\\n]{0,100}?\\b${GAS_LEAK_ACTION}\\b|\\b${GAS_LEAK_ACTION}\\b[^.\\n]{0,100}?\\b${GAS_LEAK_PHRASE}\\b|${GAS_TEACHING.source}`,
+  "i",
+);
+/**
  * Topics that pull in a safety block, and the block each one needs.
  *
  * `needs` is how many mentions count as teaching the topic. `teaching` is an extra condition for topics where the
@@ -167,7 +181,7 @@ const SAFETY_TOPICS: { pattern: RegExp; block: string; needs: number; teaching?:
     pattern: /\b(?:gas leaks?|(?:smell|smells|smelling) (?:of )?(?:gas|LPG)|leaking (?:gas|LPG)|suspected (?:gas )?leak)\b/gi,
     block: "gas-leak-response",
     needs: 1,
-    teaching: GAS_TEACHING,
+    teaching: GAS_LEAK_TEACHING,
   },
   {
     pattern:

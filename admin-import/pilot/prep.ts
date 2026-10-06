@@ -12,7 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { keepSmallTablesTogether, reskinHtml, summariseChanges } from "../reskin/reskin";
-import { resolveForMarket, publishable, type CoreResource, type MarketProfile, type SafetyBlock } from "../markets/resolve";
+import { resolveForMarket, publishable, type CoreResource, type MarketCode, type MarketProfile, type SafetyBlock } from "../markets/resolve";
 import { injectSafetyChecked } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
 import { getFoundation } from "@/lib/content/taxonomy";
@@ -77,6 +77,54 @@ const FUEL_CHECKS: { code: string; pattern: RegExp; why: string }[] = [
   },
   { code: "FUEL_GUIDANCE_REQUIRED", pattern: /\bdiesel\b/i, why: "the approved generator guidance covers petrol only" },
 ];
+
+/**
+ * Gas teaching → the SET of blocks it needs (Stage 9.62A owner ruling).
+ *
+ * The general block is the floor under every gas topic, and it is NOT enough on its own: it does not satisfy
+ * cylinder, unflued-heater, leak-response or installation teaching. Each specific topic needs the general block AND
+ * its own. Detection comes first; the set follows from what was detected; every block in the set must then be
+ * available for the market. Nothing is inferred backwards from a block being present.
+ */
+export const GAS_BLOCK_SET: Record<string, string[]> = {
+  "gas-and-lpg": ["gas-and-lpg-general"],
+  "unflued-gas-heating": ["gas-and-lpg-general", "unflued-gas-heating"],
+  "gas-cylinder-safety": ["gas-and-lpg-general", "gas-cylinder-safety"],
+  "gas-leak-response": ["gas-and-lpg-general", "gas-leak-response"],
+  "gas-installation-and-servicing": ["gas-and-lpg-general", "gas-installation-and-servicing"],
+};
+
+/** The union of the sets for the detected gas topics. A gas FUEL finding with no detected topic is generic gas teaching. */
+export function requiredGasBlocks(detectedTopics: string[], gasFuelFinding: boolean): string[] {
+  const topics = detectedTopics.filter((t) => t in GAS_BLOCK_SET);
+  if (gasFuelFinding && topics.length === 0) topics.push("gas-and-lpg");
+  return [...new Set(topics.flatMap((t) => GAS_BLOCK_SET[t]))];
+}
+
+/**
+ * Whether one gas block can be relied on in a market. It must be carried, be a real block, not be a proposal in this
+ * resource, not be pending owner approval for the market, and have its OWN wording for that market. A block with no
+ * market body resolves to the unverified sentinel and so fails closed; a pending block never satisfies anything.
+ */
+export function gasBlockAvailability(
+  id: string,
+  market: string,
+  blocks: Record<string, SafetyBlock>,
+  carried: string[],
+  proposed: string[],
+): { available: boolean; reason?: string } {
+  const block = blocks[id];
+  if (!block) return { available: false, reason: "no such block exists" };
+  if (!carried.includes(id)) return { available: false, reason: "not carried by this resource" };
+  if (proposed.includes(id)) return { available: false, reason: "wording is still a proposal for this resource" };
+  if ((block.pendingOwnerApproval ?? []).includes(market as MarketCode)) {
+    return { available: false, reason: `wording is built but PENDING OWNER APPROVAL for ${market}` };
+  }
+  if (!block.marketBody?.[market as MarketCode]?.trim()) {
+    return { available: false, reason: `no verified ${market} wording: the block FAILS CLOSED in ${market}` };
+  }
+  return { available: true };
+}
 
 /**
  * What happened to a safety topic that the legacy source taught and the migrated resource does not (Stage 9.58).
@@ -189,6 +237,8 @@ export interface PrepResult {
     exemptions: { block: string; reason: string; holds: boolean; unexpected: string[] }[];
     /** owner-approved, resource-scoped sentence removals, and whether each applied */
     trims: { block: string; market: string; reason: string; applied: boolean }[];
+    /** Gas/LPG teaching → the required block set per market, and which blocks of it are unavailable (Stage 9.62A) */
+    gas: { market: string; topics: string[]; required: string[]; unavailable: { id: string; reason: string }[] }[];
   };
   /**
    * Prices (Stage 9.61). `inOutput` is what the member-facing text carries and what each disposition is;
@@ -636,6 +686,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
   const exemptionResults = new Map(exemptions.map((e) => [e.block, { block: e.block, reason: e.reason, holds: true, unexpected: [] as string[] }]));
   const missing = new Set(launchMarkets.length ? [] : lacking);
   const trims: PrepResult["safety"]["trims"] = [];
+  const gasSets: PrepResult["safety"]["gas"] = [];
   const proposed = safetyBlocks.filter((b) => (inputs.proposedBlockIds ?? []).includes(b));
   const resource: CoreResource = {
     id: item.proposedResourceId,
@@ -675,15 +726,30 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const marketHtml = keepSmallTablesTogether(proposedMarket.html);
     collectFlags(marketHtml, code);
     // Checked on the resource's own text, before the safety blocks go in (the CO block names LPG heaters).
-    // GAS_SAFETY_REQUIRED means "no gas guidance is approved". Stage 9.62 built that guidance, so the check can now be
-    // released — but only by a resource that carries `gas-and-lpg-general` AND has had it approved by the owner. A
-    // block that is still a proposal (not in the resource's approvedSafetyBlocks) releases nothing, so this stays
-    // fail-closed until the owner signs the wording off. Diesel is a different fuel and is never released here.
-    const gasApproved = safetyBlocks.includes("gas-and-lpg-general") && !proposed.includes("gas-and-lpg-general");
-    const fuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []).filter(
-      (f) => !(gasApproved && f.startsWith("GAS_SAFETY_REQUIRED")),
+    // GAS_SAFETY_REQUIRED means "no gas guidance is approved" (Stage 9.62A): it is satisfied only by the REQUIRED GAS
+    // BLOCK SET for what this market's text actually teaches, with EVERY block in that set available and approved
+    // for this market. Presence of the general block alone releases nothing. Any unavailable block (pending, no
+    // market wording, not carried) leaves the finding in place AND adds its own problem, so the resource fails
+    // closed. Diesel is a different fuel and is never released here.
+    const rawFuelFindings = fuelSafetyFindings(marketHtml, inputs.fuelExemptions ?? []);
+    const gasFuelFinding = rawFuelFindings.some((f) => f.startsWith("GAS_SAFETY_REQUIRED"));
+    const gasTopicsTaught = safetyExposureFor(memberFacingText(marketHtml)).filter(
+      // a topic the owner has exempted for this resource is only dropped if the exemption still holds
+      (t) => t in GAS_BLOCK_SET && !(exemptions.some((e) => e.block === t) && exemptionHolds(exemptions.find((e) => e.block === t)!, marketHtml).holds),
     );
+    const gasSet = requiredGasBlocks(gasTopicsTaught, gasFuelFinding);
+    const gasUnavailable = gasSet.flatMap((id) => {
+      const a = gasBlockAvailability(id, code, blocks, safetyBlocks, proposed);
+      return a.available ? [] : [{ id, reason: a.reason ?? "unavailable" }];
+    });
+    gasSets.push({ market: code, topics: gasTopicsTaught, required: gasSet, unavailable: gasUnavailable });
+    const gasProblems = gasUnavailable.map(
+      (u) => `GAS_BLOCK_SET_UNSATISFIED (${code}): this resource's gas teaching requires "${u.id}" (${gasSet.join(" + ")}), but it is unavailable — ${u.reason}`,
+    );
+    const fuelFindings = rawFuelFindings.filter((f) => !(f.startsWith("GAS_SAFETY_REQUIRED") && gasUnavailable.length === 0));
     for (const finding of fuelFindings) if (!otherFindings.includes(finding)) otherFindings.push(finding);
+    for (const u of gasUnavailable) if (!safetyBlocks.includes(u.id)) missing.add(u.id);
+    for (const problem of gasProblems) if (!otherFindings.includes(problem)) otherFindings.push(problem);
     // Prices, on the resource's OWN text and before the blocks go in (Stage 9.58/9.61). No approved block carries
     // a price; if one ever does, that block owns it and the resource is not asked to dispose of it.
     const prices = priceFindings(marketHtml, {
@@ -758,6 +824,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     const unplaced = [
       ...trimProblems,
       ...fuelFindings,
+      ...gasProblems,
       ...prices.problems,
       ...treatment,
       ...numeric,
@@ -867,6 +934,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       proposed,
       exemptions: [...exemptionResults.values()],
       trims,
+      gas: gasSets,
     },
     prices: { inOutput: priceCandidates, legacyOnly: legacyPriceEvidence },
     contentFlags,

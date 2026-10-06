@@ -93,7 +93,74 @@ export interface SafetyBlock {
    * the owner can approve it as written, rather than a compromise being improvised later.
    */
   draftedNotServed?: Partial<Record<MarketCode, string>>;
+  /**
+   * Markets in which this block's wording is built but NOT yet owner-approved (Stage 9.62A). A block with no entry is
+   * approved (the original twelve). A pending block can be carried, but it never satisfies a gas requirement: the
+   * resource fails closed until the owner approves the wording and this entry is removed.
+   */
+  pendingOwnerApproval?: MarketCode[];
+  /**
+   * The Australian common-core claims, each with the evidence behind it and the category the Stage 9.62A rule gives it
+   * (`classifyCommonClaim`). Only category-A claims are in the served AU body; the rest are kept here so the research
+   * and the reason for leaving them out are not lost.
+   */
+  commonCoreClaims?: CommonCoreClaim[];
   sources: string[];
+}
+
+/** What stands behind one Australian claim. Only recorded evidence counts: an unrecorded jurisdiction is not evidence. */
+export interface CommonClaimEvidence {
+  /** official jurisdictions whose own pages state it (VIC, NSW, QLD, SA, WA, TAS, ACT, NT) */
+  jurisdictions: string[];
+  /** an authoritative NATIONAL Australian source that states it (none was readable at Stage 9.62: AS/NZS 5601 is paywalled) */
+  nationalSource?: boolean;
+  /** jurisdictions that say something different */
+  contradictedBy?: string[];
+  /** the claim only holds under a state-specific limitation, appliance or figure */
+  jurisdictionSpecificLimitation?: boolean;
+  /** the claim carries a number, interval, distance or size */
+  numeric?: boolean;
+}
+
+export interface CommonCoreClaim {
+  id: string;
+  text: string;
+  topicCore: boolean;
+  evidence: CommonClaimEvidence;
+  category: StateOverrideCategory;
+  reason: string;
+  served: boolean;
+}
+
+/**
+ * Jurisdictions that must state a claim, independently, before it can be common Australian core wording without a
+ * national source (Stage 9.62A owner ruling): "multiple independent official jurisdictions … enough coverage that the
+ * statement is reasonably common rather than merely coincidentally present in two". Four is half of the eight. Two is
+ * explicitly NOT enough. Owner-reviewable.
+ */
+export const COMMON_CORE_MIN_JURISDICTIONS = 4;
+
+/**
+ * The Stage 9.62A Category-A rule. A claim enters the common AU core only when
+ *   A. an authoritative national Australian source supports it; OR
+ *   B. at least COMMON_CORE_MIN_JURISDICTIONS independent official jurisdictions state it, none contradicts it, and
+ *      it carries no material jurisdiction-specific limitation.
+ * Anything numeric, contradicted or state-limited is C (serve only when the member's state matches); everything else
+ * that is protective but under-evidenced is B (labelled jurisdiction-specific information).
+ */
+export function classifyCommonClaim(e: CommonClaimEvidence): { category: StateOverrideCategory; reason: string } {
+  const states = [...new Set(e.jurisdictions.map((j) => j.toUpperCase()))];
+  if (e.numeric || e.jurisdictionSpecificLimitation || (e.contradictedBy?.length ?? 0) > 0) {
+    return { category: "C", reason: "numeric, state-limited or contradicted: serve only when the member's state matches" };
+  }
+  if (e.nationalSource) return { category: "A", reason: "an authoritative national Australian source supports it" };
+  if (states.length >= COMMON_CORE_MIN_JURISDICTIONS) {
+    return { category: "A", reason: `${states.length} independent official jurisdictions (${states.join(", ")}), none contradicting, no state-specific limitation` };
+  }
+  return {
+    category: "B",
+    reason: `only ${states.length} recorded jurisdiction${states.length === 1 ? "" : "s"} (${states.join(", ") || "none"}); common core needs ${COMMON_CORE_MIN_JURISDICTIONS}+ or a national source`,
+  };
 }
 
 /** A, B or C: who may be shown this, and when. See the Stage 9.62 report. */
@@ -123,6 +190,8 @@ export interface StateOverride {
   servedWhen: "state-label" | "state-routing";
   /** claims in the same topic that CONFLICT with this one, by override id — never to be merged */
   conflictsWith?: string[];
+  /** limits of the record — e.g. wording is the generic proposal, not this jurisdiction's own sentence */
+  note?: string;
 }
 
 /**

@@ -193,3 +193,8 @@ Each of these blocks resources until it is researched from official NZ **and** A
 
 gas-and-lpg-general, unflued-gas-heating, gas-cylinder-safety, gas-leak-response, gas-installation-and-servicing built. AU core non-numeric; AU state figures are category B/C overrides, never served. AU gas-leak-response has no body (fails closed; ACT has no published procedure). All pending owner approval.
 
+
+## Stage 9.62A - gas hardening
+
+AU common core: national source or 4+ independent jurisdictions, none contradicting, no state limit; 15 claims demoted to labelled category B (not served). AU unflued-gas-heating and gas-leak-response have no body (fail closed). Gas release = detected topic -> required block set -> every block carried, owner-approved and with market wording; no blanket release. OG-B09 requires gas-and-lpg-general only (installation 'recommended' withdrawn). OG-24 requires general + installation (licensing routing).
+

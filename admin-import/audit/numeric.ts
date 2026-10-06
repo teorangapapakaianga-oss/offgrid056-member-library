@@ -117,8 +117,32 @@ const UNITS: { pattern: string; unit: string; category: NumericCategory }[] = [
   { pattern: "(?:seconds?|minutes?|hours?|days?|weeks?|months?|years?)", unit: "time", category: "interval" },
 ];
 
-const NUMBER = "(?:\\d[\\d,]*(?:\\.\\d+)?|one|two|three|four|five|six|seven|eight|nine|ten|twelve|half)";
-const WORD_INTERVAL = /\b(annually|yearly|monthly|weekly|daily|fortnightly|twice a year|every (?:six|three|twelve) months)\b/gi;
+/**
+ * Spelled-out numbers (Stage 9.62A). Digits were always read; words stopped at "twelve", so "twenty years",
+ * "fifteen metres" and "fourteen days" passed unseen. The list is closed on purpose — 1–19, the tens, a tens+units
+ * compound ("twenty-five"), "hundred", "thousand" and "half" — and is NOT a general natural-language-number parser:
+ * "a couple of", "a dozen", "several" and "a few" are deliberately not read (see SPELLED_NUMBER_LIMITS). Every word
+ * still needs a unit beside it before it counts, which is what keeps the false-positive rate down.
+ */
+const SPELLED_UNITS = "one|two|three|four|five|six|seven|eight|nine";
+const SPELLED_TENS = "twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety";
+const SPELLED_SINGLE = `eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|ten|hundred|thousand|half|${SPELLED_UNITS}`;
+const NUMBER = `(?:\\d[\\d,]*(?:\\.\\d+)?|(?:${SPELLED_TENS})[-\\s](?:${SPELLED_UNITS})|(?:${SPELLED_TENS})|(?:${SPELLED_SINGLE}))`;
+/** What the spelled-number reader does NOT see — recorded so the gap is a decision, not an accident. */
+export const SPELLED_NUMBER_LIMITS =
+  "Vague quantities ('a couple of years', 'a dozen', 'several', 'a few', 'a decade') and numbers written across words that are not adjacent to a unit are not read. A member-facing claim written that way is not caught by this gate.";
+/**
+ * Recurring-interval phrases that carry no digit and no unit-with-number (Stage 9.62A). "Serviced once a year",
+ * "check it every year", "inspect each year" and "annually" are interval claims exactly as "every 12 months" is, and
+ * the digit+unit scanner cannot see any of them. RECURRING_SAFETY is the subset that is ALWAYS a claim wherever it
+ * appears (unlike "weekly" or "daily", which stay judged by their sentence). "yearly" counts only as an adverb ("replace\n * it yearly", not "estimated yearly generation"): a yearly cadence is a servicing, test or
+ * replacement claim. Nothing is registered by this: an unregistered recurrence still fails as C_NEEDS_SOURCE.
+ */
+const RECURRING_SAFETY = /\b(?:annually|yearly(?=\s*(?:[.,;:)!?]|$)|\s+(?:by|and|or|before|at|for|with|in|to|from|on|when|if|after|unless|but)\b)|(?:once|twice) (?:a|per|every) year|(?:once )?(?:every|each) (?:other )?year|(?:once or twice|twice or three times) a year)\b/i;
+const WORD_INTERVAL = new RegExp(
+  `\\b(annual(?:ly)?|yearly|monthly|weekly|daily|fortnightly|twice a year|(?:once|twice) (?:a|per|every) (?:year|month)|(?:once )?(?:every|each) (?:other )?year|(?:once or twice|twice or three times) a year|${NUMBER} times (?:a|per|each) (?:year|month|week)|every (?:six|three|twelve) months)\\b`,
+  "gi",
+);
 const CURRENCY = /(?:NZ\$|AU\$|\$)\s?\d[\d,]*(?:\.\d+)?(?:\s?[–-]\s?(?:NZ\$|AU\$|\$)?\d[\d,]*)?/g;
 const FLOW = /\b\d[\d,]*\s?(?:L|litres?)\s?\/\s?(?:h|hr|hour|min|minute|day)\b/gi;
 
@@ -198,7 +222,7 @@ const PLANNING_HORIZON = [
  * An interval is a claim when something is being recommended — check, replace, inspect, test, service, every… A
  * duration that is simply part of a sentence ("for three days", "in 30 days") is judged by its subject instead.
  */
-const INTERVAL_CLAIM = /\b(check|checked|replace|replaced|inspect|inspected|test|tested|service|serviced|clean|cleaned|desludg\w+|maintain\w*|review\w*|every|at least|rotate|refresh)\b/i;
+const INTERVAL_CLAIM = /\b(check|checked|replace|replaced|inspect|inspected|test|tested|service|serviced|clean|cleaned|desludg\w+|maintain\w*|review\w*|every|at least|rotate|refresh|valid|validity|expir\w+)\b/i;
 
 /**
  * A duration is also a claim when the sentence *asserts* it — "the official baseline is three days", "Get Ready
@@ -287,9 +311,23 @@ export function scanNumericClaims(
   // safety-blocks.json. A figure inside one is already sourced by that block — the interesting question is what the
   // resource's OWN text asserts, so block sentences are separated out rather than mixed in.
   const blockSentences = new Map<string, string>();
+  // KNOWN LATENT WEAKNESS, deliberately NOT changed (Stage 9.62A finding, reported to the owner): this pattern wants two
+  // closing divs in a row, so it runs from the first safety block to the end of its container. Every later block, and
+  // any resource text that follows the first block inside the same container, is credited to the FIRST block's id and
+  // treated as "already sourced by a safety block". Correcting it would surface a live resource's figure that is
+  // currently shielded by it ("15 minutes every Sunday reviewing…"), i.e. change live gate behaviour, which a gas stage
+  // may not do. It stays exactly as it was and is recorded in the report.
   for (const block of html.match(/<div class="og-safety[\s\S]*?<\/div>\s*<\/div>/gi) ?? []) {
     const id = block.match(/data-block="([^"]+)"/)?.[1] ?? "safety-block";
     for (const s of treatmentSentences(block)) blockSentences.set(clean(s), id);
+  }
+  // The CORRECT attribution, used only for block-OWNED registry claims (Stage 9.62A): one block is
+  // `<div class="og-safety …" data-block="id"><h3>…</h3><p>…</p></div>`, a single closing div, so each sentence is
+  // credited to the block that really contains it, and resource text outside a block is credited to none.
+  const ownedSentences = new Map<string, string>();
+  for (const block of html.match(/<div class="og-safety[^"]*"[^>]*data-block="[^"]+"[^>]*>[\s\S]*?<\/div>/gi) ?? []) {
+    const id = block.match(/data-block="([^"]+)"/)?.[1] ?? "safety-block";
+    for (const s of treatmentSentences(block)) ownedSentences.set(clean(s), id);
   }
 
   for (const raw of treatmentSentences(html)) {
@@ -305,7 +343,11 @@ export function scanNumericClaims(
       const approved = registry.claims.find(
         (c) =>
           c.market === market &&
-          (c.owningResources.length === 0 || c.owningResources.includes(resource)) &&
+          // A block-owned claim (Stage 9.62A) validates ONLY the sentence that comes from its own block, in the market
+          // it was written for. It can never approve a resource's own, separate sentence that merely says the same thing.
+          (c.owningBlock
+            ? c.owningBlock.split(";").some((b) => b.trim() === ownedSentences.get(sentence))
+            : c.owningResources.length === 0 || c.owningResources.includes(resource)) &&
           c.match.some((p) => new RegExp(p, "i").test(sentence)) &&
           (!c.requiresLabel || sentence.includes(c.requiresLabel)),
       );
@@ -327,6 +369,7 @@ export function scanNumericClaims(
       else if (hit.category === "interval" && horizon) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: horizon.why });
       else if (
         hit.category === "interval" &&
+        !RECURRING_SAFETY.test(sentence) &&
         !INTERVAL_CLAIM.test(sentence) &&
         !(CLAIM_ASSERTION.test(sentence) && !CLAIM_DENIAL.test(sentence))
       )

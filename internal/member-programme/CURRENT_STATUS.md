@@ -91,3 +91,8 @@ Each has an NZ and an AU PDF: **42 market files**, 0 broken internal links.
 
 Five gas blocks built (PENDING OWNER APPROVAL), AU leak response FAILS CLOSED, 551 tests passing, Worker unchanged (fa23ec74), 21 resources unchanged. Report: admin-import/STAGE_9.62_GAS_ARCHITECTURE.md.
 
+
+## Stage 9.62A (6 October 2026) - gas owner review and hardening, nothing deployed
+
+Tests 576, lint/typecheck clean. Tightened AU common-core rule (4+ jurisdictions or national source); AU unflued and AU leak FAIL CLOSED; required-gas-block-set mechanism (all five gas blocks pending owner approval, so nothing releases); annual/spelled-number detection; block-owned numeric claims scoped to their block. Report: admin-import/STAGE_9.62A_GAS_OWNER_REVIEW.md. Worker unchanged (fa23ec74).
+

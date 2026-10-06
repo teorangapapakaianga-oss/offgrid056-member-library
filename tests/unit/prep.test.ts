@@ -285,7 +285,7 @@ describe("prepareResource: safety", () => {
   it("keeps every topic block's NZ and AU wording free of the other market's number", () => {
     // The one block allowed to have NO wording for a market is gas-leak-response in AU (Stage 9.62): it fails closed
     // there on purpose. Any other block missing a market is a defect, so this is an allow-list, not a skip.
-    const FAILS_CLOSED: Record<string, string[]> = { "gas-leak-response": ["AU"] };
+    const FAILS_CLOSED: Record<string, string[]> = { "gas-leak-response": ["AU"], "unflued-gas-heating": ["AU"] };
     for (const block of Object.values(topicBlocks.blocks) as { id: string; marketBody: Record<string, string> }[]) {
       for (const market of ["NZ", "AU"]) {
         if (block.marketBody[market] === undefined) {
