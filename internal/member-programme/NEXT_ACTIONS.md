@@ -2,8 +2,10 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 6 October 2026, after Stage 9.71.
+**As at:** 7 October 2026, after Stage 9.72.
 
+> **Stage 9.72 note.** Release prep is written (`admin-import/STAGE_9.72_ASSET_RECONCILIATION_AND_RELEASE_PREP.md`); nothing is started. **Waiting on the owner:** rulings on 8 uncertain Program Component classifications (§6), and confirmation that programme days 2 and 29 now pointing at OG-01 is intended (§4a). Then the combined release (classification + 20-resource cover cleanup, one deployment, rollback `7de9641f…`).
+>
 > **Stage 9.71 note.** OG-01 is deployed (protected resource #23; Worker `7de9641f…`, rollback `db2fd12a…` retained). Report: `admin-import/STAGE_9.71_OG01_DEPLOYED.md`. The queue below is the Stage 9.61 snapshot. Next: the owner chooses the next resource or the next normal deployment. Still scheduled and NOT to be run early, bundled into the next normal deployment: `classify-the-21-live-resources` and `shared-cover-cleanup`.
 
 ---

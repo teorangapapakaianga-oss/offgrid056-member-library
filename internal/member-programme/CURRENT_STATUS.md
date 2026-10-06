@@ -1,6 +1,6 @@
 # Current status
 
-**As at:** 6 October 2026, after Stage 9.71 (OG-01 Home Resilience Scorecard deployed as protected resource #23, draft). The rows marked **9.71** are current; the rest is the Stage 9.61 snapshot.
+**As at:** 7 October 2026, after Stage 9.72 (analysis only; no change to anything live). OG-01 Home Resilience Scorecard is deployed as protected resource #23 (Stage 9.71). The rows marked **9.71** are current; the rest is the Stage 9.61 snapshot. Deployment size is **960 files** (958 before OG-01); Wrangler's "Uploaded N files" is the count of new contents, not the size (Stage 9.72).
 
 | | |
 |---|---|
