@@ -158,6 +158,17 @@ export interface FuelExemption {
   approvalRef: string;
 }
 
+/** The five questions every migrated resource must answer before it is rendered (Stage 9.64B). */
+export const PROGRAM_ALIGNMENT_KEYS = ["foundation", "programComponent", "resilienceRole", "guidanceKind", "wordingMatchesRole"] as const;
+
+/** Whether a resource has what the programme-alignment rule asks of it. Fail closed: an unanswered question is a gap. */
+export function programAlignmentGaps(inputs: { programComponent?: string | null; programAlignment?: Partial<Record<string, string>> | null }): string[] {
+  const gaps: string[] = [];
+  if (!inputs.programComponent) gaps.push("no programme component assigned");
+  for (const key of PROGRAM_ALIGNMENT_KEYS) if (!inputs.programAlignment?.[key]?.trim()) gaps.push(`alignment question unanswered: ${key}`);
+  return gaps;
+}
+
 export function fuelSafetyFindings(html: string, exemptions: FuelExemption[] = []): string[] {
   const text = clean(html.replace(/<style[\s\S]*?<\/style>/gi, " "));
   return FUEL_CHECKS.flatMap(({ code, pattern, why }) => {
@@ -206,6 +217,8 @@ export interface PrepResult {
   descriptionSource: "cover subtitle" | "header line" | "MISSING — owner must write it";
   foundation: string | null;
   resourceType: string | null;
+  /** the programme component (Stage 9.64B), or null when none was assigned */
+  programComponent: string | null;
 
   reskin: { changes: string[]; warnings: string[] };
   branding: { legacyIssues: number; issues: string[] };
@@ -529,6 +542,16 @@ export interface PrepInputs {
   /** reviewed foundation, type and category. Without one, only a HIGH-confidence audit value is used. */
   foundation?: string | null;
   resourceType?: string | null;
+  /** programme component (Stage 9.64B): off-grid-living | resilience-planning | resilience-emergency | planning-implementation | advanced-future */
+  programComponent?: string | null;
+  /**
+   * The five alignment answers every migration must give BEFORE rendering (Stage 9.64B): which foundation, which
+   * component, how it supports resilience / independence / off-grid living, what KIND of guidance it is, and whether the
+   * wording matches that role. When `programComponentRequired` is set, a missing component or an incomplete answer holds
+   * the resource at NEEDS_OWNER_METADATA.
+   */
+  programAlignment?: Partial<Record<(typeof PROGRAM_ALIGNMENT_KEYS)[number], string>> | null;
+  programComponentRequired?: boolean;
   category?: string | null;
   /** topic safety blocks beyond the disclaimer and emergency block */
   extraSafetyBlocks?: string[];
@@ -869,6 +892,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     // Never defaulted. A silent "beginner" is how a resource titled "(Advanced)" was once mislabelled. Only a
     // reviewed value is used; without one the field is left out and validation fails on purpose.
     ...(inputs.difficulty ? { difficulty: inputs.difficulty } : {}),
+    ...(inputs.programComponent ? { programComponent: inputs.programComponent } : {}),
     // Only an owner-reviewed estimate is used. When the document does not support one, the field is left out,
     // validation fails on purpose, and the resource cannot be imported until someone decides.
     ...(typeof inputs.estimatedTime === "number" ? { estimatedTime: inputs.estimatedTime } : {}),
@@ -907,7 +931,11 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       ? "NEEDS_CONTENT_REVIEW"
       : proposed.length
         ? "NEEDS_SAFETY_APPROVAL"
-      : !parsed.success || categoryIssues.length || typeof inputs.estimatedTime !== "number" || !inputs.difficulty
+      : !parsed.success ||
+          categoryIssues.length ||
+          typeof inputs.estimatedTime !== "number" ||
+          !inputs.difficulty ||
+          (inputs.programComponentRequired && programAlignmentGaps(inputs).length)
         ? "NEEDS_OWNER_METADATA"
         : "READY_AFTER_FINAL_VALIDATION";
 
@@ -920,6 +948,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
     descriptionSource: described.source,
     foundation,
     resourceType,
+    programComponent: inputs.programComponent ?? null,
     reskin: { changes: summariseChanges(changes), warnings },
     branding: { legacyIssues: legacyIssues.length, issues: legacyIssues },
     terminology: { frameworkPhrase: item.legacyTerminology.length, barePillar: 0, otherFindings },

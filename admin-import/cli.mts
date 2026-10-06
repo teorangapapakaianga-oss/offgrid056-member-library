@@ -495,6 +495,8 @@ async function commandPrep() {
   // Topic safety blocks are proposals until the owner approves them for a resource.
   const topicBlocks = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "safety-blocks.json"), "utf8")).blocks ?? {};
   const blocks = { ...spec.safetyBlocks, ...topicBlocks };
+  // The programme-component vocabulary and the resources that predate it (Stage 9.64B).
+  const programComponents = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "program-components.json"), "utf8"));
   const legacyTerms = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, "config", "legacy-terms.json"), "utf8"));
   // Owner-approved treatment claims. Every numeric or efficacy treatment claim is checked against this, per market.
   const treatmentRegistry = loadTreatmentRegistry(path.join(import.meta.dirname, "config", "treatment-sources.json"));
@@ -528,6 +530,10 @@ async function commandPrep() {
       difficulty: metadata[item.legacyCode]?.difficulty ?? null,
       foundation: metadata[item.legacyCode]?.foundation ?? null,
       resourceType: metadata[item.legacyCode]?.resourceType ?? null,
+      // Stage 9.64B: every resource not already live before the component model must be classified before it can be ready.
+      programComponent: metadata[item.legacyCode]?.programComponent ?? null,
+      programAlignment: metadata[item.legacyCode]?.programAlignment ?? null,
+      programComponentRequired: !(programComponents.deployedBeforeClassification as string[]).includes(item.legacyCode),
       category: metadata[item.legacyCode]?.category ?? null,
       extraSafetyBlocks: metadata[item.legacyCode]?.safetyBlocks ?? [],
       // Stage 9.58: the legacy source is migration evidence, not the enforcement target. What a resource is

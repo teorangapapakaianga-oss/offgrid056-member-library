@@ -121,3 +121,8 @@ OG-B09 configured (approved-copy + metadata) and verified as a draft: gas-and-lp
 
 Title: Resilient Heating & Insulation Upgrade Checklist. Heating table reframed (fuel/energy, electricity dependency, outage consideration); related resources proposed; batteries-and-electrical now detector-required and carried (owner review). 619 tests. Not rendered, not deployed. Report: admin-import/STAGE_9.64A_POSITIONING.md.
 
+
+## Stage 9.64B (6 October 2026) - programme components; OG-B09 finalised
+
+Programme-component classification added (off-grid-living, resilience-planning, resilience-emergency, planning-implementation, advanced-future); alignment rule enforced before a new resource is ready. OG-B09 = resilience-planning, ready to render (not rendered, not deployed). 633 tests. Report: admin-import/STAGE_9.64B_PROGRAM_COMPONENTS.md.
+

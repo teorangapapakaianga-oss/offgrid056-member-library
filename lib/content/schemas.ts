@@ -14,6 +14,7 @@ import {
   FILE_FORMATS,
   FIVE_FOUNDATIONS,
   FOUNDATION_IDS,
+  PROGRAM_COMPONENTS,
   RESOURCE_TYPE_IDS,
   SERVICE_TYPES,
 } from "./constants";
@@ -39,6 +40,8 @@ export const ResourceSchema = z
     summary: z.string().optional(),
     learningObjectives: z.array(z.string()).default([]),
     foundation: FoundationIdSchema,
+    /** the resource's role in the member journey (Stage 9.64B); optional for resources classified before it existed */
+    programComponent: z.enum(PROGRAM_COMPONENTS).optional(),
     category: slug,
     resourceType: ResourceTypeIdSchema,
     difficulty: DifficultySchema,

@@ -13,6 +13,11 @@ export const RESOURCE_TYPE_IDS = [
   "tutorial", "template", "supplier-resource", "workshop", "programme", "download-pack",
 ] as const;
 export const DIFFICULTIES = ["beginner", "intermediate", "advanced"] as const;
+/**
+ * Programme components (Stage 9.64B): the ROLE a resource plays in the member journey. They do not replace the Five
+ * Foundations — every resource keeps its foundation as well.
+ */
+export const PROGRAM_COMPONENTS = ["off-grid-living", "resilience-planning", "resilience-emergency", "planning-implementation", "advanced-future"] as const;
 export const COLLECTION_IDS = ["start-here", "planning-tools"] as const;
 export const FILE_FORMATS = ["PDF", "XLSX", "DOCX", "ZIP", "PNG"] as const;
 export const COUNTRIES = ["NZ", "AU", "US", "CA"] as const;
@@ -22,6 +27,7 @@ export type FoundationId = (typeof FOUNDATION_IDS)[number];
 export type FiveFoundationId = (typeof FIVE_FOUNDATIONS)[number];
 export type ResourceTypeId = (typeof RESOURCE_TYPE_IDS)[number];
 export type Difficulty = (typeof DIFFICULTIES)[number];
+export type ProgramComponent = (typeof PROGRAM_COMPONENTS)[number];
 export type CollectionId = (typeof COLLECTION_IDS)[number];
 export type FileFormat = (typeof FILE_FORMATS)[number];
 export type CountryCode = (typeof COUNTRIES)[number];

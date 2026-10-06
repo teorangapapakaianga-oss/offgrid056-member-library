@@ -291,6 +291,19 @@ describe("Stage 9.64 · the migrated OG-B09 draft, built from the legacy source 
     }
   });
 
+  it("the generation / inverter / battery wording makes the electrical block detector-required (and is not weakened)", () => {
+    for (const m of ["NZ", "AU"]) {
+      const html = build(m);
+      if (!html) return;
+      const topics = safetyExposureFor(memberFacingText(html));
+      expect(topics, `${m}: the electrical topic is required by the member-facing text`).toContain("batteries-and-electrical");
+      expect(meta.safetyBlocks as string[], `${m}: and it is carried`).toContain("batteries-and-electrical");
+      const text = html.replace(/<style[\s\S]*?<\/style>/g, "").replace(/<[^>]+>/g, " ");
+      expect(text, `${m}: the resilience wording is kept`).toMatch(/generation, inverter and battery system/);
+      expect(text, `${m}: and the questions`).toMatch(/Can my solar, battery and inverter system support it\?/);
+    }
+  });
+
   it("keeps the two markets apart", () => {
     const nz = build("NZ");
     const au = build("AU");

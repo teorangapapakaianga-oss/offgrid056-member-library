@@ -1,0 +1,56 @@
+{
+  "description": "Programme components (Stage 9.64B, owner ruling): the ROLE a resource plays in the member journey. They do NOT replace the Five Foundations (air, water, shelter, food, energy) — every resource keeps its foundation as well. Every resource migrated after Stage 9.64B must carry a foundation, a programme component, a category and a type, and must answer the five alignment questions, BEFORE it is rendered. If the answers are unclear the resource stops for owner review.",
+  "components": {
+    "off-grid-living": {
+      "label": "Off-Grid Living",
+      "definition": "Resources directly supporting reduced dependence on centralised systems: independent energy, solar, batteries, generators, water capture/storage/treatment, food production, off-grid heating, fuel systems, waste systems, property/system architecture."
+    },
+    "resilience-planning": {
+      "label": "Resilience Planning",
+      "definition": "Resources that strengthen the household and help move toward partial or full independence: insulation, heating comparisons, warm-home planning, backup power, household assessments, resilience scorecards, budgeting, phased upgrades."
+    },
+    "resilience-emergency": {
+      "label": "Resilience & Emergency",
+      "definition": "Resources focused on outages, emergency food, emergency water, household safety, gas leaks, smoke alarms, emergency lighting, evacuation, communication and short-term disruption."
+    },
+    "planning-implementation": {
+      "label": "Planning & Implementation",
+      "definition": "Resources focused on budgets, project briefs, 30-day plans, 90-day plans, implementation tracking and supplier/installer planning."
+    },
+    "advanced-future": {
+      "label": "Advanced / Future",
+      "definition": "Resources for full property independence, advanced system architecture, larger integrated systems, professional implementation and advanced planning."
+    }
+  },
+  "alignmentQuestions": {
+    "foundation": "Which of the Five Foundations does it support?",
+    "programComponent": "Which programme component does it belong to?",
+    "resilienceRole": "How does it support resilience, independence or off-grid living?",
+    "guidanceKind": "Is it emergency guidance, resilience planning or true off-grid system guidance?",
+    "wordingMatchesRole": "Does the member-facing wording match that role?"
+  },
+  "deployedBeforeClassification": [
+    "OG-26",
+    "OG-11",
+    "OG-B10",
+    "OG-27",
+    "OG-20",
+    "OG-19",
+    "OG-21",
+    "OG-02",
+    "OG-09",
+    "OG-B04",
+    "OG-B12",
+    "OG-25",
+    "OG-10",
+    "OG-22",
+    "OG-B07",
+    "OG-18",
+    "OG-15",
+    "OG-08",
+    "OG-B08",
+    "OG-13",
+    "OG-17"
+  ],
+  "deployedBeforeClassificationNote": "The 21 resources live in the private preview before the component model existed. They are not blocked for lacking a component; classifying them is a separate owner decision (see the Stage 9.64B recommendation). Any resource NOT in this list must be classified before it can be ready."
+}
