@@ -2,9 +2,11 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.73A.
+**As at:** 7 October 2026, after Stage 9.73B.
 
-> **Stage 9.73A note.** All classification rulings are applied (OG-B07 = off-grid-living; ten confirmed; OG-22 override). The demo OG-01 card is hidden. The combined release is rebuilt and staged, NOT deployed (706 tests; `admin-import/STAGE_9.73A_ROUTE_AUDIT_AND_FINAL_RULINGS.md`). **Waiting on the owner, two things only:** (1) rule on the OG-08, OG-10 and OG-13 route collisions individually (audited; recommended: separate each), (2) explicit approval to deploy. Rollback: Worker `7de9641f…`.
+> **Stage 9.73B note.** All four route collisions (OG-01, OG-08, OG-10, OG-13) are explicitly separated; programme days 2/9/11/13/29 point at demo placeholders; the combined release is rebuilt and staged, NOT deployed (708 tests; 984 files; no unexplained difference; `admin-import/STAGE_9.73B_FINAL_ROUTE_SEPARATION.md`). **No owner decision is outstanding; waiting only for explicit approval to deploy.** Rollback: Worker `7de9641f…`.
+>
+> **Stage 9.73A note (superseded).** All classification rulings are applied (OG-B07 = off-grid-living; ten confirmed; OG-22 override). The demo OG-01 card is hidden. The combined release is rebuilt and staged, NOT deployed (706 tests; `admin-import/STAGE_9.73A_ROUTE_AUDIT_AND_FINAL_RULINGS.md`). **Waiting on the owner, two things only:** (1) rule on the OG-08, OG-10 and OG-13 route collisions individually (audited; recommended: separate each), (2) explicit approval to deploy. Rollback: Worker `7de9641f…`.
 >
 > **Stage 9.73 note (superseded in part).** The combined release is staged, not deployed (`admin-import/STAGE_9.73_COMBINED_RELEASE_STAGED.md`). **Waiting on the owner:** the five items in its §11 (OG-B07 under the narrower advanced-future rule; the OG-22 override note; confirm the 13 classifications applied from the locked rules; reconfirm the three grandfathered supersessions OG-08/OG-10/OG-13; whether the demo "Home Resilience Scorecard" card may show beside the real one in the preview library), then explicit approval to deploy. Rollback: Worker `7de9641f…`.
 >

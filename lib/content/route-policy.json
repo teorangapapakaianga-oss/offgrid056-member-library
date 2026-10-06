@@ -1,21 +1,18 @@
 {
-  "description": "Owner-approved resolution of every route clash between a demonstration placeholder and a real (protected) resource in the private preview. A clash that is NOT listed here stops the build (fail closed): a real resource never replaces demo content by default, and grandfathering is not approval by itself. Stage 9.73 / 9.73A.",
-  "supersedes": {
+  "description": "Owner-approved resolution of every route clash between a demonstration placeholder and a real (protected) resource in the private preview. A clash that is NOT listed here stops the build (fail closed): a real resource never replaces demo content by default, and grandfathering is not approval by itself. Stage 9.73 / 9.73A / 9.73B.",
+  "supersedes": {},
+  "supersedesNote": "EMPTY since Stage 9.73B. The Stage 9.38/9.39 supersession rule (a real resource silently replaces its demo placeholder and every reference follows it) is no longer used by any collision. The mechanism stays in the resolver so that a FUTURE collision can be given an explicit, written supersession approval here; nothing is superseded by default.",
+  "separateDemo": {
+    "res-0007": "res-1001",
     "res-0015": "res-1008",
     "res-0016": "res-1010",
     "res-0013": "res-1013"
   },
-  "supersedesStatus": {
-    "res-0015": "AUDITED Stage 9.73A (OG-08 Water Storage Calculator vs the demo Water Storage Calculator) — PENDING OWNER RULING. Not approved by being grandfathered. Entry kept only so the live behaviour does not change before the ruling. Recommended: separate. See admin-import/STAGE_9.73A_ROUTE_AUDIT_AND_FINAL_RULINGS.md.",
-    "res-0016": "AUDITED Stage 9.73A (OG-10 Rainwater Harvesting Planner vs the demo Rainwater Harvesting Planner) — PENDING OWNER RULING. Not approved by being grandfathered. Entry kept only so the live behaviour does not change before the ruling. Recommended: separate.",
-    "res-0013": "AUDITED Stage 9.73A (OG-13 Healthy Home Air Audit vs the demo Healthy Home Air Audit) — PENDING OWNER RULING. Not approved by being grandfathered. Entry kept only so the live behaviour does not change before the ruling. Recommended: separate."
-  },
-  "supersedesNote": "These three were resolved by the Stage 9.38/9.39 supersession rule (OG-08 Stage 9.39, OG-10 Stage 9.41, OG-13 Stage 9.54): the real resource replaces the demo placeholder, and every reference to the placeholder follows it. That rule is superseded by the Stage 9.73 principle. Each entry names the one real id the placeholder may be replaced by; any other pairing is an error. Each needs an explicit owner ruling (supersede, with a written approval, or separate).",
-  "separateDemo": {
-    "res-0007": "res-1001"
-  },
   "separateDemoStatus": {
-    "res-0007": "OWNER-APPROVED Stage 9.73 / 9.73A: the real Home Resilience Scorecard (res-1001) keeps /resources/home-resilience-scorecard/; the demo placeholder stays on /resources/demo-home-resilience-scorecard/, is hidden from protected listings, and stays reachable through explicit references (programme days 2 and 29, the demo Household Resilience Assessment)."
+    "res-0007": "OWNER-APPROVED Stage 9.73 / 9.73A: OG-01 Home Resilience Scorecard (res-1001) keeps /resources/home-resilience-scorecard/; the demo placeholder stays on /resources/demo-home-resilience-scorecard/. Programme days 2 and 29 and the demo Household Resilience Assessment keep pointing at the demo.",
+    "res-0015": "OWNER-APPROVED Stage 9.73B: OG-08 Water Storage Calculator (res-1008) keeps /resources/water-storage-calculator/; the demo placeholder stays on /resources/demo-water-storage-calculator/. Programme day 9, the demo workshop's handout and the demo Water Security Guide keep pointing at the demo. No protected file is inherited.",
+    "res-0016": "OWNER-APPROVED Stage 9.73B: OG-10 Rainwater Harvesting Planner (res-1010) keeps /resources/rainwater-harvesting-planner/; the demo placeholder stays on /resources/demo-rainwater-harvesting-planner/. Programme day 11 and the demo Water Security Guide keep pointing at the demo. No protected file is inherited.",
+    "res-0013": "OWNER-APPROVED Stage 9.73B: OG-13 Healthy Home Air Audit (res-1013) keeps /resources/healthy-home-air-audit/; the demo placeholder stays on /resources/demo-healthy-home-air-audit/. Programme day 13 and the demo Ventilation Basics keep pointing at the demo. No protected file is inherited."
   },
-  "separateDemoNote": "A separated placeholder is never aliased to the real resource, and it is hidden from listings (library, Start Here, foundations, categories, collections, downloads); it is not deleted or renamed."
+  "separateDemoNote": "A separated placeholder is never aliased to the real resource, and it is hidden from listings (library, Start Here, foundations, categories, collections, downloads); it is not deleted or renamed, and stays reachable on its own demo- route and through explicit references (programme days, demo workshop, demo related links). The explicit private water-basics learning path (staged from private-assets, Stage 9.47) replaces the DEMO water-basics path file as a whole; that is an explicit private file, not an alias."
 }

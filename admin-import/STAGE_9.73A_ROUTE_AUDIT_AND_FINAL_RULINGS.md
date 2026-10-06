@@ -1,5 +1,7 @@
 # Stage 9.73A — final owner rulings applied; route audit; staged release rebuilt (NOT deployed)
 
+> **Superseded in part by `STAGE_9.73B_FINAL_ROUTE_SEPARATION.md`:** the owner ruled **separate** for OG-08, OG-10 and OG-13, so the "pending owner ruling" statuses and the three `supersedes` entries described below no longer exist; `route-policy.json` now separates all four pairs. Final counts: 708 tests; 984 files; 24 added, 211 changed.
+
 **Date:** 7 October 2026 · **Model:** Sonnet 5.5 · **Staged and validated. NOT deployed.** Live Worker unchanged: `7de9641f-df4c-4cab-8e84-055c0861879d` (rollback `db2fd12a-955e-47c4-b3c9-d174e3da85d8`). No member wording changed. Supersedes the parts of `STAGE_9.73_COMBINED_RELEASE_STAGED.md` noted below.
 
 ## 1 · Final complete 21-resource classification

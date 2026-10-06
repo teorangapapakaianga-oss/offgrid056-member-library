@@ -70,22 +70,14 @@ describe("separated demo placeholder", () => {
 describe("the recorded owner policy", () => {
   const policy = routePolicy as RoutePolicy;
 
-  it("separates the demo Home Resilience Scorecard (res-0007) from the protected one (res-1001), and does not supersede it", () => {
-    expect(policy.separateDemo["res-0007"]).toBe("res-1001");
-    expect(policy.supersedes["res-0007"]).toBeUndefined();
+  it("Stage 9.73B: all four collisions — OG-01, OG-08, OG-10, OG-13 — are explicitly separated, and nothing is superseded", () => {
+    expect(policy.separateDemo).toEqual({ "res-0007": "res-1001", "res-0015": "res-1008", "res-0016": "res-1010", "res-0013": "res-1013" });
+    expect(policy.supersedes).toEqual({});
   });
 
-  it("keeps exactly the three resolved-and-live supersessions, each tied to its one real id", () => {
-    expect(policy.supersedes).toEqual({ "res-0015": "res-1008", "res-0016": "res-1010", "res-0013": "res-1013" });
-  });
-
-  it("Stage 9.73A: grandfathering is not approval — every supersession is recorded as audited and PENDING an owner ruling, and none claims approval", () => {
-    const status = (routePolicy as unknown as { supersedesStatus: Record<string, string> }).supersedesStatus;
-    for (const id of Object.keys(policy.supersedes)) {
-      expect(status[id], `${id} needs an explicit status`).toBeTruthy();
-      expect(status[id], id).toMatch(/PENDING OWNER RULING/);
-      expect(status[id], id).not.toMatch(/^OWNER-APPROVED/);
-    }
+  it("no pending or grandfathered approval remains: every entry is OWNER-APPROVED, and there is no 'pending' status anywhere", () => {
+    expect(JSON.stringify(routePolicy)).not.toMatch(/PENDING OWNER RULING|grandfathered(?! is not)/i);
+    expect((routePolicy as unknown as Record<string, unknown>).supersedesStatus).toBeUndefined();
   });
 
   it("every entry of the policy has a status, and the approved separation says so in words", () => {
@@ -117,35 +109,68 @@ describe("the library as built (public data + the staged private records, when p
     expect(resolved.resources.find((r) => r.id === "res-0007")?.isPlaceholder).toBe(true);
   });
 
-  it("no demo id is aliased to a protected one except the three approved supersessions", () => {
-    expect(Object.fromEntries(resolved.aliases)).toEqual(privateRes.length ? { "res-0015": "res-1008", "res-0016": "res-1010", "res-0013": "res-1013" } : {});
+  it("Stage 9.73B: NO demo id is aliased to a protected one, and all four demo placeholders are separated and unlisted", () => {
+    expect(Object.fromEntries(resolved.aliases)).toEqual({});
+    expect([...resolved.separated].sort()).toEqual(privateRes.length ? ["res-0007", "res-0013", "res-0015", "res-0016"] : []);
   });
 
-  it("programme days 2 and 29 and the demo Household Resilience Assessment still point at the demo placeholder res-0007", () => {
-    for (const d of ["day-02", "day-29"]) {
-      const day = JSON.parse(fs.readFileSync(path.join(root, `data/programme/days/${d}.json`), "utf8")) as { resourceIds: string[]; worksheet?: { resourceId?: string }; isPlaceholder: boolean };
-      expect(day.resourceIds, d).toEqual(["res-0007"]);
-      expect(day.worksheet?.resourceId, d).toBe("res-0007");
-      expect(day.isPlaceholder, d).toBe(true);
-      // They resolve exactly as configured: res-0007 is not an alias of anything.
-      expect(aliasOf(resolved.aliases)("res-0007")).toBe("res-0007");
+  it("each of the four protected routes resolves to the protected resource and each demo placeholder stays demo on its own demo- route", () => {
+    if (!privateRes.length) return;
+    const pairs: [string, string, string][] = [["res-1001", "res-0007", "home-resilience-scorecard"], ["res-1008", "res-0015", "water-storage-calculator"], ["res-1010", "res-0016", "rainwater-harvesting-planner"], ["res-1013", "res-0013", "healthy-home-air-audit"]];
+    for (const [realId, demoId, slug] of pairs) {
+      expect(resolved.resources.find((r) => r.slug === slug)?.id, `/resources/${slug}/`).toBe(realId);
+      const d = resolved.resources.find((r) => r.id === demoId)!;
+      expect(d.slug, demoId).toBe(`demo-${slug}`);
+      expect(d.isPlaceholder, demoId).toBe(true);
     }
-    const hra = publicRes.find((r) => r.slug === "household-resilience-assessment");
-    expect(hra?.relatedResources).toContain("res-0007");
   });
 
-  it("the demo placeholder cannot inherit protected content or links; the protected record does not fall back to demo", () => {
-    const demoRec = publicRes.find((r) => r.id === "res-0007")!;
-    expect(demoRec.marketFiles).toBeUndefined();
-    expect(String(demoRec.fileUrl)).toMatch(/^\/resources\/general\//);
-    expect(String(demoRec.fileUrl)).not.toMatch(/\.(NZ|AU)\.pdf$/);
-    const realRec = privateRes.find((r) => r.id === "res-1001");
-    if (!realRec) return;
-    expect(realRec.fileUrl).toBeUndefined();
-    expect(Object.values(realRec.marketFiles ?? {}).map((m) => m.fileUrl)).toEqual(["/resources/home-resilience-scorecard.NZ.pdf", "/resources/home-resilience-scorecard.AU.pdf"]);
-    expect(realRec.relatedResources ?? []).not.toContain("res-0007");
-    expect(JSON.stringify(realRec)).not.toMatch(/DEMONSTRATION ENTRY|placeholder content/i);
-    expect(realRec.isPlaceholder).toBe(false);
+  it("programme days 2, 9, 11, 13 and 29 point at the DEMO placeholders and resolve exactly as configured (no promotion)", () => {
+    const want: Record<string, string> = { "day-02": "res-0007", "day-09": "res-0015", "day-11": "res-0016", "day-13": "res-0013", "day-29": "res-0007" };
+    for (const [d, demoId] of Object.entries(want)) {
+      const day = JSON.parse(fs.readFileSync(path.join(root, `data/programme/days/${d}.json`), "utf8")) as { resourceIds: string[]; worksheet?: { resourceId?: string }; isPlaceholder: boolean };
+      expect(day.resourceIds, d).toEqual([demoId]);
+      expect(day.worksheet?.resourceId, d).toBe(demoId);
+      expect(day.isPlaceholder, d).toBe(true);
+      expect(aliasOf(resolved.aliases)(demoId), `${demoId} must not be an alias`).toBe(demoId);
+    }
+  });
+
+  it("the demo references stay demo: the demo workshop, the demo Household Resilience Assessment, Water Security Guide and Ventilation Basics", () => {
+    const ws = JSON.parse(fs.readFileSync(path.join(root, "data/workshops/demo-water-storage-workshop.json"), "utf8")) as { downloads: { resourceId?: string }[] };
+    expect(ws.downloads.map((x) => x.resourceId)).toContain("res-0015");
+    const rel = (slug: string) => publicRes.find((r) => r.slug === slug)?.relatedResources ?? [];
+    expect(rel("household-resilience-assessment")).toContain("res-0007");
+    expect(rel("water-security-guide")).toEqual(expect.arrayContaining(["res-0015", "res-0016"]));
+    expect(rel("ventilation-basics")).toContain("res-0013");
+    // None of the demo records is aliased, so every one of these resolves to itself.
+    for (const id of ["res-0007", "res-0013", "res-0015", "res-0016"]) expect(aliasOf(resolved.aliases)(id)).toBe(id);
+  });
+
+  it("the demo water-basics learning path names the demo placeholders; in the preview it is replaced as a whole by the explicit private path, not aliased", () => {
+    const demoPath = JSON.parse(fs.readFileSync(path.join(root, "data/learning-paths/water-basics.json"), "utf8")) as { steps: string[] };
+    expect(demoPath.steps).toEqual(["res-0014", "res-0015", "res-0017", "res-0016"]);
+    const priv = path.join(root, "private-assets/data-learning-paths/water-basics.private.json");
+    if (fs.existsSync(priv)) expect((JSON.parse(fs.readFileSync(priv, "utf8")) as { steps: string[] }).steps).toEqual(["res-1008", "res-1010", "res-1009", "res-1508"]);
+  });
+
+  it("no demo placeholder inherits a protected file or link, and no protected record falls back to demo — for all four pairs", () => {
+    const pairs: [string, string][] = [["res-0007", "res-1001"], ["res-0015", "res-1008"], ["res-0016", "res-1010"], ["res-0013", "res-1013"]];
+    for (const [demoId, realId] of pairs) {
+      const demoRec = publicRes.find((r) => r.id === demoId)!;
+      expect(demoRec.marketFiles, `${demoId} has no market files`).toBeUndefined();
+      expect(String(demoRec.fileUrl), demoId).toMatch(/^\/resources\/[a-z]+\/[a-z0-9-]+\.pdf$/);
+      expect(String(demoRec.fileUrl), demoId).not.toMatch(/\.(NZ|AU)\.pdf$/);
+      const realRec = privateRes.find((r) => r.id === realId);
+      if (!realRec) continue; // public checkout: no private records staged
+      expect(realRec.fileUrl, `${realId} has no default (demo-shaped) file`).toBeUndefined();
+      for (const m of Object.values(realRec.marketFiles ?? {})) expect(m.fileUrl, realId).toMatch(/\.(NZ|AU)\.pdf$|^\/resources\/household-risk-identifier\.pdf$/);
+      expect(realRec.relatedResources ?? [], realId).not.toContain(demoId);
+      expect(JSON.stringify(realRec), realId).not.toMatch(/DEMONSTRATION ENTRY|placeholder content/i);
+      expect(realRec.isPlaceholder, realId).toBe(false);
+      // The demo's own file path is never the protected one.
+      expect(String(demoRec.fileUrl)).not.toBe(Object.values(realRec.marketFiles ?? {})[0]?.fileUrl);
+    }
   });
 });
 
