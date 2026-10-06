@@ -33,12 +33,16 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const r = getResourceBySlug((await params).slug);
   if (!r) notFound();
 
-  const all = getSummaries();
+  const path = r.learningPath ? loadLearningPaths().find((p) => p.id === r.learningPath) : undefined;
+  // Listings and auto-suggestions never include a separated demo placeholder (Stage 9.73A); one that this resource names
+  // explicitly (a related link, a pack item, a path step) still resolves to itself.
+  const named = new Set([...r.relatedResources, ...(r.packItems ?? []), ...(path?.steps ?? [])]);
+  const listed = getSummaries();
+  const all = [...listed, ...getSummaries((x) => named.has(x.id) && !listed.some((l) => l.id === x.id), { includeUnlisted: true })];
   const f = getFoundation(r.foundation);
   const c = getCategory(r.foundation, r.category);
   const type = getResourceType(r.resourceType);
   const related = relatedResources({ current: r, all });
-  const path = r.learningPath ? loadLearningPaths().find((p) => p.id === r.learningPath) : undefined;
   const pathSteps = path ? path.steps.map((id) => all.find((x) => x.id === id)).filter((x) => x !== undefined) : [];
   const packItems = r.packItems ? all.filter((x) => r.packItems!.includes(x.id)) : [];
 

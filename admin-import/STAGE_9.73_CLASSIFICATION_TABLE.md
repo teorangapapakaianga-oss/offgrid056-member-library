@@ -9,22 +9,22 @@
 | OG-26 | 3-Tier Budget Planner | general | **planning-implementation** | planning | planner | LOCKED RULING (earlier stage) |
 | OG-11 | 30-Day Pantry Builder | food | **resilience-emergency** | pantry-resilience | worksheet | OWNER RULING 2026-10-07 (Stage 9.73) |
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general | **planning-implementation** | planning | planner | OWNER RULING 2026-10-07 (Stage 9.73) |
-| OG-27 | 90-Day Implementation Roadmap | general | **planning-implementation** | planning | planner | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
-| OG-20 | Alternative Energy Suitability Check | energy | **off-grid-living** | household-energy-planning | assessment | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
+| OG-27 | 90-Day Implementation Roadmap | general | **planning-implementation** | planning | planner | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
+| OG-20 | Alternative Energy Suitability Check | energy | **off-grid-living** | household-energy-planning | assessment | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
 | OG-19 | Battery Backup Planner | energy | **off-grid-living** | backup-energy | planner | OWNER RULING 2026-10-07 (Stage 9.73) |
 | OG-21 | Home Energy & Shelter Upgrade Plan | shelter | **planning-implementation** | household-resilience | planner | OWNER RULING 2026-10-07 (Stage 9.73) |
-| OG-02 | Household Risk Identifier | general | **resilience-planning** | planning | worksheet | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
-| OG-09 | Household Water Treatment Guide | water | **off-grid-living** | water-security | guide | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
-| OG-B04 | Monthly Planning Challenge Template | general | **planning-implementation** | planning | planner | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
+| OG-02 | Household Risk Identifier | general | **resilience-planning** | planning | worksheet | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
+| OG-09 | Household Water Treatment Guide | water | **off-grid-living** | water-security | guide | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
+| OG-B04 | Monthly Planning Challenge Template | general | **planning-implementation** | planning | planner | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
 | OG-B12 | Off-Grid System Architecture Planner | general | **advanced-future** | planning | planner | LOCKED RULING (earlier stage) |
-| OG-25 | Project Support Brief Template | general | **planning-implementation** | planning | template | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
-| OG-10 | Rainwater Harvesting Planner | water | **off-grid-living** | rainwater | planner | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
-| OG-22 | Resilience Product Wishlist | general | **resilience-planning** | planning | worksheet | OWNER RULING 2026-10-07 (Stage 9.73) |
-| OG-B07 | Solar Planning Deep Worksheet | energy | **advanced-future** | solar | worksheet | LOCKED RULING (earlier stage) |
-| OG-18 | Solar Power 101 Workbook | energy | **off-grid-living** | solar | workbook | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
-| OG-15 | Warm Home Scorecard | shelter | **resilience-planning** | heating | assessment | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
+| OG-25 | Project Support Brief Template | general | **planning-implementation** | planning | template | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
+| OG-10 | Rainwater Harvesting Planner | water | **off-grid-living** | rainwater | planner | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
+| OG-22 | Resilience Product Wishlist | general | **resilience-planning** | planning | worksheet | OWNER RULING 2026-10-07 (Stage 9.73, kept in 9.73A): EXPLICIT OVERRIDE of the general budgeting rule |
+| OG-B07 | Solar Planning Deep Worksheet | energy | **off-grid-living** | solar | worksheet | OWNER RULING 2026-10-07 (Stage 9.73A): CORRECTION of an earlier locked ruling |
+| OG-18 | Solar Power 101 Workbook | energy | **off-grid-living** | solar | workbook | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
+| OG-15 | Warm Home Scorecard | shelter | **resilience-planning** | heating | assessment | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
 | OG-08 | Water Storage Calculator | water | **off-grid-living** | water-storage | worksheet | OWNER RULING 2026-10-07 (Stage 9.73) |
-| OG-B08 | Water Tank Sizing & Placement Guide | water | **off-grid-living** | household-water-planning | guide | APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review |
+| OG-B08 | Water Tank Sizing & Placement Guide | water | **off-grid-living** | household-water-planning | guide | OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved |
 | OG-13 | Healthy Home Air Audit | air | **resilience-planning** | healthy-home-checks | assessment | OWNER RULING 2026-10-07 (Stage 9.73) |
 | OG-17 | Solid Fuel Heating Planner | shelter | **off-grid-living** | heating | planner | OWNER RULING 2026-10-07 (Stage 9.73) |
 | OG-01 | Home Resilience Scorecard | general | **resilience-planning** | getting-started | assessment | owner-approved 2026-10-06 (Stage 9.68) |
@@ -174,12 +174,12 @@ res-1022 · foundation `general` · component `resilience-planning` · category 
 
 ### OG-B07 — Solar Planning Deep Worksheet
 
-res-1507 · foundation `energy` · component `advanced-future` · category `solar` · type `worksheet` · advanced · 30 min
+res-1507 · foundation `energy` · component `off-grid-living` · category `solar` · type `worksheet` · advanced · 30 min
 
 - **Foundation:** energy — solar
-- **Programme component:** advanced-future — advanced solar planning aimed at what an installer needs to quote accurately (locked ruling; see the release note: it is a single-system worksheet, so it is the one to reconfirm under the narrower Stage 9.73 advanced-future definition)
-- **Resilience role:** helps a household prepare the roof and site survey, shading analysis and load profile that an installer needs to quote a larger solar system
-- **Kind of guidance:** advanced solar system planning — not emergency guidance
+- **Programme component:** off-grid-living — an advanced SINGLE-SYSTEM solar planning resource (owner ruling, Stage 9.73A, correcting the earlier advanced-future ruling): advanced-future is reserved for integrated whole-property, multi-system or specialist architecture, and difficulty or complexity alone does not make a resource advanced-future
+- **Resilience role:** helps a household prepare the roof and site survey, shading analysis and load profile that an installer needs to quote a solar system, a step toward independent power
+- **Kind of guidance:** off-grid system planning (advanced, single system: solar) — not emergency guidance and not whole-property architecture
 - **Wording matches role:** yes — roof and site survey, shading analysis and load profile with payback; installation and electrical work are left to licensed professionals
 
 ### OG-18 — Solar Power 101 Workbook

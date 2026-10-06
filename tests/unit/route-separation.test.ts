@@ -50,6 +50,12 @@ describe("separated demo placeholder", () => {
     expect(aliasOf(out.aliases)("res-0007")).toBe("res-0007");
   });
 
+  it("Stage 9.73A: a separated placeholder is reported as separated (so listings can hide it); a superseded one is not", () => {
+    expect([...out.separated]).toEqual(["res-0007"]);
+    const sup = resolveRouteCollisions([{ id: "res-0015", slug: "water-storage-calculator", isPlaceholder: true, relatedResources: [] as string[] }, { id: "res-1008", slug: "water-storage-calculator", isPlaceholder: false, relatedResources: [] as string[] }], { preview: true, policy: { supersedes: { "res-0015": "res-1008" }, separateDemo: {} } });
+    expect(sup.separated.size).toBe(0);
+  });
+
   it("fails closed if the demo route is itself already taken", () => {
     const taken = { id: "res-0099", slug: "demo-home-resilience-scorecard", isPlaceholder: true, relatedResources: [] as string[] };
     expect(() => resolveRouteCollisions([demo, real, taken], { preview: true, policy: SEPARATE })).toThrow(/still claimed more than once/);
@@ -71,6 +77,20 @@ describe("the recorded owner policy", () => {
 
   it("keeps exactly the three resolved-and-live supersessions, each tied to its one real id", () => {
     expect(policy.supersedes).toEqual({ "res-0015": "res-1008", "res-0016": "res-1010", "res-0013": "res-1013" });
+  });
+
+  it("Stage 9.73A: grandfathering is not approval — every supersession is recorded as audited and PENDING an owner ruling, and none claims approval", () => {
+    const status = (routePolicy as unknown as { supersedesStatus: Record<string, string> }).supersedesStatus;
+    for (const id of Object.keys(policy.supersedes)) {
+      expect(status[id], `${id} needs an explicit status`).toBeTruthy();
+      expect(status[id], id).toMatch(/PENDING OWNER RULING/);
+      expect(status[id], id).not.toMatch(/^OWNER-APPROVED/);
+    }
+  });
+
+  it("every entry of the policy has a status, and the approved separation says so in words", () => {
+    const sep = (routePolicy as unknown as { separateDemoStatus: Record<string, string> }).separateDemoStatus;
+    for (const id of Object.keys(policy.separateDemo)) expect(sep[id], id).toMatch(/^OWNER-APPROVED/);
   });
 
   it("a placeholder is resolved one way only", () => {

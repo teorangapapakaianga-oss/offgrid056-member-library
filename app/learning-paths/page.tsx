@@ -10,7 +10,7 @@ import { formatMinutes } from "@/lib/format";
 export const metadata: Metadata = { title: "Learning paths" };
 
 export default function LearningPathsPage() {
-  const all = getSummaries();
+  const all = getSummaries(undefined, { includeUnlisted: true }); // steps are explicit references
   const paths = loadLearningPaths();
   return (
     <>

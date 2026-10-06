@@ -23,7 +23,7 @@
       "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived. The source document does not state a difficulty level (searched for beginner, intermediate, advanced, difficulty, level, skill, experience: zero matches).",
       "difficultyReason": "2 pages; approximately 15 minutes; short-answer planning activity; no technical content; no specialist knowledge required.",
       "programComponent": "planning-implementation",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "general — a monthly theme can be any foundation",
         "programComponent": "planning-implementation — a repeatable monthly planning and tracking framework (30-day plans and implementation tracking)",
@@ -85,7 +85,7 @@
       "description": "A professional brief anyone can understand",
       "descriptionStatus": "owner-approved 2026-09-22 (ruling 7: remove 'Day 25 —'); the deployed record still has the old description until the next approved deployment",
       "programComponent": "planning-implementation",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "general — a project brief that can concern any foundation",
         "programComponent": "planning-implementation — a project brief and supplier / installer planning (the component definition names project briefs)",
@@ -137,7 +137,7 @@
         "evidence": "OG-22 (res-1022) and OG-26 (res-1026) deployed together in Worker version 2aa8a131 and verified: Access 27/27, routing 27/27, exact-build verifier 16/16."
       },
       "programComponent": "planning-implementation",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "general — a plan across the foundations",
         "programComponent": "planning-implementation — its primary output is a 90-day roadmap (budgeting ruling: roadmap / action plan / schedule)",
@@ -175,13 +175,13 @@
         "res-1018"
       ],
       "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment.",
-      "programComponent": "advanced-future",
-      "programComponentStatus": "LOCKED RULING (earlier stage). Foundation, category and type kept as they are live.",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): CORRECTION of an earlier locked ruling. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "energy — solar",
-        "programComponent": "advanced-future — advanced solar planning aimed at what an installer needs to quote accurately (locked ruling; see the release note: it is a single-system worksheet, so it is the one to reconfirm under the narrower Stage 9.73 advanced-future definition)",
-        "resilienceRole": "helps a household prepare the roof and site survey, shading analysis and load profile that an installer needs to quote a larger solar system",
-        "guidanceKind": "advanced solar system planning — not emergency guidance",
+        "programComponent": "off-grid-living — an advanced SINGLE-SYSTEM solar planning resource (owner ruling, Stage 9.73A, correcting the earlier advanced-future ruling): advanced-future is reserved for integrated whole-property, multi-system or specialist architecture, and difficulty or complexity alone does not make a resource advanced-future",
+        "resilienceRole": "helps a household prepare the roof and site survey, shading analysis and load profile that an installer needs to quote a solar system, a step toward independent power",
+        "guidanceKind": "off-grid system planning (advanced, single system: solar) — not emergency guidance and not whole-property architecture",
         "wordingMatchesRole": "yes — roof and site survey, shading analysis and load profile with payback; installation and electrical work are left to licensed professionals"
       }
     },
@@ -221,7 +221,7 @@
         }
       ],
       "programComponent": "resilience-planning",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "shelter — warmth, insulation and heating",
         "programComponent": "resilience-planning — warm-home planning and a scorecard (named in the component definition)",
@@ -265,7 +265,7 @@
         "lapses": "Automatically, on any fire or bushfire wording outside those two exact labels, or on any fire-teaching signal. Scoped to OG-02 alone; there is no global fire exemption and the fire detector was not weakened (it was strengthened at Stage 9.46 to catch 'bushfire' and 'wildfire')."
       },
       "programComponent": "resilience-planning",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "general — the risks a household faces across the foundations",
         "programComponent": "resilience-planning — a household assessment that ranks priorities (the component definition names household assessments)",
@@ -383,7 +383,7 @@
         "on": "2026-09-22"
       },
       "programComponent": "resilience-planning",
-      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73, kept in 9.73A): EXPLICIT OVERRIDE of the general budgeting rule. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "general — it spans all five foundations",
         "programComponent": "resilience-planning — the step after a household assessment: turning its results into a prioritised list of what to acquire (owner ruling; the budget summary and phasing are supporting, and the owner ruled this over the budgeting default)",
@@ -516,7 +516,7 @@
       ],
       "deploymentApproved": "2026-09-22 (Stage 9.30 ruling 13, conditional on final validation)",
       "programComponent": "off-grid-living",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "energy — solar",
         "programComponent": "off-grid-living — beginner solar stays off-grid-living (systemArchitecture ruling)",
@@ -618,7 +618,7 @@
       "safetyBlockTrimsNote": "Scoped to OG-20; the canonical CO block is unchanged for every other resource. NZ CO wording unchanged: no exact duplicate (the NZ generator block has no alarm line). The electrical block's generator lines are dropped wherever the generator block is present (ruling 7) — currently OG-20 only.",
       "deploymentApproved": "2026-09-22 (Stage 9.34 ruling 11, conditional on final validation)",
       "programComponent": "off-grid-living",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "energy — alternative sources such as wind, micro-hydro and generators",
         "programComponent": "off-grid-living — helps a household choose independent energy options (systemArchitecture ruling: entry and intermediate stay off-grid-living)",
@@ -792,7 +792,7 @@
       "routeNote": "Expected to collide with the demo placeholder 'rainwater-harvesting-planner'; handled by the reusable private-preview override (Stage 9.39), with no OG-10-specific exception.",
       "deploymentApproved": "2026-09-23 (Stage 9.40 ruling 20, conditional on final validation)",
       "programComponent": "off-grid-living",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "water — rainwater capture and storage",
         "programComponent": "off-grid-living — water capture and storage",
@@ -846,7 +846,7 @@
       "route": "/resources/household-water-treatment-guide/",
       "routeNote": "New route. No demo placeholder holds it, so there is no supersession and no collision.",
       "programComponent": "off-grid-living",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "water — treating household water",
         "programComponent": "off-grid-living — water treatment is named in the component definition",
@@ -909,7 +909,7 @@
       "titleStatus": "owner-approved 2026-09-23 (Stage 9.46) — 'Water Tank Sizing & Placement Guide' kept",
       "status": "APPROVED FOR PRIVATE PREVIEW DEPLOYMENT as #19 (Stage 9.46 ruling 13)",
       "programComponent": "off-grid-living",
-      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73A): confirmed — applied from the locked rules in Stage 9.73, then owner-approved. Foundation, category and type kept as they are live.",
       "programAlignment": {
         "foundation": "water — tank sizing and siting",
         "programComponent": "off-grid-living — water storage and the tank as part of a household's own supply",

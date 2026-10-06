@@ -23,7 +23,7 @@ export default async function LearningPathPage({ params }: PageProps<"/learning-
   const { path: id } = await params;
   const path = loadLearningPaths().find((x) => x.id === id);
   if (!path) notFound();
-  const all = getSummaries();
+  const all = getSummaries(undefined, { includeUnlisted: true }); // steps are explicit references
   const steps = path.steps.map((id) => all.find((r) => r.id === id)).filter((r) => r !== undefined);
 
   return (

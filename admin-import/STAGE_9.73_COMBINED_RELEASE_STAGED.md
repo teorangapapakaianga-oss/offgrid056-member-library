@@ -1,5 +1,7 @@
 # Stage 9.73 — owner rulings applied; combined library cleanup STAGED (not deployed)
 
+> **Superseded in part by `STAGE_9.73A_ROUTE_AUDIT_AND_FINAL_RULINGS.md`:** OG-B07 is now **off-grid-living** (not advanced-future); the ten "applied from the locked rules" classifications are owner-confirmed; the three grandfathered supersessions are **not approved** and are pending a per-collision ruling; the demo Home Resilience Scorecard card is now **hidden** from listings; counts below (701 tests, 329 changed files) are now 706 tests and 175 changed files.
+
 **Date:** 7 October 2026 · **Model:** Sonnet 5.5 · **Staged and validated. NOT deployed.** The live Worker is still `7de9641f-df4c-4cab-8e84-055c0861879d` (rollback `db2fd12a-955e-47c4-b3c9-d174e3da85d8`, earlier `fa23ec74…`, `1922f7ba…`). No member wording changed.
 
 The Wrangler asset-count discrepancy is closed (Stage 9.72: 563 uploaded + 397 already uploaded = 960 files; previous 562 + 396 = 958; net +2 = the OG-01 PDFs).

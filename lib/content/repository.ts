@@ -49,6 +49,8 @@ function parseWith<S extends z.ZodType>(schema: S) {
 
 let resourceCache: Resource[] | null = null;
 let aliasCache: Map<string, string> | null = null;
+/** Demo placeholders separated from a real resource on the same route (Stage 9.73A): reachable, but never listed. */
+let unlistedIds: Set<string> = new Set();
 let pathCache: LearningPath[] | null = null;
 
 /**
@@ -68,6 +70,7 @@ export function loadAllResourceFiles(): Resource[] {
     }
     const alias = aliasOf(resolved.aliases);
     aliasCache = resolved.aliases;
+    unlistedIds = resolved.separated;
     resourceCache = resolved.resources.map((r) => ({
       ...r,
       relatedResources: r.relatedResources.map(alias),
@@ -167,8 +170,22 @@ export function getProgrammeDay(day: number): ProgrammeDay | undefined {
   return getProgrammeDays().find((d) => d.day === day);
 }
 
-export function getSummaries(filter?: (r: Resource) => boolean): ResourceSummary[] {
+/** True for a demo placeholder that was separated from a real resource: it is hidden from listings (Stage 9.73A). */
+export function isUnlisted(id: string): boolean {
+  loadAllResourceFiles();
+  return unlistedIds.has(id);
+}
+
+/**
+ * Summaries for LISTINGS (library, Start Here, foundations, categories, collections, home, progress, saved): a separated
+ * demo placeholder is left out, so the protected library shows the real resource and not a duplicate demo card.
+ *
+ * `{ includeUnlisted: true }` is for an EXPLICIT reference — a programme day, a workshop, a related link or a learning
+ * path step naming the resource by id — where the demo placeholder must still resolve to itself.
+ */
+export function getSummaries(filter?: (r: Resource) => boolean, options: { includeUnlisted?: boolean } = {}): ResourceSummary[] {
   return getResources()
+    .filter((r) => options.includeUnlisted || !isUnlisted(r.id))
     .filter(filter ?? (() => true))
     .map(toSummary);
 }
@@ -227,6 +244,7 @@ export function fileSizeBytes(fileUrl: string, declared?: number): number | null
 /** Everything downloadable, newest update first: the Member Download Centre. */
 export function getDownloads(): DownloadEntry[] {
   return getResources()
+    .filter((r) => !isUnlisted(r.id))
     .filter((r) => r.downloadable && (r.fileUrl || r.marketFiles))
     .map((r) => {
       // A market-specific resource has no default file on purpose: the member's own market picks the file,

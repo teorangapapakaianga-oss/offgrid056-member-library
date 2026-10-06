@@ -122,7 +122,8 @@ describe("Stage 9.65 · the overlap rulings, and the scheduled migration of the 
     expect(full.rulings.systemArchitecture).toMatch(/advanced-future: advanced, integrated, whole-property/);
     expect(full.rulings.systemArchitecture).toMatch(/NOT moved to advanced-future merely because it is technical/);
     expect(full.classificationsDecided["OG-B12"]).toBe("advanced-future");
-    expect(full.classificationsDecided["OG-B07"]).toBe("advanced-future");
+    // Stage 9.73A (owner): OG-B07 is an advanced SINGLE-SYSTEM solar resource, so it is off-grid-living; difficulty alone is not advanced-future.
+    expect(full.classificationsDecided["OG-B07"]).toBe("off-grid-living");
     for (const basic of ["OG-18", "OG-19", "OG-20", "OG-B08", "OG-10"]) expect(full.classificationsDecided[basic], `${basic} is not decided as advanced-future`).not.toBe("advanced-future");
   });
 

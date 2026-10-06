@@ -59,8 +59,31 @@ describe.skipIf(!hasPrivate)("Stage 9.73 · classification of every protected re
       if (r) expect(r.programComponent, code).toBe(component);
     }
     const advanced = records.filter((r) => r.programComponent === "advanced-future").map((r) => r.legacyCode).sort();
-    expect(advanced).toEqual(["OG-B07", "OG-B12"]);
+    // Stage 9.73A (owner): advanced-future is reserved for integrated whole-property, multi-system or specialist architecture.
+    expect(advanced).toEqual(["OG-B12"]);
+    expect(records.find((r) => r.legacyCode === "OG-B07")?.programComponent, "OG-B07 is an advanced single-system solar resource").toBe("off-grid-living");
     expect(records.find((r) => r.legacyCode === "OG-B10")?.programComponent).toBe("planning-implementation");
+  });
+
+  it("Stage 9.73A: the ten confirmations are recorded as owner rulings, and nothing is still marked 'owner to confirm'", () => {
+    const ten: Record<string, string> = {
+      "OG-27": "planning-implementation", "OG-25": "planning-implementation", "OG-B04": "planning-implementation",
+      "OG-18": "off-grid-living", "OG-20": "off-grid-living", "OG-09": "off-grid-living", "OG-10": "off-grid-living", "OG-B08": "off-grid-living",
+      "OG-15": "resilience-planning", "OG-02": "resilience-planning",
+    };
+    for (const [code, component] of Object.entries(ten)) {
+      expect(records.find((r) => r.legacyCode === code)?.programComponent, code).toBe(component);
+      expect(config.classificationsDecided[code], `${code} recorded as decided`).toBe(component);
+      expect(meta[code].programComponentStatus, code).toMatch(/OWNER RULING 2026-10-07 \(Stage 9\.73A\)/);
+    }
+    for (const r of records) expect(String(meta[r.legacyCode]?.programComponentStatus ?? ""), `${r.legacyCode} status`).not.toMatch(/owner to confirm/i);
+  });
+
+  it("Stage 9.73A: OG-B07 is recorded as an owner correction, and OG-22 as an explicit override of the budgeting rule", () => {
+    expect(meta["OG-B07"].programComponentStatus).toMatch(/CORRECTION/);
+    expect(meta["OG-22"].programComponentStatus).toMatch(/EXPLICIT OVERRIDE of the general budgeting rule/);
+    expect(records.find((r) => r.legacyCode === "OG-22")?.programComponent).toBe("resilience-planning");
+    expect(records.find((r) => r.legacyCode === "OG-B12")?.programComponent).toBe("advanced-future");
   });
 
   it("the exemption list is empty: no resource depends on it", () => {

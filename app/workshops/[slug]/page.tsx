@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/workshops/[slug]"
 export default async function WorkshopPage({ params }: PageProps<"/workshops/[slug]">) {
   const w = getWorkshopBySlug((await params).slug);
   if (!w) notFound();
-  const related = getSummaries((r) => w.relatedResources.includes(r.id));
+  const related = getSummaries((r) => w.relatedResources.includes(r.id), { includeUnlisted: true }); // explicit references
   const handouts = w.downloads
     .map((d) => {
       const r = d.resourceId ? getResourceById(d.resourceId) : undefined;

@@ -23,7 +23,8 @@ export async function generateMetadata({ params }: PageProps<"/programme/day/[da
 export default async function ProgrammeDayPage({ params }: PageProps<"/programme/day/[day]">) {
   const day = getProgrammeDay(Number((await params).day));
   if (!day) notFound();
-  const resources = getSummaries((r) => day.resourceIds.includes(r.id));
+  // The day names its resources explicitly, so a separated demo placeholder still resolves to itself here (Stage 9.73A).
+  const resources = getSummaries((r) => day.resourceIds.includes(r.id), { includeUnlisted: true });
   const f = getFoundation(day.foundation);
 
   // The day's worksheet, resolved to the real file so it can be opened or downloaded.

@@ -28,7 +28,10 @@ export class RouteCollisionError extends Error {}
  * - `supersedes`: placeholder id → the one real id that may replace it (the Stage 9.38/9.39 behaviour, kept only for the
  *   clashes already resolved and live). The placeholder is dropped and its references follow the real resource.
  * - `separateDemo`: placeholder id → the real id it clashes with. The real resource keeps the route; the placeholder
- *   stays a placeholder on a `demo-` route of its own, and nothing that references it is redirected.
+ *   stays a placeholder on a `demo-` route of its own, and nothing that references it is redirected. A separated
+ *   placeholder is also UNLISTED (`separated` in the result): it is hidden from library, Start Here and browsing
+ *   listings so the protected library shows the real resource, not a duplicate card, while it stays reachable on its
+ *   own route and through explicit references (programme days, related links).
  *
  * A clash with no entry (or an entry naming a different real id) is an error, so the build stops rather than choosing.
  */
@@ -43,7 +46,7 @@ export const demoSlug = (slug: string) => `demo-${slug}`;
 export function resolveRouteCollisions<T extends RoutedResource>(
   resources: T[],
   options: { preview: boolean; policy?: RoutePolicy },
-): { resources: T[]; aliases: Map<string, string> } {
+): { resources: T[]; aliases: Map<string, string>; separated: Set<string> } {
   const policy: RoutePolicy = options.policy ?? { supersedes: {}, separateDemo: {} };
   const bySlug = new Map<string, T[]>();
   for (const r of resources) bySlug.set(r.slug, [...(bySlug.get(r.slug) ?? []), r]);
@@ -79,7 +82,7 @@ export function resolveRouteCollisions<T extends RoutedResource>(
     if (slugs.has(r.slug)) throw new RouteCollisionError(`route /resources/${r.slug}/ is still claimed more than once after separating demo content`);
     slugs.add(r.slug);
   }
-  return { resources: kept, aliases };
+  return { resources: kept, aliases, separated: new Set([...renamed.keys()].map((p) => p.id)) };
 }
 
 /** The id to use for a reference, after supersession. */
