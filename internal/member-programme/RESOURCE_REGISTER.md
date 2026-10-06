@@ -147,3 +147,8 @@ OG-B09: claims-first prepared, NOT migrated. Legacy has 6 R-values, 6 prices, 3 
 
 OG-B09: migrated DRAFT prepared (config only), awaiting owner copy approval. Not rendered, not deployed.
 
+
+## Stage 9.66 note
+
+OG-B09 Resilient Heating & Insulation Upgrade Checklist: protected resource #22 (res-1509), draft, resilience-planning, deployed.
+

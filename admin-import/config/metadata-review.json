@@ -870,7 +870,7 @@
       "approvedSafetyBlocksStatus": "gas-and-lpg-general: NZ and AU owner-approved 2026-10-06 (Stages 9.62D/9.63). solid-fuel-heating: owner-approved 2026-09-22 (Stage 9.19); carried by owner ruling 1, Stage 9.64 — NOT suppressed by a disposition. batteries-and-electrical: owner-approved 2026-09-22 (Stage 9.19). DETECTOR-REQUIRED since the Stage 9.64A repositioning (the member is told to check solar, battery and inverter capacity) and carried so the requirement is met, not suppressed — OWNER-APPROVED 2026-10-06 (Stage 9.64B): the generation, inverter and battery wording is KEPT and the block is required; the resilience wording is not weakened to avoid a safety block.",
       "safetyReasoning": "The Flued gas row raises the gas fuel check (the label alone does), so gas-and-lpg-general is detector-required in both markets. The wood-burner row requires solid-fuel-heating (owner ruling, Stage 9.64). The generation, inverter and battery wording makes batteries-and-electrical detector-required (kept by owner ruling, Stage 9.64B). No other gas block is carried: the rows mention no gasfitters, servicing, installation, carbon monoxide, cylinders, leaks or unflued heaters, so none is triggered.",
       "recordStatus": "draft",
-      "migrationState": "PREPARED (Stage 9.64), repositioned Stage 9.64A — draft copy for owner review. NOT rendered, NOT a protected resource.",
+      "migrationState": "APPROVED and deployed 2026-10-06 (Stage 9.66) as private-preview resource #22, status draft. Worker version db2fd12a-955e-47c4-b3c9-d174e3da85d8; rollback fa23ec74-85d2-4d91-b484-3f037ccbe38b.",
       "foundationBasis": "OWNER-APPROVED / INFERRED",
       "categoryBasis": "OWNER-APPROVED / INFERRED",
       "difficultyBasis": "OWNER-APPROVED / INFERRED",

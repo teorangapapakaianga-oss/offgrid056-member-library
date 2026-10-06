@@ -93,3 +93,8 @@ record in `data/` is never changed.
 - **`private-assets/` is never committed.** Public GitHub has no member files.
 - **A failed check stops the deployment.** It has happened and worked: the OG-08 build failed validation on a
   programme-day worksheet link, and nothing went out.
+
+## 6 October 2026 - Stage 9.66 - OG-B09 (resource #22)
+
+Version db2fd12a-955e-47c4-b3c9-d174e3da85d8. Rollback: fa23ec74-85d2-4d91-b484-3f037ccbe38b (21 resources); private-asset copy at workspace/backups/private-assets-fa23ec74. Do not remove the rollback until you choose to.
+

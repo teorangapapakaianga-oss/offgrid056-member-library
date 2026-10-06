@@ -156,3 +156,8 @@ Owner approves rendering OG-B09; then protected resource #22 and deploy. Settle 
 
 1. Owner approves the OG-B09 PDFs. 2. Then staging, protected resource #22, verify-build, deploy with rollback - each on the owner's word. 3. At the NEXT NORMAL DEPLOYMENT: classify the 21 live resources, run the full regression, then remove the exemption (scheduled task classify-the-21-live-resources).
 
+
+## After Stage 9.66
+
+Next migration target recommended: OG-01 Home Resilience Scorecard (claims-first audit first). Next normal deployment: classify-the-21-live-resources.
+

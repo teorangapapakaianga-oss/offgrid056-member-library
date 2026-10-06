@@ -131,3 +131,8 @@ Programme-component classification added (off-grid-living, resilience-planning, 
 
 OG-B09 PDFs (NZ + AU, 8 pages each, comparison on its own landscape section) rendered into workspace/prep/OG-B09, 69/69 QA checks, verify-prep passed. NOT yet protected resource #22; not deployed. Budgeting and system-architecture overlaps ruled; live-21 classification scheduled for the next normal deployment (exemption kept). 637 tests. Report: admin-import/STAGE_9.65_OGB09_RENDER.md.
 
+
+## Stage 9.66 (6 October 2026) - OG-B09 DEPLOYED as protected resource #22
+
+Worker db2fd12a-955e-47c4-b3c9-d174e3da85d8; rollback fa23ec74-85d2-4d91-b484-3f037ccbe38b retained. 22 protected resources, 44 market files, 637 tests, Bucket C 0. Status draft behind Access; public/demo untouched. classify-the-21-live-resources still scheduled for the next normal deployment. Report: admin-import/STAGE_9.66_OGB09_DEPLOYED.md.
+
