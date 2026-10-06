@@ -57,18 +57,37 @@ export interface InjectResult {
   unplaced: string[];
 }
 
+/**
+ * Where a resource may ask for its TOPIC safety blocks to appear (Stage 9.68A): a resource whose copy contains this marker
+ * (inside its own labelled "Safety Notes" section) gets every block that is not the emergency box or the closing disclaimer
+ * placed there instead of before the content. It is opt-in per resource, by an owner ruling; the default is unchanged. The
+ * emergency block and the disclaimer never move. If the marker is not in the document the blocks are placed as before —
+ * a safety block is never dropped for want of a marker, and `injectSafetyChecked` still verifies every one.
+ */
+export const SAFETY_NOTES_MARKER = "<!-- og056:safety-notes -->";
+export interface InjectOptions {
+  /** the marker to place topic blocks at; omitted means the default placement */
+  topicBlockMarker?: string;
+}
+const FIXED_BLOCKS = ["emergency-contact", "general-disclaimer"];
+
 export function injectSafetyChecked(
   html: string,
   blocks: { id: string; title: string; body: string; severity?: string }[],
+  options: InjectOptions = {},
 ): InjectResult {
-  const out = injectSafety(html, blocks);
+  const out = injectSafety(html, blocks, options);
   const placed: string[] = [];
   const unplaced: string[] = [];
   for (const b of blocks) (out.includes(`data-block="${b.id}"`) ? placed : unplaced).push(b.id);
   return { html: out, placed, unplaced };
 }
 
-export function injectSafety(html: string, blocks: { id: string; title: string; body: string; severity?: string }[]): string {
+export function injectSafety(
+  html: string,
+  blocks: { id: string; title: string; body: string; severity?: string }[],
+  options: InjectOptions = {},
+): string {
   const style = `
 <style>
   .og-safety { border-radius: 10px; padding: 14px 18px; margin: 0 0 18px; font-size: 13px; line-height: 1.55; break-inside: avoid; page-break-inside: avoid; }
@@ -84,10 +103,16 @@ export function injectSafety(html: string, blocks: { id: string; title: string; 
     return `<div class="og-safety ${cls}" data-block="${b.id}"><h3>${b.title}</h3><p style="margin:0">${body}</p></div>`;
   };
 
-  const critical = blocks.filter((b) => b.severity === "CRITICAL").map(block).join("\n");
-  const standard = blocks.filter((b) => b.severity !== "CRITICAL").map(block).join("\n");
+  // Only a resource that asked for it, and whose copy actually carries the marker, has its topic blocks moved.
+  const marker = options.topicBlockMarker;
+  const atMarker = !!marker && html.includes(marker);
+  const moved = (b: { id: string }) => atMarker && !FIXED_BLOCKS.includes(b.id);
+  const critical = blocks.filter((b) => b.severity === "CRITICAL" && !moved(b)).map(block).join("\n");
+  const standard = blocks.filter((b) => b.severity !== "CRITICAL" && !moved(b)).map(block).join("\n");
+  const topic = blocks.filter(moved).map(block).join("\n");
 
   let out = html.replace("</head>", `${style}\n</head>`);
+  if (atMarker) out = out.replace(marker!, () => topic);
 
   // Critical blocks go immediately inside the content, before the first teaching element.
   //
@@ -97,15 +122,17 @@ export function injectSafety(html: string, blocks: { id: string; title: string; 
   // back to the top of <body>, and `injectSafetyChecked` verifies the result either way.
   if (critical) {
     if (/<div class="content">/.test(out)) {
-      out = out.replace(/(<div class="content">)/, `$1\n${critical}`);
+      out = out.replace(/(<div class="content">)/, (_m, g1: string) => `${g1}\n${critical}`);
     } else {
-      out = out.replace(/(<body[^>]*>)/, `$1\n${critical}`);
+      out = out.replace(/(<body[^>]*>)/, (_m, g1: string) => `${g1}\n${critical}`);
     }
   }
 
   // The disclaimer closes the document.
   if (standard) {
-    out = /<\/div>\s*<\/body>/.test(out) ? out.replace(/(<\/div>\s*<\/body>)/, `\n${standard}\n$1`) : out.replace(/(<\/body>)/, `\n${standard}\n$1`);
+    out = /<\/div>\s*<\/body>/.test(out)
+      ? out.replace(/(<\/div>\s*<\/body>)/, (_m, g1: string) => `\n${standard}\n${g1}`)
+      : out.replace(/(<\/body>)/, (_m, g1: string) => `\n${standard}\n${g1}`);
   }
   return out;
 }

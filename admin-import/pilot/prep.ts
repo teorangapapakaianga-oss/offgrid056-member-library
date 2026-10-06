@@ -13,7 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { keepSmallTablesTogether, reskinHtml, summariseChanges } from "../reskin/reskin";
 import { resolveForMarket, publishable, type CoreResource, type MarketCode, type MarketProfile, type SafetyBlock } from "../markets/resolve";
-import { injectSafetyChecked } from "./run";
+import { injectSafetyChecked, SAFETY_NOTES_MARKER } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
 import { getFoundation } from "@/lib/content/taxonomy";
 import type { ProgrammeItem } from "../audit/programme";
@@ -552,6 +552,13 @@ export interface PrepInputs {
    */
   programAlignment?: Partial<Record<(typeof PROGRAM_ALIGNMENT_KEYS)[number], string>> | null;
   programComponentRequired?: boolean;
+  /**
+   * Owner-approved placement of the TOPIC safety blocks (Stage 9.68A). "safety-notes" puts them at the resource's own
+   * labelled Safety Notes marker instead of before the content; unset keeps the default. The emergency block and the
+   * disclaimer never move. A resource that asks for it but whose copy lacks the marker is flagged, and its blocks are
+   * placed by default — never dropped.
+   */
+  safetyBlockPlacement?: "safety-notes" | null;
   category?: string | null;
   /** topic safety blocks beyond the disclaimer and emergency block */
   extraSafetyBlocks?: string[];
@@ -823,9 +830,13 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       return !check.holds;
     });
     for (const b of marketMissing) missing.add(b);
+    if (inputs.safetyBlockPlacement === "safety-notes" && !marketHtml.includes(SAFETY_NOTES_MARKER)) {
+      trimProblems.push(`SAFETY_PLACEMENT_MARKER_MISSING (${code}): the resource asked for its safety blocks at the Safety Notes marker, but the copy has no marker. The blocks were placed by default, not dropped; restore the marker or remove the placement setting.`);
+    }
     const injected = injectSafetyChecked(
       marketHtml,
       resolved.safety.map((s) => ({ id: s.id, title: s.title, body: s.body, severity: s.severity })),
+      inputs.safetyBlockPlacement === "safety-notes" ? { topicBlockMarker: SAFETY_NOTES_MARKER } : {},
     );
     const withSafety = injected.html;
     // Treatment claims are checked on the finished market file — the resource's own text AND its safety blocks —

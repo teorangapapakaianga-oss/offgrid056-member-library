@@ -533,6 +533,7 @@ async function commandPrep() {
       // Stage 9.64B: every resource not already live before the component model must be classified before it can be ready.
       programComponent: metadata[item.legacyCode]?.programComponent ?? null,
       programAlignment: metadata[item.legacyCode]?.programAlignment ?? null,
+      safetyBlockPlacement: metadata[item.legacyCode]?.safetyBlockPlacement ?? null,
       programComponentRequired: !(programComponents.deployedBeforeClassification as string[]).includes(item.legacyCode),
       category: metadata[item.legacyCode]?.category ?? null,
       extraSafetyBlocks: metadata[item.legacyCode]?.safetyBlocks ?? [],

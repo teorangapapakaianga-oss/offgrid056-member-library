@@ -937,6 +937,8 @@
         "fire-and-smoke-alarms"
       ],
       "approvedSafetyBlocksStatus": "batteries-and-electrical: owner-approved 2026-09-22 (Stage 9.19). fire-and-smoke-alarms: owner-approved 2026-09-23 (Stage 9.52), carried to answer the detector's fire-and-emergency requirement. carbon-monoxide is NOT carried (owner ruling, Stage 9.68).",
+      "safetyBlockPlacement": "safety-notes",
+      "safetyBlockPlacementStatus": "owner-approved 2026-10-06 (Stage 9.68A): the electrical and fire blocks appear in a labelled Safety Notes section after the assessment content, intact and unshortened. The emergency box stays at the top and the disclaimer at the end.",
       "safetyReasoning": "The electrical block answers the backup-power question (solar, battery, generator, power station). The fire block answers the smoke-alarm check. No safety teaching is duplicated inside the assessment questions. No gas, solid-fuel or water-treatment topic is present.",
       "recordStatus": "draft",
       "migrationState": "PREPARED (Stage 9.68) — draft copy for owner review. NOT rendered, NOT a protected resource.",
@@ -945,7 +947,7 @@
       "difficultyBasis": "OWNER-APPROVED / INFERRED",
       "timeBasis": "OWNER-APPROVED / INFERRED",
       "recordStatusNote": "draft, as every real resource is.",
-      "scaleStatus": "OWNER-DEFINED / OFFGRID056 SELF-ASSESSMENT SCALE. 1–10 per question; two questions per foundation = a result out of 20; NO headline total. Proposed foundation bands (PENDING OWNER REVIEW): Starting Point 2–9, Building Resilience 10–15, Strong Foundation 16–20. Not external facts."
+      "scaleStatus": "OWNER-DEFINED / OFFGRID056 SELF-ASSESSMENT SCALE. 1–10 per question; two questions per foundation = a result out of 20; NO headline total. Foundation bands, OWNER-APPROVED 2026-10-06 (Stage 9.68A): Starting Point 2–9, Building Resilience 10–15, Strong Foundation 16–20. Not external facts; no scientific, government or predictive validity is implied."
     }
   }
 }

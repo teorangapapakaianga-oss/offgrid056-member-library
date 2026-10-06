@@ -52,6 +52,11 @@ describe("Stage 9.68 · OG-01 owner rulings are recorded exactly", () => {
     for (const k of ["safetyExemptions", "safetyTopicDispositions", "fuelExemptions", "priceDispositions", "safetyBlockTrims"]) expect(meta[k], k).toBeUndefined();
   });
 
+  it("asks for its topic safety blocks to appear in a labelled Safety Notes section", () => {
+    expect(meta.safetyBlockPlacement).toBe("safety-notes");
+    expect(String(meta.safetyBlockPlacementStatus)).toMatch(/intact and unshortened/);
+  });
+
   it("has the six approved related resources, one per foundation plus the Risk Identifier", () => {
     expect(meta.relatedResources).toEqual(["res-1013", "res-1008", "res-1015", "res-1011", "res-1019", "res-1002"]);
   });
@@ -65,10 +70,11 @@ describe("Stage 9.68 · OG-01 owner rulings are recorded exactly", () => {
     }
   });
 
-  it("records the scale as owner-defined, with proposed bands pending review and no headline total", () => {
+  it("records the scale as owner-defined, with the bands OWNER-APPROVED and no headline total", () => {
     expect(String(meta.scaleStatus)).toMatch(/OWNER-DEFINED \/ OFFGRID056 SELF-ASSESSMENT SCALE/);
     expect(String(meta.scaleStatus)).toMatch(/NO headline total/);
-    expect(String(meta.scaleStatus)).toMatch(/PENDING OWNER REVIEW/);
+    expect(String(meta.scaleStatus)).toMatch(/OWNER-APPROVED 2026-10-06 \(Stage 9\.68A\)[\s\S]*Starting Point 2–9, Building Resilience 10–15, Strong Foundation 16–20/);
+    expect(String(meta.scaleStatus)).toMatch(/no scientific, government or predictive validity/);
   });
 
   it("records the context-aware duration-of-supply task for the future, and does not apply it", () => {
@@ -120,6 +126,42 @@ describe("Stage 9.68 · the migrated OG-01 draft, built from the legacy source w
     expect(t).toMatch(/does not predict safety/);
     expect(t).toMatch(/not a guarantee of preparedness/);
     expect(t).toMatch(/Do not add the foundations together/);
+  });
+
+  it("has the ten revised Part A questions, word for word", () => {
+    const html = build();
+    if (!html) return;
+    const t = text(html);
+    for (const q of [
+      "1. We do not regularly notice damp, condensation or visible mould in our home.",
+      "2. The air inside our home feels fresh rather than stuffy.",
+      "3. We know where our household water comes from and how it reaches us.",
+      "4. We have identified a backup source of water we could use if our usual supply were interrupted.",
+      "5. Our home holds warmth reasonably well and does not feel difficult to keep comfortable in colder weather.",
+      "6. Our roof, windows and doors keep the weather out, with no leaks or draughts.",
+      "7. We know what food we have available and where it is stored.",
+      "8. We rotate the food we store so that nothing is forgotten or out of date.",
+      "9. We have a backup source of power for our essential needs (for example solar, a battery, a generator or a charged power station).",
+      "10. We have a safe backup plan for essential lighting, phone charging and food preparation if mains power is unavailable.",
+    ]) expect(t, q).toContain(q);
+    expect(t).not.toMatch(/insulated|heating costs|can reach it easily|basic cooking/);
+  });
+
+  it("flows: How To Use → About → Part A → Results → Priorities → Part B → Household → Safety Notes → Where Next → Closing", () => {
+    const html = build();
+    if (!html) return;
+    const body = text(html);
+    const order = ["How To Use This Scorecard", "About This Scale", "Part A — Your Five Foundations", "Your Foundation Results", "Your Three Priority Foundations", "Part B — Emergency Basics", "Household Considerations These are not scored", "Safety Notes These safety notes apply", "Where Next Each foundation has a resource", "Where You Are Now"];
+    const at = order.map((s) => body.indexOf(s));
+    expect(at.every((i) => i >= 0), order.filter((_, i) => at[i] < 0).join(",")).toBe(true);
+    expect([...at].sort((a, b) => a - b)).toEqual(at);
+  });
+
+  it("leaves no safety marker behind and does not add a universal carbon-monoxide question", () => {
+    const html = build();
+    if (!html) return;
+    expect(html).toContain("og056:safety-notes");
+    expect(text(html)).not.toMatch(/carbon monoxide|CO alarm|CO detector/i);
   });
 
   it("uses calm foundation band names and none of the forbidden ones", () => {

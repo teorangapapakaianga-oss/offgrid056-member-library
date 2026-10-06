@@ -146,3 +146,8 @@ Audit complete; 644 tests; 22/22, 44/44, Bucket C 0. Numeric scanner now reads '
 
 Owner rulings applied: Start Here; 1-10 per question, two per foundation, subtotals /20, no /100; Part A / Part B; numbers removed (not registered); electrical + fire blocks. Draft ready (both markets), not rendered, not deployed. Future task recorded: context-aware duration-of-supply claim type. 659 tests; 22/22, 44/44, Bucket C 0. Report: admin-import/STAGE_9.68_OG01_DRAFT.md.
 
+
+## Stage 9.68A (6 October 2026) - OG-01 final copy corrections; Safety Notes placement
+
+Questions reworded, bands approved, member flow reordered; electrical + fire blocks now in a labelled Safety Notes section via an opt-in placement marker (emergency box stays top, disclaimer end; default unchanged; missing marker = held, never dropped). 673 tests; 22/22, 44/44, Bucket C 0. Ready to render (not rendered). Report: admin-import/STAGE_9.68A_OG01_FINAL_COPY.md.
+
