@@ -126,3 +126,8 @@ Title: Resilient Heating & Insulation Upgrade Checklist. Heating table reframed 
 
 Programme-component classification added (off-grid-living, resilience-planning, resilience-emergency, planning-implementation, advanced-future); alignment rule enforced before a new resource is ready. OG-B09 = resilience-planning, ready to render (not rendered, not deployed). 633 tests. Report: admin-import/STAGE_9.64B_PROGRAM_COMPONENTS.md.
 
+
+## Stage 9.65 (6 October 2026) - OG-B09 rendered and QA'd; component rulings recorded
+
+OG-B09 PDFs (NZ + AU, 8 pages each, comparison on its own landscape section) rendered into workspace/prep/OG-B09, 69/69 QA checks, verify-prep passed. NOT yet protected resource #22; not deployed. Budgeting and system-architecture overlaps ruled; live-21 classification scheduled for the next normal deployment (exemption kept). 637 tests. Report: admin-import/STAGE_9.65_OGB09_RENDER.md.
+

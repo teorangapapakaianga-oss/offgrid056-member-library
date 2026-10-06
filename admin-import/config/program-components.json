@@ -29,6 +29,28 @@
     "guidanceKind": "Is it emergency guidance, resilience planning or true off-grid system guidance?",
     "wordingMatchesRole": "Does the member-facing wording match that role?"
   },
+  "rulings": {
+    "budgeting": "If the primary output is a budget, a financial allocation, a roadmap, an action plan, an implementation schedule or a project allocation, the resource is planning-implementation. resilience-planning is used only when budgeting is a supporting element inside a broader household resilience assessment.",
+    "systemArchitecture": "off-grid-living: practical entry- or intermediate-level resources that directly help a household understand, choose or establish independent systems. advanced-future: advanced, integrated, whole-property, multi-system, expert-level or later-stage architecture and planning resources. A resource is NOT moved to advanced-future merely because it is technical: basic and intermediate solar, battery, water and energy resources stay off-grid-living."
+  },
+  "classificationsDecided": {
+    "OG-B09": "resilience-planning",
+    "OG-26": "planning-implementation",
+    "OG-03": "planning-implementation",
+    "OG-B12": "advanced-future",
+    "OG-B07": "advanced-future"
+  },
+  "classificationsDecidedNote": "OG-03 (Budget Pathway Selector): its primary output is matching a household budget to an action pathway, so the budgeting rule gives planning-implementation. Its legacy text is tied to programme tiers and prices, which the migration will have to remove. These are recorded decisions only: no live resource record has been changed.",
+  "scheduledMigration": {
+    "id": "classify-the-21-live-resources",
+    "when": "the next normal deployment (any deploy that is already happening for another reason)",
+    "steps": [
+      "Classify all 21 live resources: validate each foundation, assign each a programme component (using the rulings above), keep each existing category and type where still valid.",
+      "Add programComponent to each live record; run the full library regression (21/21 ready, 42/42 files, Bucket C 0, all tests).",
+      "Only once EVERY live resource has valid component metadata, empty deployedBeforeClassification — not before."
+    ],
+    "status": "NOT STARTED — scheduled, not performed. deployedBeforeClassification stays as the explicit temporary exemption until the last step."
+  },
   "deployedBeforeClassification": [
     "OG-26",
     "OG-11",

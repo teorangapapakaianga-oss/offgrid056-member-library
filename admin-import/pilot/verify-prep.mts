@@ -40,8 +40,10 @@ const blockTitles: Record<string, string> = Object.fromEntries(
 const reportFile = path.join(PREP, "prep-report.json");
 // Copy changes are recorded as HTML; a PDF only carries the visible text, so both sides are compared as text. An
 // empty input prints its placeholder, so that is the text it contributes.
+// CSS inside a <style> block (Stage 9.65: the landscape @page rule travels with the comparison section) is not
+// document text and is never printed, so it is dropped before the comparison rather than expected in the PDF.
 const visible = (html: string) =>
-  html.replace(/<input\b[^>]*\bplaceholder="([^"]*)"[^>]*>/gi, " $1 ").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+  html.replace(/<style\b[\s\S]*?<\/style>/gi, " ").replace(/<input\b[^>]*\bplaceholder="([^"]*)"[^>]*>/gi, " $1 ").replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&rarr;/g, "→").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
 type ReportRow = {
   legacyCode: string;
   recordStatus?: string;

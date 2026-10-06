@@ -137,7 +137,7 @@ describe("Stage 9.64 · OG-B09 owner rulings are recorded exactly", () => {
 
   it("introduces no price, percentage, R-value or construction-year figure", () => {
     for (const market of ["NZ", "AU"]) {
-      const text = newCopy(market).replace(/<[^>]+>/g, " ");
+      const text = newCopy(market).replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ");
       expect(text, `${market}: a price`).not.toMatch(/[$]\s?\d/);
       expect(text, `${market}: a percentage`).not.toMatch(/\d\s?%/);
       expect(text, `${market}: an R-value`).not.toMatch(/\bR[-\s]?\d/);
@@ -173,7 +173,7 @@ describe("Stage 9.64 · OG-B09 owner rulings are recorded exactly", () => {
 
 describe("Stage 9.64A · OffGrid056 positioning: a resilience checklist, not a home-heating buyer guide", () => {
   const nz = newCopy("NZ");
-  const rowOf = (name: string) => (nz.match(new RegExp(`<tr><td>${name}</td>[\\s\\S]*?</tr>`)) ?? [""])[0].replace(/<input[^>]*>/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const rowOf = (name: string) => (nz.match(new RegExp(`<tr[^>]*><td>${name}</td>[\\s\\S]*?</tr>`)) ?? [""])[0].replace(/<input[^>]*>/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 
   it("uses the resilience title", () => {
     expect(meta.title).toBe("Resilient Heating & Insulation Upgrade Checklist");

@@ -100,6 +100,43 @@ describe("Stage 9.64B · programme alignment is required before a new resource c
   });
 });
 
+describe("Stage 9.65 · the overlap rulings, and the scheduled migration of the 21 live resources", () => {
+  const full = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/program-components.json"), "utf8")) as {
+    rulings: Record<string, string>;
+    classificationsDecided: Record<string, string>;
+    scheduledMigration: { id: string; steps: string[]; status: string };
+    deployedBeforeClassification: string[];
+  };
+
+  it("records the budgeting ruling: budget / allocation / roadmap / action plan / schedule → planning-implementation", () => {
+    expect(full.rulings.budgeting).toMatch(/budget[\s\S]*roadmap[\s\S]*planning-implementation/);
+    expect(full.rulings.budgeting).toMatch(/only when budgeting is a supporting element/);
+    expect(full.classificationsDecided["OG-26"]).toBe("planning-implementation");
+    expect(full.classificationsDecided["OG-03"]).toBe("planning-implementation");
+  });
+
+  it("records the system-architecture ruling, and does not move basic technical resources to advanced-future", () => {
+    expect(full.rulings.systemArchitecture).toMatch(/off-grid-living: practical entry- or intermediate/);
+    expect(full.rulings.systemArchitecture).toMatch(/advanced-future: advanced, integrated, whole-property/);
+    expect(full.rulings.systemArchitecture).toMatch(/NOT moved to advanced-future merely because it is technical/);
+    expect(full.classificationsDecided["OG-B12"]).toBe("advanced-future");
+    expect(full.classificationsDecided["OG-B07"]).toBe("advanced-future");
+    for (const basic of ["OG-18", "OG-19", "OG-20", "OG-B08", "OG-10"]) expect(full.classificationsDecided[basic], `${basic} is not decided as advanced-future`).toBeUndefined();
+  });
+
+  it("every decided value is a real component", () => {
+    for (const [code, value] of Object.entries(full.classificationsDecided)) expect([...PROGRAM_COMPONENTS], code).toContain(value);
+  });
+
+  it("schedules the live-resource classification for the next normal deployment, and keeps the exemption until then", () => {
+    expect(full.scheduledMigration.id).toBe("classify-the-21-live-resources");
+    expect(full.scheduledMigration.status).toMatch(/NOT STARTED/);
+    expect(full.scheduledMigration.steps.join(" ")).toMatch(/regression/);
+    expect(full.scheduledMigration.steps.join(" ")).toMatch(/not before/);
+    expect(full.deployedBeforeClassification, "the exemption is NOT removed early").toHaveLength(21);
+  });
+});
+
 describe("Stage 9.64B · OG-B09 classification", () => {
   const e = meta["OG-B09"];
   it("is Resilience Planning — not a pure Off-Grid Living resource", () => {

@@ -151,3 +151,8 @@ Owner approves the repositioned OG-B09 copy, the electrical block, description a
 
 Owner approves rendering OG-B09; then protected resource #22 and deploy. Settle the two component overlaps (budgeting; system architecture) before classifying the rest.
 
+
+## After Stage 9.65
+
+1. Owner approves the OG-B09 PDFs. 2. Then staging, protected resource #22, verify-build, deploy with rollback - each on the owner's word. 3. At the NEXT NORMAL DEPLOYMENT: classify the 21 live resources, run the full regression, then remove the exemption (scheduled task classify-the-21-live-resources).
+
