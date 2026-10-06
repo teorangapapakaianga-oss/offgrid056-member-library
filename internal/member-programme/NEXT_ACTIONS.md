@@ -141,3 +141,8 @@ Owner decisions on OG-B09 (solid-fuel block vs disposition, R-values, efficiency
 
 Owner approves the OG-B09 copy (STAGE_9.64 section 16). Then render PDFs, add as protected resource #22, deploy - each on the owner's word.
 
+
+## After Stage 9.64A
+
+Owner approves the repositioned OG-B09 copy, the electrical block, description and related links (STAGE_9.64A section 10). Then render, then protected resource #22 and deploy - each on the owner's word.
+

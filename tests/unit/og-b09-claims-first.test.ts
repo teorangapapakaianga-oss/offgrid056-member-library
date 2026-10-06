@@ -98,9 +98,12 @@ const meta = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/me
 const newCopy = (market: string) => approvedCopy.filter((c) => !c.markets || c.markets.includes(market)).map((c) => c.to).join("\n");
 
 describe("Stage 9.64 · OG-B09 owner rulings are recorded exactly", () => {
-  it("carries gas-and-lpg-general and solid-fuel-heating, and nothing that suppresses a trigger", () => {
-    expect(meta.safetyBlocks).toEqual(["gas-and-lpg-general", "solid-fuel-heating"]);
-    expect(meta.approvedSafetyBlocks).toEqual(["gas-and-lpg-general", "solid-fuel-heating"]);
+  it("carries gas-and-lpg-general and solid-fuel-heating (plus the detector-required electrical block), and nothing that suppresses a trigger", () => {
+    // Stage 9.64A: the resilience wording (solar, battery, inverter) makes batteries-and-electrical detector-required.
+    expect(meta.safetyBlocks).toEqual(["gas-and-lpg-general", "solid-fuel-heating", "batteries-and-electrical"]);
+    expect(meta.approvedSafetyBlocks).toEqual(["gas-and-lpg-general", "solid-fuel-heating", "batteries-and-electrical"]);
+    const gasBlocksCarried = (meta.safetyBlocks as string[]).filter((b) => /gas|lpg|unflued|cylinder|leak/.test(b));
+    expect(gasBlocksCarried, "exactly one gas block").toEqual(["gas-and-lpg-general"]);
     for (const key of ["safetyExemptions", "safetyTopicDispositions", "fuelExemptions", "priceDispositions", "safetyBlockTrims"]) {
       expect(meta[key], `${key}: no exemption, disposition or trim may suppress a trigger`).toBeUndefined();
     }
@@ -108,13 +111,14 @@ describe("Stage 9.64 · OG-B09 owner rulings are recorded exactly", () => {
 
   it("records the approved metadata", () => {
     expect(meta).toMatchObject({
-      title: "Insulation & Heating Upgrade Checklist",
+      title: "Resilient Heating & Insulation Upgrade Checklist",
       resourceType: "checklist",
       foundation: "shelter",
       category: "insulation",
       difficulty: "beginner",
       estimatedTime: 30,
-      description: "Check each room's insulation, then compare heating options against your own quotes and priorities before you decide what to upgrade.",
+      description: "Check each room's insulation, then compare heating options against your household's energy, fuel and outage needs, and your own quotes, before you decide what to upgrade.",
+      relatedResources: ["res-1015", "res-1017", "res-1019", "res-1021"],
       tags: [],
       recordStatus: "draft",
       difficultyBasis: "OWNER-APPROVED / INFERRED",
@@ -164,6 +168,82 @@ describe("Stage 9.64 · OG-B09 owner rulings are recorded exactly", () => {
     const row = (newCopy("NZ").match(/<tr><td>Wood burner<\/td>[\s\S]*?<\/tr>/) ?? [""])[0];
     expect(row).toContain("Wood burner");
     expect(row).not.toMatch(/chimney|flue|clearance|metre|ash|fire\b|carbon monoxide|\bCO\b|sweep|smoke|safe/i);
+  });
+});
+
+describe("Stage 9.64A · OffGrid056 positioning: a resilience checklist, not a home-heating buyer guide", () => {
+  const nz = newCopy("NZ");
+  const rowOf = (name: string) => (nz.match(new RegExp(`<tr><td>${name}</td>[\\s\\S]*?</tr>`)) ?? [""])[0].replace(/<input[^>]*>/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+
+  it("uses the resilience title", () => {
+    expect(meta.title).toBe("Resilient Heating & Insulation Upgrade Checklist");
+    expect(newCopy("NZ") + newCopy("AU")).toContain("Resilient Heating & Insulation");
+  });
+
+  it("compares every option through the OffGrid056 lens, with the eight approved columns", () => {
+    const head = (nz.match(/<thead>[\s\S]*?<\/thead>/) ?? [""])[0].replace(/<[^>]+>/g, "|").replace(/\s+/g, " ").replace(/(\| ?)+/g, "|");
+    expect(head).toBe("|Heating Type|Energy / Fuel Source|Electricity Dependency|Resilience / Outage Consideration|Household Considerations|Your Quote|Your Estimated Running Cost|Your Notes|");
+    for (const type of ["Heat pump", "Wood burner", "Flued gas", "Panel / convection", "Underfloor electric", "Central ducted"]) expect(rowOf(type), type).toBeTruthy();
+  });
+
+  it("no conventional-home or sales-ranking framing survives", () => {
+    const all = nz + newCopy("AU");
+    expect(all).not.toMatch(/Backup heat and atmosphere|Quick heat|Heating the whole house|Heating tiled floors|Main heating for living areas|Extra heat in small rooms|most efficient|\bbest\b|cheapest|default heating|off-grid default/i);
+  });
+
+  it("heat pump: a valid option that needs electricity, and is not automatically outage heating", () => {
+    const r = rowOf("Heat pump");
+    expect(r).toMatch(/needs electricity/i);
+    expect(r).toMatch(/generation, inverter and battery/i);
+    expect(r).toMatch(/do not assume it works as outage heating/i);
+    expect(r).not.toMatch(/\d/);
+  });
+
+  it("wood burner: independent heating framed through fuel, installation and local requirements, with no safety teaching", () => {
+    const r = rowOf("Wood burner");
+    expect(r).toContain("Independent space heating where suitable fuel, installation and local requirements are addressed. Can remain useful when household electricity is unavailable.");
+  });
+
+  it("electric options are framed as household electrical load, with no figures", () => {
+    for (const t of ["Panel / convection", "Underfloor electric"]) {
+      const r = rowOf(t);
+      expect(r, t).toMatch(/electricity-dependent/i);
+      expect(r, t).toMatch(/electrical (load|demand)/i);
+      expect(r, t).toMatch(/household energy system|generation, inverter and battery/i);
+      expect(r, t).not.toMatch(/\d/);
+    }
+  });
+
+  it("central ducted is framed around the system, its electricity and its distribution", () => {
+    const r = rowOf("Central ducted");
+    expect(r).toMatch(/distribution system/);
+    expect(r).toMatch(/Check the actual requirements of the system/);
+    expect(r).not.toMatch(/\d/);
+  });
+
+  it("carries the OffGrid056 decision questions and the approved closing", () => {
+    const all = newCopy("NZ");
+    for (const q of [
+      "What energy or fuel does this option depend on?",
+      "Will it still operate if household electricity is unavailable?",
+      "Can my solar, battery and inverter system support it?",
+      "Can I store or reliably obtain the fuel it requires?",
+      "Does it give me an independent backup heating option?",
+      "What ongoing maintenance or professional servicing does it require?",
+      "What will it add to my household energy demand?",
+      "What is my supplier's written installed quote?",
+    ]) expect(all, q).toContain(q);
+    expect(all).toContain("There is no single heating system that suits every resilient or off-grid household. Compare insulation first, then consider your available energy, fuel storage, household power system, outage needs, maintenance and budget before choosing an upgrade.");
+  });
+
+  it("proposes related resources only where they genuinely support a next step", () => {
+    expect(meta.relatedResources).toEqual(["res-1015", "res-1017", "res-1019", "res-1021"]);
+    expect(meta.relatedResources).not.toContain("res-1018");
+    expect(meta.relatedResources).not.toContain("res-1020");
+    const dir = path.join(root, "private-assets/data-resources");
+    if (!fs.existsSync(dir)) return;
+    const ids = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).map((f) => (JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string }).id);
+    for (const id of meta.relatedResources as string[]) expect(ids, `${id} exists in the library`).toContain(id);
   });
 });
 

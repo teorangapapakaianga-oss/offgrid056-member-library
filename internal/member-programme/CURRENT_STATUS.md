@@ -116,3 +116,8 @@ NZ wording of all five gas blocks and the three NZ numeric claims OWNER-APPROVED
 
 OG-B09 configured (approved-copy + metadata) and verified as a draft: gas-and-lpg-general + solid-fuel-heating, 0 R-values/prices/percentages, ready in both markets. NOT rendered, no PDFs, NOT a protected resource. 610 tests. Report: admin-import/STAGE_9.64_OGB09_DRAFT.md.
 
+
+## Stage 9.64A (6 October 2026) - OG-B09 repositioned as a resilience checklist
+
+Title: Resilient Heating & Insulation Upgrade Checklist. Heating table reframed (fuel/energy, electricity dependency, outage consideration); related resources proposed; batteries-and-electrical now detector-required and carried (owner review). 619 tests. Not rendered, not deployed. Report: admin-import/STAGE_9.64A_POSITIONING.md.
+

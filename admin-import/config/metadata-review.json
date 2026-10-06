@@ -832,8 +832,8 @@
       "gasRuling": "OWNER RULING 2026-10-06 (Stage 9.60): the two legacy narrative gas sentences stay REMOVED and must not be restored. OG-17 carries no member-facing gas wording of its own. The only gas words in the finished files come from the approved carbon-monoxide block and the standing disclaimer sentence, both owner-approved since Stage 9.19. No Gas/LPG block is required and no gas exemption exists."
     },
     "OG-B09": {
-      "title": "Insulation & Heating Upgrade Checklist",
-      "titleStatus": "from the document's own cover — accurate; the legacy code and 'Action Plan Plus' label are removed",
+      "title": "Resilient Heating & Insulation Upgrade Checklist",
+      "titleStatus": "owner-approved 2026-10-06 (Stage 9.64A positioning correction): an OffGrid056 household-resilience resource, not a conventional home-heating buyer guide",
       "resourceType": "checklist",
       "resourceTypeStatus": "owner-approved 2026-10-06 (Stage 9.64); audit HIGH",
       "foundation": "shelter",
@@ -846,23 +846,31 @@
       "estimatedTime": 30,
       "estimatedTimeStatus": "owner-approved 2026-10-06 (Stage 9.64)",
       "estimatedTimeReasoning": "INFERRED: five rooms to audit plus a six-row comparison and a short decision worksheet; OG-15 precedent (30). Excludes getting quotes or speaking to an installer.",
-      "description": "Check each room's insulation, then compare heating options against your own quotes and priorities before you decide what to upgrade.",
-      "descriptionStatus": "owner-approved 2026-10-06 (Stage 9.64)",
+      "description": "Check each room's insulation, then compare heating options against your household's energy, fuel and outage needs, and your own quotes, before you decide what to upgrade.",
+      "descriptionStatus": "PROPOSED 2026-10-06 (Stage 9.64A) — OWNER-REVIEW REQUIRED. The Stage 9.64 description ('…against your own quotes and priorities…') was approved before the positioning correction; this version adds the resilience framing and matches the cover subtitle.",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
-      "relatedResources": [],
+      "relatedResources": [
+        "res-1015",
+        "res-1017",
+        "res-1019",
+        "res-1021"
+      ],
+      "relatedResourcesStatus": "PROPOSED (Stage 9.64A) — OWNER-REVIEW REQUIRED. res-1015 Warm Home Scorecard (the room-by-room warmth/insulation scoring this checklist follows); res-1017 Solid Fuel Heating Planner (the next step if a wood burner is chosen); res-1019 Battery Backup Planner (checking that storage can carry an electric option); res-1021 Home Energy & Shelter Upgrade Plan (the roadmap the chosen upgrade belongs in). NOT linked: res-1018 Solar Power 101 and res-1020 Alternative Energy Suitability Check — neither addresses heating or insulation directly.",
       "safetyBlocks": [
         "gas-and-lpg-general",
-        "solid-fuel-heating"
+        "solid-fuel-heating",
+        "batteries-and-electrical"
       ],
       "approvedSafetyBlocks": [
         "gas-and-lpg-general",
-        "solid-fuel-heating"
+        "solid-fuel-heating",
+        "batteries-and-electrical"
       ],
-      "approvedSafetyBlocksStatus": "gas-and-lpg-general: NZ and AU owner-approved 2026-10-06 (Stages 9.62D/9.63). solid-fuel-heating: owner-approved 2026-09-22 (Stage 9.19); carried by owner ruling 1, Stage 9.64 — NOT suppressed by a disposition.",
+      "approvedSafetyBlocksStatus": "gas-and-lpg-general: NZ and AU owner-approved 2026-10-06 (Stages 9.62D/9.63). solid-fuel-heating: owner-approved 2026-09-22 (Stage 9.19); carried by owner ruling 1, Stage 9.64 — NOT suppressed by a disposition. batteries-and-electrical: owner-approved 2026-09-22 (Stage 9.19). DETECTOR-REQUIRED since the Stage 9.64A repositioning (the member is told to check solar, battery and inverter capacity) and carried so the requirement is met, not suppressed — OWNER-REVIEW REQUIRED.",
       "safetyReasoning": "The Flued gas row raises the gas fuel check (the label alone does), so gas-and-lpg-general is detector-required in both markets. The wood-burner row requires solid-fuel-heating, which the owner ruled to carry. No other gas block is carried: the rewritten rows do not mention gasfitters, servicing, installation, carbon monoxide, cylinders, leaks or unflued heaters, so none is triggered.",
       "recordStatus": "draft",
-      "migrationState": "PREPARED (Stage 9.64) — draft copy for owner review. NOT rendered, NOT a protected resource.",
+      "migrationState": "PREPARED (Stage 9.64), repositioned Stage 9.64A — draft copy for owner review. NOT rendered, NOT a protected resource.",
       "foundationBasis": "OWNER-APPROVED / INFERRED",
       "categoryBasis": "OWNER-APPROVED / INFERRED",
       "difficultyBasis": "OWNER-APPROVED / INFERRED",
