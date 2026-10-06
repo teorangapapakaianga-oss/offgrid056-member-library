@@ -2,9 +2,13 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.73B.
+**As at:** 7 October 2026, after Stage 9.74.
 
-> **Stage 9.73B note.** All four route collisions (OG-01, OG-08, OG-10, OG-13) are explicitly separated; programme days 2/9/11/13/29 point at demo placeholders; the combined release is rebuilt and staged, NOT deployed (708 tests; 984 files; no unexplained difference; `admin-import/STAGE_9.73B_FINAL_ROUTE_SEPARATION.md`). **No owner decision is outstanding; waiting only for explicit approval to deploy.** Rollback: Worker `7de9641f…`.
+> **Stage 9.74 note.** The combined cleanup is **DEPLOYED** (Worker `e63141a1-380a-4770-a125-9fd7a15d0bdb`, rollback `7de9641f-df4c-4cab-8e84-055c0861879d` retained; `admin-import/STAGE_9.74_COMBINED_RELEASE_DEPLOYED.md`): 23 resources / 46 market files, all classified with the exemption empty, 40 corrected-cover PDFs, OG-01/08/10/13 explicitly separated from their demo placeholders. **Nothing is deferred and no owner decision is outstanding.** Next: the owner picks the next resource to migrate (claims-first audit and programme-component alignment first; the general/planning group in `RESOURCE_REGISTER.md` is mostly low-hazard). Any new demo/protected route clash needs an explicit `route-policy.json` entry or the build fails.
+>
+> *Earlier notes below are superseded.*
+>
+> **Stage 9.73B note (superseded).** The combined release was staged and validated before deployment.
 >
 > **Stage 9.73A note (superseded).** All classification rulings are applied (OG-B07 = off-grid-living; ten confirmed; OG-22 override). The demo OG-01 card is hidden. The combined release is rebuilt and staged, NOT deployed (706 tests; `admin-import/STAGE_9.73A_ROUTE_AUDIT_AND_FINAL_RULINGS.md`). **Waiting on the owner, two things only:** (1) rule on the OG-08, OG-10 and OG-13 route collisions individually (audited; recommended: separate each), (2) explicit approval to deploy. Rollback: Worker `7de9641f…`.
 >

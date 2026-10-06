@@ -1,13 +1,25 @@
 # Current status
 
-**As at:** 7 October 2026, after Stage 9.73B (OG-01/08/10/13 all explicitly separated from their demo placeholders; the combined release is rebuilt and staged: 984 files, 708 tests, Bucket C 0, no unexplained difference; NOT DEPLOYED; report `admin-import/STAGE_9.73B_FINAL_ROUTE_SEPARATION.md`). Before that, Stage 9.73A (final classification rulings applied; demo OG-01 card hidden; route audit written; release rebuilt, 706 tests, NOT deployed; report `admin-import/STAGE_9.73A_ROUTE_AUDIT_AND_FINAL_RULINGS.md`). Stage 9.73: the combined release (classification of the 21 resources with the exemption emptied, 40 cover-cleanup PDFs, demo/protected route separation) is **STAGED and validated, NOT DEPLOYED** (701 tests, 23 records / 46 market files in the staged build, Bucket C 0); the live Worker is unchanged. Report: `admin-import/STAGE_9.73_COMBINED_RELEASE_STAGED.md`. Before that: Stage 9.72 (analysis only). OG-01 Home Resilience Scorecard is deployed as protected resource #23 (Stage 9.71). The rows marked **9.71** are current; the rest is the Stage 9.61 snapshot. Deployment size is **960 files** (958 before OG-01); Wrangler's "Uploaded N files" is the count of new contents, not the size (Stage 9.72).
+**As at:** 7 October 2026, after **Stage 9.74** (the combined library cleanup is **DEPLOYED**). Report: `admin-import/STAGE_9.74_COMBINED_RELEASE_DEPLOYED.md`. Rows marked **9.74** are current; the rows below the line are older snapshots kept for history.
 
 | | |
 |---|---|
-| **9.71 · Protected resources** | **23** (all draft) · 46 market files · OG-01 `res-1001` live, `collections: ["start-here"]` |
-| **9.71 · Worker version / rollback** | **`7de9641f-df4c-4cab-8e84-055c0861879d`** live · rollback **`db2fd12a-955e-47c4-b3c9-d174e3da85d8`** (earlier `fa23ec74…`) |
-| **9.71 · Tests** | **677 passing** · lint clean · typecheck clean |
-| **9.70 · Scheduled, not run** | `classify-the-21-live-resources` and `shared-cover-cleanup` (regenerate the 20 live PDFs with the corrected cover), bundled into the next normal deployment |
+| **9.74 · Protected resources** | **23** (all draft) · **46** market files · 0 broken links · Bucket C 0 |
+| **9.74 · Worker version** | **`e63141a1-380a-4770-a125-9fd7a15d0bdb`** live (984 files) |
+| **9.74 · Rollback** | **`7de9641f-df4c-4cab-8e84-055c0861879d`** (immediate); also retained `db2fd12a-955e-47c4-b3c9-d174e3da85d8`, `fa23ec74-85d2-4d91-b484-3f037ccbe38b`, `1922f7ba-a0b3-4a7b-ba01-593b3df6a160` |
+| **9.74 · Tests** | **708 passing** · lint clean · typecheck clean |
+| **9.74 · Classification** | all 23 resources carry Foundation, Programme Component, Category, Type and the five alignment answers; `deployedBeforeClassification` is **empty**; OG-B07 = off-grid-living, OG-B12 = advanced-future |
+| **9.74 · Route policy** | `supersedes` empty; `separateDemo` = OG-01, OG-08, OG-10, OG-13 (all owner-approved); an unlisted collision fails the build; demo placeholders are unlisted but reachable; programme days 2, 9, 11, 13, 29 stay on the demo placeholders |
+| **9.74 · Covers** | the 20 affected resources' 40 PDFs carry the corrected shared cover (no shadow panel) |
+| **9.74 · Deferred work** | none: `classify-the-21-live-resources`, `shared-cover-cleanup` and `demo-protected-route-separation` are all DEPLOYED |
+| **9.74 · Next** | owner chooses the next resource (claims-first audit first); see `NEXT_ACTIONS.md` |
+
+---
+
+*Older snapshot (Stage 9.61 and earlier):*
+
+| | |
+|---|---|
 | *(9.61 snapshot)* Protected resources | 21 (all draft) |
 | *(9.61 snapshot)* Worker version | `fa23ec74-85d2-4d91-b484-3f037ccbe38b` |
 | **Rollback available** | `1922f7ba-a0b3-4a7b-ba01-593b3df6a160` (20 resources, before OG-17) · private files in `workspace/backups/private-assets-1922f7ba` |

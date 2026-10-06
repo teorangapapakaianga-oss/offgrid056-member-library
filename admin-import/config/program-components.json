@@ -67,7 +67,7 @@
       "Add programComponent to each live record; run the full library regression (21/21 ready, 42/42 files, Bucket C 0, all tests).",
       "Only once EVERY live resource has valid component metadata, empty deployedBeforeClassification — not before."
     ],
-    "status": "PREPARED in Stage 9.73 (metadata and records applied in staging; every one of the 21 complete, schema-valid, all five alignment answers present, exemption emptied). NOT DEPLOYED: it deploys with the combined release. Until that deployment the live Worker still serves the unclassified records."
+    "status": "DEPLOYED in Stage 9.74 (2026-10-07), Worker e63141a1-380a-4770-a125-9fd7a15d0bdb, as part of the combined release; every one of the 21 was complete and schema-valid, with all five alignment answers, before the exemption was emptied. deployedBeforeClassification is empty."
   },
   "deployedBeforeClassification": [],
   "deployedBeforeClassificationNote": "EMPTIED in Stage 9.73, only after all 21 records had a valid component, all five alignment answers, and passed schema validation. Every resource now needs a component and the five answers before it can be ready. `deployedBeforeClassificationWas` keeps the original 21 codes as history; it is not read by any gate.",

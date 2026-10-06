@@ -131,10 +131,10 @@ describe("Stage 9.65 · the overlap rulings, and the scheduled migration of the 
     for (const [code, value] of Object.entries(full.classificationsDecided)) expect([...PROGRAM_COMPONENTS], code).toContain(value);
   });
 
-  it("Stage 9.73: the live-resource classification is prepared (not deployed) and the exemption was emptied only after every resource was complete", () => {
+  it("Stage 9.73: the live-resource classification is deployed (Stage 9.74) and the exemption was emptied only after every resource was complete", () => {
     expect(full.scheduledMigration.id).toBe("classify-the-21-live-resources");
-    expect(full.scheduledMigration.status).toMatch(/PREPARED/);
-    expect(full.scheduledMigration.status).toMatch(/NOT DEPLOYED/);
+    expect(full.scheduledMigration.status).toMatch(/DEPLOYED/);
+    expect(full.scheduledMigration.status).not.toMatch(/NOT DEPLOYED/);
     expect(full.scheduledMigration.steps.join(" ")).toMatch(/regression/);
     expect(full.scheduledMigration.steps.join(" ")).toMatch(/not before/);
     expect(full.deployedBeforeClassification).toEqual([]);
