@@ -124,6 +124,16 @@ export function scaleHeadings(html: string, factor: number): { html: string; cou
  * This runs LAST — after every copy change — because it edits the <table> tag: run earlier, it made approved
  * whole-table changes (OG-26's assistance tables, OG-19's comparison table) stop matching.
  */
+/**
+ * Stage 9.69A — the cover image's blurred drop shadow (`box-shadow: 0 20px 60px rgba(0,0,0,0.4)`) is not printed as a
+ * shadow. Chrome's PDF output flattens a large blur into a solid dark rectangle behind the image, which stopped part-way
+ * through the cover title on every resource that uses this cover (found on OG-01, present on live OG-B09). A shadow has
+ * no job on a printed page, so it is removed from `.cover-img` only. Nothing else about the cover changes.
+ */
+export function fixCoverImageShadow(html: string): string {
+  return html.replace(/(\.cover-img\s*\{[^}]*?)\s*box-shadow:[^;}]*;?/g, "$1");
+}
+
 export function keepSmallTablesTogether(html: string): string {
   return html.replace(/<table\b([^>]*)>([\s\S]*?)<\/table>/gi, (whole, attrs: string, inner: string) => {
     if ((inner.match(/<tr\b/gi) ?? []).length > 10 || /og-keep-together/.test(attrs)) return whole;

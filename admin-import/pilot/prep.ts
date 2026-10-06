@@ -11,7 +11,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { keepSmallTablesTogether, reskinHtml, summariseChanges } from "../reskin/reskin";
+import { fixCoverImageShadow, keepSmallTablesTogether, reskinHtml, summariseChanges } from "../reskin/reskin";
 import { resolveForMarket, publishable, type CoreResource, type MarketCode, type MarketProfile, type SafetyBlock } from "../markets/resolve";
 import { injectSafetyChecked, SAFETY_NOTES_MARKER } from "./run";
 import { ResourceSchema } from "@/lib/content/schemas";
@@ -871,7 +871,7 @@ export function prepareResource(inputs: PrepInputs): PrepResult {
       ),
     ];
     const file = path.join(outDir, `${slug}.${code}.html`);
-    fs.writeFileSync(file, withSafety, "utf8");
+    fs.writeFileSync(file, fixCoverImageShadow(withSafety), "utf8");
     files.push(file);
     marketResults.push({
       code,
