@@ -307,33 +307,24 @@ export function scanNumericClaims(
   const out: NumericCandidate[] = [];
   const seen = new Set<string>();
 
-  // An injected safety block is owner-approved wording whose sources are recorded, per market, in
-  // safety-blocks.json. A figure inside one is already sourced by that block — the interesting question is what the
-  // resource's OWN text asserts, so block sentences are separated out rather than mixed in.
-  const blockSentences = new Map<string, string>();
-  // KNOWN LATENT WEAKNESS, deliberately NOT changed (Stage 9.62A finding, reported to the owner): this pattern wants two
-  // closing divs in a row, so it runs from the first safety block to the end of its container. Every later block, and
-  // any resource text that follows the first block inside the same container, is credited to the FIRST block's id and
-  // treated as "already sourced by a safety block". Correcting it would surface a live resource's figure that is
-  // currently shielded by it ("15 minutes every Sunday reviewing…"), i.e. change live gate behaviour, which a gas stage
-  // may not do. It stays exactly as it was and is recorded in the report.
-  for (const block of html.match(/<div class="og-safety[\s\S]*?<\/div>\s*<\/div>/gi) ?? []) {
-    const id = block.match(/data-block="([^"]+)"/)?.[1] ?? "safety-block";
-    for (const s of treatmentSentences(block)) blockSentences.set(clean(s), id);
-  }
-  // The CORRECT attribution, used only for block-OWNED registry claims (Stage 9.62A): one block is
-  // `<div class="og-safety …" data-block="id"><h3>…</h3><p>…</p></div>`, a single closing div, so each sentence is
-  // credited to the block that really contains it, and resource text outside a block is credited to none.
-  const ownedSentences = new Map<string, string>();
-  for (const block of html.match(/<div class="og-safety[^"]*"[^>]*data-block="[^"]+"[^>]*>[\s\S]*?<\/div>/gi) ?? []) {
-    const id = block.match(/data-block="([^"]+)"/)?.[1] ?? "safety-block";
-    for (const s of treatmentSentences(block)) ownedSentences.set(clean(s), id);
+  // EXACT BLOCK OWNERSHIP (Stage 9.62B). An injected safety block is owner-approved wording whose sources are recorded,
+  // per market, in safety-blocks.json. A sentence is credited to a block ONLY if it occurs inside that block's own
+  // rendered content: `<div class="og-safety …" data-block="id">…</div>` (one block, one closing div). Everything
+  // outside every block is the resource's own text and is credited to NO block — even if it sits after a block, in the
+  // same container, or happens to repeat a block's sentence word for word.
+  //
+  // The earlier pattern wanted two closing divs in a row, so it ran from the first block to the end of its container
+  // and credited all that followed (other blocks, and the resource's own text) to the FIRST block's id.
+  const BLOCK = /<div class="og-safety[^"]*"[^>]*data-block="[^"]+"[^>]*>[\s\S]*?<\/div>/gi;
+  const segments: { html: string; owner: string | null }[] = [{ html: html.replace(BLOCK, " "), owner: null }];
+  for (const block of html.match(BLOCK) ?? []) {
+    segments.push({ html: block, owner: block.match(/data-block="([^"]+)"/)?.[1] ?? "safety-block" });
   }
 
-  for (const raw of treatmentSentences(html)) {
-    const sentence = clean(raw);
+  for (const { html: segmentHtml, owner: fromBlock } of segments)
+  for (const raw of treatmentSentences(segmentHtml)) {    const sentence = clean(raw);
     for (const hit of numericMatches(sentence)) {
-      const key = `${market}|${sentence}|${hit.figure}`;
+      const key = `${market}|${fromBlock ?? "-"}|${sentence}|${hit.figure}`;
       if (seen.has(key)) continue;
       seen.add(key);
 
@@ -346,14 +337,13 @@ export function scanNumericClaims(
           // A block-owned claim (Stage 9.62A) validates ONLY the sentence that comes from its own block, in the market
           // it was written for. It can never approve a resource's own, separate sentence that merely says the same thing.
           (c.owningBlock
-            ? c.owningBlock.split(";").some((b) => b.trim() === ownedSentences.get(sentence))
+            ? c.owningBlock.split(";").some((b) => b.trim() === fromBlock)
             : c.owningResources.length === 0 || c.owningResources.includes(resource)) &&
           c.match.some((p) => new RegExp(p, "i").test(sentence)) &&
           (!c.requiresLabel || sentence.includes(c.requiresLabel)),
       );
 
       const horizon = PLANNING_HORIZON.find((h) => h.pattern.test(sentence));
-      const fromBlock = blockSentences.get(sentence);
       const base = { resource, market, sentence, ...hit };
       if (owned) out.push({ ...base, bucket: "E_TREATMENT_OWNED", claimId: owned, why: "governed by treatment-sources.json" });
       else if (approved) out.push({ ...base, bucket: "A_ALREADY_SOURCED", claimId: approved.id, why: approved.authority });

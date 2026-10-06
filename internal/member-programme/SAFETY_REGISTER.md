@@ -198,3 +198,8 @@ gas-and-lpg-general, unflued-gas-heating, gas-cylinder-safety, gas-leak-response
 
 AU common core: national source or 4+ independent jurisdictions, none contradicting, no state limit; 15 claims demoted to labelled category B (not served). AU unflued-gas-heating and gas-leak-response have no body (fail closed). Gas release = detected topic -> required block set -> every block carried, owner-approved and with market wording; no blanket release. OG-B09 requires gas-and-lpg-general only (installation 'recommended' withdrawn). OG-24 requires general + installation (licensing routing).
 
+
+## Stage 9.62C
+
+Numeric block ownership is exact (a figure inside block A is not credited to block B or to resource text). OG-27 weekly-review cadence = OWNER-DEFINED SCHEDULE, OG-27 only, not safety guidance.
+

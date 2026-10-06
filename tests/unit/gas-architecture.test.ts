@@ -626,6 +626,19 @@ describe("Stage 9.62A · the tightened Category-A rule", () => {
   });
 });
 
+describe("Stage 9.62B · provenance is complete", () => {
+  it("every jurisdiction a claim cites appears in its own block's AU source list", () => {
+    for (const id of GAS_BLOCKS) {
+      const list = ((blocks[id].sources as unknown) as { AU?: string[] }).AU ?? [];
+      for (const c of (blocks[id].commonCoreClaims ?? []) as CommonCoreClaim[]) {
+        for (const j of new Set(c.evidence.jurisdictions)) {
+          expect(list.some((s) => s.includes(`(${j};`)), `${id}/${c.id} cites ${j} but the block lists no ${j} source`).toBe(true);
+        }
+      }
+    }
+  });
+});
+
 describe("Stage 9.62A · recurring intervals and spelled numbers are detected, and fail unless registered", () => {
   it("reads annual wording as an interval claim, with no digit and no unit-with-number", () => {
     for (const text of ["Have the heater serviced once a year.", "Have the heater serviced annually.", "Have the heater serviced yearly.", "The cylinder is checked each year.", "Check the hose every year.", "Replace the regulator every other year.", "Service it two or three times a year."]) {

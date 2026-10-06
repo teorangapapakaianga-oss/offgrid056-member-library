@@ -906,6 +906,64 @@
         "NZ only. It must never appear in an AU file, and the Victorian two-year figure must never be read as supporting it: they are different agencies' advice for different appliances in different countries."
       ],
       "status": "VERIFIED_LIVE 2026-10-05 — built 2026-10-06 (Stage 9.62); wording pending owner approval with the block"
+    },
+    {
+      "id": "nz-og27-weekly-review-15-minutes-owner-defined",
+      "market": "NZ",
+      "jurisdiction": "owner-defined",
+      "owningResources": [
+        "OG-27"
+      ],
+      "category": "interval",
+      "claimType": "interval",
+      "unit": "minutes",
+      "value": {
+        "exact": 15,
+        "text": "every Sunday"
+      },
+      "allowedWording": "15 minutes every Sunday reviewing what is done, what is next, what is blocked.",
+      "match": [
+        "\\b15 minutes every Sunday reviewing what is done, what is next, what is blocked\\b"
+      ],
+      "requiresLabel": null,
+      "source": "OWNER-DEFINED SCHEDULE — not an external source. The cadence the OG-27 roadmap itself suggests to the member.",
+      "authority": "OffGrid056 owner (planning cadence)",
+      "sourceDate": "owner ruling 2026-10-06 (Stage 9.62C)",
+      "limitations": [
+        "A planning cadence only: how long the member spends on a weekly self-review of their own roadmap.",
+        "NOT safety guidance, NOT an official or government recommendation, NOT a general factual claim, and NOT source-backed.",
+        "Scoped to OG-27 ONLY. It approves this exact sentence and nothing else; it must not be reused by any other resource."
+      ],
+      "status": "OWNER-APPROVED 2026-10-06 (Stage 9.62C) — OWNER-DEFINED SCHEDULE"
+    },
+    {
+      "id": "au-og27-weekly-review-15-minutes-owner-defined",
+      "market": "AU",
+      "jurisdiction": "owner-defined",
+      "owningResources": [
+        "OG-27"
+      ],
+      "category": "interval",
+      "claimType": "interval",
+      "unit": "minutes",
+      "value": {
+        "exact": 15,
+        "text": "every Sunday"
+      },
+      "allowedWording": "15 minutes every Sunday reviewing what is done, what is next, what is blocked.",
+      "match": [
+        "\\b15 minutes every Sunday reviewing what is done, what is next, what is blocked\\b"
+      ],
+      "requiresLabel": null,
+      "source": "OWNER-DEFINED SCHEDULE — not an external source. The cadence the OG-27 roadmap itself suggests to the member.",
+      "authority": "OffGrid056 owner (planning cadence)",
+      "sourceDate": "owner ruling 2026-10-06 (Stage 9.62C)",
+      "limitations": [
+        "A planning cadence only: how long the member spends on a weekly self-review of their own roadmap.",
+        "NOT safety guidance, NOT an official or government recommendation, NOT a general factual claim, and NOT source-backed.",
+        "Scoped to OG-27 ONLY. It approves this exact sentence and nothing else; it must not be reused by any other resource."
+      ],
+      "status": "OWNER-APPROVED 2026-10-06 (Stage 9.62C) — OWNER-DEFINED SCHEDULE"
     }
   ],
   "blockingExcludes": [

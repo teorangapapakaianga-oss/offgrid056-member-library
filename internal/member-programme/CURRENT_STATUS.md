@@ -96,3 +96,8 @@ Five gas blocks built (PENDING OWNER APPROVAL), AU leak response FAILS CLOSED, 5
 
 Tests 576, lint/typecheck clean. Tightened AU common-core rule (4+ jurisdictions or national source); AU unflued and AU leak FAIL CLOSED; required-gas-block-set mechanism (all five gas blocks pending owner approval, so nothing releases); annual/spelled-number detection; block-owned numeric claims scoped to their block. Report: admin-import/STAGE_9.62A_GAS_OWNER_REVIEW.md. Worker unchanged (fa23ec74).
 
+
+## Stage 9.62C (6 October 2026) - OG-27 ruling, exact block ownership, gas wording for owner review
+
+587 tests; 21/21 ready, 42/42 files, Bucket C 0. Numeric scan now credits a figure to a safety block only inside that block's own content. OG-27 '15 minutes every Sunday' registered as an owner-defined schedule (OG-27 only). Five gas blocks still PENDING OWNER APPROVAL. Report: admin-import/STAGE_9.62C_OWNER_REVIEW.md. Worker unchanged.
+

@@ -483,10 +483,13 @@
         ],
         "AU": [
           "Energy Safe Victoria — Using gas safely; Heating your home with gas (VIC; read live 2026-10-05): https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
+          "NSW Government — Gas safety requirements and consumer rights; Using a gasfitter (NSW; read live 2026-10-05): https://www.nsw.gov.au/legal-and-justice/consumer-rights-and-protection/safety/gas-safety-requirements-and-consumer-rights",
           "Queensland Government — Using natural gas and LPG safely; Gas cylinder safety (QLD; cylinder page updated 3 September 2026; read live 2026-10-05): https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
-          "Consumer Affairs Tasmania — Preventing carbon monoxide poisoning (TAS; updated 29 January 2021; read live 2026-10-05): https://consumeraffairs.tas.gov.au/topics/technical-regulation/gas-standards-safety/carbon-monoxide/preventing-carbon-monoxide-poisoning",
+          "SA.GOV.AU — LPG cylinders and fittings (SA; read live 2026-10-05): https://www.sa.gov.au/topics/energy-and-environment/safe-energy-use/using-gas-appliances-safely/lpg-cylinders-and-fittings",
           "Building and Energy, WA — Gas cylinder safety WA (WA; updated 2 April 2026; read live 2026-10-05): https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
-          "WorkSafe ACT — Liquid petroleum gas (LPG) safety (ACT; read live 2026-10-05): https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety"
+          "Consumer Affairs Tasmania — Preventing carbon monoxide poisoning (TAS; updated 29 January 2021; read live 2026-10-05): https://consumeraffairs.tas.gov.au/topics/technical-regulation/gas-standards-safety/carbon-monoxide/preventing-carbon-monoxide-poisoning",
+          "WorkSafe ACT — Liquid petroleum gas (LPG) safety (ACT; read live 2026-10-05): https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/liquid-petroleum-gas-lpg-safety",
+          "NT WorkSafe — Gas safety (NT; read live 2026-10-05): https://worksafe.nt.gov.au/safety-and-prevention/gas-safety"
         ]
       },
       "sharedOrVaries": "VARIES. New Zealand is one jurisdiction with one regulator (WorkSafe), so its body is specific. Australia has eight regulators and no national source that could be read, so the AU body carries only what four or more jurisdictions state and no number; everything else is a labelled state record that is not served.",
@@ -981,7 +984,9 @@
         "AU": [
           "Energy Safe Victoria — Using gas safely; Heating your home with gas (VIC; read live 2026-10-05): https://www.energysafe.vic.gov.au/community-safety/energy-safety-guides/home-safety/using-gas-safely",
           "Consumer Affairs Tasmania — Preventing carbon monoxide poisoning (TAS; updated 29 January 2021; read live 2026-10-05): https://consumeraffairs.tas.gov.au/topics/technical-regulation/gas-standards-safety/carbon-monoxide/preventing-carbon-monoxide-poisoning",
-          "Building and Energy, WA — Gas cylinder safety WA (WA; updated 2 April 2026; read live 2026-10-05): https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa"
+          "Building and Energy, WA — Gas cylinder safety WA (WA; updated 2 April 2026; read live 2026-10-05): https://www.wa.gov.au/organisation/building-and-energy/gas-cylinder-safety-wa",
+          "Queensland Government — Using natural gas and LPG safely; Gas cylinder safety (QLD; cylinder page updated 3 September 2026; read live 2026-10-05): https://www.qld.gov.au/emergency/safety/home/gas/gas-safety",
+          "NSW Government — Gas safety requirements and consumer rights; Using a gasfitter (NSW; read live 2026-10-05): https://www.nsw.gov.au/legal-and-justice/consumer-rights-and-protection/safety/gas-safety-requirements-and-consumer-rights"
         ]
       },
       "sharedOrVaries": "VARIES, and asymmetrically. New Zealand states the whole rule set; Australia's household guidance read is thinner and written heater-generally, and no unflued-heater claim reaches four jurisdictions, so Australia has NO common core for this block and it fails closed there.",
