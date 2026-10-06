@@ -1,0 +1,24 @@
+{
+  "description": "Architecture tasks the owner has asked to be remembered, NOT built. Each states why it is deferred. Nothing here changes any gate today.",
+  "tasks": [
+    {
+      "id": "context-aware-duration-of-supply-claim-type",
+      "recordedOn": "2026-10-06",
+      "recordedIn": "Stage 9.68 (owner ruling)",
+      "status": "NOT STARTED — deferred by the owner",
+      "title": "Context-aware duration-of-supply claim type",
+      "problem": "A bare supply quantity such as '7+ days of non-perishable food stored and accessible' asserts how much to hold, but carries no interval verb the numeric gate knows, so it is classified as 'a duration in passing' (bucket D) and is not blocked. Treating every '<N> days of food / water / fuel' as a claim fixes that — but it also flags ordinary sentences.",
+      "mustDistinguish": {
+        "factualSupplyDurationClaim": "7+ days of non-perishable food stored and accessible; store at least N days of water per person",
+        "ordinarySentence": "You do not need to buy 30 days of food in one shop. (live OG-11)"
+      },
+      "evidence": "A broad rule was tried in Stage 9.67: it produced a false positive on live OG-11 and was withdrawn. OG-11 must not be modified to suit a rule.",
+      "constraints": [
+        "Do not apply a broad '<N> days of food/water/fuel' rule until it can tell a factual supply-duration claim from a negated, advisory or example sentence.",
+        "Do not modify OG-11 to make a rule pass.",
+        "Any such claim type must stay fail-closed for unregistered factual claims."
+      ],
+      "currentState": "The narrow 'N+ unit' detection (7+ days) stays: it makes the figure visible as a candidate. The recorded gap is pinned by a test (tests/unit/og-01-audit.test.ts)."
+    }
+  ]
+}

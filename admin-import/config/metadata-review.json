@@ -886,6 +886,66 @@
         "guidanceKind": "resilience planning (assessment and comparison) — not emergency guidance and not off-grid system design",
         "wordingMatchesRole": "yes — the comparison is framed by energy or fuel source, electricity dependency and outage consideration; no ranking, no conventional buyer-guide framing; owner-reviewed Stage 9.64A and approved Stage 9.64B"
       }
+    },
+    "OG-01": {
+      "title": "Home Resilience Scorecard",
+      "titleStatus": "owner-approved 2026-10-06 (Stage 9.68)",
+      "resourceType": "assessment",
+      "resourceTypeStatus": "owner-approved 2026-10-06 (Stage 9.68); audit HIGH",
+      "foundation": "general",
+      "foundationStatus": "owner-approved 2026-10-06 (Stage 9.68): the cross-foundation entry assessment across Air, Water, Shelter, Food and Energy — not an Air or Shelter resource",
+      "programComponent": "resilience-planning",
+      "programComponentStatus": "owner-approved 2026-10-06 (Stage 9.68). Confirmed from the content: a household assessment that identifies gaps and priorities.",
+      "programAlignment": {
+        "foundation": "general — it spans all five foundations (Air, Water, Shelter, Food, Energy) as the entry assessment",
+        "programComponent": "resilience-planning — a household self-assessment that identifies foundation gaps and priorities",
+        "resilienceRole": "lets a household see which of the five foundations need the most attention and choose practical next steps toward greater resilience and independence",
+        "guidanceKind": "resilience planning (self-assessment); Part B is a short, unscored emergency-basics check, kept separate from the foundation results",
+        "wordingMatchesRole": "yes — framed as an OffGrid056 self-assessment scale, not an official rating; no fixed supply figures; no headline score; no alarming band names"
+      },
+      "category": "getting-started",
+      "categoryStatus": "owner-approved 2026-10-06 (Stage 9.68); an existing category of the general foundation",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-10-06 (Stage 9.68)",
+      "difficultySource": "INFERRED: the document states no level. A self-rating with no calculation beyond adding two numbers.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "owner-approved 2026-10-06 (Stage 9.68)",
+      "estimatedTimeReasoning": "INFERRED: the legacy said 15–20 minutes for ten questions; the migrated draft adds an unscored emergency check and household prompts, so 20 minutes.",
+      "description": "Assess your household across Air, Water, Shelter, Food and Energy, identify the foundations that need the most attention, and choose practical next steps for building greater resilience and independence.",
+      "descriptionStatus": "owner-approved 2026-10-06 (Stage 9.68)",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "memberJourneyRole": "START HERE — the entry assessment for Resilience Planning. Record `collections: [\"start-here\"]` when the record is staged.",
+      "collections": [
+        "start-here"
+      ],
+      "relatedResources": [
+        "res-1013",
+        "res-1008",
+        "res-1015",
+        "res-1011",
+        "res-1019",
+        "res-1002"
+      ],
+      "relatedResourcesStatus": "owner-approved 2026-10-06 (Stage 9.68): Healthy Home Air Audit (Air), Water Storage Calculator (Water), Warm Home Scorecard (Shelter), 30-Day Pantry Builder (Food), Battery Backup Planner (Energy), Household Risk Identifier (wider follow-up).",
+      "safetyBlocks": [
+        "batteries-and-electrical",
+        "fire-and-smoke-alarms"
+      ],
+      "approvedSafetyBlocks": [
+        "batteries-and-electrical",
+        "fire-and-smoke-alarms"
+      ],
+      "approvedSafetyBlocksStatus": "batteries-and-electrical: owner-approved 2026-09-22 (Stage 9.19). fire-and-smoke-alarms: owner-approved 2026-09-23 (Stage 9.52), carried to answer the detector's fire-and-emergency requirement. carbon-monoxide is NOT carried (owner ruling, Stage 9.68).",
+      "safetyReasoning": "The electrical block answers the backup-power question (solar, battery, generator, power station). The fire block answers the smoke-alarm check. No safety teaching is duplicated inside the assessment questions. No gas, solid-fuel or water-treatment topic is present.",
+      "recordStatus": "draft",
+      "migrationState": "PREPARED (Stage 9.68) — draft copy for owner review. NOT rendered, NOT a protected resource.",
+      "foundationBasis": "OWNER-APPROVED / INFERRED",
+      "categoryBasis": "OWNER-APPROVED / INFERRED",
+      "difficultyBasis": "OWNER-APPROVED / INFERRED",
+      "timeBasis": "OWNER-APPROVED / INFERRED",
+      "recordStatusNote": "draft, as every real resource is.",
+      "scaleStatus": "OWNER-DEFINED / OFFGRID056 SELF-ASSESSMENT SCALE. 1–10 per question; two questions per foundation = a result out of 20; NO headline total. Proposed foundation bands (PENDING OWNER REVIEW): Starting Point 2–9, Building Resilience 10–15, Strong Foundation 16–20. Not external facts."
     }
   }
 }

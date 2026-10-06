@@ -141,3 +141,8 @@ Worker db2fd12a-955e-47c4-b3c9-d174e3da85d8; rollback fa23ec74-85d2-4d91-b484-3f
 
 Audit complete; 644 tests; 22/22, 44/44, Bucket C 0. Numeric scanner now reads 'N+ unit'. Owner decisions pending (STAGE_9.67 section 13). Report: admin-import/STAGE_9.67_OG01_AUDIT.md.
 
+
+## Stage 9.68 (6 October 2026) - OG-01 migrated DRAFT prepared
+
+Owner rulings applied: Start Here; 1-10 per question, two per foundation, subtotals /20, no /100; Part A / Part B; numbers removed (not registered); electrical + fire blocks. Draft ready (both markets), not rendered, not deployed. Future task recorded: context-aware duration-of-supply claim type. 659 tests; 22/22, 44/44, Bucket C 0. Report: admin-import/STAGE_9.68_OG01_DRAFT.md.
+
