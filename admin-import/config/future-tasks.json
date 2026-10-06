@@ -19,6 +19,25 @@
         "Any such claim type must stay fail-closed for unregistered factual claims."
       ],
       "currentState": "The narrow 'N+ unit' detection (7+ days) stays: it makes the figure visible as a candidate. The recorded gap is pinned by a test (tests/unit/og-01-audit.test.ts)."
+    },
+    {
+      "id": "shared-cover-cleanup",
+      "recordedOn": "2026-10-06",
+      "recordedIn": "Stage 9.70 (owner ruling)",
+      "status": "NOT STARTED — scheduled for the next normal deployment, bundled with classify-the-21-live-resources",
+      "title": "Shared cover cleanup",
+      "problem": "The shared cover CSS gave the cover image a blurred box-shadow that Chrome prints as a solid dark panel (Stage 9.69A). Stage 9.69A fixed the shared pipeline (fixCoverImageShadow in prep). The 20 live protected PDFs that use the cover were rendered before the fix and still carry the panel; they are deliberately NOT regenerated or redeployed yet.",
+      "scope": [
+        "regenerate all affected live PDFs using the corrected cover template (OG-02, 08, 09, 10, 11, 13, 15, 17, 18, 19, 20, 21, 22, 25, 26, 27, B07, B08, B09, B12; OG-B04 and OG-B10 have no cover page and are not affected)",
+        "classify the 21 live resources (classify-the-21-live-resources; keep deployedBeforeClassification until then)",
+        "visually QA every regenerated cover",
+        "run the full library regression",
+        "deploy together as one controlled release, with a rollback retained"
+      ],
+      "constraints": [
+        "Do not touch the deployed copies before that release.",
+        "No wording changes: layout-only regeneration; every regenerated PDF must match its current text page by page."
+      ]
     }
   ]
 }
