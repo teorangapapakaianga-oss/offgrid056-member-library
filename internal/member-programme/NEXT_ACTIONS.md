@@ -2,9 +2,9 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 6 October 2026, after Stage 9.70.
+**As at:** 6 October 2026, after Stage 9.71.
 
-> **Stage 9.70 note.** The queue below is the Stage 9.61 snapshot. Current next step: **owner approval to deploy OG-01 (protected resource #23)** — already staged and verified (rollback `fa23ec74…` retained, current Worker `db2fd12a…`). Report: `admin-import/STAGE_9.70_OG01_STAGED.md`. Still scheduled and NOT to be run early, bundled into the next normal deployment: `classify-the-21-live-resources` and `shared-cover-cleanup`.
+> **Stage 9.71 note.** OG-01 is deployed (protected resource #23; Worker `7de9641f…`, rollback `db2fd12a…` retained). Report: `admin-import/STAGE_9.71_OG01_DEPLOYED.md`. The queue below is the Stage 9.61 snapshot. Next: the owner chooses the next resource or the next normal deployment. Still scheduled and NOT to be run early, bundled into the next normal deployment: `classify-the-21-live-resources` and `shared-cover-cleanup`.
 
 ---
 

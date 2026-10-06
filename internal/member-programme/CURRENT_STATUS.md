@@ -1,12 +1,12 @@
 # Current status
 
-**As at:** 6 October 2026, after Stage 9.70 (OG-01 Home Resilience Scorecard staged as protected resource #23, corrected cover; NOT deployed). The rows marked **9.70** are current; the rest is the Stage 9.61 snapshot.
+**As at:** 6 October 2026, after Stage 9.71 (OG-01 Home Resilience Scorecard deployed as protected resource #23, draft). The rows marked **9.71** are current; the rest is the Stage 9.61 snapshot.
 
 | | |
 |---|---|
-| **9.70 · Protected resources** | **22 live** (all draft) · **23 in the staged build** (OG-01 `res-1001` staged, awaiting deployment approval) · 46 market files staged |
-| **9.70 · Worker version / rollback** | **`db2fd12a…`** live (unchanged) · rollback **`fa23ec74…`** |
-| **9.70 · Tests** | **677 passing** · lint clean · typecheck clean |
+| **9.71 · Protected resources** | **23** (all draft) · 46 market files · OG-01 `res-1001` live, `collections: ["start-here"]` |
+| **9.71 · Worker version / rollback** | **`7de9641f-df4c-4cab-8e84-055c0861879d`** live · rollback **`db2fd12a-955e-47c4-b3c9-d174e3da85d8`** (earlier `fa23ec74…`) |
+| **9.71 · Tests** | **677 passing** · lint clean · typecheck clean |
 | **9.70 · Scheduled, not run** | `classify-the-21-live-resources` and `shared-cover-cleanup` (regenerate the 20 live PDFs with the corrected cover), bundled into the next normal deployment |
 | *(9.61 snapshot)* Protected resources | 21 (all draft) |
 | *(9.61 snapshot)* Worker version | `fa23ec74-85d2-4d91-b484-3f037ccbe38b` |
