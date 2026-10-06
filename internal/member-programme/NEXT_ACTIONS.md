@@ -131,3 +131,8 @@ migrate nothing until the wording is approved.
 1. Owner decides NZ wording of the five gas blocks and the three NZ numeric claims.
 2. Then OG-B09 claims-first (general block only). Not started.
 
+
+## After Stage 9.63
+
+Owner decisions on OG-B09 (solid-fuel block vs disposition, R-values, efficiency, prices, rewrites, AU term, metadata) - see STAGE_9.63_OGB09_CLAIMS_FIRST.md section 13. Then OG-B09 config + render (Stage 9.64).
+

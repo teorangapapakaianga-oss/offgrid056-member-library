@@ -73,7 +73,7 @@ describe("Stage 9.62 · the architecture exists, and is complete", () => {
       for (const field of ["sources", "verification", "triggers", "changeRule", "sharedOrVaries", "sentenceSources"]) {
         expect(b[field], `${id}.${field}`).toBeTruthy();
       }
-      expect(JSON.stringify((b.verification as Record<string, string>).NZ), id).toMatch(/PENDING OWNER APPROVAL/);
+      expect(JSON.stringify((b.verification as Record<string, string>).NZ), id).toMatch(/OWNER-APPROVED/);
     }
     expect(blocks["gas-and-lpg-general"].answers, "it answers the detector's gas-and-lpg requirement").toContain("gas-and-lpg");
   });
@@ -518,33 +518,40 @@ describe("Stage 9.62A · detected gas topic → required block SET → every blo
   });
 
   it("a block that is carried but PENDING OWNER APPROVAL satisfies nothing", () => {
-    // the real blocks: NZ wording of all five is still pending (Stage 9.62D)
-    const r = prep({ sourceHtml: BASE(TEACH.install), extraSafetyBlocks: [GENERAL, "gas-installation-and-servicing"] });
-    expect(unavailableIds(r, "NZ").sort()).toEqual([GENERAL, "gas-installation-and-servicing"].sort());
-    expect(gas(r, "NZ").unavailable.every((u) => /PENDING OWNER APPROVAL/.test(u.reason))).toBe(true);
-    expect(publishable(r, "NZ")).toBe(false);
+    // Stage 9.63 approved the real blocks, so pending is simulated: any block marked pending for a market is unavailable there.
+    const pendingBlocks = Object.fromEntries(
+      Object.entries(blocks).map(([k, b]) => [k, GAS_BLOCKS.includes(k as (typeof GAS_BLOCKS)[number]) ? ({ ...b, pendingOwnerApproval: ["NZ", "AU"] } as SafetyBlock) : b]),
+    ) as Record<string, SafetyBlock>;
+    const r = prep({ sourceHtml: BASE(TEACH.install), blocks: pendingBlocks, extraSafetyBlocks: [GENERAL, "gas-installation-and-servicing"] });
+    for (const m of ["NZ", "AU"]) {
+      expect(unavailableIds(r, m).sort(), m).toEqual([GENERAL, "gas-installation-and-servicing"].sort());
+      expect(gas(r, m).unavailable.every((u) => /PENDING OWNER APPROVAL/.test(u.reason)), m).toBe(true);
+      expect(publishable(r, m), m).toBe(false);
+    }
   });
 
-  it("Stage 9.62D approval state: AU wording approved for three blocks, AU unflued and AU leak fail closed, NZ pending for all five", () => {
+  it("Stage 9.63 approval state: NZ wording approved for all five; AU approved for three; AU unflued and AU leak fail closed", () => {
     const pending = (id: string) => (blocks[id].pendingOwnerApproval ?? []) as string[];
+    for (const id of GAS_BLOCKS) expect(JSON.stringify((blocks[id] as unknown as { verification: Record<string, string> }).verification.NZ), `${id} NZ`).toMatch(/NZ WORDING OWNER-APPROVED 2026-10-06/);
     for (const id of ["gas-and-lpg-general", "gas-cylinder-safety", "gas-installation-and-servicing"]) {
-      expect(pending(id), `${id}: AU approved, NZ not`).toEqual(["NZ"]);
+      expect(pending(id), `${id}: NZ and AU both approved`).toEqual([]);
       expect(body(id, "AU"), id).toBeTruthy();
       expect(JSON.stringify((blocks[id] as unknown as { verification: Record<string, string> }).verification.AU), id).toMatch(/OWNER-APPROVED 2026-10-06/);
     }
     for (const id of ["unflued-gas-heating", "gas-leak-response"]) {
       expect(body(id, "AU"), `${id}: no served AU body`).toBeUndefined();
-      expect(pending(id), id).toEqual(["NZ", "AU"]);
+      expect(pending(id), `${id}: NZ approved; AU has nothing to approve`).toEqual(["AU"]);
       expect(JSON.stringify((blocks[id] as unknown as { verification: Record<string, string> }).verification.AU), id).toMatch(/FAIL/);
     }
     expect(JSON.stringify((blocks["gas-leak-response"] as unknown as { verification: Record<string, string> }).verification.AU)).toMatch(/NOT approved as AU common-core wording/);
-    // AU approval never releases NZ, and NZ stays unavailable until its own approval
+    // with both markets approved, generic gas teaching is satisfied by the general block alone in NZ and AU
     const r = prep({ sourceHtml: BASE(GENERIC), extraSafetyBlocks: [GENERAL] });
     expect(unavailableIds(r, "AU")).toEqual([]);
-    expect(unavailableIds(r, "NZ")).toEqual([GENERAL]);
-    // and the AU leak / unflued blocks stay unavailable in AU even though they are carried
+    expect(unavailableIds(r, "NZ")).toEqual([]);
+    // and the AU leak / unflued blocks stay unavailable in AU even though they are carried and NZ-approved
     const leak = prep({ sourceHtml: BASE(TEACH.leak), extraSafetyBlocks: [GENERAL, "gas-leak-response"] });
     expect(unavailableIds(leak, "AU")).toEqual(["gas-leak-response"]);
+    expect(unavailableIds(leak, "NZ")).toEqual([]);
   });
 
   it("a block that is only a PROPOSAL for this resource satisfies nothing", () => {
@@ -729,8 +736,11 @@ describe("Stage 9.62A · OG-B09, OG-24 and OG-17 against the required-block mech
     for (const not of ["unflued-gas-heating", "gas-cylinder-safety", "gas-leak-response", "gas-installation-and-servicing"]) {
       expect(safetyExposureFor(textOf("OG-B09")), `OG-B09 does not require ${not}`).not.toContain(not);
     }
-    // today it could not be released: the block is PENDING OWNER APPROVAL
-    expect(gasBlockAvailability(GENERAL_ID, "NZ", blocks, [GENERAL_ID], []).available).toBe(false);
+    // Stage 9.63: the general block is now owner-approved for NZ and AU, so carrying it releases the requirement
+    expect(gasBlockAvailability(GENERAL_ID, "NZ", blocks, [GENERAL_ID], []).available).toBe(true);
+    expect(gasBlockAvailability(GENERAL_ID, "AU", blocks, [GENERAL_ID], []).available).toBe(true);
+    // but not carried, it releases nothing
+    expect(gasBlockAvailability(GENERAL_ID, "NZ", blocks, [], []).available).toBe(false);
   });
 
   it("OG-24: 'Certifying Plumber / Gasfitter' and 'gas appliance install' are licensing routing, and need general + installation", () => {

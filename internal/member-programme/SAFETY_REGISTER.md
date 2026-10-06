@@ -208,3 +208,8 @@ Numeric block ownership is exact (a figure inside block A is not credited to blo
 
 Gas blocks: AU approved (general, cylinder, installation); AU unflued + leak fail closed; NZ pending for all five. OG-B09 = general only (no editorial additions); OG-24 = general + installation; OG-17 = none.
 
+
+## Stage 9.63
+
+Gas blocks: NZ and AU (three blocks) approved; AU unflued + leak fail closed. NZ numeric gas claims OWNER-APPROVED. OG-B09 requires gas-and-lpg-general only; solid-fuel-heating needs an owner decision (carry or disposition).
+

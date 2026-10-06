@@ -32,6 +32,7 @@ export type NumericCategory =
   | "area"
   | "flow"
   | "power"
+  | "insulation"
   | "currency";
 
 export type Bucket =
@@ -143,6 +144,7 @@ const WORD_INTERVAL = new RegExp(
   `\\b(annual(?:ly)?|yearly|monthly|weekly|daily|fortnightly|twice a year|(?:once|twice) (?:a|per|every) (?:year|month)|(?:once )?(?:every|each) (?:other )?year|(?:once or twice|twice or three times) a year|${NUMBER} times (?:a|per|each) (?:year|month|week)|every (?:six|three|twelve) months)\\b`,
   "gi",
 );
+const R_VALUE = /\bR[-\s]?\d+(?:\.\d+)?\+?(?![A-Za-z0-9])/g;
 const CURRENCY = /(?:NZ\$|AU\$|\$)\s?\d[\d,]*(?:\.\d+)?(?:\s?[–-]\s?(?:NZ\$|AU\$|\$)?\d[\d,]*)?/g;
 const FLOW = /\b\d[\d,]*\s?(?:L|litres?)\s?\/\s?(?:h|hr|hour|min|minute|day)\b/gi;
 
@@ -287,6 +289,9 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
     const figure = clean(m[0]);
     if (!found.some((f) => f.figure === figure)) found.push({ figure, value: null, unit: "L/time", category: "flow" });
   }
+  // Insulation R-values (Stage 9.63): "R-2.9", "R3.6+", "R 1.3". They carry no unit the scanner knew, so a building-code
+  // insulation target passed the numeric gate unseen. A bare R-number is a fixed figure like any other.
+  for (const m of sentence.matchAll(R_VALUE)) found.push({ figure: clean(m[0]), value: Number(m[0].replace(/[^\d.]/g, "")) || null, unit: "R-value", category: "insulation" });
   for (const m of sentence.matchAll(CURRENCY)) found.push({ figure: clean(m[0]), value: null, unit: "$", category: "currency" });
   for (const m of sentence.matchAll(WORD_INTERVAL)) found.push({ figure: clean(m[0]), value: null, unit: "time", category: "interval" });
   for (const r of ratioMatches(sentence)) if (!found.some((f) => f.figure === r.figure)) found.push(r);

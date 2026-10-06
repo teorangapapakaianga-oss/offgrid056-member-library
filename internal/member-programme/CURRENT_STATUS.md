@@ -106,3 +106,8 @@ Tests 576, lint/typecheck clean. Tightened AU common-core rule (4+ jurisdictions
 
 AU wording OWNER-APPROVED for gas-and-lpg-general, gas-cylinder-safety, gas-installation-and-servicing; AU unflued and AU leak fail closed (drafted leak wording unserved). NZ wording of all five and the three NZ numeric claims remain PENDING OWNER APPROVAL. 588 tests. Nothing deployed. Report: admin-import/STAGE_9.62D_GAS_CLOSEOUT.md.
 
+
+## Stage 9.63 (6 October 2026) - NZ gas wording and numeric claims approved; OG-B09 claims-first prepared
+
+NZ wording of all five gas blocks and the three NZ numeric claims OWNER-APPROVED. 599 tests; 21/21 ready, 42/42, Bucket C 0. Numeric scanner now detects insulation R-values. OG-B09 audited (not rendered, no PDFs): gas-and-lpg-general only; owner decisions pending. Report: admin-import/STAGE_9.63_OGB09_CLAIMS_FIRST.md.
+

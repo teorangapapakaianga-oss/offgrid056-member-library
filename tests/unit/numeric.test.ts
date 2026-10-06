@@ -259,18 +259,15 @@ describe("report-only behaviour, still available", () => {
       expect(claim.sourceDate.length, claim.id).toBeGreaterThan(0);
       expect(claim.limitations.length, claim.id).toBeGreaterThan(0);
       if (claim.owningBlock) {
-        // Stage 9.62. A figure that belongs to a safety BLOCK rather than a resource is registered when the block is
-        // built, but the block's wording is only approved when a resource carrying it is approved. Until then the
-        // claim is VERIFIED and OWNER-AUTHORISED to be registered — and it must say so, name its block, and that block
-        // must itself still be marked pending. It may NOT claim OWNER-APPROVED, and it may not be resource-less
-        // without a block. When the block is approved, this exception disappears and the claim becomes OWNER-APPROVED.
-        expect(claim.status, claim.id).toMatch(/PENDING OWNER APPROVAL/i);
+        // A figure that belongs to a safety BLOCK (not a resource). Stage 9.63: the owner approved the NZ wording of the
+        // block and these claims with it. A block-owned claim is OWNER-APPROVED, names an owning block that exists, and
+        // its market's wording in that block must NOT still be pending: a claim may never be approved ahead of its words.
+        expect(claim.status, claim.id).toMatch(/OWNER-APPROVED/);
         for (const blockId of claim.owningBlock.split(";").map((s) => s.trim())) {
-          const block = (topicBlocks.blocks as Record<string, { verification?: Record<string, string> }>)[blockId];
+          const block = (topicBlocks.blocks as Record<string, { pendingOwnerApproval?: string[] }>)[blockId];
           expect(block, `${claim.id}: owning block ${blockId} does not exist`).toBeDefined();
-          expect(JSON.stringify(block.verification), `${claim.id}: ${blockId} is no longer pending`).toMatch(/PENDING OWNER APPROVAL/i);
-        }
-      } else {
+          expect(block.pendingOwnerApproval ?? [], `${claim.id}: ${blockId} ${claim.market} wording is still pending`).not.toContain(claim.market);
+        }      } else {
         expect(claim.owningResources.length, claim.id).toBeGreaterThan(0);
         expect(claim.status, claim.id).toMatch(/OWNER-APPROVED/);
       }
