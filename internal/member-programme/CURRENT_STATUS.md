@@ -111,3 +111,8 @@ AU wording OWNER-APPROVED for gas-and-lpg-general, gas-cylinder-safety, gas-inst
 
 NZ wording of all five gas blocks and the three NZ numeric claims OWNER-APPROVED. 599 tests; 21/21 ready, 42/42, Bucket C 0. Numeric scanner now detects insulation R-values. OG-B09 audited (not rendered, no PDFs): gas-and-lpg-general only; owner decisions pending. Report: admin-import/STAGE_9.63_OGB09_CLAIMS_FIRST.md.
 
+
+## Stage 9.64 (6 October 2026) - OG-B09 owner rulings and migrated draft prepared
+
+OG-B09 configured (approved-copy + metadata) and verified as a draft: gas-and-lpg-general + solid-fuel-heating, 0 R-values/prices/percentages, ready in both markets. NOT rendered, no PDFs, NOT a protected resource. 610 tests. Report: admin-import/STAGE_9.64_OGB09_DRAFT.md.
+

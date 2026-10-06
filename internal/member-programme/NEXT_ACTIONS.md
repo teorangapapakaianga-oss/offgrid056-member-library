@@ -136,3 +136,8 @@ migrate nothing until the wording is approved.
 
 Owner decisions on OG-B09 (solid-fuel block vs disposition, R-values, efficiency, prices, rewrites, AU term, metadata) - see STAGE_9.63_OGB09_CLAIMS_FIRST.md section 13. Then OG-B09 config + render (Stage 9.64).
 
+
+## After Stage 9.64
+
+Owner approves the OG-B09 copy (STAGE_9.64 section 16). Then render PDFs, add as protected resource #22, deploy - each on the owner's word.
+

@@ -142,3 +142,8 @@ No resource changed. OG-B09 expected blocks: gas-and-lpg-general, gas-installati
 
 OG-B09: claims-first prepared, NOT migrated. Legacy has 6 R-values, 6 prices, 3 efficiency percentages; only gas content is the 'Flued gas' row. Awaiting owner decisions.
 
+
+## Stage 9.64 note
+
+OG-B09: migrated DRAFT prepared (config only), awaiting owner copy approval. Not rendered, not deployed.
+

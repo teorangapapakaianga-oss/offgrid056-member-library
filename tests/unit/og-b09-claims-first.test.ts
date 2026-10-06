@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { findContentFlags, fuelSafetyFindings, memberFacingText, requiredGasBlocks, GAS_BLOCK_SET } from "@/admin-import/pilot/prep";
+import { applyCopyChanges, findContentFlags, fuelSafetyFindings, memberFacingText, requiredGasBlocks, GAS_BLOCK_SET } from "@/admin-import/pilot/prep";
+import { reskinHtml } from "@/admin-import/reskin/reskin";
 import { safetyExposureFor } from "@/admin-import/audit/group-a";
 import { loadNumericRegistry, scanNumericClaims } from "@/admin-import/audit/numeric";
 import { loadTreatmentRegistry } from "@/admin-import/audit/treatment";
@@ -88,6 +89,137 @@ describe("Stage 9.63 · OG-B09 market separation", () => {
   it("a block-owned NZ figure still does not validate the resource's own sentence", () => {
     const own = `<div class="content"><p>WorkSafe New Zealand advises that flame effect heaters and LPG cabinet heaters should be serviced annually.</p></div>`;
     expect(bucketCs(own, "NZ").length).toBeGreaterThan(0);
+  });
+});
+
+interface Change { where: string; from: string; to: string; expectedMatches: number; markets?: string[]; approvedBy: string; approvedOn: string; reason: string }
+const approvedCopy = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, Change[]> }).changes["OG-B09"] ?? [];
+const meta = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/metadata-review.json"), "utf8")) as { resources: Record<string, Record<string, unknown>> }).resources["OG-B09"];
+const newCopy = (market: string) => approvedCopy.filter((c) => !c.markets || c.markets.includes(market)).map((c) => c.to).join("\n");
+
+describe("Stage 9.64 · OG-B09 owner rulings are recorded exactly", () => {
+  it("carries gas-and-lpg-general and solid-fuel-heating, and nothing that suppresses a trigger", () => {
+    expect(meta.safetyBlocks).toEqual(["gas-and-lpg-general", "solid-fuel-heating"]);
+    expect(meta.approvedSafetyBlocks).toEqual(["gas-and-lpg-general", "solid-fuel-heating"]);
+    for (const key of ["safetyExemptions", "safetyTopicDispositions", "fuelExemptions", "priceDispositions", "safetyBlockTrims"]) {
+      expect(meta[key], `${key}: no exemption, disposition or trim may suppress a trigger`).toBeUndefined();
+    }
+  });
+
+  it("records the approved metadata", () => {
+    expect(meta).toMatchObject({
+      title: "Insulation & Heating Upgrade Checklist",
+      resourceType: "checklist",
+      foundation: "shelter",
+      category: "insulation",
+      difficulty: "beginner",
+      estimatedTime: 30,
+      description: "Check each room's insulation, then compare heating options against your own quotes and priorities before you decide what to upgrade.",
+      tags: [],
+      recordStatus: "draft",
+      difficultyBasis: "OWNER-APPROVED / INFERRED",
+      timeBasis: "OWNER-APPROVED / INFERRED",
+    });
+  });
+
+  it("every copy change is owner-approved, dated and reasoned", () => {
+    expect(approvedCopy.length).toBeGreaterThan(8);
+    for (const c of approvedCopy) {
+      expect(c.approvedBy, c.where).toBe("owner");
+      expect(c.approvedOn, c.where).toMatch(/^2026-10-06$/);
+      expect(c.reason.length, c.where).toBeGreaterThan(20);
+    }
+  });
+
+  it("introduces no price, percentage, R-value or construction-year figure", () => {
+    for (const market of ["NZ", "AU"]) {
+      const text = newCopy(market).replace(/<[^>]+>/g, " ");
+      expect(text, `${market}: a price`).not.toMatch(/[$]\s?\d/);
+      expect(text, `${market}: a percentage`).not.toMatch(/\d\s?%/);
+      expect(text, `${market}: an R-value`).not.toMatch(/\bR[-\s]?\d/);
+      expect(text, `${market}: the 2008 rule`).not.toMatch(/\b2008\b|built before/i);
+      expect(text, `${market}: a universal ranking`).not.toMatch(/most efficient|cheapest|ultimate|\bluxury\b|know exactly/i);
+    }
+  });
+
+  it("AU terminology: first reference 'reverse-cycle air conditioner (heat pump)'; NZ keeps 'heat pump'; no global replacement", () => {
+    const au = newCopy("AU");
+    const nz = newCopy("NZ");
+    expect(au).toContain("Reverse-cycle air conditioner (heat pump)");
+    expect(au.match(/heat pump/gi)).toHaveLength(1);
+    expect(nz).toContain("<td>Heat pump</td>");
+    expect(nz).not.toMatch(/reverse[- ]cycle/i);
+    // the terminology change is market-scoped, never shared
+    for (const c of approvedCopy.filter((x) => /reverse-cycle/i.test(x.to))) expect(c.markets, c.where).toEqual(["AU"]);
+  });
+
+  it("the Flued gas row says nothing that pulls in another gas block", () => {
+    const row = (newCopy("NZ").match(/<tr><td>Flued gas<\/td>[\s\S]*?<\/tr>/) ?? [""])[0];
+    expect(row).toContain("Flued gas");
+    expect(row).not.toMatch(/gasfitter|gas fitter|licensed|servic|install|carbon monoxide|\bCO\b|cylinder|leak|unflued|ventilat|maintenance/i);
+    expect(row).toBe(((newCopy("AU").match(/<tr><td>Flued gas<\/td>[\s\S]*?<\/tr>/) ?? [""])[0]));
+  });
+
+  it("the wood-burner row carries no safety wording of its own (the solid-fuel block does)", () => {
+    const row = (newCopy("NZ").match(/<tr><td>Wood burner<\/td>[\s\S]*?<\/tr>/) ?? [""])[0];
+    expect(row).toContain("Wood burner");
+    expect(row).not.toMatch(/chimney|flue|clearance|metre|ash|fire\b|carbon monoxide|\bCO\b|sweep|smoke|safe/i);
+  });
+});
+
+describe("Stage 9.64 · the migrated OG-B09 draft, built from the legacy source when the working copy has it", () => {
+  const list = path.join(root, "workspace/candidates.json");
+  const build = (market: string): string | null => {
+    if (!fs.existsSync(list)) return null;
+    const cands = JSON.parse(fs.readFileSync(list, "utf8")) as { source: { path: string; filename: string; extension: string } }[];
+    const f = cands.find((c) => c.source.filename.startsWith("OG-B09_") && /\.html?$/i.test(c.source.extension));
+    if (!f) return null;
+    const skinned = reskinHtml(fs.readFileSync(f.source.path, "utf8"), { strapline: "Prepare • Adapt • Thrive" }).html;
+    const shared = applyCopyChanges(skinned, approvedCopy.filter((c) => !c.markets?.length));
+    const own = applyCopyChanges(shared.html, approvedCopy.filter((c) => c.markets?.includes(market)));
+    for (const r of [...shared.results, ...own.results]) expect(r.applied, `${market}: ${r.where}`).toBe(true);
+    return own.html;
+  };
+
+  it("every approved copy change applies exactly once, in both markets", () => {
+    for (const m of ["NZ", "AU"]) build(m);
+  });
+
+  it("has 0 unsupported R-values, 0 prices, 0 efficiency percentages and 0 numeric Bucket C", () => {
+    for (const m of ["NZ", "AU"]) {
+      const html = build(m);
+      if (!html) return;
+      const text = html.replace(/<style[\s\S]*?<\/style>/g, "").replace(/<[^>]+>/g, " ");
+      expect(text.match(/[$]\s?\d/g) ?? [], `${m} prices`).toEqual([]);
+      expect(text.match(/\d\s?%/g) ?? [], `${m} percentages`).toEqual([]);
+      expect(text.match(/\bR[-\s]?\d/g) ?? [], `${m} R-values`).toEqual([]);
+      expect(bucketCs(html, m), `${m} Bucket C`).toEqual([]);
+      expect(priceFindings(html, { market: m, records: [], legacyHtml: html }).problems, `${m} prices gate`).toEqual([]);
+      expect(findContentFlags(html, "OG-B09").filter((f) => f.kind === "figure-needs-source"), `${m} efficiency flags`).toEqual([]);
+    }
+  });
+
+  it("requires gas-and-lpg-general only, and no unintended gas block, in both markets", () => {
+    for (const m of ["NZ", "AU"]) {
+      const html = build(m);
+      if (!html) return;
+      const fuel = fuelSafetyFindings(html).some((f) => f.startsWith("GAS_SAFETY_REQUIRED"));
+      const topics = safetyExposureFor(memberFacingText(html));
+      expect(fuel, `${m}: the Flued gas label raises the gas check`).toBe(true);
+      expect(requiredGasBlocks(topics.filter((t) => t in GAS_BLOCK_SET), fuel), m).toEqual(["gas-and-lpg-general"]);
+      for (const not of ["unflued-gas-heating", "gas-cylinder-safety", "gas-leak-response", "gas-installation-and-servicing"]) expect(topics, `${m}: ${not}`).not.toContain(not);
+    }
+  });
+
+  it("keeps the two markets apart", () => {
+    const nz = build("NZ");
+    const au = build("AU");
+    if (!nz || !au) return;
+    const strip = (h: string) => h.replace(/<style[\s\S]*?<\/style>/g, "");
+    expect(strip(au)).not.toMatch(/New Zealand|Building Code|\b111\b/);
+    expect(strip(nz)).not.toMatch(/Australia|National Construction Code|state or territory|reverse[- ]cycle|\b000\b/i);
+    expect(strip(nz)).toContain("your council");
+    expect(strip(au)).toContain("your state or territory building authority");
   });
 });
 

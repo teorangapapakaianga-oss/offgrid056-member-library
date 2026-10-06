@@ -830,6 +830,45 @@
       "timeBasis": "OWNER-APPROVED / INFERRED",
       "recordStatusNote": "owner-approved 2026-10-06 (Stage 9.60): draft, as every real resource is.",
       "gasRuling": "OWNER RULING 2026-10-06 (Stage 9.60): the two legacy narrative gas sentences stay REMOVED and must not be restored. OG-17 carries no member-facing gas wording of its own. The only gas words in the finished files come from the approved carbon-monoxide block and the standing disclaimer sentence, both owner-approved since Stage 9.19. No Gas/LPG block is required and no gas exemption exists."
+    },
+    "OG-B09": {
+      "title": "Insulation & Heating Upgrade Checklist",
+      "titleStatus": "from the document's own cover — accurate; the legacy code and 'Action Plan Plus' label are removed",
+      "resourceType": "checklist",
+      "resourceTypeStatus": "owner-approved 2026-10-06 (Stage 9.64); audit HIGH",
+      "foundation": "shelter",
+      "foundationStatus": "owner-approved 2026-10-06 (Stage 9.64); audit HIGH",
+      "category": "insulation",
+      "categoryStatus": "owner-approved 2026-10-06 (Stage 9.64). `insulation` is an existing category of the shelter foundation — no taxonomy slug was added.",
+      "difficulty": "beginner",
+      "difficultyStatus": "owner-approved 2026-10-06 (Stage 9.64)",
+      "difficultySource": "INFERRED: the document states no level. A blank audit and a comparison to fill in; OG-15 (assessment) is beginner.",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "owner-approved 2026-10-06 (Stage 9.64)",
+      "estimatedTimeReasoning": "INFERRED: five rooms to audit plus a six-row comparison and a short decision worksheet; OG-15 precedent (30). Excludes getting quotes or speaking to an installer.",
+      "description": "Check each room's insulation, then compare heating options against your own quotes and priorities before you decide what to upgrade.",
+      "descriptionStatus": "owner-approved 2026-10-06 (Stage 9.64)",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "relatedResources": [],
+      "safetyBlocks": [
+        "gas-and-lpg-general",
+        "solid-fuel-heating"
+      ],
+      "approvedSafetyBlocks": [
+        "gas-and-lpg-general",
+        "solid-fuel-heating"
+      ],
+      "approvedSafetyBlocksStatus": "gas-and-lpg-general: NZ and AU owner-approved 2026-10-06 (Stages 9.62D/9.63). solid-fuel-heating: owner-approved 2026-09-22 (Stage 9.19); carried by owner ruling 1, Stage 9.64 — NOT suppressed by a disposition.",
+      "safetyReasoning": "The Flued gas row raises the gas fuel check (the label alone does), so gas-and-lpg-general is detector-required in both markets. The wood-burner row requires solid-fuel-heating, which the owner ruled to carry. No other gas block is carried: the rewritten rows do not mention gasfitters, servicing, installation, carbon monoxide, cylinders, leaks or unflued heaters, so none is triggered.",
+      "recordStatus": "draft",
+      "migrationState": "PREPARED (Stage 9.64) — draft copy for owner review. NOT rendered, NOT a protected resource.",
+      "foundationBasis": "OWNER-APPROVED / INFERRED",
+      "categoryBasis": "OWNER-APPROVED / INFERRED",
+      "difficultyBasis": "OWNER-APPROVED / INFERRED",
+      "timeBasis": "OWNER-APPROVED / INFERRED",
+      "recordStatusNote": "draft, as every real resource is.",
+      "gasRuling": "OWNER RULING 2026-10-06 (Stage 9.64): carry gas-and-lpg-general and solid-fuel-heating only. The Flued gas row must not mention gasfitters, servicing, installation or carbon monoxide."
     }
   }
 }
