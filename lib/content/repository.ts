@@ -10,6 +10,7 @@ import { SupplierSchema, WorkshopSchema, type Supplier, type Workshop } from "./
 import { ProgrammeDaySchema, ProgrammeSchema, type Programme, type ProgrammeDay } from "./programme-schemas";
 import { LearningPathSchema, ResourceSchema, type LearningPath, type Resource } from "./schemas";
 import { toSummary, type ResourceSummary } from "./summaries";
+import routePolicy from "./route-policy.json";
 import { aliasOf, PathCollisionError, resolveLearningPathCollisions, resolveRouteCollisions, RouteCollisionError } from "./supersession";
 
 const DATA_DIR = path.join(process.cwd(), "data");
@@ -60,7 +61,7 @@ export function loadAllResourceFiles(): Resource[] {
     const raw = readJsonDir("resources", parseWith(ResourceSchema));
     let resolved: ReturnType<typeof resolveRouteCollisions<Resource>>;
     try {
-      resolved = resolveRouteCollisions(raw, { preview: INCLUDE_DRAFTS });
+      resolved = resolveRouteCollisions(raw, { preview: INCLUDE_DRAFTS, policy: routePolicy });
     } catch (e) {
       if (e instanceof RouteCollisionError) throw new ContentError(e.message);
       throw e;

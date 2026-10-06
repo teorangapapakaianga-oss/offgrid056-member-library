@@ -21,7 +21,16 @@
       "difficulty": "beginner",
       "difficultyStatus": "owner-approved 2026-09-22",
       "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived. The source document does not state a difficulty level (searched for beginner, intermediate, advanced, difficulty, level, skill, experience: zero matches).",
-      "difficultyReason": "2 pages; approximately 15 minutes; short-answer planning activity; no technical content; no specialist knowledge required."
+      "difficultyReason": "2 pages; approximately 15 minutes; short-answer planning activity; no technical content; no specialist knowledge required.",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — a monthly theme can be any foundation",
+        "programComponent": "planning-implementation — a repeatable monthly planning and tracking framework (30-day plans and implementation tracking)",
+        "resilienceRole": "gives a household a monthly cycle of learn, assess, plan and act, with success measures, to keep its progress moving",
+        "guidanceKind": "implementation planning (a recurring framework) — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — month and theme, a weekly breakdown, community engagement and success metrics"
+      }
     },
     "OG-B10": {
       "foundation": "general",
@@ -42,7 +51,16 @@
       "reasoning": "Short to read but the most thinking per field: budget figures need working out and dependency mapping means reasoning about the order of actions. Labelled Advanced, and assumes a plan already exists.",
       "difficulty": "advanced",
       "difficultyStatus": "owner-approved 2026-09-22",
-      "difficultySource": "SOURCE-SUPPORTED — the document's own title reads '90-Day Implementation Roadmap (Advanced)'"
+      "difficultySource": "SOURCE-SUPPORTED — the document's own title reads '90-Day Implementation Roadmap (Advanced)'",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — a plan that can span all five foundations",
+        "programComponent": "planning-implementation — its primary output is a 90-day roadmap with budget burn-down and dependencies; difficulty does not make it advanced-future (owner ruling)",
+        "resilienceRole": "helps a household run a 90-day plan: phases, milestones, budget burn-down, dependencies and review checkpoints",
+        "guidanceKind": "implementation planning and tracking — not emergency guidance and not system architecture",
+        "wordingMatchesRole": "yes — programme overview, phase breakdown, budget burn-down tracker, dependency mapping and review checkpoints"
+      }
     },
     "OG-25": {
       "foundation": "general",
@@ -65,7 +83,16 @@
       "difficultyStatus": "owner-approved 2026-09-22",
       "difficultySource": "OWNER-APPROVED CLASSIFICATION — not source-derived. The document states no difficulty. Its only use of the word 'level' is a form field, 'Target Resilience Level (Days of autonomy desired)', which is about the household, not the document.",
       "description": "A professional brief anyone can understand",
-      "descriptionStatus": "owner-approved 2026-09-22 (ruling 7: remove 'Day 25 —'); the deployed record still has the old description until the next approved deployment"
+      "descriptionStatus": "owner-approved 2026-09-22 (ruling 7: remove 'Day 25 —'); the deployed record still has the old description until the next approved deployment",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — a project brief that can concern any foundation",
+        "programComponent": "planning-implementation — a project brief and supplier / installer planning (the component definition names project briefs)",
+        "resilienceRole": "helps a household brief a contractor, consultant or supplier clearly so a resilience project is quoted and delivered well",
+        "guidanceKind": "implementation planning (a template) — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — project overview, resilience context, scope, commercial terms, attachments and evaluation criteria"
+      }
     },
     "OG-27": {
       "foundation": "general",
@@ -108,6 +135,15 @@
         },
         "resolvedOn": "2026-09-22",
         "evidence": "OG-22 (res-1022) and OG-26 (res-1026) deployed together in Worker version 2aa8a131 and verified: Access 27/27, routing 27/27, exact-build verifier 16/16."
+      },
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — a plan across the foundations",
+        "programComponent": "planning-implementation — its primary output is a 90-day roadmap (budgeting ruling: roadmap / action plan / schedule)",
+        "resilienceRole": "turns a household's plan into phased action with deadlines",
+        "guidanceKind": "implementation planning — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — roadmap principles and phased 90-day action with deadlines"
       }
     },
     "OG-B07": {
@@ -138,7 +174,16 @@
       "relatedResources": [
         "res-1018"
       ],
-      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment."
+      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment.",
+      "programComponent": "advanced-future",
+      "programComponentStatus": "LOCKED RULING (earlier stage). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "energy — solar",
+        "programComponent": "advanced-future — advanced solar planning aimed at what an installer needs to quote accurately (locked ruling; see the release note: it is a single-system worksheet, so it is the one to reconfirm under the narrower Stage 9.73 advanced-future definition)",
+        "resilienceRole": "helps a household prepare the roof and site survey, shading analysis and load profile that an installer needs to quote a larger solar system",
+        "guidanceKind": "advanced solar system planning — not emergency guidance",
+        "wordingMatchesRole": "yes — roof and site survey, shading analysis and load profile with payback; installation and electrical work are left to licensed professionals"
+      }
     },
     "OG-15": {
       "foundation": "shelter",
@@ -174,7 +219,16 @@
           "reviewedOn": "2026-09-22",
           "approvalRef": "Stage 9.36 ruling 3 (resource-specific reviewed exemption; no global phrase exemption)"
         }
-      ]
+      ],
+      "programComponent": "resilience-planning",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "shelter — warmth, insulation and heating",
+        "programComponent": "resilience-planning — warm-home planning and a scorecard (named in the component definition)",
+        "resilienceRole": "lets a household score its home's warmth room by room and find the cold zones to deal with first",
+        "guidanceKind": "resilience planning (a household scorecard) — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — a scoring scale, a room-by-room warmth audit, heat loss detective work and the top three cold zones"
+      }
     },
     "OG-02": {
       "foundation": "general",
@@ -209,6 +263,15 @@
         "C_legacySourceText": "The same 2 labels, and nothing else. Nothing fire-related was removed during migration.",
         "finalOutputCheck": "Run against the FINAL migrated NZ and AU files: 2 allowed mentions, 0 unexpected mentions, 0 teaching signals — the exemption holds.",
         "lapses": "Automatically, on any fire or bushfire wording outside those two exact labels, or on any fire-teaching signal. Scoped to OG-02 alone; there is no global fire exemption and the fire detector was not weakened (it was strengthened at Stage 9.46 to catch 'bushfire' and 'wildfire')."
+      },
+      "programComponent": "resilience-planning",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — the risks a household faces across the foundations",
+        "programComponent": "resilience-planning — a household assessment that ranks priorities (the component definition names household assessments)",
+        "resilienceRole": "helps a household identify its top risks, rate probability and impact and see what to tackle first",
+        "guidanceKind": "resilience planning (a risk assessment) — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — a risk matrix, a rate-your-top-ten worksheet, the three highest-scoring risks and local factors"
       }
     },
     "OG-26": {
@@ -282,6 +345,15 @@
         "context": "Emergency heating (gas heater / thermal blankets)",
         "suggestion": "A category-based line such as 'Emergency heating / thermal blankets'",
         "note": "The exact-text fuel exemption would be removed at the same time; a reworded line with no gas appliance needs none."
+      },
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "LOCKED RULING (earlier stage). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — a budget across resilience purchases",
+        "programComponent": "planning-implementation — its primary output is a budget (locked ruling)",
+        "resilienceRole": "helps a household match what it spends on resilience to what it can afford, in three budget tiers, and record a decision",
+        "guidanceKind": "implementation planning (a budget) — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — three budget tiers (essential, balanced, complete), a check on assistance available, and a decision"
       }
     },
     "OG-22": {
@@ -309,6 +381,15 @@
       "deployed": {
         "version": "2aa8a131",
         "on": "2026-09-22"
+      },
+      "programComponent": "resilience-planning",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — it spans all five foundations",
+        "programComponent": "resilience-planning — the step after a household assessment: turning its results into a prioritised list of what to acquire (owner ruling; the budget summary and phasing are supporting, and the owner ruled this over the budgeting default)",
+        "resilienceRole": "helps a household decide which resilience products and services matter most, from must-have to won't-have-now, and in what order to get them",
+        "guidanceKind": "resilience planning (prioritisation) — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — it opens from the household's audit results, uses a must / should / could / won't priority method and a decision criteria checklist, with a budget summary and phasing as supporting parts"
       }
     },
     "OG-11": {
@@ -335,7 +416,16 @@
         "food-safety-power-cut"
       ],
       "approvedSafetyBlocksStatus": "food-safety-power-cut NZ + AU owner-approved 2026-09-22 (Stage 9.26)",
-      "deploymentApproved": "2026-09-22 (Stage 9.26 ruling 3)"
+      "deploymentApproved": "2026-09-22 (Stage 9.26 ruling 3)",
+      "programComponent": "resilience-emergency",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "food — household food storage and rotation",
+        "programComponent": "resilience-emergency — stored food that keeps a household going through a disruption (owner ruling)",
+        "resilienceRole": "helps a household build a pantry of food it will actually eat, and rotate it, so it can manage a supply disruption",
+        "guidanceKind": "emergency-readiness (food) planning — not off-grid food production and not a system design",
+        "wordingMatchesRole": "yes — framed as a household pantry built around food the family eats, with an inventory, a shopping list to close the gap, a storage check and food safety in a power cut"
+      }
     },
     "OG-19": {
       "foundation": "energy",
@@ -367,7 +457,16 @@
       "relatedResources": [
         "res-1018"
       ],
-      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment."
+      "relatedResourcesStatus": "OG-18 (res-1018) added — owner-approved 2026-09-22 (Stage 9.31): record/link change only, no PDF or copy change; ships with the next approved deployment.",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "energy — battery backup for essential loads",
+        "programComponent": "off-grid-living — intermediate battery sizing and selection (owner ruling)",
+        "resilienceRole": "helps a household size, compare and choose a battery system for its essential loads, a step toward independent power",
+        "guidanceKind": "off-grid system planning (intermediate) — not emergency guidance and not whole-property architecture",
+        "wordingMatchesRole": "yes — essential loads, a battery size calculator, a technology comparison and a decision step; installation is left to a licensed electrical worker"
+      }
     },
     "OG-18": {
       "foundation": "energy",
@@ -415,7 +514,16 @@
           "condition": "Resource-specific; the detector is unchanged. The exemption lapses automatically — and the approved market block is required again — if OG-18's member-facing text mentions fridge, freezer, pantry or perishable anywhere else."
         }
       ],
-      "deploymentApproved": "2026-09-22 (Stage 9.30 ruling 13, conditional on final validation)"
+      "deploymentApproved": "2026-09-22 (Stage 9.30 ruling 13, conditional on final validation)",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "energy — solar",
+        "programComponent": "off-grid-living — beginner solar stays off-grid-living (systemArchitecture ruling)",
+        "resilienceRole": "introduces solar and helps a household judge whether its roof and usage suit it, size a system and estimate cost",
+        "guidanceKind": "off-grid system learning and planning (entry level) — not emergency guidance and not advanced architecture",
+        "wordingMatchesRole": "yes — roof suitability, energy use profile, system size calculator, cost estimator and a decision"
+      }
     },
     "OG-21": {
       "foundation": "shelter",
@@ -450,7 +558,16 @@
       ],
       "relatedResourcesStatus": "owner-approved 2026-09-22: OG-21 is the summary step — it gathers the Warm Home Scorecard, Solar Power 101 and the Battery Backup Planner, and feeds the 3-Tier Budget Planner.",
       "titleStatus": "owner-approved 2026-09-22: \"Home Energy & Shelter Upgrade Plan\" (keep the \"&\"); PDF title \"Home Energy & Shelter Upgrade Plan — OffGrid056\"; route /resources/home-energy-and-shelter-upgrade-plan/",
-      "deploymentApproved": "2026-09-22 (Stage 9.31 (OG-21) ruling 10, conditional on final validation)"
+      "deploymentApproved": "2026-09-22 (Stage 9.31 (OG-21) ruling 10, conditional on final validation)",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "shelter — heating and energy upgrades to the home",
+        "programComponent": "planning-implementation — its primary output is a roadmap with priorities, budget and next steps (owner ruling)",
+        "resilienceRole": "turns a household's shelter, heating and energy intentions into one prioritised, budgeted upgrade plan",
+        "guidanceKind": "implementation planning (an upgrade roadmap) — not emergency guidance and not system design",
+        "wordingMatchesRole": "yes — a summary, a priority ranking of what to do first, a consolidated budget and next steps"
+      }
     },
     "OG-20": {
       "foundation": "energy",
@@ -499,7 +616,16 @@
         }
       ],
       "safetyBlockTrimsNote": "Scoped to OG-20; the canonical CO block is unchanged for every other resource. NZ CO wording unchanged: no exact duplicate (the NZ generator block has no alarm line). The electrical block's generator lines are dropped wherever the generator block is present (ruling 7) — currently OG-20 only.",
-      "deploymentApproved": "2026-09-22 (Stage 9.34 ruling 11, conditional on final validation)"
+      "deploymentApproved": "2026-09-22 (Stage 9.34 ruling 11, conditional on final validation)",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "energy — alternative sources such as wind, micro-hydro and generators",
+        "programComponent": "off-grid-living — helps a household choose independent energy options (systemArchitecture ruling: entry and intermediate stay off-grid-living)",
+        "resilienceRole": "helps a household decide which alternatives to solar suit its property, climate and budget",
+        "guidanceKind": "off-grid system choice (a suitability check) — not emergency guidance",
+        "wordingMatchesRole": "yes — an option comparison matrix, a property assessment and a decision flowchart; generator safety is carried as a standing safety block"
+      }
     },
     "OG-B12": {
       "foundation": "general",
@@ -559,7 +685,16 @@
       ],
       "relatedResourcesStatus": "owner-approved 2026-09-22",
       "hazardFlagsStatus": "owner rulings 2026-09-22: sanitation at planning level only; humanure and waste burning removed; canning kept as a method name only (no times, temperatures, pressures, recipes or shelf-life) — instructional canning would need FOOD_PRESERVATION_SAFETY_REQUIRED review first; Option A removes LPG, biogas and diesel.",
-      "deploymentApproved": "2026-09-22 (Stage 9.36 ruling 17, conditional on final validation and the gas-heater review)"
+      "deploymentApproved": "2026-09-22 (Stage 9.36 ruling 17, conditional on final validation and the gas-heater review)",
+      "programComponent": "advanced-future",
+      "programComponentStatus": "LOCKED RULING (earlier stage). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "general — it integrates energy, water and shelter",
+        "programComponent": "advanced-future — integrated whole-property system architecture (locked ruling)",
+        "resilienceRole": "helps a household plan how its energy, water and shelter systems fit together as one integrated property system",
+        "guidanceKind": "true off-grid system architecture planning (later-stage, multi-system) — not emergency guidance",
+        "wordingMatchesRole": "yes — five integrated systems, an integration map, a system architecture worksheet and a single-line diagram area"
+      }
     },
     "OG-08": {
       "foundation": "water",
@@ -612,7 +747,16 @@
         "finalOutputGates": "treatmentFindings on the FINAL rendered NZ and AU files: 0 findings in each (ruling 10).",
         "lapses": "Automatically. The exemption holds only while every treatment word in OG-08's own text is 'filtration systems'; any bleach, chlorination, boiling, filter, UV, purification or disinfection wording breaks it, and so does any treatment-teaching signal (an efficacy claim, a dose, a boil time, a micron rating, a method comparison) even when no treatment word is used. It is scoped to OG-08 alone: there is no global exemption and no exempted phrase anywhere else."
       },
-      "safetyExemptionsStatus": "owner-approved 2026-09-23 (Stage 9.43 rulings 8 and 9)"
+      "safetyExemptionsStatus": "owner-approved 2026-09-23 (Stage 9.43 rulings 8 and 9)",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "water — household drinking-water storage",
+        "programComponent": "off-grid-living — sizes and establishes the household's own water storage (owner ruling)",
+        "resilienceRole": "shows a household how much water it needs, what it stores now and the gap, so it can store its own supply instead of relying on the network",
+        "guidanceKind": "water-storage planning (a calculator) that starts from the official emergency baseline and treats longer periods as optional extended storage — not an emergency procedure",
+        "wordingMatchesRole": "yes — the wording is storage sizing (needs, current store, gap, containers); the official emergency baseline is labelled as such and the longer periods are labelled optional extended resilience storage"
+      }
     },
     "OG-10": {
       "foundation": "water",
@@ -646,7 +790,16 @@
       ],
       "relatedResourcesStatus": "owner-approved 2026-09-23",
       "routeNote": "Expected to collide with the demo placeholder 'rainwater-harvesting-planner'; handled by the reusable private-preview override (Stage 9.39), with no OG-10-specific exception.",
-      "deploymentApproved": "2026-09-23 (Stage 9.40 ruling 20, conditional on final validation)"
+      "deploymentApproved": "2026-09-23 (Stage 9.40 ruling 20, conditional on final validation)",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "water — rainwater capture and storage",
+        "programComponent": "off-grid-living — water capture and storage",
+        "resilienceRole": "helps a household work out how much rainwater its roof can catch and what tank it needs",
+        "guidanceKind": "off-grid water system planning (intermediate) — not emergency guidance",
+        "wordingMatchesRole": "yes — catchment area, tank sizing and a system components checklist, without working at height"
+      }
     },
     "OG-09": {
       "foundation": "water",
@@ -691,7 +844,16 @@
       "title": "Household Water Treatment Guide",
       "pdfTitle": "Household Water Treatment Guide — OffGrid056",
       "route": "/resources/household-water-treatment-guide/",
-      "routeNote": "New route. No demo placeholder holds it, so there is no supersession and no collision."
+      "routeNote": "New route. No demo placeholder holds it, so there is no supersession and no collision.",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "water — treating household water",
+        "programComponent": "off-grid-living — water treatment is named in the component definition",
+        "resilienceRole": "helps a household decide whether its water needs treating, whether to treat it at home, and which methods official guidance supports",
+        "guidanceKind": "off-grid water guidance with its limits and when to ask for official advice — not an emergency procedure",
+        "wordingMatchesRole": "yes — what each method does and does not do, a source and treatment decision, and maintenance and testing"
+      }
     },
     "OG-B08": {
       "foundation": "water",
@@ -745,7 +907,16 @@
       "relatedResourcesNote": "The water pathway in order: OG-08 Water Storage Calculator (how much), OG-10 Rainwater Harvesting Planner (how much the roof supplies), OG-09 Household Water Treatment Guide (making it safe). OG-B12 was considered and left out: it is a general architecture planner, and four links dilute the journey.",
       "relatedResourcesStatus": "owner-approved 2026-09-23 (Stage 9.46) — the water pathway only; OG-B12 deliberately excluded",
       "titleStatus": "owner-approved 2026-09-23 (Stage 9.46) — 'Water Tank Sizing & Placement Guide' kept",
-      "status": "APPROVED FOR PRIVATE PREVIEW DEPLOYMENT as #19 (Stage 9.46 ruling 13)"
+      "status": "APPROVED FOR PRIVATE PREVIEW DEPLOYMENT as #19 (Stage 9.46 ruling 13)",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "APPLIED FROM THE LOCKED RULES (Stage 9.73) — owner to confirm at release review. Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "water — tank sizing and siting",
+        "programComponent": "off-grid-living — water storage and the tank as part of a household's own supply",
+        "resilienceRole": "turns the litres a household needs into a tank it can site: materials, base, overflow and maintenance access",
+        "guidanceKind": "off-grid water system planning (intermediate) — not emergency guidance",
+        "wordingMatchesRole": "yes — tank materials and size, where the tank goes, a tank plan, and which parts are a supplier, plumber, professional or council job"
+      }
     },
     "OG-13": {
       "foundation": "air",
@@ -785,7 +956,16 @@
         "solid-fuel-heating"
       ],
       "approvedSafetyBlocksStatus": "fire-and-smoke-alarms, mould-and-dampness, home-ventilation: owner-approved 2026-09-23 (Stage 9.52), carried here 2026-10-05. carbon-monoxide, solid-fuel-heating: owner-approved 2026-09-22 (Stage 9.19). indoor-combustion was carried at Stage 9.53 and REMOVED by owner ruling 2 (Stage 9.54).",
-      "safetyReasoning": "The audit asks about alarms, mould, ventilation, a wood burner and carbon monoxide, and rows 1, 6, 7 and 10 give instructions rather than labels, so no hazard-identification exemption could hold. All five blocks are carried deliberately in this file rather than relied on from the detectors: the source's fire mentions (in the audit's extracted text) require fire-and-emergency, which fire-and-smoke-alarms answers, and solid-fuel-heating is required too, but carbon-monoxide has no topic detector at all. indoor-combustion is NOT carried (owner ruling 2, Stage 9.54): the audit has no row about bringing an outdoor appliance inside, carbon-monoxide already covers the risk row 2 asks about, and that block's unflued-LPG paragraph would put gas wording in an Air resource before the gas research stage. The global indoor-combustion block and detector are unchanged — this is a resource-level selection only. The OG-02 fire exemption is not referenced and not stretched."
+      "safetyReasoning": "The audit asks about alarms, mould, ventilation, a wood burner and carbon monoxide, and rows 1, 6, 7 and 10 give instructions rather than labels, so no hazard-identification exemption could hold. All five blocks are carried deliberately in this file rather than relied on from the detectors: the source's fire mentions (in the audit's extracted text) require fire-and-emergency, which fire-and-smoke-alarms answers, and solid-fuel-heating is required too, but carbon-monoxide has no topic detector at all. indoor-combustion is NOT carried (owner ruling 2, Stage 9.54): the audit has no row about bringing an outdoor appliance inside, carbon-monoxide already covers the risk row 2 asks about, and that block's unflued-LPG paragraph would put gas wording in an Air resource before the gas research stage. The global indoor-combustion block and detector are unchanged — this is a resource-level selection only. The OG-02 fire exemption is not referenced and not stretched.",
+      "programComponent": "resilience-planning",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "air — indoor air quality, damp, mould, ventilation and smoke alarms",
+        "programComponent": "resilience-planning — a household assessment that finds problems and sets priorities (owner ruling)",
+        "resilienceRole": "lets a household score the things that decide the air it breathes, room by room, and fix the three that score worst",
+        "guidanceKind": "resilience planning (a household audit) — not emergency guidance, although the smoke alarm and carbon monoxide safety notes it carries are standing safety blocks",
+        "wordingMatchesRole": "yes — a scoring scale, a room-by-room audit, a score and the top three actions"
+      }
     },
     "OG-17": {
       "title": "Solid Fuel Heating Planner",
@@ -829,7 +1009,16 @@
       "difficultyBasis": "OWNER-APPROVED / INFERRED",
       "timeBasis": "OWNER-APPROVED / INFERRED",
       "recordStatusNote": "owner-approved 2026-10-06 (Stage 9.60): draft, as every real resource is.",
-      "gasRuling": "OWNER RULING 2026-10-06 (Stage 9.60): the two legacy narrative gas sentences stay REMOVED and must not be restored. OG-17 carries no member-facing gas wording of its own. The only gas words in the finished files come from the approved carbon-monoxide block and the standing disclaimer sentence, both owner-approved since Stage 9.19. No Gas/LPG block is required and no gas exemption exists."
+      "gasRuling": "OWNER RULING 2026-10-06 (Stage 9.60): the two legacy narrative gas sentences stay REMOVED and must not be restored. OG-17 carries no member-facing gas wording of its own. The only gas words in the finished files come from the approved carbon-monoxide block and the standing disclaimer sentence, both owner-approved since Stage 9.19. No Gas/LPG block is required and no gas exemption exists.",
+      "programComponent": "off-grid-living",
+      "programComponentStatus": "OWNER RULING 2026-10-07 (Stage 9.73). Foundation, category and type kept as they are live.",
+      "programAlignment": {
+        "foundation": "shelter — heating the home with solid fuel",
+        "programComponent": "off-grid-living — off-grid heating and fuel systems (owner ruling)",
+        "resilienceRole": "helps a household compare solid fuel heating options, plan the one it chooses and keep it safe, so heating does not depend on mains electricity or gas",
+        "guidanceKind": "off-grid heating planning with safety checks (flue, fuel storage) — not emergency guidance and not a whole-system design",
+        "wordingMatchesRole": "yes — an option comparison, a plan, a chimney and flue checklist and a fuel storage plan, with the approval and installation questions put to the local authority"
+      }
     },
     "OG-B09": {
       "title": "Resilient Heating & Insulation Upgrade Checklist",

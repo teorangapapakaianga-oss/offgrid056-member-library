@@ -38,9 +38,17 @@
     "OG-26": "planning-implementation",
     "OG-03": "planning-implementation",
     "OG-B12": "advanced-future",
-    "OG-B07": "advanced-future"
+    "OG-B07": "advanced-future",
+    "OG-08": "off-grid-living",
+    "OG-17": "off-grid-living",
+    "OG-19": "off-grid-living",
+    "OG-11": "resilience-emergency",
+    "OG-13": "resilience-planning",
+    "OG-21": "planning-implementation",
+    "OG-22": "resilience-planning",
+    "OG-B10": "planning-implementation"
   },
-  "classificationsDecidedNote": "OG-03 (Budget Pathway Selector): its primary output is matching a household budget to an action pathway, so the budgeting rule gives planning-implementation. Its legacy text is tied to programme tiers and prices, which the migration will have to remove. These are recorded decisions only: no live resource record has been changed.",
+  "classificationsDecidedNote": "OG-03 (Budget Pathway Selector): its primary output is matching a household budget to an action pathway, so the budgeting rule gives planning-implementation. Its legacy text is tied to programme tiers and prices, which the migration will have to remove. These are recorded decisions only: no live resource record has been changed. Stage 9.73 (owner, 2026-10-07): OG-08, OG-17, OG-19 off-grid-living; OG-11 resilience-emergency; OG-13 and OG-22 resilience-planning; OG-21 and OG-B10 planning-implementation. advanced-future is reserved for integrated whole-property architecture, advanced multi-system design, specialist system architecture and later-stage property/system integration; difficulty or an 'Advanced' label never makes a resource advanced-future — the primary output controls.",
   "scheduledMigration": {
     "id": "classify-the-21-live-resources",
     "when": "the next normal deployment (any deploy that is already happening for another reason)",
@@ -49,9 +57,12 @@
       "Add programComponent to each live record; run the full library regression (21/21 ready, 42/42 files, Bucket C 0, all tests).",
       "Only once EVERY live resource has valid component metadata, empty deployedBeforeClassification — not before."
     ],
-    "status": "NOT STARTED — scheduled, not performed. deployedBeforeClassification stays as the explicit temporary exemption until the last step."
+    "status": "PREPARED in Stage 9.73 (metadata and records applied in staging; every one of the 21 complete, schema-valid, all five alignment answers present, exemption emptied). NOT DEPLOYED: it deploys with the combined release. Until that deployment the live Worker still serves the unclassified records."
   },
-  "deployedBeforeClassification": [
+  "deployedBeforeClassification": [],
+  "deployedBeforeClassificationNote": "EMPTIED in Stage 9.73, only after all 21 records had a valid component, all five alignment answers, and passed schema validation. Every resource now needs a component and the five answers before it can be ready. `deployedBeforeClassificationWas` keeps the original 21 codes as history; it is not read by any gate.",
+  "advancedFutureRule": "Stage 9.73 owner ruling: advanced-future is reserved for resources whose PRIMARY role is integrated whole-property architecture, advanced multi-system design, specialist system architecture or later-stage property/system integration. Do not classify a resource as advanced-future merely because it is difficult or labelled Advanced. Primary output still controls: an advanced implementation roadmap remains planning-implementation.",
+  "deployedBeforeClassificationWas": [
     "OG-26",
     "OG-11",
     "OG-B10",
@@ -73,6 +84,5 @@
     "OG-B08",
     "OG-13",
     "OG-17"
-  ],
-  "deployedBeforeClassificationNote": "The 21 resources live in the private preview before the component model existed. They are not blocked for lacking a component; classifying them is a separate owner decision (see the Stage 9.64B recommendation). Any resource NOT in this list must be classified before it can be ready."
+  ]
 }

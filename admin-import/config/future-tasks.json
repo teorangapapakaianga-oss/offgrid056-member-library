@@ -24,7 +24,7 @@
       "id": "shared-cover-cleanup",
       "recordedOn": "2026-10-06",
       "recordedIn": "Stage 9.70 (owner ruling)",
-      "status": "NOT STARTED — scheduled for the next normal deployment, bundled with classify-the-21-live-resources",
+      "status": "STAGED in Stage 9.73 — 40 candidate PDFs validated and staged in private-assets; NOT DEPLOYED. Deploys with the combined release.",
       "title": "Shared cover cleanup",
       "problem": "The shared cover CSS gave the cover image a blurred box-shadow that Chrome prints as a solid dark panel (Stage 9.69A). Stage 9.69A fixed the shared pipeline (fixCoverImageShadow in prep). The 20 live protected PDFs that use the cover were rendered before the fix and still carry the panel; they are deliberately NOT regenerated or redeployed yet.",
       "scope": [
@@ -37,7 +37,19 @@
       "constraints": [
         "Do not touch the deployed copies before that release.",
         "No wording changes: layout-only regeneration; every regenerated PDF must match its current text page by page."
-      ]
+      ],
+      "stage973Result": "28 of 40 were regenerated in full and are identical to the deployed PDFs on every page after the cover. 12 (OG-19 AU, OG-20 NZ, OG-21 NZ+AU, OG-B07 NZ+AU, OG-22 NZ+AU, OG-25 NZ+AU, OG-26 NZ, OG-27 NZ) re-flowed page breaks under the newer Chrome (154, installed 2026-10-01; the deployed files were rendered 2026-09-22) with word-for-word identical text, OG-B07 even gaining a page, so those 12 are built as the new cover page + the DEPLOYED pages 2..N (workspace/splice-cover.py), keeping the original title metadata."
+    },
+    {
+      "id": "demo-protected-route-separation",
+      "recordedOn": "2026-10-07",
+      "recordedIn": "Stage 9.73 (owner ruling)",
+      "status": "IMPLEMENTED and STAGED in Stage 9.73 — NOT DEPLOYED. Deploys with the combined release.",
+      "title": "Demo / protected route separation",
+      "problem": "Deploying the real OG-01 silently replaced the demo placeholder res-0007 on the same route and re-pointed programme days 2 and 29 and the demo Household Resilience Assessment at protected content (found Stage 9.72). Not owner-approved.",
+      "rule": "DEMO CONTENT AND PROTECTED MEMBER CONTENT MUST REMAIN EXPLICITLY SEPARATED. A real protected resource must not silently replace demo content merely because both use the same route.",
+      "implementation": "lib/content/route-policy.json lists every owner-approved resolution of a route clash. 'supersedes' keeps the three resolved-and-live supersessions (OG-08, OG-10, OG-13) and names the one real id each may replace. 'separateDemo' keeps the demo placeholder as a placeholder on /resources/demo-<slug>/ and aliases nothing (res-0007 → res-1001). Any clash not listed stops the build. Tests: tests/unit/route-separation.test.ts.",
+      "ownerToReconfirm": "the three grandfathered supersessions (OG-08, OG-10, OG-13)"
     }
   ]
 }

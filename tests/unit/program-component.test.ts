@@ -92,11 +92,13 @@ describe("Stage 9.64B · programme alignment is required before a new resource c
     expect(prep({ programComponentRequired: false }).importReadiness).toBe("READY_AFTER_FINAL_VALIDATION");
   });
 
-  it("names the 21 already-live resources explicitly, and OG-B09 is not one of them", () => {
-    expect(config.deployedBeforeClassification).toHaveLength(21);
-    expect(new Set(config.deployedBeforeClassification).size).toBe(21);
-    expect(config.deployedBeforeClassification).toContain("OG-17");
-    expect(config.deployedBeforeClassification).not.toContain("OG-B09");
+  it("Stage 9.73: the exemption is empty (every resource needs a component); the 21 original codes are kept as history, and OG-B09 was never one of them", () => {
+    const history = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/program-components.json"), "utf8")) as { deployedBeforeClassificationWas: string[] }).deployedBeforeClassificationWas;
+    expect(config.deployedBeforeClassification).toEqual([]);
+    expect(history).toHaveLength(21);
+    expect(new Set(history).size).toBe(21);
+    expect(history).toContain("OG-17");
+    expect(history).not.toContain("OG-B09");
   });
 });
 
@@ -121,19 +123,20 @@ describe("Stage 9.65 · the overlap rulings, and the scheduled migration of the 
     expect(full.rulings.systemArchitecture).toMatch(/NOT moved to advanced-future merely because it is technical/);
     expect(full.classificationsDecided["OG-B12"]).toBe("advanced-future");
     expect(full.classificationsDecided["OG-B07"]).toBe("advanced-future");
-    for (const basic of ["OG-18", "OG-19", "OG-20", "OG-B08", "OG-10"]) expect(full.classificationsDecided[basic], `${basic} is not decided as advanced-future`).toBeUndefined();
+    for (const basic of ["OG-18", "OG-19", "OG-20", "OG-B08", "OG-10"]) expect(full.classificationsDecided[basic], `${basic} is not decided as advanced-future`).not.toBe("advanced-future");
   });
 
   it("every decided value is a real component", () => {
     for (const [code, value] of Object.entries(full.classificationsDecided)) expect([...PROGRAM_COMPONENTS], code).toContain(value);
   });
 
-  it("schedules the live-resource classification for the next normal deployment, and keeps the exemption until then", () => {
+  it("Stage 9.73: the live-resource classification is prepared (not deployed) and the exemption was emptied only after every resource was complete", () => {
     expect(full.scheduledMigration.id).toBe("classify-the-21-live-resources");
-    expect(full.scheduledMigration.status).toMatch(/NOT STARTED/);
+    expect(full.scheduledMigration.status).toMatch(/PREPARED/);
+    expect(full.scheduledMigration.status).toMatch(/NOT DEPLOYED/);
     expect(full.scheduledMigration.steps.join(" ")).toMatch(/regression/);
     expect(full.scheduledMigration.steps.join(" ")).toMatch(/not before/);
-    expect(full.deployedBeforeClassification, "the exemption is NOT removed early").toHaveLength(21);
+    expect(full.deployedBeforeClassification).toEqual([]);
   });
 });
 

@@ -21,14 +21,35 @@ export interface RoutedResource {
 
 export class RouteCollisionError extends Error {}
 
+/**
+ * Stage 9.73 (owner ruling): demo content and protected member content stay explicitly separated. A real resource never
+ * replaces a placeholder merely because both want the same route. Every clash needs an explicit, owner-approved entry:
+ *
+ * - `supersedes`: placeholder id → the one real id that may replace it (the Stage 9.38/9.39 behaviour, kept only for the
+ *   clashes already resolved and live). The placeholder is dropped and its references follow the real resource.
+ * - `separateDemo`: placeholder id → the real id it clashes with. The real resource keeps the route; the placeholder
+ *   stays a placeholder on a `demo-` route of its own, and nothing that references it is redirected.
+ *
+ * A clash with no entry (or an entry naming a different real id) is an error, so the build stops rather than choosing.
+ */
+export interface RoutePolicy {
+  supersedes: Record<string, string>;
+  separateDemo: Record<string, string>;
+}
+
+/** The route a separated demo placeholder lives on, so it can never share an address with a real resource. */
+export const demoSlug = (slug: string) => `demo-${slug}`;
+
 export function resolveRouteCollisions<T extends RoutedResource>(
   resources: T[],
-  options: { preview: boolean },
+  options: { preview: boolean; policy?: RoutePolicy },
 ): { resources: T[]; aliases: Map<string, string> } {
+  const policy: RoutePolicy = options.policy ?? { supersedes: {}, separateDemo: {} };
   const bySlug = new Map<string, T[]>();
   for (const r of resources) bySlug.set(r.slug, [...(bySlug.get(r.slug) ?? []), r]);
 
   const dropped = new Set<T>();
+  const renamed = new Map<T, string>();
   const aliases = new Map<string, string>();
   for (const [slug, group] of bySlug) {
     if (group.length < 2) continue;
@@ -40,11 +61,25 @@ export function resolveRouteCollisions<T extends RoutedResource>(
     if (!options.preview)
       throw new RouteCollisionError(`route /resources/${slug}/ is claimed by a real resource and a placeholder (${ids}) outside the private preview`);
     for (const p of placeholders) {
-      dropped.add(p);
-      aliases.set(p.id, real[0].id);
+      if (policy.supersedes[p.id] === real[0].id) {
+        dropped.add(p);
+        aliases.set(p.id, real[0].id);
+      } else if (policy.separateDemo[p.id] === real[0].id) {
+        renamed.set(p, demoSlug(p.slug));
+      } else {
+        throw new RouteCollisionError(
+          `route /resources/${slug}/ is claimed by the real resource ${real[0].id} and the placeholder ${p.id}, and no owner-approved resolution is recorded for that pair (lib/content/route-policy.json). A real resource does not replace demo content by default.`,
+        );
+      }
     }
   }
-  return { resources: resources.filter((r) => !dropped.has(r)), aliases };
+  const kept = resources.filter((r) => !dropped.has(r)).map((r) => (renamed.has(r) ? { ...r, slug: renamed.get(r)! } : r));
+  const slugs = new Set<string>();
+  for (const r of kept) {
+    if (slugs.has(r.slug)) throw new RouteCollisionError(`route /resources/${r.slug}/ is still claimed more than once after separating demo content`);
+    slugs.add(r.slug);
+  }
+  return { resources: kept, aliases };
 }
 
 /** The id to use for a reference, after supersession. */

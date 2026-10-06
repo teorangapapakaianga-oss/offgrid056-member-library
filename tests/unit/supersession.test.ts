@@ -11,10 +11,12 @@ import { loadAllResourceFiles, loadLearningPaths } from "@/lib/content/repositor
 const placeholder = { id: "res-0015", slug: "water-storage-calculator", isPlaceholder: true, title: "demo" };
 const real = { id: "res-1008", slug: "water-storage-calculator", isPlaceholder: false, title: "real" };
 const other = { id: "res-0014", slug: "water-security-guide", isPlaceholder: true, title: "other" };
+// Stage 9.73: a replacement happens only where the owner has recorded it (lib/content/route-policy.json).
+const POLICY = { supersedes: { "res-0015": "res-1008", "res-0016": "res-1010" }, separateDemo: {} };
 
 describe("route supersession", () => {
   it("lets a real resource replace a demo placeholder in the private preview, and points its id at the real one", () => {
-    const { resources, aliases } = resolveRouteCollisions([placeholder, other, real], { preview: true });
+    const { resources, aliases } = resolveRouteCollisions([placeholder, other, real], { preview: true, policy: POLICY });
     expect(resources.map((r) => r.id)).toEqual(["res-0014", "res-1008"]);
     expect(resources.filter((r) => r.slug === "water-storage-calculator")).toHaveLength(1);
     expect(aliasOf(aliases)("res-0015")).toBe("res-1008");
@@ -22,7 +24,7 @@ describe("route supersession", () => {
   });
 
   it("does not depend on file order", () => {
-    expect(resolveRouteCollisions([real, placeholder], { preview: true }).resources.map((r) => r.id)).toEqual(["res-1008"]);
+    expect(resolveRouteCollisions([real, placeholder], { preview: true, policy: POLICY }).resources.map((r) => r.id)).toEqual(["res-1008"]);
   });
 
   it("stops any build that is not the private preview", () => {
@@ -50,7 +52,7 @@ describe("route supersession", () => {
     // OG-10's record shape, against the demo placeholder it will supersede.
     const og10 = { id: "res-1010", slug: "rainwater-harvesting-planner", isPlaceholder: false };
     const demo = { id: "res-0016", slug: "rainwater-harvesting-planner", isPlaceholder: true };
-    const { resources, aliases } = resolveRouteCollisions([demo, og10, placeholder], { preview: true });
+    const { resources, aliases } = resolveRouteCollisions([demo, og10, placeholder], { preview: true, policy: POLICY });
     expect(resources.map((r) => r.id)).toEqual(["res-1010", "res-0015"]);
     expect(aliasOf(aliases)("res-0016")).toBe("res-1010");
     expect(() => resolveRouteCollisions([demo, og10], { preview: false })).toThrow(/outside the private preview/);
