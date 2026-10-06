@@ -161,3 +161,8 @@ Owner approves rendering OG-B09; then protected resource #22 and deploy. Settle 
 
 Next migration target recommended: OG-01 Home Resilience Scorecard (claims-first audit first). Next normal deployment: classify-the-21-live-resources.
 
+
+## After Stage 9.67
+
+Owner rules on the OG-01 decisions (foundation/category, water and food figures, scale, Part A/B, safety blocks, detector rule vs OG-11). Then OG-01 config + render. classify-the-21-live-resources still scheduled for the next normal deployment.
+

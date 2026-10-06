@@ -136,3 +136,8 @@ OG-B09 PDFs (NZ + AU, 8 pages each, comparison on its own landscape section) ren
 
 Worker db2fd12a-955e-47c4-b3c9-d174e3da85d8; rollback fa23ec74-85d2-4d91-b484-3f037ccbe38b retained. 22 protected resources, 44 market files, 637 tests, Bucket C 0. Status draft behind Access; public/demo untouched. classify-the-21-live-resources still scheduled for the next normal deployment. Report: admin-import/STAGE_9.66_OGB09_DEPLOYED.md.
 
+
+## Stage 9.67 (6 October 2026) - OG-01 Home Resilience Scorecard: claims-first audit (no migration)
+
+Audit complete; 644 tests; 22/22, 44/44, Bucket C 0. Numeric scanner now reads 'N+ unit'. Owner decisions pending (STAGE_9.67 section 13). Report: admin-import/STAGE_9.67_OG01_AUDIT.md.
+

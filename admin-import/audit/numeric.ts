@@ -275,7 +275,7 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
     // The unit ends the match, so the boundary is "not followed by another letter or digit" rather than \b — a
     // trailing \b after "%" would never fire, which is how "90%" went undetected.
     const re = new RegExp(
-      `\\b(?:\\d[\\d,]*(?:\\.\\d+)?(?:\\s?[–-]\\s?\\d[\\d,]*(?:\\.\\d+)?)?\\s?-?\\s?${pattern}|${NUMBER}[\\s-]+${pattern})(?![A-Za-z0-9])`,
+      `\\b(?:\\d[\\d,]*(?:\\.\\d+)?(?:\\s?[–-]\\s?\\d[\\d,]*(?:\\.\\d+)?)?\\+?\\s?-?\\s?${pattern}|${NUMBER}[\\s-]+${pattern})(?![A-Za-z0-9])`,
       "gi",
     );
     for (const m of sentence.matchAll(re)) {
