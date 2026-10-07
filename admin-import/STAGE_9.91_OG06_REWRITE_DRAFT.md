@@ -2,7 +2,7 @@
 
 **Date:** 8 October 2026 · **Draft copy, metadata and detector only. NOT rendered (no PDF), NOT staged in `private-assets/`, NOT deployed; no res-ID assigned; no live resource, register or count changed.** Live baseline: 25 protected resources · 50 market files · 0 broken links · Bucket C 0 · Worker `2fb0663d-a7da-4acf-ba4c-957886b21631` (100%), rollback `65437c37-b731-4851-b67e-5b0fae79fe12`. Migration states unchanged (25 / 0 / 0 / 1 / 1 / 18 = 45; OG-16 blocked, OG-05 merged / no standalone). The Stage 9.89 tooling decisions are intact.
 
-The draft lives in `admin-import/config/approved-copy.json` and `metadata-review.json` (entry `OG-06`), with the component recorded in `program-components.json` (`OG-06: resilience-emergency`), and as an HTML preview in the git-ignored `workspace/prep/OG-06/` (prepared READY in both markets; no PDF). The prep report shows the internal proposal `res-1006`; that is a prep-report label only. No record, config entry or file assigns it.
+The draft lives in `admin-import/config/approved-copy.json` and `metadata-review.json` (entry `OG-06`), with the component recorded in `program-components.json` (`OG-06: resilience-emergency`), and as an HTML preview in the git-ignored `workspace/prep/OG-06/` (prepared READY in both markets; no PDF). The git-ignored prep report carries a temporary internal proposal label; it is a prep-report label only. No record, config entry or file assigns a resource ID.
 
 ## 1 · The complete rewritten copy (identical in NZ and AU; only the two standing blocks differ by market)
 

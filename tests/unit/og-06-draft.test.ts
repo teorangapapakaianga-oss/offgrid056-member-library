@@ -29,10 +29,23 @@ describe("Stage 9.91 · OG-06 locked metadata", () => {
     expect(COLLECTION_IDS).toEqual(["start-here", "planning-tools"]); // no collection, no new collection, no new category
   });
 
-  it("has the owner's description, marked for review, with no '72-hour' wording", () => {
+  it("has the owner-approved description (Stage 9.92), with no '72-hour' wording", () => {
     expect(meta.description).toBe("A practical checklist to help households identify the basic emergency items they already have, where important supplies are kept and what still needs to be organised before a disruption.");
-    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-REVIEW REQUIRED/);
+    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-08 \(Stage 9\.92\)/);
     expect(String(meta.description)).not.toMatch(/72/);
+  });
+
+  it("records the owner's Stage 9.92 approvals: checklist, location fields, related list (no res-1015), cover and safety dispositions", () => {
+    for (const k of ["checklistStatus", "locationFieldsStatus", "coverStatus", "relatedResourcesStatus", "approvedSafetyBlocksStatus"]) expect(String(meta[k]), k).toMatch(/9\.92/);
+    expect(meta.relatedResources).not.toContain("res-1015");
+    for (const d of Object.values(meta.safetyTopicDispositions as Record<string, { disposition: string; approvedBy?: string; approvedOn?: string }>)) expect(d).toMatchObject({ disposition: "REMOVED", approvedBy: "owner", approvedOn: "2026-10-08" });
+  });
+
+  it("assigns no res-ID anywhere that could be public or staged: the temporary prep label is not in any config, record or tracked source", () => {
+    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1006");
+    expect(allNew).not.toContain("res-1006");
+    const dir = path.join(root, "private-assets/data-resources");
+    if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) expect(fs.readFileSync(path.join(dir, f), "utf8"), f).not.toContain("res-1006");
   });
 
   it("answers all five programme-alignment questions", () => {
