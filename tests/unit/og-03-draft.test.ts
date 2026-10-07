@@ -116,3 +116,26 @@ describe("Stage 9.76A · owner rulings on the OG-03 draft", () => {
     expect(meta.description).toBe("A practical worksheet to help households understand what they can realistically allocate toward resilience and off-grid improvements while protecting essential household needs.");
   });
 });
+describe("Stage 9.77 · the one approved wording refinement, and nothing else", () => {
+  it("the savings helper text is the owner's final wording, and the old wording is gone", () => {
+    expect(newText).toContain("Savings you have chosen to make available for resilience projects. Keep any savings you want to protect for other purposes separate.");
+    expect(newText).not.toMatch(/Savings you could use for resilience|retirement savings|money you keep for emergencies/);
+  });
+
+  it("the other four field helpers are unchanged", () => {
+    for (const h of [
+      "The money that comes in each month, after tax, from all sources. Think of a typical month.",
+      "What you must pay each month: housing, food, power, water, transport, insurance, health costs and anything else you cannot do without.",
+      "Regular repayments and other commitments, such as loans, credit cards or hire purchase.",
+      "After essentials, commitments and your safety buffer, what could you put toward resilience now without strain? It can be zero.",
+    ]) expect(newText).toContain(h);
+  });
+
+  it("layout only: every fill-in section is kept whole and each major section starts a page", () => {
+    for (const marker of ["Step 1: Take a Financial Snapshot", "Step 2: Work Out Your Available Capacity", "If it helps", "Step 3: Choose a Realistic Spending Position", "Your Spending Capacity Decision", "Where Next"]) {
+      const at = content.to.indexOf(marker);
+      expect(at, marker).toBeGreaterThan(-1);
+      expect(content.to.lastIndexOf('class="keep-together page-start"', at), marker).toBeGreaterThan(content.to.lastIndexOf('class="keep-together">', at));
+    }
+  });
+});

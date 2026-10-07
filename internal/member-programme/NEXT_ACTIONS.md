@@ -2,9 +2,11 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.76A.
+**As at:** 7 October 2026, after Stage 9.77.
 
-> **Stage 9.76A note.** The owner's rulings are applied to the OG-03 draft (labels approved; one financial note; soft cost claim and "less secure" wording removed; Advanced roadmap kept as a later-stage option; owner's description). The COMPLETE member-facing copy is in `admin-import/STAGE_9.76A_OG03_COPY_REVIEW_PACK.md` (self-contained). 733 tests; price claims 0; Bucket C 0; not rendered, staged or deployed. **Waiting on the owner:** copy approval (and confirmation of the description). Then: render NZ + AU PDFs and QA (separate stage).
+> **Stage 9.77 note.** OG-03 Household Spending Capacity Check is RENDERED: NZ and AU PDFs, 9 portrait pages each, with the one approved wording change (the savings helper text) and nothing else changed in the copy (`admin-import/STAGE_9.77_OG03_RENDER.md`). Every page inspected; scans and PDF text/metadata verification pass; 736 tests; Bucket C 0. The PDFs are in the git-ignored `workspace/prep/OG-03/`; **not staged, not deployed**, nothing in `private-assets/`. **Waiting on the owner:** approval to stage OG-03 as protected resource #24 (`res-1003`); deployment is a separate decision.
+>
+> **Stage 9.76A note (earlier).** The owner's rulings are applied to the OG-03 draft (labels approved; one financial note; soft cost claim and "less secure" wording removed; Advanced roadmap kept as a later-stage option; owner's description). The COMPLETE member-facing copy is in `admin-import/STAGE_9.76A_OG03_COPY_REVIEW_PACK.md` (self-contained). 733 tests; price claims 0; Bucket C 0; not rendered, staged or deployed. **Waiting on the owner:** copy approval (and confirmation of the description). Then: render NZ + AU PDFs and QA (separate stage).
 >
 > **Stage 9.76 note (earlier).** OG-03 is narrowed (owner ruling) and its rewrite DRAFT is prepared as **Household Spending Capacity Check** (`admin-import/STAGE_9.76_OG03_REWRITE_DRAFT.md`): full copy and metadata, 0 prices, Bucket C 0, market-neutral, no topic safety block, reading grade 7.3, 727 tests; NOT rendered, NOT staged, NOT deployed. **Waiting on the owner:** approval of the copy and the eight items in section 15 of that report (notably the three refined position labels, the description and the financial note). Then render NZ + AU PDFs and QA; staging as protected resource #24 and deployment are separate decisions.
 >
