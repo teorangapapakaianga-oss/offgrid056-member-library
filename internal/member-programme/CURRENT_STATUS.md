@@ -1,6 +1,6 @@
 # Current status
 
-**As at:** 7 October 2026, after **Stage 9.76** (OG-03 narrowed; rewrite draft "Household Spending Capacity Check" prepared for owner review: not rendered, staged or deployed; live baseline unchanged; 727 tests; report `admin-import/STAGE_9.76_OG03_REWRITE_DRAFT.md`), **Stage 9.75** (OG-03 claims-first audit only: nothing migrated, rendered or deployed; live baseline unchanged; 715 tests; report `admin-import/STAGE_9.75_OG03_AUDIT.md`) and **Stage 9.74** (the combined library cleanup is **DEPLOYED**). Report: `admin-import/STAGE_9.74_COMBINED_RELEASE_DEPLOYED.md`. Rows marked **9.74** are current; the rows below the line are older snapshots kept for history.
+**As at:** 7 October 2026, after **Stage 9.76A** (owner rulings applied to the OG-03 draft; complete copy pack `admin-import/STAGE_9.76A_OG03_COPY_REVIEW_PACK.md`; 733 tests; not rendered, staged or deployed), **Stage 9.76** (OG-03 narrowed; rewrite draft "Household Spending Capacity Check" prepared for owner review: not rendered, staged or deployed; live baseline unchanged; 727 tests; report `admin-import/STAGE_9.76_OG03_REWRITE_DRAFT.md`), **Stage 9.75** (OG-03 claims-first audit only: nothing migrated, rendered or deployed; live baseline unchanged; 715 tests; report `admin-import/STAGE_9.75_OG03_AUDIT.md`) and **Stage 9.74** (the combined library cleanup is **DEPLOYED**). Report: `admin-import/STAGE_9.74_COMBINED_RELEASE_DEPLOYED.md`. Rows marked **9.74** are current; the rows below the line are older snapshots kept for history.
 
 | | |
 |---|---|

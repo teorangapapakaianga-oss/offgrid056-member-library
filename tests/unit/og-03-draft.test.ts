@@ -82,3 +82,37 @@ describe("Stage 9.76 · OG-03 draft copy: no legacy commercial material survives
     expect(digits.every((d) => ["056", "1", "2", "3", "4", "5", "90"].includes(d)), digits.join(",")).toBe(true);
   });
 });
+
+describe("Stage 9.76A · owner rulings on the OG-03 draft", () => {
+  it("the soft cost claim is gone and no cost claim replaces it", () => {
+    expect(newText).not.toMatch(/many early steps|cost(s)? little or nothing|\b(free|cheap|inexpensive|low[- ]cost)\b/i);
+  });
+
+  it("the security statement is a planning principle, with no 'less secure' wording and no guarantee", () => {
+    expect(newText).toContain("Protect essential household needs first when deciding what you can allocate.");
+    expect(newText).not.toMatch(/less secure|more secure|guarantee(d)? (financial )?security/i);
+  });
+
+  it("states the positions are planning positions, not levels, ratings or financial assessments, and keeps the approved labels without 'Capacity'", () => {
+    expect(newText).toContain("These are planning positions, not levels, ratings or financial assessments.");
+    for (const l of ["Protect Essentials First", "Small Steps", "Planned Upgrades", "A Larger Project"]) expect(newText).toContain(l);
+    expect(newText).not.toMatch(/(Small Step|Planned Upgrade|Larger Project) Capacity/);
+  });
+
+  it("carries the financial note once, in the owner's exact words", () => {
+    expect((newText.match(/This worksheet is for personal planning only and is not financial advice\./g) ?? []).length).toBe(1);
+    expect((newText.match(/financial advice/g) ?? []).length).toBe(1);
+  });
+
+  it("Where Next runs Scorecard, Risk Identifier, Wishlist, then 3-Tier Budget Planner → 90-Day Roadmap → Project Support Brief → Advanced 90-Day Roadmap, the last labelled a later-stage option", () => {
+    const next = newText.slice(newText.indexOf("Where Next"));
+    const order = ["Home Resilience Scorecard", "Household Risk Identifier", "Resilience Product Wishlist", "3-Tier Budget Planner", "90-Day Implementation Roadmap", "Project Support Brief Template", "90-Day Implementation Roadmap (Advanced)"].map((n) => next.indexOf(n));
+    expect(order.every((p, i) => p >= 0 && (i === 0 || p > order[i - 1])), order.join(",")).toBe(true);
+    expect(next).toContain("Later, for a larger plan");
+    expect(next).toContain("The last row is a later-stage option, not your next step.");
+  });
+
+  it("uses the owner's exact description", () => {
+    expect(meta.description).toBe("A practical worksheet to help households understand what they can realistically allocate toward resilience and off-grid improvements while protecting essential household needs.");
+  });
+});
