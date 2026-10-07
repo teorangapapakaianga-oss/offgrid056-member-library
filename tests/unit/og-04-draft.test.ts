@@ -129,6 +129,15 @@ describe("Stage 9.81 · OG-04 draft copy: the owner's structure", () => {
     expect(next).toContain("later-stage options, not your next step");
   });
 
+  it("carries a continuation heading above the last two Step 4 fields, which keep their writing space", () => {
+    const tail = content.to.slice(content.to.indexOf("Step 4 — Your Property Rules (continued)"));
+    expect(tail.startsWith("Step 4 — Your Property Rules (continued)")).toBe(true);
+    expect(tail.indexOf("The first thing I will check, and who I will ask")).toBeGreaterThan(0);
+    expect(tail.indexOf("Notes")).toBeGreaterThan(tail.indexOf("The first thing"));
+    expect((tail.slice(tail.indexOf("The first thing"), tail.indexOf("Notes")).match(/worksheet-line/g) ?? []).length).toBe(2);
+    expect((tail.slice(tail.indexOf("Notes")).match(/worksheet-line/g) ?? []).length).toBeGreaterThanOrEqual(3);
+  });
+
   it("connects the property situation to resilience planning, off-grid plans, independence and checking before spending or building", () => {
     for (const s of ["resilience plan", "off-grid plans", "independence", "before you spend or build"]) expect(newText, s).toContain(s);
   });
