@@ -2,9 +2,11 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.82A.
+**As at:** 7 October 2026, after Stage 9.83.
 
-> **Stage 9.82A note.** OG-04 page 7 now opens with the heading "Step 4 — Your Property Rules (continued)"; both PDFs re-rendered (9 portrait pages each); 769 tests; Bucket C 0; NOT staged or deployed. **Waiting on the owner:** approval of the PDFs to stage as protected resource #25. Report: `admin-import/STAGE_9.82A_OG04_PAGE7_FIX.md`.
+> **Stage 9.83 note.** OG-04 Property Type Review is STAGED (not deployed) as protected resource #25: record and the two approved PDFs (full SHA-256 in the report) in `private-assets/`; staged build 25 / 50 / 0 broken links / Bucket C 0; 774 tests; Planning Tools would list 8. Live is unchanged at 24 / 48 on Worker `89333107-7c0a-4bdb-8229-f2b5241a9e05`, rollback `e63141a1-380a-4770-a125-9fd7a15d0bdb`. **Waiting on the owner:** explicit approval to deploy OG-04. Report: `admin-import/STAGE_9.83_OG04_STAGED.md`.
+>
+> **Stage 9.82A note (earlier).** OG-04 page 7 now opens with the heading "Step 4 — Your Property Rules (continued)"; both PDFs re-rendered (9 portrait pages each); 769 tests; Bucket C 0; NOT staged or deployed. **Waiting on the owner:** approval of the PDFs to stage as protected resource #25. Report: `admin-import/STAGE_9.82A_OG04_PAGE7_FIX.md`.
 >
 > **Stage 9.82 note (earlier).** OG-04 Property Type Review PDFs rendered (NZ and AU, 9 portrait pages each, title Property Type Review — OffGrid056) in the workspace only; visual and automated QA pass; price claims 0, Bucket C 0; 768 tests; NOT staged or deployed. **Waiting on the owner:** approval of the rendered PDFs (including the page-7 layout) before staging as protected resource #25. Report: `admin-import/STAGE_9.82_OG04_RENDER.md`.
 >

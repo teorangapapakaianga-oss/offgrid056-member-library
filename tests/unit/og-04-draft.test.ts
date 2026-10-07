@@ -59,7 +59,14 @@ describe("Stage 9.81 · OG-04 locked metadata", () => {
     const titles = new Map(recs.map((r) => [r.id, r.title]));
     expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["Home Resilience Scorecard", "Household Risk Identifier", "Resilience Product Wishlist", "Household Spending Capacity Check", "Alternative Energy Suitability Check", "Off-Grid System Architecture Planner"]);
     expect(recs.find((r) => r.legacyCode === "OG-03")!.relatedResources).toEqual(["res-1001", "res-1002", "res-1022", "res-1026", "res-1027", "res-1025"]);
-    expect(recs.some((r) => r.legacyCode === "OG-04")).toBe(false); // not staged
+    // Stage 9.83: OG-04 is staged as res-1004 with exactly these related ids, and not the 3-Tier Budget Planner or the 90-Day Roadmap.
+    const og04 = recs.find((r) => r.legacyCode === "OG-04");
+    if (og04) {
+      expect(og04.id).toBe("res-1004");
+      expect(og04.relatedResources).toEqual(["res-1001", "res-1002", "res-1022", "res-1003", "res-1020", "res-1512"]);
+      expect(og04.relatedResources).not.toContain("res-1026");
+      expect(og04.relatedResources).not.toContain("res-1027");
+    }
   });
 
   it("records the legacy electrical topic as REMOVED (the rewrite teaches nothing on it), and adds no topic block", () => {
