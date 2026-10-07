@@ -125,6 +125,11 @@ export function loadLearningPaths(): LearningPath[] {
  */
 const INCLUDE_DRAFTS = process.env.OG056_INCLUDE_DRAFTS === "1";
 
+/** True only in the private preview build (the one that holds the real, protected resources). */
+export function isPrivatePreview(): boolean {
+  return INCLUDE_DRAFTS;
+}
+
 /** Published resources — plus drafts in a preview build. */
 export function getResources(): Resource[] {
   return loadAllResourceFiles().filter((r) => r.status === "published" || (INCLUDE_DRAFTS && r.status === "draft"));

@@ -30,7 +30,11 @@
         "resilienceRole": "gives a household a monthly cycle of learn, assess, plan and act, with success measures, to keep its progress moving",
         "guidanceKind": "implementation planning (a recurring framework) — not emergency guidance and not system design",
         "wordingMatchesRole": "yes — month and theme, a weekly breakdown, community engagement and success metrics"
-      }
+      },
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-DIRECTED 2026-10-07 (Stage 9.78B): added to the existing planning-tools collection so Planning Tools lists the real planning resources. A listing correction only: Program Component (planning-implementation), copy, PDF, safety blocks and related links are unchanged."
     },
     "OG-B10": {
       "foundation": "general",
@@ -60,7 +64,11 @@
         "resilienceRole": "helps a household run a 90-day plan: phases, milestones, budget burn-down, dependencies and review checkpoints",
         "guidanceKind": "implementation planning and tracking — not emergency guidance and not system architecture",
         "wordingMatchesRole": "yes — programme overview, phase breakdown, budget burn-down tracker, dependency mapping and review checkpoints"
-      }
+      },
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-DIRECTED 2026-10-07 (Stage 9.78B): added to the existing planning-tools collection so Planning Tools lists the real planning resources. A listing correction only: Program Component (planning-implementation), copy, PDF, safety blocks and related links are unchanged."
     },
     "OG-25": {
       "foundation": "general",
@@ -92,7 +100,11 @@
         "resilienceRole": "helps a household brief a contractor, consultant or supplier clearly so a resilience project is quoted and delivered well",
         "guidanceKind": "implementation planning (a template) — not emergency guidance and not system design",
         "wordingMatchesRole": "yes — project overview, resilience context, scope, commercial terms, attachments and evaluation criteria"
-      }
+      },
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-DIRECTED 2026-10-07 (Stage 9.78B): added to the existing planning-tools collection so Planning Tools lists the real planning resources. A listing correction only: Program Component (planning-implementation), copy, PDF, safety blocks and related links are unchanged."
     },
     "OG-27": {
       "foundation": "general",
@@ -144,7 +156,11 @@
         "resilienceRole": "turns a household's plan into phased action with deadlines",
         "guidanceKind": "implementation planning — not emergency guidance and not system design",
         "wordingMatchesRole": "yes — roadmap principles and phased 90-day action with deadlines"
-      }
+      },
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-DIRECTED 2026-10-07 (Stage 9.78B): added to the existing planning-tools collection so Planning Tools lists the real planning resources. A listing correction only: Program Component (planning-implementation), copy, PDF, safety blocks and related links are unchanged."
     },
     "OG-B07": {
       "foundation": "energy",
@@ -354,7 +370,11 @@
         "resilienceRole": "helps a household match what it spends on resilience to what it can afford, in three budget tiers, and record a decision",
         "guidanceKind": "implementation planning (a budget) — not emergency guidance and not system design",
         "wordingMatchesRole": "yes — three budget tiers (essential, balanced, complete), a check on assistance available, and a decision"
-      }
+      },
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-DIRECTED 2026-10-07 (Stage 9.78B): added to the existing planning-tools collection so Planning Tools lists the real planning resources. A listing correction only: Program Component (planning-implementation), copy, PDF, safety blocks and related links are unchanged."
     },
     "OG-22": {
       "foundation": "general",
@@ -390,7 +410,11 @@
         "resilienceRole": "helps a household decide which resilience products and services matter most, from must-have to won't-have-now, and in what order to get them",
         "guidanceKind": "resilience planning (prioritisation) — not emergency guidance and not system design",
         "wordingMatchesRole": "yes — it opens from the household's audit results, uses a must / should / could / won't priority method and a decision criteria checklist, with a budget summary and phasing as supporting parts"
-      }
+      },
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-DIRECTED 2026-10-07 (Stage 9.78B): added to the existing planning-tools collection so Planning Tools lists the real planning resources. A listing correction only: Program Component (resilience-planning), copy, PDF, safety blocks and related links are unchanged."
     },
     "OG-11": {
       "foundation": "food",

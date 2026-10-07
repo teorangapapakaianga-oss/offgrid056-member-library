@@ -2,7 +2,9 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.78A.
+**As at:** 7 October 2026, after Stage 9.78B.
+
+> **Stage 9.78B note.** Planning Tools now lists exactly seven protected resources (OG-03, OG-22, OG-25, OG-26, OG-27, OG-B04, OG-B10) and no demo placeholders (hidden in the private preview only; routes and programme references intact). Staged build 24 records / 48 market files / 0 broken links / Bucket C 0; 750 tests; 0 PDFs changed; NOT deployed. **Waiting on the owner:** explicit approval to deploy OG-03 as protected resource #24. Candidates reported, not added: OG-01 and OG-02 (Start Here assessments), OG-B12 (later-stage planner). Report: `admin-import/STAGE_9.78B_PLANNING_TOOLS_COLLECTION.md`.
 
 > **Stage 9.78A note.** OG-03's navigation is corrected: it is now in the existing `planning-tools` collection, so Planning Tools lists it (it previously listed only four demo placeholders; no protected resource had the collection). No new collection or taxonomy; PDFs, copy, safety blocks, route policy and the six related links unchanged. 739 tests; staged build 24 records / 48 market files / 0 broken links / Bucket C 0; NOT deployed; live is 23 / 46 on Worker `e63141a1…` (`admin-import/STAGE_9.78A_OG03_DISCOVERY.md`). **Waiting on the owner:** (1) approval to deploy OG-03; (2) a decision on tagging the other planning tools (OG-26, OG-27, OG-B10, OG-25, OG-22, OG-B04) with `planning-tools` so the page shows the whole planning journey; (3) whether members need a way to browse by programme component (none exists today).
 >
