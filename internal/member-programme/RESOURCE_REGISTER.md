@@ -2,24 +2,32 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 6 October 2026, after Stage 9.60.
+**As at:** 7 October 2026, after Stage 9.83A.
+
+**LIVE:** 24 protected resources · 48 market files · Worker `89333107-7c0a-4bdb-8229-f2b5241a9e05` (100%) · rollback target `e63141a1-380a-4770-a125-9fd7a15d0bdb`.
+**STAGED, NOT DEPLOYED:** OG-04 Property Type Review (`res-1004`) → 25 protected resources · 50 market files once deployed. Deploying it needs the owner's explicit approval.
+
+The table below counts the 45 legacy resources. Earlier snapshots in this file (for example "21 deployed" at Stage 9.60) are historical and are labelled as such.
 
 | State | Count |
 |---|---|
-| **Deployed** (private preview, draft) | **21** |
+| **Deployed / LIVE** (private preview, draft) | **24** |
+| **Staged, not deployed** | **1** (OG-04) |
 | **Prepared** — awaiting owner approval | **0** |
-| **Blocked** — pending research | **2** |
-| **Not started** | **22** |
+| **Blocked** — pending research | **1** |
+| **Not started** | **19** |
 
 ---
 
-## Deployed (21)
+## Deployed — LIVE (24)
 
-Each is a draft with NZ and AU files behind Cloudflare Access.
+Each is a draft with NZ and AU files behind Cloudflare Access. (Stage 9.83A: this table was last edited at Stage 9.60 with 21 rows; OG-01, OG-03 and OG-B09 were live but missing, and OG-27 showed an old foundation.)
 
 | Code | Title | Foundation / type | Safety blocks | Stage |
 |---|---|---|---|---|
+| OG-01 | Home Resilience Scorecard | general / assessment | electrical · smoke alarms | 9.71 |
 | OG-02 | Household Risk Identifier | general / worksheet | — | 9.13 |
+| OG-03 | Household Spending Capacity Check | general / worksheet | — | 9.79 |
 | OG-08 | Water Storage Calculator | water / worksheet | drinking water (audited exemption from water treatment) | 9.39 |
 | OG-09 | **Household Water Treatment Guide** | water / guide | drinking water · **water treatment** | 9.44 |
 | OG-10 | Rainwater Harvesting Planner | water / planner | drinking water · working at height | 9.41 |
@@ -32,27 +40,46 @@ Each is a draft with NZ and AU files behind Cloudflare Access.
 | OG-22 | Resilience Product Wishlist | general / worksheet | — | 9.23 |
 | OG-25 | Project Support Brief Template | general / template | — | 9.13 |
 | OG-26 | 3-Tier Budget Planner | general / planner | electrical · indoor combustion · CO · solid fuel · drinking water | 9.23 |
-| OG-27 | 90-Day Implementation Roadmap | shelter / planner | electrical · CO · indoor combustion | 9.24 |
+| OG-27 | 90-Day Implementation Roadmap | general / planner | electrical · CO · indoor combustion | 9.24 |
 | OG-B04 | Monthly Planning Challenge Template | general / planner | — | 9.15 |
 | OG-B07 | Solar Planning Deep Worksheet | energy / worksheet | electrical · working at height | 9.19 |
 | OG-B08 | **Water Tank Sizing & Placement Guide** | water / guide | drinking water · working at height (audited exemption from fire-and-emergency) | 9.46 |
+| OG-B09 | Resilient Heating & Insulation Upgrade Checklist | shelter / checklist | gas · solid fuel · electrical | 9.66 |
 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general / planner | — | 9.13 |
 | OG-B12 | Off-Grid System Architecture Planner | general / planner | generator · CO · electrical · solid fuel · drinking water | 9.37 |
 | **OG-13** | **Healthy Home Air Audit** | air / assessment | **smoke alarms · mould & dampness · ventilation** · CO · solid fuel | 9.54 |
 | **OG-17** | **Solid Fuel Heating Planner** | shelter / planner | solid fuel · smoke alarms · CO | 9.60 |
 
+## Staged, not deployed (1)
+
+Staged in `private-assets/` (git-ignored); in the staged build only. **Not live.**
+
+| Field | OG-04 |
+|---|---|
+| ID | `res-1004` |
+| Title | Property Type Review (legacy: Property Profile Matrix) |
+| Foundation | general |
+| Program Component | resilience-planning |
+| Category | planning |
+| Type | worksheet |
+| Status | **staged / not deployed** (record status: draft) |
+| Collection | planning-tools |
+| Market files | NZ and AU, 9 portrait pages each |
+| Safety blocks | standing emergency contact and general disclaimer only; legacy electrical topic recorded REMOVED |
+| Staged in | Stage 9.83 (`admin-import/STAGE_9.83_OG04_STAGED.md`) |
+| Staged build | 25 protected resources · 50 market files · 0 broken links · Bucket C 0 |
+
 ## Prepared — awaiting owner approval (0)
 
-Nothing is waiting on an owner decision. OG-17 was approved and deployed at Stage 9.60 as resource #21 (shelter / heating, intermediate, 25 minutes, NZ 7 pages and AU 7 pages).
+Nothing is waiting on an owner decision about copy. The only open item is the owner's approval to deploy OG-04, above.
 
-## Blocked — pending research (2)
+## Blocked — pending research (1)
 
 | Code | Title | Blocked by |
 |---|---|---|
 | OG-16 | Grant Eligibility Insulation Planner | **grants research** — NZ programmes; AU state and territory schemes |
-| OG-B09 | Insulation & Heating Upgrade Checklist | **gas research** — its heating comparison table prices a "Flued gas" option and gives it an efficiency band, which the Stage 9.57 detector reads as genuine gas teaching. The last real gas resource |
 
-## Not started (22)
+## Not started (19)
 
 Ordered by foundation. "Notes" are the audit's safety exposure, which tells you which approved blocks a migration
 would need.
@@ -91,9 +118,6 @@ would need.
 
 | Code | Title | Notes |
 |---|---|---|
-| OG-01 | Home Resilience Scorecard | — · a Start Here candidate |
-| OG-03 | Budget Pathway Selector | — · **claims-first audit done (Stage 9.75); owner ruled NARROW; rewrite DRAFT prepared (Stage 9.76) as "Household Spending Capacity Check" (general / planning-implementation / planning / worksheet): copy approved (Stage 9.76A); **RENDERED in Stage 9.77 (NZ + AU PDFs, 9 pages each, verified); not staged, not deployed; STAGED as #24 in Stage 9.78 (record + 2 approved PDFs in private-assets; staged build 24 / 48); not deployed** (`STAGE_9.75_OG03_AUDIT.md`, `STAGE_9.76_OG03_REWRITE_DRAFT.md`) |
-| OG-04 | Property Profile Matrix | — |
 | OG-05 | 5 Pillars Quick Reference | electrical · **"5 Pillars" is legacy framework wording** |
 | OG-06 | 72-Hour Emergency Checklist | electrical |
 | OG-07 | Week 1 Priority Lock Worksheet | — · heavy programme framing |
@@ -116,8 +140,10 @@ real one supersede the placeholder **in the private preview only**.
 |---|---|---|---|
 | OG-08 | `water-storage-calculator` | res-0015 | **resolved and live** |
 | OG-10 | `rainwater-harvesting-planner` | res-0016 | **resolved and live** (Stage 9.41) |
-| OG-01 | `home-resilience-scorecard` | res-0007 (demo) | expected |
+| OG-01 | `home-resilience-scorecard` | res-0007 (demo) | **resolved and live** (Stage 9.71) |
 | OG-13 | `healthy-home-air-audit` | demo | **resolved and live** (Stage 9.54) |
+
+Since Stage 9.73B the demo placeholders for OG-01, OG-08, OG-10 and OG-13 are separated: each stays reachable on its own `demo-<slug>` route and through explicit programme references, and is hidden from listings; the protected resource keeps the real route. Stage 9.78B hid the other four demo placeholders (res-0005, res-0006, res-0008, res-0009) from the protected Planning Tools listing only.
 
 ## How a resource moves through this register
 
@@ -128,10 +154,43 @@ NOT STARTED
   → copy changes proposed (exact from → to, market variants marked)
   → NZ + AU previews rendered and verified   ⟶ PREPARED
   → owner approval                           ⟶ approved
-  → re-render, verify the exact build, deploy ⟶ DEPLOYED (draft, behind Access)
+  → render, stage (record + PDFs in private-assets), validate the staged build ⟶ STAGED, NOT DEPLOYED
+  → re-verify the exact build, deploy on the owner's explicit approval ⟶ DEPLOYED / LIVE (draft, behind Access)
 ```
 
 Anything that cannot be verified from an official NZ or AU source **blocks** the resource instead of being guessed.
+
+## Protected resource classification (generated from the records, Stage 9.83A)
+
+Read from `private-assets/data-resources/*.private.json`; LIVE means the resource's NZ and AU PDFs are in the deployed tree. 25 records · 50 market files in total; **24 live · 48 market files**; **1 staged (OG-04) → 25 · 50**. Every record is status draft.
+
+| ID | Code | Title | Foundation | Program Component | Category | Type | Collections | State |
+|---|---|---|---|---|---|---|---|---|
+| `res-1001` | OG-01 | Home Resilience Scorecard | general | resilience-planning | getting-started | assessment | start-here | LIVE |
+| `res-1002` | OG-02 | Household Risk Identifier | general | resilience-planning | planning | worksheet | start-here | LIVE |
+| `res-1003` | OG-03 | Household Spending Capacity Check | general | planning-implementation | planning | worksheet | planning-tools | LIVE |
+| `res-1004` | OG-04 | Property Type Review | general | resilience-planning | planning | worksheet | planning-tools | **STAGED, NOT DEPLOYED** |
+| `res-1008` | OG-08 | Water Storage Calculator | water | off-grid-living | water-storage | worksheet | — | LIVE |
+| `res-1009` | OG-09 | Household Water Treatment Guide | water | off-grid-living | water-security | guide | — | LIVE |
+| `res-1010` | OG-10 | Rainwater Harvesting Planner | water | off-grid-living | rainwater | planner | — | LIVE |
+| `res-1011` | OG-11 | 30-Day Pantry Builder | food | resilience-emergency | pantry-resilience | worksheet | — | LIVE |
+| `res-1013` | OG-13 | Healthy Home Air Audit | air | resilience-planning | healthy-home-checks | assessment | — | LIVE |
+| `res-1015` | OG-15 | Warm Home Scorecard | shelter | resilience-planning | heating | assessment | — | LIVE |
+| `res-1017` | OG-17 | Solid Fuel Heating Planner | shelter | off-grid-living | heating | planner | — | LIVE |
+| `res-1018` | OG-18 | Solar Power 101 Workbook | energy | off-grid-living | solar | workbook | — | LIVE |
+| `res-1019` | OG-19 | Battery Backup Planner | energy | off-grid-living | backup-energy | planner | — | LIVE |
+| `res-1020` | OG-20 | Alternative Energy Suitability Check | energy | off-grid-living | household-energy-planning | assessment | — | LIVE |
+| `res-1021` | OG-21 | Home Energy & Shelter Upgrade Plan | shelter | planning-implementation | household-resilience | planner | — | LIVE |
+| `res-1022` | OG-22 | Resilience Product Wishlist | general | resilience-planning | planning | worksheet | planning-tools | LIVE |
+| `res-1025` | OG-25 | Project Support Brief Template | general | planning-implementation | planning | template | planning-tools | LIVE |
+| `res-1026` | OG-26 | 3-Tier Budget Planner | general | planning-implementation | planning | planner | planning-tools | LIVE |
+| `res-1027` | OG-27 | 90-Day Implementation Roadmap | general | planning-implementation | planning | planner | planning-tools | LIVE |
+| `res-1504` | OG-B04 | Monthly Planning Challenge Template | general | planning-implementation | planning | planner | planning-tools | LIVE |
+| `res-1507` | OG-B07 | Solar Planning Deep Worksheet | energy | off-grid-living | solar | worksheet | — | LIVE |
+| `res-1508` | OG-B08 | Water Tank Sizing & Placement Guide | water | off-grid-living | household-water-planning | guide | — | LIVE |
+| `res-1509` | OG-B09 | Resilient Heating & Insulation Upgrade Checklist | shelter | resilience-planning | insulation | checklist | — | LIVE |
+| `res-1510` | OG-B10 | 90-Day Implementation Roadmap (Advanced) | general | planning-implementation | planning | planner | planning-tools | LIVE |
+| `res-1512` | OG-B12 | Off-Grid System Architecture Planner | general | advanced-future | planning | planner | — | LIVE |
 
 ## Stage 9.62 note
 
@@ -152,3 +211,7 @@ OG-B09: migrated DRAFT prepared (config only), awaiting owner copy approval. Not
 
 OG-B09 Resilient Heating & Insulation Upgrade Checklist: protected resource #22 (res-1509), draft, resilience-planning, deployed.
 
+
+## Stage 9.83A note
+
+Synchronised with the actual state. Added the three live resources that were missing (OG-01, OG-03, OG-B09), moved OG-B09 out of Blocked (deployed at Stage 9.66; its gas research was resolved), corrected OG-27's foundation to general (the record has said general since the foundation validation), removed OG-01, OG-03 and OG-04 from Not started, added the Staged section for OG-04 and the generated classification table. No classification, record or PDF was changed. One data-model note: OG-02's NZ market file is `household-risk-identifier.pdf` (no `.NZ.` in the name, unlike every other resource); this is legacy naming, recorded as it is and not changed.
