@@ -1273,6 +1273,67 @@
       "migrationState": "DRAFT PREPARED (Stage 9.81) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Resilience planning: after the Home Resilience Scorecard and Household Risk Identifier; before the Resilience Product Wishlist, then the Household Spending Capacity Check, 3-Tier Budget Planner and 90-Day Implementation Roadmap."
+    },
+    "OG-06": {
+      "title": "Emergency Readiness Checklist",
+      "titleStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91); legacy '72-Hour Emergency Action Checklist' / '72-Hour Emergency Checklist'",
+      "resourceType": "checklist",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91): cross-foundation",
+      "programComponent": "resilience-emergency",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91): emergency preparation and immediate household readiness",
+      "programAlignment": {
+        "foundation": "general — the checklist spans water, food, warmth, light and communication, health and paperwork, and no single foundation is its subject",
+        "programComponent": "resilience-emergency — its primary output is a household's own readiness for an outage or disruption: what it has, where it is kept and what it still needs to organise",
+        "resilienceRole": "helps a household see what it already has for a disruption, record where supplies and papers are kept and where it will meet, and choose what to organise next; it supports household independence by making the basics findable before they are needed",
+        "guidanceKind": "emergency-readiness checklist — not a survival guide, a technical emergency manual, a water or food storage calculator, or heating, electrical or gas guidance",
+        "wordingMatchesRole": "yes — every item is a tick and every field is member-entered; the checklist carries no quantity, period, rating, technical instruction or market-specific rule, and it points on to the resources that own water, food, backup power and home safety"
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91); no emergency category exists in the taxonomy and none was invented",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91)",
+      "difficultySource": "INFERRED: ticks and member-written notes; no calculation.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91)",
+      "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
+      "description": "A practical checklist to help households identify the basic emergency items they already have, where important supplies are kept and what still needs to be organised before a disruption.",
+      "descriptionStatus": "OWNER-REVIEW REQUIRED (draft, Stage 9.91)",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-08 (Stage 9.91): none at this stage",
+      "relatedResources": [
+        "res-1002",
+        "res-1004",
+        "res-1008",
+        "res-1011",
+        "res-1013",
+        "res-1019"
+      ],
+      "relatedResourcesStatus": "PROPOSED 2026-10-08 (Stage 9.91) — OWNER-REVIEW REQUIRED; ids verified against the private records: Household Risk Identifier, Property Type Review, Water Storage Calculator, 30-Day Pantry Builder, Healthy Home Air Audit, Battery Backup Planner. Res-1015 (Warm Home Scorecard) is not proposed: it is a heating and insulation scorecard, heavier than the checklist's blankets item. No existing resource's related list is changed.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "Standing emergency-contact and general-disclaimer blocks only; any other block is reported by the Stage 9.91 safety scan of the prepared draft.",
+      "safetyTopicDispositions": {
+        "batteries-and-electrical": {
+          "disposition": "REMOVED",
+          "reason": "The legacy named batteries, a power bank and a battery or wind-up radio as list items. The owner's Stage 9.91 ruling removes this technical wording from the narrowed checklist, which teaches no electrical procedure; if a later edit names it again the safety scan will require the block."
+        },
+        "food-safety-power-cut": {
+          "disposition": "REMOVED",
+          "reason": "The legacy named non-perishable food and refrigeration as list items. The owner's Stage 9.91 ruling removes this technical wording from the narrowed checklist, which teaches no food-safety procedure; if a later edit names it again the safety scan will require the block."
+        },
+        "fire-and-emergency": {
+          "disposition": "REMOVED",
+          "reason": "The legacy named a fireplace, a fire extinguisher and smoke alarms as list items. The owner's Stage 9.91 ruling removes this technical wording from the narrowed checklist, which teaches no fire-safety procedure; if a later edit names it again the safety scan will require the block."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED (Stage 9.91) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Emergency readiness: after the Home Resilience Scorecard and Household Risk Identifier; before the Property Type Review, then the Resilience Product Wishlist, Household Spending Capacity Check, 3-Tier Budget Planner and 90-Day Implementation Roadmap."
     }
   }
 }

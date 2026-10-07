@@ -282,8 +282,9 @@ export const isSurvivalClaimSentence = (sentence: string): boolean =>
  */
 const SUPPLY_FIG = `(?:\\d[\\d,]*(?:\\.\\d+)?(?:\\s?[–-]\\s?\\d[\\d,]*)?\\+?|${NUMBER})`;
 const SUPPLY_UNIT = "(?:day|week|month)s?\\+?";
-const SUPPLY_MOD = "(?:emergency|non-?perishable|drinking|household|food|water|fuel|gas|LPG|firewood|wood|medical|stored|essential|spare|extra|backup|back-up|canned|dry|pantry|survival)";
-const SUPPLY_THING = "(?:food|water|fuel|supplies|firewood|LPG|gas|rations?|provisions|medication|medicine|batteries)";
+const SUPPLY_MOD = "(?:emergency|non-?perishable|drinking|household|food|water|fuel|gas|LPG|firewood|wood|medical|stored|essential|spare|extra|backup|back-up|canned|dry|pantry|survival|infant|baby|pet)";
+// Stage 9.91 added meals, formula, pet food, baby food and snacks: "3 days of meals" and "a 3-day supply of formula" are supply targets too.
+const SUPPLY_THING = "(?:food|water|fuel|supplies|firewood|LPG|gas|rations?|provisions|medication|medicine|batteries|meals?|formula|pet food|baby food|snacks)";
 const SUPPLY_COMPACT = new RegExp(`${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}\\s+(?:${SUPPLY_MOD}\\s+){0,3}(?:supply|supplies|stockpile|stock|rations?|reserves?)\\b`, "gi");
 const SUPPLY_OF = new RegExp(`${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}\\s+(?:of|worth of)\\s+(?:${SUPPLY_MOD}\\s+){0,3}${SUPPLY_THING}\\b`, "gi");
 const SUPPLY_ENOUGH = new RegExp(`\\b(?:enough|sufficient)\\s+(?:${SUPPLY_MOD}\\s+){0,2}${SUPPLY_THING}\\s+(?:for|to last)\\s+(?:at least\\s+|up to\\s+|about\\s+)?${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}`, "gi");
@@ -292,12 +293,59 @@ const SUPPLY_NOT_A_TARGET = /\b(?:do not|don'?t|does not|doesn'?t|need not|no ne
 const SUPPLY_ASSERTS = /\b(?:minimum|at least|least|enough|sufficient|should|must|need|needs|needed|recommend\w*|advis\w+|aim|keep|kept|store|stored|storing|hold|held|maintain\w*|have|has|stock\w*|accessible|available|ready|extended|disruption|emergenc\w+|outage|in case|per person|baseline|essential|on hand)\b/i;
 const supplyMatches = (re: RegExp, s: string) => [...s.matchAll(new RegExp(re.source, re.flags))].map((m) => m[0]);
 /** The text of every supply-duration target in a sentence, or [] when the sentence is not asserting one. */
+// Stage 9.91: "a 3-day supply of formula" names the thing, so it needs no asserting word beside it (the bare label "14-Day Supply" still does),
+// and "an emergency kit for 3 days" binds a kit to a period.
+const SUPPLY_COMPACT_OF = new RegExp(`${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}\\s+(?:${SUPPLY_MOD}\\s+){0,3}(?:supply|supplies|stockpile|stock|rations?|reserves?)\\s+of\\s+(?:${SUPPLY_MOD}\\s+){0,3}${SUPPLY_THING}\\b`, "gi");
+const SUPPLY_KIT = new RegExp(`\\b(?:(?:emergency|survival|grab|go|first[- ]aid|disaster)\\s+)?(?:kit|bag|pack|stockpile)\\s+(?:for|to last|lasting|covering)\\s+(?:at least\\s+|up to\\s+|about\\s+)?${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}`, "gi");
+/** "Plan 7 days of meals" is menu planning, not a supply target; the planning verbs keep a "days of meals" phrase ordinary. */
+const SUPPLY_PLANNING = /\b(?:plan|planning|planned|menu|menus|recipes?|batch[- ]cook\w*)\b/i;
 export function supplyTargets(sentence: string): string[] {
   if (SUPPLY_NOT_A_TARGET.test(sentence)) return [];
   const compact = SUPPLY_ASSERTS.test(sentence) ? supplyMatches(SUPPLY_COMPACT, sentence) : [];
-  return [...compact, ...supplyMatches(SUPPLY_OF, sentence), ...supplyMatches(SUPPLY_ENOUGH, sentence), ...supplyMatches(SUPPLY_LASTING, sentence)];
+  const all = [...compact, ...supplyMatches(SUPPLY_COMPACT_OF, sentence), ...supplyMatches(SUPPLY_OF, sentence), ...supplyMatches(SUPPLY_ENOUGH, sentence), ...supplyMatches(SUPPLY_LASTING, sentence), ...supplyMatches(SUPPLY_KIT, sentence)];
+  return SUPPLY_PLANNING.test(sentence) ? all.filter((t) => !/\bmeals?$/i.test(t)) : all;
 }
 const isSupplyTargetFigure = (sentence: string, figure: string): boolean => supplyTargets(sentence).some((t) => t.toLowerCase().includes(figure.toLowerCase()));
+
+/**
+ * Emergency-period claims (Stage 9.91). Stage 9.90 found that "the first 72 hours are the most critical", "help may not reach you for 3 days" and
+ * "survive … the worst 3 days without outside help" slipped past both the survival rule (no deprivation word, no bodily subject) and the supply rule
+ * (no supply noun). They assert HOW LONG an emergency, a delay in help, or household self-sufficiency lasts. They are factual statements about an
+ * emergency period and need a source, in the same way a survival interval or a supply target does.
+ *
+ * Like the other two families it reads wording, never a document, and it complements them: the classification chain tries survival, then supply,
+ * then this rule, and stops at the first, so one statement is one candidate with one owner, never two failures. It stays quiet for titles
+ * ("72-Hour Emergency Checklist"), programme names, schedules ("Day 6", "Week 1"), completion times, deadlines, plans ("your 7-day plan"),
+ * negated or reassuring sentences, questions, examples and a member's own blanks, because each of those names no asserted period.
+ */
+const EP_FIG = SUPPLY_FIG;
+const EP_UNIT = "(?:minute|hour|day|week)s?";
+const EP_CRITICAL = "(?:critical|crucial|vital|most important|most dangerous)";
+const EP_PATTERNS: RegExp[] = [
+  // "the first 72 hours are the most critical"
+  new RegExp(`\\b(?:the\\s+)?(?:first|initial|next|opening)\\s+${EP_FIG}[-\\s]*${EP_UNIT}\\b[^.?]{0,60}\\b${EP_CRITICAL}\\b`, "gi"),
+  new RegExp(`\\b${EP_CRITICAL}\\b[^.?]{0,40}\\b(?:first|initial)\\s+${EP_FIG}[-\\s]*${EP_UNIT}\\b`, "gi"),
+  // "help may not reach you for 3 days", "emergency services may take up to 3 days to reach you"
+  new RegExp(`\\b(?:help|rescue|assistance|aid|relief|emergency services|responders?)\\b[^.?]{0,50}\\b(?:may|might|could|can|will)\\s+(?:not|take|be)\\b[^.?]{0,60}\\b${EP_FIG}[-\\s]*${EP_UNIT}\\b`, "gi"),
+  // "survive and communicate through the worst 3 days", "get through the first 3 days"
+  new RegExp(`\\b(?:survive|get through|make it through|cope|manage|get by|fend for yourself|be self[- ]sufficient|be self[- ]reliant)\\b[^.?]{0,60}?\\b(?:the\\s+)?(?:worst|first|next|initial)\\s+${EP_FIG}[-\\s]*${EP_UNIT}\\b`, "gi"),
+  // "prepare to manage for 7 days", "be self-sufficient for 3 days", "get by for 3 days"
+  new RegExp(`\\b(?:survive|get through|make it through|cope|get by|fend for yourself|be self[- ]sufficient|be self[- ]reliant|manage on your own|prepare to manage)\\b[^.?]{0,40}?\\b(?:for|through|over|during)\\s+${EP_FIG}[-\\s]*${EP_UNIT}\\b`, "gi"),
+  // "without outside help for 3 days", "3 days without outside help"
+  new RegExp(`\\bwithout\\s+(?:any\\s+|outside\\s+|external\\s+)?(?:help|assistance|support|rescue)\\b[^.?]{0,30}\\b(?:for|through)\\s+${EP_FIG}[-\\s]*${EP_UNIT}\\b`, "gi"),
+  new RegExp(`\\b${EP_FIG}[-\\s]*${EP_UNIT}\\b[^.?]{0,40}\\bwithout\\s+(?:any\\s+|outside\\s+|external\\s+)?(?:help|assistance|support|rescue)\\b`, "gi"),
+  // "the 72-hour window as the critical self-sufficiency period" (a named period asserted to be critical or to measure self-sufficiency)
+  new RegExp(`\\b${EP_FIG}[-\\s]*${EP_UNIT}\\s+(?:window|period|standard|rule|mark)\\b[^.?]{0,60}\\b(?:critical|crucial|vital|self[- ]sufficien\\w*|survival)\\b`, "gi"),
+  new RegExp(`\\b(?:critical|crucial|vital|self[- ]sufficien\\w*|survival)\\b[^.?]{0,40}\\b${EP_FIG}[-\\s]*${EP_UNIT}\\s+(?:window|period|standard|rule|mark)\\b`, "gi"),
+  // "prepare for 3 days", "be ready for up to 7 days"
+  new RegExp(`\\b(?:prepare|prepared|be ready|get ready)\\s+for\\s+(?:at least\\s+|up to\\s+)?${EP_FIG}[-\\s]*${EP_UNIT}\\b`, "gi"),
+];
+/** The text of every emergency-period claim in a sentence, or [] when the sentence asserts none. */
+export function emergencyPeriodTargets(sentence: string): string[] {
+  if (SUPPLY_NOT_A_TARGET.test(sentence)) return [];
+  return EP_PATTERNS.flatMap((re) => supplyMatches(re, sentence));
+}
+const isEmergencyPeriodFigure = (sentence: string, figure: string): boolean => emergencyPeriodTargets(sentence).some((t) => t.toLowerCase().includes(figure.toLowerCase()));
 
 /**
  * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
@@ -428,6 +476,8 @@ export function scanNumericClaims(
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a survival or deprivation-outcome duration: a factual claim about what a person can withstand, with no approved entry" });
       else if (hit.category === "interval" && isSupplyTargetFigure(sentence, hit.figure))
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a supply-duration target: a factual statement of how much to hold, with no approved entry" });
+      else if (hit.category === "interval" && isEmergencyPeriodFigure(sentence, hit.figure))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an emergency-period claim: a factual statement about how long an emergency, a delay in help or household self-sufficiency lasts, with no approved entry" });
       else if (notAClaim) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: notAClaim.why });
       else if (hit.category === "interval" && horizon) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: horizon.why });
       else if (
