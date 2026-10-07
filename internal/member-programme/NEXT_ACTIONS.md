@@ -2,9 +2,11 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.75.
+**As at:** 7 October 2026, after Stage 9.76.
 
-> **Stage 9.75 note.** OG-03 Budget Pathway Selector has had its claims-first audit (`admin-import/STAGE_9.75_OG03_AUDIT.md`); nothing was migrated, rendered or deployed. It is a commercial product-tier matcher (29 prices, 26 Bucket C figures, an NZ-only subsidy box, old programme labels, no safety topic). **Recommendation: NARROW** to a member-entered spending-capacity check that sits between OG-22 and OG-26. **Waiting on the owner:** the eight decisions in section 14 of that report. Live baseline unchanged (23 / 23, 46 / 46, 715 tests, Bucket C 0).
+> **Stage 9.76 note.** OG-03 is narrowed (owner ruling) and its rewrite DRAFT is prepared as **Household Spending Capacity Check** (`admin-import/STAGE_9.76_OG03_REWRITE_DRAFT.md`): full copy and metadata, 0 prices, Bucket C 0, market-neutral, no topic safety block, reading grade 7.3, 727 tests; NOT rendered, NOT staged, NOT deployed. **Waiting on the owner:** approval of the copy and the eight items in section 15 of that report (notably the three refined position labels, the description and the financial note). Then render NZ + AU PDFs and QA; staging as protected resource #24 and deployment are separate decisions.
+>
+> **Stage 9.75 note (earlier).** OG-03 Budget Pathway Selector has had its claims-first audit (`admin-import/STAGE_9.75_OG03_AUDIT.md`); nothing was migrated, rendered or deployed. It is a commercial product-tier matcher (29 prices, 26 Bucket C figures, an NZ-only subsidy box, old programme labels, no safety topic). **Recommendation: NARROW** to a member-entered spending-capacity check that sits between OG-22 and OG-26. **Waiting on the owner:** the eight decisions in section 14 of that report. Live baseline unchanged (23 / 23, 46 / 46, 715 tests, Bucket C 0).
 >
 > **Stage 9.74 note (earlier).** The combined cleanup is **DEPLOYED** (Worker `e63141a1-380a-4770-a125-9fd7a15d0bdb`, rollback `7de9641f-df4c-4cab-8e84-055c0861879d` retained; `admin-import/STAGE_9.74_COMBINED_RELEASE_DEPLOYED.md`): 23 resources / 46 market files, all classified with the exemption empty, 40 corrected-cover PDFs, OG-01/08/10/13 explicitly separated from their demo placeholders. **Nothing is deferred and no owner decision is outstanding.** Next: the owner picks the next resource to migrate (claims-first audit and programme-component alignment first; the general/planning group in `RESOURCE_REGISTER.md` is mostly low-hazard). Any new demo/protected route clash needs an explicit `route-policy.json` entry or the build fails.
 >

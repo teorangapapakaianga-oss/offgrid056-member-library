@@ -1137,6 +1137,54 @@
       "timeBasis": "OWNER-APPROVED / INFERRED",
       "recordStatusNote": "draft, as every real resource is.",
       "scaleStatus": "OWNER-DEFINED / OFFGRID056 SELF-ASSESSMENT SCALE. 1–10 per question; two questions per foundation = a result out of 20; NO headline total. Foundation bands, OWNER-APPROVED 2026-10-06 (Stage 9.68A): Starting Point 2–9, Building Resilience 10–15, Strong Foundation 16–20. Not external facts; no scientific, government or predictive validity is implied."
+    },
+    "OG-03": {
+      "title": "Household Spending Capacity Check",
+      "titleStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76)",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76): cross-foundation; the five foundations are planning context only",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76); locked earlier by the budgeting ruling (Stage 9.64B / 9.65)",
+      "programAlignment": {
+        "foundation": "general — a household's spending capacity applies to whichever of Air, Water, Shelter, Food and Energy it decides to prioritise",
+        "programComponent": "planning-implementation — its primary output is a household's realistic amount to allocate and a spending position (a budgeting / allocation step)",
+        "resilienceRole": "helps a household work out how much it can realistically allocate toward resilience and off-grid improvements without overextending, and how fast to go, before it plans a budget or a project",
+        "guidanceKind": "implementation planning (household budgeting) — not emergency guidance, not system design, and not financial advice",
+        "wordingMatchesRole": "yes — every step is member-entered (a snapshot, a capacity reflection, a spending position and a decision); it carries no price, income range, savings threshold, subsidy figure or product, and it points on to the budget and the roadmap"
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76)",
+      "difficultySource": "INFERRED: member-entered fields and reflection; no calculation beyond an optional subtraction.",
+      "estimatedTime": 15,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76)",
+      "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
+      "description": "Find out what your household can realistically set aside for resilience and off-grid improvements, and choose a spending position that fits, before you plan a budget or a project.",
+      "descriptionStatus": "OWNER-REVIEW REQUIRED — drafted in Stage 9.76 from the owner's purpose statement",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76): none",
+      "relatedResources": [
+        "res-1001",
+        "res-1002",
+        "res-1022",
+        "res-1026",
+        "res-1027",
+        "res-1025"
+      ],
+      "relatedResourcesStatus": "OWNER-PROPOSED 2026-10-07 (Stage 9.76); ids verified against the private records: Home Resilience Scorecard, Household Risk Identifier, Resilience Product Wishlist, 3-Tier Budget Planner, 90-Day Implementation Roadmap, Project Support Brief Template.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "No topic safety block is required (Stage 9.75 safety scan: none). The standing general-disclaimer and emergency-contact blocks are added to every resource.",
+      "safetyReasoning": "Safety-topic detection found no topic. The incidental words (food, power, insulation, safety buffer) are budget categories, not teaching.",
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED (Stage 9.76) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Planning & Implementation: after the Home Resilience Scorecard, Household Risk Identifier and Resilience Product Wishlist; before the 3-Tier Budget Planner, then the 90-Day Implementation Roadmap."
     }
   }
 }
