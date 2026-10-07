@@ -2,9 +2,11 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.81A.
+**As at:** 7 October 2026, after Stage 9.82.
 
-> **Stage 9.81A note.** OG-04 owner decisions applied (description, six related ids, REMOVED safety disposition, Rural or lifestyle, shared cover, 8 blank grid rows, OG-03 untouched); self-contained copy pack in dmin-import/STAGE_9.81A_OG04_COPY_REVIEW_PACK.md; 768 tests; price claims 0; Bucket C 0; not rendered, staged or deployed. **Waiting on the owner:** copy approval for the PDF render.
+> **Stage 9.82 note.** OG-04 Property Type Review PDFs rendered (NZ and AU, 9 portrait pages each, title Property Type Review — OffGrid056) in the workspace only; visual and automated QA pass; price claims 0, Bucket C 0; 768 tests; NOT staged or deployed. **Waiting on the owner:** approval of the rendered PDFs (including the page-7 layout) before staging as protected resource #25. Report: dmin-import/STAGE_9.82_OG04_RENDER.md.
+>
+> **Stage 9.81A note (earlier).** OG-04 owner decisions applied (description, six related ids, REMOVED safety disposition, Rural or lifestyle, shared cover, 8 blank grid rows, OG-03 untouched); self-contained copy pack in dmin-import/STAGE_9.81A_OG04_COPY_REVIEW_PACK.md; 768 tests; price claims 0; Bucket C 0; not rendered, staged or deployed. **Waiting on the owner:** copy approval for the PDF render.
 >
 > **Stage 9.81 note (earlier).** OG-04 Property Type Review: narrowed rewrite DRAFT prepared (not rendered, staged or deployed); prep READY in NZ and AU, price claims 0, Bucket C 0, no topic safety block; 766 tests. **Waiting on the owner:** copy approval and the eight decisions in dmin-import/STAGE_9.81_OG04_REWRITE_DRAFT.md section 16.
 >
