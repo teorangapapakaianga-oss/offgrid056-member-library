@@ -2,7 +2,7 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 8 October 2026, after Stage 9.87.
+**As at:** 8 October 2026, after Stage 9.87A.
 
 **LIVE:** 25 protected resources · 50 market files · Worker `65437c37-b731-4851-b67e-5b0fae79fe12` (100%) · immediate rollback target `89333107-7c0a-4bdb-8229-f2b5241a9e05`.
 **STAGED, NOT DEPLOYED:** none. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84).
@@ -221,4 +221,9 @@ OG-04 Property Type Review deployed as protected resource #25 (Worker `65437c37-
 
 ## Stage 9.87 note
 
-OG-05 moved from Not started to the register-only state MERGED / NO STANDALONE RESOURCE. Verified migration-state counts across the 45 legacy resources: Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 (OG-16) · Merged 1 (OG-05) · Not started 18 = 45. The brief expected Prepared 1 and Blocked 0; the data does not support that (nothing is prepared and OG-16 is still blocked on grants research), so the verified counts are recorded and the discrepancy is reported to the owner. The register's table structure, the Stage 9.61 snapshot and OG-02's legacy NZ filename were left as they were.
+OG-05 moved from Not started to the register-only state MERGED / NO STANDALONE RESOURCE. Verified migration-state counts across the 45 legacy resources: Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 (OG-16) · Merged 1 (OG-05) · Not started 18 = 45. The brief had expected Prepared 1 and Blocked 0; the data did not support that, so the verified counts were recorded and reported, and the owner locked them in Stage 9.87A (nothing is Prepared; OG-16 stays Blocked on grants research). The register's table structure, the Stage 9.61 snapshot and OG-02's legacy NZ filename were left as they were.
+
+
+## Stage 9.87A note
+
+The owner locked the verified migration-state counts: Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 · Merged / No standalone resource 1 · Not started 18 = 45. OG-16 (Grant Eligibility Insulation Planner) stays Blocked on **grants research** (NZ programmes; AU state and territory schemes): unchanged, not researched, not unblocked, not migrated. OG-05 stays MERGED / NO STANDALONE RESOURCE.

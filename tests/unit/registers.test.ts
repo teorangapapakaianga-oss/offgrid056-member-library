@@ -69,6 +69,31 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
     });
   }
 
+  it("the owner-locked counts (Stage 9.87A) are the operational counts: no register still carries the old Prepared 1 / Blocked 0 expectation as an open question", () => {
+    for (const n of names) {
+      const c = current(n);
+      expect(c, n).not.toMatch(/Prepared 1\b|Blocked 0\b|discrepancy for the owner|confirmation of the Prepared/i);
+    }
+    const cs = current("CURRENT_STATUS");
+    expect(cs).toMatch(/Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 \(OG-16\) · Merged \/ No standalone resource 1 \(OG-05\) · Not started 18 = 45/);
+    expect(cs).toMatch(/locked by the owner in Stage 9\.87A/);
+    expect(text.NEXT_ACTIONS).toMatch(/Stage 9\.87A note\.\*\* The owner locked the verified 45-resource migration-state counts/);
+    expect(text.RESOURCE_REGISTER).toContain("## Stage 9.87A note");
+  });
+
+  it("OG-16 is the one Blocked resource, still blocked on grants research, and is not in any other state", () => {
+    const rr = text.RESOURCE_REGISTER;
+    const blocked = rr.split("## Blocked")[1].split("## Merged / No standalone resource")[0];
+    expect(blocked).toMatch(/\| OG-16 \| Grant Eligibility Insulation Planner \| \*\*grants research\*\* — NZ programmes; AU state and territory schemes \|/);
+    expect((blocked.match(/^\| OG-/gm) ?? []).length).toBe(1);
+    expect(rr.split("## Not started (18)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-16 \|/);
+    const dir = path.join(root, "private-assets/data-resources");
+    if (fs.existsSync(dir)) {
+      const codes = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => (JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string }).legacyCode);
+      expect(codes).not.toContain("OG-16"); // not migrated
+    }
+  });
+
   it("the resource register counts the 45 legacy resources: 25 live + 0 staged + 0 prepared + 1 blocked + 1 merged + 18 not started", () => {
     const rr = text.RESOURCE_REGISTER;
     expect(25 + 0 + 0 + 1 + 1 + 18).toBe(45);
