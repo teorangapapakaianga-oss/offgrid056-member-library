@@ -6,14 +6,15 @@ import { describe, expect, it } from "vitest";
  * Stages 9.83A and 9.84 — the three programme registers must agree with each other about the live state, and must stay clean
  * (no truncated paths, control characters or broken encoding). Reads the committed markdown only.
  *
- * Current state (Stage 9.84): OG-04 is live as protected resource #25 → 25 protected resources · 50 market files; nothing staged.
+ * Current state (Stage 9.88): 25 protected resources · 50 market files; nothing staged; OG-04 live (Stage 9.84); the protected
+ * navigation cleanup (Start Here, Five Foundations pointer) DEPLOYED (Stage 9.88); OG-05 merged / no standalone resource.
  */
 const root = process.cwd();
 const names = ["CURRENT_STATUS", "NEXT_ACTIONS", "RESOURCE_REGISTER"] as const;
 const text = Object.fromEntries(names.map((n) => [n, fs.readFileSync(path.join(root, "internal/member-programme", `${n}.md`), "utf8")])) as Record<(typeof names)[number], string>;
-const LIVE_WORKER = "65437c37-b731-4851-b67e-5b0fae79fe12";
-const ROLLBACK = "89333107-7c0a-4bdb-8229-f2b5241a9e05";
-const OLDER = ["e63141a1-380a-4770-a125-9fd7a15d0bdb", "7de9641f-df4c-4cab-8e84-055c0861879d", "db2fd12a-955e-47c4-b3c9-d174e3da85d8", "fa23ec74-85d2-4d91-b484-3f037ccbe38b", "1922f7ba-a0b3-4a7b-ba01-593b3df6a160"];
+const LIVE_WORKER = "2fb0663d-a7da-4acf-ba4c-957886b21631";
+const ROLLBACK = "65437c37-b731-4851-b67e-5b0fae79fe12";
+const OLDER = ["89333107-7c0a-4bdb-8229-f2b5241a9e05", "e63141a1-380a-4770-a125-9fd7a15d0bdb", "7de9641f-df4c-4cab-8e84-055c0861879d", "db2fd12a-955e-47c4-b3c9-d174e3da85d8", "fa23ec74-85d2-4d91-b484-3f037ccbe38b", "1922f7ba-a0b3-4a7b-ba01-593b3df6a160"];
 /** The statement of the CURRENT state at the top of each register: from "As at" to the first stage note, section or rule. */
 const current = (n: (typeof names)[number]) => { const t = text[n]; const a = t.indexOf("**As at:**"); const rest = t.slice(a); const e = rest.search(/\n> \*\*Stage|\n## |\n---/); return e < 0 ? rest : rest.slice(0, e); };
 
@@ -49,7 +50,7 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c).toMatch(/OG-04[^\n]*(is live|live as protected resource #25|is deployed|deployed as protected resource #25|is live as)/);
       expect(c).toMatch(/STAGED, NOT DEPLOYED(:\*\*|:|\s*=)?\s*(\*\*)?\s*none/i);
       expect(c).not.toMatch(/\b24 protected|\b48 market files|24 live|OG-04[^\n]{0,60}(is|are) (still )?staged/i);
-      expect(c).not.toMatch(/Worker `89333107[^`]*` \(100%\)/); // the previous Worker is the rollback, not the live one
+      expect(c).not.toMatch(/Worker `(?:65437c37|89333107)[^`]*` \(100%\)/); // the previous Workers are rollbacks, not the live one
     });
   }
 
@@ -62,10 +63,11 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c).not.toMatch(/OG-05[^.\n]{0,100}\b(awaiting migration|is (?:still )?not started|to be migrated|will be migrated|pending migration)\b/i);
     });
 
-    it(`${n}: states that the Stage 9.87 navigation cleanup is built and NOT deployed, and that no resource is staged`, () => {
+    it(`${n}: states that the navigation cleanup is DEPLOYED (Stage 9.88), that no resource is staged, and no longer says it awaits approval`, () => {
       const c = current(n);
-      expect(c).toMatch(/Built, not deployed \(not a resource\)/);
-      expect(c).toMatch(/explicit approval/);
+      expect(c).toMatch(/Navigation cleanup: DEPLOYED \(Stage 9\.88\)/);
+      expect(c).toMatch(/OG-01 and OG-02 only/);
+      expect(c).not.toMatch(/Built, not deployed|Deploying the navigation cleanup needs|awaiting (?:the owner's )?approval/i);
     });
   }
 
@@ -75,8 +77,8 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c, n).not.toMatch(/Prepared 1\b|Blocked 0\b|discrepancy for the owner|confirmation of the Prepared/i);
     }
     const cs = current("CURRENT_STATUS");
-    expect(cs).toMatch(/Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 \(OG-16\) · Merged \/ No standalone resource 1 \(OG-05\) · Not started 18 = 45/);
-    expect(cs).toMatch(/locked by the owner in Stage 9\.87A/);
+    expect(cs).toMatch(/Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 \(OG-16[^)]*\) · Merged \/ No standalone resource 1 \(OG-05\) · Not started 18 = 45/);
+    expect(text.RESOURCE_REGISTER).toMatch(/The owner locked the verified migration-state counts/);
     expect(text.NEXT_ACTIONS).toMatch(/Stage 9\.87A note\.\*\* The owner locked the verified 45-resource migration-state counts/);
     expect(text.RESOURCE_REGISTER).toContain("## Stage 9.87A note");
   });

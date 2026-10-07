@@ -57,9 +57,9 @@ describe("Stage 9.86 · OG-05 disposition", () => {
     expect(rr.split("## Not started (18)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-05 \|/);
   });
 
-  it("closes the follow-ups: the page pointer is done (not deployed) and the supply-duration detector is implemented", () => {
+  it("closes the follow-ups: the page pointer is done and DEPLOYED (Stage 9.88), and the supply-duration detector is implemented", () => {
     expect(followUp.status).toMatch(/^DONE in Stage 9\.87 — Option B, protected preview only/);
-    expect(followUp.status).toMatch(/NOT DEPLOYED/);
+    expect(followUp.status).toMatch(/DEPLOYED in Stage 9\.88/);
     expect(followUp.notDone).toMatch(/No ranking interaction was created/);
     const supply = tasks.find((t) => t.id === "context-aware-duration-of-supply-claim-type") as { status: string; implementedIn: string };
     expect(supply.status).toMatch(/^DONE — implemented in Stage 9\.87/);

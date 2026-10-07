@@ -2,11 +2,11 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 8 October 2026, after Stage 9.87A.
+**As at:** 8 October 2026, after Stage 9.88.
 
-**LIVE:** 25 protected resources · 50 market files · Worker `65437c37-b731-4851-b67e-5b0fae79fe12` (100%) · immediate rollback target `89333107-7c0a-4bdb-8229-f2b5241a9e05`.
+**LIVE:** 25 protected resources · 50 market files · Worker `2fb0663d-a7da-4acf-ba4c-957886b21631` (100%) · immediate rollback target `65437c37-b731-4851-b67e-5b0fae79fe12`.
 **STAGED, NOT DEPLOYED:** none. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84).
-**Built, not deployed (not a resource):** the Stage 9.87 navigation cleanup — the protected Start Here lists protected resources only, and the Five Foundations page points to the Home Resilience Scorecard in the protected preview — plus the claim-detector additions. Deploying the navigation cleanup needs the owner's explicit approval.
+**Navigation cleanup: DEPLOYED (Stage 9.88)** — the protected Start Here lists OG-01 and OG-02 only (the six demo placeholders res-0001 to res-0006 are hidden from it, not deleted), and the protected Five Foundations page points to the Home Resilience Scorecard; the public/demo build is unchanged. The survival-duration and supply-duration detector rules are admin tooling, not a live change.
 **OG-05** (legacy "5 Pillars Quick Reference"): **MERGED / NO STANDALONE RESOURCE**. No res-ID, no NZ or AU PDFs, no standalone migration planned.
 
 The table below counts the 45 legacy resources. Earlier snapshots in this file (for example "21 deployed" at Stage 9.60) are historical and are labelled as such.
@@ -227,3 +227,8 @@ OG-05 moved from Not started to the register-only state MERGED / NO STANDALONE R
 ## Stage 9.87A note
 
 The owner locked the verified migration-state counts: Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 · Merged / No standalone resource 1 · Not started 18 = 45. OG-16 (Grant Eligibility Insulation Planner) stays Blocked on **grants research** (NZ programmes; AU state and territory schemes): unchanged, not researched, not unblocked, not migrated. OG-05 stays MERGED / NO STANDALONE RESOURCE.
+
+
+## Stage 9.88 note
+
+The navigation cleanup is deployed (Worker `2fb0663d-a7da-4acf-ba4c-957886b21631`; rollback `65437c37-b731-4851-b67e-5b0fae79fe12`): protected Start Here lists OG-01 and OG-02 only, and protected Five Foundations points to the Home Resilience Scorecard. No resource, PDF, record, collection or migration state changed: Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 (OG-16) · Merged 1 (OG-05) · Not started 18 = 45.

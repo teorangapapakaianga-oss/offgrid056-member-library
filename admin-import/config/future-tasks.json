@@ -89,13 +89,13 @@
       "mergeDestination": "Decided by the owner in Stage 9.87: Option B. A short pointer on the Five Foundations page to the Home Resilience Scorecard (protected preview only); no new ranking interaction, and OG-01 is not modified. OG-01's 'Your Three Priority Foundations' step remains the single protected priority-selection mechanism.",
       "registerTreatment": "Stage 9.87: the owner approved one REGISTER-ONLY state, 'MERGED / NO STANDALONE RESOURCE', used for OG-05 in RESOURCE_REGISTER.md. It is administrative migration-state tracking only: it is not a protected-resource status value and the resource data model is unchanged.",
       "linkedWork": "Stage 9.86 hardened the numeric detector so a survival or deprivation duration is a claim candidate (admin-import/audit/numeric.ts, tests/unit/numeric-survival.test.ts).",
-      "recordedFollowUps": "Stage 9.87: Five Foundations pointer implemented (not deployed); protected Start Here cleaned of demo placeholders (not deployed); supply-duration claim detector implemented."
+      "recordedFollowUps": "Stage 9.87: Five Foundations pointer implemented, protected Start Here cleaned of demo placeholders, supply-duration claim detector implemented. Stage 9.88: the Five Foundations pointer and the Start Here cleanup are DEPLOYED (the detector is admin tooling and is not a live change)."
     },
     {
       "id": "five-foundations-page-pointer",
       "recordedOn": "2026-10-07",
       "recordedIn": "Stage 9.86",
-      "status": "DONE in Stage 9.87 — Option B, protected preview only. Built and validated in the staged build; NOT DEPLOYED until the owner approves.",
+      "status": "DONE in Stage 9.87 — Option B, protected preview only. DEPLOYED in Stage 9.88 (Worker 2fb0663d-a7da-4acf-ba4c-957886b21631; rollback 65437c37-b731-4851-b67e-5b0fae79fe12).",
       "title": "Five Foundations page: pointer to the Home Resilience Scorecard's priority step",
       "problem": "The merge of OG-05 leaves the foundation-ranking idea with no obvious entry from the Five Foundations page.",
       "options": {
@@ -103,7 +103,8 @@
         "B": "Add a short static pointer from the Five Foundations page to the Home Resilience Scorecard, shown only where the real scorecard exists. No new data, no scores, no change to OG-01."
       },
       "notDone": "No ranking interaction was created. OG-01, res-0004 and programme day 3 are unchanged. The public/demo Five Foundations page is byte-identical to its Stage 9.86 build.",
-      "implementedIn": "app/foundations/page.tsx; lib/content/collection-rules.ts (scorecardPointerHref)"
+      "implementedIn": "app/foundations/page.tsx; lib/content/collection-rules.ts (scorecardPointerHref)",
+      "deployedIn": "Stage 9.88"
     }
   ]
 }
