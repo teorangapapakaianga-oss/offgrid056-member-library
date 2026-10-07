@@ -2,8 +2,10 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.79.
+**As at:** 7 October 2026, after Stage 9.80.
 
+> **Stage 9.80 note.** OG-04 (legacy name Property Profile Matrix) audited, not migrated: recommendation NARROW; Foundation general; component resilience-planning (owner review); 11 owner decisions listed in dmin-import/STAGE_9.80_OG04_AUDIT.md. Live unchanged (24 / 48 / 0 broken links / Bucket C 0).
+>
 > **Stage 9.79 note.** OG-03 is deployed as protected resource #24 (Worker `89333107-7c0a-4bdb-8229-f2b5241a9e05`; rollback `e63141a1…`). 24 / 48 / 0 broken links / Bucket C 0; 750 tests. **Waiting on the owner:** the next resource to migrate.
 
 > **Stage 9.78B note.** Planning Tools now lists exactly seven protected resources (OG-03, OG-22, OG-25, OG-26, OG-27, OG-B04, OG-B10) and no demo placeholders (hidden in the private preview only; routes and programme references intact). Staged build 24 records / 48 market files / 0 broken links / Bucket C 0; 750 tests; 0 PDFs changed; NOT deployed. **Waiting on the owner:** explicit approval to deploy OG-03 as protected resource #24. Candidates reported, not added: OG-01 and OG-02 (Start Here assessments), OG-B12 (later-stage planner). Report: `admin-import/STAGE_9.78B_PLANNING_TOOLS_COLLECTION.md`.
