@@ -236,6 +236,37 @@ const CLAIM_ASSERTION = /\b(baseline|advises|advise|recommends?|recommended|guid
 const CLAIM_DENIAL = /\b(?:not|no|never|rather than)\s+(?:an?\s+|the\s+)?(?:official|national|required|recommended)\b/i;
 
 /**
+ * Survival and deprivation outcomes (Stage 9.86). "3 days without water", "3 weeks without food", "3–4 minutes without clean
+ * air" and "3–4 hours without shelter or heat" state how long a person can withstand a deprivation. They are factual health
+ * claims, but a duration "in passing" was filed as harmless (D_NOT_A_CLAIM) because nothing was being recommended — Stage
+ * 9.85 found the whole of a legacy "Rule of 3s" read that way. The rule describes the claim PATTERN, not any document: a
+ * duration in a sentence that either names going without something the body needs (air, oxygen, water, food, shelter,
+ * heat, warmth, sleep) or states a survival outcome (survive, die, fatal, hypothermia, dehydration …).
+ *
+ * It is deliberately narrow so scheduling language stays what it was: "90-Day Implementation Roadmap", "30-Day Programme",
+ * "complete this in 10 minutes" and "without water damage for 5 years" name no deprivation outcome. The lookaheads keep
+ * "without water damage", "without food waste", "without heat loss" and similar from reading as deprivation.
+ */
+const DEPRIVATION =
+  /\bwithout\s+(?:(?:any|clean|safe|fresh|drinking|breathable|adequate|enough|proper|a)\s+)*(?:air|oxygen|water(?!\s*(?:damage|leak\w*|ingress|tank\w*|heater\w*|filter\w*|bottle\w*|pressure|meter\w*|bill\w*|restrictions?|treatment))|food(?!\s*(?:waste|safety|allergens?|prep\w*|storage|poisoning))|shelter|heat(?!\s*(?:pump\w*|loss|recovery|source))|heating|warmth|sleep)\b/i;
+/** Outcomes that are about the body whatever the subject: "can cause hypothermia within 3 hours". */
+const BODILY_OUTCOME = /\b(?:die[sd]?|death|fatal\w*|lethal\w*|life[- ]threatening|hypothermi\w+|dehydrat\w+|starv\w+|unconscious\w*|suffocat\w+)\b/i;
+/**
+ * "Survive" is only a claim about what a PERSON can withstand ("a person can survive three days…"). A household readiness
+ * question — "Can the household survive 72 hours off-grid with only what is on-site?" — is a scenario the member plans for, not
+ * a threshold the body has, so it needs both a bodily subject and a statement rather than a question.
+ */
+const SURVIVE_VERB = /\bsurviv\w+/i;
+const BODILY_SUBJECT = /\b(?:person|people|persons|human\w*|body|bodies|adults?|child(?:ren)?|infants?|someone|anyone|patients?|victims?|casualt\w+)\b/i;
+/** Exposure to the elements for a duration is the same claim as going without shelter: "3–4 hours in extreme cold". */
+const EXPOSURE = /\b(?:in|to|under)\s+(?:the\s+)?(?:extreme|freezing|severe|intense|sub-?zero)\s+(?:cold|heat|temperatures?|weather|conditions)\b|\bexposed\s+to\s+(?:the\s+)?(?:cold|heat|elements)\b/i;
+export const isSurvivalClaimSentence = (sentence: string): boolean =>
+  DEPRIVATION.test(sentence) ||
+  BODILY_OUTCOME.test(sentence) ||
+  EXPOSURE.test(sentence) ||
+  (SURVIVE_VERB.test(sentence) && BODILY_SUBJECT.test(sentence) && !/\?\s*$/.test(sentence.trim()));
+
+/**
  * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
  * pointer back to it ("any gap in your 3-day official baseline"). It asserts nothing new, so it is judged once,
  * where the figure is actually made.
@@ -360,6 +391,8 @@ export function scanNumericClaims(
           why: `owner-approved safety block wording, sources recorded per market in safety-blocks.json`,
         });
       else if (structural) out.push({ ...base, bucket: "B_STRUCTURAL", why: structural.why });
+      else if (hit.category === "interval" && isSurvivalClaimSentence(sentence))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a survival or deprivation-outcome duration: a factual claim about what a person can withstand, with no approved entry" });
       else if (notAClaim) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: notAClaim.why });
       else if (hit.category === "interval" && horizon) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: horizon.why });
       else if (

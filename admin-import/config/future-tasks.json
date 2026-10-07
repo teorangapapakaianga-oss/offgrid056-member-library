@@ -51,6 +51,55 @@
       "implementation": "lib/content/route-policy.json lists every owner-approved resolution of a route clash. FINAL STATE (Stage 9.73B): 'supersedes' is empty (the mechanism remains only for a future, explicitly approved case). 'separateDemo' lists all four collisions (OG-01, OG-08, OG-10, OG-13) and keeps the demo placeholder as a placeholder on /resources/demo-<slug>/ and aliases nothing (res-0007 → res-1001). Any clash not listed stops the build. Tests: tests/unit/route-separation.test.ts.",
       "stage973B": "FINAL (owner, Stage 9.73B): OG-01, OG-08, OG-10 and OG-13 are all explicitly separated in route-policy.json; 'supersedes' is empty; no pending or grandfathered approval remains. Programme days 2, 9, 11, 13 and 29 point at the demo placeholders; demo placeholders are hidden from protected listings and not deleted or renamed. Report: admin-import/STAGE_9.73B_FINAL_ROUTE_SEPARATION.md. DEPLOYED in Stage 9.74.",
       "stage973A": "Grandfathering is NOT approval. The three supersessions were audited individually and are recorded as PENDING OWNER RULING (recommended: separate each). The OG-01 separation is owner-approved, the demo card is hidden from every listing (isUnlisted / getSummaries), and the demo stays reachable via its own route and explicit references (programme days 2 and 29, the demo Household Resilience Assessment). Audit: admin-import/STAGE_9.73A_ROUTE_AUDIT_AND_FINAL_RULINGS.md."
+    },
+    {
+      "id": "og-05-merged-conceptually",
+      "recordedOn": "2026-10-07",
+      "recordedIn": "Stage 9.86 (owner ruling, after the Stage 9.85 claims-first audit)",
+      "status": "DECIDED — MERGED CONCEPTUALLY / NO STANDALONE RESOURCE. No protected res-ID, no NZ or AU PDF, not staged, not deployed.",
+      "title": "OG-05 (legacy '5 Pillars Quick Reference') is not migrated as a resource",
+      "decision": "OG-05 does not become a protected library resource. Its framework introduction already exists (the site's Five Foundations page and OG-01), and its survival, safety and quantity claims are not carried anywhere.",
+      "notCarried": [
+        "the 'Rule of 3s' and its memory aid",
+        "survival thresholds (the 'Survival Threshold' column and the emergency priority table)",
+        "'fastest killers'",
+        "'3 days without water'",
+        "'3 weeks without food'",
+        "'3–4 minutes' (without clean air) and '3–4 hours' (extreme cold or heat) wording",
+        "OG-05's '3 litres per day minimum' wording",
+        "OG-05's '10 litres per person per day' survival-standard wording",
+        "OG-05's '3-day minimum stored per person (10L/day)' and '10L per person stored?' wording",
+        "the '30–50%' humidity target",
+        "the '7-day' non-perishable food target",
+        "the '30-day' food supply target",
+        "the unsourced '6-month' water rotation interval",
+        "the unsourced greywater recycling claim",
+        "the unsourced canning, dehydrating and freezing claim",
+        "smoke-alarm wording ('working smoke alarms on every level') — REMOVED / NOT CARRIED; already handled by resources with sourced safety architecture",
+        "carbon-monoxide wording ('CO detectors near sleeping areas') — REMOVED / NOT CARRIED, as above",
+        "air-purification health claim",
+        "'Week 1 — Foundation', '30-Day Programme', 'Asset OG-05 | Day 5', 'Week 2 covers…' and every other Week / Day / programme label",
+        "'Day 5 Complete' and the 'anchor for the entire programme' promise",
+        "'Next: OG-06 72-Hour Emergency Action Checklist'",
+        "the word 'Pillars' (the locked framework is the Five Foundations: Air, Water, Shelter, Food, Energy)"
+      ],
+      "uniqueKernel": "Rank the Five Foundations from weakest to strongest, or from highest priority to lowest. Preserved as a concept only: no checklist is migrated and no PDF is created for it. OG-01 already carries a 'Your Three Priority Foundations' step.",
+      "mergeDestination": "Open. Option B (a short pointer on the Five Foundations page to the Home Resilience Scorecard's priority step, with no new ranking interaction) is recommended; nothing is implemented. See the follow-up task.",
+      "registerTreatment": "The resource register's states (Deployed, Staged, Prepared, Blocked, Not started) have no 'merged' value. The existing 'Not started' row for OG-05 is left as it is until the owner approves a wording; proposed: 'MERGED CONCEPTUALLY / NO STANDALONE RESOURCE'.",
+      "linkedWork": "Stage 9.86 hardened the numeric detector so a survival or deprivation duration is a claim candidate (admin-import/audit/numeric.ts, tests/unit/numeric-survival.test.ts)."
+    },
+    {
+      "id": "five-foundations-page-pointer",
+      "recordedOn": "2026-10-07",
+      "recordedIn": "Stage 9.86",
+      "status": "NOT STARTED — awaiting the owner's decision (Option B recommended)",
+      "title": "Five Foundations page: pointer to the Home Resilience Scorecard's priority step",
+      "problem": "The merge of OG-05 leaves the foundation-ranking idea with no obvious entry from the Five Foundations page.",
+      "options": {
+        "A": "Add a 'Rank Your Foundations' interaction to the Five Foundations page: a new kind of saved member data (lib/member/store.ts), with backup, restore and start-again handling, and shared by the public demo build.",
+        "B": "Add a short static pointer from the Five Foundations page to the Home Resilience Scorecard, shown only where the real scorecard exists. No new data, no scores, no change to OG-01."
+      },
+      "notDone": "Neither option is implemented. The Five Foundations page, OG-01, res-0004 and programme day 3 are unchanged."
     }
   ]
 }
