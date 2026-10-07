@@ -2,9 +2,9 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.77.
+**As at:** 7 October 2026, after Stage 9.78.
 
-> **Stage 9.77 note.** OG-03 Household Spending Capacity Check is RENDERED: NZ and AU PDFs, 9 portrait pages each, with the one approved wording change (the savings helper text) and nothing else changed in the copy (`admin-import/STAGE_9.77_OG03_RENDER.md`). Every page inspected; scans and PDF text/metadata verification pass; 736 tests; Bucket C 0. The PDFs are in the git-ignored `workspace/prep/OG-03/`; **not staged, not deployed**, nothing in `private-assets/`. **Waiting on the owner:** approval to stage OG-03 as protected resource #24 (`res-1003`); deployment is a separate decision.
+> **Stage 9.78 note.** OG-03 Household Spending Capacity Check is STAGED as protected resource #24 (`res-1003`, draft): record plus the two approved PDFs (byte-identical) in `private-assets/`; staged build 24 records / 48 market files / 0 broken links / Bucket C 0; 736 tests; all differences against the deployed tree attributed (`admin-import/STAGE_9.78_OG03_STAGED.md`). **NOT deployed;** live is still 23 / 46 on Worker `e63141a1-380a-4770-a125-9fd7a15d0bdb`. **Waiting on the owner:** explicit approval to deploy (and, if wanted, to add `res-1510` as a seventh related link).
 >
 > **Stage 9.76A note (earlier).** The owner's rulings are applied to the OG-03 draft (labels approved; one financial note; soft cost claim and "less secure" wording removed; Advanced roadmap kept as a later-stage option; owner's description). The COMPLETE member-facing copy is in `admin-import/STAGE_9.76A_OG03_COPY_REVIEW_PACK.md` (self-contained). 733 tests; price claims 0; Bucket C 0; not rendered, staged or deployed. **Waiting on the owner:** copy approval (and confirmation of the description). Then: render NZ + AU PDFs and QA (separate stage).
 >

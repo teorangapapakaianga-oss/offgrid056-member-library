@@ -92,7 +92,7 @@ would need.
 | Code | Title | Notes |
 |---|---|---|
 | OG-01 | Home Resilience Scorecard | — · a Start Here candidate |
-| OG-03 | Budget Pathway Selector | — · **claims-first audit done (Stage 9.75); owner ruled NARROW; rewrite DRAFT prepared (Stage 9.76) as "Household Spending Capacity Check" (general / planning-implementation / planning / worksheet): copy approved (Stage 9.76A); **RENDERED in Stage 9.77 (NZ + AU PDFs, 9 pages each, verified); not staged, not deployed; awaiting approval to stage as #24** (`STAGE_9.75_OG03_AUDIT.md`, `STAGE_9.76_OG03_REWRITE_DRAFT.md`) |
+| OG-03 | Budget Pathway Selector | — · **claims-first audit done (Stage 9.75); owner ruled NARROW; rewrite DRAFT prepared (Stage 9.76) as "Household Spending Capacity Check" (general / planning-implementation / planning / worksheet): copy approved (Stage 9.76A); **RENDERED in Stage 9.77 (NZ + AU PDFs, 9 pages each, verified); not staged, not deployed; STAGED as #24 in Stage 9.78 (record + 2 approved PDFs in private-assets; staged build 24 / 48); not deployed** (`STAGE_9.75_OG03_AUDIT.md`, `STAGE_9.76_OG03_REWRITE_DRAFT.md`) |
 | OG-04 | Property Profile Matrix | — |
 | OG-05 | 5 Pillars Quick Reference | electrical · **"5 Pillars" is legacy framework wording** |
 | OG-06 | 72-Hour Emergency Checklist | electrical |
