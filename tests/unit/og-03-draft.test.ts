@@ -3,6 +3,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { scanPrices } from "@/admin-import/audit/price";
 import { memberFacingText } from "@/admin-import/pilot/prep";
+import { COLLECTION_IDS, PROGRAM_COMPONENTS } from "@/lib/content/constants";
 
 /**
  * Stage 9.76 — OG-03 Household Spending Capacity Check: the narrowed draft.
@@ -18,7 +19,7 @@ const newText = memberFacingText(`<div class="content">${allNew}</div>`);
 
 describe("Stage 9.76 · OG-03 locked metadata", () => {
   it("is the owner's narrowed resource, as a draft", () => {
-    expect(meta).toMatchObject({ title: "Household Spending Capacity Check", foundation: "general", programComponent: "planning-implementation", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 15, recordStatus: "draft", collections: [], tags: [] });
+    expect(meta).toMatchObject({ title: "Household Spending Capacity Check", foundation: "general", programComponent: "planning-implementation", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 15, recordStatus: "draft", collections: ["planning-tools"], tags: [] });
   });
 
   it("carries only the standing safety blocks (no topic block)", () => {
@@ -137,5 +138,22 @@ describe("Stage 9.77 · the one approved wording refinement, and nothing else", 
       expect(at, marker).toBeGreaterThan(-1);
       expect(content.to.lastIndexOf('class="keep-together page-start"', at), marker).toBeGreaterThan(content.to.lastIndexOf('class="keep-together">', at));
     }
+  });
+});
+describe("Stage 9.78A · OG-03 is discoverable in Planning Tools, using the existing collection only", () => {
+  it("is in the existing planning-tools collection, and not in Start Here", () => {
+    expect(meta.collections).toEqual(["planning-tools"]);
+    expect(COLLECTION_IDS).toContain("planning-tools");
+  });
+
+  it("introduces no new collection or taxonomy: the collection ids and programme components are exactly the existing ones", () => {
+    expect([...COLLECTION_IDS]).toEqual(["start-here", "planning-tools"]);
+    expect([...PROGRAM_COMPONENTS]).toEqual(["off-grid-living", "resilience-planning", "resilience-emergency", "planning-implementation", "advanced-future"]);
+  });
+
+  it("keeps the six related links, and the Advanced roadmap only in the PDF's Where Next table", () => {
+    expect(meta.relatedResources).toEqual(["res-1001", "res-1002", "res-1022", "res-1026", "res-1027", "res-1025"]);
+    expect(meta.relatedResources as string[]).not.toContain("res-1510");
+    expect(newText).toContain("90-Day Implementation Roadmap (Advanced)");
   });
 });

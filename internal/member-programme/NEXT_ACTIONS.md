@@ -2,9 +2,9 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.78.
+**As at:** 7 October 2026, after Stage 9.78A.
 
-> **Stage 9.78 note.** OG-03 Household Spending Capacity Check is STAGED as protected resource #24 (`res-1003`, draft): record plus the two approved PDFs (byte-identical) in `private-assets/`; staged build 24 records / 48 market files / 0 broken links / Bucket C 0; 736 tests; all differences against the deployed tree attributed (`admin-import/STAGE_9.78_OG03_STAGED.md`). **NOT deployed;** live is still 23 / 46 on Worker `e63141a1-380a-4770-a125-9fd7a15d0bdb`. **Waiting on the owner:** explicit approval to deploy (and, if wanted, to add `res-1510` as a seventh related link).
+> **Stage 9.78A note.** OG-03's navigation is corrected: it is now in the existing `planning-tools` collection, so Planning Tools lists it (it previously listed only four demo placeholders; no protected resource had the collection). No new collection or taxonomy; PDFs, copy, safety blocks, route policy and the six related links unchanged. 739 tests; staged build 24 records / 48 market files / 0 broken links / Bucket C 0; NOT deployed; live is 23 / 46 on Worker `e63141a1…` (`admin-import/STAGE_9.78A_OG03_DISCOVERY.md`). **Waiting on the owner:** (1) approval to deploy OG-03; (2) a decision on tagging the other planning tools (OG-26, OG-27, OG-B10, OG-25, OG-22, OG-B04) with `planning-tools` so the page shows the whole planning journey; (3) whether members need a way to browse by programme component (none exists today).
 >
 > **Stage 9.76A note (earlier).** The owner's rulings are applied to the OG-03 draft (labels approved; one financial note; soft cost claim and "less secure" wording removed; Advanced roadmap kept as a later-stage option; owner's description). The COMPLETE member-facing copy is in `admin-import/STAGE_9.76A_OG03_COPY_REVIEW_PACK.md` (self-contained). 733 tests; price claims 0; Bucket C 0; not rendered, staged or deployed. **Waiting on the owner:** copy approval (and confirmation of the description). Then: render NZ + AU PDFs and QA (separate stage).
 >

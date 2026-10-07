@@ -1166,8 +1166,10 @@
       "descriptionStatus": "OWNER-PROVIDED purpose, 2026-10-07 (Stage 9.76A): exact text returned for owner confirmation",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
-      "collections": [],
-      "collectionsStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.76): none",
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-DIRECTED NAVIGATION CORRECTION 2026-10-07 (Stage 9.78A): the existing planning-tools collection (documented in docs/ARCHITECTURE.md and used by the Planning Tools page). Stage 9.76/9.77 had recorded none; with no collection OG-03 was reachable only through All Resources, search, Downloads and the home page. No new collection or taxonomy was introduced.",
       "relatedResources": [
         "res-1001",
         "res-1002",
@@ -1184,7 +1186,7 @@
       "recordStatus": "draft",
       "migrationState": "DRAFT PREPARED (Stage 9.76) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource.",
       "recordStatusNote": "draft, as every real resource is.",
-      "memberJourneyRole": "Planning & Implementation: after the Home Resilience Scorecard, Household Risk Identifier and Resilience Product Wishlist; before the 3-Tier Budget Planner, then the 90-Day Implementation Roadmap."
+      "memberJourneyRole": "Planning & Implementation: after the Home Resilience Scorecard, Household Risk Identifier and Resilience Product Wishlist; before the 3-Tier Budget Planner, then the 90-Day Implementation Roadmap. Listed in Planning Tools (collection planning-tools)."
     }
   }
 }
