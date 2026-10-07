@@ -27,9 +27,23 @@ describe("Stage 9.81 · OG-04 locked metadata", () => {
     expect(PROGRAM_COMPONENTS).toContain("resilience-planning");
   });
 
-  it("leaves the description for owner review", () => {
-    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-REVIEW REQUIRED/);
-    expect(String(meta.description).length).toBeGreaterThan(40);
+  it("carries the owner-approved description, which stays focused on the property situation and what to check", () => {
+    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED/);
+    expect(meta.description).toBe("A worksheet to record your property situation, because it shapes what you can change, what may need permission and what to check first, before you make resilience or off-grid changes.");
+    expect(String(meta.description)).not.toMatch(/\b(legal|law|tenan\w*|landlord|real estate|valuation|design|install\w*|consent)\b/i);
+  });
+
+  it("records the owner's Stage 9.81A rulings: market wording, cover, grid, related list, OG-03 untouched", () => {
+    for (const k of ["marketWordingStatus", "coverStatus", "constraintsGridStatus", "toHelpYouThinkStatus", "og03ReverseLinkStatus"]) expect(String(meta[k]), k).toMatch(/9\.81A/);
+    expect(meta.relatedResources).not.toContain("res-1026");
+    expect(meta.relatedResources).not.toContain("res-1027");
+    expect((meta.safetyTopicDispositions as Record<string, { disposition: string; approvedBy?: string }>)["batteries-and-electrical"]).toMatchObject({ disposition: "REMOVED", approvedBy: "owner" });
+  });
+
+  it("keeps the 'To Help You Think' box to neutral reflection prompts", () => {
+    const box = memberFacingText(`<div class="content">${content.to.match(/To Help You Think[\s\S]*?<\/div>\s*<table/)![0]}</div>`);
+    expect(box).toContain("Questions to ask yourself");
+    expect(box).not.toMatch(/\b(legal|law|tenan\w*|landlord|consents?|council|permits?|code|install\w*|solar|batter\w*|generator|regulat\w*|grant|must|cannot|allowed|illegal)\b/i);
   });
 
   it("answers all five programme-alignment questions", () => {

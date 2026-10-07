@@ -1237,7 +1237,12 @@
       "estimatedTimeStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81)",
       "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
       "description": "A worksheet to record your property situation, because it shapes what you can change, what may need permission and what to check first, before you make resilience or off-grid changes.",
-      "descriptionStatus": "OWNER-REVIEW REQUIRED (draft, Stage 9.81)",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81A): focused on the member's property situation, practical constraints and what to check before resilience or off-grid changes; not legal, tenancy, real-estate or system-design advice",
+      "marketWordingStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81A): 'Rural or lifestyle' for both NZ and AU; the rest of the worksheet stays market-neutral",
+      "coverStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81A): the shared OffGrid056 cover image already used by the resource family; no new cover",
+      "constraintsGridStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81A): five member-completed columns, 8 blank rows, nothing pre-populated",
+      "toHelpYouThinkStatus": "Stage 9.81A review: neutral reflection prompts only (area categories and four questions); no legal conclusion, tenancy or consent advice, capability claim, technical instruction or market-specific assumption; kept unchanged",
+      "og03ReverseLinkStatus": "OWNER RULING 2026-10-07 (Stage 9.81A): OG-03 is NOT modified; OG-04 is not added to its related list in this stage",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
       "collections": [
@@ -1252,13 +1257,15 @@
         "res-1020",
         "res-1512"
       ],
-      "relatedResourcesStatus": "PROPOSED 2026-10-07 (Stage 9.81) — OWNER-REVIEW REQUIRED; ids verified against the private records: Home Resilience Scorecard, Household Risk Identifier, Resilience Product Wishlist, Household Spending Capacity Check, Alternative Energy Suitability Check, Off-Grid System Architecture Planner. OG-03's own related list is NOT changed in this stage.",
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81A): these six only; the 3-Tier Budget Planner and 90-Day Implementation Roadmap are NOT added (later in the journey; they stay in Where Next only). Ids verified against the private records: Home Resilience Scorecard, Household Risk Identifier, Resilience Product Wishlist, Household Spending Capacity Check, Alternative Energy Suitability Check, Off-Grid System Architecture Planner. OG-03's own related list is NOT changed in this stage.",
       "safetyBlocks": [],
       "approvedSafetyBlocks": [],
-      "approvedSafetyBlocksStatus": "To be confirmed by the safety scan of the prepared draft (Stage 9.81). The standing general-disclaimer and emergency-contact blocks are added to every resource.",
+      "approvedSafetyBlocksStatus": "No topic safety block (Stage 9.81 safety scan: none; legacy electrical-topic disposition REMOVED approved by the owner, Stage 9.81A). The standing general-disclaimer and emergency-contact blocks are added to every resource.",
       "safetyTopicDispositions": {
         "batteries-and-electrical": {
           "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-07",
           "reason": "The legacy source named solar panels, a backup generator and a home battery system only as one-word entries in the capability matrix and in two profile descriptions; it gave no instruction on installing or running any of them. The owner's Stage 9.81 ruling removes the matrix and those descriptions and asks the rewrite to avoid naming these technologies. The rewrite teaches nothing on the topic, so no block is required; if a later edit names them again the safety scan will require the block."
         }
       },
