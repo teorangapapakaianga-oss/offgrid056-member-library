@@ -2,10 +2,12 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 7 October 2026, after Stage 9.84.
+**As at:** 8 October 2026, after Stage 9.87.
 
 **LIVE:** 25 protected resources · 50 market files · Worker `65437c37-b731-4851-b67e-5b0fae79fe12` (100%) · immediate rollback target `89333107-7c0a-4bdb-8229-f2b5241a9e05`.
 **STAGED, NOT DEPLOYED:** none. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84).
+**Built, not deployed (not a resource):** the Stage 9.87 navigation cleanup — the protected Start Here lists protected resources only, and the Five Foundations page points to the Home Resilience Scorecard in the protected preview — plus the claim-detector additions. Deploying the navigation cleanup needs the owner's explicit approval.
+**OG-05** (legacy "5 Pillars Quick Reference"): **MERGED / NO STANDALONE RESOURCE**. No res-ID, no NZ or AU PDFs, no standalone migration planned.
 
 The table below counts the 45 legacy resources. Earlier snapshots in this file (for example "21 deployed" at Stage 9.60) are historical and are labelled as such.
 
@@ -15,7 +17,8 @@ The table below counts the 45 legacy resources. Earlier snapshots in this file (
 | **Staged, not deployed** | **0** |
 | **Prepared** — awaiting owner approval | **0** |
 | **Blocked** — pending research | **1** |
-| **Not started** | **19** |
+| **Merged / No standalone resource** (register-only state) | **1** (OG-05) |
+| **Not started** | **18** |
 
 ---
 
@@ -65,7 +68,15 @@ Nothing is waiting on an owner decision about copy, and nothing is staged.
 |---|---|---|
 | OG-16 | Grant Eligibility Insulation Planner | **grants research** — NZ programmes; AU state and territory schemes |
 
-## Not started (19)
+## Merged / No standalone resource (1)
+
+A **register-only** state (Stage 9.87): administrative migration-state tracking. It is **not** a protected-resource status value, and the resource data model is unchanged.
+
+| Code | Legacy title | State | Note |
+|---|---|---|---|
+| OG-05 | 5 Pillars Quick Reference | **MERGED / NO STANDALONE RESOURCE** | No res-ID was assigned. No NZ or AU PDFs exist. No standalone migration is planned. The useful ranking concept is already handled by OG-01 ("Your Three Priority Foundations"), and the Five Foundations page now points to the Home Resilience Scorecard in the protected preview. The unsafe or unsupported legacy claims (the Rule of 3s, survival thresholds, the litre figures, the humidity target, the 7-day and 30-day food targets, the rotation, greywater and canning claims, smoke-alarm and CO wording, the programme labels) were **NOT CARRIED** into any resource. Audit: `admin-import/STAGE_9.85_OG05_AUDIT.md`; decision record: `og-05-merged-conceptually` in `admin-import/config/future-tasks.json`. |
+
+## Not started (18)
 
 Ordered by foundation. "Notes" are the audit's safety exposure, which tells you which approved blocks a migration
 would need.
@@ -104,7 +115,6 @@ would need.
 
 | Code | Title | Notes |
 |---|---|---|
-| OG-05 | 5 Pillars Quick Reference | electrical · **"5 Pillars" is legacy framework wording** |
 | OG-06 | 72-Hour Emergency Checklist | electrical |
 | OG-07 | Week 1 Priority Lock Worksheet | — · heavy programme framing |
 | OG-23 | Supplier Question Bank | — |
@@ -142,6 +152,7 @@ NOT STARTED
   → owner approval                           ⟶ approved
   → render, stage (record + PDFs in private-assets), validate the staged build ⟶ STAGED, NOT DEPLOYED (none at present)
   → re-verify the exact build, deploy on the owner's explicit approval ⟶ DEPLOYED / LIVE (draft, behind Access)
+  → or the audit finds the job is already done elsewhere ⟶ MERGED / NO STANDALONE RESOURCE (register-only; no res-ID, no PDFs)
 ```
 
 Anything that cannot be verified from an official NZ or AU source **blocks** the resource instead of being guessed.
@@ -206,3 +217,8 @@ Synchronised with the actual state. Added the three live resources that were mis
 ## Stage 9.84 note
 
 OG-04 Property Type Review deployed as protected resource #25 (Worker `65437c37-b731-4851-b67e-5b0fae79fe12`; rollback `89333107-7c0a-4bdb-8229-f2b5241a9e05`). The register now shows 25 live resources and 50 market files, nothing staged: OG-04 added to the Deployed table, the Staged section emptied, the state table and the generated classification table updated. The register's table structure, the Stage 9.61 snapshot and OG-02's legacy NZ filename were left as they were.
+
+
+## Stage 9.87 note
+
+OG-05 moved from Not started to the register-only state MERGED / NO STANDALONE RESOURCE. Verified migration-state counts across the 45 legacy resources: Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 (OG-16) · Merged 1 (OG-05) · Not started 18 = 45. The brief expected Prepared 1 and Blocked 0; the data does not support that (nothing is prepared and OG-16 is still blocked on grants research), so the verified counts are recorded and the discrepancy is reported to the owner. The register's table structure, the Stage 9.61 snapshot and OG-02's legacy NZ filename were left as they were.

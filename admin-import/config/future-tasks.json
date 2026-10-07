@@ -5,7 +5,7 @@
       "id": "context-aware-duration-of-supply-claim-type",
       "recordedOn": "2026-10-06",
       "recordedIn": "Stage 9.68 (owner ruling)",
-      "status": "NOT STARTED — deferred by the owner",
+      "status": "DONE — implemented in Stage 9.87 (context-aware; negated, question, example, member-blank and bare-label sentences stay ordinary; OG-11 unchanged).",
       "title": "Context-aware duration-of-supply claim type",
       "problem": "A bare supply quantity such as '7+ days of non-perishable food stored and accessible' asserts how much to hold, but carries no interval verb the numeric gate knows, so it is classified as 'a duration in passing' (bucket D) and is not blocked. Treating every '<N> days of food / water / fuel' as a claim fixes that — but it also flags ordinary sentences.",
       "mustDistinguish": {
@@ -18,7 +18,9 @@
         "Do not modify OG-11 to make a rule pass.",
         "Any such claim type must stay fail-closed for unregistered factual claims."
       ],
-      "currentState": "The narrow 'N+ unit' detection (7+ days) stays: it makes the figure visible as a candidate. The recorded gap is pinned by a test (tests/unit/og-01-audit.test.ts)."
+      "currentState": "The narrow 'N+ unit' detection (7+ days) stays: it makes the figure visible as a candidate. The recorded gap is pinned by a test (tests/unit/og-01-audit.test.ts).",
+      "implementedIn": "admin-import/audit/numeric.ts (supplyTargets); tests/unit/numeric-supply.test.ts; the recorded gap in tests/unit/og-01-audit.test.ts is now a closed-gap test.",
+      "wholeLibraryResult": "Run over all 25 live resources in both markets: Bucket C 0 and no supply-duration finding (no live sentence asserts an unsourced supply target)."
     },
     {
       "id": "shared-cover-cleanup",
@@ -84,22 +86,24 @@
         "the word 'Pillars' (the locked framework is the Five Foundations: Air, Water, Shelter, Food, Energy)"
       ],
       "uniqueKernel": "Rank the Five Foundations from weakest to strongest, or from highest priority to lowest. Preserved as a concept only: no checklist is migrated and no PDF is created for it. OG-01 already carries a 'Your Three Priority Foundations' step.",
-      "mergeDestination": "Open. Option B (a short pointer on the Five Foundations page to the Home Resilience Scorecard's priority step, with no new ranking interaction) is recommended; nothing is implemented. See the follow-up task.",
-      "registerTreatment": "The resource register's states (Deployed, Staged, Prepared, Blocked, Not started) have no 'merged' value. The existing 'Not started' row for OG-05 is left as it is until the owner approves a wording; proposed: 'MERGED CONCEPTUALLY / NO STANDALONE RESOURCE'.",
-      "linkedWork": "Stage 9.86 hardened the numeric detector so a survival or deprivation duration is a claim candidate (admin-import/audit/numeric.ts, tests/unit/numeric-survival.test.ts)."
+      "mergeDestination": "Decided by the owner in Stage 9.87: Option B. A short pointer on the Five Foundations page to the Home Resilience Scorecard (protected preview only); no new ranking interaction, and OG-01 is not modified. OG-01's 'Your Three Priority Foundations' step remains the single protected priority-selection mechanism.",
+      "registerTreatment": "Stage 9.87: the owner approved one REGISTER-ONLY state, 'MERGED / NO STANDALONE RESOURCE', used for OG-05 in RESOURCE_REGISTER.md. It is administrative migration-state tracking only: it is not a protected-resource status value and the resource data model is unchanged.",
+      "linkedWork": "Stage 9.86 hardened the numeric detector so a survival or deprivation duration is a claim candidate (admin-import/audit/numeric.ts, tests/unit/numeric-survival.test.ts).",
+      "recordedFollowUps": "Stage 9.87: Five Foundations pointer implemented (not deployed); protected Start Here cleaned of demo placeholders (not deployed); supply-duration claim detector implemented."
     },
     {
       "id": "five-foundations-page-pointer",
       "recordedOn": "2026-10-07",
       "recordedIn": "Stage 9.86",
-      "status": "NOT STARTED — awaiting the owner's decision (Option B recommended)",
+      "status": "DONE in Stage 9.87 — Option B, protected preview only. Built and validated in the staged build; NOT DEPLOYED until the owner approves.",
       "title": "Five Foundations page: pointer to the Home Resilience Scorecard's priority step",
       "problem": "The merge of OG-05 leaves the foundation-ranking idea with no obvious entry from the Five Foundations page.",
       "options": {
         "A": "Add a 'Rank Your Foundations' interaction to the Five Foundations page: a new kind of saved member data (lib/member/store.ts), with backup, restore and start-again handling, and shared by the public demo build.",
         "B": "Add a short static pointer from the Five Foundations page to the Home Resilience Scorecard, shown only where the real scorecard exists. No new data, no scores, no change to OG-01."
       },
-      "notDone": "Neither option is implemented. The Five Foundations page, OG-01, res-0004 and programme day 3 are unchanged."
+      "notDone": "No ranking interaction was created. OG-01, res-0004 and programme day 3 are unchanged. The public/demo Five Foundations page is byte-identical to its Stage 9.86 build.",
+      "implementedIn": "app/foundations/page.tsx; lib/content/collection-rules.ts (scorecardPointerHref)"
     }
   ]
 }

@@ -4,21 +4,29 @@ import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { PageHeader } from "@/components/layout/page-header";
 import { FoundationProgressBadge } from "@/components/member/foundation-progress";
 import { Icon } from "@/components/ui/icon";
-import { getSummaries } from "@/lib/content/repository";
+import { scorecardPointerHref } from "@/lib/content/collection-rules";
+import { getResourceById, getSummaries, isPrivatePreview } from "@/lib/content/repository";
 import { fiveFoundations } from "@/lib/content/taxonomy";
 
 export const metadata: Metadata = { title: "The Five Foundations" };
 
+/** The protected Home Resilience Scorecard: the one place a member chooses their priority foundations (Stage 9.87). */
+const SCORECARD_ID = "res-1001";
+
 export default function FoundationsPage() {
   const items = getSummaries();
-  return (
-    <>
-      <Breadcrumbs items={[{ label: "Five Foundations" }]} />
-      <PageHeader
-        eyebrow="The OffGrid056 framework"
-        title="The Five Foundations"
-        description="Air, Water, Shelter, Food and Energy: the five things every household depends on. Choose a foundation to see its topics and resources."
-      />
+  // The pointer exists only in the private preview build AND only when the real, non-placeholder scorecard is in that build,
+  // so the public/demo build (which shares this page) is byte-for-byte unchanged.
+  const scorecardHref = scorecardPointerHref({ privatePreview: isPrivatePreview() }, getResourceById(SCORECARD_ID));
+  const breadcrumbs = <Breadcrumbs items={[{ label: "Five Foundations" }]} />;
+  const header = (
+    <PageHeader
+      eyebrow="The OffGrid056 framework"
+      title="The Five Foundations"
+      description="Air, Water, Shelter, Food and Energy: the five things every household depends on. Choose a foundation to see its topics and resources."
+    />
+  );
+  const list = (
       <ul role="list" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {fiveFoundations.map((f) => {
           const mine = items.filter((r) => r.foundation === f.id);
@@ -49,6 +57,30 @@ export default function FoundationsPage() {
           );
         })}
       </ul>
+  );
+  // The public/demo page is returned exactly as it was before the pointer existed (same elements, same order); only the private
+  // preview, with the real scorecard in the build, appends the sentence.
+  if (!scorecardHref) {
+    return (
+      <>
+        {breadcrumbs}
+        {header}
+        {list}
+      </>
+    );
+  }
+  return (
+    <>
+      {breadcrumbs}
+      {header}
+      {list}
+      <p className="mt-8 text-sm text-og-taupe">
+        Not sure which foundation to start with?{" "}
+        <Link href={scorecardHref} className="font-semibold text-og-deep underline underline-offset-2">
+          The Home Resilience Scorecard
+        </Link>{" "}
+        helps you identify your three priority foundations.
+      </p>
     </>
   );
 }

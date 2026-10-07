@@ -33,9 +33,13 @@ describe("Stage 9.78B · the collection listing rule", () => {
     expect(inCollection(demo, "start-here", { hidePlaceholders: true, privatePreview: true })).toBe(false); // not a member of that collection
   });
 
-  it("only the Planning Tools page asks for hiding; Start Here is untouched", () => {
+  it("the Planning Tools page (Stage 9.78B) and the Start Here page (Stage 9.87) ask for hiding; no other collection page does", () => {
     expect(fs.readFileSync(path.join(root, "app/planning-tools/page.tsx"), "utf8")).toMatch(/inCollection\(r, "planning-tools", \{ hidePlaceholders: true/);
-    expect(fs.readFileSync(path.join(root, "app/start-here/page.tsx"), "utf8")).not.toMatch(/inCollection|hidePlaceholders/);
+    expect(fs.readFileSync(path.join(root, "app/start-here/page.tsx"), "utf8")).toMatch(/inCollection\(r, "start-here", \{ hidePlaceholders: true/);
+    for (const f of ["app/library/page.tsx", "app/foundations/page.tsx"]) {
+      const p = path.join(root, f);
+      if (fs.existsSync(p)) expect(fs.readFileSync(p, "utf8"), f).not.toMatch(/hidePlaceholders/);
+    }
   });
 
   it("introduces no new collection and no new programme component", () => {

@@ -49,21 +49,29 @@ describe("Stage 9.86 · OG-05 disposition", () => {
     expect(decision.uniqueKernel).not.toMatch(/\bPillars?\b/);
   });
 
-  it("does not invent a register status: the register's own states are unchanged and the proposal is only recorded", () => {
-    expect(decision.registerTreatment).toMatch(/no 'merged' value/);
+  it("records the owner's register-only state (Stage 9.87): OG-05 is in the Merged section, never in Not started", () => {
+    expect(decision.registerTreatment).toMatch(/REGISTER-ONLY state, 'MERGED \/ NO STANDALONE RESOURCE'/);
+    expect(decision.registerTreatment).toMatch(/not a protected-resource status value/);
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr).toMatch(/\| OG-05 \| 5 Pillars Quick Reference \|/); // still in Not started, as before
-    expect(rr).not.toMatch(/MERGED CONCEPTUALLY/);
+    expect(rr.split("## Merged / No standalone resource")[1].split("## Not started")[0]).toMatch(/\| OG-05 \| 5 Pillars Quick Reference \| \*\*MERGED \/ NO STANDALONE RESOURCE\*\*/);
+    expect(rr.split("## Not started (18)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-05 \|/);
   });
 
-  it("leaves the Five Foundations page, OG-01, res-0004 and programme day 3 untouched; the page pointer is only an open follow-up", () => {
-    expect(followUp.status).toMatch(/^NOT STARTED/);
-    expect(followUp.notDone).toMatch(/unchanged/);
+  it("closes the follow-ups: the page pointer is done (not deployed) and the supply-duration detector is implemented", () => {
+    expect(followUp.status).toMatch(/^DONE in Stage 9\.87 — Option B, protected preview only/);
+    expect(followUp.status).toMatch(/NOT DEPLOYED/);
+    expect(followUp.notDone).toMatch(/No ranking interaction was created/);
+    const supply = tasks.find((t) => t.id === "context-aware-duration-of-supply-claim-type") as { status: string; implementedIn: string };
+    expect(supply.status).toMatch(/^DONE — implemented in Stage 9\.87/);
+    expect(supply.implementedIn).toMatch(/numeric-supply\.test\.ts/);
+  });
+
+  it("leaves OG-01, res-0004 and programme day 3 untouched, and adds no ranking interaction to the Five Foundations page", () => {
     const demo = json<Record<string, unknown>>("data/resources/five-foundations-overview.json");
     expect(demo).toMatchObject({ id: "res-0004", slug: "five-foundations-overview", title: "Five Foundations Overview", isPlaceholder: true, status: "published", collections: ["start-here"], relatedResources: [] });
     expect(json<{ resourceIds: string[]; worksheet: { resourceId: string } }>("data/programme/days/day-03.json")).toMatchObject({ resourceIds: ["res-0004"], worksheet: { resourceId: "res-0004" } });
     const page = fs.readFileSync(path.join(root, "app/foundations/page.tsx"), "utf8");
-    expect(page).not.toMatch(/Scorecard|Rank Your Foundations|isPrivatePreview/);
+    expect(page).not.toMatch(/Rank Your Foundations|use client|useState|localStorage/);
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const og01 = json<{ id: string; relatedResources: string[]; collections: string[] }>("private-assets/data-resources/home-resilience-scorecard.private.json");

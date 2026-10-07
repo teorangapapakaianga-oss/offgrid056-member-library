@@ -53,16 +53,54 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
     });
   }
 
-  it("the resource register counts the 45 legacy resources: 25 live + 0 staged + 1 blocked + 19 not started", () => {
+  for (const n of names) {
+    it(`${n}: OG-05 is MERGED / NO STANDALONE RESOURCE, and is not described as awaiting migration`, () => {
+      const c = current(n);
+      expect(c).toMatch(/OG-05/);
+      expect(c).toContain("MERGED / NO STANDALONE RESOURCE");
+      expect(c).toMatch(/No res-ID/);
+      expect(c).not.toMatch(/OG-05[^.\n]{0,100}\b(awaiting migration|is (?:still )?not started|to be migrated|will be migrated|pending migration)\b/i);
+    });
+
+    it(`${n}: states that the Stage 9.87 navigation cleanup is built and NOT deployed, and that no resource is staged`, () => {
+      const c = current(n);
+      expect(c).toMatch(/Built, not deployed \(not a resource\)/);
+      expect(c).toMatch(/explicit approval/);
+    });
+  }
+
+  it("the resource register counts the 45 legacy resources: 25 live + 0 staged + 0 prepared + 1 blocked + 1 merged + 18 not started", () => {
     const rr = text.RESOURCE_REGISTER;
-    expect(25 + 0 + 1 + 19).toBe(45);
+    expect(25 + 0 + 0 + 1 + 1 + 18).toBe(45);
     expect(rr).toMatch(/\*\*Deployed \/ LIVE\*\*[^\n]*\*\*25\*\*/);
     expect(rr).toMatch(/\*\*Staged, not deployed\*\*[^\n]*\*\*0\*\*/);
+    expect(rr).toMatch(/\*\*Prepared\*\*[^\n]*\*\*0\*\*/);
     expect(rr).toMatch(/\*\*Blocked\*\*[^\n]*\*\*1\*\*/);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*19\*\*/);
+    expect(rr).toMatch(/\*\*Merged \/ No standalone resource\*\*[^\n]*\*\*1\*\* \(OG-05\)/);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*18\*\*/);
     expect(rr).toContain("## Deployed — LIVE (25)");
     expect(rr).toContain("## Staged, not deployed (0)");
-    expect(rr).toContain("## Not started (19)");
+    expect(rr).toContain("## Merged / No standalone resource (1)");
+    expect(rr).toContain("## Not started (18)");
+  });
+
+  it("the table rows agree with the counts, and OG-05 sits only in the Merged section", () => {
+    const rr = text.RESOURCE_REGISTER;
+    const rows = (a: string, b: string) => [...rr.split(a)[1].split(b)[0].matchAll(/^\| \*{0,2}(OG-[B0-9]+)\*{0,2} \|/gm)].map((m) => m[1]);
+    const deployed = rows("## Deployed", "## Staged");
+    const blocked = rows("## Blocked", "## Merged / No standalone resource");
+    const merged = rows("## Merged / No standalone resource", "## Not started");
+    const notStarted = rows("## Not started", "## Route clashes");
+    expect([deployed.length, blocked.length, merged.length, notStarted.length]).toEqual([25, 1, 1, 18]);
+    expect(merged).toEqual(["OG-05"]);
+    expect([...deployed, ...blocked, ...notStarted]).not.toContain("OG-05");
+    expect(new Set([...deployed, ...blocked, ...merged, ...notStarted]).size).toBe(45);
+  });
+
+  it("the merged state is register-only: no protected resource carries it, and no record or schema has the value", () => {
+    expect(text.RESOURCE_REGISTER).toMatch(/\*\*not\*\* a protected-resource status value/);
+    const schema = fs.readFileSync(path.join(root, "lib/content/schemas.ts"), "utf8") + fs.readFileSync(path.join(root, "lib/content/constants.ts"), "utf8");
+    expect(schema).not.toMatch(/MERGED|NO STANDALONE/i);
   });
 
   it("OG-04 is registered as live res-1004 with the locked classification, in Planning Tools", () => {

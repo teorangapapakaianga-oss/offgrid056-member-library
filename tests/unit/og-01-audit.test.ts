@@ -33,12 +33,12 @@ describe("Stage 9.67 · numeric detector: 'N+ unit' quantities are now seen", ()
     expect(scan(html, "NZ").map((c) => c.figure)).toContain("7+ days");
   });
 
-  it("RECORDED GAP (not fixed here): a bare stored-quantity phrase is still classed 'a duration in passing'", () => {
-    // "7+ days of food stored" asserts how much to hold, but carries no interval verb the gate knows, so it is bucket D.
-    // A rule that always treats "<N> days of food/water/fuel" as a claim would catch it, and would also flag live OG-11's
-    // reassurance "You do not need to buy 30 days of food in one shop." — an owner decision, so the rule is NOT applied.
+  it("GAP CLOSED (Stage 9.87): a stored-quantity phrase is a supply-duration target, a candidate that needs a source", () => {
+    // "7+ days of food stored" asserts how much to hold. Stage 9.67 recorded it as bucket D because a broad "<N> days of
+    // food/water/fuel" rule also flagged live OG-11's reassurance. Stage 9.87 added the context-aware rule (negated, question,
+    // example and bare-label sentences stay ordinary), so the target is now C_NEEDS_SOURCE and the reassurance below is unchanged.
     const html = `<div class="content"><p>7+ days of non-perishable food stored and accessible</p></div>`;
-    expect(scan(html, "NZ").find((c) => c.figure === "7+ days")?.bucket).toBe("D_NOT_A_CLAIM");
+    expect(scan(html, "NZ").find((c) => c.figure === "7+ days")?.bucket).toBe("C_NEEDS_SOURCE");
     const og11 = `<div class="content"><p>You do not need to buy 30 days of food in one shop.</p></div>`;
     expect(scan(og11, "NZ").find((c) => c.figure === "30 days")?.bucket).toBe("D_NOT_A_CLAIM");
   });
@@ -83,12 +83,14 @@ describe("Stage 9.67 · the legacy OG-01 source, when the working copy has it", 
     expect(safetyTopicMentions(text, "carbon-monoxide"), "carbon monoxide has no topic detector").toEqual([]);
   });
 
-  it("has exactly one registry-blocked figure pair: the water baseline (10L per person per day, 3 days) — no prices, no percentages", () => {
+  it("has exactly these registry-blocked figures: the water baseline (10L per person per day, 3 days) and, since Stage 9.87, the '7+ days' supply target — no prices, no percentages", () => {
     if (!html) return;
     for (const m of ["NZ", "AU"]) {
       const all = scan(html, m);
       const c = all.filter((x) => x.bucket === "C_NEEDS_SOURCE").map((x) => x.figure).sort();
-      expect(c, m).toEqual(["10L", "3 days"]);
+      // "7+ days of non-perishable food stored and accessible" is in the legacy source and was invisible before the supply-duration rule.
+      // It is not in the migrated OG-01 (the live library's Bucket C is 0), so the legacy audit now lists it as the third blocked figure.
+      expect(c, m).toEqual(["10L", "3 days", "7+ days"]);
       expect(all.some((x) => x.category === "currency" || x.category === "percentage"), `${m}: no money or percentages`).toBe(false);
     }
   });

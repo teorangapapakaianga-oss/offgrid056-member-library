@@ -77,10 +77,10 @@ describe("Stage 9.68 · OG-01 owner rulings are recorded exactly", () => {
     expect(String(meta.scaleStatus)).toMatch(/no scientific, government or predictive validity/);
   });
 
-  it("records the context-aware duration-of-supply task for the future, and does not apply it", () => {
+  it("records the context-aware duration-of-supply task and its constraints; deferred at Stage 9.68, implemented at Stage 9.87", () => {
     const f = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/future-tasks.json"), "utf8")) as { tasks: { id: string; status: string; mustDistinguish: Record<string, string>; constraints: string[] }[] };
     const t = f.tasks.find((x) => x.id === "context-aware-duration-of-supply-claim-type")!;
-    expect(t.status).toMatch(/NOT STARTED/);
+    expect(t.status).toMatch(/^DONE — implemented in Stage 9\.87/); // "NOT STARTED — deferred by the owner" until the owner took it up in Stage 9.87
     expect(t.mustDistinguish.ordinarySentence).toContain("You do not need to buy 30 days of food in one shop.");
     expect(t.constraints.join(" ")).toMatch(/Do not modify OG-11/);
   });

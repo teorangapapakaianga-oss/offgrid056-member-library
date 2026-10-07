@@ -4,12 +4,17 @@ import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { PageHeader } from "@/components/layout/page-header";
 import { ResourceCard } from "@/components/resources/resource-card";
 import { EmptyState } from "@/components/ui/empty-state";
-import { getSummaries } from "@/lib/content/repository";
+import { inCollection } from "@/lib/content/collection-rules";
+import { getSummaries, isPrivatePreview } from "@/lib/content/repository";
 
 export const metadata: Metadata = { title: "Start Here" };
 
 export default function StartHerePage() {
-  const steps = getSummaries((r) => r.collections?.includes("start-here") ?? false).sort((a, b) => a.order - b.order);
+  const privatePreview = isPrivatePreview();
+  // In the private preview, Start Here lists the protected member resources only. Demonstration placeholders stay reachable on
+  // their own routes and through the programme, the workshops and the demo learning path (Stage 9.87). The public demo build
+  // is not the private preview, so it lists them exactly as before.
+  const steps = getSummaries((r) => inCollection(r, "start-here", { hidePlaceholders: true, privatePreview })).sort((a, b) => a.order - b.order);
   return (
     <>
       <Breadcrumbs items={[{ label: "Start Here" }]} />

@@ -267,6 +267,39 @@ export const isSurvivalClaimSentence = (sentence: string): boolean =>
   (SURVIVE_VERB.test(sentence) && BODILY_SUBJECT.test(sentence) && !/\?\s*$/.test(sentence.trim()));
 
 /**
+ * Supply-duration targets (Stage 9.87, the task deferred at Stage 9.68). "A 7-day non-perishable supply", "30 days of water",
+ * "enough food for 14 days" and "a supply lasting 3 days" assert HOW MUCH to hold, but they carry no interval verb the gate
+ * knows, so they were filed as "a duration in passing". They are factual preparedness targets and now read as claim candidates.
+ *
+ * The rule describes the wording, never a document, and it is context-aware, because a duration beside a supply word is not
+ * always a target. It reads as a TARGET only when the duration is bound to a supply noun, and it stays an ordinary sentence when:
+ *  - it is NEGATED or reassuring ("You do not need to buy 30 days of food in one shop" — live OG-11, which must stay as it is);
+ *  - it is a QUESTION, an EXAMPLE ("for example…") or a member's own choice or blank ("choose…", "write…", "____");
+ *  - it is a bare LABEL such as the title "30-Day Pantry Builder" or a menu entry "14-Day Supply" (the compact "N-day supply"
+ *    form needs an asserting word beside it — minimum, at least, enough, should, keep, store, disruption …).
+ * Titles, programme names ("30-Day Programme", "90-Day Implementation Roadmap"), schedules ("complete this in 7 days", "Day 7",
+ * "Week 3") and task deadlines never name a supply noun, so they are untouched.
+ */
+const SUPPLY_FIG = `(?:\\d[\\d,]*(?:\\.\\d+)?(?:\\s?[–-]\\s?\\d[\\d,]*)?\\+?|${NUMBER})`;
+const SUPPLY_UNIT = "(?:day|week|month)s?\\+?";
+const SUPPLY_MOD = "(?:emergency|non-?perishable|drinking|household|food|water|fuel|gas|LPG|firewood|wood|medical|stored|essential|spare|extra|backup|back-up|canned|dry|pantry|survival)";
+const SUPPLY_THING = "(?:food|water|fuel|supplies|firewood|LPG|gas|rations?|provisions|medication|medicine|batteries)";
+const SUPPLY_COMPACT = new RegExp(`${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}\\s+(?:${SUPPLY_MOD}\\s+){0,3}(?:supply|supplies|stockpile|stock|rations?|reserves?)\\b`, "gi");
+const SUPPLY_OF = new RegExp(`${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}\\s+(?:of|worth of)\\s+(?:${SUPPLY_MOD}\\s+){0,3}${SUPPLY_THING}\\b`, "gi");
+const SUPPLY_ENOUGH = new RegExp(`\\b(?:enough|sufficient)\\s+(?:${SUPPLY_MOD}\\s+){0,2}${SUPPLY_THING}\\s+(?:for|to last)\\s+(?:at least\\s+|up to\\s+|about\\s+)?${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}`, "gi");
+const SUPPLY_LASTING = new RegExp(`\\b(?:supply|supplies|stock|stockpile)\\s+(?:lasting|that lasts?|to last|covering)\\s+(?:at least\\s+|up to\\s+|about\\s+)?${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}`, "gi");
+const SUPPLY_NOT_A_TARGET = /\b(?:do not|don'?t|does not|doesn'?t|need not|no need|not need|never|not necessary|unnecessary|isn'?t|aren'?t|not required|rather than|instead of)\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose)\b|[_…]{3,}|\b(?:choose|select|pick|decide|circle|tick|fill in|write|your own)\b/i;
+const SUPPLY_ASSERTS = /\b(?:minimum|at least|least|enough|sufficient|should|must|need|needs|needed|recommend\w*|advis\w+|aim|keep|kept|store|stored|storing|hold|held|maintain\w*|have|has|stock\w*|accessible|available|ready|extended|disruption|emergenc\w+|outage|in case|per person|baseline|essential|on hand)\b/i;
+const supplyMatches = (re: RegExp, s: string) => [...s.matchAll(new RegExp(re.source, re.flags))].map((m) => m[0]);
+/** The text of every supply-duration target in a sentence, or [] when the sentence is not asserting one. */
+export function supplyTargets(sentence: string): string[] {
+  if (SUPPLY_NOT_A_TARGET.test(sentence)) return [];
+  const compact = SUPPLY_ASSERTS.test(sentence) ? supplyMatches(SUPPLY_COMPACT, sentence) : [];
+  return [...compact, ...supplyMatches(SUPPLY_OF, sentence), ...supplyMatches(SUPPLY_ENOUGH, sentence), ...supplyMatches(SUPPLY_LASTING, sentence)];
+}
+const isSupplyTargetFigure = (sentence: string, figure: string): boolean => supplyTargets(sentence).some((t) => t.toLowerCase().includes(figure.toLowerCase()));
+
+/**
  * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
  * pointer back to it ("any gap in your 3-day official baseline"). It asserts nothing new, so it is judged once,
  * where the figure is actually made.
@@ -393,6 +426,8 @@ export function scanNumericClaims(
       else if (structural) out.push({ ...base, bucket: "B_STRUCTURAL", why: structural.why });
       else if (hit.category === "interval" && isSurvivalClaimSentence(sentence))
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a survival or deprivation-outcome duration: a factual claim about what a person can withstand, with no approved entry" });
+      else if (hit.category === "interval" && isSupplyTargetFigure(sentence, hit.figure))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a supply-duration target: a factual statement of how much to hold, with no approved entry" });
       else if (notAClaim) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: notAClaim.why });
       else if (hit.category === "interval" && horizon) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: horizon.why });
       else if (
