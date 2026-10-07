@@ -2,32 +2,33 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 7 October 2026, after Stage 9.83A.
+**As at:** 7 October 2026, after Stage 9.84.
 
-**LIVE:** 24 protected resources · 48 market files · Worker `89333107-7c0a-4bdb-8229-f2b5241a9e05` (100%) · rollback target `e63141a1-380a-4770-a125-9fd7a15d0bdb`.
-**STAGED, NOT DEPLOYED:** OG-04 Property Type Review (`res-1004`) → 25 protected resources · 50 market files once deployed. Deploying it needs the owner's explicit approval.
+**LIVE:** 25 protected resources · 50 market files · Worker `65437c37-b731-4851-b67e-5b0fae79fe12` (100%) · immediate rollback target `89333107-7c0a-4bdb-8229-f2b5241a9e05`.
+**STAGED, NOT DEPLOYED:** none. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84).
 
 The table below counts the 45 legacy resources. Earlier snapshots in this file (for example "21 deployed" at Stage 9.60) are historical and are labelled as such.
 
 | State | Count |
 |---|---|
-| **Deployed / LIVE** (private preview, draft) | **24** |
-| **Staged, not deployed** | **1** (OG-04) |
+| **Deployed / LIVE** (private preview, draft) | **25** |
+| **Staged, not deployed** | **0** |
 | **Prepared** — awaiting owner approval | **0** |
 | **Blocked** — pending research | **1** |
 | **Not started** | **19** |
 
 ---
 
-## Deployed — LIVE (24)
+## Deployed — LIVE (25)
 
-Each is a draft with NZ and AU files behind Cloudflare Access. (Stage 9.83A: this table was last edited at Stage 9.60 with 21 rows; OG-01, OG-03 and OG-B09 were live but missing, and OG-27 showed an old foundation.)
+Each is a draft with NZ and AU files behind Cloudflare Access. (Stage 9.83A: this table was last edited at Stage 9.60 with 21 rows; OG-01, OG-03 and OG-B09 were live but missing, and OG-27 showed an old foundation. Stage 9.84 added OG-04.)
 
 | Code | Title | Foundation / type | Safety blocks | Stage |
 |---|---|---|---|---|
 | OG-01 | Home Resilience Scorecard | general / assessment | electrical · smoke alarms | 9.71 |
 | OG-02 | Household Risk Identifier | general / worksheet | — | 9.13 |
 | OG-03 | Household Spending Capacity Check | general / worksheet | — | 9.79 |
+| OG-04 | Property Type Review | general / worksheet | — | 9.84 |
 | OG-08 | Water Storage Calculator | water / worksheet | drinking water (audited exemption from water treatment) | 9.39 |
 | OG-09 | **Household Water Treatment Guide** | water / guide | drinking water · **water treatment** | 9.44 |
 | OG-10 | Rainwater Harvesting Planner | water / planner | drinking water · working at height | 9.41 |
@@ -50,28 +51,13 @@ Each is a draft with NZ and AU files behind Cloudflare Access. (Stage 9.83A: thi
 | **OG-13** | **Healthy Home Air Audit** | air / assessment | **smoke alarms · mould & dampness · ventilation** · CO · solid fuel | 9.54 |
 | **OG-17** | **Solid Fuel Heating Planner** | shelter / planner | solid fuel · smoke alarms · CO | 9.60 |
 
-## Staged, not deployed (1)
+## Staged, not deployed (0)
 
-Staged in `private-assets/` (git-ignored); in the staged build only. **Not live.**
-
-| Field | OG-04 |
-|---|---|
-| ID | `res-1004` |
-| Title | Property Type Review (legacy: Property Profile Matrix) |
-| Foundation | general |
-| Program Component | resilience-planning |
-| Category | planning |
-| Type | worksheet |
-| Status | **staged / not deployed** (record status: draft) |
-| Collection | planning-tools |
-| Market files | NZ and AU, 9 portrait pages each |
-| Safety blocks | standing emergency contact and general disclaimer only; legacy electrical topic recorded REMOVED |
-| Staged in | Stage 9.83 (`admin-import/STAGE_9.83_OG04_STAGED.md`) |
-| Staged build | 25 protected resources · 50 market files · 0 broken links · Bucket C 0 |
+None. OG-04 was staged in Stage 9.83 and **deployed in Stage 9.84** as protected resource #25 (`res-1004`, Property Type Review; general / resilience-planning / planning / worksheet; collection planning-tools; draft, behind Cloudflare Access; NZ and AU, 9 portrait pages each; standing blocks only, legacy electrical topic recorded REMOVED; report `admin-import/STAGE_9.84_OG04_DEPLOYED.md`).
 
 ## Prepared — awaiting owner approval (0)
 
-Nothing is waiting on an owner decision about copy. The only open item is the owner's approval to deploy OG-04, above.
+Nothing is waiting on an owner decision about copy, and nothing is staged.
 
 ## Blocked — pending research (1)
 
@@ -154,7 +140,7 @@ NOT STARTED
   → copy changes proposed (exact from → to, market variants marked)
   → NZ + AU previews rendered and verified   ⟶ PREPARED
   → owner approval                           ⟶ approved
-  → render, stage (record + PDFs in private-assets), validate the staged build ⟶ STAGED, NOT DEPLOYED
+  → render, stage (record + PDFs in private-assets), validate the staged build ⟶ STAGED, NOT DEPLOYED (none at present)
   → re-verify the exact build, deploy on the owner's explicit approval ⟶ DEPLOYED / LIVE (draft, behind Access)
 ```
 
@@ -162,14 +148,14 @@ Anything that cannot be verified from an official NZ or AU source **blocks** the
 
 ## Protected resource classification (generated from the records, Stage 9.83A)
 
-Read from `private-assets/data-resources/*.private.json`; LIVE means the resource's NZ and AU PDFs are in the deployed tree. 25 records · 50 market files in total; **24 live · 48 market files**; **1 staged (OG-04) → 25 · 50**. Every record is status draft.
+Read from `private-assets/data-resources/*.private.json`; LIVE means the resource's NZ and AU PDFs are in the deployed tree. 25 records · 50 market files in total; **25 live · 50 market files**; none staged. Every record is status draft.
 
 | ID | Code | Title | Foundation | Program Component | Category | Type | Collections | State |
 |---|---|---|---|---|---|---|---|---|
 | `res-1001` | OG-01 | Home Resilience Scorecard | general | resilience-planning | getting-started | assessment | start-here | LIVE |
 | `res-1002` | OG-02 | Household Risk Identifier | general | resilience-planning | planning | worksheet | start-here | LIVE |
 | `res-1003` | OG-03 | Household Spending Capacity Check | general | planning-implementation | planning | worksheet | planning-tools | LIVE |
-| `res-1004` | OG-04 | Property Type Review | general | resilience-planning | planning | worksheet | planning-tools | **STAGED, NOT DEPLOYED** |
+| `res-1004` | OG-04 | Property Type Review | general | resilience-planning | planning | worksheet | planning-tools | LIVE |
 | `res-1008` | OG-08 | Water Storage Calculator | water | off-grid-living | water-storage | worksheet | — | LIVE |
 | `res-1009` | OG-09 | Household Water Treatment Guide | water | off-grid-living | water-security | guide | — | LIVE |
 | `res-1010` | OG-10 | Rainwater Harvesting Planner | water | off-grid-living | rainwater | planner | — | LIVE |
@@ -212,6 +198,11 @@ OG-B09: migrated DRAFT prepared (config only), awaiting owner copy approval. Not
 OG-B09 Resilient Heating & Insulation Upgrade Checklist: protected resource #22 (res-1509), draft, resilience-planning, deployed.
 
 
-## Stage 9.83A note
+## Stage 9.83A note (history)
 
 Synchronised with the actual state. Added the three live resources that were missing (OG-01, OG-03, OG-B09), moved OG-B09 out of Blocked (deployed at Stage 9.66; its gas research was resolved), corrected OG-27's foundation to general (the record has said general since the foundation validation), removed OG-01, OG-03 and OG-04 from Not started, added the Staged section for OG-04 and the generated classification table. No classification, record or PDF was changed. One data-model note: OG-02's NZ market file is `household-risk-identifier.pdf` (no `.NZ.` in the name, unlike every other resource); this is legacy naming, recorded as it is and not changed.
+
+
+## Stage 9.84 note
+
+OG-04 Property Type Review deployed as protected resource #25 (Worker `65437c37-b731-4851-b67e-5b0fae79fe12`; rollback `89333107-7c0a-4bdb-8229-f2b5241a9e05`). The register now shows 25 live resources and 50 market files, nothing staged: OG-04 added to the Deployed table, the Staged section emptied, the state table and the generated classification table updated. The register's table structure, the Stage 9.61 snapshot and OG-02's legacy NZ filename were left as they were.

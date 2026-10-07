@@ -2,13 +2,13 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.83A.
+**As at:** 7 October 2026, after Stage 9.84.
 
-**Current state:** LIVE = 24 protected resources · 48 market files (Worker `89333107-7c0a-4bdb-8229-f2b5241a9e05`, 100%; rollback target `e63141a1-380a-4770-a125-9fd7a15d0bdb`). STAGED, NOT DEPLOYED = OG-04 Property Type Review (`res-1004`) → 25 protected resources · 50 market files. **Next action:** the owner decides whether to deploy OG-04 as protected resource #25; nothing is deployed until they approve.
+**Current state:** LIVE = 25 protected resources · 50 market files (Worker `65437c37-b731-4851-b67e-5b0fae79fe12`, 100%; immediate rollback target `89333107-7c0a-4bdb-8229-f2b5241a9e05`, then `e63141a1-380a-4770-a125-9fd7a15d0bdb` and the older versions). OG-04 Property Type Review (`res-1004`) is live. STAGED, NOT DEPLOYED = none. **Next action:** the owner chooses the next resource to audit or migrate; nothing is staged or waiting to deploy.
 
-> **Stage 9.83A note.** `RESOURCE_REGISTER.md` synchronised with the records and the deployed tree (24 live / 48 market files; OG-04 staged, 25 / 50). No resource, PDF, classification or route changed. Waiting on the owner: explicit approval to deploy OG-04.
+> **Stage 9.84 note.** OG-04 is deployed as protected resource #25 (Worker `65437c37-b731-4851-b67e-5b0fae79fe12`; rollback `89333107-7c0a-4bdb-8229-f2b5241a9e05`). 25 protected resources · 50 market files · 0 broken links · Bucket C 0; the two OG-04 PDFs are byte-identical to the approved renders; every protected route still redirects to Cloudflare Access. Report: `admin-import/STAGE_9.84_OG04_DEPLOYED.md`. **Waiting on the owner:** the next resource to audit or migrate.
 >
-> **Stage 9.83 note (earlier).** OG-04 Property Type Review is STAGED (not deployed) as protected resource #25: record and the two approved PDFs (full SHA-256 in the report) in `private-assets/`; staged build 25 / 50 / 0 broken links / Bucket C 0; 774 tests; Planning Tools would list 8. Live is unchanged at 24 / 48 on Worker `89333107-7c0a-4bdb-8229-f2b5241a9e05`, rollback `e63141a1-380a-4770-a125-9fd7a15d0bdb`. *Then waiting on the owner (resolved or superseded since):* explicit approval to deploy OG-04. Report: `admin-import/STAGE_9.83_OG04_STAGED.md`.
+> **Stage 9.83 and 9.83A notes (earlier, history).** OG-04 was staged (9.83) and the resource register synchronised with the records (9.83A); both are superseded by the deployment in Stage 9.84. Reports: `admin-import/STAGE_9.83_OG04_STAGED.md`, `admin-import/STAGE_9.83A_REGISTER_SYNC.md`.
 >
 > **Stage 9.82A note (earlier).** OG-04 page 7 now opens with the heading "Step 4 — Your Property Rules (continued)"; both PDFs re-rendered (9 portrait pages each); 769 tests; Bucket C 0; NOT staged or deployed. *Then waiting on the owner (resolved or superseded since):* approval of the PDFs to stage as protected resource #25. Report: `admin-import/STAGE_9.82A_OG04_PAGE7_FIX.md`.
 >
