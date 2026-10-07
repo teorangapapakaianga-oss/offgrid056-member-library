@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
  * Stages 9.83A and 9.84 — the three programme registers must agree with each other about the live state, and must stay clean
  * (no truncated paths, control characters or broken encoding). Reads the committed markdown only.
  *
- * Current state (Stage 9.88): 25 protected resources · 50 market files; nothing staged; OG-04 live (Stage 9.84); the protected
+ * Current state (Stage 9.93): LIVE 25 protected resources · 50 market files; STAGED (not deployed) OG-06 res-1006 = 26 / 52; OG-04 live (Stage 9.84); the protected
  * navigation cleanup (Start Here, Five Foundations pointer) DEPLOYED (Stage 9.88); OG-05 merged / no standalone resource.
  */
 const root = process.cwd();
@@ -45,10 +45,12 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c).toContain(ROLLBACK);
     });
 
-    it(`${n}: OG-04 is live, nothing is staged, and the current-state statement carries no stale counts`, () => {
+    it(`${n}: OG-04 is live, OG-06 (res-1006) is staged and not deployed, and the current-state statement carries no stale counts`, () => {
       const c = current(n);
       expect(c).toMatch(/OG-04[^\n]*(is live|live as protected resource #25|is deployed|deployed as protected resource #25|is live as)/);
-      expect(c).toMatch(/STAGED, NOT DEPLOYED(:\*\*|:|\s*=)?\s*(\*\*)?\s*none/i);
+      expect(c).toMatch(/STAGED, NOT DEPLOYED(:\*\*|:|\s*=)?\s*(\*\*)?\s*OG-06 Emergency Readiness Checklist \(`res-1006`\)/);
+      expect(c).toMatch(/26 protected resources\s\S\s52 market files/);
+      expect(c).toMatch(/explicit owner approval to deploy OG-06/);
       expect(c).not.toMatch(/\b24 protected|\b48 market files|24 live|OG-04[^\n]{0,60}(is|are) (still )?staged/i);
       expect(c).not.toMatch(/Worker `(?:65437c37|89333107)[^`]*` \(100%\)/); // the previous Workers are rollbacks, not the live one
     });
@@ -63,7 +65,7 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c).not.toMatch(/OG-05[^.\n]{0,100}\b(awaiting migration|is (?:still )?not started|to be migrated|will be migrated|pending migration)\b/i);
     });
 
-    it(`${n}: states that the navigation cleanup is DEPLOYED (Stage 9.88), that no resource is staged, and no longer says it awaits approval`, () => {
+    it(`${n}: states that the navigation cleanup is DEPLOYED (Stage 9.88), that only OG-06 is staged, and no longer says it awaits approval`, () => {
       const c = current(n);
       expect(c).toMatch(/Navigation cleanup: DEPLOYED \(Stage 9\.88\)/);
       expect(c).toMatch(/OG-01 and OG-02 only/);
@@ -77,7 +79,7 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c, n).not.toMatch(/Prepared 1\b|Blocked 0\b|discrepancy for the owner|confirmation of the Prepared/i);
     }
     const cs = current("CURRENT_STATUS");
-    expect(cs).toMatch(/Deployed 25 · Staged 0 · Prepared 0 · Blocked 1 \(OG-16[^)]*\) · Merged \/ No standalone resource 1 \(OG-05\) · Not started 18 = 45/);
+    expect(cs).toMatch(/Deployed 25 · Staged 1 \(OG-06\) · Prepared 0 · Blocked 1 \(OG-16[^)]*\) · Merged \/ No standalone resource 1 \(OG-05\) · Not started 17 = 45/);
     expect(text.RESOURCE_REGISTER).toMatch(/The owner locked the verified migration-state counts/);
     expect(text.NEXT_ACTIONS).toMatch(/Stage 9\.87A note\.\*\* The owner locked the verified 45-resource migration-state counts/);
     expect(text.RESOURCE_REGISTER).toContain("## Stage 9.87A note");
@@ -88,7 +90,7 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
     const blocked = rr.split("## Blocked")[1].split("## Merged / No standalone resource")[0];
     expect(blocked).toMatch(/\| OG-16 \| Grant Eligibility Insulation Planner \| \*\*grants research\*\* — NZ programmes; AU state and territory schemes \|/);
     expect((blocked.match(/^\| OG-/gm) ?? []).length).toBe(1);
-    expect(rr.split("## Not started (18)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-16 \|/);
+    expect(rr.split("## Not started (17)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-16 \|/);
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const codes = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => (JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string }).legacyCode);
@@ -96,32 +98,34 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
     }
   });
 
-  it("the resource register counts the 45 legacy resources: 25 live + 0 staged + 0 prepared + 1 blocked + 1 merged + 18 not started", () => {
+  it("the resource register counts the 45 legacy resources: 25 live + 1 staged + 0 prepared + 1 blocked + 1 merged + 17 not started", () => {
     const rr = text.RESOURCE_REGISTER;
-    expect(25 + 0 + 0 + 1 + 1 + 18).toBe(45);
+    expect(25 + 1 + 0 + 1 + 1 + 17).toBe(45);
     expect(rr).toMatch(/\*\*Deployed \/ LIVE\*\*[^\n]*\*\*25\*\*/);
-    expect(rr).toMatch(/\*\*Staged, not deployed\*\*[^\n]*\*\*0\*\*/);
+    expect(rr).toMatch(/\*\*Staged, not deployed\*\*[^\n]*\*\*1\*\* \(OG-06\)/);
     expect(rr).toMatch(/\*\*Prepared\*\*[^\n]*\*\*0\*\*/);
     expect(rr).toMatch(/\*\*Blocked\*\*[^\n]*\*\*1\*\*/);
     expect(rr).toMatch(/\*\*Merged \/ No standalone resource\*\*[^\n]*\*\*1\*\* \(OG-05\)/);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*18\*\*/);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*17\*\*/);
     expect(rr).toContain("## Deployed — LIVE (25)");
-    expect(rr).toContain("## Staged, not deployed (0)");
+    expect(rr).toContain("## Staged, not deployed (1)");
     expect(rr).toContain("## Merged / No standalone resource (1)");
-    expect(rr).toContain("## Not started (18)");
+    expect(rr).toContain("## Not started (17)");
   });
 
   it("the table rows agree with the counts, and OG-05 sits only in the Merged section", () => {
     const rr = text.RESOURCE_REGISTER;
     const rows = (a: string, b: string) => [...rr.split(a)[1].split(b)[0].matchAll(/^\| \*{0,2}(OG-[B0-9]+)\*{0,2} \|/gm)].map((m) => m[1]);
     const deployed = rows("## Deployed", "## Staged");
+    const staged = rows("## Staged", "## Prepared");
     const blocked = rows("## Blocked", "## Merged / No standalone resource");
     const merged = rows("## Merged / No standalone resource", "## Not started");
     const notStarted = rows("## Not started", "## Route clashes");
-    expect([deployed.length, blocked.length, merged.length, notStarted.length]).toEqual([25, 1, 1, 18]);
+    expect([deployed.length, staged.length, blocked.length, merged.length, notStarted.length]).toEqual([25, 1, 1, 1, 17]);
+    expect(staged).toEqual(["OG-06"]);
     expect(merged).toEqual(["OG-05"]);
-    expect([...deployed, ...blocked, ...notStarted]).not.toContain("OG-05");
-    expect(new Set([...deployed, ...blocked, ...merged, ...notStarted]).size).toBe(45);
+    expect([...deployed, ...staged, ...blocked, ...notStarted]).not.toContain("OG-05");
+    expect(new Set([...deployed, ...staged, ...blocked, ...merged, ...notStarted]).size).toBe(45);
   });
 
   it("the merged state is register-only: no protected resource carries it, and no record or schema has the value", () => {
@@ -138,16 +142,16 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
     expect(rr).not.toContain("**STAGED, NOT DEPLOYED** |");
   });
 
-  it("every protected record that exists is in the classification table with its own classification and state LIVE, when the private records are present", () => {
+  it("every protected record that exists is in the classification table with its own classification; 25 are LIVE and res-1006 is STAGED, when the private records are present", () => {
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; legacyCode: string; title: string; foundation: string; programComponent: string; category: string; resourceType: string });
-    expect(recs).toHaveLength(25);
+    expect(recs).toHaveLength(26);
     for (const r of recs) {
       const row = text.RESOURCE_REGISTER.split("\n").find((l) => l.startsWith(`| \`${r.id}\` |`));
       expect(row, r.id).toBeTruthy();
       expect(row, r.id).toContain(`| ${r.legacyCode} | ${r.title} | ${r.foundation} | ${r.programComponent} | ${r.category} | ${r.resourceType} |`);
-      expect(row, r.id).toMatch(/\| LIVE \|$/);
+      expect(row, r.id).toMatch(r.id === "res-1006" ? /\| STAGED \|$/ : /\| LIVE \|$/);
     }
   });
 });

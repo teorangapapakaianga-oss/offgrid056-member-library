@@ -1340,9 +1340,9 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED (Stage 9.91) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned.",
+      "migrationState": "STAGED, NOT DEPLOYED (Stage 9.93) — the owner assigned the resource ID; the record and the two approved Stage 9.92 PDFs are in private-assets. Live is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
-      "memberJourneyRole": "Emergency readiness: after the Home Resilience Scorecard and Household Risk Identifier; before the Property Type Review, then the Resilience Product Wishlist, Household Spending Capacity Check, 3-Tier Budget Planner and 90-Day Implementation Roadmap."
+      "memberJourneyRole": "Conceptual journey (documentation only; Start Here and other resources' links are unchanged): OG-01 → OG-02 → OG-06 → OG-04 → OG-22 → OG-03 → OG-26 → OG-27. Emergency readiness sits after the Home Resilience Scorecard and Household Risk Identifier and before the Property Type Review."
     }
   }
 }

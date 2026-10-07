@@ -10,7 +10,7 @@ import { COLLECTION_IDS, PROGRAM_COMPONENTS } from "@/lib/content/constants";
 /**
  * Stage 9.91 — OG-06 Emergency Readiness Checklist: the narrowed draft.
  *
- * Read from the committed review config (no private file needed). The draft is NOT rendered, NOT staged and NOT live, and it has no res-ID.
+ * Read from the committed review config (no private file needed). Stage 9.93: the draft is rendered and STAGED as res-1006 (not deployed); the ID is internal data only.
  */
 const root = process.cwd();
 const ac = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, { where: string; from: string; to: string }[]> }).changes["OG-06"];
@@ -41,11 +41,11 @@ describe("Stage 9.91 · OG-06 locked metadata", () => {
     for (const d of Object.values(meta.safetyTopicDispositions as Record<string, { disposition: string; approvedBy?: string; approvedOn?: string }>)) expect(d).toMatchObject({ disposition: "REMOVED", approvedBy: "owner", approvedOn: "2026-10-08" });
   });
 
-  it("assigns no res-ID anywhere that could be public or staged: the temporary prep label is not in any config, record or tracked source", () => {
+  it("Stage 9.93: res-1006 is assigned in the staged record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1006");
     expect(allNew).not.toContain("res-1006");
     const dir = path.join(root, "private-assets/data-resources");
-    if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) expect(fs.readFileSync(path.join(dir, f), "utf8"), f).not.toContain("res-1006");
+    if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) { const s = fs.readFileSync(path.join(dir, f), "utf8"); if (f === "emergency-readiness-checklist.private.json") expect(JSON.parse(s)).toMatchObject({ id: "res-1006", slug: "emergency-readiness-checklist", legacyCode: "OG-06", collections: [], status: "draft" }); else expect(s.includes("res-1006"), f).toBe(false); }
   });
 
   it("answers all five programme-alignment questions", () => {
@@ -53,15 +53,15 @@ describe("Stage 9.91 · OG-06 locked metadata", () => {
     for (const k of ["foundation", "programComponent", "resilienceRole", "guidanceKind", "wordingMatchesRole"]) expect(a[k]?.trim(), k).toBeTruthy();
   });
 
-  it("proposes six related resources whose ids and titles exist; no existing related list changes; no res-ID and no private record yet", () => {
+  it("six related resources whose ids and titles exist; no existing related list changes; the staged record carries them", () => {
     expect(meta.relatedResources).toEqual(["res-1002", "res-1004", "res-1008", "res-1011", "res-1013", "res-1019"]);
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string; legacyCode: string; relatedResources: string[] });
     const titles = new Map(recs.map((r) => [r.id, r.title]));
     expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["Household Risk Identifier", "Property Type Review", "Water Storage Calculator", "30-Day Pantry Builder", "Healthy Home Air Audit", "Battery Backup Planner"]);
-    expect(recs.some((r) => r.legacyCode === "OG-06")).toBe(false);
-    expect(recs).toHaveLength(25);
+    expect(recs.find((r) => r.legacyCode === "OG-06")!.relatedResources).toEqual(["res-1002", "res-1004", "res-1008", "res-1011", "res-1013", "res-1019"]);
+    expect(recs).toHaveLength(26);
     expect(recs.find((r) => r.legacyCode === "OG-04")!.relatedResources).toEqual(["res-1001", "res-1002", "res-1022", "res-1003", "res-1020", "res-1512"]);
     expect(recs.find((r) => r.legacyCode === "OG-03")!.relatedResources).toEqual(["res-1001", "res-1002", "res-1022", "res-1026", "res-1027", "res-1025"]);
   });
@@ -144,10 +144,11 @@ describe("Stage 9.91 · OG-06 draft copy: the owner's structure", () => {
   });
 });
 
-describe("Stage 9.91 · nothing else moved", () => {
-  it("leaves the registers' OG-06 row where it was (Not started) and the counts as locked", () => {
+describe("Stage 9.93 · registers", () => {
+  it("lists OG-06 as the one staged resource (not in Not started) with the counts as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr.split("## Not started (18)")[1].split("## Route clashes")[0]).toMatch(/\| OG-06 \| 72-Hour Emergency Checklist \|/);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*18\*\*/);
+    expect(rr.split("## Not started (17)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-06 \|/);
+    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).toMatch(/\| OG-06 \| Emergency Readiness Checklist \| `res-1006` \//);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*17\*\*/);
   });
 });

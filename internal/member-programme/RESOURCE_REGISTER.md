@@ -2,10 +2,10 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 8 October 2026, after Stage 9.88.
+**As at:** 8 October 2026, after Stage 9.93.
 
 **LIVE:** 25 protected resources · 50 market files · Worker `2fb0663d-a7da-4acf-ba4c-957886b21631` (100%) · immediate rollback target `65437c37-b731-4851-b67e-5b0fae79fe12`.
-**STAGED, NOT DEPLOYED:** none. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84).
+**STAGED, NOT DEPLOYED:** OG-06 Emergency Readiness Checklist (`res-1006`) — staged build 26 protected resources · 52 market files · 0 broken links; the staged build only, LIVE is unchanged. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84). **Next action:** explicit owner approval to deploy OG-06.
 **Navigation cleanup: DEPLOYED (Stage 9.88)** — the protected Start Here lists OG-01 and OG-02 only (the six demo placeholders res-0001 to res-0006 are hidden from it, not deleted), and the protected Five Foundations page points to the Home Resilience Scorecard; the public/demo build is unchanged. The survival-duration and supply-duration detector rules are admin tooling, not a live change.
 **OG-05** (legacy "5 Pillars Quick Reference"): **MERGED / NO STANDALONE RESOURCE**. No res-ID, no NZ or AU PDFs, no standalone migration planned.
 
@@ -14,11 +14,11 @@ The table below counts the 45 legacy resources. Earlier snapshots in this file (
 | State | Count |
 |---|---|
 | **Deployed / LIVE** (private preview, draft) | **25** |
-| **Staged, not deployed** | **0** |
+| **Staged, not deployed** | **1** (OG-06) |
 | **Prepared** — awaiting owner approval | **0** |
 | **Blocked** — pending research | **1** |
 | **Merged / No standalone resource** (register-only state) | **1** (OG-05) |
-| **Not started** | **18** |
+| **Not started** | **17** |
 
 ---
 
@@ -54,9 +54,15 @@ Each is a draft with NZ and AU files behind Cloudflare Access. (Stage 9.83A: thi
 | **OG-13** | **Healthy Home Air Audit** | air / assessment | **smoke alarms · mould & dampness · ventilation** · CO · solid fuel | 9.54 |
 | **OG-17** | **Solid Fuel Heating Planner** | shelter / planner | solid fuel · smoke alarms · CO | 9.60 |
 
-## Staged, not deployed (0)
+## Staged, not deployed (1)
 
-None. OG-04 was staged in Stage 9.83 and **deployed in Stage 9.84** as protected resource #25 (`res-1004`, Property Type Review; general / resilience-planning / planning / worksheet; collection planning-tools; draft, behind Cloudflare Access; NZ and AU, 9 portrait pages each; standing blocks only, legacy electrical topic recorded REMOVED; report `admin-import/STAGE_9.84_OG04_DEPLOYED.md`).
+| Code | Title | ID / slug | Foundation / type | Safety blocks | Stage |
+|---|---|---|---|---|---|
+| OG-06 | Emergency Readiness Checklist | `res-1006` / `emergency-readiness-checklist` | general / checklist | emergency-contact and general-disclaimer only (legacy electrical, food-safety and fire topics REMOVED, owner-approved) | 9.93 |
+
+Staged in Stage 9.93, NOT deployed: NZ and AU PDFs 8 portrait pages each, byte-identical to the Stage 9.92 renders; collections none (not in Start Here or Planning Tools); no demo counterpart and no route clash; report `admin-import/STAGE_9.93_OG06_STAGED.md`. Conceptual journey (documentation only): OG-01 → OG-02 → OG-06 → OG-04 → OG-22 → OG-03 → OG-26 → OG-27.
+
+Earlier note: OG-04 was staged in Stage 9.83 and **deployed in Stage 9.84** as protected resource #25 (`res-1004`, Property Type Review; general / resilience-planning / planning / worksheet; collection planning-tools; draft, behind Cloudflare Access; NZ and AU, 9 portrait pages each; standing blocks only, legacy electrical topic recorded REMOVED; report `admin-import/STAGE_9.84_OG04_DEPLOYED.md`).
 
 ## Prepared — awaiting owner approval (0)
 
@@ -76,7 +82,7 @@ A **register-only** state (Stage 9.87): administrative migration-state tracking.
 |---|---|---|---|
 | OG-05 | 5 Pillars Quick Reference | **MERGED / NO STANDALONE RESOURCE** | No res-ID was assigned. No NZ or AU PDFs exist. No standalone migration is planned. The useful ranking concept is already handled by OG-01 ("Your Three Priority Foundations"), and the Five Foundations page now points to the Home Resilience Scorecard in the protected preview. The unsafe or unsupported legacy claims (the Rule of 3s, survival thresholds, the litre figures, the humidity target, the 7-day and 30-day food targets, the rotation, greywater and canning claims, smoke-alarm and CO wording, the programme labels) were **NOT CARRIED** into any resource. Audit: `admin-import/STAGE_9.85_OG05_AUDIT.md`; decision record: `og-05-merged-conceptually` in `admin-import/config/future-tasks.json`. |
 
-## Not started (18)
+## Not started (17)
 
 Ordered by foundation. "Notes" are the audit's safety exposure, which tells you which approved blocks a migration
 would need.
@@ -115,7 +121,6 @@ would need.
 
 | Code | Title | Notes |
 |---|---|---|
-| OG-06 | 72-Hour Emergency Checklist | electrical |
 | OG-07 | Week 1 Priority Lock Worksheet | — · heavy programme framing |
 | OG-23 | Supplier Question Bank | — |
 | OG-24 | Professional Review Selector | — |
@@ -150,7 +155,7 @@ NOT STARTED
   → copy changes proposed (exact from → to, market variants marked)
   → NZ + AU previews rendered and verified   ⟶ PREPARED
   → owner approval                           ⟶ approved
-  → render, stage (record + PDFs in private-assets), validate the staged build ⟶ STAGED, NOT DEPLOYED (none at present)
+  → render, stage (record + PDFs in private-assets), validate the staged build ⟶ STAGED, NOT DEPLOYED (OG-06 at present)
   → re-verify the exact build, deploy on the owner's explicit approval ⟶ DEPLOYED / LIVE (draft, behind Access)
   → or the audit finds the job is already done elsewhere ⟶ MERGED / NO STANDALONE RESOURCE (register-only; no res-ID, no PDFs)
 ```
@@ -159,7 +164,7 @@ Anything that cannot be verified from an official NZ or AU source **blocks** the
 
 ## Protected resource classification (generated from the records, Stage 9.83A)
 
-Read from `private-assets/data-resources/*.private.json`; LIVE means the resource's NZ and AU PDFs are in the deployed tree. 25 records · 50 market files in total; **25 live · 50 market files**; none staged. Every record is status draft.
+Read from `private-assets/data-resources/*.private.json`; LIVE means the resource's NZ and AU PDFs are in the deployed tree. 26 records · 52 market files in total; **25 live · 50 market files**; **1 staged (OG-06) · 2 market files**, not deployed (staged build 26 / 52). Every record is status draft.
 
 | ID | Code | Title | Foundation | Program Component | Category | Type | Collections | State |
 |---|---|---|---|---|---|---|---|---|
@@ -167,6 +172,7 @@ Read from `private-assets/data-resources/*.private.json`; LIVE means the resourc
 | `res-1002` | OG-02 | Household Risk Identifier | general | resilience-planning | planning | worksheet | start-here | LIVE |
 | `res-1003` | OG-03 | Household Spending Capacity Check | general | planning-implementation | planning | worksheet | planning-tools | LIVE |
 | `res-1004` | OG-04 | Property Type Review | general | resilience-planning | planning | worksheet | planning-tools | LIVE |
+| `res-1006` | OG-06 | Emergency Readiness Checklist | general | resilience-emergency | planning | checklist | — | STAGED |
 | `res-1008` | OG-08 | Water Storage Calculator | water | off-grid-living | water-storage | worksheet | — | LIVE |
 | `res-1009` | OG-09 | Household Water Treatment Guide | water | off-grid-living | water-security | guide | — | LIVE |
 | `res-1010` | OG-10 | Rainwater Harvesting Planner | water | off-grid-living | rainwater | planner | — | LIVE |
