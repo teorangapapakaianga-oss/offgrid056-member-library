@@ -1211,6 +1211,61 @@
       "migrationState": "DRAFT PREPARED (Stage 9.76) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Planning & Implementation: after the Home Resilience Scorecard, Household Risk Identifier and Resilience Product Wishlist; before the 3-Tier Budget Planner, then the 90-Day Implementation Roadmap. Listed in Planning Tools (collection planning-tools)."
+    },
+    "OG-04": {
+      "title": "Property Type Review",
+      "titleStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81); legacy 'Property Profile Matrix'",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81): cross-foundation; the property situation applies to whichever foundation the household works on",
+      "programComponent": "resilience-planning",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81); flagged '?' in Stage 9.64B, now locked",
+      "programAlignment": {
+        "foundation": "general — a property situation shapes what a household may change in any of Air, Water, Shelter, Food and Energy",
+        "programComponent": "resilience-planning — its primary output is the household's own list of what to check, and three working rules, before it plans or spends",
+        "resilienceRole": "records a household's property situation and what to check before resilience or off-grid changes, so the plan, wishlist and budget stay realistic; it supports household independence by separating what the member controls from what needs confirming",
+        "guidanceKind": "planning intake and constraints worksheet — not legal, tenancy, consent, building or financial guidance, and not system design",
+        "wordingMatchesRole": "yes — every answer, fact, grid cell and rule is member-entered; the worksheet carries no capability claim, no price, no threshold, no market-specific rule and no named technology, and it points on to the wishlist, spending check, budget and roadmap"
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81)",
+      "difficultySource": "INFERRED: member-entered answers and notes; no calculation.",
+      "estimatedTime": 15,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81)",
+      "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
+      "description": "A worksheet to record your property situation, because it shapes what you can change, what may need permission and what to check first, before you make resilience or off-grid changes.",
+      "descriptionStatus": "OWNER-REVIEW REQUIRED (draft, Stage 9.81)",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-07 (Stage 9.81)",
+      "relatedResources": [
+        "res-1001",
+        "res-1002",
+        "res-1022",
+        "res-1003",
+        "res-1020",
+        "res-1512"
+      ],
+      "relatedResourcesStatus": "PROPOSED 2026-10-07 (Stage 9.81) — OWNER-REVIEW REQUIRED; ids verified against the private records: Home Resilience Scorecard, Household Risk Identifier, Resilience Product Wishlist, Household Spending Capacity Check, Alternative Energy Suitability Check, Off-Grid System Architecture Planner. OG-03's own related list is NOT changed in this stage.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "To be confirmed by the safety scan of the prepared draft (Stage 9.81). The standing general-disclaimer and emergency-contact blocks are added to every resource.",
+      "safetyTopicDispositions": {
+        "batteries-and-electrical": {
+          "disposition": "REMOVED",
+          "reason": "The legacy source named solar panels, a backup generator and a home battery system only as one-word entries in the capability matrix and in two profile descriptions; it gave no instruction on installing or running any of them. The owner's Stage 9.81 ruling removes the matrix and those descriptions and asks the rewrite to avoid naming these technologies. The rewrite teaches nothing on the topic, so no block is required; if a later edit names them again the safety scan will require the block."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED (Stage 9.81) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Resilience planning: after the Home Resilience Scorecard and Household Risk Identifier; before the Resilience Product Wishlist, then the Household Spending Capacity Check, 3-Tier Budget Planner and 90-Day Implementation Roadmap."
     }
   }
 }

@@ -2,9 +2,11 @@
 
 What happens next, and what is waiting on research.
 
-**As at:** 7 October 2026, after Stage 9.80.
+**As at:** 7 October 2026, after Stage 9.81.
 
-> **Stage 9.80 note.** OG-04 (legacy name Property Profile Matrix) audited, not migrated: recommendation NARROW; Foundation general; component resilience-planning (owner review); 11 owner decisions listed in dmin-import/STAGE_9.80_OG04_AUDIT.md. Live unchanged (24 / 48 / 0 broken links / Bucket C 0).
+> **Stage 9.81 note.** OG-04 Property Type Review: narrowed rewrite DRAFT prepared (not rendered, staged or deployed); prep READY in NZ and AU, price claims 0, Bucket C 0, no topic safety block; 766 tests. **Waiting on the owner:** copy approval and the eight decisions in dmin-import/STAGE_9.81_OG04_REWRITE_DRAFT.md section 16.
+>
+> **Stage 9.80 note (earlier).** OG-04 (legacy name Property Profile Matrix) audited, not migrated: recommendation NARROW; Foundation general; component resilience-planning (owner review); 11 owner decisions listed in dmin-import/STAGE_9.80_OG04_AUDIT.md. Live unchanged (24 / 48 / 0 broken links / Bucket C 0).
 >
 > **Stage 9.79 note.** OG-03 is deployed as protected resource #24 (Worker `89333107-7c0a-4bdb-8229-f2b5241a9e05`; rollback `e63141a1…`). 24 / 48 / 0 broken links / Bucket C 0; 750 tests. **Waiting on the owner:** the next resource to migrate.
 
