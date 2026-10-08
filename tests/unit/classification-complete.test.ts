@@ -20,7 +20,7 @@ const config = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/p
 
 describe.skipIf(!hasPrivate)("Stage 9.73 · classification of every protected resource", () => {
   it("covers all 28 protected resources (the 27 live ones plus OG-12, staged in Stage 10.04)", () => {
-    expect(records).toHaveLength(28);
+    expect(records).toHaveLength(29);
     expect(records.find((r) => r.legacyCode === "OG-03")?.programComponent).toBe("planning-implementation");
     expect(records.find((r) => r.legacyCode === "OG-04")?.programComponent).toBe("resilience-planning");
     expect(records.find((r) => r.legacyCode === "OG-06")?.programComponent).toBe("resilience-emergency");

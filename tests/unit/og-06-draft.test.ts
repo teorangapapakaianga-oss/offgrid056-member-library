@@ -63,7 +63,7 @@ describe("Stage 9.91 · OG-06 locked metadata", () => {
     const titles = new Map(recs.map((r) => [r.id, r.title]));
     expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["Household Risk Identifier", "Property Type Review", "Water Storage Calculator", "30-Day Pantry Builder", "Healthy Home Air Audit", "Battery Backup Planner"]);
     expect(recs.find((r) => r.legacyCode === "OG-06")!.relatedResources).toEqual(["res-1002", "res-1004", "res-1008", "res-1011", "res-1013", "res-1019"]);
-    expect(recs).toHaveLength(28);
+    expect(recs).toHaveLength(29);
     expect(recs.find((r) => r.legacyCode === "OG-04")!.relatedResources).toEqual(["res-1001", "res-1002", "res-1022", "res-1003", "res-1020", "res-1512"]);
     expect(recs.find((r) => r.legacyCode === "OG-03")!.relatedResources).toEqual(["res-1001", "res-1002", "res-1022", "res-1026", "res-1027", "res-1025"]);
   });
@@ -149,9 +149,9 @@ describe("Stage 9.91 · OG-06 draft copy: the owner's structure", () => {
 describe("Stage 9.95 · registers", () => {
   it("lists OG-06 as deployed (not in Not started or Staged) with the counts as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr.split("## Not started (15)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-06 \|/);
+    expect(rr.split("## Not started (14)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-06 \|/);
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-06 \| Emergency Readiness Checklist \| general \/ checklist \|/);
-    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-06 \|/m);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*15\*\*/);
+    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-06 \|/m);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*14\*\*/);
   });
 });

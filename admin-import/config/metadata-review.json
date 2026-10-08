@@ -1506,7 +1506,7 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "COPY APPROVED and PDFs RENDERED (Stage 10.08) - NOT staged, NOT deployed, NOT a protected resource, no res-ID assigned.",
+      "migrationState": "STAGED, NOT DEPLOYED (Stage 10.09) — the owner assigned the resource ID; the record and the two approved Stage 10.08 PDFs are in private-assets. Live is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
       "legacyMetadataDrift": "The resource register groups OG-14 under Food and PROGRAMME_ARCHITECTURE.md describes it as 'growing and preserving (OG-14)'. The source is a water, food and air synthesis, so the source controls: general / resilience-planning / planning / worksheet. The historical snapshots are not rewritten.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a capstone after the water, food and air resources (OG-08, OG-11, OG-13), taken once those are in view, handing off to the Priority Lock Worksheet (OG-07). It is not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27) and is not a scorecard, risk assessment, readiness checklist, action lock or budget tool.",

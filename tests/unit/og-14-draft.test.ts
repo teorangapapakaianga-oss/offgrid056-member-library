@@ -35,12 +35,15 @@ describe("Stage 10.07 · OG-14 locked metadata", () => {
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.08\)/);
   });
 
-  it("assigns no res-ID: not in the config, not in the copy, and no private record exists yet", () => {
+  it("Stage 10.09: res-1014 is assigned in the staged record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1014");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-14" || r.id === "res-1014")).toEqual([]);
+      const og14 = recs.filter((r) => r.legacyCode === "OG-14" || r.id === "res-1014");
+      expect(og14).toHaveLength(1);
+      expect(og14[0]).toMatchObject({ id: "res-1014", legacyCode: "OG-14" });
+      expect(recs).toHaveLength(29);
     }
   });
 
