@@ -59,7 +59,8 @@
     "OG-B08": "off-grid-living",
     "OG-15": "resilience-planning",
     "OG-02": "resilience-planning",
-    "OG-07": "planning-implementation"
+    "OG-07": "planning-implementation",
+    "OG-12": "resilience-emergency"
   },
   "classificationsDecidedNote": "OG-03 (Budget Pathway Selector): its primary output is matching a household budget to an action pathway, so the budgeting rule gives planning-implementation. Its legacy text is tied to programme tiers and prices, which the migration will have to remove. These are recorded decisions only: no live resource record has been changed. Stage 9.73 (owner, 2026-10-07): OG-08, OG-17, OG-19 off-grid-living; OG-11 resilience-emergency; OG-13 and OG-22 resilience-planning; OG-21 and OG-B10 planning-implementation. advanced-future is reserved for integrated whole-property architecture, advanced multi-system design, specialist system architecture and later-stage property/system integration; difficulty or an 'Advanced' label never makes a resource advanced-future — the primary output controls. Stage 9.73A (owner, 2026-10-07): OG-B07 CORRECTED from advanced-future to off-grid-living (an advanced single-system solar resource; difficulty alone does not make a resource advanced-future); OG-B12 stays advanced-future. The ten classifications applied in Stage 9.73 are CONFIRMED by the owner: OG-27, OG-25, OG-B04 planning-implementation; OG-18, OG-20, OG-09, OG-10, OG-B08 off-grid-living; OG-15, OG-02 resilience-planning. OG-22 resilience-planning is an explicit owner override of the general budgeting rule.",
   "scheduledMigration": {

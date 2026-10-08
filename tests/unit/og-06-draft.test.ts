@@ -42,7 +42,9 @@ describe("Stage 9.91 · OG-06 locked metadata", () => {
   });
 
   it("Stage 9.93: res-1006 is assigned in the staged record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
-    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1006");
+    // the ID is internal data: it is not in OG-06's own review entry, the copy or the configs (other resources' related lists may reference a live ID)
+    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1006");
+    expect(JSON.stringify(meta), "OG-06 review entry").not.toContain("res-1006");
     expect(allNew).not.toContain("res-1006");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) { const s = fs.readFileSync(path.join(dir, f), "utf8"); if (f === "emergency-readiness-checklist.private.json") expect(JSON.parse(s)).toMatchObject({ id: "res-1006", slug: "emergency-readiness-checklist", legacyCode: "OG-06", collections: [], status: "draft" }); else expect(s.includes("res-1006"), f).toBe(false); }

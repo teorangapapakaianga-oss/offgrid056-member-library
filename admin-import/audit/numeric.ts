@@ -300,7 +300,7 @@ const SUPPLY_COMPACT_OF = new RegExp(`${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}\\s+(?:$
 const SUPPLY_KIT = new RegExp(`\\b(?:(?:emergency|survival|grab|go|first[- ]aid|disaster)\\s+)?(?:kit|bag|pack|stockpile)\\s+(?:for|to last|lasting|covering)\\s+(?:at least\\s+|up to\\s+|about\\s+)?${SUPPLY_FIG}[-\\s]*${SUPPLY_UNIT}`, "gi");
 /** "Plan 7 days of meals" is menu planning, not a supply target; the planning verbs keep a "days of meals" phrase ordinary. */
 const SUPPLY_PLANNING = /\b(?:plan|planning|planned|menu|menus|recipes?|batch[- ]cook\w*)\b/i;
-export function supplyTargets(sentence: string): string[] {
+function supplyTargetsRaw(sentence: string): string[] {
   if (SUPPLY_NOT_A_TARGET.test(sentence)) return [];
   const compact = SUPPLY_ASSERTS.test(sentence) ? supplyMatches(SUPPLY_COMPACT, sentence) : [];
   const all = [...compact, ...supplyMatches(SUPPLY_COMPACT_OF, sentence), ...supplyMatches(SUPPLY_OF, sentence), ...supplyMatches(SUPPLY_ENOUGH, sentence), ...supplyMatches(SUPPLY_LASTING, sentence), ...supplyMatches(SUPPLY_KIT, sentence)];
@@ -342,7 +342,7 @@ const EP_PATTERNS: RegExp[] = [
   new RegExp(`\\b(?:prepare|prepared|be ready|get ready)\\s+for\\s+(?:at least\\s+|up to\\s+)?${EP_FIG}[-\\s]*${EP_UNIT}\\b`, "gi"),
 ];
 /** The text of every emergency-period claim in a sentence, or [] when the sentence asserts none. */
-export function emergencyPeriodTargets(sentence: string): string[] {
+function emergencyPeriodTargetsRaw(sentence: string): string[] {
   if (SUPPLY_NOT_A_TARGET.test(sentence)) return [];
   return EP_PATTERNS.flatMap((re) => supplyMatches(re, sentence));
 }
@@ -378,7 +378,7 @@ const MULT_PATTERNS: RegExp[] = [
 ];
 const PERF_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|never|not\s+(?:a|an|the|about)|no\s+(?:guarantee|promise))\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|if you|whether)\b|[_…]{3,}|^\s*(?:please\s+)?(?:choose|select|pick|decide|circle|tick|fill in|write|record|enter|note|compare|review|check|list|rank|ask|consider|think|look)\b/i;
 /** The text of every multiplier claim in a sentence, or [] when the sentence asserts none. */
-export function multiplierClaims(sentence: string): string[] {
+function multiplierClaimsRaw(sentence: string): string[] {
   if (PERF_NOT_A_CLAIM.test(sentence)) return [];
   const found: string[] = [];
   for (const re of MULT_PATTERNS) for (const m of sentence.matchAll(re)) {
@@ -398,7 +398,7 @@ const COMP_PATTERNS: RegExp[] = [
   new RegExp(`\\b(?:achiev\\w+|accomplish\\w*|get|gets|make|makes|do|does|see|sees|gain\\w*)\\s+(?:far\\s+|much\\s+)?(?:more|better)\\b[^.?!]{0,40}?\\bthan\\s+${COMP_BASE}\\b`, "gi"),
 ];
 /** The text of every comparative-performance claim in a sentence, or [] when the sentence asserts none. */
-export function comparativePerformanceClaims(sentence: string): string[] {
+function comparativePerformanceClaimsRaw(sentence: string): string[] {
   if (PERF_NOT_A_CLAIM.test(sentence)) return [];
   // overlapping matches of the three patterns describe one statement: keep the earliest, longest span only
   const spans = COMP_PATTERNS.flatMap((re) => [...sentence.matchAll(re)].map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) }))).sort((a, b) => a.start - b.start || b.end - a.end);
@@ -434,7 +434,7 @@ const ST_PATTERNS: RegExp[] = [
 ];
 const ST_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|not guarantee|no guarantee)\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|whether)\b|[_…]{3,}|^\s*(?:please\s+)?(?:choose|select|pick|decide|circle|tick|fill in|write|record|enter|note|list|add|compare|review|check|ask)\b/i;
 /** The figure text of every storage-duration claim in a sentence, or [] when it asserts none. */
-export function storageDurationClaims(sentence: string): string[] {
+function storageDurationClaimsRaw(sentence: string): string[] {
   if (ST_NOT_A_CLAIM.test(sentence)) return [];
   const found: string[] = [];
   for (const re of ST_PATTERNS) for (const m of sentence.matchAll(re)) {
@@ -495,7 +495,7 @@ const OUT_PATTERNS: RegExp[] = [
 const OUT_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|cannot|can'?t|can not|won'?t|not guarantee|no guarantee)\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|if you|whether)\b|[_…]{3,}|^\s*(?:please\s+)?(?:choose|select|pick|decide|circle|tick|fill in|write|record|enter|note|compare|review|check|list|rank|ask|consider|think|look)\b/i;
 const OUT_HEDGE = /\b(?:may|might|could|can|should|would|aims? to|tries? to|helps?|help you|hope to)\b[^.?!]{0,30}$/i;
 /** The text of every absolute outcome claim in a sentence, or [] when it asserts none. */
-export function outcomeClaims(sentence: string): string[] {
+function outcomeClaimsRaw(sentence: string): string[] {
   if (OUT_NOT_A_CLAIM.test(sentence)) return [];
   const found: string[] = [];
   // overlapping matches describe one statement ("always prevents waste"): keep the earliest, longest span only
@@ -505,6 +505,21 @@ export function outcomeClaims(sentence: string): string[] {
   return kept.map((k) => k.text);
 }
 
+/** The claim families are pure functions of one sentence, and the scan asks about the same sentence several times (ownership, hit generation, classification): answer each once. */
+function memoByText<T>(fn: (s: string) => T): (s: string) => T {
+  const cache = new Map<string, T>();
+  return (s) => {
+    let v = cache.get(s);
+    if (v === undefined) { v = fn(s); if (cache.size > 50000) cache.clear(); cache.set(s, v); }
+    return v;
+  };
+}
+export const supplyTargets = memoByText(supplyTargetsRaw);
+export const emergencyPeriodTargets = memoByText(emergencyPeriodTargetsRaw);
+export const multiplierClaims = memoByText(multiplierClaimsRaw);
+export const comparativePerformanceClaims = memoByText(comparativePerformanceClaimsRaw);
+export const storageDurationClaims = memoByText(storageDurationClaimsRaw);
+export const outcomeClaims = memoByText(outcomeClaimsRaw);
 /** True when an earlier family already owns the sentence, so no performance candidate is raised for it. */
 const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0 || storageDurationClaims(sentence).length > 0;
 

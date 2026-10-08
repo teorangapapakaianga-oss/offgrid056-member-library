@@ -1394,6 +1394,58 @@
       "migrationState": "DEPLOYED (Stage 10.00) — protected resource #27, draft, behind Cloudflare Access; NZ and AU PDFs byte-identical to the Stage 9.98 renders.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual journey (documentation only; no live link is changed): OG-01 → OG-02 → OG-06 → OG-04 → OG-22 → OG-03 → OG-07 → OG-26 → OG-27. It converts the earlier assessment and spending-capacity work into a small set of immediate actions before fuller budgeting and roadmap planning."
+    },
+    "OG-12": {
+      "title": "Pantry Rotation Tracker",
+      "titleStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02); legacy 'FIFO Rotation Tracker'",
+      "resourceType": "template",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02)",
+      "foundation": "food",
+      "foundationStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02)",
+      "programComponent": "resilience-emergency",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02): matches OG-11",
+      "programAlignment": {
+        "foundation": "food — the job is keeping track of stored food; no other foundation applies",
+        "programComponent": "resilience-emergency — a reusable record of what food a household has stored and what to use next, the maintenance companion to the Pantry Builder",
+        "resilienceRole": "helps a household keep a simple written record of its stored food, where it is kept and what it wants to use next; it supports household independence by making the pantry visible and easy to rotate",
+        "guidanceKind": "tracking template — not a pantry course, a food-safety guide, a shelf-life reference, an emergency-supply target, a budget tool or a shopping planner",
+        "wordingMatchesRole": "yes — every field is member-entered; the draft carries no shelf-life, safety, supply-duration, outcome or savings claim, and it points to the 30-Day Pantry Builder for date-label and food-safety guidance"
+      },
+      "category": "food-storage",
+      "categoryStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02): 'Storing and rotating food so nothing is wasted' is the taxonomy's own description",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02)",
+      "difficultySource": "INFERRED: member-written entries; no calculation.",
+      "estimatedTime": 15,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02)",
+      "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
+      "description": "A reusable tracker to help you note what is in your pantry, where it is kept and what date information is shown, so you can see which items you want to use first.",
+      "descriptionStatus": "OWNER-REVIEW REQUIRED (Stage 10.02C): the owner's draft wording; not yet approved",
+      "coverStatus": "OWNER-REVIEW REQUIRED: the shared OffGrid056 cover system, corrected treatment, no legacy code or programme label in the public title",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02): none",
+      "relatedResources": [
+        "res-1011",
+        "res-1006"
+      ],
+      "relatedResourcesStatus": "RECOMMENDED, OWNER-REVIEW REQUIRED (Stage 10.02C): the 30-Day Pantry Builder (learn first; owns the date-label and food-safety guidance) and the Emergency Readiness Checklist (records where a household keeps its food and other basics). No other live resource supports a pantry tracker: the water, energy and planning resources do not, and the budget tools are outside this resource's job. No existing resource's related list is changed.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "Standing emergency-contact and general-disclaimer blocks only (recommended, OWNER-REVIEW REQUIRED). The body teaches no food-safety, date-label rule, spoilage or temperature guidance, so the food-safety-power-cut block is not carried; that teaching stays with OG-11, which carries the block.",
+      "safetyTopicDispositions": {
+        "food-safety-power-cut": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-08",
+          "reason": "The legacy taught shelf-life figures, 'signs it's gone bad' and 'still safe' for 13 foods. The owner's Stage 10.02 boundary removes this teaching from the narrowed tracker (OG-11 owns date-label, shelf-life and food-safety guidance); if a later edit teaches it again the safety scan will require the block."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED (Stage 10.02C) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Food pathway (documentation only; no live link is changed): the 30-Day Pantry Builder first (OG-11), then this tracker to keep the pantry in view. It is not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27)."
     }
   }
 }
