@@ -1449,7 +1449,7 @@
     },
     "OG-14": {
       "title": "Water, Food and Air Household Snapshot",
-      "titleStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.07); legacy 'Basic Survival Systems Mini-Plan' (removed publicly)",
+      "titleStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08); legacy 'Basic Survival Systems Mini-Plan' (removed publicly)",
       "resourceType": "worksheet",
       "resourceTypeStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.07)",
       "foundation": "general",
@@ -1472,11 +1472,11 @@
       "estimatedTimeStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.07)",
       "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
       "description": "A practical worksheet to help you capture what your household currently has in place across Water, Food and Air, note what still needs attention and record the key points your household should know.",
-      "descriptionStatus": "OWNER-REVIEW REQUIRED (Stage 10.07): the owner's draft sentence, exactly",
-      "snapshotStatus": "OWNER-REVIEW REQUIRED (Stage 10.07): three areas (Water, Food, Air), each with member-entered descriptive fields only; no score, no /10, no /50, no target, no 3-day or 7-day water figure, no supply duration, no technical threshold or official-looking rating",
-      "familyBriefingStatus": "OWNER-REVIEW REQUIRED (Stage 10.07): three practical prompts; not a formal emergency plan",
-      "attentionNextStatus": "OWNER-REVIEW REQUIRED (Stage 10.07): one neutral prompt; no ranking of three or five priorities (the action lock stays with the Priority Lock Worksheet)",
-      "coverStatus": "OWNER-REVIEW REQUIRED (Stage 10.07): the shared OffGrid056 cover system, corrected treatment, no legacy code, programme label or survival wording in the public title",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): the exact sentence",
+      "snapshotStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): three areas (Water, Food, Air), each with member-entered descriptive fields only; no score, rating, target, threshold or supply duration",
+      "familyBriefingStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): exactly three prompts (the fourth possible prompt is not added); not a formal emergency plan",
+      "attentionNextStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): one neutral prompt; no ranking of priorities",
+      "coverStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): the existing water / food / air cover image under the shared OffGrid056 cover system, corrected treatment, no dark cover panel, no legacy code, programme label or survival wording in the public title",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
       "collections": [],
@@ -1487,10 +1487,10 @@
         "res-1013",
         "res-1007"
       ],
-      "relatedResourcesStatus": "RECOMMENDED — OWNER-REVIEW REQUIRED (Stage 10.07): Water Storage Calculator, 30-Day Pantry Builder, Healthy Home Air Audit (the three areas, in snapshot order, as 'review first') and Priority Lock Worksheet (the forward handoff). Not included: Pantry Rotation Tracker (a maintenance template beyond the snapshot's job; optional fifth), Household Spending Capacity Check and 3-Tier Budget Planner (money planning is outside this resource's job). No existing resource's related list is changed.",
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): exactly these four, in this order: Water Storage Calculator, 30-Day Pantry Builder, Healthy Home Air Audit, Priority Lock Worksheet. The Pantry Rotation Tracker and the money-planning resources are not added. No existing resource's related list is changed.",
       "safetyBlocks": [],
       "approvedSafetyBlocks": [],
-      "approvedSafetyBlocksStatus": "Standing emergency-contact and general-disclaimer blocks only (owner ruling, Stage 10.07). food-safety-power-cut is not carried because the narrowed body no longer reaches its topic threshold; the smoke alarm and CO prompts are removed (the Healthy Home Air Audit owns that teaching); no technical topic block is added.",
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): standing emergency-contact and general-disclaimer only; food-safety-power-cut, fire-and-smoke-alarms, carbon-monoxide, water-treatment, electrical, gas, generator, heating and structural are not carried unless the final rendered wording unexpectedly creates a genuine topic.",
       "safetyTopicDispositions": {
         "food-safety-power-cut": {
           "disposition": "REMOVED",
@@ -1506,10 +1506,12 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED (Stage 10.07) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned.",
+      "migrationState": "COPY APPROVED and PDFs RENDERED (Stage 10.08) - NOT staged, NOT deployed, NOT a protected resource, no res-ID assigned.",
       "recordStatusNote": "draft, as every real resource is.",
       "legacyMetadataDrift": "The resource register groups OG-14 under Food and PROGRAMME_ARCHITECTURE.md describes it as 'growing and preserving (OG-14)'. The source is a water, food and air synthesis, so the source controls: general / resilience-planning / planning / worksheet. The historical snapshots are not rewritten.",
-      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a capstone after the water, food and air resources (OG-08, OG-11, OG-13), taken once those are in view, handing off to the Priority Lock Worksheet (OG-07). It is not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27) and is not a scorecard, risk assessment, readiness checklist, action lock or budget tool."
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a capstone after the water, food and air resources (OG-08, OG-11, OG-13), taken once those are in view, handing off to the Priority Lock Worksheet (OG-07). It is not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27) and is not a scorecard, risk assessment, readiness checklist, action lock or budget tool.",
+      "whereNextStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): Review first - Water Storage Calculator, 30-Day Pantry Builder, Healthy Home Air Audit; Next - Priority Lock Worksheet; the concise explanatory wording as drafted; no Week 3 programme pointer",
+      "legacyMetadataDriftStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): keep the legacyMetadataDrift note; the historical register Food grouping and the PROGRAMME_ARCHITECTURE \"growing and preserving\" wording are not rewritten in this stage"
     }
   }
 }

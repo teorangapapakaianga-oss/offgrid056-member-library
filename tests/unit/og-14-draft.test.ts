@@ -30,9 +30,9 @@ describe("Stage 10.07 · OG-14 locked metadata", () => {
     expect(COLLECTION_IDS).toEqual(["start-here", "planning-tools"]);
   });
 
-  it("carries the owner's draft description, marked for owner review", () => {
+  it("carries the owner-approved description (Stage 10.08)", () => {
     expect(meta.description).toBe("A practical worksheet to help you capture what your household currently has in place across Water, Food and Air, note what still needs attention and record the key points your household should know.");
-    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-REVIEW REQUIRED/);
+    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.08\)/);
   });
 
   it("assigns no res-ID: not in the config, not in the copy, and no private record exists yet", () => {
@@ -52,9 +52,10 @@ describe("Stage 10.07 · OG-14 locked metadata", () => {
     expect(String(meta.foundationStatus)).toMatch(/legacy metadata drift/);
   });
 
-  it("recommends a focused related list in snapshot order, ending with the Priority Lock Worksheet (owner review)", () => {
+  it("has the owner-approved related list in snapshot order, ending with the Priority Lock Worksheet (Stage 10.08)", () => {
     expect(meta.relatedResources).toEqual(["res-1008", "res-1011", "res-1013", "res-1007"]);
-    expect(String(meta.relatedResourcesStatus)).toMatch(/^RECOMMENDED/);
+    expect(String(meta.relatedResourcesStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.08\)/);
+    expect(meta.relatedResources).toHaveLength(4);
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const titles = new Map(fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string }; return [r.id, r.title] as const; }));

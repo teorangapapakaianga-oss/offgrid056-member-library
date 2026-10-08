@@ -145,3 +145,64 @@ describe("assurance / completion claim rule: negative cases", () => {
     expect(scan(p(s)).filter((c) => c.unit === "assurance"), "scan").toEqual([]);
   });
 });
+
+describe("reverse target-label rule (Stage 10.08): the duration precedes the label", () => {
+  const positive: [string, string][] = [
+    ["7-day target", "7-day"],
+    ["30-day target", "30-day"],
+    ["14-day goal", "14-day"],
+    ["two-week minimum", "two-week"],
+    ["three-day required supply", "three-day"],
+    ["30-day preparedness target", "30-day"],
+    ["7-day water target", "7-day"],
+    ["14-day food goal", "14-day"],
+    ["7-day target: ___ L", "7-day"],
+    ["Set a 30-day target for your pantry.", "30-day"],
+    ["Your 72-hour minimum", "72-hour"],
+    ["A 2-month storage goal", "2-month"],
+  ];
+  for (const [s, fig] of positive) it(`flags "${s}"`, () => expect(targetLabelDurations(s).map((x) => x.toLowerCase())).toContain(fig));
+  for (const market of ["NZ", "AU"]) {
+    for (const s of ["7-day target", "30-day target", "14-day goal", "two-week minimum", "7-day water target", "14-day food goal", "7-day target: ___ L"]) {
+      it(`${market}: "${s}" is one Bucket C target-label candidate`, () => {
+        const c = target(s, market);
+        expect(c.length, JSON.stringify(c.map((x) => [x.figure, x.why]))).toBe(1);
+        expect(c[0].bucket).toBe("C_NEEDS_SOURCE");
+        expect(c[0].market).toBe(market);
+        expect(bucketC(s, market).length).toBe(1);
+      });
+    }
+  }
+  const quiet = [
+    "7-day trip",
+    "30-day programme",
+    "90-day roadmap",
+    "two-week project",
+    "14-day review period",
+    "7-day weather forecast",
+    "30-day trial",
+    "My target date is next Friday",
+    "Target date: ______",
+    "What is your target?",
+    "30-Day Pantry Builder",
+    "90-Day Implementation Roadmap",
+    "Day 7 of the 30-Day Programme",
+    "a 7-day period",
+    "A 30-day fitness goal",
+    "Is a 14-day goal right for you?",
+    "You do not need a 30-day target.",
+    "Finish the 30-day target by Friday",
+  ];
+  for (const s of quiet) it(`does not flag "${s}"`, () => {
+    expect(targetLabelDurations(s), "function").toEqual([]);
+    expect(scan(p(s)).filter((c) => c.why.startsWith("a target-label duration")), "scan").toEqual([]);
+  });
+  it("precedence: the same statement is one candidate with one owner (existing owners keep it)", () => {
+    expect(bucketC("Keep a 7-day supply of water as a minimum").length).toBe(1);
+    expect(supplyTargets("Keep a 7-day supply of water as a minimum").length).toBeGreaterThan(0);
+    expect(target("Keep a 7-day supply of water as a minimum")).toEqual([]);
+    expect(storageDurationClaims("Goal: a shelf life of 2 years").length).toBeGreaterThan(0);
+    expect(target("2-year shelf life goal")).toEqual([]);
+    expect(target("7-day target").length).toBe(1);
+  });
+});

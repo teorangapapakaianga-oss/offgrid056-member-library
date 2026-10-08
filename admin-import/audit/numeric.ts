@@ -445,13 +445,16 @@ const ST_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|not guarantee|no gu
  *  - SENTENCE: any target label followed within a short span by a duration, only when the sentence is about supplies, storage, preparedness or self-sufficiency.
  * It stays quiet for target dates and deadlines ("Target date: ____", "My target date is next Friday"), a duration beside scheduling words (by, before, until,
  * finish, complete, due, project, meeting), a title-case programme or resource title ("30-Day Pantry Builder", "90-Day Implementation Roadmap"), a member's own blank
- * inside the match ("Target: ____ days"), questions, negations and examples. OWNERSHIP: it is tried after storage-duration; supply-duration, emergency-period and
+ * inside the match ("Target: ____ days"), questions, negations and examples. The REVERSE form (Stage 10.08, "7-day target", "two-week minimum", "14-day food goal") is part of this same family. OWNERSHIP: it is tried after storage-duration; supply-duration, emergency-period and
  * storage-duration own a sentence first, so one statement is one candidate with one owner.
  */
 const TL_DUR = `(?:(?:at least|about|around|up to|a|an|the)\\s+)?(${SUPPLY_FIG}[-\\s]*(?:hour|day|week|month)s?)\\b`;
 const TL_STRONG = new RegExp(`\\b(?:target|goal|minimum|required)\\s*:\\s*${TL_DUR}`, "gi");
 const TL_LABEL = "(?:target(?:s|ed)?|goal|minimum|required|requirement|aim(?:s|ed)?\\s+(?:for|to\\s+(?:have|keep|hold|store|maintain))|maintain(?:ing)?|keep(?:ing)?\\s+at\\s+least|build(?:ing)?\\s+(?:up\\s+)?to)";
 const TL_LOOSE = new RegExp(`\\b${TL_LABEL}\\b[^.?!:;]{0,40}?${TL_DUR}`, "gi");
+/** REVERSE form (Stage 10.08): the duration comes BEFORE the label, "7-day target", "two-week minimum", "7-day water target", "14-day food goal", "three-day required supply", "30-day preparedness target". Up to three descriptive words may sit between the duration and the label. The label itself is the prescription, so no supply noun is required; personal-habit and review-period subjects are left alone. */
+const TL_REV = new RegExp(`\\b(${SUPPLY_FIG}[-\\s]*(?:hour|day|week|month)s?)(?:[-\\s]+[A-Za-z][A-Za-z-]*){0,3}?[-\\s]+(?:target|goal|minimum|required|requirement)s?\\b`, "gi");
+const TL_REV_NOT_PREPAREDNESS = /\b(?:fitness|exercise|workout|weight|diet|reading|writing|study|learning|course|sales|revenue|challenge|trial|trip|forecast|review)\b/i;
 const TL_CONTEXT = /\b(?:supply|supplies|stock|stockpile|stored|storage|store|pantry|food|water|fuel|firewood|gas|LPG|rations?|meals?|batteries|medication|preparedness|prepared|self[- ]sufficien\w+|self[- ]reliant|resilien\w+|emergenc\w+|outage|disruption|power cut)\b/i;
 const TL_SCHEDULE = /\b(?:date|deadline|due|by|before|until|finish|complete|completion|launch|submit|schedule[d]?|meeting|call|appointment|project|from today|from now)\b/i;
 const TL_SCHEDULE_ANY = /\b(?:deadline|due|date|meeting|appointment|project|schedule[d]?)\b/i;
@@ -472,6 +475,7 @@ function targetLabelDurationsRaw(sentence: string): string[] {
   };
   for (const m of sentence.matchAll(TL_STRONG)) add(m, true);
   for (const m of sentence.matchAll(TL_LOOSE)) add(m, false);
+  for (const m of sentence.matchAll(TL_REV)) if (!TL_REV_NOT_PREPAREDNESS.test(m[0])) add(m, true);
   return found;
 }
 const isTargetLabelFigure = (sentence: string, figure: string): boolean => targetLabelDurations(sentence).some((t) => t.toLowerCase().includes(figure.toLowerCase()) || figure.toLowerCase().includes(t.toLowerCase()));
