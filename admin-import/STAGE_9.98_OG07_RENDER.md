@@ -8,8 +8,8 @@ Title, NARROW, general / planning-implementation / planning / worksheet / beginn
 **Layout-only changes after the first render** (no wording changed, no writing area shrunk): the priority-table cells were enlarged (Foundation 3 lines, First Action 4, Done By 3, line height 40 px), each reflection prompt got 3 writing lines (was 2), the commitment got 4 lines (was 3), and the closing box starts the last page so that it sits with the disclaimer (as in OG-06) instead of leaving a page that held only the disclaimer.
 
 ## Return items
-1. **NZ PDF:** rendered, 8 pages, 236,655 bytes; all 31 checks pass.
-2. **AU PDF:** rendered, 8 pages, 236,422 bytes; all 31 checks pass.
+1. **NZ PDF:** rendered, 8 pages, 236,655 bytes; all 29 checks pass.
+2. **AU PDF:** rendered, 8 pages, 236,422 bytes; all 29 checks pass.
 3. **SHA-256:** NZ `9480a6e2e7eb58223ed1ac8aee3a3a38b1850baa12f34884fa04c2799c5ac7f5`; AU `71bbc930ad86912eaece09e247ab47f7d74b8fa77d5ad7f163bbaabd77614ced`.
 4. **Page count:** 8 in both markets.
 5. **Orientation:** portrait, MediaBox 612 × 792 on every page.
@@ -36,4 +36,4 @@ Title, NARROW, general / planning-implementation / planning / worksheet / beginn
 No clipping, overflow, orphan heading or blank page. Page 2 and page 7 are about half empty by design (each step starts on its own page and the standing blocks sit at the ends), which keeps the writing areas uncluttered. Page 8 holds the closing box and the disclaimer.
 
 ## Validation (exit codes)
-lint 0 · typecheck 0 · full tests 0 (1,106) · targeted suites 0 (314) · draft QA 0 · PDF QA 0 (31 checks per market) · live-library scan 0, Bucket C 0 · `import:verify-build` 0 (records 26 · market files 52 · broken internal links 0).
+lint 0 · typecheck 0 · full tests 0 (1,106) · targeted suites 0 (314) · draft QA 0 · PDF QA 0 (29 checks per market plus the NZ/AU body comparison) · live-library scan 0, Bucket C 0 · `import:verify-build` 0 (records 26 · market files 52 · broken internal links 0).
