@@ -37,7 +37,9 @@ describe("Stage 9.97 · OG-07 locked metadata", () => {
   });
 
   it("Stage 10.00: res-1007 is assigned in the deployed record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
-    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1007");
+    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1007");
+    expect(JSON.stringify(meta), "OG-07 review entry").not.toContain("res-1007"); // other records may link to it in relatedResources (Stage 10.07: the OG-14 related-list recommendation)
+    expect(allNew).not.toContain("res-1007");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });

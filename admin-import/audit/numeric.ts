@@ -433,6 +433,49 @@ const ST_PATTERNS: RegExp[] = [
   new RegExp(`\\b(?:keeps?|lasts?|stores?)\\s+${ST_FOREVER}`, "gi"),
 ];
 const ST_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|not guarantee|no guarantee)\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|whether)\b|[_…]{3,}|^\s*(?:please\s+)?(?:choose|select|pick|decide|circle|tick|fill in|write|record|enter|note|list|add|compare|review|check|ask)\b/i;
+/**
+ * Target-label durations (Stage 10.07). A fixed preparedness, supply or storage target can sit behind a label rather than a supply noun:
+ * "Target: 30 days", "Goal: 14 days of food", "Build to a 30-day pantry", "Aim for four weeks". Stage 10.06 found "Target: 30 days" filed as
+ * "a duration in passing" because the line carries no supply noun for the supply-duration rule. This rule reads a TARGET LABEL
+ * (Target, Goal, Minimum, Required, Aim for, Maintain, Keep at least, Build to) bound to a duration in hours, days, weeks or months (digits or spelled-out).
+ *
+ * Two forms, both wording only (no resource is named):
+ *  - LABELLED FIELD: "Target: 30 days" — a strong label (Target, Goal, Minimum, Required) and a colon, directly followed by the duration. The colon form is the
+ *    prescription itself, so it needs no supply noun.
+ *  - SENTENCE: any target label followed within a short span by a duration, only when the sentence is about supplies, storage, preparedness or self-sufficiency.
+ * It stays quiet for target dates and deadlines ("Target date: ____", "My target date is next Friday"), a duration beside scheduling words (by, before, until,
+ * finish, complete, due, project, meeting), a title-case programme or resource title ("30-Day Pantry Builder", "90-Day Implementation Roadmap"), a member's own blank
+ * inside the match ("Target: ____ days"), questions, negations and examples. OWNERSHIP: it is tried after storage-duration; supply-duration, emergency-period and
+ * storage-duration own a sentence first, so one statement is one candidate with one owner.
+ */
+const TL_DUR = `(?:(?:at least|about|around|up to|a|an|the)\\s+)?(${SUPPLY_FIG}[-\\s]*(?:hour|day|week|month)s?)\\b`;
+const TL_STRONG = new RegExp(`\\b(?:target|goal|minimum|required)\\s*:\\s*${TL_DUR}`, "gi");
+const TL_LABEL = "(?:target(?:s|ed)?|goal|minimum|required|requirement|aim(?:s|ed)?\\s+(?:for|to\\s+(?:have|keep|hold|store|maintain))|maintain(?:ing)?|keep(?:ing)?\\s+at\\s+least|build(?:ing)?\\s+(?:up\\s+)?to)";
+const TL_LOOSE = new RegExp(`\\b${TL_LABEL}\\b[^.?!:;]{0,40}?${TL_DUR}`, "gi");
+const TL_CONTEXT = /\b(?:supply|supplies|stock|stockpile|stored|storage|store|pantry|food|water|fuel|firewood|gas|LPG|rations?|meals?|batteries|medication|preparedness|prepared|self[- ]sufficien\w+|self[- ]reliant|resilien\w+|emergenc\w+|outage|disruption|power cut)\b/i;
+const TL_SCHEDULE = /\b(?:date|deadline|due|by|before|until|finish|complete|completion|launch|submit|schedule[d]?|meeting|call|appointment|project|from today|from now)\b/i;
+const TL_SCHEDULE_ANY = /\b(?:deadline|due|date|meeting|appointment|project|schedule[d]?)\b/i;
+const TL_NOT = /\b(?:do not|don'?t|does not|doesn'?t|need not|no need|never|not necessary|isn'?t|aren'?t|not required|rather than|instead of)\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose)\b/i;
+/** The duration text of every target-label duration in a sentence, or [] when it asserts none. */
+function targetLabelDurationsRaw(sentence: string): string[] {
+  if (TL_NOT.test(sentence) || TL_SCHEDULE_ANY.test(sentence)) return [];
+  const found: string[] = [];
+  const add = (m: RegExpMatchArray, strong: boolean) => {
+    const dur = clean(m[1] ?? "");
+    const whole = m[0];
+    const after = sentence.slice((m.index ?? 0) + whole.length, (m.index ?? 0) + whole.length + 30);
+    if (!dur || found.includes(dur)) return;
+    if (/_{3,}|…/.test(whole) || TL_SCHEDULE.test(whole) || TL_SCHEDULE.test(after)) return;
+    if (/-(?:Day|Week|Month|Hour)s?\b/.test(dur)) return; // a title-case programme or resource title: "30-Day Pantry Builder"
+    if (!strong && !TL_CONTEXT.test(sentence)) return;
+    found.push(dur);
+  };
+  for (const m of sentence.matchAll(TL_STRONG)) add(m, true);
+  for (const m of sentence.matchAll(TL_LOOSE)) add(m, false);
+  return found;
+}
+const isTargetLabelFigure = (sentence: string, figure: string): boolean => targetLabelDurations(sentence).some((t) => t.toLowerCase().includes(figure.toLowerCase()) || figure.toLowerCase().includes(t.toLowerCase()));
+
 /** The figure text of every storage-duration claim in a sentence, or [] when it asserts none. */
 function storageDurationClaimsRaw(sentence: string): string[] {
   if (ST_NOT_A_CLAIM.test(sentence)) return [];
@@ -480,7 +523,7 @@ export function storageTableRows(html: string): { sentence: string; cell: string
  *
  * Because a figure-free sentence raises no ordinary candidate, this rule supplies its own hit (category "performance", unit "outcome").
  * OWNERSHIP (full order): treatment-owned → registry-approved → safety block → structural label → survival-duration → supply-duration → emergency-period →
- * storage-duration → multiplier → comparative performance → absolute outcome → not-a-claim and the ordinary figure rules. A sentence owned by an earlier
+ * storage-duration → target-label duration (Stage 10.07) → multiplier → comparative performance → absolute outcome → assurance or completion claim (Stage 10.07) → not-a-claim and the ordinary figure rules. A sentence owned by an earlier
  * family raises none of the later performance candidates, and a multiplier or comparative owns the sentence before an outcome claim.
  */
 const OUT_PATTERNS: RegExp[] = [
@@ -505,6 +548,46 @@ function outcomeClaimsRaw(sentence: string): string[] {
   return kept.map((k) => k.text);
 }
 
+/**
+ * Assurance and completion claims (Stage 10.07). A statement that presents household resilience, safety or preparedness as ACHIEVED because a worksheet step is
+ * done: "You have secured your water supply", "Your household is now prepared", "You are fully ready for an outage", "Your food resilience is secured",
+ * "You now have everything you need", "This guarantees your household is prepared", "guaranteed preparedness". A worksheet cannot know that, so the sentence is an
+ * unsupported assurance. General wording rules, no resource named; the category is "performance" and the unit "assurance" (a figure-free hit, like an outcome claim).
+ *
+ * Quiet for everything that is not an assertion of achievement: questions ("What still needs to be secured?"), instructions ("Write down what you have secured."),
+ * conditional or hedged wording (if, once, when, may, might, could, can, should, helps), a member's own blank, an ordinary "secure" with no completion or assurance
+ * context ("Secure heavy shelves to the wall" is a different, safety-owned topic and is not read here), and a bare "ready" that leads to a task ("you are ready to begin").
+ * OWNERSHIP: tried last of the performance families — after a multiplier, a comparative-performance claim and an absolute outcome claim — so a sentence owned by an earlier
+ * family raises no assurance candidate (one statement, one owner).
+ */
+const AS_STATE = "(?:secured?|prepared|covered|protected|resilient|sorted)";
+const AS_READY = "ready(?!\\s+(?:to|for\\s+(?:the\\s+)?(?:next|this|week|day|step|section|stage|part|page))\\b)";
+const AS_PATTERNS: RegExp[] = [
+  // "You have secured your water supply", "You've secured the three pillars", "You have now covered everything"
+  /\byou(?:'ve|\s+have)(?:\s+now)?\s+(?:secured|covered|sorted)\s+(?:your|the|all|every|everything)\b[^.?!]{0,40}/gi,
+  // "Your household is now prepared", "Your food resilience is secured", "Your supplies are covered"
+  new RegExp(`\\b(?:your|the)\\s+(?:household|family|home|water|food|air|supply|supplies|resilience|preparedness|readiness)(?:\\s+\\w+){0,2}?\\s+(?:is|are)\\s+(?:now\\s+|fully\\s+|completely\\s+|totally\\s+)*(?:${AS_STATE}|${AS_READY})`, "gi"),
+  // "You are fully ready for an outage", "You're now completely prepared"
+  new RegExp(`\\byou(?:'re|\\s+are)\\s+(?:now\\s+)?(?:fully|completely|totally|100%)\\s+(?:${AS_STATE}|ready)\\b[^.?!]{0,30}`, "gi"),
+  // "You now have everything you need"
+  /\byou\s+(?:now\s+)?have\s+(?:everything|all)\s+(?:you|your\s+(?:household|family))\s+(?:need|needs|require)\b/gi,
+  // "This guarantees your household is prepared", "completing this ensures you are ready"
+  new RegExp(`\\b(?:this|it|the\\s+worksheet|this\\s+worksheet|completing\\s+this)\\s+(?:guarantees?|ensures?|makes\\s+sure)\\s+(?:that\\s+)?(?:you|your\\s+(?:household|family|home)|everyone)\\b[^.?!]{0,40}?\\b(?:${AS_STATE}|ready|safe)\\b`, "gi"),
+  // "guaranteed preparedness", "guarantees readiness"
+  /\bguarantee[sd]?\s+(?:preparedness|readiness|resilience|security)\b/gi,
+  // "water supply secured", "supplies are now secured"
+  /\b(?:water|food|fuel|energy|household)?\s*suppl(?:y|ies)\s+(?:(?:is|are)\s+)?(?:now\s+)?secured\b/gi,
+];
+const AS_NOT_A_CLAIM = /\?\s*$|[_…]{3,}|\b(?:if|when|once|until|unless|whether|may|might|could|can|should|would|helps?|help you|aims? to|tries? to|hope to|for example|for instance|such as|e\.g\.|imagine|suppose)\b|\b(?:do not|don'?t|does not|doesn'?t|not guarantee|no guarantee|cannot|can'?t)\b|^\s*(?:please\s+)?(?:write|record|note|list|tick|circle|check|ask|consider|think|look|choose|select|decide|add|enter|fill in)\b/i;
+/** The text of every assurance or completion claim in a sentence, or [] when it asserts none. */
+function assuranceClaimsRaw(sentence: string): string[] {
+  if (AS_NOT_A_CLAIM.test(sentence)) return [];
+  const spans = AS_PATTERNS.flatMap((re) => [...sentence.matchAll(re)].map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) }))).sort((a, b) => a.start - b.start || b.end - a.end);
+  const kept: typeof spans = [];
+  for (const s of spans) if (!kept.some((k) => s.start < k.end && s.end > k.start)) kept.push(s);
+  return kept.map((k) => k.text);
+}
+
 /** The claim families are pure functions of one sentence, and the scan asks about the same sentence several times (ownership, hit generation, classification): answer each once. */
 function memoByText<T>(fn: (s: string) => T): (s: string) => T {
   const cache = new Map<string, T>();
@@ -520,8 +603,10 @@ export const multiplierClaims = memoByText(multiplierClaimsRaw);
 export const comparativePerformanceClaims = memoByText(comparativePerformanceClaimsRaw);
 export const storageDurationClaims = memoByText(storageDurationClaimsRaw);
 export const outcomeClaims = memoByText(outcomeClaimsRaw);
+export const targetLabelDurations = memoByText(targetLabelDurationsRaw);
+export const assuranceClaims = memoByText(assuranceClaimsRaw);
 /** True when an earlier family already owns the sentence, so no performance candidate is raised for it. */
-const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0 || storageDurationClaims(sentence).length > 0;
+const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0 || storageDurationClaims(sentence).length > 0 || targetLabelDurations(sentence).length > 0;
 
 /**
  * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
@@ -589,6 +674,8 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
     for (const fig of mult) if (!found.some((f) => f.figure === fig)) found.push({ figure: fig, value: Number(fig.match(/\d+(?:\.\d+)?/)?.[0]) || null, unit: "multiplier", category: "performance" });
     if (!mult.length) for (const t of comparativePerformanceClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "comparative", category: "performance" });
     if (!mult.length && !comparativePerformanceClaims(sentence).length) for (const t of outcomeClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "outcome", category: "performance" });
+    // Assurance and completion claims (Stage 10.07): last of the performance families, only when no multiplier, comparative or outcome claim owns the sentence.
+    if (!mult.length && !comparativePerformanceClaims(sentence).length && !outcomeClaims(sentence).length) for (const t of assuranceClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "assurance", category: "performance" });
   }
   // Storage-duration claims (Stage 10.02): the figure itself, or a "forever" word that carries no unit ("Indefinite").
   for (const fig of storageDurationClaims(sentence)) if (!found.some((f) => fig.toLowerCase().includes(f.figure.toLowerCase()) || f.figure.toLowerCase().includes(fig.toLowerCase()))) found.push({ figure: fig, value: Number(fig.match(/\d+(?:\.\d+)?/)?.[0]) || null, unit: "storage", category: "interval" });
@@ -668,6 +755,10 @@ export function scanNumericClaims(
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an emergency-period claim: a factual statement about how long an emergency, a delay in help or household self-sufficiency lasts, with no approved entry" });
       else if (hit.category === "interval" && isStorageDurationFigure(sentence, hit.figure))
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a storage-duration claim: a factual statement of how long food or stores keep, or must be used within, with no approved entry" });
+      else if (hit.category === "interval" && isTargetLabelFigure(sentence, hit.figure))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a target-label duration: a fixed supply, storage or preparedness target set out behind a label such as Target, Goal, Minimum or Build to, with no approved entry" });
+      else if (hit.category === "performance" && hit.unit === "assurance")
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an assurance or completion claim: an unsupported statement that the household is secured, prepared or ready because a step is complete, with no approved entry" });
       else if (hit.category === "performance" && hit.unit === "outcome")
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an absolute outcome claim: an unsupported statement that something eliminates, prevents, guarantees or always achieves a result, with no approved entry" });
       else if (hit.category === "performance" && hit.unit === "multiplier")
