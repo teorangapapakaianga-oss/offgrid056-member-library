@@ -33,7 +33,8 @@ export type NumericCategory =
   | "flow"
   | "power"
   | "insulation"
-  | "currency";
+  | "currency"
+  | "performance";
 
 export type Bucket =
   | "A_ALREADY_SOURCED"
@@ -348,6 +349,67 @@ export function emergencyPeriodTargets(sentence: string): string[] {
 const isEmergencyPeriodFigure = (sentence: string, figure: string): boolean => emergencyPeriodTargets(sentence).some((t) => t.toLowerCase().includes(figure.toLowerCase()));
 
 /**
+ * Performance and efficacy claims (Stage 9.97). Two further families, general (they name no resource) and, like the three above, they read the
+ * wording of a sentence, never a document.
+ *
+ *  - MULTIPLIER: "2x", "2×", "2–3x", "twice", "three times", "tenfold" attached to result language (effective, faster, productive, results,
+ *    progress, improvement, savings, follow-through, output …): "increases follow-through by 2–3x", "twice as effective", "achieves 3 times the progress".
+ *  - COMPARATIVE PERFORMANCE: a better/faster/more-effective/more-progress statement set against "most people", "the average person", "typical
+ *    approaches", "most households": "more progress than most people make in a year".
+ *
+ * A bare "x" is not a claim: a multiplier needs result language in the same sentence, so "2 x batteries" (a member's quantity), "review this twice",
+ * "two times this week" (a schedule) and "which option is better for you?" stay quiet. Questions, examples, negations, a member's own blanks and a
+ * sentence that opens with an instruction ("Compare the three plans", "Write down what worked better") also assert nothing.
+ *
+ * OWNERSHIP. One statement has one primary owner. The order is: treatment-owned → registry-approved → safety block → structural label → survival-duration
+ * → supply-duration → emergency-period → multiplier → comparative performance → not-a-claim and the ordinary figure rules. Ownership is per figure:
+ * a sentence already claimed by survival, supply or emergency-period raises no multiplier or comparative candidate (no second failure for one
+ * statement), and a sentence with a multiplier raises no comparative candidate. A different figure in the same sentence ("by 30%") is still its own
+ * candidate under the ordinary rules.
+ */
+const PERF_WORD =
+  "(?:effective(?:ness)?|efficien\\w+|faster|quicker|speed\\w*|productiv\\w+|results?|progress|improv\\w+|better|outcomes?|output|savings?|gains?|success\\w*|follow[- ]?through|performance|achiev\\w+|accomplish\\w*|reliab\\w+|likely|succeed\\w*|stronger|longer|boost\\w*|increas\\w+|enhanc\\w+|growth|returns?|impact|powerful)";
+const MULT_FIG = "(?:\\d+(?:\\.\\d+)?(?:\\s?[–-]\\s?\\d+(?:\\.\\d+)?)?\\s?(?:x|×)(?![A-Za-z0-9])|(?:twice|thrice)(?![A-Za-z])|(?:double|triple|quadruple)(?=\\s+(?:the|as|your|their|its|that)\\b)|(?:(?:one and a half|two|three|four|five|six|seven|eight|nine|ten|\\d+(?:\\.\\d+)?)\\s+times)(?![A-Za-z])|(?:two|three|four|five|six|seven|eight|nine|ten)-?fold)";
+const MULT_PATTERNS: RegExp[] = [
+  // "2–3x more effective", "twice as effective", "three times faster"
+  new RegExp(`\\b${MULT_FIG}(?:\\s+(?:as|more|the|your|their|its))?[^.?!]{0,25}?\\b${PERF_WORD}\\b`, "gi"),
+  // "increases output by 2x", "achieves 3 times the progress", "improves results by a factor of two" (verb + result word before the multiplier)
+  new RegExp(`\\b${PERF_WORD}\\b[^.?!]{0,40}?\\b(?:by\\s+(?:a\\s+factor\\s+of\\s+)?|up to\\s+|to\\s+)?${MULT_FIG}`, "gi"),
+];
+const PERF_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|never|not\s+(?:a|an|the|about)|no\s+(?:guarantee|promise))\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|if you|whether)\b|[_…]{3,}|^\s*(?:please\s+)?(?:choose|select|pick|decide|circle|tick|fill in|write|record|enter|note|compare|review|check|list|rank|ask|consider|think|look)\b/i;
+/** The text of every multiplier claim in a sentence, or [] when the sentence asserts none. */
+export function multiplierClaims(sentence: string): string[] {
+  if (PERF_NOT_A_CLAIM.test(sentence)) return [];
+  const found: string[] = [];
+  for (const re of MULT_PATTERNS) for (const m of sentence.matchAll(re)) {
+    const fig = m[0].match(new RegExp(MULT_FIG, "i"));
+    if (fig && !found.includes(fig[0].trim())) found.push(fig[0].trim());
+  }
+  return found;
+}
+const COMP_BASE = "(?:most|many|the average|an average|average|typical|the typical|nearly all|almost all|the majority of|the vast majority of|other)";
+const COMP_GROUP = "(?:people|persons?|households?|homes?|homeowners|families|folks|approaches|methods|plans|options|systems|programmes?|programs?)";
+const COMP_PATTERNS: RegExp[] = [
+  // "more progress than most people make in a year", "better results than most households"
+  new RegExp(`\\b(?:more|greater|better|faster|bigger|stronger)\\s+(?:\\w+\\s+){0,2}?(?:progress|results?|success|gains?|improvements?|output|productivity|impact)\\s+than\\s+${COMP_BASE}\\b`, "gi"),
+  // "faster than the average person", "more effective than typical approaches", "better than most households"
+  new RegExp(`\\b(?:faster|quicker|better|stronger|more\\s+(?:effective|efficient|productive|successful|reliable|powerful))\\b[^.?!]{0,30}?\\bthan\\s+(?:${COMP_BASE}\\s+)(?:\\w+\\s+){0,1}?${COMP_GROUP}\\b`, "gi"),
+  // "achieves more than most people", "gets better results than the average person"
+  new RegExp(`\\b(?:achiev\\w+|accomplish\\w*|get|gets|make|makes|do|does|see|sees|gain\\w*)\\s+(?:far\\s+|much\\s+)?(?:more|better)\\b[^.?!]{0,40}?\\bthan\\s+${COMP_BASE}\\b`, "gi"),
+];
+/** The text of every comparative-performance claim in a sentence, or [] when the sentence asserts none. */
+export function comparativePerformanceClaims(sentence: string): string[] {
+  if (PERF_NOT_A_CLAIM.test(sentence)) return [];
+  // overlapping matches of the three patterns describe one statement: keep the earliest, longest span only
+  const spans = COMP_PATTERNS.flatMap((re) => [...sentence.matchAll(re)].map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) }))).sort((a, b) => a.start - b.start || b.end - a.end);
+  const kept: typeof spans = [];
+  for (const s of spans) if (!kept.some((k) => s.start < k.end && s.end > k.start)) kept.push(s);
+  return kept.map((k) => k.text);
+}
+/** True when an earlier family already owns the sentence, so no performance candidate is raised for it. */
+const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0;
+
+/**
  * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
  * pointer back to it ("any gap in your 3-day official baseline"). It asserts nothing new, so it is judged once,
  * where the figure is actually made.
@@ -407,6 +469,12 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
   for (const m of sentence.matchAll(CURRENCY)) found.push({ figure: clean(m[0]), value: null, unit: "$", category: "currency" });
   for (const m of sentence.matchAll(WORD_INTERVAL)) found.push({ figure: clean(m[0]), value: null, unit: "time", category: "interval" });
   for (const r of ratioMatches(sentence)) if (!found.some((f) => f.figure === r.figure)) found.push(r);
+  // Performance and efficacy claims (Stage 9.97): only when no earlier family owns the sentence; a multiplier owns the sentence before a comparative.
+  if (!ownedByEarlierFamily(sentence)) {
+    const mult = multiplierClaims(sentence);
+    for (const fig of mult) if (!found.some((f) => f.figure === fig)) found.push({ figure: fig, value: Number(fig.match(/\d+(?:\.\d+)?/)?.[0]) || null, unit: "multiplier", category: "performance" });
+    if (!mult.length) for (const t of comparativePerformanceClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "comparative", category: "performance" });
+  }
   return found;
 }
 
@@ -478,6 +546,10 @@ export function scanNumericClaims(
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a supply-duration target: a factual statement of how much to hold, with no approved entry" });
       else if (hit.category === "interval" && isEmergencyPeriodFigure(sentence, hit.figure))
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an emergency-period claim: a factual statement about how long an emergency, a delay in help or household self-sufficiency lasts, with no approved entry" });
+      else if (hit.category === "performance" && hit.unit === "multiplier")
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a multiplier claim: an unsupported statement of how much more effective, faster or productive something is, with no approved entry" });
+      else if (hit.category === "performance")
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a comparative-performance claim: an unsupported statement that something outperforms what most people or typical approaches achieve, with no approved entry" });
       else if (notAClaim) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: notAClaim.why });
       else if (hit.category === "interval" && horizon) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: horizon.why });
       else if (
