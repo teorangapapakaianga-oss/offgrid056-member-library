@@ -406,8 +406,107 @@ export function comparativePerformanceClaims(sentence: string): string[] {
   for (const s of spans) if (!kept.some((k) => s.start < k.end && s.end > k.start)) kept.push(s);
   return kept.map((k) => k.text);
 }
+/**
+ * Storage-duration claims (Stage 10.02). A duration that says how long food or stores keep: "shelf life of 2 years", "keeps for 6 months", "use within 12
+ * months", "pantry life: 4–5 years", and the same facts set out in a table, where the figure sits in a cell and the claim is in the column header
+ * ("Pantry Shelf Life" over "4–5 years"). Wording only, general (no resource is named). Table context is supplied by `storageTableRows`, which turns each
+ * body row back into the claim it makes ("Rice (white) — Pantry Shelf Life: 4–5 years") exactly as the treatment gates do for efficacy tables, so
+ * the same sentence rules read it and the bare cell ("4–5 years") is not judged a second time.
+ *
+ * Quiet for what is not a claim: "monthly pantry check", "review this next month", a member's own "Bought 2 months ago" field (its header names no
+ * storage life), programme titles ("30-Day Pantry Builder"), schedules ("Week 2", "Day 12"), blank templates, questions, examples, negations and
+ * instructions ("Choose how long…", "Write the date…").
+ */
+const ST_UNIT = "(?:day|week|month|year)s?";
+const ST_LIFE = "(?:shelf|storage|pantry|freezer|fridge|refrigerator|cupboard) life";
+const ST_DUR = `(?:(?:up to|about|around|at least)\\s+)?(${SUPPLY_FIG}[-\\s]*${ST_UNIT})`;
+const ST_COLON = "\\s*:?\\s*";
+const ST_FOREVER = "(indefinite(?:ly)?|forever|unlimited|no expiry|never expires?)";
+const ST_PATTERNS: RegExp[] = [
+  new RegExp(`\\b${ST_LIFE}\\b[^.?!]{0,50}?${ST_DUR}`, "gi"),
+  new RegExp(`\\b${ST_DUR}\\s+(?:of\\s+)?${ST_LIFE}\\b`, "gi"),
+  new RegExp(`\\b(?:keeps?|lasts?|stays?\\s+(?:fresh|good|safe|edible|usable)|stor(?:e|es|ed|ing)|good|best quality)\\b[^.?!]{0,25}?\\b(?:for|up to|about|around|over)${ST_COLON}${ST_DUR}`, "gi"),
+  new RegExp(`\\b(?:use|used|consume|consumed|eat|eaten)\\s+within${ST_COLON}${ST_DUR}`, "gi"),
+  new RegExp(`\\bstorage (?:time|duration|period)\\b[^.?!]{0,30}?${ST_DUR}`, "gi"),
+  new RegExp(`\\b${ST_FOREVER}\\s+${ST_LIFE}\\b`, "gi"),
+  new RegExp(`\\b${ST_LIFE}\\b[^.?!]{0,30}?${ST_FOREVER}`, "gi"),
+  new RegExp(`\\b(?:keeps?|lasts?|stores?)\\s+${ST_FOREVER}`, "gi"),
+];
+const ST_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|not guarantee|no guarantee)\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|whether)\b|[_…]{3,}|^\s*(?:please\s+)?(?:choose|select|pick|decide|circle|tick|fill in|write|record|enter|note|list|add|compare|review|check|ask)\b/i;
+/** The figure text of every storage-duration claim in a sentence, or [] when it asserts none. */
+export function storageDurationClaims(sentence: string): string[] {
+  if (ST_NOT_A_CLAIM.test(sentence)) return [];
+  const found: string[] = [];
+  for (const re of ST_PATTERNS) for (const m of sentence.matchAll(re)) {
+    const fig = clean(m[1] ?? "");
+    if (fig && !found.includes(fig)) found.push(fig);
+  }
+  return found;
+}
+const isStorageDurationFigure = (sentence: string, figure: string): boolean => storageDurationClaims(sentence).some((t) => t.toLowerCase().includes(figure.toLowerCase()) || figure.toLowerCase().includes(t.toLowerCase()));
+const ST_HEADER = new RegExp(`${ST_LIFE}|\\bkeeps? for\\b|\\blasts? for\\b|\\bstore for\\b|\\buse within\\b|\\bconsume within\\b|\\bbest quality\\b|\\bstorage (?:time|duration|period)\\b|\\bhow long (?:it )?(?:keeps|lasts|stores)\\b`, "i");
+const ST_HEADING = new RegExp(ST_LIFE, "i");
+const stripCell = (s: string) => s.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&ndash;/g, "\u2013").replace(/&mdash;/g, "\u2014").replace(/\s+/g, " ").trim();
+/** Each body row of a table whose column header (or preceding heading) names a storage life, as the claim the row makes; `cell` is the bare cell it came from. */
+export function storageTableRows(html: string): { sentence: string; cell: string }[] {
+  const out: { sentence: string; cell: string }[] = [];
+  for (const m of html.matchAll(/<table[\s\S]*?<\/table>/gi)) {
+    const table = m[0];
+    const headers = [...table.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/gi)].map((h) => stripCell(h[1]));
+    const before = html.slice(Math.max(0, (m.index ?? 0) - 400), m.index ?? 0);
+    const heading = [...before.matchAll(/<h\d[^>]*>([\s\S]*?)<\/h\d>/gi)].map((h) => stripCell(h[1])).pop() ?? "";
+    const headingIsStorage = ST_HEADING.test(heading);
+    if (!headers.some((h) => ST_HEADER.test(h)) && !headingIsStorage) continue;
+    for (const row of table.match(/<tr[\s\S]*?<\/tr>/gi) ?? []) {
+      const cells = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((c) => stripCell(c[1]));
+      if (cells.length < 2) continue;
+      cells.forEach((cell, i) => {
+        if (i === 0 || !cell) return;
+        const header = headers[i] ?? "";
+        if (ST_HEADER.test(header)) out.push({ sentence: `${cells[0]} \u2014 ${header}: ${cell}`, cell });
+        else if (headingIsStorage && new RegExp(`${SUPPLY_FIG}[-\\s]*${ST_UNIT}|${ST_FOREVER}`, "i").test(cell)) out.push({ sentence: `${cells[0]} \u2014 Shelf life${header ? ` (${header})` : ""}: ${cell}`, cell });
+      });
+    }
+  }
+  return out;
+}
+
+/**
+ * Absolute or promised outcome claims (Stage 10.02): a statement that something eliminates, prevents, guarantees or always achieves a result.
+ * "eliminates expired food", "prevents all food waste", "stops waste", "perpetually fresh", "fresh indefinitely", "guarantees freshness", "saves money",
+ * "never run out of food", "always prevents waste", "no more waste". General wording rules. Hedged or member-facing wording stays quiet: "may help
+ * reduce waste", "can help you save money", "write down ways you could save money", "what would help you waste less food?", goals, questions,
+ * examples, negations ("does not guarantee savings") and an instruction opener.
+ *
+ * Because a figure-free sentence raises no ordinary candidate, this rule supplies its own hit (category "performance", unit "outcome").
+ * OWNERSHIP (full order): treatment-owned → registry-approved → safety block → structural label → survival-duration → supply-duration → emergency-period →
+ * storage-duration → multiplier → comparative performance → absolute outcome → not-a-claim and the ordinary figure rules. A sentence owned by an earlier
+ * family raises none of the later performance candidates, and a multiplier or comparative owns the sentence before an outcome claim.
+ */
+const OUT_PATTERNS: RegExp[] = [
+  /\b(?:eliminat\w+|prevent\w*|stops?|ends?|removes?|abolish\w*)\s+(?:all\s+|every\s+|any\s+|your\s+)?(?:expired(?:\s+(?:food|cans?|items?))?|food\s+waste|wasted\s+food|waste|spoilage|spoiled\s+food)\b/gi,
+  /\b(?:perpetually|permanently|indefinitely|forever|always)\s+(?:fresh|safe|good|in[- ]date|usable)\b|\b(?:fresh|safe|good)\s+(?:perpetually|permanently|indefinitely|forever)\b/gi,
+  /\bguarantee[sd]?\s+(?:you\s+)?(?:freshness|savings?|results?|safety|success|no waste|waste[- ]free)\b/gi,
+  /\b(?:saves|will save)\s+(?:you\s+)?(?:money|cash|thousands)\b/gi,
+  /\b(?:never|will never|won'?t ever)\s+(?:run out of|run short of|go without|go hungry|throw away|throw out|waste)\b/gi,
+  /\balways\s+(?:prevents?|keeps?|saves?|stops?|eliminates?)\b/gi,
+  /\bno more\s+(?:waste|wasted|expired|spoil\w+|throwing)\b/gi,
+];
+const OUT_NOT_A_CLAIM = /\b(?:do not|don'?t|does not|doesn'?t|cannot|can'?t|can not|won'?t|not guarantee|no guarantee)\b|\?\s*$|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|if you|whether)\b|[_…]{3,}|^\s*(?:please\s+)?(?:choose|select|pick|decide|circle|tick|fill in|write|record|enter|note|compare|review|check|list|rank|ask|consider|think|look)\b/i;
+const OUT_HEDGE = /\b(?:may|might|could|can|should|would|aims? to|tries? to|helps?|help you|hope to)\b[^.?!]{0,30}$/i;
+/** The text of every absolute outcome claim in a sentence, or [] when it asserts none. */
+export function outcomeClaims(sentence: string): string[] {
+  if (OUT_NOT_A_CLAIM.test(sentence)) return [];
+  const found: string[] = [];
+  // overlapping matches describe one statement ("always prevents waste"): keep the earliest, longest span only
+  const spans = OUT_PATTERNS.flatMap((re) => [...sentence.matchAll(re)].map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) }))).filter((s) => !OUT_HEDGE.test(sentence.slice(Math.max(0, s.start - 40), s.start))).sort((a, b) => a.start - b.start || b.end - a.end);
+  const kept: typeof spans = [];
+  for (const s of spans) if (!kept.some((k) => s.start < k.end && s.end > k.start)) kept.push(s);
+  return kept.map((k) => k.text);
+}
+
 /** True when an earlier family already owns the sentence, so no performance candidate is raised for it. */
-const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0;
+const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0 || storageDurationClaims(sentence).length > 0;
 
 /**
  * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
@@ -474,7 +573,10 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
     const mult = multiplierClaims(sentence);
     for (const fig of mult) if (!found.some((f) => f.figure === fig)) found.push({ figure: fig, value: Number(fig.match(/\d+(?:\.\d+)?/)?.[0]) || null, unit: "multiplier", category: "performance" });
     if (!mult.length) for (const t of comparativePerformanceClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "comparative", category: "performance" });
+    if (!mult.length && !comparativePerformanceClaims(sentence).length) for (const t of outcomeClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "outcome", category: "performance" });
   }
+  // Storage-duration claims (Stage 10.02): the figure itself, or a "forever" word that carries no unit ("Indefinite").
+  for (const fig of storageDurationClaims(sentence)) if (!found.some((f) => fig.toLowerCase().includes(f.figure.toLowerCase()) || f.figure.toLowerCase().includes(fig.toLowerCase()))) found.push({ figure: fig, value: Number(fig.match(/\d+(?:\.\d+)?/)?.[0]) || null, unit: "storage", category: "interval" });
   return found;
 }
 
@@ -506,8 +608,11 @@ export function scanNumericClaims(
     segments.push({ html: block, owner: block.match(/data-block="([^"]+)"/)?.[1] ?? "safety-block" });
   }
 
-  for (const { html: segmentHtml, owner: fromBlock } of segments)
-  for (const raw of treatmentSentences(segmentHtml)) {    const sentence = clean(raw);
+  for (const { html: segmentHtml, owner: fromBlock } of segments) {
+  // Storage-life tables (Stage 10.02): each body row is read as the claim it makes, and the bare cell it came from is not judged a second time.
+  const storageRows = storageTableRows(segmentHtml);
+  const ownedCells = new Set(storageRows.map((r) => clean(r.cell)));
+  for (const raw of [...treatmentSentences(segmentHtml).filter((s) => !ownedCells.has(clean(s))), ...storageRows.map((r) => r.sentence)]) {    const sentence = clean(raw);
     for (const hit of numericMatches(sentence)) {
       const key = `${market}|${fromBlock ?? "-"}|${sentence}|${hit.figure}`;
       if (seen.has(key)) continue;
@@ -546,6 +651,10 @@ export function scanNumericClaims(
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a supply-duration target: a factual statement of how much to hold, with no approved entry" });
       else if (hit.category === "interval" && isEmergencyPeriodFigure(sentence, hit.figure))
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an emergency-period claim: a factual statement about how long an emergency, a delay in help or household self-sufficiency lasts, with no approved entry" });
+      else if (hit.category === "interval" && isStorageDurationFigure(sentence, hit.figure))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a storage-duration claim: a factual statement of how long food or stores keep, or must be used within, with no approved entry" });
+      else if (hit.category === "performance" && hit.unit === "outcome")
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an absolute outcome claim: an unsupported statement that something eliminates, prevents, guarantees or always achieves a result, with no approved entry" });
       else if (hit.category === "performance" && hit.unit === "multiplier")
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a multiplier claim: an unsupported statement of how much more effective, faster or productive something is, with no approved entry" });
       else if (hit.category === "performance")
@@ -563,6 +672,7 @@ export function scanNumericClaims(
         out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: "arithmetic being explained, not a figure asserted" });
       else out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a member-facing figure with no approved entry for this market and resource" });
     }
+  }
   }
 
   // Second pass: a back-reference to a baseline this document has already sourced is not a second claim. It is only

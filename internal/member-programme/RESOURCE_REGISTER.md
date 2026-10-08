@@ -2,10 +2,10 @@
 
 All 45 legacy resources and where each one stands.
 
-**As at:** 8 October 2026, after Stage 10.00.
+**As at:** 8 October 2026, after Stage 10.02A.
 
 **LIVE:** 27 protected resources · 54 market files · Worker `8834be25-0110-4355-94a5-93b9943f792d` (100%) · immediate rollback target `5d88271b-6f06-4be8-9fd9-6b73fa4a002a`.
-**STAGED, NOT DEPLOYED:** none. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84), OG-06 Emergency Readiness Checklist (`res-1006`) is live as protected resource #26 (deployed in Stage 9.95) and OG-07 Priority Lock Worksheet (`res-1007`) is live as protected resource #27 (deployed in Stage 10.00). **Next action:** the next legacy-resource audit.
+**STAGED, NOT DEPLOYED:** none. OG-04 Property Type Review (`res-1004`) is live as protected resource #25 (deployed in Stage 9.84), OG-06 Emergency Readiness Checklist (`res-1006`) is live as protected resource #26 (deployed in Stage 9.95) and OG-07 Priority Lock Worksheet (`res-1007`) is live as protected resource #27 (deployed in Stage 10.00). **Pending content revision (staged, not deployed):** the live OG-11 30-Day Pantry Builder has one sentence corrected in its NZ and AU PDFs ("Some canned foods carry no date — write the date you bought them on the can with a permanent marker."; the qualifier "with a shelf life of more than two years" is removed so the hardened storage-duration rule finds nothing). It is a revision of an existing resource, not a new resource: no count changes (live 27 / 54; Deployed 27 · Staged 0). Report: `admin-import/STAGE_10.02A_OG11_CORRECTION.md`. **Next action:** explicit owner approval to deploy the OG-11 storage-wording correction; the OG-12 rewrite resumes afterwards.
 **Navigation cleanup: DEPLOYED (Stage 9.88)** — the protected Start Here lists OG-01 and OG-02 only (the six demo placeholders res-0001 to res-0006 are hidden from it, not deleted), and the protected Five Foundations page points to the Home Resilience Scorecard; the public/demo build is unchanged. The survival-duration and supply-duration detector rules are admin tooling, not a live change.
 **OG-05** (legacy "5 Pillars Quick Reference"): **MERGED / NO STANDALONE RESOURCE**. No res-ID, no NZ or AU PDFs, no standalone migration planned.
 

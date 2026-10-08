@@ -45,13 +45,14 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c).toContain(ROLLBACK);
     });
 
-    it(`${n}: OG-04, OG-06 (res-1006) and OG-07 (res-1007) are live, nothing is staged, and the current-state statement carries no stale counts`, () => {
+    it(`${n}: OG-04, OG-06 (res-1006) and OG-07 (res-1007) are live, no new resource is staged (an OG-11 content correction is pending), and the current-state statement carries no stale counts`, () => {
       const c = current(n);
       expect(c).toMatch(/OG-04[^\n]*(is live|live as protected resource #25|is deployed|deployed as protected resource #25|is live as)/);
       expect(c).toMatch(/STAGED, NOT DEPLOYED(:\*\*|:|\s*=)?\s*(\*\*)?\s*none/i);
       expect(c).toMatch(/OG-07 Priority Lock Worksheet (?:\(`res-1007`\) )?is live as protected resource #27/);
       expect(c).toMatch(/OG-06 Emergency Readiness Checklist (?:\(`res-1006`\) )?is live as protected resource #26(?: \(`res-1006`)?/);
-      expect(c).toMatch(/next legacy-resource audit/);
+      expect(c).toMatch(/explicit owner approval to deploy the OG-11 storage-wording correction/);
+      expect(c).toMatch(/Pending content revision \(staged, not deployed\)[^\n]*OG-11/);
       expect(c).not.toMatch(/\b26 protected resources, 52|\b25 protected resources, 50|\b24 protected|\b48 market files|24 live|OG-04[^\n]{0,60}(is|are) (still )?staged/i);
       expect(c).not.toMatch(/Worker `(?:5d88271b|2fb0663d|65437c37|89333107)[^`]*` \(100%\)/); // the previous Workers are rollbacks, not the live one
     });
