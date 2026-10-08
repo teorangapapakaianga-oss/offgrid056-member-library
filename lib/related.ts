@@ -12,9 +12,15 @@ export interface RelatedReason {
   reason: "Linked by us" | "Same topic" | "Same learning path" | "Similar tags" | "Same foundation";
 }
 
+/**
+ * A curated list (Stage 10.09B, owner ruling): a protected resource with this many explicit owner-approved related links shows exactly
+ * those links and no automatic fill (no same-topic, learning-path, shared-tag or same-foundation card).
+ */
+export const CURATED_RELATED_MIN = 4;
+
 export interface RelatedInput {
-  /** the resource we are showing */
-  current: { id: string; foundation: string; category: string; tags: string[]; learningPath?: string; relatedResources: string[] };
+  /** the resource we are showing; `isPlaceholder` marks a demonstration resource (a protected resource has none or false) */
+  current: { id: string; foundation: string; category: string; tags: string[]; learningPath?: string; relatedResources: string[]; isPlaceholder?: boolean };
   /** every published resource (unknown ids simply never match) */
   all: ResourceSummary[];
   limit?: number;
@@ -32,6 +38,10 @@ export function relatedResources({ current, all, limit = 6 }: RelatedInput): Rel
 
   // 1. Manually chosen links, in the order the author wrote them (unknown ids are skipped, never rendered).
   for (const id of current.relatedResources) add(byId.get(id), "Linked by us");
+
+  // A curated list stops here: four or more explicit links on a protected resource are the whole list, in the order written.
+  // A demonstration resource is unchanged, and so is any resource with fewer explicit links (it keeps the automatic fills below).
+  if (!current.isPlaceholder && picked.size >= CURATED_RELATED_MIN) return [...picked.values()].slice(0, limit);
 
   // 2. Same category, 3. same learning path, 4. shared tags (most tags in common first), 5. same foundation.
   const sameCategory = pool.filter((r) => r.foundation === current.foundation && r.category === current.category);
