@@ -28,9 +28,10 @@ describe("Stage 10.02C · OG-12 locked metadata", () => {
     expect(COLLECTION_IDS).toEqual(["start-here", "planning-tools"]);
   });
 
-  it("carries the owner's draft description, still marked OWNER-REVIEW REQUIRED", () => {
+  it("carries the owner-approved description (Stage 10.03)", () => {
     expect(meta.description).toBe("A reusable tracker to help you note what is in your pantry, where it is kept and what date information is shown, so you can see which items you want to use first.");
-    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-REVIEW REQUIRED/);
+    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.03\)/);
+    for (const k of ["trackerStatus", "monthlyWordingStatus", "rotationWordingStatus", "coverStatus", "relatedResourcesStatus", "approvedSafetyBlocksStatus"]) expect(String(meta[k]), k).toMatch(/OWNER-APPROVED 2026-10-09 \(Stage 10\.03/);
     expect(String(meta.description)).not.toMatch(/FIFO|week|day 12|expir|shelf|fresh|safe/i);
   });
 
@@ -49,20 +50,20 @@ describe("Stage 10.02C · OG-12 locked metadata", () => {
     for (const k of ["foundation", "programComponent", "resilienceRole", "guidanceKind", "wordingMatchesRole"]) expect(a[k]?.trim(), k).toBeTruthy();
   });
 
-  it("recommends the 30-Day Pantry Builder first and the Emergency Readiness Checklist, for owner review", () => {
+  it("has the owner-approved related list: the 30-Day Pantry Builder first, then the Emergency Readiness Checklist", () => {
     expect(meta.relatedResources).toEqual(["res-1011", "res-1006"]);
-    expect(String(meta.relatedResourcesStatus)).toMatch(/OWNER-REVIEW REQUIRED/);
+    expect(meta.relatedResources).toHaveLength(2);
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const titles = new Map(fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string }; return [r.id, r.title] as const; }));
     expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["30-Day Pantry Builder", "Emergency Readiness Checklist"]);
   });
 
-  it("records the food-safety-power-cut topic as REMOVED, carries no topic block, and leaves the block decision to the owner", () => {
-    expect(meta.safetyBlocks).toEqual([]);
-    expect(meta.approvedSafetyBlocks).toEqual([]);
-    expect(meta.safetyTopicDispositions).toMatchObject({ "food-safety-power-cut": { disposition: "REMOVED", approvedBy: "owner" } });
-    expect(String(meta.approvedSafetyBlocksStatus)).toMatch(/OWNER-REVIEW REQUIRED/);
+  it("carries the approved food-safety-power-cut block (owner Option A) plus the standing blocks, with no disposition, exemption or other technical block", () => {
+    expect(meta.safetyBlocks).toEqual(["food-safety-power-cut"]);
+    expect(meta.approvedSafetyBlocks).toEqual(["food-safety-power-cut"]);
+    expect(meta.safetyTopicDispositions).toBeUndefined();
+    expect(meta.safetyExemptions).toBeUndefined();
   });
 });
 

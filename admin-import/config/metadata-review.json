@@ -1420,8 +1420,11 @@
       "estimatedTimeStatus": "OWNER-APPROVED 2026-10-08 (Stage 10.02)",
       "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
       "description": "A reusable tracker to help you note what is in your pantry, where it is kept and what date information is shown, so you can see which items you want to use first.",
-      "descriptionStatus": "OWNER-REVIEW REQUIRED (Stage 10.02C): the owner's draft wording; not yet approved",
-      "coverStatus": "OWNER-REVIEW REQUIRED: the shared OffGrid056 cover system, corrected treatment, no legacy code or programme label in the public title",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03): the exact sentence",
+      "trackerStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03): exactly Item, Quantity, Stored Location, Added / Bought, Date Label (as shown), Use Next / Notes; 14 blank rows; no Exp. Date or Expiry Date, no shelf-life calculation, no safe-consumption date, no food-safety decision field",
+      "monthlyWordingStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03): 'If a monthly routine suits your household, use the same tracker each month.' (not 'monthly check'); no detector refinement, no exemption",
+      "rotationWordingStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03): the practical concept only; no claim of freshness, waste prevention, savings or safety",
+      "coverStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03): the shared OffGrid056 cover system, corrected treatment, no legacy code or programme label in the public title",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
       "collections": [],
@@ -1430,18 +1433,15 @@
         "res-1011",
         "res-1006"
       ],
-      "relatedResourcesStatus": "RECOMMENDED, OWNER-REVIEW REQUIRED (Stage 10.02C): the 30-Day Pantry Builder (learn first; owns the date-label and food-safety guidance) and the Emergency Readiness Checklist (records where a household keeps its food and other basics). No other live resource supports a pantry tracker: the water, energy and planning resources do not, and the budget tools are outside this resource's job. No existing resource's related list is changed.",
-      "safetyBlocks": [],
-      "approvedSafetyBlocks": [],
-      "approvedSafetyBlocksStatus": "Standing emergency-contact and general-disclaimer blocks only (recommended, OWNER-REVIEW REQUIRED). The body teaches no food-safety, date-label rule, spoilage or temperature guidance, so the food-safety-power-cut block is not carried; that teaching stays with OG-11, which carries the block.",
-      "safetyTopicDispositions": {
-        "food-safety-power-cut": {
-          "disposition": "REMOVED",
-          "approvedBy": "owner",
-          "approvedOn": "2026-10-08",
-          "reason": "The legacy taught shelf-life figures, 'signs it's gone bad' and 'still safe' for 13 foods. The owner's Stage 10.02 boundary removes this teaching from the narrowed tracker (OG-11 owns date-label, shelf-life and food-safety guidance); if a later edit teaches it again the safety scan will require the block."
-        }
-      },
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03): exactly these two, in this order: the 30-Day Pantry Builder (learn first; owns the date-label and food-safety guidance) and the Emergency Readiness Checklist (records where a household keeps its food and other basics). No other live resource supports a pantry tracker: the water, energy and planning resources do not, and the budget tools are outside this resource's job. No existing resource's related list is changed.",
+      "safetyBlocks": [
+        "food-safety-power-cut"
+      ],
+      "safetyReasoning": "REQUIRED by the existing topic threshold (the words pantry, fridge, freezer or perishable three or more times; 'pantry' occurs 14 times, the resource being explicitly pantry-focused). The body teaches no food-safety, date-label rule, spoilage or temperature guidance of its own; the approved standing block is carried, not a new teaching.",
+      "approvedSafetyBlocks": [
+        "food-safety-power-cut"
+      ],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03, Option A): food-safety-power-cut NZ + AU (the wording owner-approved in Stage 9.26 and carried by OG-11), plus the standing emergency-contact and general-disclaimer. No exemption, no change to the threshold. Any further technical block only if the final rendered wording triggers one.",
       "recordStatus": "draft",
       "migrationState": "DRAFT PREPARED (Stage 10.02C) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned.",
       "recordStatusNote": "draft, as every real resource is.",
