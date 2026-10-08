@@ -10,7 +10,7 @@ import { COLLECTION_IDS, PROGRAM_COMPONENTS } from "@/lib/content/constants";
 /**
  * Stage 9.91 — OG-06 Emergency Readiness Checklist: the narrowed draft.
  *
- * Read from the committed review config (no private file needed). Stage 9.93: the draft is rendered and STAGED as res-1006 (not deployed); the ID is internal data only.
+ * Read from the committed review config (no private file needed). Stage 9.95: the resource is DEPLOYED as res-1006 (protected resource #26); the ID is internal data only.
  */
 const root = process.cwd();
 const ac = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, { where: string; from: string; to: string }[]> }).changes["OG-06"];
@@ -144,11 +144,12 @@ describe("Stage 9.91 · OG-06 draft copy: the owner's structure", () => {
   });
 });
 
-describe("Stage 9.93 · registers", () => {
-  it("lists OG-06 as the one staged resource (not in Not started) with the counts as locked", () => {
+describe("Stage 9.95 · registers", () => {
+  it("lists OG-06 as deployed (not in Not started or Staged) with the counts as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
     expect(rr.split("## Not started (17)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-06 \|/);
-    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).toMatch(/\| OG-06 \| Emergency Readiness Checklist \| `res-1006` \//);
+    expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-06 \| Emergency Readiness Checklist \| general \/ checklist \|/);
+    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-06 \|/m);
     expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*17\*\*/);
   });
 });

@@ -1340,7 +1340,7 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "STAGED, NOT DEPLOYED (Stage 9.93) — the owner assigned the resource ID; the record and the two approved Stage 9.92 PDFs are in private-assets. Live is unchanged.",
+      "migrationState": "DEPLOYED (Stage 9.95) — protected resource #26, draft, behind Cloudflare Access; NZ and AU PDFs byte-identical to the Stage 9.92 renders.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual journey (documentation only; Start Here and other resources' links are unchanged): OG-01 → OG-02 → OG-06 → OG-04 → OG-22 → OG-03 → OG-26 → OG-27. Emergency readiness sits after the Home Resilience Scorecard and Household Risk Identifier and before the Property Type Review."
     }
