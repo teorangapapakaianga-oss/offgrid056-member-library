@@ -1391,7 +1391,7 @@
       "approvedSafetyBlocksStatus": "Standing emergency-contact and general-disclaimer blocks only. The legacy teaches no technical safety topic (the safety scan found none) and neither does the draft; no topic block is added.",
       "safetyTopicDispositions": {},
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED (Stage 9.97) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned.",
+      "migrationState": "STAGED, NOT DEPLOYED (Stage 9.99) — the owner assigned the resource ID; the record and the two approved Stage 9.98 PDFs are in private-assets. Live is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual journey (documentation only; no live link is changed): OG-01 → OG-02 → OG-06 → OG-04 → OG-22 → OG-03 → OG-07 → OG-26 → OG-27. It converts the earlier assessment and spending-capacity work into a small set of immediate actions before fuller budgeting and roadmap planning."
     }

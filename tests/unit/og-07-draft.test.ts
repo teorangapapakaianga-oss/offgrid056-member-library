@@ -36,13 +36,15 @@ describe("Stage 9.97 · OG-07 locked metadata", () => {
     expect(String(meta.description)).not.toMatch(/week|day 7|pillar|72/i);
   });
 
-  it("has no res-ID, in the config or the copy, and no private record yet (a prep label is not an assignment)", () => {
+  it("Stage 9.99: res-1007 is assigned in the staged record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1007");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });
-      expect(recs.some((r) => r.legacyCode === "OG-07" || r.id === "res-1007")).toBe(false);
-      expect(recs).toHaveLength(26);
+      const og07 = recs.filter((r) => r.legacyCode === "OG-07" || r.id === "res-1007");
+      expect(og07).toHaveLength(1);
+      expect(og07[0]).toMatchObject({ id: "res-1007", legacyCode: "OG-07" });
+      expect(recs).toHaveLength(27);
     }
   });
 
@@ -138,10 +140,11 @@ describe("Stage 9.97 · OG-07 draft copy: the owner's structure", () => {
   });
 });
 
-describe("Stage 9.97 · registers untouched", () => {
-  it("OG-07 is still Not started and the counts are as locked", () => {
+describe("Stage 9.99 · registers", () => {
+  it("OG-07 is the one staged resource (not in Not started) and the counts are as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr.split("## Not started (17)")[1].split("## Route clashes")[0]).toMatch(/\| OG-07 \| Week 1 Priority Lock Worksheet \|/);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*17\*\*/);
+    expect(rr.split("## Not started (16)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-07 \|/);
+    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).toMatch(/\| OG-07 \| Priority Lock Worksheet \| `res-1007` \//);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*16\*\*/);
   });
 });
