@@ -12,9 +12,9 @@ import { describe, expect, it } from "vitest";
 const root = process.cwd();
 const names = ["CURRENT_STATUS", "NEXT_ACTIONS", "RESOURCE_REGISTER"] as const;
 const text = Object.fromEntries(names.map((n) => [n, fs.readFileSync(path.join(root, "internal/member-programme", `${n}.md`), "utf8")])) as Record<(typeof names)[number], string>;
-const LIVE_WORKER = "8834be25-0110-4355-94a5-93b9943f792d";
-const ROLLBACK = "5d88271b-6f06-4be8-9fd9-6b73fa4a002a";
-const OLDER = ["2fb0663d-a7da-4acf-ba4c-957886b21631", "65437c37-b731-4851-b67e-5b0fae79fe12", "89333107-7c0a-4bdb-8229-f2b5241a9e05", "e63141a1-380a-4770-a125-9fd7a15d0bdb", "7de9641f-df4c-4cab-8e84-055c0861879d", "db2fd12a-955e-47c4-b3c9-d174e3da85d8", "fa23ec74-85d2-4d91-b484-3f037ccbe38b", "1922f7ba-a0b3-4a7b-ba01-593b3df6a160"];
+const LIVE_WORKER = "e1b31486-afbe-4849-9702-a54e51114717";
+const ROLLBACK = "8834be25-0110-4355-94a5-93b9943f792d";
+const OLDER = ["5d88271b-6f06-4be8-9fd9-6b73fa4a002a", "2fb0663d-a7da-4acf-ba4c-957886b21631", "65437c37-b731-4851-b67e-5b0fae79fe12", "89333107-7c0a-4bdb-8229-f2b5241a9e05", "e63141a1-380a-4770-a125-9fd7a15d0bdb", "7de9641f-df4c-4cab-8e84-055c0861879d", "db2fd12a-955e-47c4-b3c9-d174e3da85d8", "fa23ec74-85d2-4d91-b484-3f037ccbe38b", "1922f7ba-a0b3-4a7b-ba01-593b3df6a160"];
 /** The statement of the CURRENT state at the top of each register: from "As at" to the first stage note, section or rule. */
 const current = (n: (typeof names)[number]) => { const t = text[n]; const a = t.indexOf("**As at:**"); const rest = t.slice(a); const e = rest.search(/\n> \*\*Stage|\n## |\n---/); return e < 0 ? rest : rest.slice(0, e); };
 
@@ -45,16 +45,17 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c).toContain(ROLLBACK);
     });
 
-    it(`${n}: OG-04, OG-06 (res-1006) and OG-07 (res-1007) are live, no new resource is staged (an OG-11 content correction is pending), and the current-state statement carries no stale counts`, () => {
+    it(`${n}: OG-04, OG-06 (res-1006) and OG-07 (res-1007) are live, nothing is staged (the OG-11 correction is deployed), and the current-state statement carries no stale counts`, () => {
       const c = current(n);
       expect(c).toMatch(/OG-04[^\n]*(is live|live as protected resource #25|is deployed|deployed as protected resource #25|is live as)/);
       expect(c).toMatch(/STAGED, NOT DEPLOYED(:\*\*|:|\s*=)?\s*(\*\*)?\s*none/i);
       expect(c).toMatch(/OG-07 Priority Lock Worksheet (?:\(`res-1007`\) )?is live as protected resource #27/);
       expect(c).toMatch(/OG-06 Emergency Readiness Checklist (?:\(`res-1006`\) )?is live as protected resource #26(?: \(`res-1006`)?/);
-      expect(c).toMatch(/explicit owner approval to deploy the OG-11 storage-wording correction/);
-      expect(c).toMatch(/Pending content revision \(staged, not deployed\)[^\n]*OG-11/);
+      expect(c).toMatch(/OG-11 correction deployed \(Stage 10\.02B\)/);
+      expect(c).toMatch(/resume the Stage 10\.02 OG-12 rewrite/);
+      expect(c).not.toMatch(/Pending content revision/);
       expect(c).not.toMatch(/\b26 protected resources, 52|\b25 protected resources, 50|\b24 protected|\b48 market files|24 live|OG-04[^\n]{0,60}(is|are) (still )?staged/i);
-      expect(c).not.toMatch(/Worker `(?:5d88271b|2fb0663d|65437c37|89333107)[^`]*` \(100%\)/); // the previous Workers are rollbacks, not the live one
+      expect(c).not.toMatch(/Worker `(?:8834be25|5d88271b|2fb0663d|65437c37|89333107)[^`]*` \(100%\)/); // the previous Workers are rollbacks, not the live one
     });
   }
 
