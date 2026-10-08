@@ -29,9 +29,10 @@ describe("Stage 9.97 · OG-07 locked metadata", () => {
     expect(COLLECTION_IDS).toEqual(["start-here", "planning-tools"]);
   });
 
-  it("carries the drafted description, still marked OWNER-REVIEW REQUIRED, with no programme or performance wording", () => {
+  it("carries the owner-approved description (Stage 9.98), with no programme or performance wording", () => {
     expect(meta.description).toBe("A practical worksheet to help you turn your assessment and planning results into three clear first actions, set a target date for each and decide what you will start with.");
-    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-REVIEW REQUIRED/);
+    expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-08 \(Stage 9\.98\)/);
+    for (const k of ["priorityTableStatus", "reflectionStatus", "commitmentStatus", "coverStatus", "relatedResourcesStatus"]) expect(String(meta[k]), k).toMatch(/OWNER-APPROVED 2026-10-08 \(Stage 9\.98\)/);
     expect(String(meta.description)).not.toMatch(/week|day 7|pillar|72/i);
   });
 
@@ -50,9 +51,10 @@ describe("Stage 9.97 · OG-07 locked metadata", () => {
     for (const k of ["foundation", "programComponent", "resilienceRole", "guidanceKind", "wordingMatchesRole"]) expect(a[k]?.trim(), k).toBeTruthy();
   });
 
-  it("recommends five related resources that exist, in the journey order, for owner review (not res-1004, res-1006 or res-1015)", () => {
+  it("has the owner-approved five related resources, in the journey order (not res-1004, res-1006 or res-1015)", () => {
     expect(meta.relatedResources).toEqual(["res-1001", "res-1002", "res-1003", "res-1026", "res-1027"]);
-    expect(String(meta.relatedResourcesStatus)).toMatch(/OWNER-REVIEW REQUIRED/);
+    expect(meta.relatedResources).not.toContain("res-1004");
+    expect(meta.relatedResources).not.toContain("res-1006");
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const titles = new Map(fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string }; return [r.id, r.title] as const; }));
