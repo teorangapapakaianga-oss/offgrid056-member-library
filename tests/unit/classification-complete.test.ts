@@ -19,8 +19,8 @@ const meta = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/me
 const config = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/program-components.json"), "utf8")) as { components: Record<string, unknown>; deployedBeforeClassification: string[]; classificationsDecided: Record<string, string> };
 
 describe.skipIf(!hasPrivate)("Stage 9.73 · classification of every protected resource", () => {
-  it("covers all 27 protected resources (the 26 live ones plus OG-07, staged in Stage 9.99)", () => {
-    expect(records).toHaveLength(27);
+  it("covers all 28 protected resources (the 27 live ones plus OG-12, staged in Stage 10.04)", () => {
+    expect(records).toHaveLength(28);
     expect(records.find((r) => r.legacyCode === "OG-03")?.programComponent).toBe("planning-implementation");
     expect(records.find((r) => r.legacyCode === "OG-04")?.programComponent).toBe("resilience-planning");
     expect(records.find((r) => r.legacyCode === "OG-06")?.programComponent).toBe("resilience-emergency");

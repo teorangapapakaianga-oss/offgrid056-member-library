@@ -30,7 +30,7 @@ describe("Stage 9.86 · OG-05 disposition", () => {
     if (!fs.existsSync(dir)) return;
     const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; slug: string });
     expect(recs.some((r) => r.legacyCode === "OG-05")).toBe(false);
-    expect(recs).toHaveLength(27); // 26 live + OG-07 staged (Stage 9.99)
+    expect(recs).toHaveLength(28); // 27 live + OG-12 staged (Stage 10.04)
     const pdfs = fs.readdirSync(path.join(root, "private-assets/resources"));
     expect(pdfs.filter((f) => /quick-reference|pillars/i.test(f))).toEqual([]);
   });
@@ -54,7 +54,7 @@ describe("Stage 9.86 · OG-05 disposition", () => {
     expect(decision.registerTreatment).toMatch(/not a protected-resource status value/);
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
     expect(rr.split("## Merged / No standalone resource")[1].split("## Not started")[0]).toMatch(/\| OG-05 \| 5 Pillars Quick Reference \| \*\*MERGED \/ NO STANDALONE RESOURCE\*\*/);
-    expect(rr.split("## Not started (16)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-05 \|/);
+    expect(rr.split("## Not started (15)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-05 \|/);
   });
 
   it("closes the follow-ups: the page pointer is done and DEPLOYED (Stage 9.88), and the supply-duration detector is implemented", () => {

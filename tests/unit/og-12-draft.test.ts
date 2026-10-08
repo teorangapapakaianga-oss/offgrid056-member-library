@@ -35,13 +35,15 @@ describe("Stage 10.02C · OG-12 locked metadata", () => {
     expect(String(meta.description)).not.toMatch(/FIFO|week|day 12|expir|shelf|fresh|safe/i);
   });
 
-  it("has no res-ID in the config or the copy, and no private record (a prep label is not an assignment)", () => {
+  it("Stage 10.04: res-1012 is assigned in the staged record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1012");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });
-      expect(recs.some((r) => r.legacyCode === "OG-12" || r.id === "res-1012")).toBe(false);
-      expect(recs).toHaveLength(27);
+      const og12 = recs.filter((r) => r.legacyCode === "OG-12" || r.id === "res-1012");
+      expect(og12).toHaveLength(1);
+      expect(og12[0]).toMatchObject({ id: "res-1012", legacyCode: "OG-12" });
+      expect(recs).toHaveLength(28);
     }
   });
 
@@ -133,10 +135,11 @@ describe("Stage 10.02C · OG-12 draft copy: the owner's structure", () => {
   });
 });
 
-describe("Stage 10.02C · registers untouched", () => {
-  it("OG-12 is still Not started and the counts are as locked", () => {
+describe("Stage 10.04 · registers", () => {
+  it("OG-12 is the one staged resource (not in Not started) and the counts are as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr.split("## Not started (16)")[1].split("## Route clashes")[0]).toMatch(/\| OG-12 \| FIFO Rotation Tracker \|/);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*16\*\*/);
+    expect(rr.split("## Not started (15)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-12 \|/);
+    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).toMatch(/\| OG-12 \| Pantry Rotation Tracker \| `res-1012` \//);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*15\*\*/);
   });
 });

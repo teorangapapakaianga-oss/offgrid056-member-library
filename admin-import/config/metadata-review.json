@@ -1443,7 +1443,7 @@
       ],
       "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.03, Option A): food-safety-power-cut NZ + AU (the wording owner-approved in Stage 9.26 and carried by OG-11), plus the standing emergency-contact and general-disclaimer. No exemption, no change to the threshold. Any further technical block only if the final rendered wording triggers one.",
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED (Stage 10.02C) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned.",
+      "migrationState": "STAGED, NOT DEPLOYED (Stage 10.04) — the owner assigned the resource ID; the record and the two approved Stage 10.03 PDFs are in private-assets. Live is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Food pathway (documentation only; no live link is changed): the 30-Day Pantry Builder first (OG-11), then this tracker to keep the pantry in view. It is not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27)."
     }
