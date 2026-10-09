@@ -43,7 +43,7 @@ describe("Stage 10.02C · OG-12 locked metadata", () => {
       const og12 = recs.filter((r) => r.legacyCode === "OG-12" || r.id === "res-1012");
       expect(og12).toHaveLength(1);
       expect(og12[0]).toMatchObject({ id: "res-1012", legacyCode: "OG-12" });
-      expect(recs).toHaveLength(29);
+      expect(recs).toHaveLength(30);
     }
   });
 
@@ -138,9 +138,9 @@ describe("Stage 10.02C · OG-12 draft copy: the owner's structure", () => {
 describe("Stage 10.04 · registers", () => {
   it("OG-12 is deployed (not in Not started or Staged) and the counts are as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr.split("## Not started (14)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-12 \|/);
+    expect(rr.split("## Not started (13)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-12 \|/);
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-12 \| Pantry Rotation Tracker \| food \/ template \|/);
-    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-12 \|/m);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*14\*\*/);
+    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-12 \|/m);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*13\*\*/);
   });
 });

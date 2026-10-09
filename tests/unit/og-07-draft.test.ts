@@ -46,7 +46,7 @@ describe("Stage 9.97 · OG-07 locked metadata", () => {
       const og07 = recs.filter((r) => r.legacyCode === "OG-07" || r.id === "res-1007");
       expect(og07).toHaveLength(1);
       expect(og07[0]).toMatchObject({ id: "res-1007", legacyCode: "OG-07" });
-      expect(recs).toHaveLength(29);
+      expect(recs).toHaveLength(30);
     }
   });
 
@@ -145,9 +145,9 @@ describe("Stage 9.97 · OG-07 draft copy: the owner's structure", () => {
 describe("Stage 10.00 · registers", () => {
   it("OG-07 is deployed (not in Not started or Staged) and the counts are as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr.split("## Not started (14)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-07 \|/);
+    expect(rr.split("## Not started (13)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-07 \|/);
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-07 \| Priority Lock Worksheet \| general \/ worksheet \|/);
-    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-07 \|/m);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*14\*\*/);
+    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-07 \|/m);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*13\*\*/);
   });
 });

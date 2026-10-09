@@ -33,12 +33,15 @@ describe("Stage 10.12A · OG-23 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to help you prepare questions for suppliers and installers, record their answers side by side and note anything that needs a closer look before you decide.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.12\)/);
   });
-  it("assigns no res-ID and does not change Planning Tools: no private record, no ID in the config, and the collection status says it is unchanged until deployment", () => {
+  it("Stage 10.14: res-1023 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and the collection status says Planning Tools is unchanged until deployment", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1023");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-23" || r.id === "res-1023")).toEqual([]);
+      const og23 = recs.filter((r) => r.legacyCode === "OG-23" || r.id === "res-1023");
+      expect(og23).toHaveLength(1);
+      expect(og23[0]).toMatchObject({ id: "res-1023", legacyCode: "OG-23" });
+      expect(recs).toHaveLength(30);
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-23 is staged and deployed/);
   });
