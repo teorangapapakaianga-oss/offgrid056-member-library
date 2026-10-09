@@ -1018,6 +1018,168 @@
         "Queensland legislation, named in the sentence, not a national Australian rule and not a New Zealand one; the sentence also tells the member to check what applies where they live."
       ],
       "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-10-05 (live copy, OG-13 'Row 1 smoke alarms (AU)'; deployed Stage 9.54); REGISTERED 2026-10-09 (Stage 10.12A, owner ruling Option A)"
+    },
+    {
+      "id": "au-electrical-fixed-work-pump-licensed-electrician-esv",
+      "market": "AU",
+      "jurisdiction": "AU (state and territory electrical-safety regulators; the licence is a state licence)",
+      "owningResources": [
+        "OG-10"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "in Australia, fixed electrical work, including the electrical connection of a rainwater pump, must be done by a licensed electrician"
+      },
+      "allowedWording": "Fixed electrical work and the pump connection must be handled by a licensed electrician.",
+      "match": [
+        "Fixed electrical work and the pump connection must be handled by a licensed electrician"
+      ],
+      "requiresLabel": "licensed electrician",
+      "source": "https://www.energysafe.vic.gov.au/electrical-ddiy-dont-do-it-yourself",
+      "authority": "Energy Safe Victoria, Electrical DDIY; Electrical Safety Office Queensland, 'Don't do your own electrical work'; NSW Government, Electrical safety in the home ('DIY electrical work is dangerous and illegal'; read directly 2026-09-22) — the sources of the owner-approved AU batteries-and-electrical block in safety-blocks.json (statement: electrical work in your home must be done by a licensed electrician; DIY electrical work is illegal)",
+      "sourceDate": "read directly 2026-09-22 (Stage 9.17)",
+      "limitations": [
+        "This exact sentence, in the AU market and in OG-10 only. It is not an exemption and does not approve any other statement about who must do electrical work, about licences, or about legality.",
+        "It is a narrower application of the approved AU electrical-work rule to fixed work and the pump's electrical connection. It is not a rule about plumbing, which the neighbouring sentence handles separately."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED wording (OG-10 'Pump electrical wording', owner ruling 9, deployed Stage 9.41, 2026-09-23); REGISTERED 2026-10-09 (Stage 10.17A)"
+    },
+    {
+      "id": "au-electrical-solar-battery-licensed-electrician-diy-illegal-esv",
+      "market": "AU",
+      "jurisdiction": "AU (state and territory electrical-safety regulators; the licence is a state licence)",
+      "owningResources": [
+        "OG-19"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "in Australia, solar and battery systems must be installed by a licensed electrician, and DIY electrical work is illegal"
+      },
+      "allowedWording": "Solar and battery systems must be installed by a licensed electrician — DIY electrical work is illegal",
+      "match": [
+        "Solar and battery systems must be installed by a licensed electrician — DIY electrical work is illegal"
+      ],
+      "requiresLabel": "licensed electrician",
+      "source": "https://www.energysafe.vic.gov.au/electrical-ddiy-dont-do-it-yourself",
+      "authority": "Energy Safe Victoria, Electrical DDIY; Electrical Safety Office Queensland, 'Don't do your own electrical work'; NSW Government, Electrical safety in the home ('DIY electrical work is dangerous and illegal'; read directly 2026-09-22). Both assertions (licensed electrician for solar and battery installation; DIY electrical work is illegal) are stated in the owner-approved AU batteries-and-electrical block (safety-blocks.json), verified 2026-09-22",
+      "sourceDate": "read directly 2026-09-22 (Stage 9.17)",
+      "limitations": [
+        "This exact sentence, in the AU market and in OG-19 only. It is not an exemption and does not approve any other statement about who must do electrical work, about licences, or about legality.",
+        "A condensed form of the approved AU block wording ('Electrical work in your home — including solar, home batteries, inverters — must be done by a licensed electrician. DIY electrical work is illegal, even for small jobs'). Australian rule; New Zealand differs and its OG-19 wording is separate."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED wording (OG-19 'The Non-Negotiables', AU; deployed Stage 9.29, 2026-09-22); REGISTERED 2026-10-09 (Stage 10.17A)"
+    },
+    {
+      "id": "nz-generator-permanent-connection-table-licensed-worker-worksafe",
+      "market": "NZ",
+      "jurisdiction": "NZ (national; WorkSafe NZ)",
+      "owningResources": [
+        "OG-20"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "in New Zealand, a permanently connected standby generator's connection must be installed by a licensed electrical worker"
+      },
+      "allowedWording": "Permanently connected: must be installed by a licensed electrical worker",
+      "match": [
+        "Permanently connected: must be installed by a licensed electrical worker"
+      ],
+      "requiresLabel": "licensed electrical worker",
+      "source": "https://www.worksafe.govt.nz/about-us/news-and-media/connecting-a-generator-to-the-wiring-of-a-house-or-building-following-an-emergency/",
+      "authority": "WorkSafe NZ, Technical bulletin: Connecting a generator to the wiring of a house or building following an emergency (3 Mar 2023; read directly 2026-09-22): connecting a generator to house wiring is work for a licensed electrical worker, via a permanent connection point with a changeover switch (recorded in the generator-safety block sources and sentenceSources, safety-blocks.json)",
+      "sourceDate": "3 Mar 2023 (read directly 2026-09-22)",
+      "limitations": [
+        "This exact sentence, in the NZ market and in OG-20 (the standby-generator row of the options table) only. It is not an exemption and does not approve any other statement about who must do electrical work, about licences, or about legality.",
+        "Generator connection only; it does not say that all electrical work needs a licensed worker, which is not the NZ rule (homeowners may do some wiring)."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED rewrite (OG-20 review item G3, Stage 9.34; deployed Stage 9.35, 2026-09-22); REGISTERED 2026-10-09 (Stage 10.17A)"
+    },
+    {
+      "id": "nz-generator-connection-flow-licensed-worker-worksafe",
+      "market": "NZ",
+      "jurisdiction": "NZ (national; WorkSafe NZ)",
+      "owningResources": [
+        "OG-20"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "in New Zealand, a standby generator's connection must be installed by a licensed electrical worker"
+      },
+      "allowedWording": "Its connection must be installed by a licensed electrical worker.",
+      "match": [
+        "Its connection must be installed by a licensed electrical worker"
+      ],
+      "requiresLabel": "licensed electrical worker",
+      "source": "https://www.worksafe.govt.nz/about-us/news-and-media/connecting-a-generator-to-the-wiring-of-a-house-or-building-following-an-emergency/",
+      "authority": "WorkSafe NZ, Technical bulletin: Connecting a generator to the wiring of a house or building following an emergency (3 Mar 2023; read directly 2026-09-22), as recorded in the generator-safety block (safety-blocks.json): connecting it is work for a licensed electrical worker",
+      "sourceDate": "3 Mar 2023 (read directly 2026-09-22)",
+      "limitations": [
+        "This exact sentence, in the NZ market and in OG-20 (the Q3 standby-generator answer) only. It is not an exemption and does not approve any other statement about who must do electrical work, about licences, or about legality.",
+        "Generator connection only; not a rule for any other electrical work."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED rewrite (OG-20 review item G6, Stage 9.34; deployed Stage 9.35, 2026-09-22); REGISTERED 2026-10-09 (Stage 10.17A)"
+    },
+    {
+      "id": "au-generator-permanent-connection-table-licensed-electrician-esv",
+      "market": "AU",
+      "jurisdiction": "AU (state and territory electrical-safety regulators; the licence is a state licence)",
+      "owningResources": [
+        "OG-20"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "in Australia, a permanently connected standby generator's connection must be installed by a licensed electrician"
+      },
+      "allowedWording": "Permanently connected: must be installed by a licensed electrician",
+      "match": [
+        "Permanently connected: must be installed by a licensed electrician"
+      ],
+      "requiresLabel": "licensed electrician",
+      "source": "https://www.energysafe.vic.gov.au/community-safety/emergencies/using-generator-safely",
+      "authority": "Energy Safe Victoria, Using a generator safely (reviewed 16 Mar 2026; read directly 2026-09-22); Electrical Safety Office Queensland, Do's and don'ts of running generators (read directly 2026-09-22): a dedicated generator inlet or changeover switch must be installed by a licensed electrician (recorded in the generator-safety block sentenceSources, safety-blocks.json)",
+      "sourceDate": "ESV reviewed 16 Mar 2026 (read directly 2026-09-22)",
+      "limitations": [
+        "This exact sentence, in the AU market and in OG-20 (the standby-generator row of the options table) only. It is not an exemption and does not approve any other statement about who must do electrical work, about licences, or about legality.",
+        "Generator connection only."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED rewrite (OG-20 review item G3, Stage 9.34; deployed Stage 9.35, 2026-09-22); REGISTERED 2026-10-09 (Stage 10.17A)"
+    },
+    {
+      "id": "au-generator-connection-flow-licensed-electrician-esv",
+      "market": "AU",
+      "jurisdiction": "AU (state and territory electrical-safety regulators; the licence is a state licence)",
+      "owningResources": [
+        "OG-20"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "in Australia, a standby generator's connection must be installed by a licensed electrician"
+      },
+      "allowedWording": "Its connection must be installed by a licensed electrician.",
+      "match": [
+        "Its connection must be installed by a licensed electrician"
+      ],
+      "requiresLabel": "licensed electrician",
+      "source": "https://www.energysafe.vic.gov.au/community-safety/emergencies/using-generator-safely",
+      "authority": "Energy Safe Victoria, Using a generator safely (reviewed 16 Mar 2026; read directly 2026-09-22); Electrical Safety Office Queensland, Do's and don'ts of running generators (read directly 2026-09-22), as recorded in the generator-safety block (safety-blocks.json)",
+      "sourceDate": "ESV reviewed 16 Mar 2026 (read directly 2026-09-22)",
+      "limitations": [
+        "This exact sentence, in the AU market and in OG-20 (the Q3 standby-generator answer) only. It is not an exemption and does not approve any other statement about who must do electrical work, about licences, or about legality.",
+        "Generator connection only."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED rewrite (OG-20 review item G6, Stage 9.34; deployed Stage 9.35, 2026-09-22); REGISTERED 2026-10-09 (Stage 10.17A)"
     }
   ],
   "blockingExcludes": [
