@@ -1569,7 +1569,7 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "STAGED, NOT DEPLOYED (Stage 10.14) — the owner assigned the resource ID; the record and the two owner-approved Stage 10.13A PDFs are in private-assets. Live is unchanged.",
+      "migrationState": "DEPLOYED (Stage 10.15) — live as a protected resource behind Cloudflare Access; the record and the two owner-approved PDFs are in the deployed tree.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an implementation companion used when the household starts approaching suppliers and installers: after the wishlist, budget and roadmap work (OG-22, OG-26, OG-27) or alongside the Project Support Brief (OG-25). Not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27); not an Emergency Readiness resource."
     }
