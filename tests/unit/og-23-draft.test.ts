@@ -125,7 +125,10 @@ describe("Stage 10.12A · OG-23 draft copy: the owner's structure", () => {
     expect((own.match(/worksheet-line/g) ?? []).length).toBeGreaterThanOrEqual(5);
     expect(content.to).toContain('class="checklist-section prompts"');
     for (const k of ["questionsStatus", "comparisonStatus", "closerLookStatus", "followUpStatus", "relatedResourcesStatus"]) expect(String(meta[k]), k).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.13\)/);
-    expect(String(meta.coverStatus)).toMatch(/^PENDING/);
+    expect(String(meta.coverStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.13A\)/);
+    expect(String(meta.coverStatus)).toMatch(/workspace\/prep\/OG-23\/assets\/supplier-comparison-cover\.webp/);
+    expect(allNew).toContain('<img src="assets/supplier-comparison-cover.webp" class="cover-img"');
+    expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4_ActionPlanPathway|Week 4 Cover|Week1_Foundation|Week2_WaterFoodAir|Week3_/);
   });
   it("points on in the owner's flow, with no programme pointer", () => {
     const next = newText.slice(newText.lastIndexOf("Where it fits"));
