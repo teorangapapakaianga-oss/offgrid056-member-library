@@ -1539,11 +1539,11 @@
       "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
       "description": "A practical worksheet to help you prepare questions for suppliers and installers, record their answers side by side and note anything that needs a closer look before you decide.",
       "descriptionStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): the exact sentence",
-      "questionsStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): fifteen market-neutral questions in five groups; questions for the supplier only, no OffGrid056 claim; no solar, battery, water, heating or insulation question set",
-      "comparisonStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): Supplier / Installer A, B and C; ten member-entered rows; no score, total, rank or threshold",
-      "closerLookStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): seven neutral prompts; no payment rule, legal conclusion or compliance statement",
-      "followUpStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): four member-entered fields; nothing selects, approves or endorses a supplier",
-      "coverStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): the shared OffGrid056 cover system, corrected treatment, no legacy code, programme label or Day wording; the stand-in image must be replaced by the owner's cover choice before rendering",
+      "questionsStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.13): fifteen market-neutral questions in five groups; questions for the supplier only, no OffGrid056 claim; no solar, battery, water, heating or insulation question set",
+      "comparisonStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.13): Supplier / Installer A, B and C; ten member-entered rows; no score, total, rank or threshold",
+      "closerLookStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.13): seven neutral prompts; no payment rule, legal conclusion or compliance statement",
+      "followUpStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.13): four member-entered fields; nothing selects, approves or endorses a supplier",
+      "coverStatus": "PENDING (Stage 10.13): the owner-approved concept is a natural-light scene of a household or project owner comparing three supplier quote sheets at a table with a notebook and pen (non-identifiable person, three separate neutral documents, no logos, no AI imagery, no certification graphics, no programme wording). The asset could NOT be produced because no established image-generation workflow exists in the project or the build environment; the old stand-in image is still referenced. Rendering is blocked until the owner supplies the asset or names the workflow. Shared cover system, chip General · Planning, PDF title Supplier Comparison Worksheet — OffGrid056.",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
       "collections": [
@@ -1551,12 +1551,12 @@
       ],
       "collectionsStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): planning-tools. The collection is NOT changed until OG-23 is staged and deployed; it is expected to move from 8 to 9 resources then",
       "relatedResources": [
-        "res-1025",
         "res-1022",
+        "res-1025",
         "res-1026",
         "res-1027"
       ],
-      "relatedResourcesStatus": "RECOMMENDED — OWNER-REVIEW REQUIRED (Stage 10.12A): Project Support Brief Template and Resilience Product Wishlist (before or alongside), 3-Tier Budget Planner (also useful), 90-Day Implementation Roadmap (next), in the owner's proposed flow order. Four explicit links trigger the curated-related rule, so no automatic fill would be shown. Optional adjustment for the owner: Wishlist before Brief (decide what to buy before describing the work). Not included: Household Spending Capacity Check, Solar Power 101 Workbook, Battery Backup Planner, Water Tank Sizing & Placement Guide, Resilient Heating & Insulation Upgrade Checklist.",
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.13): exactly these four, in this order: Resilience Product Wishlist, Project Support Brief Template, 3-Tier Budget Planner, 90-Day Implementation Roadmap (decide what you are considering, describe the work, check the budget, plan implementation). Four explicit links invoke the existing curated-related rule, so no automatic fill is shown; lib/related.ts is not changed. Not included: Household Spending Capacity Check, Solar Power 101 Workbook, Battery Backup Planner, Water Tank Sizing & Placement Guide, Resilient Heating & Insulation Upgrade Checklist.",
       "safetyBlocks": [],
       "approvedSafetyBlocks": [],
       "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): standing emergency-contact and general-disclaimer blocks only; batteries-and-electrical is not carried because the system-specific questions are removed; no technical topic block is added.",
@@ -1569,7 +1569,7 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED (Stage 10.12A) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned. Planning Tools is unchanged.",
+      "migrationState": "COPY APPROVED (Stage 10.13) — cover asset PENDING (no established image-generation workflow was available). NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned. Planning Tools is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an implementation companion used when the household starts approaching suppliers and installers: after the wishlist, budget and roadmap work (OG-22, OG-26, OG-27) or alongside the Project Support Brief (OG-25). Not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27); not an Emergency Readiness resource."
     }

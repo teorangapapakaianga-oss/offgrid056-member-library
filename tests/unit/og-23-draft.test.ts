@@ -46,13 +46,13 @@ describe("Stage 10.12A · OG-23 locked metadata", () => {
     const a = meta.programAlignment as Record<string, string>;
     for (const k of ["foundation", "programComponent", "resilienceRole", "guidanceKind", "wordingMatchesRole"]) expect(a[k]?.trim(), k).toBeTruthy();
   });
-  it("recommends four explicit related links (the curated-related rule then shows only those), for owner review", () => {
-    expect(meta.relatedResources).toEqual(["res-1025", "res-1022", "res-1026", "res-1027"]);
-    expect(String(meta.relatedResourcesStatus)).toMatch(/^RECOMMENDED/);
+  it("has the owner-approved four explicit related links in the approved order (the curated-related rule then shows only those)", () => {
+    expect(meta.relatedResources).toEqual(["res-1022", "res-1025", "res-1026", "res-1027"]);
+    expect(String(meta.relatedResourcesStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.13\)/);
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const titles = new Map(fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string }; return [r.id, r.title] as const; }));
-    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["Project Support Brief Template", "Resilience Product Wishlist", "3-Tier Budget Planner", "90-Day Implementation Roadmap"]);
+    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["Resilience Product Wishlist", "Project Support Brief Template", "3-Tier Budget Planner", "90-Day Implementation Roadmap"]);
   });
   it("carries the standing blocks only, with batteries-and-electrical recorded REMOVED by the owner", () => {
     expect(meta.safetyBlocks).toEqual([]);
@@ -120,9 +120,16 @@ describe("Stage 10.12A · OG-23 draft copy: the owner's structure", () => {
     for (const x of ["The quote or the scope is unclear.", "Important questions have not been answered.", "Something was promised that is not shown in writing.", "The warranty or support details are unclear.", "I felt pressure to decide quickly.", "The payment stages are unclear.", "It is unclear who is responsible for the installation or the follow-up."]) expect(newText).toContain(x);
     for (const x of ["The supplier I want to follow up with:", "Why:", "Questions I still need answered:", "What I need before deciding:"]) expect(newText).toContain(x);
   });
+  it("gives the member generous writing space for their own questions, and shows the closer-look items as prompts", () => {
+    const own = content.to.match(/Questions of my own:<\/div>([\s\S]*?)<\/div>\s*<\/div>/)![1];
+    expect((own.match(/worksheet-line/g) ?? []).length).toBeGreaterThanOrEqual(5);
+    expect(content.to).toContain('class="checklist-section prompts"');
+    for (const k of ["questionsStatus", "comparisonStatus", "closerLookStatus", "followUpStatus", "relatedResourcesStatus"]) expect(String(meta[k]), k).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.13\)/);
+    expect(String(meta.coverStatus)).toMatch(/^PENDING/);
+  });
   it("points on in the owner's flow, with no programme pointer", () => {
     const next = newText.slice(newText.lastIndexOf("Where it fits"));
-    const order = ["Project Support Brief Template", "Resilience Product Wishlist", "3-Tier Budget Planner", "90-Day Implementation Roadmap"];
+    const order = ["Resilience Product Wishlist", "Project Support Brief Template", "3-Tier Budget Planner", "90-Day Implementation Roadmap"];
     const at = order.map((o) => next.indexOf(o));
     expect(at.every((p, i) => p >= 0 && (i === 0 || p > at[i - 1]))).toBe(true);
     expect(newText).not.toMatch(/OG-24|Professional Review|Tomorrow|Day 2\d/);
