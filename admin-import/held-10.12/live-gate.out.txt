@@ -1,0 +1,3 @@
+resources 29 · files 58 · numeric candidates 448 · Bucket C 2 · target-label 0 · assurance 0
+  OG-10 NZ C :: the law requires :: a regulatory assertion: an unsupported statement that something is man :: Connecting rainwater to the plumbing of a house that also has mains water needs a building consent, and the law requires
+  OG-13 AU C :: required by law :: a regulatory assertion: an unsupported statement that something is man :: In Queensland, interconnected photoelectric alarms are required by law — check what applies where you live.

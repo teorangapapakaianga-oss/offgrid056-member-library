@@ -1,0 +1,103 @@
+legacy PDF: 9 pages, 502559 bytes; title field: OG-23 Supplier Question Bank — OffGrid056
+
+== SAFETY
+required topics (HTML + PDF text): batteries-and-electrical
+required topics (member-facing HTML): batteries-and-electrical
+required topics (PDF): batteries-and-electrical
+fuel/gas signals: none | fuel check: none
+[electrical/energy] 9 mention(s)
+     ...stions before you buy. This bank covers solar, water, heating, shelter, and food suppliers...
+     ...ate fluctuation? Import-heavy products (solar, batteries) can shift. 9 What payment terms ...
+     ...ctuation? Import-heavy products (solar, batteries) can shift. 9 What payment terms do you ...
+     ...place, or refund? Who covers transport? Solar & Battery Suppliers # Question Why It Matter...
+     ...r refund? Who covers transport? Solar & Battery Suppliers # Question Why It Matters Score ...
+     ...Question Why It Matters Score 11 Is the inverter and battery certified for NZ grid connect...
+     ...It Matters Score 11 Is the inverter and battery certified for NZ grid connection? Must com...
+     ...ion (e.g., EV charger)? Prevents costly inverter replacement later. 14 Do you handle grid ...
+     ...xpected payback period based on current power prices? Reality check. Should be 6-10 years ...
+[fire/smoke/CO/gas] 0 mention(s)
+[water/food/heating] 11 mention(s)
+     ...before you buy. This bank covers solar, water, heating, shelter, and food suppliers. Use i...
+     ...you buy. This bank covers solar, water, heating, shelter, and food suppliers. Use it durin...
+     ...ers solar, water, heating, shelter, and food suppliers. Use it during phone calls, site vi...
+     .... Should be 6-10 years for residential. Water System Suppliers # Question Why It Matters S...
+     ...t Matters Score 16 Is the tank material food-grade and UV-stabilised? Essential for potabl...
+     ...nd UV-stabilised? Essential for potable water safety in NZ sun. 17 Do you provide a first-...
+     ...ost and project coordination. 20 Is the filtration system NSF/ANSI certified for pathogen ...
+     ...d for pathogen reduction? UV and carbon filters should meet international standards. Heati...
+     ...rs should meet international standards. Heating & Insulation Suppliers # Question Why It M...
+     ...meet international standards. Heating & Insulation Suppliers # Question Why It Matters Sco...
+     ...unning cost. Mandatory in NZ. 22 Is the insulation product BRANZ appraised or CodeMark cer...
+[emergency] 0 mention(s)
+
+== PRICES
+  total 0: PRICE 0 | PLACEHOLDER 0 | NOT_A_PRICE 0
+  money words: costly, costly, Saves, payback, prices, cost, cost, Price
+
+== NUMERIC NZ: 10 candidates, Bucket C 8
+  D_NOT_A_CLAIM      interval   "30-Day" :: OffGrid056 30-Day Programme
+  D_NOT_A_CLAIM      interval   "30-Day" :: Day 23 — Week 4: Action Plan & Pathway | OffGrid056 30-Day Programme
+  C_NEEDS_SOURCE     percentage "100%" :: Never pay 100% upfront.
+  C_NEEDS_SOURCE     performance "50/50 or milestone-based is fair" :: 50/50 or milestone-based is fair.
+  C_NEEDS_SOURCE     performance "Must comply with AS/NZS 4777" :: Must comply with AS/NZS 4777.2 standards.
+  C_NEEDS_SOURCE     performance "Mandatory in NZ" :: Mandatory in NZ.
+  C_NEEDS_SOURCE     performance "Proves compliance with NZ Building Code" :: Proves compliance with NZ Building Code.
+  C_NEEDS_SOURCE     temperature "7°C" :: What is the expected COP (Coefficient of Performance) at 7°C ambient?
+  C_NEEDS_SOURCE     interval   "2-5 years" :: What warranties do you offer on products and workmanship? Should be 2-5 years minimum on major systems.
+  C_NEEDS_SOURCE     interval   "6-10 years" :: What is the expected payback period based on current power prices? Should be 6-10 years for residential.
+
+== NUMERIC AU: 10 candidates, Bucket C 8
+  D_NOT_A_CLAIM      interval   "30-Day" :: OffGrid056 30-Day Programme
+  D_NOT_A_CLAIM      interval   "30-Day" :: Day 23 — Week 4: Action Plan & Pathway | OffGrid056 30-Day Programme
+  C_NEEDS_SOURCE     percentage "100%" :: Never pay 100% upfront.
+  C_NEEDS_SOURCE     performance "50/50 or milestone-based is fair" :: 50/50 or milestone-based is fair.
+  C_NEEDS_SOURCE     performance "Must comply with AS/NZS 4777" :: Must comply with AS/NZS 4777.2 standards.
+  C_NEEDS_SOURCE     performance "Mandatory in NZ" :: Mandatory in NZ.
+  C_NEEDS_SOURCE     performance "Proves compliance with NZ Building Code" :: Proves compliance with NZ Building Code.
+  C_NEEDS_SOURCE     temperature "7°C" :: What is the expected COP (Coefficient of Performance) at 7°C ambient?
+  C_NEEDS_SOURCE     interval   "2-5 years" :: What warranties do you offer on products and workmanship? Should be 2-5 years minimum on major systems.
+  C_NEEDS_SOURCE     interval   "6-10 years" :: What is the expected payback period based on current power prices? Should be 6-10 years for residential.
+
+== CLAIM FAMILIES, per member-facing sentence/line (hits only)
+  [payment=1] Never pay 100% upfront.
+  [payment=1] 50/50 or milestone-based is fair.
+  [regulatory=1] Must comply with AS/NZS 4777.2 standards.
+  [regulatory=1] Mandatory in NZ.
+  [regulatory=1] Proves compliance with NZ Building Code.
+  sentences scanned 126; with a family hit 5
+
+== CONTENT FLAGS
+  day-complete: Day 23 Complete
+  next-link: Next: Tomorrow you will select the professionals you need and understand when DIY ends and expert help begins.
+  next-link: Next: OG-24 Professional Review Selector →
+  next-link: Tomorrow you will select the professionals you need and understand when DIY ends and expert help begins
+  programme-sequencing: OffGrid056 30-Day Programme
+  programme-sequencing: Week 4 — Action Plan & Pathway
+  programme-sequencing: Day 23 — Vet sellers and installers before you spend
+  programme-sequencing: Day 23 — Week 4: Action Plan & Pathway
+  figure-needs-source: Never pay 100% upfront
+  figure-needs-source: What is the expected COP (Coefficient of Performance) at 7°C ambient?
+  cross-reference: OG-24
+
+== LEGACY LANGUAGE (member-facing text)
+  Pillars             0  
+  Week                2  Week 4 — Action Plan & Pathway OffGr | Week 4: Action Plan & Pathway | OffG
+  Day                 3  Day 23
+  30-Day Programme    2  30-Day Programme
+  72-hour             0  
+  survival            0  
+  critical            0  
+  prepper             0  
+  panic               0  
+  worst-case          0  
+  premium             0  
+  upsell              0  
+  Skool               0  
+  Simply Services     0  
+  HTPS                0  
+  OG codes            2  OG-23 Supplier Question Bank Day 23 | OG-24 Professional Review Selector
+  NZ-only terms      18  New Zealand? Longevity suggests stability and local | NZ company? Can you provide a GST number? | NZ customers? Actual customer feedback bea | NZ grid connection? Must comply with AS/NZ | lines company? Saves you significant paperwork and de | NZ sun | NSF/ANSI certified for pathogen reduction? | NZ Energy Rating Label? Higher stars = low
+  URLs                1  OFFGRID056.COM
+  CTA                 0  
+  Week-2 lock         0  
+  non-visible source refs: /mnt/agents/output/OffGrid056/Covers/Week4_ActionPlanPathway_Cover.jpg | alt="Week 4 Cover"
