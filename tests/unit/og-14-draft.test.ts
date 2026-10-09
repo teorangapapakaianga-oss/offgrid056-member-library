@@ -35,7 +35,7 @@ describe("Stage 10.07 · OG-14 locked metadata", () => {
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.08\)/);
   });
 
-  it("Stage 10.09: res-1014 is assigned in the staged record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
+  it("Stage 10.10: res-1014 is assigned in the deployed record only (internal routing/data), never in the review config, the member-facing copy or the PDFs", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1014");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
@@ -113,6 +113,15 @@ describe("Stage 10.07 · OG-14 draft copy: duplicated and legacy content is not 
     expect(content.to).not.toMatch(/checklist-box|lock-table|scorecard|budget/i);
     expect(text.replace(/Priority Lock Worksheet/g, "")).not.toMatch(/rank|priorit|assess/i);
     expect((content.to.match(/class="worksheet-label"/g) ?? []).length).toBe(13);
+  });
+});
+
+describe("Stage 10.10 · OG-14 is deployed", () => {
+  it("is in the Deployed section (not Staged or Not started) of the resource register", () => {
+    const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
+    expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-14 \| Water, Food and Air Household Snapshot \| general \/ worksheet \|/);
+    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-14 \|/m);
+    expect(rr.split("## Not started (14)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-14 \|/);
   });
 });
 
