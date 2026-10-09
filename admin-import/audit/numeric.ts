@@ -527,7 +527,7 @@ export function storageTableRows(html: string): { sentence: string; cell: string
  *
  * Because a figure-free sentence raises no ordinary candidate, this rule supplies its own hit (category "performance", unit "outcome").
  * OWNERSHIP (full order): treatment-owned → registry-approved → safety block → structural label → survival-duration → supply-duration → emergency-period →
- * storage-duration → target-label duration (Stage 10.07) → multiplier → comparative performance → absolute outcome → assurance or completion claim (Stage 10.07) → not-a-claim and the ordinary figure rules. A sentence owned by an earlier
+ * storage-duration → target-label duration (Stage 10.07) → payback-duration norm → warranty-duration norm → payment figure (Stage 10.12) → multiplier → comparative performance → absolute outcome → assurance or completion claim (Stage 10.07) → payment norm without a figure and regulatory assertion (Stage 10.12) → not-a-claim and the ordinary figure rules. A sentence owned by an earlier
  * family raises none of the later performance candidates, and a multiplier or comparative owns the sentence before an outcome claim.
  */
 const OUT_PATTERNS: RegExp[] = [
@@ -592,6 +592,72 @@ function assuranceClaimsRaw(sentence: string): string[] {
   return kept.map((k) => k.text);
 }
 
+/**
+ * Payback, warranty, payment and regulatory norms (Stage 10.12). Four general wording rules, no resource named. Each flags a statement in a resource's own text
+ * that PRESCRIBES, PREDICTS or PRESENTS A NORM, and stays quiet where the member is asked a question, fills a blank or the figure is clearly the supplier's:
+ *  - PAYBACK: a payback (or "pays for itself", "break-even") with a duration in years or months: "Payback is 6-10 years", "usually pays for itself within five years".
+ *  - WARRANTY: a warranty with a duration and a normative word (good, should, at least, minimum, typical, standard, expect, look for ...): "Typical warranty: 2-5 years",
+ *    "Look for at least 10 years." (a bare normative duration with no noun is read as the warranty prescription it is).
+ *  - PAYMENT: a payment term (pay, deposit, upfront, hold back ...) with a quantity (a percentage, a fraction, "half", "in full", "all upfront") and a normative word
+ *    (never, always, only, must, fair, standard, no more than ...), or a split such as "50/50 is fair": "Never pay 100% upfront", "A 30% deposit is standard".
+ *  - REGULATORY: an unsupported authoritative status: mandatory, legally required, must comply or be approved, proves or guarantees compliance, approved under, meets the
+ *    Building Code, required in NZ or Australia: "This label is mandatory in NZ", "CodeMark proves compliance with the NZ Building Code".
+ * Quiet for questions, blanks, openers that tell the member to ask, write, record, compare, check or verify, a figure or status attributed to the supplier or
+ * manufacturer ("The supplier says the warranty is 5 years"), hedged or conditional wording (may, might, could, if, unless), titles in title case, and a duration with no
+ * payback or warranty beside it. OWNERSHIP: tried after target-label duration and before the performance families (payback, then warranty, then a payment figure); the
+ * figure-free payment and regulatory hits are the last of the performance families, after assurance, so one statement has one owner and no duplicate Bucket C finding.
+ */
+const NORM_DUR = `${SUPPLY_FIG}[-\\s]*(?:year|month)s?`;
+const NORM_NOT_A_CLAIM = /\?\s*$|[_…]{3,}|^\s*(?:please\s+)?(?:ask|write|record|enter|note|list|compare|check|find out|confirm|verify|calculate|work out|choose|select|tick|circle|add|review|contact|read)\b|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|whether)\b/i;
+const NORM_ATTRIBUTED = /\b(?:supplier|installer|seller|vendor|business|company|manufacturer|retailer|they)\b[^.?!]{0,30}\b(?:says?|said|states?|stated|claims?|claimed|quotes?|quoted|gave|gives|offers?|offered|provides?|provided|estimates?|estimated|told|advises?|advised|proposes?|proposed|asked for|requests?|requested)\b|\b(?:supplier|installer|seller|vendor|business|manufacturer)[- ](?:stated|quoted|given|offered|estimated|provided)\b|\b(?:quoted|stated|offered|given|estimated) by\b/i;
+const normDurations = (s: string): string[] => [...s.matchAll(new RegExp(NORM_DUR, "gi"))].map((m) => clean(m[0])).filter((d) => !/-(?:Year|Month)s?\b/.test(d));
+const PB_TERM = /\bpay(?:s|ing|ed)?[- ]?back\b|\bpay(?:s|ing)?\s+for\s+(?:itself|themselves)\b|\bbreak[- ]even\b/i;
+const PB_HEDGE = /\b(?:not necessarily|do not assume|don'?t assume|no guarantee|does not guarantee|cannot promise|may|might|could)\b/i;
+function paybackNormsRaw(sentence: string): string[] {
+  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence) || PB_HEDGE.test(sentence) || !PB_TERM.test(sentence)) return [];
+  return normDurations(sentence);
+}
+const WA_TERM = /\bwarrant(?:y|ies)\b|\bguarantee period\b/i;
+const WA_NORM = /\b(?:good|great|decent|reasonable|solid|should|must|ought|at least|minimum|min|typical|typically|usual|usually|standard|normal|normally|expect|expected|look for|ideal|recommended|most|average|generally|commonly|best|worth)\b/i;
+const WA_BARE = new RegExp(`^\\s*(?:look for|aim for|expect)\\s+(?:at least|a minimum of|no less than)\\s+(${NORM_DUR})\\s*\\.?\\s*$`, "i");
+function warrantyNormsRaw(sentence: string): string[] {
+  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence) || PB_HEDGE.test(sentence)) return [];
+  const bare = sentence.match(WA_BARE);
+  if (bare) return [clean(bare[1])];
+  if (!WA_TERM.test(sentence) || !WA_NORM.test(sentence)) return [];
+  return normDurations(sentence);
+}
+const PAY_TERM = /\b(?:pay|pays|paid|paying|payment|payments|deposit|deposits|upfront|up front|up-front|hold back|holdback|hand(?:s|ing)? over|retention|instalments?|installments?|progress payments?)\b/i;
+const PAY_QTY = /\d+(?:\.\d+)?\s?%|\b\d+\s?percent\b|\b(?:ten|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|one hundred|hundred)\s+percent\b|\b(?:half|one[- ]half|a third|one[- ]third|a quarter|one[- ]quarter|two[- ]thirds?|three[- ]quarters?|a fifth|a tenth)\b|\b(?:in full|full (?:payment|amount|price)|the full amount|all (?:of it )?(?:up ?front|in advance|at once)|everything (?:up ?front|in advance)|entire (?:amount|price|payment))\b/gi;
+const PAY_NORM = /\b(?:never|always|only|must|should|do not|don'?t|ought|fair|standard|typical|typically|normal|normally|reasonable|usual|usually|common|commonly|rule of thumb|recommended|no more than|not more than|at most|maximum|at least|minimum|ideal|safe|wise|sensible|best practice)\b/i;
+const PAY_SPLIT = /\b\d{2}\s?\/\s?\d{2}\b[^.?!]{0,20}\b(?:is|are)\s+(?:fair|standard|normal|typical|reasonable|usual|common|safe|best)\b/i;
+function paymentNormsRaw(sentence: string): string[] {
+  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence)) return [];
+  const split = sentence.match(PAY_SPLIT);
+  if (split) return [clean(split[0])];
+  if (!PAY_TERM.test(sentence) || !PAY_NORM.test(sentence)) return [];
+  return [...sentence.matchAll(PAY_QTY)].map((m) => clean(m[0]));
+}
+const RG_CONTEXT = /\b(?:label|labelling|labeling|certif\w*|standard|approv\w*|code|regulat\w*|law|licen[cs]\w*|permit|consent|installer|installation|product|system|compliance|rating|NZ|New Zealand|Australia|AU)\b/i;
+const RG_HEDGE = /\b(?:may|might|could|if|unless|depending|sometimes|some)\b/i;
+const RG_PATTERNS: RegExp[] = [
+  /\b(?:is|are|be|being)\s+(?:mandatory|compulsory)\b[^.?!]{0,30}/gi,
+  /\b(?:mandatory|compulsory)\s+(?:in|under|for|by|across)\b[^.?!]{0,40}/gi,
+  /\blegally\s+(?:required|binding|mandatory)\b|\brequired\s+by\s+law\b|\ba\s+legal\s+requirement\b|\bthe\s+law\s+requires\b/gi,
+  /\b(?:must|has to|have to|needs? to|required to)\s+(?:comply|conform|meet|be\s+(?:approved|certified|compliant|registered|licensed|consented|accredited))\b[^.?!]{0,40}/gi,
+  /\b(?:proves?|guarantees?|ensures?|confirms?|demonstrates?|certifies)\s+(?:full\s+)?(?:compliance|that\s+(?:it|they|the\s+\w+)\s+(?:comply|complies|meets?))\b[^.?!]{0,40}/gi,
+  /\b(?:certified|approved|accredited)\s+(?:as\s+)?compliant\b|\bapproved\s+under\b[^.?!]{0,30}|\bgovernment[- ](?:approved|certified)\b/gi,
+  /\b(?:meets|complies\s+with|satisfies|conforms\s+to)\s+(?:the\s+)?(?:\w+\s+){0,2}(?:Building\s+Code|building\s+regulations|National\s+Construction\s+Code|NCC|electrical\s+(?:regulations|safety\s+rules))\b/gi,
+  /\brequired\s+(?:in|under)\s+(?:NZ|New\s+Zealand|Australia|AU)\b/gi,
+];
+function regulatoryAssertionsRaw(sentence: string): string[] {
+  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence) || RG_HEDGE.test(sentence) || PB_HEDGE.test(sentence)) return [];
+  const spans = RG_PATTERNS.flatMap((re, i) => [...sentence.matchAll(re)].filter(() => i > 1 || RG_CONTEXT.test(sentence)).map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) }))).sort((a, b) => a.start - b.start || b.end - a.end);
+  const kept: typeof spans = [];
+  for (const s of spans) if (!kept.some((k) => s.start < k.end && s.end > k.start)) kept.push(s);
+  return kept.map((k) => k.text);
+}
+
 /** The claim families are pure functions of one sentence, and the scan asks about the same sentence several times (ownership, hit generation, classification): answer each once. */
 function memoByText<T>(fn: (s: string) => T): (s: string) => T {
   const cache = new Map<string, T>();
@@ -609,8 +675,41 @@ export const storageDurationClaims = memoByText(storageDurationClaimsRaw);
 export const outcomeClaims = memoByText(outcomeClaimsRaw);
 export const targetLabelDurations = memoByText(targetLabelDurationsRaw);
 export const assuranceClaims = memoByText(assuranceClaimsRaw);
+export const paybackNorms = memoByText(paybackNormsRaw);
+/**
+ * Question / rationale table rows (Stage 10.12). In a table of "Question | Why It Matters" the rationale sentence ("Should be 2-5 years minimum on major systems.") only
+ * makes sense beside its question ("What warranties do you offer?"), so each rationale sentence is also read with the question of its row, exactly as storage-life
+ * rows are read with their column header. The combined sentence is adopted only when a payback, warranty, payment or regulatory norm fires on it and not on the
+ * rationale alone, and the bare rationale is then not judged a second time.
+ */
+export function normTableRows(html: string): { sentence: string; cell: string }[] {
+  const out: { sentence: string; cell: string }[] = [];
+  for (const m of html.matchAll(/<table[\s\S]*?<\/table>/gi)) {
+    const table = m[0];
+    const headers = [...table.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/gi)].map((h) => stripCell(h[1]));
+    const qi = headers.findIndex((h) => /question|criteri/i.test(h)), wi = headers.findIndex((h) => /^(?:why|reason|rationale|explanation)|why it matters/i.test(h));
+    if (qi < 0 || wi < 0 || qi === wi) continue;
+    for (const row of table.match(/<tr[\s\S]*?<\/tr>/gi) ?? []) {
+      const cells = [...row.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((c) => stripCell(c[1]));
+      if (cells.length <= Math.max(qi, wi) || !cells[qi] || !cells[wi]) continue;
+      for (const s of cells[wi].split(/(?<=[.!?])\s+/).map((x) => x.trim()).filter(Boolean)) {
+        const combined = `${cells[qi]} ${s}`;
+        const hit = (x: string) => paybackNorms(x).length + warrantyNorms(x).length + paymentNorms(x).length + regulatoryAssertions(x).length > 0;
+        if (hit(combined) && !hit(s)) out.push({ sentence: combined, cell: s });
+      }
+    }
+  }
+  return out;
+}
+export const warrantyNorms = memoByText(warrantyNormsRaw);
+export const paymentNorms = memoByText(paymentNormsRaw);
+export const regulatoryAssertions = memoByText(regulatoryAssertionsRaw);
+const figureOwned = (owned: string[], figure: string): boolean => owned.some((x) => x.toLowerCase().includes(figure.toLowerCase()) || figure.toLowerCase().includes(x.toLowerCase()));
+const isPaybackFigure = (s: string, figure: string): boolean => figureOwned(paybackNorms(s), figure);
+const isWarrantyFigure = (s: string, figure: string): boolean => figureOwned(warrantyNorms(s), figure);
+const isPaymentFigure = (s: string, figure: string): boolean => figureOwned(paymentNorms(s), figure);
 /** True when an earlier family already owns the sentence, so no performance candidate is raised for it. */
-const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0 || storageDurationClaims(sentence).length > 0 || targetLabelDurations(sentence).length > 0;
+const ownedByEarlierFamily = (sentence: string): boolean => isSurvivalClaimSentence(sentence) || supplyTargets(sentence).length > 0 || emergencyPeriodTargets(sentence).length > 0 || storageDurationClaims(sentence).length > 0 || targetLabelDurations(sentence).length > 0 || paybackNorms(sentence).length > 0 || warrantyNorms(sentence).length > 0;
 
 /**
  * A restatement of a figure the document has already sourced — a row label ("3-Day Official Baseline"), or a
@@ -680,6 +779,11 @@ function numericMatches(sentence: string): { figure: string; value: number | nul
     if (!mult.length && !comparativePerformanceClaims(sentence).length) for (const t of outcomeClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "outcome", category: "performance" });
     // Assurance and completion claims (Stage 10.07): last of the performance families, only when no multiplier, comparative or outcome claim owns the sentence.
     if (!mult.length && !comparativePerformanceClaims(sentence).length && !outcomeClaims(sentence).length) for (const t of assuranceClaims(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "assurance", category: "performance" });
+    // Payment and regulatory norms (Stage 10.12): the figure-free hits, last of the performance families. A payment sentence with a percentage is owned through that percentage figure instead.
+    if (!mult.length && !comparativePerformanceClaims(sentence).length && !outcomeClaims(sentence).length && !assuranceClaims(sentence).length) {
+      if (!found.some((f) => f.category === "percentage")) for (const t of paymentNorms(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "payment", category: "performance" });
+      for (const t of regulatoryAssertions(sentence)) if (!found.some((f) => f.figure === t)) found.push({ figure: t, value: null, unit: "regulatory", category: "performance" });
+    }
   }
   // Storage-duration claims (Stage 10.02): the figure itself, or a "forever" word that carries no unit ("Indefinite").
   for (const fig of storageDurationClaims(sentence)) if (!found.some((f) => fig.toLowerCase().includes(f.figure.toLowerCase()) || f.figure.toLowerCase().includes(fig.toLowerCase()))) found.push({ figure: fig, value: Number(fig.match(/\d+(?:\.\d+)?/)?.[0]) || null, unit: "storage", category: "interval" });
@@ -717,14 +821,16 @@ export function scanNumericClaims(
   for (const { html: segmentHtml, owner: fromBlock } of segments) {
   // Storage-life tables (Stage 10.02): each body row is read as the claim it makes, and the bare cell it came from is not judged a second time.
   const storageRows = storageTableRows(segmentHtml);
-  const ownedCells = new Set(storageRows.map((r) => clean(r.cell)));
-  for (const raw of [...treatmentSentences(segmentHtml).filter((s) => !ownedCells.has(clean(s))), ...storageRows.map((r) => r.sentence)]) {    const sentence = clean(raw);
+  const normRows = normTableRows(segmentHtml);
+  const ownedCells = new Set([...storageRows, ...normRows].map((r) => clean(r.cell)));
+  for (const raw of [...treatmentSentences(segmentHtml).filter((s) => !ownedCells.has(clean(s))), ...storageRows.map((r) => r.sentence), ...normRows.map((r) => r.sentence)]) {    const sentence = clean(raw);
     for (const hit of numericMatches(sentence)) {
       const key = `${market}|${fromBlock ?? "-"}|${sentence}|${hit.figure}`;
       if (seen.has(key)) continue;
       seen.add(key);
 
-      const structural = STRUCTURAL.find((s) => s.pattern.test(sentence));
+      // A payment norm or regulatory assertion (Stage 10.12) is the statement itself: a standard designation inside it does not make it a structural label.
+      const structural = hit.category === "performance" && (hit.unit === "payment" || hit.unit === "regulatory") ? undefined : STRUCTURAL.find((s) => s.pattern.test(sentence));
       const notAClaim = NOT_A_CLAIM.find((s) => s.pattern.test(sentence));
       const owned = treatmentOwns(sentence, treatment, market);
       const approved = registry.claims.find(
@@ -761,6 +867,16 @@ export function scanNumericClaims(
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a storage-duration claim: a factual statement of how long food or stores keep, or must be used within, with no approved entry" });
       else if (hit.category === "interval" && isTargetLabelFigure(sentence, hit.figure))
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a target-label duration: a fixed supply, storage or preparedness target set out behind a label such as Target, Goal, Minimum or Build to, with no approved entry" });
+      else if (hit.category === "interval" && isPaybackFigure(sentence, hit.figure))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a payback-duration norm: an unsupported statement of a normal, typical or expected payback period, with no approved entry" });
+      else if (hit.category === "interval" && isWarrantyFigure(sentence, hit.figure))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a warranty-duration norm: an unsupported statement of a good, minimum, typical or expected warranty period, with no approved entry" });
+      else if (hit.category === "percentage" && isPaymentFigure(sentence, hit.figure))
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a payment norm: an unsupported universal or normative payment instruction or percentage, with no approved entry" });
+      else if (hit.category === "performance" && hit.unit === "payment")
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a payment norm: an unsupported universal or normative payment instruction or percentage, with no approved entry" });
+      else if (hit.category === "performance" && hit.unit === "regulatory")
+        out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a regulatory assertion: an unsupported statement that something is mandatory, legally required, compliant or approved, with no approved entry" });
       else if (hit.category === "performance" && hit.unit === "assurance")
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "an assurance or completion claim: an unsupported statement that the household is secured, prepared or ready because a step is complete, with no approved entry" });
       else if (hit.category === "performance" && hit.unit === "outcome")

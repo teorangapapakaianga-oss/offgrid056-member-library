@@ -1512,6 +1512,66 @@
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a capstone after the water, food and air resources (OG-08, OG-11, OG-13), taken once those are in view, handing off to the Priority Lock Worksheet (OG-07). It is not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27) and is not a scorecard, risk assessment, readiness checklist, action lock or budget tool.",
       "whereNextStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): Review first - Water Storage Calculator, 30-Day Pantry Builder, Healthy Home Air Audit; Next - Priority Lock Worksheet; the concise explanatory wording as drafted; no Week 3 programme pointer",
       "legacyMetadataDriftStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.08): keep the legacyMetadataDrift note; the historical register Food grouping and the PROGRAMME_ARCHITECTURE \"growing and preserving\" wording are not rewritten in this stage"
+    },
+    "OG-23": {
+      "title": "Supplier Comparison Worksheet",
+      "titleStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12); legacy 'OG-23 Supplier Question Bank' (removed publicly)",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): it compares suppliers across several systems; no single foundation is its subject",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): the locked definition names supplier and installer planning",
+      "programAlignment": {
+        "foundation": "general — the worksheet applies to any supplier or installer; no single foundation is its subject",
+        "programComponent": "planning-implementation — supplier and installer planning is named in the locked definition; its primary output is a side-by-side record of up to three suppliers' answers",
+        "resilienceRole": "helps a household ask suppliers and installers the same practical questions, record what each one says side by side and note what needs a closer look before deciding; it supports household independence by making a purchase decision informed and written down",
+        "guidanceKind": "comparison and note-taking worksheet — not a technical buying guide, a certification or compliance guide, an electrical or water-treatment or heating guide, a price or warranty benchmark, a payback calculator, a supplier rating system or a legal or consumer-rights guide",
+        "wordingMatchesRole": "yes — every field is member-entered; the draft carries no score, ranking, threshold, benchmark, payment rule, regulatory statement or supplier endorsement, and it points to the planning resources for scope, budget and schedule"
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12)",
+      "difficultySource": "INFERRED: member-written entries; no calculation.",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12)",
+      "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
+      "description": "A practical worksheet to help you prepare questions for suppliers and installers, record their answers side by side and note anything that needs a closer look before you decide.",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): the exact sentence",
+      "questionsStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): fifteen market-neutral questions in five groups; questions for the supplier only, no OffGrid056 claim; no solar, battery, water, heating or insulation question set",
+      "comparisonStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): Supplier / Installer A, B and C; ten member-entered rows; no score, total, rank or threshold",
+      "closerLookStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): seven neutral prompts; no payment rule, legal conclusion or compliance statement",
+      "followUpStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): four member-entered fields; nothing selects, approves or endorses a supplier",
+      "coverStatus": "OWNER-REVIEW REQUIRED (Stage 10.12A): the shared OffGrid056 cover system, corrected treatment, no legacy code, programme label or Day wording; the stand-in image must be replaced by the owner's cover choice before rendering",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): planning-tools. The collection is NOT changed until OG-23 is staged and deployed; it is expected to move from 8 to 9 resources then",
+      "relatedResources": [
+        "res-1025",
+        "res-1022",
+        "res-1026",
+        "res-1027"
+      ],
+      "relatedResourcesStatus": "RECOMMENDED — OWNER-REVIEW REQUIRED (Stage 10.12A): Project Support Brief Template and Resilience Product Wishlist (before or alongside), 3-Tier Budget Planner (also useful), 90-Day Implementation Roadmap (next), in the owner's proposed flow order. Four explicit links trigger the curated-related rule, so no automatic fill would be shown. Optional adjustment for the owner: Wishlist before Brief (decide what to buy before describing the work). Not included: Household Spending Capacity Check, Solar Power 101 Workbook, Battery Backup Planner, Water Tank Sizing & Placement Guide, Resilient Heating & Insulation Upgrade Checklist.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.12): standing emergency-contact and general-disclaimer blocks only; batteries-and-electrical is not carried because the system-specific questions are removed; no technical topic block is added.",
+      "safetyTopicDispositions": {
+        "batteries-and-electrical": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-09",
+          "reason": "The legacy named solar, battery and inverter questions (grid certification, shading, expansion, grid connection, payback). The owner's Stage 10.12 ruling removes every system-specific question set; the worksheet asks general supplier questions and teaches no electrical topic. If a later edit names it again the safety scan will require the block."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED (Stage 10.12A) — copy for owner review. NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned. Planning Tools is unchanged.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an implementation companion used when the household starts approaching suppliers and installers: after the wishlist, budget and roadmap work (OG-22, OG-26, OG-27) or alongside the Project Support Brief (OG-25). Not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27); not an Emergency Readiness resource."
     }
   }
 }

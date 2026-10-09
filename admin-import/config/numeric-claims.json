@@ -964,6 +964,60 @@
         "Scoped to OG-27 ONLY. It approves this exact sentence and nothing else; it must not be reused by any other resource."
       ],
       "status": "OWNER-APPROVED 2026-10-06 (Stage 9.62C) — OWNER-DEFINED SCHEDULE"
+    },
+    {
+      "id": "nz-rainwater-plumbing-consent-backflow-mbie",
+      "market": "NZ",
+      "jurisdiction": "NZ (national guidance; rules differ by council, which the live paragraph states)",
+      "owningResources": [
+        "OG-10"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "a mains-connected rainwater system needs a building consent, and the mains supply must be isolated by a backflow prevention device installed by a qualified plumber"
+      },
+      "allowedWording": "Connecting rainwater to the plumbing of a house that also has mains water needs a building consent, and the law requires the mains supply to be isolated by a backflow prevention device installed by a qualified plumber.",
+      "match": [
+        "Connecting rainwater to the plumbing of a house that also has mains water needs a building consent, and the law requires the mains supply to be isolated by a backflow prevention device installed by a qualified plumber"
+      ],
+      "requiresLabel": "backflow prevention device",
+      "source": "https://www.building.govt.nz/getting-started/smarter-homes-guides/water-and-waste/collecting-and-using-rainwater",
+      "authority": "Building Performance, MBIE (statement recorded in admin-import/STAGE_9.40_OG10_REVIEW.md, section 8, 'Plumbed connection')",
+      "sourceDate": "2026-01-15 (read live 2026-09-23)",
+      "limitations": [
+        "This exact sentence, in the NZ market and in OG-10 only. It is not an exemption and does not approve any other statement that something is required by law.",
+        "New Zealand only: rules differ by council, and the paragraph around the sentence says so. Not an Australian rule."
+      ],
+      "status": "VERIFIED — OWNER-APPROVED 2026-09-23 (live copy, OG-10 'Consent field (NZ)'; deployed Stage 9.41); REGISTERED 2026-10-09 (Stage 10.12A, owner ruling Option A)"
+    },
+    {
+      "id": "au-qld-interconnected-photoelectric-alarms-law-qfd",
+      "market": "AU",
+      "jurisdiction": "QLD (state legislation, attributed in the sentence)",
+      "owningResources": [
+        "OG-13"
+      ],
+      "category": "performance",
+      "claimType": "value",
+      "unit": "statement",
+      "value": {
+        "text": "in Queensland, interconnected photoelectric smoke alarms are required by law"
+      },
+      "allowedWording": "In Queensland, interconnected photoelectric alarms are required by law — check what applies where you live.",
+      "match": [
+        "In Queensland, interconnected photoelectric alarms are required by law — check what applies where you live\\."
+      ],
+      "requiresLabel": "Queensland",
+      "source": "https://www.fire.qld.gov.au/about-us/corporate-knowledge-centre/qfdlegislation/smoke-alarm-reforms",
+      "authority": "Queensland Fire Department (the same source and reading as au-qld-alarm-ten-year-battery-qfd; see admin-import/STAGE_9.51_OG13_AIR_RESEARCH.md and STAGE_9.52_AIR_SAFETY_ARCHITECTURE.md)",
+      "sourceDate": "read 2026-09-23 (Stage 9.51)",
+      "limitations": [
+        "This exact sentence, in the AU market and in OG-13 only. It is not an exemption and does not approve any other Queensland statement or any other statement that something is required by law.",
+        "Queensland legislation, named in the sentence, not a national Australian rule and not a New Zealand one; the sentence also tells the member to check what applies where they live."
+      ],
+      "status": "VERIFIED_LIVE 2026-09-23 — OWNER-APPROVED 2026-10-05 (live copy, OG-13 'Row 1 smoke alarms (AU)'; deployed Stage 9.54); REGISTERED 2026-10-09 (Stage 10.12A, owner ruling Option A)"
     }
   ],
   "blockingExcludes": [
