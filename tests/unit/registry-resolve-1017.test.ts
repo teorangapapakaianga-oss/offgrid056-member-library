@@ -30,7 +30,15 @@ describe("registered Stage 10.17A statements resolve narrowly", () => {
     expect(reg("Consents or permits needed", "OG-20", "NZ").some((c) => c.bucket === "C_NEEDS_SOURCE")).toBe(true);
     expect(reg("Permits or approvals needed", "OG-20", "AU").some((c) => c.bucket === "C_NEEDS_SOURCE")).toBe(true);
   });
-  it("a broader or different sentence is not approved by a similar entry", () => {
+  it("the three corrected statements make no regulatory assertion and match no registry entry (Stage 10.17B)", () => {
+    expect(reg("Check which electrical work on the pump connection needs a licensed person where you live, and use a suitably qualified professional where it does.", "OG-10", "NZ")).toEqual([]);
+    expect(reg("Consents or permits to check", "OG-20", "NZ")).toEqual([]);
+    expect(reg("Permits or approvals to check", "OG-20", "AU")).toEqual([]);
+  });
+  it("broader licensing, permit and legality statements still fail in OG-20 and OG-10", () => {
+    for (const [s, r, m] of [["Consents or permits are required for this work.", "OG-20", "NZ"], ["Permits or approvals are needed before you install it.", "OG-20", "AU"], ["Only a licensed electrician may connect the pump.", "OG-10", "NZ"], ["Connecting the pump yourself is illegal.", "OG-10", "AU"]] as const)
+      expect(reg(s, r, m).some((c) => c.bucket === "C_NEEDS_SOURCE"), s).toBe(true);
+  });  it("a broader or different sentence is not approved by a similar entry", () => {
     expect(reg("All electrical work must be done by a licensed electrician.", "OG-20", "AU").some((c) => c.bucket === "C_NEEDS_SOURCE")).toBe(true);
   });
 });

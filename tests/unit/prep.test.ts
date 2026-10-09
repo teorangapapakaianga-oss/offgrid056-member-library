@@ -591,7 +591,10 @@ describe("OG-20 copy changes", () => {
     expect(forMarket("NZ")).toContain("licensed electrical worker");
     expect(forMarket("NZ")).not.toMatch(/licensed electrician|Permits or approvals/);
     expect(forMarket("AU")).toContain("licensed electrician");
-    expect(forMarket("AU")).toContain("Permits or approvals needed");
+    expect(forMarket("AU")).toContain("Permits or approvals to check");
+    expect(forMarket("AU")).not.toContain("Permits or approvals needed");
+    expect(forMarket("NZ")).toContain("Consents or permits to check");
+    expect(forMarket("NZ")).not.toContain("Consents or permits needed");
     expect(forMarket("AU")).not.toMatch(/electrical worker|Consents/);
   });
 
@@ -844,7 +847,8 @@ describe("OG-10 rainwater planner", () => {
     const au = forMarket("AU");
     expect(nz).toContain("regional council or NIWA");
     expect(nz).toContain("backflow prevention device installed by a qualified plumber");
-    expect(nz).toContain("licensed electrical worker");
+    expect(nz).toContain("needs a licensed person where you live");
+    expect(nz).not.toContain("licensed electrical worker");
     expect(nz).not.toMatch(/Bureau of Meteorology|NSW Health|licensed electrician|state or territory/);
     expect(au).toContain("Bureau of Meteorology");
     expect(au).toContain("licensed plumber");
@@ -888,7 +892,8 @@ describe("OG-10 rainwater planner", () => {
   });
 
   it("covers the pump with a short market-specific line, not the electrical block", () => {
-    expect(forMarket("NZ")).toContain("Fixed electrical work and the pump connection must be handled by an appropriately licensed electrical worker.");
+    expect(forMarket("NZ")).toContain("Check which electrical work on the pump connection needs a licensed person where you live, and use a suitably qualified professional where it does.");
+    expect(forMarket("NZ")).not.toContain("appropriately licensed electrical worker");
     expect(forMarket("AU")).toContain("Fixed electrical work and the pump connection must be handled by a licensed electrician.");
     // No DIY wiring, and no consent claimed for every tank.
     expect(og10.map((c) => c.to).join("\n")).not.toMatch(/wire it|wiring diagram|connect the pump yourself/i);

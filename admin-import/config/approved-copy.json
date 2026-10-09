@@ -2216,17 +2216,32 @@
       {
         "where": "Plan — permissions (AU)",
         "from": "Consents or permits needed",
-        "to": "Permits or approvals needed",
+        "to": "Permits or approvals to check",
         "expectedMatches": 1,
         "proposedOn": "2026-09-22",
         "kind": "market-variant",
-        "reason": "'Consents' is NZ terminology; AU requirements vary by state and territory (as OG-27 AU).",
+        "reason": "'Consents' is NZ terminology; AU requirements vary by state and territory (as OG-27 AU). Corrected Stage 10.17B (owner ruling): 'needed' became 'to check' (no source says a permit is needed).",
         "markets": [
           "AU"
         ],
         "approvedBy": "owner",
         "approvedOn": "2026-09-22",
         "approvalRef": "Stage 9.34 ruling 2"
+      },
+      {
+        "where": "Plan — permissions (NZ)",
+        "from": "Consents or permits needed",
+        "to": "Consents or permits to check",
+        "expectedMatches": 1,
+        "proposedOn": "2026-10-09",
+        "kind": "market-variant",
+        "reason": "Stage 10.17B (owner ruling): the field label no longer says a consent or permit is needed; it asks the member to check. NZ keeps 'Consents' terminology.",
+        "markets": [
+          "NZ"
+        ],
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-09",
+        "approvalRef": "Stage 10.17B"
       },
       {
         "where": "Hybrid principle",
@@ -3023,11 +3038,11 @@
       {
         "where": "Components — plumbing and pump note (NZ)",
         "from": "<div class=\"worksheet-field\" style=\"margin-top:16px;\">\n    <div class=\"worksheet-label\">Total system estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>",
-        "to": "<div class=\"worksheet-field\" style=\"margin-top:16px;\">\n    <div class=\"worksheet-label\">Total system estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <p style=\"font-size:12px;\">A rainwater system that supplies the house needs a pump. Connecting it to household plumbing is work for a qualified plumber, including the backflow prevention device where there is also a mains supply. Fixed electrical work and the pump connection must be handled by an appropriately licensed electrical worker.</p>",
+        "to": "<div class=\"worksheet-field\" style=\"margin-top:16px;\">\n    <div class=\"worksheet-label\">Total system estimated cost</div>\n    <div class=\"worksheet-line\"></div>\n  </div>\n  \n  <p style=\"font-size:12px;\">A rainwater system that supplies the house needs a pump. Connecting it to household plumbing is work for a qualified plumber, including the backflow prevention device where there is also a mains supply. Check which electrical work on the pump connection needs a licensed person where you live, and use a suitably qualified professional where it does.</p>",
         "expectedMatches": 1,
         "proposedOn": "2026-09-23",
         "kind": "market-variant",
-        "reason": "PLUMBING/ELECTRICAL: the component list includes a pressure pump and household supply, with no mention of who may do the work. MBIE: a system supplying the house needs a pump; a backflow prevention device must be installed by a qualified plumber. NZ electrical term (WorkSafe NZ).",
+        "reason": "PLUMBING/ELECTRICAL: the component list includes a pressure pump and household supply, with no mention of who may do the work. MBIE: a system supplying the house needs a pump; a backflow prevention device must be installed by a qualified plumber. NZ electrical term (WorkSafe NZ). Corrected Stage 10.17B (owner ruling): the fixed-work licensing assertion is replaced by a neutral check-and-engage sentence; the AU wording is unchanged.",
         "markets": [
           "NZ"
         ],
@@ -3052,12 +3067,12 @@
       },
       {
         "where": "Consent field (NZ)",
-        "from": "Council consent required? (Check local rules — many areas exempt under certain sizes)",
-        "to": "Council requirements checked? (Rules differ by council, and not every tank needs a consent — MBIE notes there is usually no problem installing smaller tanks for garden watering only. Connecting rainwater to the plumbing of a house that also has mains water needs a building consent, and the law requires the mains supply to be isolated by a backflow prevention device installed by a qualified plumber. A tank on a stand over one metre high generally needs a consent too.)",
+        "from": "<div class=\"worksheet-label\">Council consent required? (Check local rules — many areas exempt under certain sizes)",
+        "to": "<div class=\"worksheet-label\" style=\"break-inside:avoid;page-break-inside:avoid;\">Council requirements checked? (Rules differ by council, and not every tank needs a consent — MBIE notes there is usually no problem installing smaller tanks for garden watering only. Connecting rainwater to the plumbing of a house that also has mains water needs a building consent, and the law requires the mains supply to be isolated by a backflow prevention device installed by a qualified plumber. A tank on a stand over one metre high generally needs a consent too.)",
         "expectedMatches": 1,
         "proposedOn": "2026-09-23",
         "kind": "market-variant",
-        "reason": "REGULATORY: 'many areas exempt under certain sizes' is an invented compliance claim. MBIE: rules differ by council; connecting to the plumbing of a house with mains water needs a building consent and a backflow prevention device installed by a qualified plumber; a tank on a stand over one metre high generally needs a consent.",
+        "reason": "REGULATORY: 'many areas exempt under certain sizes' is an invented compliance claim. MBIE: rules differ by council; connecting to the plumbing of a house with mains water needs a building consent and a backflow prevention device installed by a qualified plumber; a tank on a stand over one metre high generally needs a consent. Stage 10.17B layout-only: the label keeps its lines together on one page (break-inside: avoid) because the corrected pump sentence is one line longer; no wording changed.",
         "markets": [
           "NZ"
         ],
