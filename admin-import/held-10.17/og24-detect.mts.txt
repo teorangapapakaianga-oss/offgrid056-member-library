@@ -1,0 +1,75 @@
+// Stage 10.16: claims-first detector pass over the legacy OG-24 source (read only).
+import fs from "node:fs";
+import path from "node:path";
+import { PDFParse } from "pdf-parse";
+import { safetyExposureFor, fuelTeachingSignals } from "../admin-import/audit/group-a";
+import { findContentFlags, fuelSafetyFindings, memberFacingText } from "../admin-import/pilot/prep";
+import { scanPrices } from "../admin-import/audit/price";
+import { comparativePerformanceClaims, emergencyPeriodTargets, isSurvivalClaimSentence, loadNumericRegistry, multiplierClaims, outcomeClaims, scanNumericClaims, storageDurationClaims, supplyTargets, targetLabelDurations, assuranceClaims, paybackNorms, warrantyNorms, paymentNorms, regulatoryAssertions } from "../admin-import/audit/numeric";
+import { loadTreatmentRegistry } from "../admin-import/audit/treatment";
+
+const html = fs.readFileSync("workspace/og-24-legacy.html", "utf8");
+const pdfPath = "C:\\Users\\jgate\\OneDrive\\Attachments\\Documents\\kingitanga\\OffGrid056_Complete_30Day_Programme\\OffGrid056\\PDFs\\OG-24_Professional_Review_Selector.pdf";
+const raw = fs.readFileSync(pdfPath);
+const parser = new PDFParse({ data: new Uint8Array(raw) });
+const { pages = [] } = await parser.getText();
+await parser.destroy?.();
+const pdfText = pages.map((p) => p.text ?? "").join("\n");
+const s = raw.toString("latin1");
+const tm = s.match(/\/Title\s*(<[0-9A-Fa-f]+>|\((?:\\.|[^\\)])*\))/);
+console.log(`legacy PDF: ${pages.length} pages, ${raw.length} bytes; title field: ${tm ? (tm[1].startsWith("<") ? Buffer.from(tm[1].slice(1, -1), "hex").subarray(2).swap16().toString("utf16le") : tm[1]) : "(none)"}`);
+const member = memberFacingText(html);
+const flat = member.replace(/\s+/g, " ");
+
+console.log("\n== SAFETY");
+console.log("required topics (HTML + PDF text):", safetyExposureFor(member + "\n" + pdfText).join(", ") || "none");
+console.log("required topics (member-facing HTML):", safetyExposureFor(member).join(", ") || "none");
+console.log("required topics (PDF):", safetyExposureFor(pdfText).join(", ") || "none");
+console.log("fuel/gas signals:", fuelTeachingSignals(member).join(" | ") || "none", "| fuel check:", fuelSafetyFindings(html).join(" | ") || "none");
+for (const [label, re] of [["electrical/energy", /\b(solar|battery|batteries|generator|inverter|power)\b/gi], ["fire/smoke/CO/gas", /\b(smoke|carbon monoxide|CO\b|fire|gas|LPG|alarm|detector)/gi], ["water/food/heating", /\b(water|food|heating|insulation|storage|pantry|filtration|filter)/gi], ["emergency", /\b(emergency|111|000|112)\b/gi]] as [string, RegExp][]) {
+  const hits = [...flat.matchAll(re)].map((m) => `...${flat.slice(Math.max(0, (m.index ?? 0) - 40), (m.index ?? 0) + 50)}...`);
+  console.log(`[${label}] ${hits.length} mention(s)`); hits.forEach((h) => console.log("    ", h));
+}
+
+console.log("\n== PRICES");
+const prices = scanPrices(html);
+for (const p of prices) console.log(`  ${p.kind.padEnd(11)} ${String(p.figure).padEnd(22)} ${p.why}`);
+console.log(`  total ${prices.length}: PRICE ${prices.filter((p) => p.kind === "PRICE").length} | PLACEHOLDER ${prices.filter((p) => p.kind === "PLACEHOLDER").length} | NOT_A_PRICE ${prices.filter((p) => p.kind === "NOT_A_PRICE").length}`);
+console.log("  money words:", [...flat.matchAll(/\b(budget|spent|cost|save|saves|saving|afford|payback|value|cheap|price|\$)\w*/gi)].map((m) => m[0]).join(", ") || "none");
+
+const registry = loadNumericRegistry(path.join(process.cwd(), "admin-import/config/numeric-claims.json"));
+const treatment = loadTreatmentRegistry(path.join(process.cwd(), "admin-import/config/treatment-sources.json"));
+for (const market of ["NZ", "AU"]) {
+  const all = scanNumericClaims(html, { resource: "OG-24", market, registry, treatment });
+  console.log(`\n== NUMERIC ${market}: ${all.length} candidates, Bucket C ${all.filter((c) => c.bucket === "C_NEEDS_SOURCE").length}`);
+  for (const c of all) console.log(`  ${c.bucket.padEnd(18)} ${c.category.padEnd(10)} "${c.figure}" :: ${c.sentence.slice(0, 110)}`);
+}
+
+console.log("\n== CLAIM FAMILIES, per member-facing sentence/line (hits only)");
+const units = member.split(/(?<=[.!?])\s+|\n+/).map((x) => x.trim()).filter(Boolean);
+let n = 0;
+for (const u of units) {
+  const r = {
+    survival: isSurvivalClaimSentence(u), supply: supplyTargets(u).length, emergencyPeriod: emergencyPeriodTargets(u).length,
+    storage: storageDurationClaims(u).length, multiplier: multiplierClaims(u).length, comparative: comparativePerformanceClaims(u).length, outcome: outcomeClaims(u).length, targetLabel: targetLabelDurations(u).length, assurance: assuranceClaims(u).length, payback: paybackNorms(u).length, warranty: warrantyNorms(u).length, payment: paymentNorms(u).length, regulatory: regulatoryAssertions(u).length,
+  };
+  const hit = Object.entries(r).filter(([, v]) => v);
+  if (hit.length) { n++; console.log(`  [${hit.map(([k, v]) => `${k}=${v}`).join(",")}] ${u.slice(0, 140)}`); }
+}
+console.log(`  sentences scanned ${units.length}; with a family hit ${n}`);
+
+console.log("\n== CONTENT FLAGS");
+for (const f of findContentFlags(html, "OG-24")) console.log(`  ${f.kind}: ${f.text}`);
+
+console.log("\n== LEGACY LANGUAGE (member-facing text)");
+const terms: [string, RegExp][] = [["Pillars", /\bpillars?\b/gi], ["Week", /\bWeek \d+[^<.]{0,30}/g], ["Day", /\bDays? \d+(?:[\u2013-]\d+)?/g], ["30-Day Programme", /30-Day Programme/gi], ["72-hour", /72[- ]hour/gi], ["survival", /\bsurvival\b/gi], ["critical", /\bcritical\b/gi], ["prepper", /\bprepper/gi], ["panic", /\bpanic/gi], ["worst-case", /worst[- ]case/gi], ["premium", /\bpremium\b/gi], ["upsell", /upsell/gi], ["Skool", /\bSkool\b/gi], ["Simply Services", /Simply Services/gi], ["HTPS", /\bHTPS\b/g], ["OG codes", /\b(?:Asset )?OG-[B]?\d+[^<.]{0,30}/g], ["URLs", /OFFGRID056\.COM|https?:\/\/\S+|\/mnt\/\S+/gi], ["CTA", /\b(next:|upgrade|join|subscribe|buy now|get started)\b[^<.]{0,40}/gi], ["Week-2 lock", /Week 2 [A-Za-z]+/g]];
+for (const [label, re] of terms) {
+  const hits = [...flat.matchAll(re)].map((m) => m[0].trim());
+  console.log(`  ${label.padEnd(18)} ${String(hits.length).padStart(2)}  ${[...new Set(hits)].slice(0, 8).join(" | ")}`);
+}
+const rawHits = [...html.matchAll(/(\/mnt\/[^"']+|Week2_[^"']+|alt="[^"]+")/g)].map((m) => m[0]);
+console.log("  non-visible source refs:", rawHits.join(" | "));
+
+console.log("\n== PROFESSIONAL / CREDENTIAL TERMS (per unit)");
+const pro = /\b(licen[cs]\w*|registered|registration|certif\w*|qualified|approved|accredit\w*|insured|insurance|bonded|authoris\w*|specialist|engineer\w*|electrician|plumber|builder|installer|gasfitter|drainlayer|architect|practitioner|assessor|auditor|consultant|illegal|legal\w*|consent|compliance|mandatory|required|must)\b/i;
+for (const u of units) if (pro.test(u)) console.log("  " + u.slice(0, 170));

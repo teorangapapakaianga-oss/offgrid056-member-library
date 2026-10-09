@@ -1,0 +1,86 @@
+﻿diff --git a/admin-import/audit/numeric.ts b/admin-import/audit/numeric.ts
+index 995aa75..6374b9c 100644
+--- a/admin-import/audit/numeric.ts
++++ b/admin-import/audit/numeric.ts
+@@ -609,7 +609,7 @@ function assuranceClaimsRaw(sentence: string): string[] {
+  */
+ const NORM_DUR = `${SUPPLY_FIG}[-\\s]*(?:year|month)s?`;
+ const NORM_NOT_A_CLAIM = /\?\s*$|[_…]{3,}|^\s*(?:please\s+)?(?:ask|write|record|enter|note|list|compare|check|find out|confirm|verify|calculate|work out|choose|select|tick|circle|add|review|contact|read)\b|\b(?:for example|for instance|such as|e\.g\.|imagine|suppose|whether)\b/i;
+-const NORM_ATTRIBUTED = /\b(?:supplier|installer|seller|vendor|business|company|manufacturer|retailer|they)\b[^.?!]{0,30}\b(?:says?|said|states?|stated|claims?|claimed|quotes?|quoted|gave|gives|offers?|offered|provides?|provided|estimates?|estimated|told|advises?|advised|proposes?|proposed|asked for|requests?|requested)\b|\b(?:supplier|installer|seller|vendor|business|manufacturer)[- ](?:stated|quoted|given|offered|estimated|provided)\b|\b(?:quoted|stated|offered|given|estimated) by\b/i;
++const NORM_ATTRIBUTED = /\b(?:supplier|installer|seller|vendor|business|company|manufacturer|retailer|professional|contractor|tradesperson|tradie|adviser|advisor|consultant|they)\b[^.?!]{0,30}\b(?:says?|said|states?|stated|claims?|claimed|quotes?|quoted|gave|gives|offers?|offered|provides?|provided|estimates?|estimated|told|advises?|advised|proposes?|proposed|asked for|requests?|requested)\b|\b(?:supplier|installer|seller|vendor|business|manufacturer)[- ](?:stated|quoted|given|offered|estimated|provided)\b|\b(?:quoted|stated|offered|given|estimated) by\b/i;
+ const normDurations = (s: string): string[] => [...s.matchAll(new RegExp(NORM_DUR, "gi"))].map((m) => clean(m[0])).filter((d) => !/-(?:Year|Month)s?\b/.test(d));
+ const PB_TERM = /\bpay(?:s|ing|ed)?[- ]?back\b|\bpay(?:s|ing)?\s+for\s+(?:itself|themselves)\b|\bbreak[- ]even\b/i;
+ const PB_HEDGE = /\b(?:not necessarily|do not assume|don'?t assume|no guarantee|does not guarantee|cannot promise|may|might|could)\b/i;
+@@ -650,12 +650,61 @@ const RG_PATTERNS: RegExp[] = [
+   /\b(?:meets|complies\s+with|satisfies|conforms\s+to)\s+(?:the\s+)?(?:\w+\s+){0,2}(?:Building\s+Code|building\s+regulations|National\s+Construction\s+Code|NCC|electrical\s+(?:regulations|safety\s+rules))\b/gi,
+   /\brequired\s+(?:in|under)\s+(?:NZ|New\s+Zealand|Australia|AU)\b/gi,
+ ];
++/**
++ * Licensing, registration and legality assertions (Stage 10.17). Part of the regulatory family (one owner per statement, no new bucket): a statement in the resource's
++ * own voice that says who MUST, ALWAYS or ONLY may do work, that a licence, registration or certification IS REQUIRED, or that something is ILLEGAL or UNLAWFUL.
++ * "Always use a licensed electrician", "This must be carried out by a qualified tradesperson", "A valid licence is required", "Only a certified installer may do this",
++ * "Illegal and dangerous otherwise", "Always licensed". Quiet for questions, blanks, openers that tell the member to ask, check, record or verify, wording attributed to a
++ * supplier, installer or professional, hedged wording (if, unless, might, could, sometimes, depending) and "may be required"; a registered sourced claim resolves through
++ * the registry exactly as any regulatory assertion does. The rule names no resource and no country.
++ */
++const LG_ROLE = "(?:licen[cs]ed|registered|certified|accredited|authori[sz]ed|qualified|approved)";
++const LG_DOC = "(?:licen[cs]es?|licen[cs]ences?|registrations?|certifications?|certificates?|accreditations?|authori[sz]ations?|qualifications?)";
++const LG_NEEDED = "(?:required|mandatory|compulsory|needed|necessary)";
++const LG_PRO = "(?:professionals?|tradespeople|tradesperson|trades?\\s?person|tradies|installers?|electricians?|plumbers?|gasfitters?|builders?|technicians?|engineers?|practitioners?|contractors?|specialists?|persons?|people)";
++const LG_PATTERNS: RegExp[] = [
++  new RegExp(`\\b(?:always|only|must|has to|have to|needs? to|never)\\s+(?:use|hire|engage|employ|choose|get|call|ask|trust)\\s+(?:a\\s+|an\\s+|the\\s+)?(?:\\w+\\s+){0,2}?${LG_ROLE}\\b[^.?!]{0,30}`, "gi"),
++  new RegExp(`\\b(?:must|has to|have to|needs? to|should always|can only|may only)\\s+be\\s+(?:carried out|done|performed|installed|completed|undertaken|handled|signed off|checked|certified|inspected|fitted|connected)\\s+by\\s+(?:a\\s+|an\\s+|the\\s+)?(?:\\w+\\s+){0,2}?(?:${LG_ROLE}|${LG_PRO})\\b[^.?!]{0,30}`, "gi"),
++  new RegExp(`\\bonly\\s+(?:a\\s+|an\\s+|the\\s+)?(?:\\w+\\s+){0,2}?${LG_ROLE}\\s+${LG_PRO}\\s+(?:may|can|should|is allowed to|are allowed to|is permitted to|are permitted to)\\b[^.?!]{0,30}`, "gi"),
++  new RegExp(`\\b(?:a\\s+|an\\s+|the\\s+)?(?:valid\\s+|current\\s+)?${LG_DOC}\\b[^.?!]{0,40}\\b(?:is|are)\\s+${LG_NEEDED}\\b`, "gi"),
++  new RegExp(`\\bvalid\\s+${LG_DOC}\\b[^.?!]{0,40}\\b${LG_NEEDED}\\b`, "gi"),
++  new RegExp(`\\b(?:requires?|required|needs?|demands?)\\s+(?:a\\s+|an\\s+|the\\s+)?(?:valid\\s+|current\\s+)?(?:(?:\\w+\\s+){0,1}?${LG_ROLE}\\b|${LG_DOC}\\b)[^.?!]{0,30}`, "gi"),
++  new RegExp(`\\b${LG_ROLE}\\s+${LG_PRO}\\s+(?:is|are)\\s+${LG_NEEDED}\\b`, "gi"),
++  new RegExp(`\\b(?:consent|permits?|approvals?|inspections?|licen[cs]es?|certificates?)\\b[^.?!]{0,50}\\b${LG_NEEDED}\\b`, "gi"),
++  new RegExp(`\\balways\\s+${LG_ROLE}\\b`, "gi"),
++  /\b(?:regulations?|laws?|legislation|by-?laws?|rules)\s+(?:apply|applies|govern)\b/gi,
++];
++const LG_LEGAL: RegExp[] = [
++  /\b(?:illegal|unlawful|against\s+the\s+law|not\s+legally\s+allowed|not\s+legally\s+permitted|breaks?\s+the\s+law|legally\s+(?:prohibited|permitted|allowed|required|binding))\b/gi,
++  /\bnot\s+(?:always\s+)?legal\b(?![^.?!]{0,60}\badvice\b)|\ba\s+legal\s+(?:requirement|obligation)\b|\b(?:is|are)\s+prohibited\b|\bprohibited\s+(?:by|under|from)\b/gi,
++];
++const LG_HEDGE = /\b(?:might|could|if|unless|depending|sometimes|some|often|usually|typically|can vary|vary|varies)\b/i;
++const LG_MAY = /\bmay\b/i;
++function licensingAssertionsRaw(sentence: string): string[] {
++  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence) || LG_HEDGE.test(sentence)) return [];
++  const onlyMay = /\bonly\b[^.?!]{0,60}\bmay\b/i.test(sentence);
++  if (LG_MAY.test(sentence) && !onlyMay) return [];
++  const spans = LG_PATTERNS.flatMap((re) => [...sentence.matchAll(re)].map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) })));
++  return dedupeSpans(spans);
++}
++function legalityAssertionsRaw(sentence: string): string[] {
++  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence) || LG_HEDGE.test(sentence) || /\bmay\b/i.test(sentence)) return [];
++  return dedupeSpans(LG_LEGAL.flatMap((re) => [...sentence.matchAll(re)].map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) }))));
++}
++function dedupeSpans(spans: { start: number; end: number; text: string }[]): string[] {
++  const sorted = [...spans].sort((a, b) => a.start - b.start || b.end - a.end);
++  const kept: typeof sorted = [];
++  for (const s of sorted) if (!kept.some((k) => s.start < k.end && s.end > k.start)) kept.push(s);
++  return kept.map((k) => k.text);
++}
+ function regulatoryAssertionsRaw(sentence: string): string[] {
+-  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence) || RG_HEDGE.test(sentence) || PB_HEDGE.test(sentence)) return [];
++  const extra = [...licensingAssertionsRaw(sentence), ...legalityAssertionsRaw(sentence)];
++  if (NORM_NOT_A_CLAIM.test(sentence) || NORM_ATTRIBUTED.test(sentence) || RG_HEDGE.test(sentence) || PB_HEDGE.test(sentence)) return extra;
+   const spans = RG_PATTERNS.flatMap((re, i) => [...sentence.matchAll(re)].filter(() => i > 1 || RG_CONTEXT.test(sentence)).map((m) => ({ start: m.index ?? 0, end: (m.index ?? 0) + m[0].length, text: clean(m[0]) }))).sort((a, b) => a.start - b.start || b.end - a.end);
+   const kept: typeof spans = [];
+   for (const s of spans) if (!kept.some((k) => s.start < k.end && s.end > k.start)) kept.push(s);
+-  return kept.map((k) => k.text);
++  const old = kept.map((k) => k.text);
++  return [...old, ...extra.filter((e) => !old.some((o) => o.includes(e) || e.includes(o)))];
+ }
+ 
+ /** The claim families are pure functions of one sentence, and the scan asks about the same sentence several times (ownership, hit generation, classification): answer each once. */
+@@ -704,6 +753,8 @@ export function normTableRows(html: string): { sentence: string; cell: string }[
+ export const warrantyNorms = memoByText(warrantyNormsRaw);
+ export const paymentNorms = memoByText(paymentNormsRaw);
+ export const regulatoryAssertions = memoByText(regulatoryAssertionsRaw);
++export const licensingAssertions = memoByText(licensingAssertionsRaw);
++export const legalityAssertions = memoByText(legalityAssertionsRaw);
+ const figureOwned = (owned: string[], figure: string): boolean => owned.some((x) => x.toLowerCase().includes(figure.toLowerCase()) || figure.toLowerCase().includes(x.toLowerCase()));
+ const isPaybackFigure = (s: string, figure: string): boolean => figureOwned(paybackNorms(s), figure);
+ const isWarrantyFigure = (s: string, figure: string): boolean => figureOwned(warrantyNorms(s), figure);

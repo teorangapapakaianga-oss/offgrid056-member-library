@@ -1,0 +1,143 @@
+﻿legacy PDF: 5 pages, 507823 bytes; title field: OG-24 Professional Review Selector — OffGrid056
+
+== SAFETY
+required topics (HTML + PDF text): solid-fuel-heating, gas-and-lpg, gas-installation-and-servicing, batteries-and-electrical
+required topics (member-facing HTML): solid-fuel-heating, gas-and-lpg, gas-installation-and-servicing, batteries-and-electrical
+required topics (PDF): solid-fuel-heating, gas-and-lpg, gas-installation-and-servicing, batteries-and-electrical
+fuel/gas signals: certifying plumber / gasfitter | connection to mains, gas appliance | fuel check: GAS_SAFETY_REQUIRED: "gas appliance" — no NZ/AU gas or LPG guidance is approved
+[electrical/energy] 5 mention(s)
+     ...? Licensed Required? When to Hire a Pro Solar PV installation (&gt;120V DC or grid-tied) N...
+     ...lways. Illegal and dangerous otherwise. Battery system installation No Yes — electrician F...
+     ... they do: All electrical installations, solar grid connections, switchboard upgrades. When...
+     ...s. When you need one: Any fixed wiring, solar inverter connection, or work over 50V AC / 1...
+     ...n you need one: Any fixed wiring, solar inverter connection, or work over 50V AC / 120V DC...
+[fire/smoke/CO/gas] 5 mention(s)
+     ...ystem installation No Yes — electrician Fire and electrocution risk. Always licensed. Plum...
+     ...) registration. 3. Certifying Plumber / Gasfitter / Drainlayer What they do: Potable water...
+     ...Drainlayer What they do: Potable water, gas, drainage, and sanitary work. When you need on...
+     ...When you need one: Connection to mains, gas appliance install, septic or greywater. How to...
+     ... or greywater. How to verify: Plumbers, Gasfitters and Drainlayers Board (PGDB) register. ...
+[water/food/heating] 7 mention(s)
+     ...isk. Always licensed. Plumbing to mains water No Yes — plumber Backflow and contamination ...
+     ...ything affecting load-bearing elements. Insulation installation Yes No Large or awkward sp...
+     ... No Complex slopes, drainage issues, or food safety certification. Septic or greywater sys...
+     ...tter / Drainlayer What they do: Potable water, gas, drainage, and sanitary work. When you ...
+     ...maging. When you need one: Before major heating or insulation investment to target spend a...
+     ...n you need one: Before major heating or insulation investment to target spend accurately. ...
+     ...: Rural land purchases, earthworks near waterways, or establishing native plantings. How t...
+[emergency] 1 mention(s)
+     ...When you need one: Any project over $33,000 (Consumer Guarantees Act threshold), structura...
+
+== PRICES
+  PRICE       $33,000                a currency symbol with an amount
+  total 1: PRICE 1 | PLACEHOLDER 0 | NOT_A_PRICE 0
+  money words: budget, Budget, price
+
+== NUMERIC NZ: 14 candidates, Bucket C 12
+  D_NOT_A_CLAIM      interval   "30-Day" :: OffGrid056 30-Day Programme
+  D_NOT_A_CLAIM      interval   "30-Day" :: Day 24 — Week 4: Action Plan & Pathway | OffGrid056 30-Day Programme
+  C_NEEDS_SOURCE     performance "not always legal" :: Doing everything yourself is not always legal, safe, or efficient.
+  C_NEEDS_SOURCE     power      "120V" :: Solar PV installation (&gt;120V DC or grid-tied)
+  C_NEEDS_SOURCE     performance "Illegal" :: Illegal and dangerous otherwise.
+  C_NEEDS_SOURCE     performance "Always licensed" :: Always licensed.
+  C_NEEDS_SOURCE     performance "requires certified technician" :: Refrigerant handling requires certified technician.
+  C_NEEDS_SOURCE     performance "consent and certified flue work required" :: Building consent and certified flue work required.
+  C_NEEDS_SOURCE     performance "regulations apply" :: Public health and environmental regulations apply.
+  C_NEEDS_SOURCE     currency   "$33,000" :: When you need one: Any project over $33,000 (Consumer Guarantees Act threshold), structural alterations, or wo
+  C_NEEDS_SOURCE     performance "valid licence and category match required" :: How to verify: Search the LBP register at lbp.website — valid licence and category match required.
+  C_NEEDS_SOURCE     power      "50V" :: When you need one: Any fixed wiring, solar inverter connection, or work over 50V AC / 120V DC.
+  C_NEEDS_SOURCE     power      "120V" :: When you need one: Any fixed wiring, solar inverter connection, or work over 50V AC / 120V DC.
+  C_NEEDS_SOURCE     performance "require licensed professionals, how to verify" :: You now know exactly which projects require licensed professionals, how to verify their credentials, and how t
+
+== NUMERIC AU: 14 candidates, Bucket C 12
+  D_NOT_A_CLAIM      interval   "30-Day" :: OffGrid056 30-Day Programme
+  D_NOT_A_CLAIM      interval   "30-Day" :: Day 24 — Week 4: Action Plan & Pathway | OffGrid056 30-Day Programme
+  C_NEEDS_SOURCE     performance "not always legal" :: Doing everything yourself is not always legal, safe, or efficient.
+  C_NEEDS_SOURCE     power      "120V" :: Solar PV installation (&gt;120V DC or grid-tied)
+  C_NEEDS_SOURCE     performance "Illegal" :: Illegal and dangerous otherwise.
+  C_NEEDS_SOURCE     performance "Always licensed" :: Always licensed.
+  C_NEEDS_SOURCE     performance "requires certified technician" :: Refrigerant handling requires certified technician.
+  C_NEEDS_SOURCE     performance "consent and certified flue work required" :: Building consent and certified flue work required.
+  C_NEEDS_SOURCE     performance "regulations apply" :: Public health and environmental regulations apply.
+  C_NEEDS_SOURCE     currency   "$33,000" :: When you need one: Any project over $33,000 (Consumer Guarantees Act threshold), structural alterations, or wo
+  C_NEEDS_SOURCE     performance "valid licence and category match required" :: How to verify: Search the LBP register at lbp.website — valid licence and category match required.
+  C_NEEDS_SOURCE     power      "50V" :: When you need one: Any fixed wiring, solar inverter connection, or work over 50V AC / 120V DC.
+  C_NEEDS_SOURCE     power      "120V" :: When you need one: Any fixed wiring, solar inverter connection, or work over 50V AC / 120V DC.
+  C_NEEDS_SOURCE     performance "require licensed professionals, how to verify" :: You now know exactly which projects require licensed professionals, how to verify their credentials, and how t
+
+== CLAIM FAMILIES, per member-facing sentence/line (hits only)
+  [regulatory=1] Doing everything yourself is not always legal, safe, or efficient.
+  [regulatory=1] Illegal and dangerous otherwise.
+  [regulatory=1] Always licensed.
+  [regulatory=1] Heat pump installation (split system) No Yes — refrigeration engineer Refrigerant handling requires certified technician.
+  [regulatory=1] Wood burner installation No Yes — solid fuel installer Building consent and certified flue work required.
+  [regulatory=1] Septic or greywater system No Yes — drainlayer Public health and environmental regulations apply.
+  [regulatory=1] How to verify: Search the LBP register at lbp.website — valid licence and category match required.
+  [regulatory=1] You now know exactly which projects require licensed professionals, how to verify their credentials, and how to brief them for accurate quot
+  sentences scanned 81; with a family hit 8
+
+== CONTENT FLAGS
+  day-complete: Day 24 Complete
+  next-link: Next: Tomorrow you will create a formal Project Support Brief to hand to any contractor or advisor.
+  next-link: Next: OG-25 Project Support Brief Template →
+  next-link: Tomorrow you will create a formal Project Support Brief to hand to any contractor or advisor
+  programme-sequencing: OffGrid056 30-Day Programme
+  programme-sequencing: Week 4 — Action Plan & Pathway
+  programme-sequencing: Day 24 — Know when DIY ends and expert help begins
+  programme-sequencing: Day 24 — Week 4: Action Plan & Pathway
+  cross-reference: OG-01
+  cross-reference: OG-22
+  cross-reference: OG-23
+  cross-reference: OG-25
+
+== LEGACY LANGUAGE (member-facing text)
+  Pillars             0  
+  Week                2  Week 4 — Action Plan & Pathway OffGr | Week 4: Action Plan & Pathway | OffG
+  Day                 3  Day 24
+  30-Day Programme    2  30-Day Programme
+  72-hour             0  
+  survival            0  
+  critical            0  
+  prepper             0  
+  panic               0  
+  worst-case          0  
+  premium             0  
+  upsell              0  
+  Skool               0  
+  Simply Services     0  
+  HTPS                0  
+  OG codes            4  OG-24 Professional Review Selector | OG-01) and wishlist (OG-22) Site pl | OG-23 Supplier Question Bank Day 24 | OG-25 Project Support Brief Templat
+  URLs                1  OFFGRID056.COM
+  CTA                 0  
+  Week-2 lock         0  
+  non-visible source refs: /mnt/agents/output/OffGrid056/Covers/Week4_ActionPlanPathway_Cover.jpg | alt="Week 4 Cover"
+
+== PROFESSIONAL / CREDENTIAL TERMS (per unit)
+  Purpose: Resilience projects span plumbing, electrical, structural, and consent work.
+  Doing everything yourself is not always legal, safe, or efficient.
+  Licensed Required?
+  Solar PV installation (&gt;120V DC or grid-tied) No Yes — electrician Always.
+  Illegal and dangerous otherwise.
+  Battery system installation No Yes — electrician Fire and electrocution risk.
+  Always licensed.
+  Plumbing to mains water No Yes — plumber Backflow and contamination risk.
+  Structural building work No Yes — LBP builder Anything affecting load-bearing elements.
+  Heat pump installation (split system) No Yes — refrigeration engineer Refrigerant handling requires certified technician.
+  Wood burner installation No Yes — solid fuel installer Building consent and certified flue work required.
+  Permaculture design & soil testing Yes No Complex slopes, drainage issues, or food safety certification.
+  Septic or greywater system No Yes — drainlayer Public health and environmental regulations apply.
+  Licensed Building Practitioner (LBP) — Builder / Carpenter
+  What they do: Structural work, weather tightness, consent-compliant building.
+  When you need one: Any project over $33,000 (Consumer Guarantees Act threshold), structural alterations, or work requiring building consent.
+  How to verify: Search the LBP register at lbp.website — valid licence and category match required.
+  Registered Electrician
+  How to verify: Check Electrical Workers Registration Board (EWRB) registration.
+  Certifying Plumber / Gasfitter / Drainlayer
+  Energy Auditor / Home Performance Assessor
+  How to verify: Look for EECA-recognised assessors or Home Performance Advisor accreditation.
+  Architect / Architectural Designer
+  What they do: Design, documentation, and consent navigation for structural or aesthetic changes.
+  When you need one: New builds, major renovations, or complex consent applications.
+  How to verify: New Zealand Registered Architects Board (NZRAB) or ADNZ membership.
+  Environmental / Ecological Consultant
+  You now know exactly which projects require licensed professionals, how to verify their credentials, and how to brief them for accurate quotes.

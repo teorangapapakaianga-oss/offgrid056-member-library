@@ -1,0 +1,16 @@
+﻿resources 30 | files 60 | numeric candidates 550 | Bucket C 10
+unresolved by family: {"payback":0,"warranty":0,"payment":0,"regulatory":10,"other":0}
+sentence-level hits of the four new families across the live text (before the registry):  {"payback":0,"warranty":0,"payment":0,"regulatory":11}
+resolved through the registry:
+   OG-10 NZ -> nz-rainwater-plumbing-consent-backflow-mbie :: Connecting rainwater to the plumbing of a house that also has mains water needs a building consent, and the la
+   OG-13 AU -> au-qld-interconnected-photoelectric-alarms-law-qfd :: In Queensland, interconnected photoelectric alarms are required by law — check what applies where you live.
+UNRESOLVED regulatory: OG-10 NZ: Fixed electrical work and the pump connection must be handled by an appropriately licensed electrical worker.
+UNRESOLVED regulatory: OG-10 AU: Fixed electrical work and the pump connection must be handled by a licensed electrician.
+UNRESOLVED regulatory: OG-19 AU: Solar and battery systems must be installed by a licensed electrician — DIY electrical work is illegal
+UNRESOLVED regulatory: OG-19 AU: Solar and battery systems must be installed by a licensed electrician — DIY electrical work is illegal
+UNRESOLVED regulatory: OG-20 NZ: Permanently connected: must be installed by a licensed electrical worker
+UNRESOLVED regulatory: OG-20 NZ: Its connection must be installed by a licensed electrical worker.
+UNRESOLVED regulatory: OG-20 NZ: Consents or permits needed
+UNRESOLVED regulatory: OG-20 AU: Permanently connected: must be installed by a licensed electrician
+UNRESOLVED regulatory: OG-20 AU: Its connection must be installed by a licensed electrician.
+UNRESOLVED regulatory: OG-20 AU: Permits or approvals needed
