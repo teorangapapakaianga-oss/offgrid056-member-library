@@ -1572,6 +1572,76 @@
       "migrationState": "DEPLOYED (Stage 10.15) — live as a protected resource behind Cloudflare Access; the record and the two owner-approved PDFs are in the deployed tree.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an implementation companion used when the household starts approaching suppliers and installers: after the wishlist, budget and roadmap work (OG-22, OG-26, OG-27) or alongside the Project Support Brief (OG-25). Not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27); not an Emergency Readiness resource."
+    },
+    "OG-24": {
+      "title": "Professional Support Planner",
+      "titleStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17); legacy 'OG-24 Professional Review Selector' (removed publicly)",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): the planner applies to any project; no single foundation is its subject",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): the locked definition names supplier and installer planning",
+      "programAlignment": {
+        "foundation": "general — the planner applies to any project; no single foundation is its subject",
+        "programComponent": "planning-implementation — working out what professional support a project may need and who to speak to is implementation planning; its output is the member's own record of the help wanted, the people considered and the questions to ask",
+        "resilienceRole": "helps a household decide where professional support may help, note who it is considering and prepare neutral questions before engaging anyone; it supports household independence by making an engagement decision informed and written down",
+        "guidanceKind": "member-entry planning worksheet — not a legal, licensing, register, compliance, trade-qualification or technical-safety guide, a DIY-versus-professional matrix, a supplier rating or quote-comparison tool, or a project briefing template",
+        "wordingMatchesRole": "yes — every field is member-entered; the draft names no system, appliance, agency, register or requirement, asserts nothing about licensing, legality or consent, and carries no score, ranking, threshold, fee, payment rule or endorsement; briefing and comparison stay with the Project Support Brief Template and the Supplier Comparison Worksheet"
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17)",
+      "difficultySource": "INFERRED: member-written entries; no calculation.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17)",
+      "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
+      "description": "A practical worksheet to help you identify where professional support may be useful, record who you are considering and prepare the questions you want answered before you engage them.",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): the exact sentence",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.18): eleven market-neutral questions, member-entered fields, three people or businesses, nine neutral closer-look prompts, next-contact fields and a Where Next table. Not yet owner-approved as copy.",
+      "coverStatus": "PENDING owner approval: the concept is a household or project owner at a table with project notes and documents speaking with a non-identifiable professional or service provider, natural light, calm planning discussion; no uniforms implying a regulated trade, licence cards, certification graphics, logos, unsafe tools, AI or robot imagery, programme label or OG code. The image is not generated. The legacy Week 4 programme artwork must not be used in the final render.",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): planning-tools (YES). The collection is NOT changed until OG-24 is staged and deployed; it is expected to move from 9 to 10 resources then",
+      "relatedResources": [],
+      "relatedResourcesStatus": "PROPOSED, not applied (Stage 10.18): Supplier Comparison Worksheet, Project Support Brief Template, Resilience Product Wishlist, 90-Day Implementation Roadmap, in that order (before, next, also useful, later). Four explicit links would invoke the existing curated-related rule; lib/related.ts is not changed. The links are recorded here only after owner copy approval.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or trade and teaches no technical safety topic.",
+      "safetyTopicDispositions": {
+        "batteries-and-electrical": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-09",
+          "reason": "The legacy matrix and role guide named solar, battery, inverter and fixed-wiring work and an electrician. The owner's Stage 10.17 ruling removes every system-specific statement; the planner asks general questions and teaches no electrical topic."
+        },
+        "gas-and-lpg": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-09",
+          "reason": "The legacy role guide named gas appliance installation and gasfitters. Removed; nothing in the rewrite names gas."
+        },
+        "gas-installation-and-servicing": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-09",
+          "reason": "The legacy matrix named gas appliance installation. Removed with the matrix."
+        },
+        "solid-fuel-heating": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-09",
+          "reason": "The legacy matrix named wood burner installation and flue work. Removed with the matrix."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.18) — NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an implementation companion between the Supplier Comparison Worksheet and the Project Support Brief Template (OG-23 → OG-24 → OG-25): compare suppliers, decide what professional support is needed and who to speak with, then brief the chosen professional. Not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27); not an Emergency Readiness resource."
     }
   }
 }

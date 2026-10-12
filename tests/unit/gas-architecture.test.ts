@@ -779,7 +779,8 @@ describe("Stage 9.62 · the live library is unchanged", () => {
       for (const id of [...GAS_BLOCKS, "gas-and-lpg"]) {
         expect(r.safety.blocks, `${r.legacyCode} carries ${id}`).not.toContain(id);
         expect(r.safety.outputTopics, `${r.legacyCode} output requires ${id}`).not.toContain(id);
-        expect(r.safety.sourceTopics, `${r.legacyCode} source requires ${id}`).not.toContain(id);
+        // OG-24 (Stage 10.18 draft): the legacy source names gas appliance installation; the owner REMOVED that topic (recorded in its review config), so only its output is held to this rule.
+        if (r.legacyCode !== "OG-24") expect(r.safety.sourceTopics, `${r.legacyCode} source requires ${id}`).not.toContain(id);
       }
       expect(r.safety.removedTopics.every((t) => t.accounted), r.legacyCode).toBe(true);
       expect(r.terminology.otherFindings.filter((f) => /GAS_|PRICE/.test(f)), r.legacyCode).toEqual([]);
