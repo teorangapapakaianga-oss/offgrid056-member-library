@@ -80,7 +80,7 @@ describe("Stage 10.19 · canonical resource index", () => {
     for (const r of idx.resources) {
       expect([r.status, r.publicationStatus, r.releaseChannel, r.migrationState]).toEqual(["draft", "approved", "private-preview", "LIVE"]);
       expect([r.visibleBadge, r.futureVisibleBadge]).toEqual(["Draft", "Preview"]);
-      expect(r.futureBadgeTooltip).toBe("Approved resource in the protected OffGrid056 preview. Not a public or final member release.");
+      expect(r.futureBadgeTooltip).toBe("Approved resource in the protected OffGrid056 preview.");
       expect(r.futureBadgeTooltip).not.toMatch(/not yet approved|production|paid access|entitle/i);
     }
     expect(idx.resources.find((r) => r.stableResourceId === "res-1019")!.notes.join(" ")).toMatch(/MODEL \/ BADGE SEMANTICS ISSUE/);
@@ -94,7 +94,7 @@ describe("Stage 10.19 · canonical resource index", () => {
   });
   it("records the rulings on res-1002, res-1025 and res-1027 / res-1510 as exceptions or tasks, without any record change", () => {
     const by = (id: string) => idx.resources.find((r) => r.stableResourceId === id)!;
-    expect(by("res-1002").knownExceptions).toEqual(["LEGACY_NAMING_EXCEPTION"]);
+    expect(by("res-1002").knownExceptions).toEqual(["KNOWN_LEGACY_NAMING_EXCEPTION"]);
     expect(by("res-1002").downloadAssets[0].route).toBe("/resources/household-risk-identifier.pdf");
     expect(by("res-1025").futureTasks).toEqual(["FT-1025-WORDING-REVIEW"]);
     expect(by("res-1027").knownExceptions).toEqual(["INTENTIONAL_NEAR_DUPLICATE_TITLE"]);
@@ -104,7 +104,7 @@ describe("Stage 10.19 · canonical resource index", () => {
   });
   it("locks the Library and OS governance rules and defers repository hygiene to a separate stage", () => {
     const g = (idx as unknown as { governance: string[]; rulings: { publicRepositoryHygiene: string } });
-    for (const x of ["do not share cookies", "do not share session tokens", "do not share localStorage", "do not share household state", "must not write Library progress", "stable resource ID", "must not guess resource URLs", "must not proxy protected Library content", "Authentication is not entitlement", "remains inactive until the entitlement contract is approved"]) expect(g.governance.join(" "), x).toContain(x);
+    for (const x of ["does not share OS cookies", "does not share OS session tokens", "does not share OS localStorage", "does not share OS household state", "does not depend on OS authentication records", "must not write Library saved, progress or member state", "Entitlement remains a separate future contract", "stable resource ID", "must not guess Library URLs", "must not proxy protected Library content", "Authentication is not entitlement", "remains inactive until that contract is approved"]) expect(g.governance.join(" "), x).toContain(x);
     expect(g.rulings.publicRepositoryHygiene).toMatch(/separate security\/hygiene stage/);
     expect(g.rulings.publicRepositoryHygiene).toMatch(/does not establish that the repository is clean/);
   });  it("is not read by the application or the build", () => {

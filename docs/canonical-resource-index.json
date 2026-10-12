@@ -5,17 +5,19 @@
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
-    "The OS and the Library do not share cookies.",
-    "The OS and the Library do not share session tokens.",
-    "The OS and the Library do not share localStorage.",
-    "The OS and the Library do not share household state.",
-    "The OS must not write Library progress or member state; Library saved, progress and browser state stay Library-owned.",
+    "The Library does not share OS cookies.",
+    "The Library does not share OS session tokens.",
+    "The Library does not share OS localStorage.",
+    "The Library does not share OS household state.",
+    "The Library does not depend on OS authentication records.",
+    "The OS must not write Library saved, progress or member state; Library state remains Library-owned.",
     "OS recommendations must use the stable resource ID.",
-    "The OS must use approved Library metadata.",
-    "The OS must not guess resource URLs.",
+    "OS recommendations must use approved Library metadata.",
+    "The OS must not guess Library URLs.",
     "The OS must not proxy protected Library content.",
-    "Authentication is not entitlement.",
-    "Real recommendation handoff remains inactive until the entitlement contract is approved.",
+    "Authentication is not entitlement; Cloudflare authentication must not imply entitlement.",
+    "Entitlement remains a separate future contract.",
+    "Recommendation handoff remains inactive until that contract is approved.",
     "The Library remains the visual brand reference for OffGrid056.",
     "No OS, Supabase, Railway or Cloudflare infrastructure change is part of the Library programme stages that maintain this index."
   ],
@@ -191,7 +193,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-06"
     },
     {
@@ -277,7 +279,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "Known legacy naming exception (owner ruling, Stage 10.19A): the NZ file is household-risk-identifier.pdf with no market suffix; kept as-is; it is served and linked correctly.",
+        "KNOWN_LEGACY_NAMING_EXCEPTION (owner ruling, Stage 10.19A): the NZ file is household-risk-identifier.pdf with no market suffix; kept as-is; it is served and linked correctly.",
         "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
@@ -295,10 +297,10 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-21",
       "knownExceptions": [
-        "LEGACY_NAMING_EXCEPTION"
+        "KNOWN_LEGACY_NAMING_EXCEPTION"
       ]
     },
     {
@@ -404,7 +406,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-07"
     },
     {
@@ -510,7 +512,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-07"
     },
     {
@@ -614,7 +616,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-08"
     },
     {
@@ -717,7 +719,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-08"
     },
     {
@@ -819,7 +821,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -919,7 +921,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-23"
     },
     {
@@ -1020,7 +1022,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-23"
     },
     {
@@ -1117,7 +1119,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -1217,7 +1219,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-09"
     },
     {
@@ -1318,7 +1320,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-05"
     },
     {
@@ -1420,7 +1422,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-09"
     },
     {
@@ -1517,7 +1519,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -1617,7 +1619,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-06"
     },
     {
@@ -1717,7 +1719,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -1817,7 +1819,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -1918,7 +1920,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -2020,7 +2022,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -2121,7 +2123,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -2225,7 +2227,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-09"
     },
     {
@@ -2326,7 +2328,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "futureTasks": [
         "FT-1025-WORDING-REVIEW"
@@ -2432,7 +2434,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -2535,7 +2537,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "knownExceptions": [
         "INTENTIONAL_NEAR_DUPLICATE_TITLE"
@@ -2637,7 +2639,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -2736,7 +2738,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     },
     {
@@ -2837,7 +2839,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-23"
     },
     {
@@ -2939,7 +2941,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-06"
     },
     {
@@ -3039,7 +3041,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "knownExceptions": [
         "INTENTIONAL_NEAR_DUPLICATE_TITLE"
@@ -3145,7 +3147,7 @@
       "status": "draft",
       "releaseChannel": "private-preview",
       "futureVisibleBadge": "Preview",
-      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22"
     }
   ],
@@ -3171,8 +3173,8 @@
       "current": "Draft (resource detail page only)",
       "future": "Preview",
       "basedOn": "publicationStatus + releaseChannel (approved + private-preview = Preview)",
-      "tooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
-      "tooltipRule": "Must not imply public release, production entitlement, paid access or a final member launch.",
+      "tooltip": "Approved resource in the protected OffGrid056 preview.",
+      "tooltipRule": "Exact approved wording; used unless a technical constraint requires a minor punctuation or capitalisation change. It must not imply public release, production entitlement, paid access or a final member launch, and 'not yet approved for members' is not used for the approved private-preview state.",
       "implemented": false
     },
     "res1019": {
@@ -3232,7 +3234,7 @@
   "knownExceptions": [
     {
       "resource": "res-1002",
-      "exception": "LEGACY_NAMING_EXCEPTION",
+      "exception": "KNOWN_LEGACY_NAMING_EXCEPTION",
       "detail": "NZ file is household-risk-identifier.pdf (no .NZ suffix); kept as-is by owner ruling."
     },
     {
@@ -3241,5 +3243,20 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "Stage 10.19B — implement publicationStatus + releaseChannel + Preview badge (not started)"
+  "nextStage": "Stage 10.19B — implement publicationStatus + releaseChannel + Preview badge (not started)",
+  "acceptedBaseline": {
+    "stage": "10.19",
+    "protectedResources": 30,
+    "marketFiles": 60,
+    "brokenLinks": 0,
+    "canonicalIndexRecords": 30,
+    "duplicateStableIds": 0,
+    "duplicateRoutes": 0,
+    "missingRoutes": 0,
+    "marketFilesPresent": 60,
+    "testFiles": 59,
+    "tests": 1636,
+    "lintExit": 0,
+    "typecheckExit": 0
+  }
 }

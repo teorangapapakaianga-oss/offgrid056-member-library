@@ -5,19 +5,21 @@
 ## Locked Library ↔ OS governance rules
 
 1. The Member Resource Library remains a separate protected application from the OffGrid056 OS.
-2. The OS and the Library do not share cookies.
-3. The OS and the Library do not share session tokens.
-4. The OS and the Library do not share localStorage.
-5. The OS and the Library do not share household state.
-6. The OS must not write Library progress or member state; Library saved, progress and browser state stay Library-owned.
-7. OS recommendations must use the stable resource ID.
-8. The OS must use approved Library metadata.
-9. The OS must not guess resource URLs.
-10. The OS must not proxy protected Library content.
-11. Authentication is not entitlement.
-12. Real recommendation handoff remains inactive until the entitlement contract is approved.
-13. The Library remains the visual brand reference for OffGrid056.
-14. No OS, Supabase, Railway or Cloudflare infrastructure change is part of the Library programme stages that maintain this index.
+2. The Library does not share OS cookies.
+3. The Library does not share OS session tokens.
+4. The Library does not share OS localStorage.
+5. The Library does not share OS household state.
+6. The Library does not depend on OS authentication records.
+7. The OS must not write Library saved, progress or member state; Library state remains Library-owned.
+8. OS recommendations must use the stable resource ID.
+9. OS recommendations must use approved Library metadata.
+10. The OS must not guess Library URLs.
+11. The OS must not proxy protected Library content.
+12. Authentication is not entitlement; Cloudflare authentication must not imply entitlement.
+13. Entitlement remains a separate future contract.
+14. Recommendation handoff remains inactive until that contract is approved.
+15. The Library remains the visual brand reference for OffGrid056.
+16. No OS, Supabase, Railway or Cloudflare infrastructure change is part of the Library programme stages that maintain this index.
 
 ## Owner rulings (Stage 10.19A)
 
@@ -29,8 +31,9 @@
   - `migrationState`: migration workflow state in the operational registers (Not started, Prepared, Staged, Deployed/LIVE, Blocked, Merged)
   - `accessProtection`: whether access protection exists (Cloudflare Access on the preview hostname)
   - `entitlementRequirement`: whether the member is entitled to receive a resource (undefined until the owner defines it)
+- **Accepted Stage 10.19 baseline:** 30 protected resources · 60 market files · 0 broken links · 30 canonical index records · 0 duplicate stable IDs · 0 duplicate routes · 0 missing routes · all 60 market files present · 59 test files / 1,636 tests · lint 0 · typecheck 0.
 - **Current 30 resources:** `publicationStatus` **approved**, `releaseChannel` **private-preview**. Protected private-preview resources. NOT public, NOT a production-member release, NOT a paid entitlement, NOT OS entitlement, NOT an OS authentication handoff.
-- **Visible badge:** today "Draft" (detail page only); future **Preview**, computed from `publicationStatus` + `releaseChannel`; never "Draft" for these approved private-preview resources. **Proposed tooltip:** "Approved resource in the protected OffGrid056 preview. Not a public or final member release." (it must not imply public release, production entitlement, paid access or a final member launch). Not implemented.
+- **Visible badge:** today "Draft" (detail page only); future **Preview**, computed from `publicationStatus` + `releaseChannel`; never "Draft" for these approved private-preview resources. **Proposed tooltip:** "Approved resource in the protected OffGrid056 preview." (exact wording; it must not imply public release, production entitlement, paid access or a final member launch, and "not yet approved for members" is not used for the approved private-preview state). Not implemented.
 - **res-1019 Battery Backup Planner:** MODEL / BADGE SEMANTICS ISSUE; not a resource-specific data error; future approved / private-preview / Preview; not changed separately.
 - **Access and entitlement:** No free or paid tier is assigned. accessTier and entitlementRequirement stay UNDEFINED_OWNER_DECISION on all 30. Authentication must not be treated as entitlement.
 - **OS integration fields (inactive):** `recommendationEligible` false, `handoffStatus` INACTIVE, `approvedHandoffRoute` null, `entitlementContractStatus` NOT_APPROVED.
@@ -43,7 +46,7 @@
 
 ## Known exceptions
 
-- **res-1002** — LEGACY_NAMING_EXCEPTION: NZ file is household-risk-identifier.pdf (no .NZ suffix); kept as-is by owner ruling.
+- **res-1002** — KNOWN_LEGACY_NAMING_EXCEPTION: NZ file is household-risk-identifier.pdf (no .NZ suffix); kept as-is by owner ruling.
 - **res-1027 and res-1510** — INTENTIONAL_NEAR_DUPLICATE_TITLE: Standard and advanced roadmaps; kept as separate resources by owner ruling.
 
 ## Future tasks (open)
