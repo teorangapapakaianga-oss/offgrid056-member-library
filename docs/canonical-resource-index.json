@@ -1,0 +1,3075 @@
+{
+  "schemaVersion": "1.0",
+  "generated": "2026-10-13",
+  "stage": "10.19",
+  "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
+  "governance": [
+    "The Member Resource Library remains separate from the OffGrid056 OS.",
+    "The Library must not depend on or share OS cookies, session tokens, localStorage, household state or authentication records.",
+    "Library saved, progress and browser state remain Library-owned.",
+    "The OS must never write directly into Library member state.",
+    "Any future OS recommendation into the Library must use a stable resource ID and approved Library metadata.",
+    "The OS must not proxy protected Library content, guess a resource URL or infer entitlement from authentication.",
+    "Authentication is not entitlement.",
+    "Real OS recommendation destinations remain inactive until the future entitlement/handoff contract is approved.",
+    "The Library remains the visual brand reference for OffGrid056.",
+    "No OS, Supabase, Railway or Cloudflare infrastructure change is part of this index."
+  ],
+  "controlledValues": {
+    "programComponent": [
+      "off-grid-living",
+      "resilience-planning",
+      "resilience-emergency",
+      "planning-implementation",
+      "advanced-future"
+    ],
+    "foundation": [
+      "general",
+      "air",
+      "water",
+      "shelter",
+      "food",
+      "energy"
+    ],
+    "recordStatus": [
+      "draft",
+      "published",
+      "archived"
+    ],
+    "proposedPublicationStatus": [
+      "draft",
+      "review",
+      "approved",
+      "live",
+      "withdrawn",
+      "superseded",
+      "internal"
+    ],
+    "reviewStatus": [
+      "VERIFIED_CURRENT",
+      "NEEDS_METADATA",
+      "NEEDS_BADGE_REVIEW",
+      "NEEDS_ROUTE_REVIEW",
+      "NEEDS_ASSET_REVIEW",
+      "NEEDS_ENTITLEMENT_DECISION",
+      "NEEDS_OWNER_REVIEW",
+      "WITHDRAWN",
+      "SUPERSEDED"
+    ],
+    "accessTier": [
+      "UNDEFINED_OWNER_DECISION"
+    ],
+    "entitlementRequirement": [
+      "UNDEFINED_OWNER_DECISION"
+    ],
+    "handoffStatus": [
+      "INACTIVE"
+    ],
+    "entitlementContractStatus": [
+      "NOT_APPROVED"
+    ]
+  },
+  "baseline": {
+    "protectedResources": 30,
+    "marketFiles": 60,
+    "brokenLinks": 0,
+    "worker": "see operational registers (not recorded here)"
+  },
+  "resources": [
+    {
+      "stableResourceId": "res-1001",
+      "legacyCode": "OG-01",
+      "title": "Home Resilience Scorecard",
+      "resourceType": "assessment",
+      "foundation": "general",
+      "programComponent": "resilience-planning",
+      "category": "getting-started",
+      "topic": "getting-started",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-06",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-01_Home_Resilience_Scorecard.html",
+        "legacyPdf": "OG-01_Home_Resilience_Scorecard.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-01",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-01",
+        "protectedRecord": "private-assets/data-resources/home-resilience-scorecard.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/home-resilience-scorecard/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/home-resilience-scorecard.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/home-resilience-scorecard.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "15b142f7c0a54ab0d9cb517ecffe2fbdbed82387207c7940b8ec666677673c45",
+          "bytes": 319433,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/home-resilience-scorecard.AU.pdf",
+          "expectedSuffixedRoute": "/resources/home-resilience-scorecard.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "85833db811451f2eb2ca180b16239dbf05ba1265007021af6862cc7889f9a004",
+          "bytes": 320048,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA",
+        "NEEDS_OWNER_REVIEW"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "start-here"
+      ],
+      "relatedResources": [
+        "res-1013",
+        "res-1008",
+        "res-1015",
+        "res-1011",
+        "res-1019",
+        "res-1002"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "Title similar to res-1015 (Warm Home Scorecard); different jobs.",
+        "A demo placeholder (res-0007) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1002",
+      "legacyCode": "OG-02",
+      "title": "Household Risk Identifier",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "resilience-planning",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [
+        "risk",
+        "planning",
+        "week-1"
+      ],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-21",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-02_Household_Risk_Identifier.html",
+        "legacyPdf": "OG-02_Household_Risk_Identifier.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-02",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-02",
+        "protectedRecord": "private-assets/data-resources/household-risk-identifier.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/household-risk-identifier/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/household-risk-identifier.pdf",
+          "expectedSuffixedRoute": "/resources/household-risk-identifier.NZ.pdf",
+          "namingMatchesConvention": false,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "f54d0dfa52fb5f8a1f7960dd9f59b208b93a877cd7ca65a909ef2cb2b3c7bee9",
+          "bytes": 276893,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/household-risk-identifier.AU.pdf",
+          "expectedSuffixedRoute": "/resources/household-risk-identifier.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "d3477bdcc4860378acfcc01633f8adbb8a72367a7128daa740d574f7574aa863",
+          "bytes": 276750,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA",
+        "NEEDS_ASSET_REVIEW"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "start-here"
+      ],
+      "relatedResources": [],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "The NZ file is stored without a market suffix (household-risk-identifier.pdf) while every other resource uses <slug>.NZ.pdf; it is served and linked correctly, so this is naming drift, not a break.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1003",
+      "legacyCode": "OG-03",
+      "title": "Household Spending Capacity Check",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-07",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-03_Budget_Pathway_Selector.html",
+        "legacyPdf": "OG-03_Budget_Pathway_Selector.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-03",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-03",
+        "protectedRecord": "private-assets/data-resources/household-spending-capacity-check.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/household-spending-capacity-check/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/household-spending-capacity-check.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/household-spending-capacity-check.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "d0197f0539c1fa553592997e99bc7645073d09e2cca3f55855393596c58adb65",
+          "bytes": 283976,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/household-spending-capacity-check.AU.pdf",
+          "expectedSuffixedRoute": "/resources/household-spending-capacity-check.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "4811fd4e59bdaa19c4ff5062c93404c529e6dda1beae54d77b2a2f20f1801a9c",
+          "bytes": 283712,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1001",
+        "res-1002",
+        "res-1022",
+        "res-1026",
+        "res-1027",
+        "res-1025"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1004",
+      "legacyCode": "OG-04",
+      "title": "Property Type Review",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "resilience-planning",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-07",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-04_Property_Profile_Matrix.html",
+        "legacyPdf": "OG-04_Property_Profile_Matrix.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-04",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-04",
+        "protectedRecord": "private-assets/data-resources/property-type-review.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/property-type-review/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/property-type-review.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/property-type-review.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "c39c3d561573e1816ad1c43ddc4b2f3eed2ce086d40eeeb4dc5c437e004cf96e",
+          "bytes": 262937,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/property-type-review.AU.pdf",
+          "expectedSuffixedRoute": "/resources/property-type-review.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "a1e4ef42de129671bdea6a7d8e03b8ea4ca6b32749e51a0488205ce67d5c0f7e",
+          "bytes": 262718,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1001",
+        "res-1002",
+        "res-1022",
+        "res-1003",
+        "res-1020",
+        "res-1512"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1006",
+      "legacyCode": "OG-06",
+      "title": "Emergency Readiness Checklist",
+      "resourceType": "checklist",
+      "foundation": "general",
+      "programComponent": "resilience-emergency",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-08",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-06_72Hour_Emergency_Checklist.html",
+        "legacyPdf": "OG-06_72Hour_Emergency_Checklist.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-06",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-06",
+        "protectedRecord": "private-assets/data-resources/emergency-readiness-checklist.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/emergency-readiness-checklist/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/emergency-readiness-checklist.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/emergency-readiness-checklist.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "6a892f0dcb8afba650418f381d97c6440bc8a5e2c22097cfd71af7ae1b98b171",
+          "bytes": 251985,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/emergency-readiness-checklist.AU.pdf",
+          "expectedSuffixedRoute": "/resources/emergency-readiness-checklist.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "dd0cf256810ffde0cc5c1a09ec5e934699ea2c890b0f3b2d6f4295a2358f6aba",
+          "bytes": 251778,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1002",
+        "res-1004",
+        "res-1008",
+        "res-1011",
+        "res-1013",
+        "res-1019"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1007",
+      "legacyCode": "OG-07",
+      "title": "Priority Lock Worksheet",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-08",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-07_Week1_Priority_Lock_Worksheet.html",
+        "legacyPdf": "OG-07_Week1_Priority_Lock_Worksheet.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-07",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-07",
+        "protectedRecord": "private-assets/data-resources/priority-lock-worksheet.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/priority-lock-worksheet/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/priority-lock-worksheet.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/priority-lock-worksheet.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "9480a6e2e7eb58223ed1ac8aee3a3a38b1850baa12f34884fa04c2799c5ac7f5",
+          "bytes": 236655,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/priority-lock-worksheet.AU.pdf",
+          "expectedSuffixedRoute": "/resources/priority-lock-worksheet.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "71bbc930ad86912eaece09e247ab47f7d74b8fa77d5ad7f163bbaabd77614ced",
+          "bytes": 236422,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1001",
+        "res-1002",
+        "res-1003",
+        "res-1026",
+        "res-1027"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1008",
+      "legacyCode": "OG-08",
+      "title": "Water Storage Calculator",
+      "resourceType": "worksheet",
+      "foundation": "water",
+      "programComponent": "off-grid-living",
+      "category": "water-storage",
+      "topic": "water-storage",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-08_Water_Storage_Calculator.html",
+        "legacyPdf": "OG-08_Water_Storage_Calculator.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-08",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-08",
+        "protectedRecord": "private-assets/data-resources/water-storage-calculator.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/water-storage-calculator/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/water-storage-calculator.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/water-storage-calculator.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "5ec4c960357873535b2a06b13ebd3974ee8fb1f018a0c5d66877c95ecabf4787",
+          "bytes": 306697,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/water-storage-calculator.AU.pdf",
+          "expectedSuffixedRoute": "/resources/water-storage-calculator.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "edd98ad3f02b18c6e73ed380ddc3ceaff042e3d093e21d480b8d45c97849d649",
+          "bytes": 305768,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1022",
+        "res-1026",
+        "res-1512"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "A demo placeholder (res-0015) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1009",
+      "legacyCode": "OG-09",
+      "title": "Household Water Treatment Guide",
+      "resourceType": "guide",
+      "foundation": "water",
+      "programComponent": "off-grid-living",
+      "category": "water-security",
+      "topic": "water-security",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-23",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-09_Filtration_Comparison_Matrix.html",
+        "legacyPdf": "OG-09_Filtration_Comparison_Matrix.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-09",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-09",
+        "protectedRecord": "private-assets/data-resources/household-water-treatment-guide.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/household-water-treatment-guide/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/household-water-treatment-guide.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/household-water-treatment-guide.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "7bfca22a548ecc0549bf3b0e5647a3fae2093f88d03b3cff1b22e247fca17dd6",
+          "bytes": 296126,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/household-water-treatment-guide.AU.pdf",
+          "expectedSuffixedRoute": "/resources/household-water-treatment-guide.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "cefcb4bffeedbed1f633ed86ff0c8bacab59447e751ff9dbf25b516f56aa2f0f",
+          "bytes": 301366,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1008",
+        "res-1010"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1010",
+      "legacyCode": "OG-10",
+      "title": "Rainwater Harvesting Planner",
+      "resourceType": "planner",
+      "foundation": "water",
+      "programComponent": "off-grid-living",
+      "category": "rainwater",
+      "topic": "rainwater",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-23",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-10_Rainwater_Harvesting_Planner.html",
+        "legacyPdf": "OG-10_Rainwater_Harvesting_Planner.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-10",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-10",
+        "protectedRecord": "private-assets/data-resources/rainwater-harvesting-planner.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/rainwater-harvesting-planner/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/rainwater-harvesting-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/rainwater-harvesting-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "72adca048f75314bce200273f104ed5ba5a48c82dd5879d01671f03766ac12f5",
+          "bytes": 323626,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/rainwater-harvesting-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/rainwater-harvesting-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "dee5ced7bc2163a6c02bb735af648607248f40f5c26993e462059b1f582e5e3c",
+          "bytes": 319622,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1008",
+        "res-1512"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "A demo placeholder (res-0016) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1011",
+      "legacyCode": "OG-11",
+      "title": "30-Day Pantry Builder",
+      "resourceType": "worksheet",
+      "foundation": "food",
+      "programComponent": "resilience-emergency",
+      "category": "pantry-resilience",
+      "topic": "pantry-resilience",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-11_30Day_Pantry_Builder.html",
+        "legacyPdf": "OG-11_30Day_Pantry_Builder.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-11",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-11",
+        "protectedRecord": "private-assets/data-resources/30-day-pantry-builder.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/30-day-pantry-builder/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/30-day-pantry-builder.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/30-day-pantry-builder.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "74ac281e484acd61349752229deb87a3c9e71fa4ab153a7bd18e15d11575b4d1",
+          "bytes": 294155,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/30-day-pantry-builder.AU.pdf",
+          "expectedSuffixedRoute": "/resources/30-day-pantry-builder.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "1ba3828edd5e258c0d7d2ea5ea9ddd3e655c54b46ce7c76eb9b8aa980d810220",
+          "bytes": 293505,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1012",
+      "legacyCode": "OG-12",
+      "title": "Pantry Rotation Tracker",
+      "resourceType": "template",
+      "foundation": "food",
+      "programComponent": "resilience-emergency",
+      "category": "food-storage",
+      "topic": "food-storage",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-09",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-12_FIFO_Rotation_Tracker.html",
+        "legacyPdf": "OG-12_FIFO_Rotation_Tracker.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-12",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-12",
+        "protectedRecord": "private-assets/data-resources/pantry-rotation-tracker.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/pantry-rotation-tracker/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/pantry-rotation-tracker.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/pantry-rotation-tracker.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "a27e0cc0f068b6494816fae21d0e0fcc901411c0505ad664eea35a8bfcce45a7",
+          "bytes": 225951,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/pantry-rotation-tracker.AU.pdf",
+          "expectedSuffixedRoute": "/resources/pantry-rotation-tracker.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "78b8ddf99a118c59a321b876e73dfde721010566333f84ca1c7fcf5048b70458",
+          "bytes": 224934,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1011",
+        "res-1006"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1013",
+      "legacyCode": "OG-13",
+      "title": "Healthy Home Air Audit",
+      "resourceType": "assessment",
+      "foundation": "air",
+      "programComponent": "resilience-planning",
+      "category": "healthy-home-checks",
+      "topic": "healthy-home-checks",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-05",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-13_Healthy_Home_Air_Audit.html",
+        "legacyPdf": "OG-13_Healthy_Home_Air_Audit.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-13",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-13",
+        "protectedRecord": "private-assets/data-resources/healthy-home-air-audit.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/healthy-home-air-audit/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/healthy-home-air-audit.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/healthy-home-air-audit.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "e00618546c37bf3a0c101f20ccaa087f70a40bbaf568a43b7de06ffd6b2428d4",
+          "bytes": 284867,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/healthy-home-air-audit.AU.pdf",
+          "expectedSuffixedRoute": "/resources/healthy-home-air-audit.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "6c8cef71b8344fc082f9718bc478090d2a858d6d023e2d67e38ed527a6b05cdd",
+          "bytes": 291437,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1002",
+        "res-1015"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "A demo placeholder (res-0013) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1014",
+      "legacyCode": "OG-14",
+      "title": "Water, Food and Air Household Snapshot",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "resilience-planning",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-09",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-14_Basic_Survival_Systems_MiniPlan.html",
+        "legacyPdf": "OG-14_Basic_Survival_Systems_MiniPlan.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-14",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-14",
+        "protectedRecord": "private-assets/data-resources/water-food-air-household-snapshot.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/water-food-air-household-snapshot/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/water-food-air-household-snapshot.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/water-food-air-household-snapshot.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "5e7bbc1f2463339276bc860e434efb2a0e1f15585c0700003f2d401962d15438",
+          "bytes": 240067,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/water-food-air-household-snapshot.AU.pdf",
+          "expectedSuffixedRoute": "/resources/water-food-air-household-snapshot.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "143b064e9d118ac874db820fa7b166114b923659d55b18621e95f12b2712310e",
+          "bytes": 239757,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1008",
+        "res-1011",
+        "res-1013",
+        "res-1007"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1015",
+      "legacyCode": "OG-15",
+      "title": "Warm Home Scorecard",
+      "resourceType": "assessment",
+      "foundation": "shelter",
+      "programComponent": "resilience-planning",
+      "category": "heating",
+      "topic": "heating",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-15_Warm_Home_Scorecard.html",
+        "legacyPdf": "OG-15_Warm_Home_Scorecard.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-15",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-15",
+        "protectedRecord": "private-assets/data-resources/warm-home-scorecard.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/warm-home-scorecard/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/warm-home-scorecard.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/warm-home-scorecard.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "36fe5ff0618f5c27ab2274037d210ab31f162b7c44435662e9aca591c98f2129",
+          "bytes": 320900,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/warm-home-scorecard.AU.pdf",
+          "expectedSuffixedRoute": "/resources/warm-home-scorecard.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "5e99f1d7ff55257a0febce9d6a40e914290a4b9cf5f9d88aad67f93482c82198",
+          "bytes": 321667,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA",
+        "NEEDS_OWNER_REVIEW"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "Title similar to res-1001; different jobs.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1017",
+      "legacyCode": "OG-17",
+      "title": "Solid Fuel Heating Planner",
+      "resourceType": "planner",
+      "foundation": "shelter",
+      "programComponent": "off-grid-living",
+      "category": "heating",
+      "topic": "heating",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-06",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-17_Solid_Fuel_Heating_Planner.html",
+        "legacyPdf": "OG-17_Solid_Fuel_Heating_Planner.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-17",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-17",
+        "protectedRecord": "private-assets/data-resources/solid-fuel-heating-planner.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/solid-fuel-heating-planner/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/solid-fuel-heating-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/solid-fuel-heating-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "35b37749ccb2968e0f501e014d979b412e96b4616674a6d9f919370230f35261",
+          "bytes": 305553,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/solid-fuel-heating-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/solid-fuel-heating-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "8f47f5f674f59df680d9be276297890778fdb4e2f37495caa5e9edbe2da2ce1d",
+          "bytes": 307149,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1015",
+        "res-1021"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1018",
+      "legacyCode": "OG-18",
+      "title": "Solar Power 101 Workbook",
+      "resourceType": "workbook",
+      "foundation": "energy",
+      "programComponent": "off-grid-living",
+      "category": "solar",
+      "topic": "solar",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-18_Solar_Power_101_Workbook.html",
+        "legacyPdf": "OG-18_Solar_Power_101_Workbook.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-18",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-18",
+        "protectedRecord": "private-assets/data-resources/solar-power-101-workbook.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/solar-power-101-workbook/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/solar-power-101-workbook.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/solar-power-101-workbook.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "d6f52168f9bdf7422d72ef1b8f5f07504461e64a8c190cff61bae941645a51a4",
+          "bytes": 347053,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/solar-power-101-workbook.AU.pdf",
+          "expectedSuffixedRoute": "/resources/solar-power-101-workbook.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "5a77b661e09e7c8e71220e2b732f99a87147d50d10f177d66c147b126f90fe8a",
+          "bytes": 346953,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1507",
+        "res-1019"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1019",
+      "legacyCode": "OG-19",
+      "title": "Battery Backup Planner",
+      "resourceType": "planner",
+      "foundation": "energy",
+      "programComponent": "off-grid-living",
+      "category": "backup-energy",
+      "topic": "backup-energy",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-19_Battery_Backup_Planner.html",
+        "legacyPdf": "OG-19_Battery_Backup_Planner.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-19",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-19",
+        "protectedRecord": "private-assets/data-resources/battery-backup-planner.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/battery-backup-planner/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/battery-backup-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/battery-backup-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "a9b376d90ba8e0bd525317e18f9a3ac0d3adf5da20c0c68a3c2ff34e6769664c",
+          "bytes": 358369,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/battery-backup-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/battery-backup-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "cb25d02e7a4d93e412b72bbea5a7ac214271fc4d8fa3a7d609518f3ca26a7fdf",
+          "bytes": 369190,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1018"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1020",
+      "legacyCode": "OG-20",
+      "title": "Alternative Energy Suitability Check",
+      "resourceType": "assessment",
+      "foundation": "energy",
+      "programComponent": "off-grid-living",
+      "category": "household-energy-planning",
+      "topic": "household-energy-planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-20_Alternative_Energy_Suitability_Check.html",
+        "legacyPdf": "OG-20_Alternative_Energy_Suitability_Check.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-20",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-20",
+        "protectedRecord": "private-assets/data-resources/alternative-energy-suitability-check.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/alternative-energy-suitability-check/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/alternative-energy-suitability-check.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/alternative-energy-suitability-check.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "c461ed15ced687efd050b581feef20ba4b162790bbca9c726ee38b3b3ac311c0",
+          "bytes": 296075,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/alternative-energy-suitability-check.AU.pdf",
+          "expectedSuffixedRoute": "/resources/alternative-energy-suitability-check.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "7a3f0fcec148a49e5fb4ed1663abf89c477a13264f95928297add77a763ab979",
+          "bytes": 297937,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1018",
+        "res-1019",
+        "res-1021"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1021",
+      "legacyCode": "OG-21",
+      "title": "Home Energy & Shelter Upgrade Plan",
+      "resourceType": "planner",
+      "foundation": "shelter",
+      "programComponent": "planning-implementation",
+      "category": "household-resilience",
+      "topic": "household-resilience",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-21_Home_Energy_Shelter_Upgrade_Plan.html",
+        "legacyPdf": "OG-21_Home_Energy_Shelter_Upgrade_Plan.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-21",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-21",
+        "protectedRecord": "private-assets/data-resources/home-energy-and-shelter-upgrade-plan.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/home-energy-and-shelter-upgrade-plan/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/home-energy-and-shelter-upgrade-plan.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/home-energy-and-shelter-upgrade-plan.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "37d47fd511133218c4da802de504e37c6ef6fa536cfa88f871805d4d2a7e8263",
+          "bytes": 344189,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/home-energy-and-shelter-upgrade-plan.AU.pdf",
+          "expectedSuffixedRoute": "/resources/home-energy-and-shelter-upgrade-plan.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "ea3ccf3b770dc43928b19386f0f812540e1b93e8c52067b99e1a9429735023ad",
+          "bytes": 343654,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1015",
+        "res-1018",
+        "res-1019",
+        "res-1026"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1022",
+      "legacyCode": "OG-22",
+      "title": "Resilience Product Wishlist",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "resilience-planning",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-22_Resilience_Product_Wishlist.html",
+        "legacyPdf": "OG-22_Resilience_Product_Wishlist.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-22",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-22",
+        "protectedRecord": "private-assets/data-resources/resilience-product-wishlist.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/resilience-product-wishlist/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/resilience-product-wishlist.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/resilience-product-wishlist.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "b4048552051262d9a0d751b31458b6a909fa99e34d26c9bde311bd6f97105139",
+          "bytes": 261563,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/resilience-product-wishlist.AU.pdf",
+          "expectedSuffixedRoute": "/resources/resilience-product-wishlist.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "a13c1245c1935eebb34f5130283327f8946701fbaeed096802081b5ae118ba6e",
+          "bytes": 261095,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1026"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1023",
+      "legacyCode": "OG-23",
+      "title": "Supplier Comparison Worksheet",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-09",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-23_Supplier_Question_Bank.html",
+        "legacyPdf": "OG-23_Supplier_Question_Bank.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-23",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-23",
+        "protectedRecord": "private-assets/data-resources/supplier-comparison-worksheet.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/supplier-comparison-worksheet/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/supplier-comparison-worksheet.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/supplier-comparison-worksheet.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "5178e066ae34c8636a6a250402c6d7bcee6c2c1761fe90e731e711284b0df3db",
+          "bytes": 2655802,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/supplier-comparison-worksheet.AU.pdf",
+          "expectedSuffixedRoute": "/resources/supplier-comparison-worksheet.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "5d1658a8ae051adad950a000d05081fbf8ee3f6977332fc9fc6e427e5748f1bc",
+          "bytes": 2655603,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1022",
+        "res-1025",
+        "res-1026",
+        "res-1027"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1025",
+      "legacyCode": "OG-25",
+      "title": "Project Support Brief Template",
+      "resourceType": "template",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-25_Project_Support_Brief_Template.html",
+        "legacyPdf": "OG-25_Project_Support_Brief_Template.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-25",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-25",
+        "protectedRecord": "private-assets/data-resources/project-support-brief-template.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/project-support-brief-template/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/project-support-brief-template.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/project-support-brief-template.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "6a4f8ef42cd5798b49533d47ee3c5fe13f4fea01c2907b157b9464553de69c13",
+          "bytes": 229771,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/project-support-brief-template.AU.pdf",
+          "expectedSuffixedRoute": "/resources/project-support-brief-template.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "418e78d5598829d51962574d1e0b56fd346b02e6db486f411d0977be7f7eb3e5",
+          "bytes": 229812,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA",
+        "NEEDS_OWNER_REVIEW"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "Stage 10.16 observation: the live copy still carries legacy-style wording ('Days of autonomy desired', 'Required Start Date', 'Penalties / Incentives'); not part of this audit, owner review recommended.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1026",
+      "legacyCode": "OG-26",
+      "title": "3-Tier Budget Planner",
+      "resourceType": "planner",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-26_3-Tier_Budget_Planner.html",
+        "legacyPdf": "OG-26_3-Tier_Budget_Planner.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-26",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-26",
+        "protectedRecord": "private-assets/data-resources/3-tier-budget-planner.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/3-tier-budget-planner/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/3-tier-budget-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/3-tier-budget-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "0a866302d5c31f389cae26667666232cceadb3d72f215993b4807fbba6486139",
+          "bytes": 270144,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/3-tier-budget-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/3-tier-budget-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "ce5a780282dd272b8754884c0b0ff5e5f67e69dfaca682c244868a5064afcff6",
+          "bytes": 286126,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1022",
+        "res-1027",
+        "res-1018"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1027",
+      "legacyCode": "OG-27",
+      "title": "90-Day Implementation Roadmap",
+      "resourceType": "planner",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-27_90Day_Implementation_Roadmap.html",
+        "legacyPdf": "OG-27_90Day_Implementation_Roadmap.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-27",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-27",
+        "protectedRecord": "private-assets/data-resources/90-day-implementation-roadmap.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/90-day-implementation-roadmap/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/90-day-implementation-roadmap.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/90-day-implementation-roadmap.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "4487411b4d3f0a2d014a78e67dacf0b88364975773fe5755e8e4c204f6918fa8",
+          "bytes": 239871,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/90-day-implementation-roadmap.AU.pdf",
+          "expectedSuffixedRoute": "/resources/90-day-implementation-roadmap.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "2b831e65c18ee4390495a019f39803c2d208f6d7a6234bd464710ffa93b37b80",
+          "bytes": 235598,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA",
+        "NEEDS_OWNER_REVIEW"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1026",
+        "res-1022"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "Near-duplicate title of res-1510 (Advanced); kept as separate resources by the owner.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1504",
+      "legacyCode": "OG-B04",
+      "title": "Monthly Planning Challenge Template",
+      "resourceType": "planner",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-B04_Monthly_Planning_Challenge_Template.html",
+        "legacyPdf": "OG-B04_Monthly_Planning_Challenge_Template.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B04",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B04",
+        "protectedRecord": "private-assets/data-resources/monthly-planning-challenge-template.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/monthly-planning-challenge-template/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/monthly-planning-challenge-template.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/monthly-planning-challenge-template.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "7e860f5c265bf1c6d534832e9bb99e3e2ac85fdec719d141a83c3c1105e29998",
+          "bytes": 66112,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/monthly-planning-challenge-template.AU.pdf",
+          "expectedSuffixedRoute": "/resources/monthly-planning-challenge-template.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "32c643681c036c0df93118a3a92cfbda64b21e709f8dec25445173383465f4f8",
+          "bytes": 65997,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1507",
+      "legacyCode": "OG-B07",
+      "title": "Solar Planning Deep Worksheet",
+      "resourceType": "worksheet",
+      "foundation": "energy",
+      "programComponent": "off-grid-living",
+      "category": "solar",
+      "topic": "solar",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-B07_Solar_Planning_Deep_Worksheet.html",
+        "legacyPdf": "OG-B07_Solar_Planning_Deep_Worksheet.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B07",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B07",
+        "protectedRecord": "private-assets/data-resources/solar-planning-deep-worksheet.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/solar-planning-deep-worksheet/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/solar-planning-deep-worksheet.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/solar-planning-deep-worksheet.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "8fe9a126387016a8c455fd57868653d5d7853e6c30fdb1da4f71dd8c5dd6d53c",
+          "bytes": 328741,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/solar-planning-deep-worksheet.AU.pdf",
+          "expectedSuffixedRoute": "/resources/solar-planning-deep-worksheet.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "2a4d269bc2c0beb248b354fe8620458e1aa88b3f9f86dfb55e1e9cf24b482e29",
+          "bytes": 328615,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1018"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1508",
+      "legacyCode": "OG-B08",
+      "title": "Water Tank Sizing & Placement Guide",
+      "resourceType": "guide",
+      "foundation": "water",
+      "programComponent": "off-grid-living",
+      "category": "household-water-planning",
+      "topic": "household-water-planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-23",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-B08_Water_Tank_Sizing_Placement_Guide.html",
+        "legacyPdf": "OG-B08_Water_Tank_Sizing_Placement_Guide.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B08",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B08",
+        "protectedRecord": "private-assets/data-resources/water-tank-sizing-and-placement-guide.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/water-tank-sizing-and-placement-guide/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/water-tank-sizing-and-placement-guide.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/water-tank-sizing-and-placement-guide.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "e3bbfb5d01f58ae3cbbbe3c1407c86eebbd34703cf8cfa6cabc579780361cbdb",
+          "bytes": 256129,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/water-tank-sizing-and-placement-guide.AU.pdf",
+          "expectedSuffixedRoute": "/resources/water-tank-sizing-and-placement-guide.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "cb130cc981288c7c90c86bf8c43b8ede42e6dad4c5a2d20cbe7710836754f36e",
+          "bytes": 254758,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1008",
+        "res-1010",
+        "res-1009"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1509",
+      "legacyCode": "OG-B09",
+      "title": "Resilient Heating & Insulation Upgrade Checklist",
+      "resourceType": "checklist",
+      "foundation": "shelter",
+      "programComponent": "resilience-planning",
+      "category": "insulation",
+      "topic": "insulation",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-10-06",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-B09_Insulation_Heating_Upgrade_Checklist.html",
+        "legacyPdf": "OG-B09_Insulation_Heating_Upgrade_Checklist.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B09",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B09",
+        "protectedRecord": "private-assets/data-resources/resilient-heating-and-insulation-upgrade-checklist.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/resilient-heating-and-insulation-upgrade-checklist/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/resilient-heating-and-insulation-upgrade-checklist.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/resilient-heating-and-insulation-upgrade-checklist.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "38b85d6942edd5ca359ce2db5b92da7f2ebebbfc438155417f796b6d881b8dc5",
+          "bytes": 361555,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/resilient-heating-and-insulation-upgrade-checklist.AU.pdf",
+          "expectedSuffixedRoute": "/resources/resilient-heating-and-insulation-upgrade-checklist.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "c34c64c437d137d16ba4981166478f6847eecb715fbb803dc4aca89526de5c71",
+          "bytes": 358824,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1015",
+        "res-1017",
+        "res-1019",
+        "res-1021"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1510",
+      "legacyCode": "OG-B10",
+      "title": "90-Day Implementation Roadmap (Advanced)",
+      "resourceType": "planner",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-B10_90Day_Roadmap_Advanced.html",
+        "legacyPdf": "OG-B10_90Day_Roadmap_Advanced.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B10",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B10",
+        "protectedRecord": "private-assets/data-resources/90-day-implementation-roadmap-advanced.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/90-day-implementation-roadmap-advanced/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/90-day-implementation-roadmap-advanced.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/90-day-implementation-roadmap-advanced.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "d51337d6207f58c68fa1cc737df6f22e19f44b4386609ee48a35fc4c23705271",
+          "bytes": 79086,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/90-day-implementation-roadmap-advanced.AU.pdf",
+          "expectedSuffixedRoute": "/resources/90-day-implementation-roadmap-advanced.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "3553431ef5a2bf2ae06c30b04064d1cec898b8180435d076aa2508ebc2c33e43",
+          "bytes": 78926,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA",
+        "NEEDS_OWNER_REVIEW"
+      ],
+      "lastReviewedDate": null,
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "Near-duplicate title of res-1027; kept as the advanced variant.",
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    },
+    {
+      "stableResourceId": "res-1512",
+      "legacyCode": "OG-B12",
+      "title": "Off-Grid System Architecture Planner",
+      "resourceType": "planner",
+      "foundation": "general",
+      "programComponent": "advanced-future",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
+      "version": null,
+      "versionDate": "2026-09-22",
+      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "sourceFile": {
+        "legacyHtml": "OG-B12_OffGrid_System_Architecture_Planner.html",
+        "legacyPdf": "OG-B12_OffGrid_System_Architecture_Planner.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B12",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B12",
+        "protectedRecord": "private-assets/data-resources/off-grid-system-architecture-planner.private.json (git-ignored)"
+      },
+      "sourceLink": null,
+      "recordStatus": "draft",
+      "migrationState": "LIVE",
+      "publicationStatus": "draft",
+      "proposedPublicationStatus": "live",
+      "visibleBadge": "Draft",
+      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/off-grid-system-architecture-planner/",
+      "routeSource": "record.slug (private resource record) confirmed by out/resources/<slug>/index.html; route-policy separateDemo applies to four resources",
+      "routeStatus": "VERIFIED_IN_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/off-grid-system-architecture-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/off-grid-system-architecture-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "52966b32d0b509aba9c62f7580127b74ca2398568374ea65208504064bd97276",
+          "bytes": 252758,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/off-grid-system-architecture-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/off-grid-system-architecture-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "81c7e73559324ea3c8898325b0011d088f486bae9fbed5ef10522d06e3307417",
+          "bytes": 252322,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_BADGE_REVIEW",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": null,
+      "collections": [],
+      "relatedResources": [
+        "res-1018",
+        "res-1019",
+        "res-1020",
+        "res-1026",
+        "res-1022"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
+    }
+  ]
+}
