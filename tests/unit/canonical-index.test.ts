@@ -25,7 +25,7 @@ describe("Stage 10.19 · canonical resource index", () => {
     }
   });
   it("carries every schema field", () => {
-    const fields = ["stableResourceId", "legacyCode", "title", "resourceType", "foundation", "programComponent", "category", "topic", "shortDescription", "owner", "version", "versionDate", "sourceFile", "sourceLink", "publicationStatus", "visibleBadge", "accessTier", "entitlementRequirement", "canonicalRoute", "marketAvailability", "downloadAssets", "reviewStatus", "lastReviewedDate", "collections", "relatedResources", "supersededBy", "withdrawn", "internalOnly", "notes", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"];
+    const fields = ["stableResourceId", "legacyCode", "title", "resourceType", "foundation", "programComponent", "category", "topic", "shortDescription", "owner", "version", "versionDate", "sourceFile", "sourceLink", "status", "publicationStatus", "releaseChannel", "migrationState", "accessProtection", "firstPublishedToPreview", "futureVisibleBadge", "futureBadgeTooltip", "visibleBadge", "accessTier", "entitlementRequirement", "canonicalRoute", "marketAvailability", "downloadAssets", "reviewStatus", "lastReviewedDate", "collections", "relatedResources", "supersededBy", "withdrawn", "internalOnly", "notes", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"];
     for (const r of idx.resources) for (const f of fields) expect(Object.prototype.hasOwnProperty.call(r, f), `${r.stableResourceId} ${f}`).toBe(true);
   });
   it("uses only the controlled Program Component, Foundation and review values", () => {
@@ -64,7 +64,7 @@ describe("Stage 10.19 · canonical resource index", () => {
     expect(recs.map((r) => r.id).sort()).toEqual(idx.resources.map((r) => r.stableResourceId).sort());
     for (const rec of recs) {
       const r = idx.resources.find((x) => x.stableResourceId === rec.id)!;
-      expect([r.legacyCode, r.title, r.resourceType, r.foundation, r.programComponent, r.category, r.recordStatus, r.canonicalRoute]).toEqual([rec.legacyCode, rec.title, rec.resourceType, rec.foundation, rec.programComponent, rec.category, rec.status, `/resources/${rec.slug}/`]);
+      expect([r.legacyCode, r.title, r.resourceType, r.foundation, r.programComponent, r.category, r.status, r.canonicalRoute]).toEqual([rec.legacyCode, rec.title, rec.resourceType, rec.foundation, rec.programComponent, rec.category, rec.status, `/resources/${rec.slug}/`]);
       expect(r.collections).toEqual(rec.collections ?? []);
       expect(r.relatedResources).toEqual(rec.relatedResources ?? []);
       for (const a of r.downloadAssets as { market: string; route: string; sha256: string | null }[]) {
@@ -73,7 +73,41 @@ describe("Stage 10.19 · canonical resource index", () => {
       }
     }
   });
-  it("is not read by the application or the build", () => {
+  it("records the Stage 10.19A rulings: status stays the build gate, publicationStatus approved, releaseChannel private-preview, future badge Preview", () => {
+    expect(idx.controlledValues.publicationStatus).toEqual(["draft", "review", "approved", "live", "withdrawn", "superseded", "internal"]);
+    expect(idx.controlledValues.releaseChannel).toEqual(["private-preview", "members"]);
+    expect(idx.controlledValues.status).toEqual(["draft", "published", "archived"]);
+    for (const r of idx.resources) {
+      expect([r.status, r.publicationStatus, r.releaseChannel, r.migrationState]).toEqual(["draft", "approved", "private-preview", "LIVE"]);
+      expect([r.visibleBadge, r.futureVisibleBadge]).toEqual(["Draft", "Preview"]);
+      expect(r.futureBadgeTooltip).toBe("Approved resource in the protected OffGrid056 preview. Not a public or final member release.");
+      expect(r.futureBadgeTooltip).not.toMatch(/not yet approved|production|paid access|entitle/i);
+    }
+    expect(idx.resources.find((r) => r.stableResourceId === "res-1019")!.notes.join(" ")).toMatch(/MODEL \/ BADGE SEMANTICS ISSUE/);
+  });
+  it("records missing owner, version, review and source data explicitly and never fabricates it", () => {
+    for (const r of idx.resources) {
+      for (const f of ["owner", "version", "versionDate", "lastReviewedDate", "sourceLink"]) expect(r[f], `${r.stableResourceId} ${f}`).toBe("UNKNOWN_EXISTING_RECORD");
+      expect(r.firstPublishedToPreview).toMatch(/^2026-\d\d-\d\d$/);
+      expect(r.reviewStatus).toEqual(expect.arrayContaining(["NEEDS_METADATA", "NEEDS_ENTITLEMENT_DECISION"]));
+    }
+  });
+  it("records the rulings on res-1002, res-1025 and res-1027 / res-1510 as exceptions or tasks, without any record change", () => {
+    const by = (id: string) => idx.resources.find((r) => r.stableResourceId === id)!;
+    expect(by("res-1002").knownExceptions).toEqual(["LEGACY_NAMING_EXCEPTION"]);
+    expect(by("res-1002").downloadAssets[0].route).toBe("/resources/household-risk-identifier.pdf");
+    expect(by("res-1025").futureTasks).toEqual(["FT-1025-WORDING-REVIEW"]);
+    expect(by("res-1027").knownExceptions).toEqual(["INTENTIONAL_NEAR_DUPLICATE_TITLE"]);
+    expect(by("res-1510").knownExceptions).toEqual(["INTENTIONAL_NEAR_DUPLICATE_TITLE"]);
+    expect(by("res-1027").title).toBe("90-Day Implementation Roadmap");
+    expect(by("res-1510").title).toBe("90-Day Implementation Roadmap (Advanced)");
+  });
+  it("locks the Library and OS governance rules and defers repository hygiene to a separate stage", () => {
+    const g = (idx as unknown as { governance: string[]; rulings: { publicRepositoryHygiene: string } });
+    for (const x of ["do not share cookies", "do not share session tokens", "do not share localStorage", "do not share household state", "must not write Library progress", "stable resource ID", "must not guess resource URLs", "must not proxy protected Library content", "Authentication is not entitlement", "remains inactive until the entitlement contract is approved"]) expect(g.governance.join(" "), x).toContain(x);
+    expect(g.rulings.publicRepositoryHygiene).toMatch(/separate security\/hygiene stage/);
+    expect(g.rulings.publicRepositoryHygiene).toMatch(/does not establish that the repository is clean/);
+  });  it("is not read by the application or the build", () => {
     for (const dir of ["app", "lib", "components", "tools"]) {
       const walk = (d: string): string[] => fs.readdirSync(path.join(root, d), { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
       for (const f of walk(dir)) if (/\.(ts|tsx|mjs|mts|js)$/.test(f)) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("canonical-resource-index");

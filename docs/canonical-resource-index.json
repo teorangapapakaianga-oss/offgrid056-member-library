@@ -1,19 +1,23 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "generated": "2026-10-13",
-  "stage": "10.19",
+  "stage": "10.19A",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
-    "The Member Resource Library remains separate from the OffGrid056 OS.",
-    "The Library must not depend on or share OS cookies, session tokens, localStorage, household state or authentication records.",
-    "Library saved, progress and browser state remain Library-owned.",
-    "The OS must never write directly into Library member state.",
-    "Any future OS recommendation into the Library must use a stable resource ID and approved Library metadata.",
-    "The OS must not proxy protected Library content, guess a resource URL or infer entitlement from authentication.",
+    "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
+    "The OS and the Library do not share cookies.",
+    "The OS and the Library do not share session tokens.",
+    "The OS and the Library do not share localStorage.",
+    "The OS and the Library do not share household state.",
+    "The OS must not write Library progress or member state; Library saved, progress and browser state stay Library-owned.",
+    "OS recommendations must use the stable resource ID.",
+    "The OS must use approved Library metadata.",
+    "The OS must not guess resource URLs.",
+    "The OS must not proxy protected Library content.",
     "Authentication is not entitlement.",
-    "Real OS recommendation destinations remain inactive until the future entitlement/handoff contract is approved.",
+    "Real recommendation handoff remains inactive until the entitlement contract is approved.",
     "The Library remains the visual brand reference for OffGrid056.",
-    "No OS, Supabase, Railway or Cloudflare infrastructure change is part of this index."
+    "No OS, Supabase, Railway or Cloudflare infrastructure change is part of the Library programme stages that maintain this index."
   ],
   "controlledValues": {
     "programComponent": [
@@ -31,12 +35,12 @@
       "food",
       "energy"
     ],
-    "recordStatus": [
+    "status": [
       "draft",
       "published",
       "archived"
     ],
-    "proposedPublicationStatus": [
+    "publicationStatus": [
       "draft",
       "review",
       "approved",
@@ -44,6 +48,10 @@
       "withdrawn",
       "superseded",
       "internal"
+    ],
+    "releaseChannel": [
+      "private-preview",
+      "members"
     ],
     "reviewStatus": [
       "VERIFIED_CURRENT",
@@ -67,6 +75,9 @@
     ],
     "entitlementContractStatus": [
       "NOT_APPROVED"
+    ],
+    "missingDataMarker": [
+      "UNKNOWN_EXISTING_RECORD"
     ]
   },
   "baseline": {
@@ -87,10 +98,9 @@
       "topic": "getting-started",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-06",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-01_Home_Resilience_Scorecard.html",
         "legacyPdf": "OG-01_Home_Resilience_Scorecard.pdf",
@@ -99,11 +109,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-01",
         "protectedRecord": "private-assets/data-resources/home-resilience-scorecard.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -147,10 +155,9 @@
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
         "NEEDS_BADGE_REVIEW",
-        "NEEDS_METADATA",
-        "NEEDS_OWNER_REVIEW"
+        "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "start-here"
       ],
@@ -166,9 +173,8 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "Title similar to res-1015 (Warm Home Scorecard); different jobs.",
         "A demo placeholder (res-0007) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -181,7 +187,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-06"
     },
     {
       "stableResourceId": "res-1002",
@@ -198,10 +209,9 @@
         "week-1"
       ],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-21",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-02_Household_Risk_Identifier.html",
         "legacyPdf": "OG-02_Household_Risk_Identifier.pdf",
@@ -210,11 +220,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-02",
         "protectedRecord": "private-assets/data-resources/household-risk-identifier.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -258,10 +266,9 @@
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
         "NEEDS_BADGE_REVIEW",
-        "NEEDS_METADATA",
-        "NEEDS_ASSET_REVIEW"
+        "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "start-here"
       ],
@@ -270,8 +277,8 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "The NZ file is stored without a market suffix (household-risk-identifier.pdf) while every other resource uses <slug>.NZ.pdf; it is served and linked correctly, so this is naming drift, not a break.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "Known legacy naming exception (owner ruling, Stage 10.19A): the NZ file is household-risk-identifier.pdf with no market suffix; kept as-is; it is served and linked correctly.",
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -284,7 +291,15 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-21",
+      "knownExceptions": [
+        "LEGACY_NAMING_EXCEPTION"
+      ]
     },
     {
       "stableResourceId": "res-1003",
@@ -297,10 +312,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-07",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-03_Budget_Pathway_Selector.html",
         "legacyPdf": "OG-03_Budget_Pathway_Selector.pdf",
@@ -309,11 +323,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-03",
         "protectedRecord": "private-assets/data-resources/household-spending-capacity-check.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -359,7 +371,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -375,7 +387,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -388,7 +400,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-07"
     },
     {
       "stableResourceId": "res-1004",
@@ -401,10 +418,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-07",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-04_Property_Profile_Matrix.html",
         "legacyPdf": "OG-04_Property_Profile_Matrix.pdf",
@@ -413,11 +429,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-04",
         "protectedRecord": "private-assets/data-resources/property-type-review.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -463,7 +477,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -479,7 +493,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -492,7 +506,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-07"
     },
     {
       "stableResourceId": "res-1006",
@@ -505,10 +524,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-08",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-06_72Hour_Emergency_Checklist.html",
         "legacyPdf": "OG-06_72Hour_Emergency_Checklist.pdf",
@@ -517,11 +535,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-06",
         "protectedRecord": "private-assets/data-resources/emergency-readiness-checklist.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -567,7 +583,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1002",
@@ -581,7 +597,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -594,7 +610,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-08"
     },
     {
       "stableResourceId": "res-1007",
@@ -607,10 +628,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-08",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-07_Week1_Priority_Lock_Worksheet.html",
         "legacyPdf": "OG-07_Week1_Priority_Lock_Worksheet.pdf",
@@ -619,11 +639,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-07",
         "protectedRecord": "private-assets/data-resources/priority-lock-worksheet.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -669,7 +687,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1001",
@@ -682,7 +700,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -695,7 +713,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-08"
     },
     {
       "stableResourceId": "res-1008",
@@ -708,10 +731,9 @@
       "topic": "water-storage",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-08_Water_Storage_Calculator.html",
         "legacyPdf": "OG-08_Water_Storage_Calculator.pdf",
@@ -720,11 +742,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-08",
         "protectedRecord": "private-assets/data-resources/water-storage-calculator.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -770,7 +790,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1022",
@@ -782,7 +802,7 @@
       "internalOnly": false,
       "notes": [
         "A demo placeholder (res-0015) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -795,7 +815,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1009",
@@ -808,10 +833,9 @@
       "topic": "water-security",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-23",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-09_Filtration_Comparison_Matrix.html",
         "legacyPdf": "OG-09_Filtration_Comparison_Matrix.pdf",
@@ -820,11 +844,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-09",
         "protectedRecord": "private-assets/data-resources/household-water-treatment-guide.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -870,7 +892,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1008",
@@ -880,7 +902,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -893,7 +915,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-23"
     },
     {
       "stableResourceId": "res-1010",
@@ -906,10 +933,9 @@
       "topic": "rainwater",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-23",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-10_Rainwater_Harvesting_Planner.html",
         "legacyPdf": "OG-10_Rainwater_Harvesting_Planner.pdf",
@@ -918,11 +944,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-10",
         "protectedRecord": "private-assets/data-resources/rainwater-harvesting-planner.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -968,7 +992,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1008",
@@ -979,7 +1003,7 @@
       "internalOnly": false,
       "notes": [
         "A demo placeholder (res-0016) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -992,7 +1016,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-23"
     },
     {
       "stableResourceId": "res-1011",
@@ -1005,10 +1034,9 @@
       "topic": "pantry-resilience",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-11_30Day_Pantry_Builder.html",
         "legacyPdf": "OG-11_30Day_Pantry_Builder.pdf",
@@ -1017,11 +1045,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-11",
         "protectedRecord": "private-assets/data-resources/30-day-pantry-builder.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1067,14 +1093,14 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [],
       "supersededBy": null,
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1087,7 +1113,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1012",
@@ -1100,10 +1131,9 @@
       "topic": "food-storage",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-09",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-12_FIFO_Rotation_Tracker.html",
         "legacyPdf": "OG-12_FIFO_Rotation_Tracker.pdf",
@@ -1112,11 +1142,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-12",
         "protectedRecord": "private-assets/data-resources/pantry-rotation-tracker.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1162,7 +1190,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1011",
@@ -1172,7 +1200,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1185,7 +1213,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-09"
     },
     {
       "stableResourceId": "res-1013",
@@ -1198,10 +1231,9 @@
       "topic": "healthy-home-checks",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-05",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-13_Healthy_Home_Air_Audit.html",
         "legacyPdf": "OG-13_Healthy_Home_Air_Audit.pdf",
@@ -1210,11 +1242,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-13",
         "protectedRecord": "private-assets/data-resources/healthy-home-air-audit.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1260,7 +1290,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1002",
@@ -1271,7 +1301,7 @@
       "internalOnly": false,
       "notes": [
         "A demo placeholder (res-0013) shares this title and is separated by route-policy; this protected resource keeps the plain route.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1284,7 +1314,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-05"
     },
     {
       "stableResourceId": "res-1014",
@@ -1297,10 +1332,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-09",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-14_Basic_Survival_Systems_MiniPlan.html",
         "legacyPdf": "OG-14_Basic_Survival_Systems_MiniPlan.pdf",
@@ -1309,11 +1343,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-14",
         "protectedRecord": "private-assets/data-resources/water-food-air-household-snapshot.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1359,7 +1391,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1008",
@@ -1371,7 +1403,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1384,7 +1416,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-09"
     },
     {
       "stableResourceId": "res-1015",
@@ -1397,10 +1434,9 @@
       "topic": "heating",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-15_Warm_Home_Scorecard.html",
         "legacyPdf": "OG-15_Warm_Home_Scorecard.pdf",
@@ -1409,11 +1445,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-15",
         "protectedRecord": "private-assets/data-resources/warm-home-scorecard.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1457,18 +1491,16 @@
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
         "NEEDS_BADGE_REVIEW",
-        "NEEDS_METADATA",
-        "NEEDS_OWNER_REVIEW"
+        "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [],
       "supersededBy": null,
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "Title similar to res-1001; different jobs.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1481,7 +1513,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1017",
@@ -1494,10 +1531,9 @@
       "topic": "heating",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-06",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-17_Solid_Fuel_Heating_Planner.html",
         "legacyPdf": "OG-17_Solid_Fuel_Heating_Planner.pdf",
@@ -1506,11 +1542,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-17",
         "protectedRecord": "private-assets/data-resources/solid-fuel-heating-planner.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1556,7 +1590,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1015",
@@ -1566,7 +1600,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1579,7 +1613,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-06"
     },
     {
       "stableResourceId": "res-1018",
@@ -1592,10 +1631,9 @@
       "topic": "solar",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-18_Solar_Power_101_Workbook.html",
         "legacyPdf": "OG-18_Solar_Power_101_Workbook.pdf",
@@ -1604,11 +1642,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-18",
         "protectedRecord": "private-assets/data-resources/solar-power-101-workbook.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1654,7 +1690,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1507",
@@ -1664,7 +1700,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1677,7 +1713,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1019",
@@ -1690,10 +1731,9 @@
       "topic": "backup-energy",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-19_Battery_Backup_Planner.html",
         "legacyPdf": "OG-19_Battery_Backup_Planner.pdf",
@@ -1702,11 +1742,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-19",
         "protectedRecord": "private-assets/data-resources/battery-backup-planner.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1752,7 +1790,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1018"
@@ -1761,7 +1799,8 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "Owner classification: MODEL / BADGE SEMANTICS ISSUE, not a resource-specific data error. Future: publicationStatus approved, releaseChannel private-preview, badge Preview. Not changed separately.",
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1774,7 +1813,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1020",
@@ -1787,10 +1831,9 @@
       "topic": "household-energy-planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-20_Alternative_Energy_Suitability_Check.html",
         "legacyPdf": "OG-20_Alternative_Energy_Suitability_Check.pdf",
@@ -1799,11 +1842,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-20",
         "protectedRecord": "private-assets/data-resources/alternative-energy-suitability-check.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1849,7 +1890,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1018",
@@ -1860,7 +1901,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1873,7 +1914,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1021",
@@ -1886,10 +1932,9 @@
       "topic": "household-resilience",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-21_Home_Energy_Shelter_Upgrade_Plan.html",
         "legacyPdf": "OG-21_Home_Energy_Shelter_Upgrade_Plan.pdf",
@@ -1898,11 +1943,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-21",
         "protectedRecord": "private-assets/data-resources/home-energy-and-shelter-upgrade-plan.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -1948,7 +1991,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1015",
@@ -1960,7 +2003,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -1973,7 +2016,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1022",
@@ -1986,10 +2034,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-22_Resilience_Product_Wishlist.html",
         "legacyPdf": "OG-22_Resilience_Product_Wishlist.pdf",
@@ -1998,11 +2045,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-22",
         "protectedRecord": "private-assets/data-resources/resilience-product-wishlist.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2048,7 +2093,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -2059,7 +2104,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2072,7 +2117,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1023",
@@ -2085,10 +2135,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-09",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-23_Supplier_Question_Bank.html",
         "legacyPdf": "OG-23_Supplier_Question_Bank.pdf",
@@ -2097,11 +2146,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-23",
         "protectedRecord": "private-assets/data-resources/supplier-comparison-worksheet.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2147,7 +2194,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -2161,7 +2208,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2174,7 +2221,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-09"
     },
     {
       "stableResourceId": "res-1025",
@@ -2187,10 +2239,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-25_Project_Support_Brief_Template.html",
         "legacyPdf": "OG-25_Project_Support_Brief_Template.pdf",
@@ -2199,11 +2250,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-25",
         "protectedRecord": "private-assets/data-resources/project-support-brief-template.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2250,7 +2299,7 @@
         "NEEDS_METADATA",
         "NEEDS_OWNER_REVIEW"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -2259,8 +2308,8 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "Stage 10.16 observation: the live copy still carries legacy-style wording ('Days of autonomy desired', 'Required Start Date', 'Penalties / Incentives'); not part of this audit, owner review recommended.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "Owner ruling: review later; the resource stays live and unchanged.",
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2273,7 +2322,15 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22",
+      "futureTasks": [
+        "FT-1025-WORDING-REVIEW"
+      ]
     },
     {
       "stableResourceId": "res-1026",
@@ -2286,10 +2343,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-26_3-Tier_Budget_Planner.html",
         "legacyPdf": "OG-26_3-Tier_Budget_Planner.pdf",
@@ -2298,11 +2354,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-26",
         "protectedRecord": "private-assets/data-resources/3-tier-budget-planner.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2348,7 +2402,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -2361,7 +2415,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2374,7 +2428,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1027",
@@ -2387,10 +2446,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-27_90Day_Implementation_Roadmap.html",
         "legacyPdf": "OG-27_90Day_Implementation_Roadmap.pdf",
@@ -2399,11 +2457,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-27",
         "protectedRecord": "private-assets/data-resources/90-day-implementation-roadmap.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2447,10 +2503,9 @@
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
         "NEEDS_BADGE_REVIEW",
-        "NEEDS_METADATA",
-        "NEEDS_OWNER_REVIEW"
+        "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -2462,8 +2517,8 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "Near-duplicate title of res-1510 (Advanced); kept as separate resources by the owner.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "Near-duplicate title with res-1510/res-1027 is intentional (owner ruling): standard and advanced roadmaps.",
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2476,7 +2531,15 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22",
+      "knownExceptions": [
+        "INTENTIONAL_NEAR_DUPLICATE_TITLE"
+      ]
     },
     {
       "stableResourceId": "res-1504",
@@ -2489,10 +2552,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-B04_Monthly_Planning_Challenge_Template.html",
         "legacyPdf": "OG-B04_Monthly_Planning_Challenge_Template.pdf",
@@ -2501,11 +2563,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B04",
         "protectedRecord": "private-assets/data-resources/monthly-planning-challenge-template.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2551,7 +2611,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -2560,7 +2620,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2573,7 +2633,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1507",
@@ -2586,10 +2651,9 @@
       "topic": "solar",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-B07_Solar_Planning_Deep_Worksheet.html",
         "legacyPdf": "OG-B07_Solar_Planning_Deep_Worksheet.pdf",
@@ -2598,11 +2662,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B07",
         "protectedRecord": "private-assets/data-resources/solar-planning-deep-worksheet.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2648,7 +2710,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1018"
@@ -2657,7 +2719,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2670,7 +2732,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     },
     {
       "stableResourceId": "res-1508",
@@ -2683,10 +2750,9 @@
       "topic": "household-water-planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-23",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-B08_Water_Tank_Sizing_Placement_Guide.html",
         "legacyPdf": "OG-B08_Water_Tank_Sizing_Placement_Guide.pdf",
@@ -2695,11 +2761,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B08",
         "protectedRecord": "private-assets/data-resources/water-tank-sizing-and-placement-guide.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2745,7 +2809,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1008",
@@ -2756,7 +2820,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2769,7 +2833,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-23"
     },
     {
       "stableResourceId": "res-1509",
@@ -2782,10 +2851,9 @@
       "topic": "insulation",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-10-06",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-B09_Insulation_Heating_Upgrade_Checklist.html",
         "legacyPdf": "OG-B09_Insulation_Heating_Upgrade_Checklist.pdf",
@@ -2794,11 +2862,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B09",
         "protectedRecord": "private-assets/data-resources/resilient-heating-and-insulation-upgrade-checklist.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2844,7 +2910,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1015",
@@ -2856,7 +2922,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2869,7 +2935,12 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-10-06"
     },
     {
       "stableResourceId": "res-1510",
@@ -2882,10 +2953,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-B10_90Day_Roadmap_Advanced.html",
         "legacyPdf": "OG-B10_90Day_Roadmap_Advanced.pdf",
@@ -2894,11 +2964,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B10",
         "protectedRecord": "private-assets/data-resources/90-day-implementation-roadmap-advanced.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -2942,10 +3010,9 @@
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
         "NEEDS_BADGE_REVIEW",
-        "NEEDS_METADATA",
-        "NEEDS_OWNER_REVIEW"
+        "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [
         "planning-tools"
       ],
@@ -2954,8 +3021,8 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "Near-duplicate title of res-1027; kept as the advanced variant.",
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "Near-duplicate title with res-1510/res-1027 is intentional (owner ruling): standard and advanced roadmaps.",
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -2968,7 +3035,15 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22",
+      "knownExceptions": [
+        "INTENTIONAL_NEAR_DUPLICATE_TITLE"
+      ]
     },
     {
       "stableResourceId": "res-1512",
@@ -2981,10 +3056,9 @@
       "topic": "planning",
       "tags": [],
       "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
-      "owner": "OffGrid056 (organisation; a per-resource owner is not recorded)",
-      "version": null,
-      "versionDate": "2026-09-22",
-      "versionDateMeaning": "publishedDate in the resource record (date first published to the private preview); no content version is recorded",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
       "sourceFile": {
         "legacyHtml": "OG-B12_OffGrid_System_Architecture_Planner.html",
         "legacyPdf": "OG-B12_OffGrid_System_Architecture_Planner.pdf",
@@ -2993,11 +3067,9 @@
         "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B12",
         "protectedRecord": "private-assets/data-resources/off-grid-system-architecture-planner.private.json (git-ignored)"
       },
-      "sourceLink": null,
-      "recordStatus": "draft",
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
-      "publicationStatus": "draft",
-      "proposedPublicationStatus": "live",
+      "publicationStatus": "approved",
       "visibleBadge": "Draft",
       "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
       "accessTier": "UNDEFINED_OWNER_DECISION",
@@ -3043,7 +3115,7 @@
         "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
-      "lastReviewedDate": null,
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
       "collections": [],
       "relatedResources": [
         "res-1018",
@@ -3056,7 +3128,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "record status 'draft' is the private-preview build gate (the Library's 'Draft' badge); the register state 'LIVE' means deployed to the private preview behind Cloudflare Access. Neither is an entitlement."
+        "`status` is the technical build gate (draft); `publicationStatus` approved and `releaseChannel` private-preview record the owner-approved governance state; the register state LIVE means deployed to the private preview behind Cloudflare Access. None of these is an entitlement."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -3069,7 +3141,105 @@
         "titleOnPage": true,
         "filesPresentInBuild": true,
         "registerRowFound": true
-      }
+      },
+      "status": "draft",
+      "releaseChannel": "private-preview",
+      "futureVisibleBadge": "Preview",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "firstPublishedToPreview": "2026-09-22"
     }
-  ]
+  ],
+  "definitions": {
+    "status": "technical / build-state gate (draft, published, archived): decides whether a build loads the record; unchanged",
+    "publicationStatus": "editorial / publication governance state (draft, review, approved, live, withdrawn, superseded, internal)",
+    "releaseChannel": "environment / audience state (private-preview, members)",
+    "migrationState": "migration workflow state in the operational registers (Not started, Prepared, Staged, Deployed/LIVE, Blocked, Merged)",
+    "accessProtection": "whether access protection exists (Cloudflare Access on the preview hostname)",
+    "entitlementRequirement": "whether the member is entitled to receive a resource (undefined until the owner defines it)",
+    "rule": "These six concepts stay separate and are never derived from one another."
+  },
+  "rulings": {
+    "stage": "10.19A",
+    "date": "2026-10-13",
+    "publicationModel": "APPROVED: keep `status` as the technical/build gate; add the separate future fields `publicationStatus` and `releaseChannel`; do not merge the concepts. Not implemented: no record, build or badge changed.",
+    "currentThirtyResources": {
+      "publicationStatus": "approved",
+      "releaseChannel": "private-preview",
+      "meaning": "Protected private-preview resources. NOT public, NOT a production-member release, NOT a paid entitlement, NOT OS entitlement, NOT an OS authentication handoff."
+    },
+    "visibleBadge": {
+      "current": "Draft (resource detail page only)",
+      "future": "Preview",
+      "basedOn": "publicationStatus + releaseChannel (approved + private-preview = Preview)",
+      "tooltip": "Approved resource in the protected OffGrid056 preview. Not a public or final member release.",
+      "tooltipRule": "Must not imply public release, production entitlement, paid access or a final member launch.",
+      "implemented": false
+    },
+    "res1019": {
+      "classification": "MODEL / BADGE SEMANTICS ISSUE",
+      "resourceSpecificDataError": false,
+      "future": {
+        "publicationStatus": "approved",
+        "releaseChannel": "private-preview",
+        "visibleBadge": "Preview"
+      },
+      "note": "Not changed separately."
+    },
+    "accessAndEntitlement": "No free or paid tier is assigned. accessTier and entitlementRequirement stay UNDEFINED_OWNER_DECISION on all 30. Authentication must not be treated as entitlement.",
+    "osIntegration": {
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "active": false
+    },
+    "res1002FileName": "KEEP AS-IS. household-risk-identifier.pdf stays; recorded as a known legacy naming exception (route and download work, no member-facing defect, a rename adds deployment risk). No correction stage is required for this filename alone.",
+    "res1025": "REVIEW LATER. The resource stays live and unchanged; a dedicated wording review is a future task, kept separate from the publication-model implementation.",
+    "res1027AndRes1510": "KEEP BOTH. res-1027 is the standard implementation roadmap and res-1510 the advanced roadmap; the near-duplicate title is intentional. No merge, rename or retirement.",
+    "metadataPolicy": "owner, version, versionDate, reviewStatus and lastReviewedDate are now recorded. Where current project evidence cannot establish a value the marker UNKNOWN_EXISTING_RECORD is used; no date or version is fabricated. For new or reviewed resources going forward these fields are mandatory.",
+    "reviewStatusModel": "Retained. A resource cannot be VERIFIED_CURRENT until the required canonical fields (version, versionDate, sourceLink, entitlement) are supported; missing values stay visible as unresolved metadata.",
+    "publicRepositoryHygiene": "REVIEW REQUIRED in a separate security/hygiene stage. Nothing is removed or rewritten now; the repository visibility is not changed. The later review should assess internal/, admin-import/, Worker IDs, Access hostnames, account email references, local file paths and historical operational notes. The Stage 10.19 scan found no credential-like value, which does not establish that the repository is clean."
+  },
+  "futureTasks": [
+    {
+      "id": "FT-1025-WORDING-REVIEW",
+      "resource": "res-1025",
+      "title": "Project Support Brief Template",
+      "task": "Dedicated wording review of the live resource (legacy-style wording noted at Stage 10.16). Keep separate from the publication-model implementation.",
+      "status": "OPEN",
+      "approvedBy": "owner",
+      "approvedOn": "2026-10-13"
+    },
+    {
+      "id": "FT-REPO-HYGIENE-REVIEW",
+      "resource": null,
+      "title": "Public repository hygiene review",
+      "task": "Assess internal/, admin-import/, Worker IDs, Access hostnames, account email references, local file paths and historical operational notes. Do not claim the repository is clean from the absence of credential patterns.",
+      "status": "OPEN",
+      "approvedBy": "owner",
+      "approvedOn": "2026-10-13"
+    },
+    {
+      "id": "FT-PUBLICATION-MODEL-IMPLEMENTATION",
+      "resource": null,
+      "title": "Implement publicationStatus, releaseChannel and the Preview badge",
+      "task": "Stage 10.19B: add the fields, compute the badge from publicationStatus and releaseChannel, update the tooltip, full regression.",
+      "status": "OPEN",
+      "approvedBy": "owner",
+      "approvedOn": "2026-10-13"
+    }
+  ],
+  "knownExceptions": [
+    {
+      "resource": "res-1002",
+      "exception": "LEGACY_NAMING_EXCEPTION",
+      "detail": "NZ file is household-risk-identifier.pdf (no .NZ suffix); kept as-is by owner ruling."
+    },
+    {
+      "resource": "res-1027 and res-1510",
+      "exception": "INTENTIONAL_NEAR_DUPLICATE_TITLE",
+      "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
+    }
+  ],
+  "nextStage": "Stage 10.19B — implement publicationStatus + releaseChannel + Preview badge (not started)"
 }

@@ -1,19 +1,58 @@
 # Canonical resource index
 
-**Stage 10.19 · generated 2026-10-13 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
+**Stage 10.19A · updated 2026-10-13 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
 
-## Locked integration rules
+## Locked Library ↔ OS governance rules
 
-1. The Member Resource Library remains separate from the OffGrid056 OS.
-2. The Library must not depend on or share OS cookies, session tokens, localStorage, household state or authentication records.
-3. Library saved, progress and browser state remain Library-owned.
-4. The OS must never write directly into Library member state.
-5. Any future OS recommendation into the Library must use a stable resource ID and approved Library metadata.
-6. The OS must not proxy protected Library content, guess a resource URL or infer entitlement from authentication.
-7. Authentication is not entitlement.
-8. Real OS recommendation destinations remain inactive until the future entitlement/handoff contract is approved.
-9. The Library remains the visual brand reference for OffGrid056.
-10. No OS, Supabase, Railway or Cloudflare infrastructure change is part of this index.
+1. The Member Resource Library remains a separate protected application from the OffGrid056 OS.
+2. The OS and the Library do not share cookies.
+3. The OS and the Library do not share session tokens.
+4. The OS and the Library do not share localStorage.
+5. The OS and the Library do not share household state.
+6. The OS must not write Library progress or member state; Library saved, progress and browser state stay Library-owned.
+7. OS recommendations must use the stable resource ID.
+8. The OS must use approved Library metadata.
+9. The OS must not guess resource URLs.
+10. The OS must not proxy protected Library content.
+11. Authentication is not entitlement.
+12. Real recommendation handoff remains inactive until the entitlement contract is approved.
+13. The Library remains the visual brand reference for OffGrid056.
+14. No OS, Supabase, Railway or Cloudflare infrastructure change is part of the Library programme stages that maintain this index.
+
+## Owner rulings (Stage 10.19A)
+
+- **Publication model — approved (not implemented):** APPROVED: keep `status` as the technical/build gate; add the separate future fields `publicationStatus` and `releaseChannel`; do not merge the concepts. Not implemented: no record, build or badge changed.
+- **Definitions (kept separate, never derived from each other):**
+  - `status`: technical / build-state gate (draft, published, archived): decides whether a build loads the record; unchanged
+  - `publicationStatus`: editorial / publication governance state (draft, review, approved, live, withdrawn, superseded, internal)
+  - `releaseChannel`: environment / audience state (private-preview, members)
+  - `migrationState`: migration workflow state in the operational registers (Not started, Prepared, Staged, Deployed/LIVE, Blocked, Merged)
+  - `accessProtection`: whether access protection exists (Cloudflare Access on the preview hostname)
+  - `entitlementRequirement`: whether the member is entitled to receive a resource (undefined until the owner defines it)
+- **Current 30 resources:** `publicationStatus` **approved**, `releaseChannel` **private-preview**. Protected private-preview resources. NOT public, NOT a production-member release, NOT a paid entitlement, NOT OS entitlement, NOT an OS authentication handoff.
+- **Visible badge:** today "Draft" (detail page only); future **Preview**, computed from `publicationStatus` + `releaseChannel`; never "Draft" for these approved private-preview resources. **Proposed tooltip:** "Approved resource in the protected OffGrid056 preview. Not a public or final member release." (it must not imply public release, production entitlement, paid access or a final member launch). Not implemented.
+- **res-1019 Battery Backup Planner:** MODEL / BADGE SEMANTICS ISSUE; not a resource-specific data error; future approved / private-preview / Preview; not changed separately.
+- **Access and entitlement:** No free or paid tier is assigned. accessTier and entitlementRequirement stay UNDEFINED_OWNER_DECISION on all 30. Authentication must not be treated as entitlement.
+- **OS integration fields (inactive):** `recommendationEligible` false, `handoffStatus` INACTIVE, `approvedHandoffRoute` null, `entitlementContractStatus` NOT_APPROVED.
+- **res-1002 file name:** KEEP AS-IS. household-risk-identifier.pdf stays; recorded as a known legacy naming exception (route and download work, no member-facing defect, a rename adds deployment risk). No correction stage is required for this filename alone.
+- **res-1025:** REVIEW LATER. The resource stays live and unchanged; a dedicated wording review is a future task, kept separate from the publication-model implementation.
+- **res-1027 + res-1510:** KEEP BOTH. res-1027 is the standard implementation roadmap and res-1510 the advanced roadmap; the near-duplicate title is intentional. No merge, rename or retirement.
+- **Metadata policy:** owner, version, versionDate, reviewStatus and lastReviewedDate are now recorded. Where current project evidence cannot establish a value the marker UNKNOWN_EXISTING_RECORD is used; no date or version is fabricated. For new or reviewed resources going forward these fields are mandatory.
+- **Review status:** Retained. A resource cannot be VERIFIED_CURRENT until the required canonical fields (version, versionDate, sourceLink, entitlement) are supported; missing values stay visible as unresolved metadata.
+- **Public repository hygiene:** REVIEW REQUIRED in a separate security/hygiene stage. Nothing is removed or rewritten now; the repository visibility is not changed. The later review should assess internal/, admin-import/, Worker IDs, Access hostnames, account email references, local file paths and historical operational notes. The Stage 10.19 scan found no credential-like value, which does not establish that the repository is clean.
+
+## Known exceptions
+
+- **res-1002** — LEGACY_NAMING_EXCEPTION: NZ file is household-risk-identifier.pdf (no .NZ suffix); kept as-is by owner ruling.
+- **res-1027 and res-1510** — INTENTIONAL_NEAR_DUPLICATE_TITLE: Standard and advanced roadmaps; kept as separate resources by owner ruling.
+
+## Future tasks (open)
+
+- **FT-1025-WORDING-REVIEW** — Project Support Brief Template: Dedicated wording review of the live resource (legacy-style wording noted at Stage 10.16). Keep separate from the publication-model implementation.
+- **FT-REPO-HYGIENE-REVIEW** — Public repository hygiene review: Assess internal/, admin-import/, Worker IDs, Access hostnames, account email references, local file paths and historical operational notes. Do not claim the repository is clean from the absence of credential patterns.
+- **FT-PUBLICATION-MODEL-IMPLEMENTATION** — Implement publicationStatus, releaseChannel and the Preview badge: Stage 10.19B: add the fields, compute the badge from publicationStatus and releaseChannel, update the tooltip, full regression.
+
+Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Preview badge (not started).
 
 ## Schema (one record per real protected resource)
 
@@ -24,18 +63,21 @@
 | title | member-facing title |
 | resourceType / foundation / programComponent / category / topic | controlled classification (topic = category until a separate topic taxonomy exists) |
 | shortDescription | member-facing description (withheld here; held in the private record) |
-| owner / version / versionDate | content owner and version; only `publishedDate` is recorded today, so version is null |
-| sourceFile / sourceLink | legacy source file names and the review-config entries; no external link is recorded |
-| recordStatus | the stored `status` of the resource record (draft, published, archived): the build gate |
-| migrationState | the operational-register state (LIVE = deployed to the private preview) |
-| publicationStatus / proposedPublicationStatus | publicationStatus mirrors the stored record status today; the proposed controlled model is in the audit report |
-| visibleBadge | what members see (Draft on the resource detail page) |
-| accessTier / entitlementRequirement | UNDEFINED_OWNER_DECISION until the owner defines tiers; never derived from authentication, route access, badge or programme membership |
-| canonicalRoute / routeSource / routeStatus | route taken from the record slug and confirmed in the build |
+| owner / version / versionDate / lastReviewedDate / sourceLink | recorded going forward; UNKNOWN_EXISTING_RECORD where current evidence cannot establish a value (never fabricated) |
+| firstPublishedToPreview | the record's `publishedDate`: when the resource first entered the private preview (not a version date) |
+| sourceFile | legacy source file names and the review-config entries |
+| status | technical / build gate (draft, published, archived) |
+| publicationStatus | editorial / publication governance state |
+| releaseChannel | environment / audience state |
+| migrationState | operational-register state |
+| visibleBadge / futureVisibleBadge / futureBadgeTooltip | what members see today, and the approved future value and tooltip |
+| accessTier / entitlementRequirement | UNDEFINED_OWNER_DECISION; never derived from authentication, route access, badge or programme membership |
+| accessProtection | Cloudflare Access on the preview hostname: authentication, not entitlement |
+| canonicalRoute / routeSource / routeStatus | route from the record slug, confirmed in the build |
 | marketAvailability / downloadAssets | NZ and AU files with route, SHA-256 and size |
-| reviewStatus / lastReviewedDate | issue flags (a resource is not VERIFIED_CURRENT while any fact is unrecorded); no review date is recorded |
-| collections / relatedResources / supersededBy / withdrawn / internalOnly / notes | as stored; no resource is superseded, withdrawn or internal |
-| recommendationEligible / handoffStatus / approvedHandoffRoute / entitlementContractStatus | future OS integration fields, prepared and INACTIVE (false / INACTIVE / null / NOT_APPROVED) |
+| reviewStatus | issue flags; no resource is VERIFIED_CURRENT while a required field is unsupported |
+| collections / relatedResources / supersededBy / withdrawn / internalOnly / notes / knownExceptions / futureTasks | as stored or ruled |
+| recommendationEligible / handoffStatus / approvedHandoffRoute / entitlementContractStatus | future OS integration fields, prepared and INACTIVE |
 
 ## Controlled values
 
@@ -56,12 +98,12 @@
     "food",
     "energy"
   ],
-  "recordStatus": [
+  "status": [
     "draft",
     "published",
     "archived"
   ],
-  "proposedPublicationStatus": [
+  "publicationStatus": [
     "draft",
     "review",
     "approved",
@@ -69,6 +111,10 @@
     "withdrawn",
     "superseded",
     "internal"
+  ],
+  "releaseChannel": [
+    "private-preview",
+    "members"
   ],
   "reviewStatus": [
     "VERIFIED_CURRENT",
@@ -92,6 +138,9 @@
   ],
   "entitlementContractStatus": [
     "NOT_APPROVED"
+  ],
+  "missingDataMarker": [
+    "UNKNOWN_EXISTING_RECORD"
   ]
 }
 ```
@@ -135,38 +184,73 @@
 
 ### Publication, badge, access and review
 
-| ID | Record status | Register state | Visible badge | Access tier | Entitlement | Review status flags | Related (explicit) |
-|---|---|---|---|---|---|---|---|
-| res-1001 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_OWNER_REVIEW | res-1013, res-1008, res-1015, res-1011, res-1019, res-1002 |
-| res-1002 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_ASSET_REVIEW | — |
-| res-1003 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1001, res-1002, res-1022, res-1026, res-1027, res-1025 |
-| res-1004 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1001, res-1002, res-1022, res-1003, res-1020, res-1512 |
-| res-1006 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1002, res-1004, res-1008, res-1011, res-1013, res-1019 |
-| res-1007 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1001, res-1002, res-1003, res-1026, res-1027 |
-| res-1008 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1022, res-1026, res-1512 |
-| res-1009 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1008, res-1010 |
-| res-1010 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1008, res-1512 |
-| res-1011 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | — |
-| res-1012 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1011, res-1006 |
-| res-1013 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1002, res-1015 |
-| res-1014 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1008, res-1011, res-1013, res-1007 |
-| res-1015 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_OWNER_REVIEW | — |
-| res-1017 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1015, res-1021 |
-| res-1018 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1507, res-1019 |
-| res-1019 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1018 |
-| res-1020 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1018, res-1019, res-1021 |
-| res-1021 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1015, res-1018, res-1019, res-1026 |
-| res-1022 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1026 |
-| res-1023 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1022, res-1025, res-1026, res-1027 |
-| res-1025 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_OWNER_REVIEW | — |
-| res-1026 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1022, res-1027, res-1018 |
-| res-1027 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_OWNER_REVIEW | res-1026, res-1022 |
-| res-1504 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | — |
-| res-1507 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1018 |
-| res-1508 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1008, res-1010, res-1009 |
-| res-1509 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1015, res-1017, res-1019, res-1021 |
-| res-1510 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_OWNER_REVIEW | — |
-| res-1512 | draft | LIVE | Draft | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA | res-1018, res-1019, res-1020, res-1026, res-1022 |
+| ID | status | publicationStatus | releaseChannel | Register | Badge now → future | Access tier | Entitlement | Review status flags |
+|---|---|---|---|---|---|---|---|---|
+| res-1001 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1002 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1003 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1004 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1006 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1007 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1008 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1009 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1010 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1011 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1012 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1013 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1014 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1015 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1017 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1018 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1019 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1020 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1021 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1022 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1023 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1025 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_OWNER_REVIEW |
+| res-1026 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1027 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1504 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1507 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1508 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1509 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1510 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1512 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+
+### Ownership, version and review (missing values are explicit)
+
+| ID | Owner | Version | Version date | Last reviewed | Source link | First published to preview |
+|---|---|---|---|---|---|---|
+| res-1001 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-06 |
+| res-1002 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-21 |
+| res-1003 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-07 |
+| res-1004 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-07 |
+| res-1006 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-08 |
+| res-1007 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-08 |
+| res-1008 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1009 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-23 |
+| res-1010 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-23 |
+| res-1011 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1012 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-09 |
+| res-1013 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-05 |
+| res-1014 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-09 |
+| res-1015 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1017 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-06 |
+| res-1018 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1019 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1020 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1021 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1022 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1023 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-09 |
+| res-1025 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1026 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1027 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1504 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1507 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1508 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-23 |
+| res-1509 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-06 |
+| res-1510 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1512 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
 
 ### Source and downloads
 
@@ -207,4 +291,4 @@
 
 `recommendationEligible: false` · `handoffStatus: INACTIVE` · `approvedHandoffRoute: null` · `entitlementContractStatus: NOT_APPROVED`. No active OS link exists or is created.
 
-Findings, mismatches and recommendations are in `admin-import/STAGE_10.19_CANONICAL_RESOURCE_AUDIT.md`.
+Findings and rulings: `admin-import/STAGE_10.19_CANONICAL_RESOURCE_AUDIT.md` and `admin-import/STAGE_10.19A_OWNER_GOVERNANCE_RULINGS.md`.
