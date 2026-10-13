@@ -1722,10 +1722,17 @@
       "programComponentStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): turning decisions into owned actions and next steps is implementation planning",
       "programAlignment": {
         "foundation": "general — the plan applies to any household area; no single foundation is its subject",
-        "programComponent": "planning-implementation — recording decisions and turning them into a ten-row action list with owners and next steps is implementation planning; its output is the household's own plan",
+        "programComponent": "planning-implementation — recording decisions and turning them into a ten-row action list with an owner and a target date for each is implementation planning; its output is the household's own plan",
         "resilienceRole": "helps a household bring its decisions together, list its first actions with an owner and a next step for each, and choose its own review timing; it supports household independence by making the plan shared and written down",
         "guidanceKind": "member-entry planning worksheet — not a technical, medical, safety, legal, financial or compliance guide, a programme index, or an emergency procedure",
         "wordingMatchesRole": "yes — every field is member-entered; the draft names no system, appliance, price, date or fixed cadence and makes no promise; it points to the 90-Day Implementation Roadmap, the Household Responsibility Roster and the Priority Lock Worksheet for scheduling, roles and priorities"
+      },
+      "alignmentAnswers": {
+        "problem": "It helps a household consolidate decisions and convert them into clear owned actions.",
+        "standalone": "It is the household's consolidated action record, while the 90-Day Implementation Roadmap handles time-phased implementation and the Household Responsibility Roster handles ongoing roles.",
+        "foundationGeneral": "The actions can span multiple OffGrid056 foundations rather than belonging to one technical foundation.",
+        "programComponent": "Its main output is an actionable household implementation plan with ownership and target dates.",
+        "mustNotBecome": "A programme index, technical guide, professional or legal compliance guide, budget planner, supplier-ranking worksheet, or a duplicate of the 90-Day Implementation Roadmap."
       },
       "category": "planning",
       "categoryStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A)",
@@ -1735,9 +1742,9 @@
       "estimatedTime": 20,
       "estimatedTimeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A)",
       "estimatedTimeReasoning": "OWNER-APPROVED: a first fill-in of details, decisions and ten actions.",
-      "description": "A practical worksheet to help your household turn its main resilience decisions into a clear list of actions, owners and next steps.",
+      "description": "A practical worksheet to bring your household decisions together, turn them into a clear list of priority actions and record who will take each action forward.",
       "descriptionStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): the exact sentence",
-      "draftStatus": "DRAFT for owner copy review (Stage 10.22A): member-entered sections only (plan details, decisions table, ten action rows, review prompts, notes), a Where Next table and a short closing note. Not yet owner-approved as copy.",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.22A): member-entered sections only (plan details, decision prompts, ten action rows with why it matters, owner, target date and status or notes, a review prompt, notes), a four-row Where Next table and closing prompts. Not yet owner-approved as copy.",
       "coverStatus": "PENDING owner approval: record only, nothing generated. Future direction: a title-free image of a mixed-age household at a kitchen or dining table or a wall-planning setting with a blank visual planner and sticky notes, natural daylight, a clear upper area for the template title 'Household Action Plan'; no readable generated text, OG code, logos, technical tools, uniforms or emergency imagery. The legacy Week 4 programme artwork is not used in the final render.",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
@@ -1748,10 +1755,10 @@
       "relatedResources": [
         "res-1027",
         "res-1028",
-        "res-1007",
-        "res-1026"
+        "res-1026",
+        "res-1007"
       ],
-      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): exactly four, in this metadata order: 90-Day Implementation Roadmap (before, res-1027), Household Responsibility Roster (next, res-1028), Priority Lock Worksheet (also useful, res-1007), 3-Tier Budget Planner (later, res-1026). Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed. The printed Where Next shows three rows (before, next, also useful); the later link is metadata only.",
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A, re-issued): exactly four, in this metadata and printed order: 90-Day Implementation Roadmap (before, res-1027), Household Responsibility Roster (next, res-1028), 3-Tier Budget Planner (also useful, res-1026), Priority Lock Worksheet (also useful, res-1007). res-1504 Monthly Planning Challenge Template, demo placeholders and automatic filler are not used. Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed. The printed Where Next shows all four rows.",
       "safetyBlocks": [],
       "approvedSafetyBlocks": [],
       "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or medical task.",

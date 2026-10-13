@@ -20,7 +20,7 @@ const content = ac.find((c) => c.where === "Worksheet content (rebuilt)")!;
 const allNew = ac.map((c) => c.to).join("\n");
 const newText = memberFacingText(`<div class="content">${allNew}</div>`);
 const sentences = newText.split(/(?<=[.!?])\s+|\n/).map((s) => s.trim()).filter(Boolean);
-const text = newText.replace(/OffGrid056/g, "OffGrid").replace(/90-Day Implementation Roadmap/g, "Live Title");
+const text = newText.replace(/OffGrid056/g, "OffGrid").replace(/90-Day Implementation Roadmap/g, "Live Title").replace(/3-Tier Budget Planner/g, "Live Title B");
 
 describe("Stage 10.22A · OG-29 locked metadata", () => {
   it("is the owner's rewritten worksheet: general / planning-implementation / planning / worksheet, draft, in the planning-tools collection", () => {
@@ -30,7 +30,7 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
     expect(COLLECTION_IDS).toContain("planning-tools");
   });
   it("carries the owner's description exactly", () => {
-    expect(meta.description).toBe("A practical worksheet to help your household turn its main resilience decisions into a clear list of actions, owners and next steps.");
+    expect(meta.description).toBe("A practical worksheet to bring your household decisions together, turn them into a clear list of priority actions and record who will take each action forward.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-14 \(Stage 10\.22A\)/);
   });
   it("assigns no resource ID, creates no protected record and does not change Planning Tools", () => {
@@ -45,11 +45,12 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
     expect(String(meta.coverStatus)).toMatch(/^PENDING owner approval/);
   });
   it("has the owner-approved four curated related links in the metadata order", () => {
-    expect(meta.relatedResources).toEqual(["res-1027", "res-1028", "res-1007", "res-1026"]);
+    expect(meta.relatedResources).toEqual(["res-1027", "res-1028", "res-1026", "res-1007"]);
+    expect(JSON.stringify(meta.relatedResources)).not.toMatch(/res-1504|res-000|res-1510/);
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const titles = new Map(fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string }; return [r.id, r.title] as const; }));
-    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["90-Day Implementation Roadmap", "Household Responsibility Roster", "Priority Lock Worksheet", "3-Tier Budget Planner"]);
+    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["90-Day Implementation Roadmap", "Household Responsibility Roster", "3-Tier Budget Planner", "Priority Lock Worksheet"]);
   });
   it("answers all five programme-alignment questions and carries the standing blocks only", () => {
     const a = meta.programAlignment as Record<string, string>;
@@ -88,7 +89,7 @@ describe("Stage 10.22A · OG-29 draft copy: the legacy programme index and claim
 describe("Stage 10.22A · OG-29 draft copy: the owner's structure", () => {
   it("has the new title and subtitle, and no legacy title", () => {
     expect(allNew).toContain("Household Action<br>Plan");
-    expect(allNew).toContain("A calm, practical worksheet for turning your household's decisions into clear actions and next steps.");
+    expect(allNew).toContain("A calm, practical worksheet for turning your household's decisions into clear actions and owners.");
     expect(allNew).not.toMatch(/OG-29|Day 29|Everything from 30 days/);
   });
   it("has the sections in the approved order", () => {
@@ -97,28 +98,32 @@ describe("Stage 10.22A · OG-29 draft copy: the owner's structure", () => {
     for (const o of order) { const p = newText.indexOf(o, from); at.push(p); if (p >= 0) from = p + o.length; }
     expect(at.every((p, i) => p >= 0 && (i === 0 || p > at[i - 1]))).toBe(true);
   });
-  it("has the approved fields, a four-column decisions table and exactly ten action rows", () => {
-    for (const l of ["Household or family name:", "What we are mainly working on:", "What matters most to us right now:", "What we have already completed:", "What still needs attention:", "What we want to do next:"]) expect(newText).toContain(l);
-    for (const c of ["Decision", "Why we chose it", "What this affects", "Anything we still need to confirm", "No.", "Action", "Owner", "Next step", "Notes or status"]) expect(content.to).toContain(`<th>${c}</th>`);
-    expect((content.to.match(/<tr><td>\d+<\/td><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>/g) ?? []).length).toBe(10);
-    expect(content.to).not.toMatch(/<th>(?:Due|Date)/i);
+  it("has the six plan-detail fields and the four decision prompts, with no money field", () => {
+    for (const l of ["Household or property:", "Date:", "Our main goal:", "Our main priority:", "What we want to improve:", "Who is involved:", "What have we decided to do?", "Why is this important to us?", "What still needs clarification?", "What are we deliberately not doing yet?"]) expect(newText).toContain(l);
+    expect(newText).not.toMatch(/budget amount|how much|amount we|cost of/i);
   });
-  it("has member-chosen review prompts and one notes area", () => {
-    for (const x of ["When we want to look at this plan again:", "What might make us change it:", "What we want to check next time:", "Anything else we want to remember:"]) expect(newText).toContain(x);
-    expect(newText.match(/Notes/g)?.length).toBeGreaterThanOrEqual(1);
+  it("has exactly ten action rows with the approved columns and no score, rank, percentage or cadence column", () => {
+    for (const c of ["No.", "Action", "Why it matters", "Owner", "Target date", "Status or notes"]) expect(content.to).toContain(`<th>${c}</th>`);
+    expect((content.to.match(/<tr><td>\d+<\/td><td><\/td><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>/g) ?? []).length).toBe(10);
+    expect(content.to).not.toMatch(/<th>(?:Score|Rank|Percent|Day|Week|Month|Cost|Price|Supplier)/i);
   });
-  it("points on in the approved printed order with exactly three rows and no Later or budget row", () => {
+  it("keeps review timing member-controlled, with one notes area", () => {
+    expect(newText).toContain("We will review this plan when:");
+    expect(newText).toContain("Notes:");
+    expect(newText).not.toMatch(/review it monthly|update it quarterly|week by week|every \w+ days?|past 29 days/i);
+  });
+  it("points on in the approved order with four rows (before, next, also useful twice) and no Later, 1504 or demo row", () => {
     const next = newText.slice(newText.lastIndexOf("Where it fits"), newText.indexOf("Where You Are Now"));
-    const order = ["90-Day Implementation Roadmap", "Household Responsibility Roster", "Priority Lock Worksheet"];
+    const order = ["90-Day Implementation Roadmap", "Household Responsibility Roster", "3-Tier Budget Planner", "Priority Lock Worksheet"];
     const at = order.map((o) => next.indexOf(o));
     expect(at.every((p, i) => p >= 0 && (i === 0 || p > at[i - 1]))).toBe(true);
-    expect(next).toMatch(/Before[\s\S]*Next[\s\S]*Also useful/);
-    expect(next).not.toMatch(/\bLater\b|3-Tier Budget/);
+    expect(next).toMatch(/Before[\s\S]*Next[\s\S]*Also useful[\s\S]*Also useful/);
+    expect(next).not.toMatch(/\bLater\b|Monthly Planning|30-Day Action/);
     expect(newText).not.toMatch(/OG-30|Tomorrow/);
   });
-  it("closes with a record of what the member now has, with no promise", () => {
+  it("closes with neutral prompts and no programme-completion language", () => {
     const closing = newText.slice(newText.lastIndexOf("Where You Are Now"));
-    expect(closing).toContain("a record of the decisions your household has made");
-    expect(closing).not.toMatch(/guarantee|ensure|prevent|everything|nothing|success/i);
+    for (const p of ["Our main priority now is:", "The first action we will take is:", "The person responsible is:", "The next thing we need to clarify is:"]) expect(closing).toContain(p);
+    expect(closing).not.toMatch(/complete|congratulat|finished|journey|success|guarantee/i);
   });
 });
