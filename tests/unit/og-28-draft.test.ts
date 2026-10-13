@@ -34,7 +34,8 @@ describe("Stage 10.21A · OG-28 locked metadata", () => {
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-13 \(Stage 10\.21A\)/);
   });
   it("Stage 10.21C: res-1028 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged until deployment", () => {
-    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1028");
+    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1028");
+    expect(JSON.stringify(meta), "OG-28 review entry").not.toContain("res-1028"); // later resources (OG-29) may name res-1028 as a related link in their own entries
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });

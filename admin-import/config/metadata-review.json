@@ -1710,6 +1710,63 @@
       "migrationState": "DEPLOYED (Stage 10.21D) — live as a protected resource behind Cloudflare Access; the record and the two approved Stage 10.21B.3 PDFs are in the deployed tree. Planning Tools is now eleven live resources.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Planning & Implementation worksheet that turns household priorities into shared responsibility before larger actions are scheduled or carried out: Priority Lock Worksheet → Household Responsibility Roster → 90-Day Implementation Roadmap, with the Emergency Readiness Checklist alongside. Not part of the main planning journey; not an Emergency Readiness resource."
+    },
+    "OG-29": {
+      "title": "Household Action Plan",
+      "titleStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A); legacy 'OG-29 30-Day Master Action Plan' (code removed publicly)",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): the plan applies to any household area; no single foundation is its subject",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): turning decisions into owned actions and next steps is implementation planning",
+      "programAlignment": {
+        "foundation": "general — the plan applies to any household area; no single foundation is its subject",
+        "programComponent": "planning-implementation — recording decisions and turning them into a ten-row action list with owners and next steps is implementation planning; its output is the household's own plan",
+        "resilienceRole": "helps a household bring its decisions together, list its first actions with an owner and a next step for each, and choose its own review timing; it supports household independence by making the plan shared and written down",
+        "guidanceKind": "member-entry planning worksheet — not a technical, medical, safety, legal, financial or compliance guide, a programme index, or an emergency procedure",
+        "wordingMatchesRole": "yes — every field is member-entered; the draft names no system, appliance, price, date or fixed cadence and makes no promise; it points to the 90-Day Implementation Roadmap, the Household Responsibility Roster and the Priority Lock Worksheet for scheduling, roles and priorities"
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A)",
+      "difficultySource": "OWNER-APPROVED: member-written entries; no calculation.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A)",
+      "estimatedTimeReasoning": "OWNER-APPROVED: a first fill-in of details, decisions and ten actions.",
+      "description": "A practical worksheet to help your household turn its main resilience decisions into a clear list of actions, owners and next steps.",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): the exact sentence",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.22A): member-entered sections only (plan details, decisions table, ten action rows, review prompts, notes), a Where Next table and a short closing note. Not yet owner-approved as copy.",
+      "coverStatus": "PENDING owner approval: record only, nothing generated. Future direction: a title-free image of a mixed-age household at a kitchen or dining table or a wall-planning setting with a blank visual planner and sticky notes, natural daylight, a clear upper area for the template title 'Household Action Plan'; no readable generated text, OG code, logos, technical tools, uniforms or emergency imagery. The legacy Week 4 programme artwork is not used in the final render.",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): planning-tools (FUTURE YES). The collection is NOT changed until OG-29 is staged and deployed; it is expected to move from 11 to 12 resources then",
+      "relatedResources": [
+        "res-1027",
+        "res-1028",
+        "res-1007",
+        "res-1026"
+      ],
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): exactly four, in this metadata order: 90-Day Implementation Roadmap (before, res-1027), Household Responsibility Roster (next, res-1028), Priority Lock Worksheet (also useful, res-1007), 3-Tier Budget Planner (later, res-1026). Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed. The printed Where Next shows three rows (before, next, also useful); the later link is metadata only.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or medical task.",
+      "safetyTopicDispositions": {
+        "batteries-and-electrical": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-14",
+          "reason": "The legacy asset table named 'Solar PV Sizing Worksheet' and 'Battery & Backup Power Planner' only as programme asset titles. Removed with the table; the plan names no system."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.22A) — NOT rendered, NOT staged, NOT a protected resource, no resource ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Planning & Implementation worksheet that gathers a household's decisions into one owned action list: Priority Lock Worksheet and 3-Tier Budget Planner → 90-Day Implementation Roadmap → Household Action Plan → Household Responsibility Roster. Not an Emergency Readiness resource and not a programme index."
     }
   }
 }
