@@ -4582,6 +4582,15 @@
         "reason": "Removes 'Week 4 — Action Plan & Pathway' (legacy programme sequencing)."
       },
       {
+        "where": "Cover image",
+        "from": "<img src=\"assets/Week4_ActionPlanPathway_Cover.jpg\" class=\"cover-img\" alt=\"Week 4 Cover\">",
+        "to": "<img src=\"assets/professional-support-cover.webp\" class=\"cover-img\" alt=\"Two people at a kitchen table talking through project plans and notes\">",
+        "expectedMatches": 1,
+        "approvedBy": "owner",
+        "approvedOn": "2026-10-09",
+        "reason": "Replaces the legacy Week 4 programme artwork (Week4_ActionPlanPathway_Cover.jpg, alt Week 4 Cover) with the owner-supplied, owner-approved OG-24 cover photograph (Stage 10.18B)."
+      },
+      {
         "where": "Cover label",
         "from": "<div class=\"cover-label\">OffGrid056 30-Day Programme</div>",
         "to": "<div class=\"cover-label\">OffGrid056 Member Library</div>",

@@ -43,7 +43,9 @@ describe("Stage 10.18 · OG-24 locked metadata", () => {
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-24 is staged and deployed/);
     expect(meta.relatedResources).toEqual([]);
     expect(String(meta.relatedResourcesStatus)).toMatch(/PROPOSED, not applied/);
-    expect(String(meta.coverStatus)).toMatch(/^PENDING owner approval/);
+    expect(String(meta.coverStatus)).toMatch(/^OWNER-APPROVED 2026-10-13 \(Stage 10\.18B\)/);
+    expect(allNew).toContain('<img src="assets/professional-support-cover.webp" class="cover-img"');
+    expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4_ActionPlanPathway|Week 4 Cover|Week1_Foundation|Week2_WaterFoodAir|Week3_/);
     expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
   });
   it("answers all five programme-alignment questions", () => {
