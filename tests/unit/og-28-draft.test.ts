@@ -44,12 +44,12 @@ describe("Stage 10.21A · OG-28 locked metadata", () => {
     expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
     expect(String(meta.coverStatus)).toMatch(/^PENDING owner approval/);
   });
-  it("has the owner-approved three related links and no fourth", () => {
-    expect(meta.relatedResources).toEqual(["res-1007", "res-1027", "res-1006"]);
+  it("has the owner-approved four curated related links (Stage 10.21B.1), in order", () => {
+    expect(meta.relatedResources).toEqual(["res-1007", "res-1027", "res-1006", "res-1026"]);
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const titles = new Map(fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string }; return [r.id, r.title] as const; }));
-    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["Priority Lock Worksheet", "90-Day Implementation Roadmap", "Emergency Readiness Checklist"]);
+    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["Priority Lock Worksheet", "90-Day Implementation Roadmap", "Emergency Readiness Checklist", "3-Tier Budget Planner"]);
   });
   it("answers all five programme-alignment questions and carries the standing blocks only", () => {
     const a = meta.programAlignment as Record<string, string>;

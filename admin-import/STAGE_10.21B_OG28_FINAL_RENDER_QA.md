@@ -42,3 +42,15 @@ Default-timeout full suite **61 files, 1,672 tests, all passed**; lint **0 error
 
 ## 9. Next stage
 Resume **Stage 10.21B** once the cover is in `workspace/cover-assets/`. Not started further; nothing staged.
+
+## 10. Stage 10.21B.1 update — related-link lock (owner ruling, 2026-10-13)
+- **Owner rejected the automatic related-card set** from section 5 (res-1026, res-0008 demo 30-Day Action Planner, res-1510 Advanced roadmap). The three-link configuration is not approved for staging.
+- **Final fourth curated link: res-1026 3-Tier Budget Planner (later).** Final curated order: 1) res-1007 Priority Lock Worksheet (before); 2) res-1027 90-Day Implementation Roadmap (next); 3) res-1006 Emergency Readiness Checklist (also useful); 4) res-1026 3-Tier Budget Planner (later). Held in `metadata-review.json` (`relatedResources`, status text updated); `lib/related.ts` unchanged.
+- **Automatic fill suppression result (real engine, protected plus listed demo pool, read-only):** exactly four cards, all "Linked by us", in the exact order above. res-0008 not appended; res-1510 not appended; no duplicate roadmap; no automatic card of any kind. The four-link rule (`CURATED_RELATED_MIN = 4`) stops the fill. No protected record was staged for the check (records were copied in temporarily and removed; working tree verified clean).
+- **Copy remains locked:** the approved Stage 10.21A document copy is unchanged (`approved-copy.json` not modified), including the three-row Where Next table. The fourth link lives in related-resource metadata only. If you want a "Later" row in the document's Where Next, that is a separate copy ruling.
+- **Layout preserved:** 8-page layout check, 31px writing lines, no wording change.
+- **Cover blocker remains: HOLD — COVER ASSET BLOCKER.** No approved OG-28 cover exists; not used: the legacy Week 4 artwork, the res-1024 cover, any placeholder or generated substitute. Needed: portrait approximately 1055 x 1491 in `workspace/cover-assets/`. Final render remains pending.
+- **Governance unchanged;** stable ID `res-1028` SUGGESTED / UNASSIGNED, not assigned; protected record NO; staging NO; deployment NO.
+- **Validation:** `og-28-draft-qa` ALL PASS (safety triggers 0, regulatory unresolved 0, Bucket C 0, legacy-language 0, content flags 0; body 2,983 chars, 8,686 bytes each, identical); default full suite 61 files, 1,672 tests passed; lint 0 errors; typecheck 0; verify-prep 0; verify-build 0 (31 records, 62 market files, 0 broken links).
+- **Live unchanged:** 31 protected resources, 62 market files, Planning Tools 10, Downloads 53, My Progress 56, Worker `3e53c3a7-eb7a-450d-8f12-5244c04c0d38`.
+- **Resume tomorrow (Stage 10.21B):** insert the final cover, render NZ and AU PDFs, cover QA, page-by-page QA, return for owner approval. No staging or deployment unless separately approved.

@@ -1685,9 +1685,10 @@
       "relatedResources": [
         "res-1007",
         "res-1027",
-        "res-1006"
+        "res-1006",
+        "res-1026"
       ],
-      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): exactly three, in this order: Priority Lock Worksheet (before), 90-Day Implementation Roadmap (next), Emergency Readiness Checklist (also useful); no fourth link and no 'later' item. Fewer than four explicit links: the existing related-resource fill still applies to this page, which the owner may want to review at staging; lib/related.ts is not changed.",
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21B.1): exactly four, in this order: Priority Lock Worksheet (before, res-1007), 90-Day Implementation Roadmap (next, res-1027), Emergency Readiness Checklist (also useful, res-1006), 3-Tier Budget Planner (later, res-1026). The owner rejected the three-link configuration because it triggered automatic related-card fill (res-0008 demo, res-1510 Advanced roadmap). Four explicit links suppress the automatic fill under the existing rule; lib/related.ts is not changed. The document Where Next copy is unchanged (locked).",
       "safetyBlocks": [],
       "approvedSafetyBlocks": [],
       "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or medical task.",
