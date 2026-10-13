@@ -1,6 +1,6 @@
 # Canonical resource index
 
-**Stage 10.19B · updated 2026-10-13 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
+**Stage 10.18C · updated 2026-10-13 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
 
 ## Locked Library ↔ OS governance rules
 
@@ -34,7 +34,7 @@
 - **Accepted Stage 10.19 baseline:** 30 protected resources · 60 market files · 0 broken links · 30 canonical index records · 0 duplicate stable IDs · 0 duplicate routes · 0 missing routes · all 60 market files present · 59 test files / 1,636 tests · lint 0 · typecheck 0.
 - **Current 30 resources:** `publicationStatus` **approved**, `releaseChannel` **private-preview**. Protected private-preview resources. NOT public, NOT a production-member release, NOT a paid entitlement, NOT OS entitlement, NOT an OS authentication handoff.
 - **Visible badge:** today "Draft" (detail page only); future **Preview**, computed from `publicationStatus` + `releaseChannel`; never "Draft" for these approved private-preview resources. **Proposed tooltip:** "Approved resource in the protected OffGrid056 preview." (exact wording; it must not imply public release, production entitlement, paid access or a final member launch, and "not yet approved for members" is not used for the approved private-preview state). Not implemented.
-- **Implementation (Stage 10.19B, not deployed):** `publicationStatus` and `releaseChannel` now exist in the resource schema and in the 30 protected records (approved / private-preview); the badge is computed by `lib/content/publication.ts` (approved + private-preview => Preview with the exact tooltip; anything else => no badge, fail closed) and shown on resource detail pages only; the preview build renders Preview; the live Worker still shows Draft until deployment is approved. A new resource staged from now on must carry an owner-approved pair or the build fails.
+- **Implementation (Stage 10.19B; deployed Stage 10.19C):** `publicationStatus` and `releaseChannel` now exist in the resource schema and in the 30 protected records (approved / private-preview); the badge is computed by `lib/content/publication.ts` (approved + private-preview => Preview with the exact tooltip; anything else => no badge, fail closed) and shown on resource detail pages only; the live Worker shows Preview on all 30 live resources. A new resource staged from now on must carry an owner-approved pair or the build fails.
 - **res-1019 Battery Backup Planner:** MODEL / BADGE SEMANTICS ISSUE; not a resource-specific data error; future approved / private-preview / Preview; not changed separately.
 - **Access and entitlement:** No free or paid tier is assigned. accessTier and entitlementRequirement stay UNDEFINED_OWNER_DECISION on all 30. Authentication must not be treated as entitlement.
 - **OS integration fields (inactive):** `recommendationEligible` false, `handoffStatus` INACTIVE, `approvedHandoffRoute` null, `entitlementContractStatus` NOT_APPROVED.
@@ -149,7 +149,9 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 }
 ```
 
-## Index (30 resources)
+## Index (31 records: 30 live, 1 staged)
+
+**res-1024 Professional Support Planner is STAGED, not deployed (Stage 10.18C):** it is counted in the staged build (31 resources, 62 market files) and not in the live totals (30, 60).
 
 ### Identity and classification
 
@@ -185,41 +187,43 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1509 | OG-B09 | Resilient Heating & Insulation Upgrade Checklist | checklist | shelter | resilience-planning | insulation | `/resources/resilient-heating-and-insulation-upgrade-checklist/` | — |
 | res-1510 | OG-B10 | 90-Day Implementation Roadmap (Advanced) | planner | general | planning-implementation | planning | `/resources/90-day-implementation-roadmap-advanced/` | planning-tools |
 | res-1512 | OG-B12 | Off-Grid System Architecture Planner | planner | general | advanced-future | planning | `/resources/off-grid-system-architecture-planner/` | — |
+| res-1024 | OG-24 | Professional Support Planner | worksheet | general | planning-implementation | planning | `/resources/professional-support-planner/` | planning-tools |
 
 ### Publication, badge, access and review
 
-| ID | status | publicationStatus | releaseChannel | Register | Badge now → future | Access tier | Entitlement | Review status flags |
+| ID | status | publicationStatus | releaseChannel | Register | Badge (live) | Access tier | Entitlement | Review status flags |
 |---|---|---|---|---|---|---|---|---|
-| res-1001 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1002 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1003 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1004 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1006 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1007 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1008 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1009 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1010 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1011 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1012 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1013 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1014 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1015 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1017 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1018 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1019 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1020 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1021 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1022 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1023 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1025 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA, NEEDS_OWNER_REVIEW |
-| res-1026 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1027 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1504 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1507 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1508 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1509 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1510 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
-| res-1512 | draft | approved | private-preview | LIVE | Draft → Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_BADGE_REVIEW, NEEDS_METADATA |
+| res-1001 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1002 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1003 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1004 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1006 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1007 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1008 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1009 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1010 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1011 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1012 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1013 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1014 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1015 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1017 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1018 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1019 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1020 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1021 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1022 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1023 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1025 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA, NEEDS_OWNER_REVIEW |
+| res-1026 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1027 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1504 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1507 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1508 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1509 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1510 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1512 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1024 | draft | approved | private-preview | STAGED | — (staged: Preview) | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 
 ### Ownership, version and review (missing values are explicit)
 
@@ -255,6 +259,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1509 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-06 |
 | res-1510 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
 | res-1512 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
+| res-1024 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | not yet deployed |
 
 ### Source and downloads
 
@@ -290,9 +295,10 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1509 | OG-B09_Insulation_Heating_Upgrade_Checklist.html | OG-B09_Insulation_Heating_Upgrade_Checklist.pdf | `/resources/resilient-heating-and-insulation-upgrade-checklist.NZ.pdf` | `/resources/resilient-heating-and-insulation-upgrade-checklist.AU.pdf` | `38b85d6942ed…` | `c34c64c437d1…` |
 | res-1510 | OG-B10_90Day_Roadmap_Advanced.html | OG-B10_90Day_Roadmap_Advanced.pdf | `/resources/90-day-implementation-roadmap-advanced.NZ.pdf` | `/resources/90-day-implementation-roadmap-advanced.AU.pdf` | `d51337d6207f…` | `3553431ef5a2…` |
 | res-1512 | OG-B12_OffGrid_System_Architecture_Planner.html | OG-B12_OffGrid_System_Architecture_Planner.pdf | `/resources/off-grid-system-architecture-planner.NZ.pdf` | `/resources/off-grid-system-architecture-planner.AU.pdf` | `52966b32d0b5…` | `81c7e7355932…` |
+| res-1024 | OG-24_Professional_Review_Selector.html | OG-24_Professional_Review_Selector.pdf | `/resources/professional-support-planner.NZ.pdf` | `/resources/professional-support-planner.AU.pdf` | `574a7308ad47…` | `460d17cb4b39…` |
 
 ### Future OS integration fields (all resources)
 
 `recommendationEligible: false` · `handoffStatus: INACTIVE` · `approvedHandoffRoute: null` · `entitlementContractStatus: NOT_APPROVED`. No active OS link exists or is created.
 
-Findings and rulings: `admin-import/STAGE_10.19_CANONICAL_RESOURCE_AUDIT.md` and `admin-import/STAGE_10.19A_OWNER_GOVERNANCE_RULINGS.md`.
+Findings and rulings: `admin-import/STAGE_10.19_CANONICAL_RESOURCE_AUDIT.md`, `admin-import/STAGE_10.19A_OWNER_GOVERNANCE_RULINGS.md` and `admin-import/STAGE_10.18C_OG24_CONTROLLED_STAGING.md`.

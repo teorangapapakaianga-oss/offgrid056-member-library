@@ -33,20 +33,23 @@ describe("Stage 10.18 · OG-24 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to help you identify where professional support may be useful, record who you are considering and prepare the questions you want answered before you engage them.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.17\)/);
   });
-  it("assigns no res-ID, creates no protected record and does not change Planning Tools", () => {
+  it("Stage 10.18C: res-1024 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged until deployment", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1024");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-24" || r.id === "res-1024")).toEqual([]);
+      const og24 = recs.filter((r) => r.legacyCode === "OG-24" || r.id === "res-1024");
+      expect(og24).toHaveLength(1);
+      expect(og24[0]).toMatchObject({ id: "res-1024", legacyCode: "OG-24" });
+      expect(recs).toHaveLength(31);
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-24 is staged and deployed/);
-    expect(meta.relatedResources).toEqual([]);
-    expect(String(meta.relatedResourcesStatus)).toMatch(/PROPOSED, not applied/);
+    expect(meta.relatedResources).toEqual(["res-1023", "res-1025", "res-1022", "res-1027"]);
+    expect(String(meta.relatedResourcesStatus)).toMatch(/^OWNER-APPROVED 2026-10-13 \(Stage 10\.18C\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-APPROVED 2026-10-13 \(Stage 10\.18B\)/);
     expect(allNew).toContain('<img src="assets/professional-support-cover.webp" class="cover-img"');
     expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4_ActionPlanPathway|Week 4 Cover|Week1_Foundation|Week2_WaterFoodAir|Week3_/);
-    expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
+    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.18C\)/);
   });
   it("answers all five programme-alignment questions", () => {
     const a = meta.programAlignment as Record<string, string>;

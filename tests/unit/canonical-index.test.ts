@@ -17,15 +17,15 @@ const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_R
 
 describe("Stage 10.19 · canonical resource index", () => {
   it("has one record per protected resource, with unique IDs, routes and titles", () => {
-    expect(idx.resources).toHaveLength(30);
-    for (const k of ["stableResourceId", "canonicalRoute", "title"]) expect(new Set(idx.resources.map((r) => r[k] as string)).size, k).toBe(30);
+    expect(idx.resources).toHaveLength(31); // 30 live + res-1024 staged
+    for (const k of ["stableResourceId", "canonicalRoute", "title"]) expect(new Set(idx.resources.map((r) => r[k] as string)).size, k).toBe(31);
     for (const r of idx.resources) {
       expect(r.stableResourceId).toMatch(/^res-1\d{3}$/);
       expect(r.canonicalRoute).toBe(`/resources/${(r.canonicalRoute as string).split("/")[2]}/`);
     }
   });
   it("carries every schema field", () => {
-    const fields = ["stableResourceId", "legacyCode", "title", "resourceType", "foundation", "programComponent", "category", "topic", "shortDescription", "owner", "version", "versionDate", "sourceFile", "sourceLink", "status", "publicationStatus", "releaseChannel", "migrationState", "accessProtection", "firstPublishedToPreview", "futureVisibleBadge", "futureBadgeTooltip", "visibleBadge", "accessTier", "entitlementRequirement", "canonicalRoute", "marketAvailability", "downloadAssets", "reviewStatus", "lastReviewedDate", "collections", "relatedResources", "supersededBy", "withdrawn", "internalOnly", "notes", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"];
+    const fields = ["stableResourceId", "legacyCode", "title", "resourceType", "foundation", "programComponent", "category", "topic", "shortDescription", "owner", "version", "versionDate", "sourceFile", "sourceLink", "status", "publicationStatus", "releaseChannel", "migrationState", "accessProtection", "firstPublishedToPreview", "visibleBadgeInCurrentBuild", "futureBadgeTooltip", "visibleBadge", "accessTier", "entitlementRequirement", "canonicalRoute", "marketAvailability", "downloadAssets", "reviewStatus", "lastReviewedDate", "collections", "relatedResources", "supersededBy", "withdrawn", "internalOnly", "notes", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"];
     for (const r of idx.resources) for (const f of fields) expect(Object.prototype.hasOwnProperty.call(r, f), `${r.stableResourceId} ${f}`).toBe(true);
   });
   it("uses only the controlled Program Component, Foundation and review values", () => {
@@ -54,7 +54,7 @@ describe("Stage 10.19 · canonical resource index", () => {
       expect([r.supersededBy, r.withdrawn, r.internalOnly]).toEqual([null, false, false]);
       const row = rr.split("\n").find((l) => l.startsWith(`| \`${r.stableResourceId}\` |`));
       expect(row, r.stableResourceId).toBeTruthy();
-      expect(row, r.stableResourceId).toMatch(/\| LIVE \|$/);
+      expect(row, r.stableResourceId).toMatch(r.stableResourceId === "res-1024" ? /\| STAGED \|$/ : /\| LIVE \|$/);
     }
   });
   it("matches the private resource records when they are present", () => {
@@ -78,8 +78,9 @@ describe("Stage 10.19 · canonical resource index", () => {
     expect(idx.controlledValues.releaseChannel).toEqual(["private-preview", "members"]);
     expect(idx.controlledValues.status).toEqual(["draft", "published", "archived"]);
     for (const r of idx.resources) {
-      expect([r.status, r.publicationStatus, r.releaseChannel, r.migrationState]).toEqual(["draft", "approved", "private-preview", "LIVE"]);
-      expect([r.visibleBadge, r.futureVisibleBadge]).toEqual(["Draft", "Preview"]);
+      expect([r.status, r.publicationStatus, r.releaseChannel, r.migrationState]).toEqual(["draft", "approved", "private-preview", r.stableResourceId === "res-1024" ? "STAGED" : "LIVE"]);
+      expect(r.visibleBadge).toBe(r.stableResourceId === "res-1024" ? null : "Preview"); // the Preview badge is deployed for the 30 live resources (Stage 10.19C); res-1024 is staged
+      expect(r.visibleBadgeInCurrentBuild).toBe("Preview");
       expect(r.futureBadgeTooltip).toBe("Approved resource in the protected OffGrid056 preview.");
       expect(r.futureBadgeTooltip).not.toMatch(/not yet approved|production|paid access|entitle/i);
     }
@@ -88,7 +89,7 @@ describe("Stage 10.19 · canonical resource index", () => {
   it("records missing owner, version, review and source data explicitly and never fabricates it", () => {
     for (const r of idx.resources) {
       for (const f of ["owner", "version", "versionDate", "lastReviewedDate", "sourceLink"]) expect(r[f], `${r.stableResourceId} ${f}`).toBe("UNKNOWN_EXISTING_RECORD");
-      expect(r.firstPublishedToPreview).toMatch(/^2026-\d\d-\d\d$/);
+      if (r.stableResourceId === "res-1024") expect(r.firstPublishedToPreview).toBeNull(); else expect(r.firstPublishedToPreview).toMatch(/^2026-\d\d-\d\d$/);
       expect(r.reviewStatus).toEqual(expect.arrayContaining(["NEEDS_METADATA", "NEEDS_ENTITLEMENT_DECISION"]));
     }
   });

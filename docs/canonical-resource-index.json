@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-13",
-  "stage": "10.19B",
+  "stage": "10.18C",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -83,8 +83,11 @@
     ]
   },
   "baseline": {
-    "protectedResources": 30,
-    "marketFiles": 60,
+    "liveProtectedResources": 30,
+    "liveMarketFiles": 60,
+    "stagedProtectedResources": 1,
+    "stagedBuildProtectedResources": 31,
+    "stagedBuildMarketFiles": 62,
     "brokenLinks": 0,
     "worker": "see operational registers (not recorded here)"
   },
@@ -114,8 +117,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -156,7 +159,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -192,7 +194,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-06",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -227,8 +228,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -269,7 +270,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -298,7 +298,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-21",
       "knownExceptions": [
@@ -332,8 +331,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -374,7 +373,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -409,7 +407,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-07",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -440,8 +437,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -482,7 +479,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -517,7 +513,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-07",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -548,8 +543,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -590,7 +585,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -623,7 +617,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-08",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -654,8 +647,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -696,7 +689,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -728,7 +720,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-08",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -759,8 +750,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -801,7 +792,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -832,7 +822,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -863,8 +852,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -905,7 +894,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -934,7 +922,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-23",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -965,8 +952,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1007,7 +994,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1037,7 +1023,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-23",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1068,8 +1053,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1110,7 +1095,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1136,7 +1120,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1167,8 +1150,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1209,7 +1192,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1238,7 +1220,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-09",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1269,8 +1250,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1311,7 +1292,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1341,7 +1321,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-05",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1372,8 +1351,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1414,7 +1393,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1445,7 +1423,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-09",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1476,8 +1453,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1518,7 +1495,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1544,7 +1520,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1575,8 +1550,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1617,7 +1592,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1646,7 +1620,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-06",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1677,8 +1650,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1719,7 +1692,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1748,7 +1720,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1779,8 +1750,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1821,7 +1792,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1850,7 +1820,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1881,8 +1850,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -1923,7 +1892,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -1953,7 +1921,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -1984,8 +1951,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2026,7 +1993,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2057,7 +2023,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -2088,8 +2053,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2130,7 +2095,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2160,7 +2124,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -2191,8 +2154,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2233,7 +2196,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2266,7 +2228,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-09",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -2297,8 +2258,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2339,7 +2300,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA",
         "NEEDS_OWNER_REVIEW"
       ],
@@ -2369,7 +2329,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "futureTasks": [
@@ -2403,8 +2362,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2445,7 +2404,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2477,7 +2435,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -2508,8 +2465,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2550,7 +2507,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2582,7 +2538,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "knownExceptions": [
@@ -2616,8 +2571,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2658,7 +2613,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2686,7 +2640,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -2717,8 +2670,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2759,7 +2712,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2787,7 +2739,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -2818,8 +2769,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2860,7 +2811,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2890,7 +2840,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-23",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -2921,8 +2870,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -2963,7 +2912,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -2994,7 +2942,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-10-06",
       "visibleBadgeInCurrentBuild": "Preview",
@@ -3025,8 +2972,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -3067,7 +3014,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -3096,7 +3042,6 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "knownExceptions": [
@@ -3130,8 +3075,8 @@
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "migrationState": "LIVE",
       "publicationStatus": "approved",
-      "visibleBadge": "Draft",
-      "visibleBadgeWhere": "resource detail page only (the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no Draft badge)",
+      "visibleBadge": "Preview",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.19C); the Library, Downloads, Planning Tools, Start Here, Saved and Progress listings show no publication badge",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
@@ -3172,7 +3117,6 @@
       ],
       "reviewStatus": [
         "NEEDS_ENTITLEMENT_DECISION",
-        "NEEDS_BADGE_REVIEW",
         "NEEDS_METADATA"
       ],
       "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
@@ -3204,11 +3148,117 @@
       },
       "status": "draft",
       "releaseChannel": "private-preview",
-      "futureVisibleBadge": "Preview",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "firstPublishedToPreview": "2026-09-22",
       "visibleBadgeInCurrentBuild": "Preview",
       "publicationFieldsInRecord": true
+    },
+    {
+      "stableResourceId": "res-1024",
+      "legacyCode": "OG-24",
+      "title": "Professional Support Planner",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
+      "firstPublishedToPreview": null,
+      "stagedRecordPublishedDate": "2026-10-13",
+      "sourceFile": {
+        "legacyHtml": "OG-24_Professional_Review_Selector.html",
+        "legacyPdf": "OG-24_Professional_Review_Selector.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-24",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-24",
+        "protectedRecord": "private-assets/data-resources/professional-support-planner.private.json (git-ignored)"
+      },
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
+      "status": "draft",
+      "migrationState": "STAGED",
+      "publicationStatus": "approved",
+      "releaseChannel": "private-preview",
+      "visibleBadge": null,
+      "visibleBadgeInCurrentBuild": "Preview",
+      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/professional-support-planner/",
+      "routeSource": "record.slug (private resource record), confirmed in the staged build",
+      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/professional-support-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/professional-support-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "574a7308ad479116037d3bcaff968945dc230cb4e30fa26d2b0091cbcce2f462",
+          "bytes": 2434802,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/professional-support-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/professional-support-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "460d17cb4b390ee9f8198c7ae01462fb1657cfcba5c1eb2a463afe6a7f6df6b7",
+          "bytes": 2434497,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1023",
+        "res-1025",
+        "res-1022",
+        "res-1027"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "STAGED, not deployed (Stage 10.18C): the live site has 30 resources; the staged build has 31. Planning Tools is 9 live and 10 in the staged build.",
+        "Related links are the four curated resources in the approved order (Supplier Comparison Worksheet, Project Support Brief Template, Resilience Product Wishlist, 90-Day Implementation Roadmap); the Advanced roadmap is not used.",
+        "`status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the owner-approved governance state. None of these is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "publicationFieldsInRecord": true,
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
     }
   ],
   "definitions": {
@@ -3235,7 +3285,7 @@
       "basedOn": "publicationStatus + releaseChannel (approved + private-preview = Preview)",
       "tooltip": "Approved resource in the protected OffGrid056 preview.",
       "tooltipRule": "Exact approved wording; used unless a technical constraint requires a minor punctuation or capitalisation change. It must not imply public release, production entitlement, paid access or a final member launch, and 'not yet approved for members' is not used for the approved private-preview state.",
-      "implemented": "IMPLEMENTED_NOT_DEPLOYED (Stage 10.19B): the repository, the 30 protected records and the validated preview build use publicationStatus + releaseChannel and render Preview; the live Worker still shows Draft until a deployment is approved."
+      "implemented": "DEPLOYED (Stage 10.19C): the 30 live protected resources show Preview on the resource detail page; the staged resource res-1024 will show it when deployed."
     },
     "res1019": {
       "classification": "MODEL / BADGE SEMANTICS ISSUE",
@@ -3267,7 +3317,7 @@
       "badgeLogic": "lib/content/publication.ts: approved + private-preview => Preview with the exact tooltip; every other, missing or unrecognised combination => no badge (fail closed). The build validator and verify-build fail a real resource whose pair is not owner-approved.",
       "listing": "no publication badge (unchanged)",
       "detailPage": "PublicationBadge on the resource detail page",
-      "deployed": false,
+      "deployed": true,
       "obligation": "Any new resource staged from now on must carry an owner-approved publicationStatus + releaseChannel in its record, or the build fails."
     }
   },
@@ -3312,7 +3362,7 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "Stage 10.19B — implement publicationStatus + releaseChannel + Preview badge (not started)",
+  "nextStage": "Stage 10.18D — OG-24 controlled deployment + post-deploy QA (not started)",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -3327,5 +3377,13 @@
     "tests": 1636,
     "lintExit": 0,
     "typecheckExit": 0
-  }
+  },
+  "stagedResources": [
+    {
+      "stableResourceId": "res-1024",
+      "stage": "10.18C",
+      "state": "STAGED, NOT DEPLOYED",
+      "note": "Counted in the staged build (31 / 62), not in the live totals (30 / 60)."
+    }
+  ]
 }

@@ -1599,16 +1599,21 @@
       "estimatedTimeReasoning": "INFERRED: the legacy stated no time.",
       "description": "A practical worksheet to help you identify where professional support may be useful, record who you are considering and prepare the questions you want answered before you engage them.",
       "descriptionStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): the exact sentence",
-      "draftStatus": "DRAFT for owner copy review (Stage 10.18): eleven market-neutral questions, member-entered fields, three people or businesses, nine neutral closer-look prompts, next-contact fields and a Where Next table. Not yet owner-approved as copy.",
-      "coverStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.18B): the owner-supplied photograph (1055 x 1491, WebP, SHA-256 92eff0912b3734faa8bbf6757ecedaa9a27b219977a40d6ef93a7d8afeadf93d3) of two people at a table with project notes and documents, calm discussion, natural light; no logos, uniforms, licence or certification cards, unsafe tools, AI or robot imagery, programme label or OG code. Stored as the private prepared-PDF asset workspace/prep/OG-24/assets/professional-support-cover.webp (git-ignored); the legacy Week 4 artwork is not used.",
+      "draftStatus": "OWNER-APPROVED (Stage 10.18, copy review) and rendered, QA'd and approved (Stage 10.18B); staged in Stage 10.18C.",
+      "coverStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.18B): the owner-supplied photograph (1055 x 1491, WebP, SHA-256 92eff0912b3734faa8bbf6757eceda9a27b219977a40d6ef93a7d8afeadf93d3) of two people at a table with project notes and documents, calm discussion, natural light; no logos, uniforms, licence or certification cards, unsafe tools, AI or robot imagery, programme label or OG code. Stored as the private prepared-PDF asset workspace/prep/OG-24/assets/professional-support-cover.webp (git-ignored); the legacy Week 4 artwork is not used.",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
       "collections": [
         "planning-tools"
       ],
       "collectionsStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): planning-tools (YES). The collection is NOT changed until OG-24 is staged and deployed; it is expected to move from 9 to 10 resources then",
-      "relatedResources": [],
-      "relatedResourcesStatus": "PROPOSED, not applied (Stage 10.18): Supplier Comparison Worksheet, Project Support Brief Template, Resilience Product Wishlist, 90-Day Implementation Roadmap, in that order (before, next, also useful, later). Four explicit links would invoke the existing curated-related rule; lib/related.ts is not changed. The links are recorded here only after owner copy approval.",
+      "relatedResources": [
+        "res-1023",
+        "res-1025",
+        "res-1022",
+        "res-1027"
+      ],
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.18C): exactly these four, in this order: Supplier Comparison Worksheet (before), Project Support Brief Template (next), Resilience Product Wishlist (also useful), 90-Day Implementation Roadmap (later). Four explicit links invoke the existing curated-related rule, so no automatic fill is shown; lib/related.ts is not changed. Not used: 90-Day Implementation Roadmap (Advanced).",
       "safetyBlocks": [],
       "approvedSafetyBlocks": [],
       "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-09 (Stage 10.17): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or trade and teaches no technical safety topic.",
@@ -1639,7 +1644,7 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.18) — NOT rendered, NOT staged, NOT a protected resource, no res-ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "migrationState": "STAGED, NOT DEPLOYED (Stage 10.18C) — the owner assigned the resource ID; the record and the two approved Stage 10.18B PDFs are in private-assets. Live is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an implementation companion between the Supplier Comparison Worksheet and the Project Support Brief Template (OG-23 → OG-24 → OG-25): compare suppliers, decide what professional support is needed and who to speak with, then brief the chosen professional. Not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27); not an Emergency Readiness resource."
     }
