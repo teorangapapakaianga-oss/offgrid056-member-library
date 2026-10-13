@@ -64,11 +64,11 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
 });
 
 describe("Stage 10.22A · OG-29 draft copy: the legacy programme index and claims are not carried", () => {
-  it("has no price, currency, percentage, score, ratio, duration, frequency or figure beyond the ten structural row numbers", () => {
+  it("has no price, currency, percentage, score, ratio, duration, frequency or figure at all", () => {
     expect(scanPrices(content.to)).toEqual([]);
     expect(newText).not.toMatch(/[$€£]|\d\s?%|\/\s?\d/);
     const digits = [...text.matchAll(/\d+/g)].map((m) => Number(m[0]));
-    expect(digits).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    expect(digits).toEqual([]);
     expect(text).not.toMatch(/\b(?:hours?|days?|weeks?|months?|years?|daily|weekly|monthly|quarterly|annual(?:ly)?)\b|week by week/i);
   });
   it("is clean under every claim family, sentence by sentence", () => {
@@ -89,7 +89,7 @@ describe("Stage 10.22A · OG-29 draft copy: the legacy programme index and claim
 describe("Stage 10.22A · OG-29 draft copy: the owner's structure", () => {
   it("has the new title and subtitle, and no legacy title", () => {
     expect(allNew).toContain("Household Action<br>Plan");
-    expect(allNew).toContain("A calm, practical worksheet for turning your household's decisions into clear actions and owners.");
+    expect(allNew).toContain("A calm, practical worksheet for turning your household's decisions into clear actions and next steps.");
     expect(allNew).not.toMatch(/OG-29|Day 29|Everything from 30 days/);
   });
   it("has the sections in the approved order", () => {
@@ -102,10 +102,12 @@ describe("Stage 10.22A · OG-29 draft copy: the owner's structure", () => {
     for (const l of ["Household or property:", "Date:", "Our main goal:", "Our main priority:", "What we want to improve:", "Who is involved:", "What have we decided to do?", "Why is this important to us?", "What still needs clarification?", "What are we deliberately not doing yet?"]) expect(newText).toContain(l);
     expect(newText).not.toMatch(/budget amount|how much|amount we|cost of/i);
   });
-  it("has exactly ten action rows with the approved columns and no score, rank, percentage or cadence column", () => {
-    for (const c of ["No.", "Action", "Why it matters", "Owner", "Target date", "Status or notes"]) expect(content.to).toContain(`<th>${c}</th>`);
-    expect((content.to.match(/<tr><td>\d+<\/td><td><\/td><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>/g) ?? []).length).toBe(10);
-    expect(content.to).not.toMatch(/<th>(?:Score|Rank|Percent|Day|Week|Month|Cost|Price|Supplier)/i);
+  it("has exactly ten action rows and exactly the five approved columns (Why it matters and Target date kept, no Next step, no number column)", () => {
+    const head = content.to.match(/<table class="rost-table actions">[\s\S]*?<\/thead>/)![0];
+    expect(head.match(/<th>[^<]*<\/th>/g)!.join("")).toBe("<th>Action</th><th>Why it matters</th><th>Owner</th><th>Target date</th><th>Status / Notes</th>");
+    expect(content.to).not.toMatch(/Next step/);
+    expect((content.to.match(/<tr><td><\/td><td><\/td><td><\/td><td><\/td><td><\/td><\/tr>/g) ?? []).length).toBe(10);
+    expect(head).not.toMatch(/<th>(?:No\.|Score|Rank|Percent|Day|Week|Month|Cost|Price|Supplier)/i);
   });
   it("keeps review timing member-controlled, with one notes area", () => {
     expect(newText).toContain("We will review this plan when:");

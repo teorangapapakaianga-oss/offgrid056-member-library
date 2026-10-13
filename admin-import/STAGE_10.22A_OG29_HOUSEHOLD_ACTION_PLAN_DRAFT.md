@@ -1,5 +1,8 @@
 # Stage 10.22A — OG-29 Household Action Plan: rewrite draft and owner copy review
 
+> **Corrected by Stage 10.22A-CORRECTION** (STAGE_10.22A_CORRECTION_OG29_COPY_ALIGNMENT.md): the action table is now exactly five columns (Action, Why it matters, Owner, Target date, Status / Notes) with no number column, the cover subtitle is the owner-accepted one (...clear actions and next steps.), and the body is 2,357 characters / 7,611 bytes. Where the two reports differ, the correction report is current.
+
+
 **Copy/draft only.** Not rendered, no cover generated, no stable ID, no protected record, not staged, not deployed. The prep tool prints a suggested internal ID `res-1029` (**SUGGESTED / UNASSIGNED**); it is recorded nowhere. OG-29 stays Not started. This report supersedes the earlier Stage 10.22A draft report (`STAGE_10.22A_OG29_COPY_REVIEW.md`, removed): the description, the action columns, the decision and closing sections and the related set were re-issued by the owner and the draft was revised to match.
 
 LIVE (unchanged): **32 protected resources · 64 market files · Planning Tools 11 · Downloads 54 · My Progress 57 · 0 broken links** · Worker `dd11e4e9-6c2d-4dff-a6f7-5233a8150e2e` · rollback `3e53c3a7-eb7a-450d-8f12-5244c04c0d38`. Migration (unchanged): Deployed 32 · Staged 0 · Prepared 0 · Blocked 1 · Merged 1 · Not started 11 = 45. The draft lives only in the review config (`approved-copy.json`, `metadata-review.json`, `program-components.json`; generator `workspace/add-og29-config.mts`) and in git-ignored prep HTML (`workspace/prep/OG-29/`, no PDF).
