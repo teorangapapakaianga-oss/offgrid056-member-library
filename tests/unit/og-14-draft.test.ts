@@ -43,7 +43,7 @@ describe("Stage 10.07 · OG-14 locked metadata", () => {
       const og14 = recs.filter((r) => r.legacyCode === "OG-14" || r.id === "res-1014");
       expect(og14).toHaveLength(1);
       expect(og14[0]).toMatchObject({ id: "res-1014", legacyCode: "OG-14" });
-      expect(recs).toHaveLength(32); // 31 live + res-1028 staged (Stage 10.21C)
+      expect(recs).toHaveLength(32); // all 32 live (Stage 10.21D)
     }
   });
 
@@ -120,7 +120,7 @@ describe("Stage 10.10 · OG-14 is deployed", () => {
   it("is in the Deployed section (not Staged or Not started) of the resource register", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-14 \| Water, Food and Air Household Snapshot \| general \/ worksheet \|/);
-    expect(rr.split("## Staged, not deployed (1)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-14 \|/m);
+    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-14 \|/m);
     expect(rr.split("## Not started (11)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-14 \|/);
   });
 });

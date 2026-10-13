@@ -95,7 +95,7 @@ describe("B and D · the current protected records (when present)", () => {
   const dir = path.join(root, "private-assets/data-resources");
   const recs = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as Record<string, unknown>) : [];
   it.skipIf(recs.length === 0)("all 31 live resources (including res-1024) are approved + private-preview, keep status draft and pass the schema and the shared badge logic", () => {
-    expect(recs).toHaveLength(32); // 31 live + res-1028 staged (Stage 10.21C)
+    expect(recs).toHaveLength(32); // all 32 live (Stage 10.21D)
     for (const r of recs) {
       expect([r.status, r.publicationStatus, r.releaseChannel], String(r.id)).toEqual(["draft", "approved", "private-preview"]);
       expect(ResourceSchema.safeParse(r).success, String(r.id)).toBe(true);

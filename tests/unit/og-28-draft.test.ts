@@ -44,7 +44,7 @@ describe("Stage 10.21A · OG-28 locked metadata", () => {
       expect(recs).toHaveLength(32);
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-28 is staged and deployed/);
-    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.21C\)/);
+    expect(String(meta.migrationState)).toMatch(/^DEPLOYED \(Stage 10\.21D\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.21B\)/);
   });
   it("has the owner-approved four curated related links (Stage 10.21B.1), in order", () => {
