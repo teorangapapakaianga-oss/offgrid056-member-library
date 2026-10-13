@@ -53,3 +53,9 @@ No stable ID assigned (suggested `res-1029` stays unassigned) · no PDF rendered
 
 ## 13. Recommended next step
 Supply a title-free OG-29 cover (or approve an image workflow) and confirm which subtitle to print ("next steps" as accepted, or "owners"). Then resume **Stage 10.22B** (cover insertion, cover CSS, NZ and AU render, page-by-page QA), still with no ID, record, staging or deployment.
+
+## 14. Owner rulings after this stage (2026-10-14)
+1. **Final subtitle (exact):** "A calm, practical worksheet for turning your household's decisions into clear actions and owners." This supersedes the earlier "…clear actions and next steps" version. The draft source (`approved-copy.json` cover-subtitle entry), the test and the prepared NZ and AU HTML now carry it (verified in both prepared files). Body copy is unchanged (NZ and AU 2,353 characters each, body HTML 7,611 bytes each, byte-identical; the measured count includes the cover subtitle, so it fell by four characters because owners is four characters shorter than next steps).
+2. **Action table:** stays exactly five columns (Action, Why it matters, Owner, Target date, Status / Notes) with ten blank, visually unnumbered rows; no number column.
+3. **Cover:** still **COVER_ASSET_REQUIRED**. A title-free OG-29 cover will be supplied separately; no substitute is to be sought, and no search of Downloads, Desktop, sibling or unrelated project folders will be made. Final rendering stays on hold. No PDF exists in `workspace/prep/OG-29` (0 PDFs).
+Re-validation after the subtitle change (actual exit codes): draft QA ALL PASS (0); focused OG-29 tests 17 passed (0); full suite 62 files, 1,689 tests (0); lint (0, 0 errors); typecheck (0); `import:verify-prep` (0); `import:verify-build` (0; 32 records · 64 market files · 0 broken links). Live state unchanged; Worker `dd11e4e9-6c2d-4dff-a6f7-5233a8150e2e`.

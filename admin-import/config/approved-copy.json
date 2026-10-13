@@ -4714,11 +4714,11 @@
       {
         "where": "Cover subtitle",
         "from": "<p class=\"cover-subtitle\">Day 29 — Everything from 30 days on one page</p>",
-        "to": "<p class=\"cover-subtitle\">A calm, practical worksheet for turning your household's decisions into clear actions and next steps.</p>",
+        "to": "<p class=\"cover-subtitle\">A calm, practical worksheet for turning your household's decisions into clear actions and owners.</p>",
         "expectedMatches": 1,
         "approvedBy": "owner",
         "approvedOn": "2026-10-14",
-        "reason": "Removes 'Day 29' and 'Everything from 30 days on one page'; subtitle accepted by the owner in the Stage 10.22A review."
+        "reason": "Removes 'Day 29' and 'Everything from 30 days on one page'; subtitle ruled final by the owner after Stage 10.22B-CORRECTION (exact wording)."
       },
       {
         "where": "Worksheet content (rebuilt)",

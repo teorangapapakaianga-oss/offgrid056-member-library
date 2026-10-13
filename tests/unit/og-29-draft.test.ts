@@ -89,7 +89,8 @@ describe("Stage 10.22A · OG-29 draft copy: the legacy programme index and claim
 describe("Stage 10.22A · OG-29 draft copy: the owner's structure", () => {
   it("has the new title and subtitle, and no legacy title", () => {
     expect(allNew).toContain("Household Action<br>Plan");
-    expect(allNew).toContain("A calm, practical worksheet for turning your household's decisions into clear actions and next steps.");
+    expect(allNew).toContain("A calm, practical worksheet for turning your household's decisions into clear actions and owners.");
+    expect(allNew).not.toContain("clear actions and next steps");
     expect(allNew).not.toMatch(/OG-29|Day 29|Everything from 30 days/);
   });
   it("has the sections in the approved order", () => {

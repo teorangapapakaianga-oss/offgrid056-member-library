@@ -42,3 +42,6 @@ No stable ID assigned · no render · no protected record · no Planning Tools a
 
 ## 13. Readiness
 The copy now matches every owner lock. **Ready for Stage 10.22B — OG-29 final render and visual QA**, once you approve the corrected copy and supply or approve the title-free cover (no ID, staging or deployment unless separately approved). Not started.
+
+> **Superseded in part (2026-10-14):** the owner ruled the final cover subtitle is "...clear actions and owners." (not "...next steps."). Where this report says otherwise, the Stage 10.22B-CORRECTION report (section 14) is current.
+

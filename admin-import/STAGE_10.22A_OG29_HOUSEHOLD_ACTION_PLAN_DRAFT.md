@@ -63,3 +63,6 @@ No stable ID assigned · no PDF rendered · no protected record created · no Pl
 
 ## 13. Readiness for the next separate stage
 **Ready for Stage 10.22B — OG-29 final render and visual QA**, once you approve the copy and supply or approve the cover (no ID, staging or deployment unless separately approved). Not started.
+
+> **Superseded in part (2026-10-14):** the owner ruled the final cover subtitle is "...clear actions and owners." (not "...next steps."). Where this report says otherwise, the Stage 10.22B-CORRECTION report (section 14) is current.
+
