@@ -33,15 +33,18 @@ describe("Stage 10.21A · OG-28 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to help your household agree who looks after what, record a backup for each area and choose a regular time to check in.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-13 \(Stage 10\.21A\)/);
   });
-  it("assigns no resource ID, creates no protected record and does not change Planning Tools", () => {
+  it("Stage 10.21C: res-1028 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged until deployment", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1028");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-28" || r.id === "res-1028")).toEqual([]);
+      const og28 = recs.filter((r) => r.legacyCode === "OG-28" || r.id === "res-1028");
+      expect(og28).toHaveLength(1);
+      expect(og28[0]).toMatchObject({ id: "res-1028", legacyCode: "OG-28" });
+      expect(recs).toHaveLength(32);
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-28 is staged and deployed/);
-    expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
+    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.21C\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.21B\)/);
   });
   it("has the owner-approved four curated related links (Stage 10.21B.1), in order", () => {

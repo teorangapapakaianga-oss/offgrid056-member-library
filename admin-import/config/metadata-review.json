@@ -1707,7 +1707,7 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.21A) — NOT rendered, NOT staged, NOT a protected resource, no resource ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "migrationState": "STAGED, NOT DEPLOYED (Stage 10.21C) — the protected record and the two approved Stage 10.21B.3 PDFs are staged in private-assets for the preview build; not live. Planning Tools stays at ten live resources until deployment.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Planning & Implementation worksheet that turns household priorities into shared responsibility before larger actions are scheduled or carried out: Priority Lock Worksheet → Household Responsibility Roster → 90-Day Implementation Roadmap, with the Emergency Readiness Checklist alongside. Not part of the main planning journey; not an Emergency Readiness resource."
     }
