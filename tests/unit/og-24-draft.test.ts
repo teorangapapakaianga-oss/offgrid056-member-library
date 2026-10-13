@@ -49,7 +49,7 @@ describe("Stage 10.18 · OG-24 locked metadata", () => {
     expect(String(meta.coverStatus)).toMatch(/^OWNER-APPROVED 2026-10-13 \(Stage 10\.18B\)/);
     expect(allNew).toContain('<img src="assets/professional-support-cover.webp" class="cover-img"');
     expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4_ActionPlanPathway|Week 4 Cover|Week1_Foundation|Week2_WaterFoodAir|Week3_/);
-    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.18C\)/);
+    expect(String(meta.migrationState)).toMatch(/^DEPLOYED \(Stage 10\.18D\)/);
   });
   it("answers all five programme-alignment questions", () => {
     const a = meta.programAlignment as Record<string, string>;

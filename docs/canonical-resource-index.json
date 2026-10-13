@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-13",
-  "stage": "10.18C",
+  "stage": "10.18D",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -83,11 +83,9 @@
     ]
   },
   "baseline": {
-    "liveProtectedResources": 30,
-    "liveMarketFiles": 60,
-    "stagedProtectedResources": 1,
-    "stagedBuildProtectedResources": 31,
-    "stagedBuildMarketFiles": 62,
+    "liveProtectedResources": 31,
+    "liveMarketFiles": 62,
+    "stagedProtectedResources": 0,
     "brokenLinks": 0,
     "worker": "see operational registers (not recorded here)"
   },
@@ -3167,7 +3165,7 @@
       "owner": "UNKNOWN_EXISTING_RECORD",
       "version": "UNKNOWN_EXISTING_RECORD",
       "versionDate": "UNKNOWN_EXISTING_RECORD",
-      "firstPublishedToPreview": null,
+      "firstPublishedToPreview": "2026-10-13",
       "stagedRecordPublishedDate": "2026-10-13",
       "sourceFile": {
         "legacyHtml": "OG-24_Professional_Review_Selector.html",
@@ -3179,12 +3177,12 @@
       },
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "status": "draft",
-      "migrationState": "STAGED",
+      "migrationState": "LIVE",
       "publicationStatus": "approved",
       "releaseChannel": "private-preview",
-      "visibleBadge": null,
+      "visibleBadge": "Preview",
       "visibleBadgeInCurrentBuild": "Preview",
-      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.18D); the listings show no publication badge",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
@@ -3193,7 +3191,7 @@
       "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
       "canonicalRoute": "/resources/professional-support-planner/",
       "routeSource": "record.slug (private resource record), confirmed in the staged build",
-      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "routeStatus": "VERIFIED_IN_BUILD",
       "marketAvailability": [
         "NZ",
         "AU"
@@ -3242,7 +3240,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "STAGED, not deployed (Stage 10.18C): the live site has 30 resources; the staged build has 31. Planning Tools is 9 live and 10 in the staged build.",
+        "DEPLOYED (Stage 10.18D) as live protected resource #31 behind Cloudflare Access.",
         "Related links are the four curated resources in the approved order (Supplier Comparison Worksheet, Project Support Brief Template, Resilience Product Wishlist, 90-Day Implementation Roadmap); the Advanced roadmap is not used.",
         "`status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the owner-approved governance state. None of these is an entitlement."
       ],
@@ -3285,7 +3283,7 @@
       "basedOn": "publicationStatus + releaseChannel (approved + private-preview = Preview)",
       "tooltip": "Approved resource in the protected OffGrid056 preview.",
       "tooltipRule": "Exact approved wording; used unless a technical constraint requires a minor punctuation or capitalisation change. It must not imply public release, production entitlement, paid access or a final member launch, and 'not yet approved for members' is not used for the approved private-preview state.",
-      "implemented": "DEPLOYED (Stage 10.19C): the 30 live protected resources show Preview on the resource detail page; the staged resource res-1024 will show it when deployed."
+      "implemented": "DEPLOYED (Stage 10.19C and 10.18D): all 31 live protected resources show Preview on the resource detail page."
     },
     "res1019": {
       "classification": "MODEL / BADGE SEMANTICS ISSUE",
@@ -3362,7 +3360,7 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "Stage 10.18D — OG-24 controlled deployment + post-deploy QA (not started)",
+  "nextStage": "No stage in progress; the next work is the owner's choice (the wider roadmap).",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -3378,12 +3376,5 @@
     "lintExit": 0,
     "typecheckExit": 0
   },
-  "stagedResources": [
-    {
-      "stableResourceId": "res-1024",
-      "stage": "10.18C",
-      "state": "STAGED, NOT DEPLOYED",
-      "note": "Counted in the staged build (31 / 62), not in the live totals (30 / 60)."
-    }
-  ]
+  "stagedResources": []
 }
