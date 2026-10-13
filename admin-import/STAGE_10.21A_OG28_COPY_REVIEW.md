@@ -1,0 +1,49 @@
+# Stage 10.21A — OG-28 Household Responsibility Roster: rewrite and owner copy review
+
+**Copy rewrite for owner review only.** Not rendered, no resource ID, no protected record, not staged, not deployed. The prep tool prints a suggested internal ID `res-1028` (**SUGGESTED / UNASSIGNED**); it is recorded nowhere. OG-28 stays Not started. Live is unchanged: **31 protected resources · 62 market files · Planning Tools 10 · Downloads 53 · My Progress 56 · 0 broken links** · Worker `3e53c3a7-eb7a-450d-8f12-5244c04c0d38`. Registers, records, PDFs, routes, Planning Tools, Cloudflare, Supabase, Railway, the OS and entitlement untouched. The draft is held in the review config (`approved-copy.json`, `metadata-review.json`, `program-components.json`; generator `workspace/add-og28-config.mts`) and prepared into the git-ignored review workspace (`workspace/prep/OG-28/`, HTML only, no PDF).
+
+## 1. Title, description, classification (owner lock)
+**Household Responsibility Roster.** Description (exact): "A practical worksheet to help your household agree who looks after what, record a backup for each area and choose a regular time to check in." General / planning-implementation / planning / worksheet. Difficulty beginner and 20 minutes are inferred (the source states neither) and marked OWNER-REVIEW REQUIRED. Collection planning-tools (future yes; live count stays 10, expected 11 after a future deployment). Slug `household-responsibility-roster` (proposed).
+
+## 2. KEEP / REMOVE mapping (internal; not member-facing)
+**KEEP:** shared household responsibility; primary and backup roles; practice and learning (as a neutral prompt); the regular check-in concept (member-chosen); temporary unavailability; change tracking; household coordination.
+**REMOVE:** the seven prescribed named roles and their duties (solar, battery, generator fuel, inverter, load shedding, tank, pump, filter, greywater, pantry, preserving, wood/gas/pellets, heater servicing, radio, medication, first aid, security); every fixed frequency (daily, weekly, monthly, annual); the Sunday huddle and its agenda; credentials ("Basic electrical safety", "Basic plumbing", "Water testing knowledge", "First aid certificate", "The backup must be trained and capable", "Annual CPR refresher", "Annual professional service"); technical and medical duties; programme framing (Week 4, Day 28, 30-Day Programme, "Day 28 Complete", the 30-day consolidation line); the OG codes OG-28 and OG-29; "Next:" and "Tomorrow"; OFFGRID056.COM and the old cover path; the absolute promises ("Nothing is forgotten", "Everyone knows their role", "Every capable person has a role, a backup, and a training path"); "civil defence warnings"; the Emergency Override Protocol table.
+
+## 3. Section architecture
+Cover (title, approved subtitle) · What This Roster Is For · Our Household · Areas We Look After · Our Responsibility Roster · Our Regular Check-In · If Someone Is Unavailable · Change Log and Notes · Where Next · Where You Are Now · standing emergency-contact and general-disclaimer blocks (injected).
+
+## 4. Complete proposed member-facing copy
+**Cover.** General · Planning · OffGrid056 Member Library · **Household Responsibility Roster** · "A practical worksheet for sharing responsibility, creating backups and keeping household plans clear." · Prepare • Adapt • Thrive.
+
+**What This Roster Is For.** "It helps when more than one person in a household knows how things are looked after. This roster gives you a simple way to decide who looks after each area, who can step in as a backup, and when you will check in with each other." "The aim is clarity, not rigid job titles. One person should not have to remember everything, and roles can change as your circumstances change. Fill in what suits your household, and come back to update it." **How to Use It:** "Start with the areas that matter most to you. Use your own words, write in pencil if you like, and leave anything blank that does not apply."
+
+**Our Household.** Fields: Household or group name · Date started · People taking part · Review note.
+
+**Areas We Look After.** "List the parts of household life you want someone to look after. There are no set areas to choose from." Table (six blank rows): Area · Why it matters to us · Who currently knows this area · Notes.
+
+**Our Responsibility Roster.** "Copy each area across, then choose a primary person and a backup. A backup is someone who can step in when the usual person is busy or away." Table (eight blank rows): Area · Primary person · Backup person · What we want to practise or understand · Notes.
+
+**Our Regular Check-In.** "A short check-in helps everyone stay on the same page. Choose a rhythm that suits your household, and change it whenever you need to." Fields: When do we want to check in? (our preferred rhythm) · What should we quickly review? · Has anything changed? · Does anyone need support? · Does a backup need more practice? · Is anything unclear? · Check-in notes.
+
+**If Someone Is Unavailable.** "Plans work better when you have talked about who can step in. Use these prompts to think it through together." Fields: Which areas need a backup first? · Who can step in? · Is there information we need to make easier to find? · Is there anything we should practise together? · What can wait until the usual person is available?
+
+**Change Log and Notes.** "Record changes as they happen, so the roster stays useful." Table (seven blank rows): Date · What changed · Who is now responsible · Follow-up needed; then Other notes.
+
+**Where Next.** "Use this roster once you know what matters most to your household. The first resource helps you set priorities, and the next ones help you plan and prepare." Before: **Priority Lock Worksheet**, "Choose your first priorities, so you know which areas matter most to your household." Next: **90-Day Implementation Roadmap**, "Turn your plans into phased action when you are ready to schedule the work." Also useful: **Emergency Readiness Checklist**, "Note what your household already has and what still needs organising." (no Later item).
+
+**Where You Are Now.** "You are in Planning & Implementation. This worksheet helps turn your household's priorities into shared responsibility before you schedule or carry out larger actions. Keep it somewhere easy to find, and update it when things change."
+
+## 5. Validation of the proposed copy (prepared NZ and AU files; `workspace/og28-draft-qa.mts`: ALL PASS)
+**NZ and AU body identical:** 2,983 characters each; body HTML byte-identical (8,686 bytes); one market-neutral body, no override. Standing blocks required: **emergency-contact and general-disclaimer only**. Technical safety triggers **0** (the legacy electrical and food-safety topics are recorded REMOVED in the review config). Regulatory candidates **0** and unresolved **0** (the only regulatory-unit candidate is the standing general-disclaimer block, resolved as block-owned). Numeric **Bucket C 0** (two candidates: the live title "90-Day Implementation Roadmap" and the disclaimer block). Price 0; payback 0; warranty 0; payment 0; multiplier 0; comparative 0; outcome 0; assurance 0; survival 0; supply-duration 0; storage 0; target-label 0; legacy-language **0**; content flags **0**. Removed-content hit counts all 0 (OG-28, OG-29, Week, Day, 30-Day Programme, Tomorrow, Next:, Sunday, daily/weekly/monthly/annual, certificate/licence/qualified, CPR/first aid/medication, solar/battery/generator/inverter/electrical, plumbing/greywater/water testing/heater/filter/pump, security/perimeter, civil defence, absolute promises, override). No digits in the body. No exemption, no registry entry. Live-library gate: staged-style scan 32 resources / 64 files, Bucket C 0 (555 candidates); true live 31 / 62 Bucket C 0.
+
+## 6. Related resources, cover and governance
+**Related (owner-approved, by stable ID):** res-1007 Priority Lock Worksheet (before), res-1027 90-Day Implementation Roadmap (next), res-1006 Emergency Readiness Checklist (also useful); no fourth. **Note for the owner:** with three explicit links the curated-related rule (four or more) does not apply, so at staging this page would also show automatic "Same topic" cards after the three links; accept that, or add a fourth link later. **Cover concept (not generated):** a household around a kitchen or dining table with a paper responsibility chart or sticky notes, natural daylight, calm domestic setting, mixed ages if practical, people seen from the side or back; no logos, uniforms, trade or technical tools, medical equipment, certification cards, survival or military imagery, panic, robots, neon or OG code. The draft still references the legacy stand-in only until a cover is supplied (`coverStatus` PENDING). **Governance to apply at staging:** status draft; publicationStatus approved; releaseChannel private-preview; accessTier and entitlementRequirement UNDEFINED_OWNER_DECISION; recommendationEligible false; handoffStatus INACTIVE; approvedHandoffRoute null; entitlementContractStatus NOT_APPROVED.
+
+## 7. Validation (actual results)
+OG-28 draft tests (16) pass. Default-timeout full suite: **61 files, 1,672 tests, all passed** (no 30-second override). Lint **0**; typecheck **0**; `import:verify-prep` **0**; `import:verify-build` **0** (31 records · 62 market files · 0 broken internal links). Stable ID assigned NO; record created NO; staging NO; render NO; deployment NO.
+
+## 8. Owner approvals still required
+1. The copy (and any edits). 2. Difficulty beginner and 20 minutes. 3. Whether three related links are acceptable. 4. The cover (supply an image or approve a workflow). 5. Then, as separate approvals: render, stable ID and staging, deployment.
+
+## 9. Next stage
+**Stage 10.21B — OG-28 final render and visual QA** after your copy approval (no ID or deployment unless separately approved). Not started.

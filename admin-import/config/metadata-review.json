@@ -1647,6 +1647,68 @@
       "migrationState": "DEPLOYED (Stage 10.18D) — live as a protected resource behind Cloudflare Access; the record and the two approved Stage 10.18B PDFs are in the deployed tree.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an implementation companion between the Supplier Comparison Worksheet and the Project Support Brief Template (OG-23 → OG-24 → OG-25): compare suppliers, decide what professional support is needed and who to speak with, then brief the chosen professional. Not part of the main planning journey (OG-01 → … → OG-07 → OG-26 → OG-27); not an Emergency Readiness resource."
+    },
+    "OG-28": {
+      "title": "Household Responsibility Roster",
+      "titleStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A); legacy 'OG-28 Household Responsibility Roster' (code removed publicly)",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): the roster applies to any household area; no single foundation is its subject",
+      "programComponent": "planning-implementation",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): allocating responsibility and agreeing a regular check-in is implementation planning",
+      "programAlignment": {
+        "foundation": "general — the roster applies to any household area; no single foundation is its subject",
+        "programComponent": "planning-implementation — allocating who looks after what, who backs them up and when the household checks in is implementation planning; its output is the household's own roster",
+        "resilienceRole": "helps a household share responsibility so that more than one person knows how things are looked after, record a backup for each area and choose its own check-in rhythm; it supports household independence by making responsibility shared and written down",
+        "guidanceKind": "member-entry planning worksheet — not a technical, medical, safety, legal or compliance guide, a duty or job description, a training or credential requirement, or an emergency procedure",
+        "wordingMatchesRole": "yes — every field is member-entered; the draft names no system, appliance, medical task, credential or fixed frequency and makes no absolute promise; it points to the Priority Lock Worksheet, the 90-Day Implementation Roadmap and the Emergency Readiness Checklist for priorities, scheduling and readiness"
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-REVIEW REQUIRED: inferred (member-written entries; no calculation); the source states none",
+      "difficultySource": "INFERRED: member-written entries; no calculation.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "OWNER-REVIEW REQUIRED: inferred; the source states none (its huddle is fifteen minutes)",
+      "estimatedTimeReasoning": "INFERRED: a first fill-in of names, areas and a roster.",
+      "description": "A practical worksheet to help your household agree who looks after what, record a backup for each area and choose a regular time to check in.",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): the exact sentence",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.21A): member-entered sections only (household, areas, roster, check-in prompts, unavailable-person prompts, change log), a Where Next table and a short position note. Not yet owner-approved as copy.",
+      "coverStatus": "PENDING owner approval: the concept is a household at a kitchen or dining table with a paper responsibility chart or sticky notes, natural daylight, a calm domestic setting, mixed ages if practical, people seen from the side or back; no logos, uniforms, trade or technical tools, medical equipment, certification cards, survival or military imagery, panic, robots, neon or OG code. The image is not generated. The legacy Week 4 programme artwork must not be used in the final render.",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [
+        "planning-tools"
+      ],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): planning-tools (FUTURE YES). The collection is NOT changed until OG-28 is staged and deployed; it is expected to move from 10 to 11 resources then",
+      "relatedResources": [
+        "res-1007",
+        "res-1027",
+        "res-1006"
+      ],
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): exactly three, in this order: Priority Lock Worksheet (before), 90-Day Implementation Roadmap (next), Emergency Readiness Checklist (also useful); no fourth link and no 'later' item. Fewer than four explicit links: the existing related-resource fill still applies to this page, which the owner may want to review at staging; lib/related.ts is not changed.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-13 (Stage 10.21A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or medical task.",
+      "safetyTopicDispositions": {
+        "batteries-and-electrical": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-13",
+          "reason": "The legacy Energy & Power Steward role named solar, battery, inverter, generator fuel and load shedding and 'basic electrical safety'. Removed with the prescribed roles; the roster names no system."
+        },
+        "food-safety-power-cut": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-13",
+          "reason": "The legacy Food & Garden Coordinator role named pantry rotation and preserving. Removed with the prescribed roles; the roster names no food task."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.21A) — NOT rendered, NOT staged, NOT a protected resource, no resource ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Planning & Implementation worksheet that turns household priorities into shared responsibility before larger actions are scheduled or carried out: Priority Lock Worksheet → Household Responsibility Roster → 90-Day Implementation Roadmap, with the Emergency Readiness Checklist alongside. Not part of the main planning journey; not an Emergency Readiness resource."
     }
   }
 }
