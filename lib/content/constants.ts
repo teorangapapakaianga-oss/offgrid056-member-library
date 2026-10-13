@@ -18,6 +18,10 @@ export const DIFFICULTIES = ["beginner", "intermediate", "advanced"] as const;
  * Foundations — every resource keeps its foundation as well.
  */
 export const PROGRAM_COMPONENTS = ["off-grid-living", "resilience-planning", "resilience-emergency", "planning-implementation", "advanced-future"] as const;
+/** Editorial / publication governance state (Stage 10.19B; owner-approved values). Separate from the technical `status` build gate. */
+export const PUBLICATION_STATUSES = ["draft", "review", "approved", "live", "withdrawn", "superseded", "internal"] as const;
+/** Environment / audience state (Stage 10.19B; owner-approved values). */
+export const RELEASE_CHANNELS = ["private-preview", "members"] as const;
 export const COLLECTION_IDS = ["start-here", "planning-tools"] as const;
 export const FILE_FORMATS = ["PDF", "XLSX", "DOCX", "ZIP", "PNG"] as const;
 export const COUNTRIES = ["NZ", "AU", "US", "CA"] as const;

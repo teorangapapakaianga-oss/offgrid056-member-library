@@ -1,4 +1,5 @@
 import type { Difficulty, FoundationId, ResourceTypeId } from "@/lib/content/constants";
+import { publicationBadge } from "@/lib/content/publication";
 import { getFoundation, getResourceType } from "@/lib/content/taxonomy";
 import { DIFFICULTY_LABELS } from "@/lib/format";
 import { FOUNDATION_STYLES } from "@/lib/foundation-style";
@@ -57,16 +58,16 @@ export function DemoBadge() {
 }
 
 /**
- * Only ever seen in a preview build, where drafts are loaded alongside published resources
- * (`OG056_INCLUDE_DRAFTS=1`). A production build never loads a draft, so this never renders there.
- *
- * Without it an imported, unreviewed resource looks exactly like approved content, which is a poor thing to
- * hand someone who is reviewing it.
+ * The publication badge (Stage 10.19B). Computed from publicationStatus + releaseChannel only (see lib/content/publication.ts): an approved resource in
+ * the protected preview shows "Preview". It never reads the technical `status` gate, `premium`, authentication or entitlement, and a missing, unrecognised
+ * or not-yet-approved combination renders nothing (fail closed) instead of a guessed badge.
  */
-export function DraftBadge() {
+export function PublicationBadge({ publicationStatus, releaseChannel }: { publicationStatus?: string; releaseChannel?: string }) {
+  const badge = publicationBadge({ publicationStatus, releaseChannel });
+  if (!badge) return null;
   return (
-    <span className={`${pill} bg-og-charcoal text-og-green`} title="Draft: imported but not yet approved for members">
-      Draft
+    <span className={`${pill} bg-og-charcoal text-og-green`} title={badge.tooltip}>
+      {badge.label}
     </span>
   );
 }

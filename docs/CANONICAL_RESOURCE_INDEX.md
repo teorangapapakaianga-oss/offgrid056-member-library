@@ -1,6 +1,6 @@
 # Canonical resource index
 
-**Stage 10.19A · updated 2026-10-13 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
+**Stage 10.19B · updated 2026-10-13 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
 
 ## Locked Library ↔ OS governance rules
 
@@ -34,6 +34,7 @@
 - **Accepted Stage 10.19 baseline:** 30 protected resources · 60 market files · 0 broken links · 30 canonical index records · 0 duplicate stable IDs · 0 duplicate routes · 0 missing routes · all 60 market files present · 59 test files / 1,636 tests · lint 0 · typecheck 0.
 - **Current 30 resources:** `publicationStatus` **approved**, `releaseChannel` **private-preview**. Protected private-preview resources. NOT public, NOT a production-member release, NOT a paid entitlement, NOT OS entitlement, NOT an OS authentication handoff.
 - **Visible badge:** today "Draft" (detail page only); future **Preview**, computed from `publicationStatus` + `releaseChannel`; never "Draft" for these approved private-preview resources. **Proposed tooltip:** "Approved resource in the protected OffGrid056 preview." (exact wording; it must not imply public release, production entitlement, paid access or a final member launch, and "not yet approved for members" is not used for the approved private-preview state). Not implemented.
+- **Implementation (Stage 10.19B, not deployed):** `publicationStatus` and `releaseChannel` now exist in the resource schema and in the 30 protected records (approved / private-preview); the badge is computed by `lib/content/publication.ts` (approved + private-preview => Preview with the exact tooltip; anything else => no badge, fail closed) and shown on resource detail pages only; the preview build renders Preview; the live Worker still shows Draft until deployment is approved. A new resource staged from now on must carry an owner-approved pair or the build fails.
 - **res-1019 Battery Backup Planner:** MODEL / BADGE SEMANTICS ISSUE; not a resource-specific data error; future approved / private-preview / Preview; not changed separately.
 - **Access and entitlement:** No free or paid tier is assigned. accessTier and entitlementRequirement stay UNDEFINED_OWNER_DECISION on all 30. Authentication must not be treated as entitlement.
 - **OS integration fields (inactive):** `recommendationEligible` false, `handoffStatus` INACTIVE, `approvedHandoffRoute` null, `entitlementContractStatus` NOT_APPROVED.

@@ -17,6 +17,7 @@ import {
   loadLearningPaths,
 } from "../lib/content/repository";
 import { getCategory } from "../lib/content/taxonomy";
+import { isApprovedPublication } from "../lib/content/publication";
 import { PROGRAMME_DAYS } from "../lib/member/types";
 
 const release = process.argv.includes("--release");
@@ -52,6 +53,8 @@ try {
     for (const url of [r.fileUrl, r.thumbnail?.src, ...Object.values(r.marketFiles ?? {}).map((f) => f.fileUrl)]) {
       if (url?.startsWith("/") && !fs.existsSync(path.join(process.cwd(), "public", url))) errors.push(`${at}: file not found: public${url}`);
     }
+    // Fail closed (Stage 10.19B): a real resource must declare an owner-approved publicationStatus + releaseChannel, or it has no honest badge.
+    if (!r.isPlaceholder && !isApprovedPublication(r)) errors.push(`${at}: publicationStatus "${r.publicationStatus ?? "(none)"}" with releaseChannel "${r.releaseChannel ?? "(none)"}" is not an owner-approved combination`);
     if (r.fileUrl?.startsWith("https://") && !r.fileSizeBytes) warnings.push(`${at}: remote file has no fileSizeBytes`);
     if (release && r.isPlaceholder && r.status === "published") errors.push(`${at}: placeholder content in a release build`);
   }

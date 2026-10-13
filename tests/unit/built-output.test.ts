@@ -171,3 +171,21 @@ describe.skipIf(!isPreviewBuildOfTheseRecords)("Stage 9.89 · the built private 
     });
   });
 });
+
+describe.skipIf(recs.length === 0 || !fs.existsSync(path.join(root, "out")))("Stage 10.19B · publication badge in the built output", () => {
+  it("every protected resource page shows Preview with the exact tooltip and no Draft badge; listings show no publication badge", () => {
+    for (const r of recs) {
+      const html = read(`resources/${r.slug}/index.html`);
+      expect(html, r.id).toContain('title="Approved resource in the protected OffGrid056 preview."');
+      expect(html, r.id).toMatch(/>Preview</);
+      expect(html, r.id).not.toContain("Draft: imported but not yet approved for members");
+      expect(html.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<[^>]+>/g, "|"), r.id).not.toMatch(/\|Draft\|/);
+    }
+    for (const p of ["library", "downloads", "planning-tools", "start-here", "progress", "saved"]) expect(read(`${p}/index.html`).replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<[^>]+>/g, "|"), p).not.toMatch(/\|(?:Draft|Preview)\|/);
+  });
+  it("res-1019 route is unchanged and carries the Preview badge", () => {
+    const html = read("resources/battery-backup-planner/index.html");
+    expect(html).toContain("Battery Backup Planner");
+    expect(html).toMatch(/>Preview</);
+  });
+});

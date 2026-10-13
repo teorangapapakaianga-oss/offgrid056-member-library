@@ -15,6 +15,8 @@ import {
   FIVE_FOUNDATIONS,
   FOUNDATION_IDS,
   PROGRAM_COMPONENTS,
+  PUBLICATION_STATUSES,
+  RELEASE_CHANNELS,
   RESOURCE_TYPE_IDS,
   SERVICE_TYPES,
 } from "./constants";
@@ -54,6 +56,10 @@ export const ResourceSchema = z
     premium: z.boolean(),
     isPlaceholder: z.boolean(),
     status: z.enum(["draft", "published", "archived"]),
+    /** editorial / publication governance state (Stage 10.19B); separate from `status`. Declared together with releaseChannel; demo placeholders carry neither. */
+    publicationStatus: z.enum(PUBLICATION_STATUSES).optional(),
+    /** environment / audience state (Stage 10.19B); separate from `status` and from any entitlement. */
+    releaseChannel: z.enum(RELEASE_CHANNELS).optional(),
     thumbnail: z.object({ src: localOrAbsoluteUrl, alt: z.string().min(3) }).optional(),
     fileUrl: localOrAbsoluteUrl.optional(),
     fileFormat: z.enum(FILE_FORMATS).optional(),
@@ -87,6 +93,7 @@ export const ResourceSchema = z
   })
   .strict()
   .superRefine((r, ctx) => {
+    if ((r.publicationStatus === undefined) !== (r.releaseChannel === undefined)) ctx.addIssue({ code: "custom", path: ["publicationStatus"], message: "publicationStatus and releaseChannel are declared together" });
     if (r.downloadable && !r.fileUrl && !r.marketFiles) ctx.addIssue({ code: "custom", path: ["fileUrl"], message: "downloadable resources need a fileUrl or marketFiles" });
     // A market-specific resource must NOT also carry a default file. Any page that reads `fileUrl` directly —
     // the download centre, a programme day, a workshop — would otherwise hand every member one country's

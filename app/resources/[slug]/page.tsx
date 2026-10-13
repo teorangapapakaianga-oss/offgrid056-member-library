@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/breadcrumbs";
 import { CompletionButton, RecordView, SaveButton, StorageNotice } from "@/components/member/member-actions";
-import { DemoBadge, DifficultyBadge, DraftBadge, FeaturedBadge, FoundationBadge, ResourceTypeBadge } from "@/components/resources/badges";
+import { DemoBadge, DifficultyBadge, FeaturedBadge, FoundationBadge, PublicationBadge, ResourceTypeBadge } from "@/components/resources/badges";
 import { DownloadActions } from "@/components/resources/download-actions";
 import { MarketDownload } from "@/components/resources/market-download";
 import { LearningPathStrip } from "@/components/resources/learning-path-views";
@@ -76,7 +76,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
             <ResourceTypeBadge type={r.resourceType} />
             {r.featured && <FeaturedBadge />}
             {r.isPlaceholder && <DemoBadge />}
-            {r.status === "draft" && <DraftBadge />}
+            <PublicationBadge publicationStatus={r.publicationStatus} releaseChannel={r.releaseChannel} />
           </div>
           <h1 className="font-display text-4xl leading-none text-og-charcoal sm:text-5xl">{r.title}</h1>
           <p className="mt-3 text-lg text-og-graphite/90">{r.description}</p>

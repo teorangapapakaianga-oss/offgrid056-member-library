@@ -11,6 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { extractText, detectFileType } from "../parsers/index";
+import { isApprovedPublication } from "../../lib/content/publication";
 
 const ROOT = path.resolve(import.meta.dirname, "..", "..");
 const OUT = path.join(ROOT, "out");
@@ -21,6 +22,8 @@ interface PrivateRecord {
   slug: string;
   title: string;
   status: string;
+  publicationStatus?: string;
+  releaseChannel?: string;
   marketFiles: Record<string, { fileUrl: string }>;
 }
 
@@ -67,6 +70,11 @@ const NZ_ONLY = [
 let failures = 0;
 const rows: string[] = [];
 for (const r of records.sort((a, b) => a.legacyCode.localeCompare(b.legacyCode))) {
+  // Stage 10.19B: every real resource must carry an owner-approved publication pair, so its badge is honest (fail closed).
+  if (!isApprovedPublication(r)) {
+    failures++;
+    rows.push(`✗ ${r.legacyCode} publicationStatus "${r.publicationStatus ?? "(none)"}" / releaseChannel "${r.releaseChannel ?? "(none)"}" is not an owner-approved combination`);
+  }
   if (r.status !== "draft") {
     failures++;
     rows.push(`✗ ${r.legacyCode} record status is "${r.status}", not draft`);
