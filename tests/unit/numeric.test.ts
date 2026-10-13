@@ -214,7 +214,10 @@ describe("blocking mode (Stage 9.50)", () => {
     expect(findings(sourced, "NZ", "OG-08", { claims: [], mode: "report-only" })).toEqual([]);
   });
 
-  it("leaves the whole live library green: every prepared file has zero blocking findings", () => {
+  // Runs every detector over every prepared file, so its duration grows with the library (about 2.8 s alone, about 5 s under full-suite load at 31 resources). The default
+  // timeout is unchanged for every other test; the larger bound only covers the expected scan time and no assertion is relaxed.
+  const LIBRARY_SCAN_TIMEOUT_MS = 20_000;
+  it("leaves the whole live library green: every prepared file has zero blocking findings", { timeout: LIBRARY_SCAN_TIMEOUT_MS }, () => {
     const prepDir = path.join(root, "workspace/prep");
     if (!fs.existsSync(prepDir)) return; // the prepared workspace is local and git-ignored
     const problems: string[] = [];

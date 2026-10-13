@@ -63,6 +63,10 @@ afterAll(() => {
   fs.rmSync(root, { recursive: true, force: true });
 });
 
+// Each scan starts a PowerShell process to spot OneDrive placeholders (about 1.3 s, more under full-suite load), so the tests that scan get a bounded per-test
+// timeout. The default timeout is unchanged for every other test, and no assertion or scan scope is relaxed.
+const SCAN_TIMEOUT_MS = 20_000;
+
 const scanOptions = {
   ignore: { folders: [], filenames: [], extensions: [] },
   limits: { maxTextBytesPerFile: 200000, textExtractionSkipOver: 50_000_000 },
@@ -73,7 +77,7 @@ async function scanFixture() {
 }
 
 describe("scanner", () => {
-  it("finds every file and records size, date, type and checksum", async () => {
+  it("finds every file and records size, date, type and checksum", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const { entries, summary } = await scanFixture();
     expect(entries.length).toBe(11);
     expect(summary.files).toBe(11);
@@ -84,7 +88,7 @@ describe("scanner", () => {
     }
   });
 
-  it("honours ignore rules", async () => {
+  it("honours ignore rules", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const { entries } = await scanSources([{ label: "fixtures", path: root, enabled: true }], {
       ...scanOptions,
       ignore: { folders: ["copy"], filenames: ["note.txt"], extensions: [".png"] },
@@ -95,7 +99,7 @@ describe("scanner", () => {
     expect(entries.filter((e) => e.source.folder.includes("copy"))).toHaveLength(0);
   });
 
-  it("leaves every source file exactly as it found it", async () => {
+  it("leaves every source file exactly as it found it", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const before = new Map<string, { sum: string; mtime: number }>();
     const walk = (dir: string): string[] =>
       fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory() ? walk(path.join(dir, d.name)) : [path.join(dir, d.name)]));
@@ -173,14 +177,14 @@ describe("classification", () => {
     return classify(entry, texts.get(entry.candidateId) as TextBundle);
   };
 
-  it("infers a resource type with evidence", async () => {
+  it("infers a resource type with evidence", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const c = await classifyFixture("OG-08_Water_Storage_Calculator.html");
     expect(c.inferred.resourceType.value).toBe("worksheet");
     expect(c.inferred.tags).toContain("calculator"); // owner decision D9-6
     expect(c.inferred.resourceType.evidence.join(" ")).toMatch(/filename|title/);
   });
 
-  it("infers a foundation with confidence and evidence", async () => {
+  it("infers a foundation with confidence and evidence", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const water = await classifyFixture("OG-08_Water_Storage_Calculator.html");
     expect(water.inferred.foundation.value).toBe("water");
     // "water" itself is an everyday word here, so it is deliberately demoted: the supporting words (litres,
@@ -192,14 +196,14 @@ describe("classification", () => {
     expect(energy.inferred.foundation.value).toBe("energy");
   });
 
-  it("never guesses a foundation for artwork", async () => {
+  it("never guesses a foundation for artwork", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const art = await classifyFixture("artwork.png");
     expect(art.inferred.foundation.value).toBeNull();
     expect(art.inferred.resourceType.value).toBeNull();
     expect(art.status).toBe("NEEDS_REVIEW");
   });
 
-  it("flags index and internal documents for review instead of importing them", async () => {
+  it("flags index and internal documents for review instead of importing them", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const readme = await classifyFixture("README.md");
     expect(readme.status).toBe("NEEDS_REVIEW");
     expect(readme.materialKind).toBe("internal"); // internal material can never reach READY_TO_IMPORT
@@ -331,7 +335,7 @@ describe("duplicate grouping", () => {
     return { candidates, groups };
   };
 
-  it("groups identical files as EXACT and deletes nothing", async () => {
+  it("groups identical files as EXACT and deletes nothing", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const { candidates, groups } = await build();
     const exact = groups.find((g) => g.kind === "EXACT");
     expect(exact).toBeDefined();
@@ -339,13 +343,13 @@ describe("duplicate grouping", () => {
     expect(candidates.every((c) => fs.existsSync(c.source.path))).toBe(true); // nothing removed
   });
 
-  it("groups same-name different-content files as version candidates", async () => {
+  it("groups same-name different-content files as version candidates", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const { groups } = await build();
     const versions = groups.filter((g) => g.kind === "VERSION_CANDIDATE");
     expect(versions.length).toBeGreaterThan(0);
   });
 
-  it("never picks a winner: every group is left for a person to decide", async () => {
+  it("never picks a winner: every group is left for a person to decide", { timeout: SCAN_TIMEOUT_MS }, async () => {
     const { candidates } = await build();
     expect(candidates.every((c) => c.disposition === null)).toBe(true);
     expect(candidates.every((c) => c.importApproved === false)).toBe(true);
