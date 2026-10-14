@@ -42,7 +42,10 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-29 is staged and deployed/);
     expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
-    expect(String(meta.coverStatus)).toMatch(/^PENDING owner approval/);
+    expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.22B\)/);
+    expect(String(meta.coverStatus)).toContain("1B67D0D6829EFBE19B51D2A1D6EAFE13AAC3940309A91C8033E68DAE8905D359");
+    expect(allNew).toContain('<img src="assets/household-action-plan-cover.png" class="cover-img"');
+    expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4_ActionPlanPathway|Week 4 Cover|Week1_Foundation|Week2_WaterFoodAir|Week3_/);
   });
   it("has the owner-approved four curated related links in the metadata order", () => {
     expect(meta.relatedResources).toEqual(["res-1027", "res-1028", "res-1026", "res-1007"]);
