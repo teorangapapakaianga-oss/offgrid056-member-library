@@ -1774,6 +1774,68 @@
       "migrationState": "DEPLOYED (Stage 10.22D) — live as a protected resource behind Cloudflare Access; the record and the two approved Stage 10.22B.1 PDFs are in the deployed tree. Planning Tools is now twelve live resources.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Planning & Implementation worksheet that gathers a household's decisions into one owned action list: Priority Lock Worksheet and 3-Tier Budget Planner → 90-Day Implementation Roadmap → Household Action Plan → Household Responsibility Roster. Not an Emergency Readiness resource and not a programme index."
+    },
+    "OG-30": {
+      "title": "Long-Term Direction Planner",
+      "titleStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A); legacy 'OG-30 Upgrade Pathway Decision Matrix' (code removed publicly)",
+      "proposedSlug": "long-term-direction-planner",
+      "proposedSlugStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A): chosen so that the slug sorts after 'household-action-plan' in the related-resource engine's slug order and does not change the automatic related cards on existing pages",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A): the direction applies to any household area; no single foundation is its subject",
+      "programComponent": "advanced-future",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A): a longer-term direction beyond the near-term plan, alongside the Off-Grid System Architecture Planner",
+      "programAlignment": {
+        "foundation": "general — the direction applies to any household area; no single foundation is its subject",
+        "programComponent": "advanced-future — helps a household decide how far it wants to take its resilience plans over the longer term and choose a first project to explore; its output is the household's own direction",
+        "resilienceRole": "helps a household step back from immediate tasks, compare broad directions in its own words, choose one to explore and name a first project; it supports household independence by making the longer-term choice deliberate and written down",
+        "guidanceKind": "member-entry planning worksheet — not a technical, safety, legal, financial or compliance guide, a pathway matrix, a cost or duration estimate, or an emergency procedure",
+        "wordingMatchesRole": "yes — every field is member-entered; the draft names no system, appliance, cost, duration, deadline or fixed cadence, makes no promise and does not recreate the legacy four pathways; it points to the 90-Day Implementation Roadmap, the Off-Grid System Architecture Planner and the 3-Tier Budget Planner"
+      },
+      "alignmentAnswers": {
+        "problem": "It helps a household decide how far it wants to take its resilience plans and choose a first project, without prescribing systems, costs or timelines.",
+        "standalone": "No other live resource asks the long-term direction question: the 3-Tier Budget Planner handles budget tiers, the Household Action Plan and the 90-Day Implementation Roadmap handle near-term actions, and the Off-Grid System Architecture Planner designs systems.",
+        "mustNotBecome": "A four-pathway matrix, a cost or autonomy-duration table, a twelve-month calendar, a technical or system guide, a legal or compliance guide, or a programme-completion message."
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A)",
+      "difficulty": "intermediate",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A)",
+      "difficultySource": "OWNER-APPROVED: member-written decisions about longer-term trade-offs; no calculation.",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A)",
+      "estimatedTimeReasoning": "OWNER-APPROVED: a first fill-in of the baseline, up to three directions, a chosen direction and a first project.",
+      "description": "A practical worksheet to help your household decide how far you want to take your resilience plans, choose a direction and identify the first project to explore.",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A): the exact sentence",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.23A): member-entered sections only (baseline, three direction cards, chosen direction, first project, revisit prompts, notes), a three-row Where Next table and a closing summary. Not yet owner-approved as copy.",
+      "coverStatus": "PENDING owner approval: record only, nothing generated. Future direction: a title-free image of a couple, or a household with an older child, at a table near a window in a calm home, with a view toward a garden or open land, notebooks and planning papers, natural daylight and a clear upper area for the template title 'Long-Term Direction Planner'; no readable generated text, OG code, logos, solar panels, batteries, tools, uniforms or survival imagery. The legacy Week 4 programme artwork is not used in the final render.",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A): Planning Tools = NO. The resource is in no collection (consistent with the Off-Grid System Architecture Planner); Planning Tools stays at twelve live resources",
+      "relatedResources": [
+        "res-1027",
+        "res-1512",
+        "res-1026",
+        "res-1021"
+      ],
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A): exactly four, in this metadata order: 90-Day Implementation Roadmap (before, res-1027), Off-Grid System Architecture Planner (next, res-1512), 3-Tier Budget Planner (also useful, res-1026), Home Energy & Shelter Upgrade Plan (later, res-1021). Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed. The printed Where Next shows three rows (before, next, also useful); res-1021 is metadata only.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.23A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or procedure.",
+      "safetyTopicDispositions": {
+        "batteries-and-electrical": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-14",
+          "reason": "The legacy Pathway B and Pathway C named solar battery expansion and an off-grid solar + battery install. Removed with the four pathways; the planner names no system."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.23A) — NOT rendered, NOT staged, NOT a protected resource, no resource ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an Advanced Future worksheet that follows near-term planning and precedes system design: 90-Day Implementation Roadmap → Long-Term Direction Planner → Off-Grid System Architecture Planner, with the 3-Tier Budget Planner alongside. Not an Emergency Readiness resource and not a programme completion page."
     }
   }
 }
