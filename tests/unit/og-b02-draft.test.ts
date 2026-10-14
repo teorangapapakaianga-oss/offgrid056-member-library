@@ -19,7 +19,8 @@ const ac = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/appr
 const meta = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/metadata-review.json"), "utf8")) as { resources: Record<string, Record<string, unknown>> }).resources["OG-B02"];
 const pc = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/program-components.json"), "utf8")) as { classificationsDecided: Record<string, string> };
 const content = ac.find((c) => c.where === "Sheet content (rebuilt)")!;
-const allNew = content.to;
+const cover = ac.find((c) => c.where === "Cover and page structure")!;
+const allNew = `${cover.to}\n${content.to}`;
 const newText = memberFacingText(`<div class="content">${allNew}</div>`);
 const sentences = newText.split(/(?<=[.!?])\s+|\n/).map((s) => s.trim()).filter(Boolean);
 const PRIV = "This sheet does not ask for account numbers, policy numbers, passwords or access codes.";
@@ -48,11 +49,36 @@ describe("Stage 10.24A · OG-B02 locked metadata", () => {
     const pdfs = path.join(root, "private-assets/resources");
     if (fs.existsSync(pdfs)) expect(fs.readdirSync(pdfs).filter((f) => /household-contacts-sheet/.test(f))).toEqual([]);
     expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
-    expect(String(meta.coverStatus)).toMatch(/^PENDING/);
+    expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.24B\)/);
     expect(String(meta.coverStatus)).toContain("OGB02_COVER_v1 — Household Contacts Sheet");
-    expect(String(meta.coverStatus)).toContain("OGB02_Household-Contacts-Sheet_Cover_v1.png");
-    expect(allNew).not.toMatch(/<img /);
+    expect(String(meta.coverStatus)).toContain("37483DF484FCFD763C05DD1AC4ADAEC423ED9E817730AFF4426DB17DF0ED4854");
+    expect(String(meta.coverStatus)).toContain("4FC1CAF594831C390AC2DC5232481499E7C7CF25886BD7B0BA83703826049022");
+    expect(allNew).toContain('<img src="assets/household-contacts-sheet-cover.png" class="cover-img"');
+    expect((allNew.match(/<img /g) ?? []).length).toBe(1);
+    expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4|Cover\.jpg|OG30_|long-term-direction-planner-cover/);
   });
+  it("Stage 10.24B: the rendered NZ and AU PDFs in the git-ignored prep folder (when present) are the approved renders: 8 pages, exact title, one cover, identical body text", async () => {
+    const dir = path.join(root, "workspace/prep/OG-B02");
+    const nz = path.join(dir, "household-contacts-sheet.NZ.pdf"), au = path.join(dir, "household-contacts-sheet.AU.pdf");
+    if (!fs.existsSync(nz) || !fs.existsSync(au)) return;
+    const { PDFParse } = await import("pdf-parse");
+    const texts: string[] = [];
+    for (const f of [nz, au]) {
+      const raw = fs.readFileSync(f);
+      const parser = new PDFParse({ data: new Uint8Array(raw) });
+      const { pages = [] } = await parser.getText();
+      expect(pages).toHaveLength(8);
+      const s = raw.toString("latin1");
+      expect(s).toMatch(/\/Title/);
+      const per = pages.map((p: { text?: string }) => (p.text ?? "").replace(/\s+/g, " ").trim());
+      expect((per[0].match(/Household Contacts Sheet/g) ?? []).length).toBe(1);
+      expect(per[0]).toContain("A calm, simple place to keep your household’s key contact details together.");
+      expect(per.join(" ")).not.toMatch(/OG-B02|OFFGRID056\.COM|yearly|12 months|Emergency Kit|Civil Defence \/ Emergency Services/i);
+      expect(per.join(" ")).not.toMatch(/Professional Support/);
+      texts.push([per[1].slice(per[1].indexOf("About This Sheet")), ...per.slice(2, 7), per[7].slice(0, per[7].indexOf("Before you start"))].join(" | "));
+    }
+    expect(texts[0]).toBe(texts[1]);
+  }, 30000);
   it("has the owner-approved four curated related links in the metadata order, with the exact canonical titles", () => {
     expect(meta.relatedResources).toEqual(["res-1006", "res-1014", "res-1028", "res-1024"]);
     const dir = path.join(root, "private-assets/data-resources");
@@ -149,7 +175,7 @@ describe("Stage 10.24A · OG-B02 draft copy: the owner's structure", () => {
     expect(allNew).toContain("Prepare • Adapt • Thrive");
     expect(allNew).toContain("A calm, simple place to keep your household’s key contact details together.");
     expect(allNew).not.toMatch(/OG-B02|Emergency Contacts &|Info Sheet|OFFGRID056\.COM|UPDATE THIS SHEET/i);
-    expect(ac.find((c) => c.where === "Page title")!.to).toBe("<title>Household Contacts Sheet — OffGrid056</title>");
+    expect(ac.map((c) => c.to).join("\n")).not.toMatch(/Emergency Contacts &|Info Sheet/);
   });
   it("has the sections in the approved order", () => {
     const order = ["About This Sheet", "Our Household", "People We Can Contact", "Health & Support Contacts", "Home & Essential Service Contacts", "Other Useful Contacts", "Where We Keep Important Information", "Notes", "Where Next", "Where You Are Now"];
