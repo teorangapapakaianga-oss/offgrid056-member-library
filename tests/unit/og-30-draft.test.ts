@@ -42,7 +42,10 @@ describe("Stage 10.23A · OG-30 locked metadata", () => {
       expect(recs.filter((r) => r.legacyCode === "OG-30" || r.id === "res-1030" || r.slug === "long-term-direction-planner")).toEqual([]);
     }
     expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
-    expect(String(meta.coverStatus)).toMatch(/^PENDING owner approval/);
+    expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.23B\)/);
+    expect(String(meta.coverStatus)).toContain("23DAB88CEBD189911CA0FEDAB0B8FA4381AC157C20FF07644B805DABD1FFF0FD");
+    expect(allNew).toContain('<img src="assets/long-term-direction-planner-cover.png" class="cover-img"');
+    expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4_ActionPlanPathway|Week 4 Cover|Week1_Foundation|Week2_WaterFoodAir|Week3_/);
   });
   it("has the owner-approved four curated related links in the metadata order", () => {
     expect(meta.relatedResources).toEqual(["res-1027", "res-1512", "res-1026", "res-1021"]);
