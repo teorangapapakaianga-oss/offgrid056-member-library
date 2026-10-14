@@ -1771,7 +1771,7 @@
         }
       },
       "recordStatus": "draft",
-      "migrationState": "STAGED, NOT DEPLOYED (Stage 10.22C) — the protected record and the two approved Stage 10.22B.1 PDFs are staged in private-assets for the preview build; not live. Planning Tools stays at eleven live resources until deployment.",
+      "migrationState": "DEPLOYED (Stage 10.22D) — live as a protected resource behind Cloudflare Access; the record and the two approved Stage 10.22B.1 PDFs are in the deployed tree. Planning Tools is now twelve live resources.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Planning & Implementation worksheet that gathers a household's decisions into one owned action list: Priority Lock Worksheet and 3-Tier Budget Planner → 90-Day Implementation Roadmap → Household Action Plan → Household Responsibility Roster. Not an Emergency Readiness resource and not a programme index."
     }

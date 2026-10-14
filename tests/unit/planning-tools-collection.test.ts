@@ -65,7 +65,7 @@ describe.skipIf(!fs.existsSync(recDir))("Stage 9.78B · the protected records", 
   const recs = fs.readdirSync(recDir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(recDir, f), "utf8")) as { id: string; legacyCode: string; title: string; collections: string[]; programComponent: string; relatedResources: string[] });
   const by = (code: string) => recs.find((r) => r.legacyCode === code)!;
 
-  it("exactly twelve protected records are in Planning Tools (the seven of Stage 9.78B, OG-04, OG-23 and OG-24: ten live after Stage 10.18D; OG-28 deployed in Stage 10.21D: eleven live; OG-29 staged in Stage 10.22C: twelve staged), with these ids and titles", () => {
+  it("exactly twelve protected records are in Planning Tools (the seven of Stage 9.78B, OG-04, OG-23 and OG-24: ten live after Stage 10.18D; OG-28 deployed in Stage 10.21D: eleven live; OG-29 deployed in Stage 10.22D: twelve live), with these ids and titles", () => {
     const members = recs.filter((r) => r.collections?.includes("planning-tools")).map((r) => `${r.legacyCode} ${r.id} ${r.title}`).sort();
     expect(members).toEqual([
       "OG-04 res-1004 Property Type Review",

@@ -44,7 +44,7 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
       expect(recs).toHaveLength(33);
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-29 is staged and deployed/);
-    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.22C\)/);
+    expect(String(meta.migrationState)).toMatch(/^DEPLOYED \(Stage 10\.22D\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.22B\)/);
     expect(String(meta.coverStatus)).toContain("1B67D0D6829EFBE19B51D2A1D6EAFE13AAC3940309A91C8033E68DAE8905D359");
     expect(allNew).toContain('<img src="assets/household-action-plan-cover.png" class="cover-img"');
