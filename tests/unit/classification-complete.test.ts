@@ -20,7 +20,7 @@ const config = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/p
 
 describe.skipIf(!hasPrivate)("Stage 9.73 · classification of every protected resource", () => {
   it("covers all 28 protected resources (the 27 live ones plus OG-12, staged in Stage 10.04)", () => {
-    expect(records).toHaveLength(33); // 32 live + res-1029 staged (Stage 10.22C)
+    expect(records).toHaveLength(34); // 33 live + res-1030 staged (Stage 10.23C)
     expect(records.find((r) => r.legacyCode === "OG-03")?.programComponent).toBe("planning-implementation");
     expect(records.find((r) => r.legacyCode === "OG-04")?.programComponent).toBe("resilience-planning");
     expect(records.find((r) => r.legacyCode === "OG-06")?.programComponent).toBe("resilience-emergency");
@@ -63,7 +63,7 @@ describe.skipIf(!hasPrivate)("Stage 9.73 · classification of every protected re
     }
     const advanced = records.filter((r) => r.programComponent === "advanced-future").map((r) => r.legacyCode).sort();
     // Stage 9.73A (owner): advanced-future is reserved for integrated whole-property, multi-system or specialist architecture.
-    expect(advanced).toEqual(["OG-B12"]);
+    expect(advanced).toEqual(["OG-30", "OG-B12"]); // OG-30 Long-Term Direction Planner: owner-approved advanced-future (Stage 10.23A)
     expect(records.find((r) => r.legacyCode === "OG-B07")?.programComponent, "OG-B07 is an advanced single-system solar resource").toBe("off-grid-living");
     expect(records.find((r) => r.legacyCode === "OG-B10")?.programComponent).toBe("planning-implementation");
   });

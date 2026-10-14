@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -34,14 +35,26 @@ describe("Stage 10.23A · OG-30 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to help your household decide how far you want to take your resilience plans, choose a direction and identify the first project to explore.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-14 \(Stage 10\.23A\)/);
   });
-  it("assigns no resource ID, creates no protected record and does not change Planning Tools", () => {
+  it("Stage 10.23C: res-1030 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1030");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
-      const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string; slug: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-30" || r.id === "res-1030" || r.slug === "long-term-direction-planner")).toEqual([]);
+      const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as Record<string, unknown> & { legacyCode: string; id: string; slug: string });
+      const og30 = recs.filter((r) => r.legacyCode === "OG-30" || r.id === "res-1030" || r.slug === "long-term-direction-planner");
+      expect(og30).toHaveLength(1);
+      expect(og30[0]).toMatchObject({
+        id: "res-1030", slug: "long-term-direction-planner", legacyCode: "OG-30", title: "Long-Term Direction Planner", foundation: "general", programComponent: "advanced-future", category: "planning", resourceType: "worksheet", difficulty: "intermediate", estimatedTime: 30,
+        status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", collections: [], tags: [], premium: false, isPlaceholder: false, downloadable: true,
+        relatedResources: ["res-1027", "res-1512", "res-1026", "res-1021"], description: meta.description,
+        marketFiles: { NZ: { fileUrl: "/resources/long-term-direction-planner.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/long-term-direction-planner.AU.pdf", fileFormat: "PDF" } },
+      });
+      expect(recs).toHaveLength(34);
+      expect(recs.filter((r) => (r.collections as string[] | undefined)?.includes("planning-tools"))).toHaveLength(12);
+      const sha = (f: string) => crypto.createHash("sha256").update(fs.readFileSync(f)).digest("hex");
+      expect(sha(path.join(root, "private-assets/resources/long-term-direction-planner.NZ.pdf"))).toBe("eca257980ea8b3cd439a0947f07d2e42e5aa18d7f1592452b941a3f5cd1cbcbe");
+      expect(sha(path.join(root, "private-assets/resources/long-term-direction-planner.AU.pdf"))).toBe("a29643746bbeecdcf0229426de1928b930cf36e4796c0b982c6782a0c9d413ff");
     }
-    expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
+    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.23C\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.23B\)/);
     expect(String(meta.coverStatus)).toContain("23DAB88CEBD189911CA0FEDAB0B8FA4381AC157C20FF07644B805DABD1FFF0FD");
     expect(allNew).toContain('<img src="assets/long-term-direction-planner-cover.png" class="cover-img"');

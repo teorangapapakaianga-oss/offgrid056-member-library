@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-14",
-  "stage": "10.22D",
+  "stage": "10.23C",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -85,9 +85,11 @@
   "baseline": {
     "liveProtectedResources": 33,
     "liveMarketFiles": 66,
-    "stagedProtectedResources": 0,
+    "stagedProtectedResources": 1,
     "brokenLinks": 0,
-    "worker": "see operational registers (not recorded here)"
+    "worker": "see operational registers (not recorded here)",
+    "stagedBuildProtectedResources": 34,
+    "stagedBuildMarketFiles": 68
   },
   "resources": [
     {
@@ -3471,6 +3473,111 @@
         "filesPresentInBuild": true,
         "registerRowFound": true
       }
+    },
+    {
+      "stableResourceId": "res-1030",
+      "legacyCode": "OG-30",
+      "title": "Long-Term Direction Planner",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "advanced-future",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
+      "firstPublishedToPreview": null,
+      "stagedRecordPublishedDate": "2026-10-14",
+      "sourceFile": {
+        "legacyHtml": "OG-30_Upgrade_Pathway_Decision_Matrix.html",
+        "legacyPdf": "OG-30_Upgrade_Pathway_Decision_Matrix.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-30",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-30",
+        "protectedRecord": "private-assets/data-resources/long-term-direction-planner.private.json (git-ignored)"
+      },
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
+      "status": "draft",
+      "migrationState": "STAGED",
+      "publicationStatus": "approved",
+      "releaseChannel": "private-preview",
+      "visibleBadge": null,
+      "visibleBadgeInCurrentBuild": "Preview",
+      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/long-term-direction-planner/",
+      "routeSource": "record.slug (private resource record), confirmed in the staged build",
+      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/long-term-direction-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/long-term-direction-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "eca257980ea8b3cd439a0947f07d2e42e5aa18d7f1592452b941a3f5cd1cbcbe",
+          "bytes": 4075119,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/long-term-direction-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/long-term-direction-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "a29643746bbeecdcf0229426de1928b930cf36e4796c0b982c6782a0c9d413ff",
+          "bytes": 4074987,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
+      "collections": [],
+      "relatedResources": [
+        "res-1027",
+        "res-1512",
+        "res-1026",
+        "res-1021"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "STAGED, not deployed (Stage 10.23C): the live site has 33 resources; the staged build has 34. Planning Tools is 12 live and 12 in the staged build (this resource is in no collection).",
+        "Related links are the four curated resources in the approved order (90-Day Implementation Roadmap, Off-Grid System Architecture Planner, 3-Tier Budget Planner, Home Energy & Shelter Upgrade Plan); the fourth link keeps the automatic related fill suppressed. The printed PDF Where Next lists three rows (res-1021 is metadata only).",
+        "`status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the owner-approved governance state. None of these is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "publicationFieldsInRecord": true,
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
     }
   ],
   "definitions": {
@@ -3574,7 +3681,7 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "No stage in progress; the next work is the owner's choice (the wider roadmap).",
+  "nextStage": "Stage 10.23D — OG-30 controlled deployment + post-deploy QA (needs separate owner approval; not started)",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -3590,5 +3697,12 @@
     "lintExit": 0,
     "typecheckExit": 0
   },
-  "stagedResources": []
+  "stagedResources": [
+    {
+      "stableResourceId": "res-1030",
+      "stage": "10.23C",
+      "state": "STAGED, NOT DEPLOYED",
+      "note": "Counted in the staged build (34 / 68), not in the live totals (33 / 66)."
+    }
+  ]
 }
