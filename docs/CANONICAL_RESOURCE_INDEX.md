@@ -1,6 +1,6 @@
 # Canonical resource index
 
-**Stage 10.23C · updated 2026-10-14 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
+**Stage 10.23D · updated 2026-10-14 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
 
 ## Locked Library ↔ OS governance rules
 
@@ -149,7 +149,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 }
 ```
 
-## Index (34 records: 33 live, 1 staged)
+## Index (34 live resources)
 
 **res-1024 Professional Support Planner was deployed in Stage 10.18D** and is live resource #31 (31 resources, 62 market files).
 
@@ -157,7 +157,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 
 **res-1029 Household Action Plan was deployed in Stage 10.22D** and is live resource #33 (33 resources, 66 market files).
 
-**res-1030 Long-Term Direction Planner is STAGED, not deployed (Stage 10.23C):** it is counted in the staged build (34 resources, 68 market files) and not in the live totals (33, 66).
+**res-1030 Long-Term Direction Planner was deployed in Stage 10.23D** and is live resource #34 (34 resources, 68 market files).
 
 ### Identity and classification
 
@@ -235,7 +235,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1024 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 | res-1028 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 | res-1029 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
-| res-1030 | draft | approved | private-preview | STAGED | — (staged: Preview) | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1030 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 
 ### Ownership, version and review (missing values are explicit)
 
@@ -274,7 +274,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1024 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-13 |
 | res-1028 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-14 |
 | res-1029 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-14 |
-| res-1030 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | not yet deployed |
+| res-1030 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-14 |
 
 ### Source and downloads
 

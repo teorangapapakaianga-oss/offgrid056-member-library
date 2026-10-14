@@ -54,7 +54,7 @@ describe("Stage 10.23A · OG-30 locked metadata", () => {
       expect(sha(path.join(root, "private-assets/resources/long-term-direction-planner.NZ.pdf"))).toBe("eca257980ea8b3cd439a0947f07d2e42e5aa18d7f1592452b941a3f5cd1cbcbe");
       expect(sha(path.join(root, "private-assets/resources/long-term-direction-planner.AU.pdf"))).toBe("a29643746bbeecdcf0229426de1928b930cf36e4796c0b982c6782a0c9d413ff");
     }
-    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.23C\)/);
+    expect(String(meta.migrationState)).toMatch(/^DEPLOYED \(Stage 10\.23D\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.23B\)/);
     expect(String(meta.coverStatus)).toContain("23DAB88CEBD189911CA0FEDAB0B8FA4381AC157C20FF07644B805DABD1FFF0FD");
     expect(allNew).toContain('<img src="assets/long-term-direction-planner-cover.png" class="cover-img"');

@@ -41,7 +41,7 @@ describe("Stage 10.18 · OG-24 locked metadata", () => {
       const og24 = recs.filter((r) => r.legacyCode === "OG-24" || r.id === "res-1024");
       expect(og24).toHaveLength(1);
       expect(og24[0]).toMatchObject({ id: "res-1024", legacyCode: "OG-24" });
-      expect(recs).toHaveLength(34); // 33 live + res-1030 staged (Stage 10.23C)
+      expect(recs).toHaveLength(34); // all 34 live (res-1030 deployed in Stage 10.23D)
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-24 is staged and deployed/);
     expect(meta.relatedResources).toEqual(["res-1023", "res-1025", "res-1022", "res-1027"]);
