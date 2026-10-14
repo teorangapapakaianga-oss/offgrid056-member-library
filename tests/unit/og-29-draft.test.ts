@@ -33,15 +33,18 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to help your household turn its main resilience decisions into a clear list of actions, owners and next steps.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-14 \(Stage 10\.22A\)/);
   });
-  it("assigns no resource ID, creates no protected record and does not change Planning Tools", () => {
+  it("Stage 10.22C: res-1029 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged until deployment", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1029");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-29" || r.id === "res-1029")).toEqual([]);
+      const og29 = recs.filter((r) => r.legacyCode === "OG-29" || r.id === "res-1029");
+      expect(og29).toHaveLength(1);
+      expect(og29[0]).toMatchObject({ id: "res-1029", legacyCode: "OG-29" });
+      expect(recs).toHaveLength(33);
     }
     expect(String(meta.collectionsStatus)).toMatch(/NOT changed until OG-29 is staged and deployed/);
-    expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
+    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.22C\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.22B\)/);
     expect(String(meta.coverStatus)).toContain("1B67D0D6829EFBE19B51D2A1D6EAFE13AAC3940309A91C8033E68DAE8905D359");
     expect(allNew).toContain('<img src="assets/household-action-plan-cover.png" class="cover-img"');

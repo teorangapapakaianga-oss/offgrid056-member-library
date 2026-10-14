@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-14",
-  "stage": "10.21D",
+  "stage": "10.22C",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -85,7 +85,9 @@
   "baseline": {
     "liveProtectedResources": 32,
     "liveMarketFiles": 64,
-    "stagedProtectedResources": 0,
+    "stagedProtectedResources": 1,
+    "stagedBuildProtectedResources": 33,
+    "stagedBuildMarketFiles": 66,
     "brokenLinks": 0,
     "worker": "see operational registers (not recorded here)"
   },
@@ -3364,6 +3366,113 @@
         "filesPresentInBuild": true,
         "registerRowFound": true
       }
+    },
+    {
+      "stableResourceId": "res-1029",
+      "legacyCode": "OG-29",
+      "title": "Household Action Plan",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "planning-implementation",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
+      "firstPublishedToPreview": null,
+      "stagedRecordPublishedDate": "2026-10-14",
+      "sourceFile": {
+        "legacyHtml": "OG-29_30Day_Master_Action_Plan.html",
+        "legacyPdf": "OG-29_30Day_Master_Action_Plan.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-29",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-29",
+        "protectedRecord": "private-assets/data-resources/household-action-plan.private.json (git-ignored)"
+      },
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
+      "status": "draft",
+      "migrationState": "STAGED",
+      "publicationStatus": "approved",
+      "releaseChannel": "private-preview",
+      "visibleBadge": null,
+      "visibleBadgeInCurrentBuild": "Preview",
+      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/household-action-plan/",
+      "routeSource": "record.slug (private resource record), confirmed in the staged build",
+      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/household-action-plan.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/household-action-plan.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "b8a5432752acf97721064e22f150b02768226950a72a7f4afcee19e3db6b5613",
+          "bytes": 3416494,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/household-action-plan.AU.pdf",
+          "expectedSuffixedRoute": "/resources/household-action-plan.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "8781aea47ad7a393826dfe1d3e66d1d7fcfada0e8e50469fda1147342a7aab3c",
+          "bytes": 3416184,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
+      "collections": [
+        "planning-tools"
+      ],
+      "relatedResources": [
+        "res-1027",
+        "res-1028",
+        "res-1007",
+        "res-1026"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "STAGED, not deployed (Stage 10.22C): the live site has 32 resources; the staged build has 33. Planning Tools is 11 live and 12 in the staged build.",
+        "Related links are the four curated resources in the approved order (90-Day Implementation Roadmap, Household Responsibility Roster, Priority Lock Worksheet, 3-Tier Budget Planner); the fourth link exists to suppress the automatic related fill. The printed PDF Where Next lists three rows (res-1026 is metadata only).",
+        "`status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the owner-approved governance state. None of these is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "publicationFieldsInRecord": true,
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
     }
   ],
   "definitions": {
@@ -3467,7 +3576,7 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "No stage in progress; the next work is the owner's choice (the wider roadmap).",
+  "nextStage": "Stage 10.22D — OG-29 controlled deployment + post-deploy QA (not started)",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -3483,5 +3592,12 @@
     "lintExit": 0,
     "typecheckExit": 0
   },
-  "stagedResources": []
+  "stagedResources": [
+    {
+      "stableResourceId": "res-1029",
+      "stage": "10.22C",
+      "state": "STAGED, NOT DEPLOYED",
+      "note": "Counted in the staged build (33 / 66), not in the live totals (32 / 64)."
+    }
+  ]
 }

@@ -65,7 +65,7 @@ describe.skipIf(!fs.existsSync(recDir))("Stage 9.78B · the protected records", 
   const recs = fs.readdirSync(recDir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(recDir, f), "utf8")) as { id: string; legacyCode: string; title: string; collections: string[]; programComponent: string; relatedResources: string[] });
   const by = (code: string) => recs.find((r) => r.legacyCode === code)!;
 
-  it("exactly eleven protected records are in Planning Tools (the seven of Stage 9.78B, OG-04, OG-23 and OG-24: ten live after Stage 10.18D; OG-28 staged in Stage 10.21C: eleven staged), with these ids and titles", () => {
+  it("exactly twelve protected records are in Planning Tools (the seven of Stage 9.78B, OG-04, OG-23 and OG-24: ten live after Stage 10.18D; OG-28 deployed in Stage 10.21D: eleven live; OG-29 staged in Stage 10.22C: twelve staged), with these ids and titles", () => {
     const members = recs.filter((r) => r.collections?.includes("planning-tools")).map((r) => `${r.legacyCode} ${r.id} ${r.title}`).sort();
     expect(members).toEqual([
       "OG-04 res-1004 Property Type Review",
@@ -79,16 +79,17 @@ describe.skipIf(!fs.existsSync(recDir))("Stage 9.78B · the protected records", 
       "OG-23 res-1023 Supplier Comparison Worksheet",
       "OG-24 res-1024 Professional Support Planner",
       "OG-28 res-1028 Household Responsibility Roster",
+      "OG-29 res-1029 Household Action Plan",
     ].sort());
   });
 
   it("the other protected resources are not in Planning Tools, and Start Here is unchanged (OG-01 and OG-02 only)", () => {
-    for (const r of recs) if (!["OG-03", "OG-04", "OG-22", "OG-23", "OG-24", "OG-25", "OG-26", "OG-27", "OG-28", "OG-B04", "OG-B10"].includes(r.legacyCode)) expect(r.collections ?? [], r.legacyCode).not.toContain("planning-tools");
+    for (const r of recs) if (!["OG-03", "OG-04", "OG-22", "OG-23", "OG-24", "OG-25", "OG-26", "OG-27", "OG-28", "OG-29", "OG-B04", "OG-B10"].includes(r.legacyCode)) expect(r.collections ?? [], r.legacyCode).not.toContain("planning-tools");
     expect(recs.filter((r) => r.collections?.includes("start-here")).map((r) => r.legacyCode).sort()).toEqual(["OG-01", "OG-02"]);
   });
 
-  it("the eleven records carry no collection other than planning-tools", () => {
-    for (const code of ["OG-03", "OG-04", "OG-22", "OG-23", "OG-24", "OG-25", "OG-26", "OG-27", "OG-28", "OG-B04", "OG-B10"]) expect(by(code).collections, code).toEqual(["planning-tools"]);
+  it("the twelve records carry no collection other than planning-tools", () => {
+    for (const code of ["OG-03", "OG-04", "OG-22", "OG-23", "OG-24", "OG-25", "OG-26", "OG-27", "OG-28", "OG-29", "OG-B04", "OG-B10"]) expect(by(code).collections, code).toEqual(["planning-tools"]);
   });
 
   it("Program Components are unchanged — OG-22 stays resilience-planning", () => {

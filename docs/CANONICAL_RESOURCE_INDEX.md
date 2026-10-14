@@ -1,6 +1,6 @@
 # Canonical resource index
 
-**Stage 10.21D · updated 2026-10-14 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
+**Stage 10.22C · updated 2026-10-14 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
 
 ## Locked Library ↔ OS governance rules
 
@@ -149,11 +149,13 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 }
 ```
 
-## Index (32 live resources)
+## Index (33 records: 32 live, 1 staged)
 
 **res-1024 Professional Support Planner was deployed in Stage 10.18D** and is live resource #31 (31 resources, 62 market files).
 
 **res-1028 Household Responsibility Roster was deployed in Stage 10.21D** and is live resource #32 (32 resources, 64 market files).
+
+**res-1029 Household Action Plan is STAGED, not deployed (Stage 10.22C):** it is counted in the staged build (33 resources, 66 market files) and not in the live totals (32, 64).
 
 ### Identity and classification
 
@@ -191,6 +193,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1512 | OG-B12 | Off-Grid System Architecture Planner | planner | general | advanced-future | planning | `/resources/off-grid-system-architecture-planner/` | — |
 | res-1024 | OG-24 | Professional Support Planner | worksheet | general | planning-implementation | planning | `/resources/professional-support-planner/` | planning-tools |
 | res-1028 | OG-28 | Household Responsibility Roster | worksheet | general | planning-implementation | planning | `/resources/household-responsibility-roster/` | planning-tools |
+| res-1029 | OG-29 | Household Action Plan | worksheet | general | planning-implementation | planning | `/resources/household-action-plan/` | planning-tools |
 
 ### Publication, badge, access and review
 
@@ -228,6 +231,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1512 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 | res-1024 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 | res-1028 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1029 | draft | approved | private-preview | STAGED | — (staged: Preview) | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 
 ### Ownership, version and review (missing values are explicit)
 
@@ -265,6 +269,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1512 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-09-22 |
 | res-1024 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-13 |
 | res-1028 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-14 |
+| res-1029 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | not yet deployed |
 
 ### Source and downloads
 
@@ -302,6 +307,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1512 | OG-B12_OffGrid_System_Architecture_Planner.html | OG-B12_OffGrid_System_Architecture_Planner.pdf | `/resources/off-grid-system-architecture-planner.NZ.pdf` | `/resources/off-grid-system-architecture-planner.AU.pdf` | `52966b32d0b5…` | `81c7e7355932…` |
 | res-1024 | OG-24_Professional_Review_Selector.html | OG-24_Professional_Review_Selector.pdf | `/resources/professional-support-planner.NZ.pdf` | `/resources/professional-support-planner.AU.pdf` | `574a7308ad47…` | `460d17cb4b39…` |
 | res-1028 | OG-28_Household_Responsibility_Roster.html | OG-28_Household_Responsibility_Roster.pdf | `/resources/household-responsibility-roster.NZ.pdf` | `/resources/household-responsibility-roster.AU.pdf` | `1b99def55b26…` | `52d9b9329df0…` |
+| res-1029 | OG-29_30Day_Master_Action_Plan.html | OG-29_30Day_Master_Action_Plan.pdf | `/resources/household-action-plan.NZ.pdf` | `/resources/household-action-plan.AU.pdf` | `b8a5432752ac…` | `8781aea47ad7…` |
 
 ### Future OS integration fields (all resources)
 
