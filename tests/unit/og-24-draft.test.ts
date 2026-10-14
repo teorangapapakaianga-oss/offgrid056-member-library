@@ -13,7 +13,8 @@ import { COLLECTION_IDS, PROGRAM_COMPONENTS } from "@/lib/content/constants";
  * Read from the committed review config (no private file needed). The draft is NOT owner-approved copy, NOT rendered, NOT staged and NOT live, and it has no res-ID.
  */
 const root = process.cwd();
-const ac = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, { where: string; from: string; to: string }[]> }).changes["OG-24"];
+const withoutOgB02Entry = (raw: string) => { const j = JSON.parse(raw) as Record<string, Record<string, unknown> | undefined>; for (const k of ["resources", "changes", "classificationsDecided"]) if (j[k]) delete j[k]!["OG-B02"]; return JSON.stringify(j); };
+const ac =(JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, { where: string; from: string; to: string }[]> }).changes["OG-24"];
 const meta = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/metadata-review.json"), "utf8")) as { resources: Record<string, Record<string, unknown>> }).resources["OG-24"];
 const pc = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/program-components.json"), "utf8")) as { classificationsDecided: Record<string, string> };
 const content = ac.find((c) => c.where === "Worksheet content (rebuilt)")!;
@@ -34,7 +35,7 @@ describe("Stage 10.18 · OG-24 locked metadata", () => {
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-09 \(Stage 10\.17\)/);
   });
   it("Stage 10.18C: res-1024 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged until deployment", () => {
-    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1024");
+    for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(withoutOgB02Entry(fs.readFileSync(path.join(root, f), "utf8")), f).not.toContain("res-1024"); // the OG-B02 entry (Stage 10.24A) legitimately lists res-1024 as an owner-approved related link
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string });

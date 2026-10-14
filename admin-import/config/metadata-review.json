@@ -1836,6 +1836,62 @@
       "migrationState": "DEPLOYED (Stage 10.23D) — live as a protected resource behind Cloudflare Access; the record and the two approved Stage 10.23B PDFs are in the deployed tree. Planning Tools stays at twelve live resources (this resource is in no collection).",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): an Advanced Future worksheet that follows near-term planning and precedes system design: 90-Day Implementation Roadmap → Long-Term Direction Planner → Off-Grid System Architecture Planner, with the 3-Tier Budget Planner alongside. Not an Emergency Readiness resource and not a programme completion page."
+    },
+    "OG-B02": {
+      "title": "Household Contacts Sheet",
+      "titleStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A); legacy 'OG-B02 Emergency Contacts & Info Sheet' (code removed publicly)",
+      "proposedSlug": "household-contacts-sheet",
+      "proposedSlugStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): sorts after 'emergency-readiness-checklist' in the related-resource engine's slug order, so it does not change the automatic related cards on any existing page (Stage 10.24 simulation: 0 pages; an emergency-contacts-* slug would change 11)",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): the contacts apply to the whole household; no single foundation is its subject",
+      "programComponent": "resilience-emergency",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): it keeps household contact details together for when routines are disrupted, beside the Emergency Readiness Checklist",
+      "programAlignment": {
+        "foundation": "general — the contacts apply to the whole household; no single foundation is its subject",
+        "programComponent": "resilience-emergency — a simple contact record that helps a household find key people and services when routines are disrupted; it records contacts and teaches no emergency action",
+        "resilienceRole": "helps a household keep its key contact details together and note where other important information is kept, so they are easier to find",
+        "guidanceKind": "member-entry contact worksheet — not an emergency-response, first-aid, medical, insurance, utility-account, emergency-kit or technical safety guide",
+        "wordingMatchesRole": "yes — every field is member-entered; the draft asks for no account, policy, password, access-code, diagnosis or medication detail, names no agency or emergency number, makes no promise and states no fixed update interval"
+      },
+      "alignmentAnswers": {
+        "problem": "It gives a household one simple place to keep its key contact details so they are easier to find when routines are disrupted.",
+        "standalone": "No live resource holds household contacts: the Emergency Readiness Checklist asks whether contact details are written down and where supplies are kept, but offers no place to record them; the Household Responsibility Roster records who looks after what; the Professional Support Planner records tradespeople being considered. The demo placeholder 'Household Contacts Template' (res-0009) is not a real resource and is left unchanged.",
+        "mustNotBecome": "An emergency-response or first-aid guide, a medical record, an insurance or utility account register, an emergency-kit checklist, a disaster plan, or a technical safety guide."
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A)",
+      "difficultySource": "OWNER-APPROVED: writing in contact details; no calculation.",
+      "estimatedTime": 20,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A)",
+      "estimatedTimeReasoning": "OWNER-APPROVED: gathering and writing in the household, people, support and service contacts.",
+      "description": "A practical worksheet to keep your household’s key contact details together so they are easier to find when routines are disrupted.",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): the exact sentence (curly apostrophe)",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.24A): member-entered contact sections only (household, people, health and support contacts, home and essential service contacts, other contacts, where important information is kept, notes), a three-row Where Next table and a closing summary. Not yet owner-approved as copy.",
+      "coverStatus": "PENDING (Stage 10.24A records the concept only; no image is generated or supplied). Future title-free concept: a calm household scene with one or two adults reviewing a simple contact sheet or notebook at a kitchen table, phone nearby, natural daylight and a tidy home background; no sirens, ambulances, dominant uniforms, disaster scenes, panic expressions, flashing lights, readable generated text or logos. Suggested future asset tag 'OGB02_COVER_v1 — Household Contacts Sheet'; suggested file name OGB02_Household-Contacts-Sheet_Cover_v1.png. The draft cover shows the template title on the dark brand background with no image.",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): Planning Tools = NO. The resource is in no collection; Planning Tools stays at twelve live resources",
+      "relatedResources": [
+        "res-1006",
+        "res-1014",
+        "res-1028",
+        "res-1024"
+      ],
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): exactly four, in this metadata order: Emergency Readiness Checklist (before, res-1006), Water, Food and Air Household Snapshot (next, res-1014; exact canonical title verified from the protected record), Household Responsibility Roster (also useful, res-1028), Professional Support Planner (later, res-1024). Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed. The printed Where Next shows three rows (before, next, also useful); res-1024 is metadata only.",
+      "demoPlaceholderNote": "The demo placeholder 'Household Contacts Template' (demo record id res-0009) is left completely unchanged in this stage: not deleted, remapped, superseded or converted, and separateDemo is not changed. Its relationship to the future real resource is decided during controlled staging.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the sheet records contacts and teaches no emergency or technical action.",
+      "safetyTopicDispositions": {},
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.24A) — NOT rendered, NOT staged, NOT a protected resource, no resource ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Resilience Emergency worksheet that follows the Emergency Readiness Checklist and sits beside the Household Responsibility Roster: Emergency Readiness Checklist → Household Contacts Sheet → Water, Food and Air Household Snapshot, with the Household Responsibility Roster alongside and the Professional Support Planner later. Not an emergency procedure and not a medical or account record."
     }
   }
 }
