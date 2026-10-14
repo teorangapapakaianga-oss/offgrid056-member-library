@@ -30,7 +30,7 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
     expect(COLLECTION_IDS).toContain("planning-tools");
   });
   it("carries the owner's description exactly", () => {
-    expect(meta.description).toBe("A practical worksheet to bring your household decisions together, turn them into a clear list of priority actions and record who will take each action forward.");
+    expect(meta.description).toBe("A practical worksheet to help your household turn its main resilience decisions into a clear list of actions, owners and next steps.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-14 \(Stage 10\.22A\)/);
   });
   it("assigns no resource ID, creates no protected record and does not change Planning Tools", () => {
@@ -48,12 +48,12 @@ describe("Stage 10.22A · OG-29 locked metadata", () => {
     expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4_ActionPlanPathway|Week 4 Cover|Week1_Foundation|Week2_WaterFoodAir|Week3_/);
   });
   it("has the owner-approved four curated related links in the metadata order", () => {
-    expect(meta.relatedResources).toEqual(["res-1027", "res-1028", "res-1026", "res-1007"]);
+    expect(meta.relatedResources).toEqual(["res-1027", "res-1028", "res-1007", "res-1026"]);
     expect(JSON.stringify(meta.relatedResources)).not.toMatch(/res-1504|res-000|res-1510/);
     const dir = path.join(root, "private-assets/data-resources");
     if (!fs.existsSync(dir)) return;
     const titles = new Map(fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => { const r = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { id: string; title: string }; return [r.id, r.title] as const; }));
-    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["90-Day Implementation Roadmap", "Household Responsibility Roster", "3-Tier Budget Planner", "Priority Lock Worksheet"]);
+    expect((meta.relatedResources as string[]).map((id) => titles.get(id))).toEqual(["90-Day Implementation Roadmap", "Household Responsibility Roster", "Priority Lock Worksheet", "3-Tier Budget Planner"]);
   });
   it("answers all five programme-alignment questions and carries the standing blocks only", () => {
     const a = meta.programAlignment as Record<string, string>;
@@ -92,7 +92,8 @@ describe("Stage 10.22A · OG-29 draft copy: the legacy programme index and claim
 describe("Stage 10.22A · OG-29 draft copy: the owner's structure", () => {
   it("has the new title and subtitle, and no legacy title", () => {
     expect(allNew).toContain("Household Action<br>Plan");
-    expect(allNew).toContain("A calm, practical worksheet for turning your household's decisions into clear actions and owners.");
+    expect(allNew).toContain("A calm, practical worksheet for turning your household’s decisions into clear actions and owners.");
+    expect(allNew).not.toContain("household's decisions");
     expect(allNew).not.toContain("clear actions and next steps");
     expect(allNew).not.toMatch(/OG-29|Day 29|Everything from 30 days/);
   });
@@ -118,13 +119,14 @@ describe("Stage 10.22A · OG-29 draft copy: the owner's structure", () => {
     expect(newText).toContain("Notes:");
     expect(newText).not.toMatch(/review it monthly|update it quarterly|week by week|every \w+ days?|past 29 days/i);
   });
-  it("points on in the approved order with four rows (before, next, also useful twice) and no Later, 1504 or demo row", () => {
+  it("points on in the approved order with exactly three printed rows (before, next, also useful) and no Later, res-1026, 1504 or demo row", () => {
     const next = newText.slice(newText.lastIndexOf("Where it fits"), newText.indexOf("Where You Are Now"));
-    const order = ["90-Day Implementation Roadmap", "Household Responsibility Roster", "3-Tier Budget Planner", "Priority Lock Worksheet"];
+    const order = ["90-Day Implementation Roadmap", "Household Responsibility Roster", "Priority Lock Worksheet"];
     const at = order.map((o) => next.indexOf(o));
     expect(at.every((p, i) => p >= 0 && (i === 0 || p > at[i - 1]))).toBe(true);
-    expect(next).toMatch(/Before[\s\S]*Next[\s\S]*Also useful[\s\S]*Also useful/);
-    expect(next).not.toMatch(/\bLater\b|Monthly Planning|30-Day Action/);
+    expect(next).toMatch(/Before[\s\S]*Next[\s\S]*Also useful/);
+    expect((next.match(/Also useful/g) ?? []).length).toBe(1);
+    expect(next).not.toMatch(/\bLater\b|3-Tier|Monthly Planning|30-Day Action/);
     expect(newText).not.toMatch(/OG-30|Tomorrow/);
   });
   it("closes with neutral prompts and no programme-completion language", () => {

@@ -45,3 +45,5 @@ The copy now matches every owner lock. **Ready for Stage 10.22B — OG-29 final 
 
 > **Superseded in part (2026-10-14):** the owner ruled the final cover subtitle is "...clear actions and owners." (not "...next steps."). Where this report says otherwise, the Stage 10.22B-CORRECTION report (section 14) is current.
 
+
+> **Superseded in part (Stage 10.22B.1):** the description is the owner's older sentence ("…turn its main resilience decisions into a clear list of actions, owners and next steps."), the related metadata order is 1027, 1028, 1007, 1026, the printed Where Next has three rows (res-1026 is metadata only) and the subtitle uses the curly apostrophe (household’s). See `STAGE_10.22B_OG29_FINAL_RENDER_QA.md` section 14.

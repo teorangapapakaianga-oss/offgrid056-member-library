@@ -1742,9 +1742,9 @@
       "estimatedTime": 20,
       "estimatedTimeStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A)",
       "estimatedTimeReasoning": "OWNER-APPROVED: a first fill-in of details, decisions and ten actions.",
-      "description": "A practical worksheet to bring your household decisions together, turn them into a clear list of priority actions and record who will take each action forward.",
+      "description": "A practical worksheet to help your household turn its main resilience decisions into a clear list of actions, owners and next steps.",
       "descriptionStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): the exact sentence",
-      "draftStatus": "DRAFT for owner copy review (Stage 10.22A): member-entered sections only (plan details, decision prompts, ten action rows with Why it matters, Owner, Target date and Status / Notes, a review prompt, notes), a four-row Where Next table and closing prompts. Not yet owner-approved as copy.",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.22A): member-entered sections only (plan details, decision prompts, ten action rows with Why it matters, Owner, Target date and Status / Notes, a review prompt, notes), a three-row Where Next table and closing prompts. Not yet owner-approved as copy.",
       "coverStatus": "OWNER-SUPPLIED 2026-10-14 (Stage 10.22B), final cover and PDF approval pending. File household-action-plan-cover.png (1536 x 1024, SHA-256 1B67D0D6829EFBE19B51D2A1D6EAFE13AAC3940309A91C8033E68DAE8905D359) is title-free; the title is rendered once by the template. Source Downloads/Family Planning Around the Table.png (owner-supplied). Not generated here, not altered; the layout trims its sides slightly (all faces and the board stay whole) and places it as a full-width band below the template title. A mixed-age family at a table with a blank planning board, sticky notes and notebooks; no readable text, logos or OG code. The legacy Week 4 programme artwork and any other resource's cover are not used.",
       "tags": [],
       "tagsStatus": "the convention across all live resources",
@@ -1755,10 +1755,10 @@
       "relatedResources": [
         "res-1027",
         "res-1028",
-        "res-1026",
-        "res-1007"
+        "res-1007",
+        "res-1026"
       ],
-      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A, re-issued): exactly four, in this metadata and printed order: 90-Day Implementation Roadmap (before, res-1027), Household Responsibility Roster (next, res-1028), 3-Tier Budget Planner (also useful, res-1026), Priority Lock Worksheet (also useful, res-1007). res-1504 Monthly Planning Challenge Template, demo placeholders and automatic filler are not used. Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed. The printed Where Next shows all four rows.",
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22B.1, owner correction): exactly four, in this metadata order: 90-Day Implementation Roadmap (before, res-1027), Household Responsibility Roster (next, res-1028), Priority Lock Worksheet (also useful, res-1007), 3-Tier Budget Planner (later, res-1026). The earlier order 1027, 1028, 1026, 1007 is rejected. The printed Where Next shows exactly three rows (before, next, also useful); res-1026 is metadata only and is not printed. res-1504, demo placeholders and automatic filler are not used. Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed.",
       "safetyBlocks": [],
       "approvedSafetyBlocks": [],
       "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.22A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the rewrite names no system, appliance or medical task.",

@@ -1,5 +1,7 @@
 # Stage 10.22B — OG-29 Household Action Plan: cover insertion, NZ/AU render and page-by-page QA
 
+> **Superseded in part by Stage 10.22B.1 (section 14 below).** The description, the related order, the printed Where Next (now three rows), the subtitle apostrophe, the body counts and both PDF hashes were corrected after owner review. Where sections 2 to 7 differ, section 14 is current.
+
 **Render and QA only. PASS, with three items for your confirmation (section 2).** Nothing was staged, deployed, assigned an ID or added to Planning Tools; no protected record was created. The PDFs are in `workspace/prep/OG-29/` only (git-ignored), not in `private-assets`.
 
 LIVE (unchanged): **32 protected resources · 64 market files · Planning Tools 11 · Downloads 54 · My Progress 57 · 0 broken links** · Worker `dd11e4e9-6c2d-4dff-a6f7-5233a8150e2e` (confirmed 100%). Migration (unchanged): Deployed 32 · Staged 0 · Prepared 0 · Blocked 1 · Merged 1 · Not started 11 = 45.
@@ -57,3 +59,31 @@ Stable ID assigned **NO** (`res-1029` suggested only, unassigned) · protected r
 
 ## 11. Next stage
 **Stage 10.22C — OG-29 stable ID assignment and controlled staging**, after your approvals (not started).
+
+## 14. Stage 10.22B.1 — Owner Correction Finalisation (PASS)
+Applied the three owner-confirmed corrections, re-rendered both PDFs and re-ran QA. **No ID, protected record, Planning Tools addition, staging or deployment.** Live unchanged: 32 protected resources · 64 market files · Planning Tools 11 · Downloads 54 · My Progress 57 · 0 broken links · Worker `dd11e4e9-6c2d-4dff-a6f7-5233a8150e2e` (100%, confirmed). Migration unchanged: Deployed 32 · Staged 0 · Prepared 0 · Blocked 1 · Merged 1 · Not started 11 = 45.
+
+1. **Final description (exact, locked):** "A practical worksheet to help your household turn its main resilience decisions into a clear list of actions, owners and next steps." (config, test and checks agree.)
+2. **Final subtitle (exact):** "A calm, practical worksheet for turning your household’s decisions into clear actions and owners."
+3. **Apostrophe verification:** the **curly apostrophe (U+2019)** in "household’s" is in the draft source, both prepared HTML files, the tests, the PDF checks and the text extracted from both PDFs; the straight form is asserted absent.
+4. **Related metadata order:** res-1027 90-Day Implementation Roadmap (before) · res-1028 Household Responsibility Roster (next) · res-1007 Priority Lock Worksheet (also useful) · res-1026 3-Tier Budget Planner (later). The order 1027, 1028, 1026, 1007 is rejected and no longer present.
+5. **Printed Where Next (exactly three rows):** Before 90-Day Implementation Roadmap · Next Household Responsibility Roster · Also useful Priority Lock Worksheet.
+6. **res-1026 printed: NO** (metadata only).
+7. **Automatic-fill suppression (real engine, simulated):** the four curated links produce exactly res-1027, res-1028, res-1007, res-1026, all "Linked by us"; no res-0006, res-0008, res-1504 or res-1510. `lib/related.ts` unchanged.
+8. **Cover hash unchanged: YES.** `1B67D0D6829EFBE19B51D2A1D6EAFE13AAC3940309A91C8033E68DAE8905D359` (source, prep copy and the image embedded in both PDFs at 1536 x 1024); image not altered; photo-band layout unchanged.
+9. **NZ PDF:** `workspace/prep/OG-29/household-action-plan.NZ.pdf`. 10. **AU PDF:** `workspace/prep/OG-29/household-action-plan.AU.pdf`.
+11. **NZ SHA-256:** `b8a5432752acf97721064e22f150b02768226950a72a7f4afcee19e3db6b5613` (3,416,494 bytes). 12. **AU SHA-256:** `8781aea47ad7a393826dfe1d3e66d1d7fcfada0e8e50469fda1147342a7aab3c` (3,416,184 bytes). (The earlier hashes `c5ffd469…` and `b3871cdb…` are superseded.)
+13. **NZ pages:** 6. 14. **AU pages:** 6. PDF title "Household Action Plan — OffGrid056" in both.
+15. **NZ page-by-page:** p1 cover (approved cover, title once, subtitle with curly apostrophe, brand band, no clipping); p2 emergency-contact box, intro, six plan-detail fields; p3 four decision prompts; p4 action table; p5 review and notes; p6 Where Next with three rows, Where You Are Now with four prompts, general-disclaimer. No overflow, blank page, orphan heading or legacy wording; page numbers 2 to 6; no OG-29.
+16. **AU page-by-page:** identical layout and result.
+17. **Action table:** exactly five columns (Action, Why it matters, Owner, Target date, Status / Notes), ten blank unnumbered rows, no number column, unchanged.
+18. **NZ body characters:** **2,232.** 19. **AU body characters:** **2,232.** (The earlier 2,353 included the fourth Where Next row; the count fell by 121 characters because the res-1026 row is no longer printed.) 20. **Body HTML:** **7,409 bytes** each, byte-identical.
+21. **Market parity:** identical; the text extracted from both PDFs matches on every page except the market-specific standing blocks (2,059 characters of body text compared). No market override.
+22. **Safety:** standing emergency-contact and general-disclaimer only; technical safety triggers **0**. 23. **Regulatory:** candidates 0, unresolved 0. 24. **Numeric Bucket C:** 0. 25. **Other families:** price, payback, warranty, payment, multiplier, comparative, outcome, assurance, survival, supply-duration, storage and target-label all 0. 26. **Legacy-language:** 0. 27. **Content flags:** 0. No exemption, no registry change.
+28. **Focused tests:** 17 passed, exit 0 (updated only for the description, subtitle apostrophe, related order and three printed rows). 29. **Full suite:** passed, exit 0. 30. **Total tests:** 1,689 across 62 files. 31. **Lint:** exit 0 (0 errors, 58 existing warnings). 32. **Typecheck:** exit 0. 33. **import:verify-prep:** exit 0 (OG-29 NZ and AU, 6 pages each). 34. **import:verify-build:** exit 0 (32 records · 64 market files). 35. **Broken links:** 0.
+36 to 39. Stable ID assigned **NO** (`res-1029` suggested only) · protected record **NO** · staging **NO** · deployment **NO**.
+40. **Live counts:** 32 / 64 / 11 / 54 / 57. 41. **Worker:** `dd11e4e9-6c2d-4dff-a6f7-5233a8150e2e`.
+42. **Repo changes:** `approved-copy.json` and `metadata-review.json` (OG-29 draft entries), `og-29-draft.test.ts`, this report (plus pointer notes in earlier OG-29 reports). Git-ignored: the regenerated PDFs and prepared HTML.
+43. **Verdict:** PASS.
+44. **Owner decisions required:** approve the final cover, the NZ PDF and the AU PDF; then, as separate approvals, the stable ID, the staging metadata and controlled staging.
+45. **Next stage:** **Stage 10.22C — OG-29 stable ID assignment and controlled staging**, after your approval (not started).
