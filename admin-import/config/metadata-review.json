@@ -1889,7 +1889,7 @@
       "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-14 (Stage 10.24A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the sheet records contacts and teaches no emergency or technical action.",
       "safetyTopicDispositions": {},
       "recordStatus": "draft",
-      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.24A) — NOT rendered, NOT staged, NOT a protected resource, no resource ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "migrationState": "STAGED, NOT DEPLOYED (Stage 10.24C) — the stable ID is assigned in the protected record only, the protected record and the two approved Stage 10.24B PDFs are staged in private-assets for the preview build; not live. Planning Tools stays at twelve live resources (this resource is in no collection). The demo placeholder Household Contacts Template is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Resilience Emergency worksheet that follows the Emergency Readiness Checklist and sits beside the Household Responsibility Roster: Emergency Readiness Checklist → Household Contacts Sheet → Water, Food and Air Household Snapshot, with the Household Responsibility Roster alongside and the Professional Support Planner later. Not an emergency procedure and not a medical or account record."
     }

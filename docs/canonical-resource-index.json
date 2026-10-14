@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-14",
-  "stage": "10.23D",
+  "stage": "10.24C",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -85,9 +85,11 @@
   "baseline": {
     "liveProtectedResources": 34,
     "liveMarketFiles": 68,
-    "stagedProtectedResources": 0,
+    "stagedProtectedResources": 1,
     "brokenLinks": 0,
-    "worker": "see operational registers (not recorded here)"
+    "worker": "see operational registers (not recorded here)",
+    "stagedBuildProtectedResources": 35,
+    "stagedBuildMarketFiles": 70
   },
   "resources": [
     {
@@ -3576,6 +3578,112 @@
         "filesPresentInBuild": true,
         "registerRowFound": true
       }
+    },
+    {
+      "stableResourceId": "res-1502",
+      "legacyCode": "OG-B02",
+      "title": "Household Contacts Sheet",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "resilience-emergency",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
+      "firstPublishedToPreview": null,
+      "stagedRecordPublishedDate": "2026-10-14",
+      "sourceFile": {
+        "legacyHtml": "OG-B02_Emergency_Contacts_Info_Sheet.html",
+        "legacyPdf": "OG-B02_Emergency_Contacts_Info_Sheet.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B02",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B02",
+        "protectedRecord": "private-assets/data-resources/household-contacts-sheet.private.json (git-ignored)"
+      },
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
+      "status": "draft",
+      "migrationState": "STAGED",
+      "publicationStatus": "approved",
+      "releaseChannel": "private-preview",
+      "visibleBadge": null,
+      "visibleBadgeInCurrentBuild": "Preview",
+      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/household-contacts-sheet/",
+      "routeSource": "record.slug (private resource record), confirmed in the staged build",
+      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/household-contacts-sheet.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/household-contacts-sheet.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "43272199d2247d2a2408402555e3a4049097f64e85f4d02fef67b68ba36d91ac",
+          "bytes": 2513688,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/household-contacts-sheet.AU.pdf",
+          "expectedSuffixedRoute": "/resources/household-contacts-sheet.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "a8467d92996829248873689bb7b2cac6c2d36c42a753fca5e7bfa74f3ec2f22d",
+          "bytes": 2513510,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
+      "collections": [],
+      "relatedResources": [
+        "res-1006",
+        "res-1014",
+        "res-1028",
+        "res-1024"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "STAGED, not deployed (Stage 10.24C): the live site has 34 resources; the staged build has 35. Planning Tools is 12 live and 12 in the staged build (this resource is in no collection).",
+        "Related links are the four curated resources in the approved order (Emergency Readiness Checklist, Water, Food and Air Household Snapshot, Household Responsibility Roster, Professional Support Planner); the fourth link keeps the automatic related fill suppressed. The printed PDF Where Next lists three rows (res-1024 is metadata only).",
+        "The demo placeholder Household Contacts Template (res-0009) overlaps in member job but is unchanged and intentionally separate at this stage; its treatment is an owner decision for later.",
+        "`status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the owner-approved governance state. None of these is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "publicationFieldsInRecord": true,
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
     }
   ],
   "definitions": {
@@ -3679,7 +3787,7 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "No stage in progress; the next work is the owner's choice (the wider roadmap).",
+  "nextStage": "Stage 10.24D — OG-B02 controlled deployment + post-deploy QA (needs separate owner approval; not started)",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -3695,5 +3803,12 @@
     "lintExit": 0,
     "typecheckExit": 0
   },
-  "stagedResources": []
+  "stagedResources": [
+    {
+      "stableResourceId": "res-1502",
+      "stage": "10.24C",
+      "state": "STAGED, NOT DEPLOYED",
+      "note": "Counted in the staged build (35 / 70), not in the live totals (34 / 68)."
+    }
+  ]
 }

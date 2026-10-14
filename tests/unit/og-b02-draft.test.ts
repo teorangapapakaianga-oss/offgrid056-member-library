@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -38,17 +39,24 @@ describe("Stage 10.24A · OG-B02 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to keep your household’s key contact details together so they are easier to find when routines are disrupted.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-14 \(Stage 10\.24A\)/);
   });
-  it("assigns no resource ID, creates no protected record, no PDF and no staged file; the suggested ID is recorded nowhere", () => {
+  it("Stage 10.24C: res-1502 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1502");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
       const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string; slug: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-B02" || r.id === "res-1502" || r.slug === "household-contacts-sheet")).toEqual([]);
-      expect(recs).toHaveLength(34);
+      const rec = recs.filter((r) => r.legacyCode === "OG-B02" || r.id === "res-1502" || r.slug === "household-contacts-sheet") as unknown as Record<string, unknown>[];
+      expect(rec).toHaveLength(1);
+      expect(rec[0]).toMatchObject({ id: "res-1502", slug: "household-contacts-sheet", legacyCode: "OG-B02", title: "Household Contacts Sheet", foundation: "general", programComponent: "resilience-emergency", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 20, status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", collections: [], tags: [], premium: false, isPlaceholder: false, downloadable: true, relatedResources: ["res-1006", "res-1014", "res-1028", "res-1024"], description: meta.description, marketFiles: { NZ: { fileUrl: "/resources/household-contacts-sheet.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/household-contacts-sheet.AU.pdf", fileFormat: "PDF" } } });
+      expect(recs).toHaveLength(35);
+      expect(recs.filter((r) => ((r as unknown as { collections?: string[] }).collections ?? []).includes("planning-tools"))).toHaveLength(12);
     }
     const pdfs = path.join(root, "private-assets/resources");
-    if (fs.existsSync(pdfs)) expect(fs.readdirSync(pdfs).filter((f) => /household-contacts-sheet/.test(f))).toEqual([]);
-    expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
+    if (fs.existsSync(pdfs)) {
+      const sha = (f: string) => crypto.createHash("sha256").update(fs.readFileSync(path.join(pdfs, f))).digest("hex");
+      expect(sha("household-contacts-sheet.NZ.pdf")).toBe("43272199d2247d2a2408402555e3a4049097f64e85f4d02fef67b68ba36d91ac");
+      expect(sha("household-contacts-sheet.AU.pdf")).toBe("a8467d92996829248873689bb7b2cac6c2d36c42a753fca5e7bfa74f3ec2f22d");
+    }
+    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.24C\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.24B\)/);
     expect(String(meta.coverStatus)).toContain("OGB02_COVER_v1 — Household Contacts Sheet");
     expect(String(meta.coverStatus)).toContain("37483DF484FCFD763C05DD1AC4ADAEC423ED9E817730AFF4426DB17DF0ED4854");
@@ -99,11 +107,13 @@ describe("Stage 10.24A · OG-B02: the engine, the slug and the demo placeholder"
   const dir = path.join(root, "private-assets/data-resources");
   type R = { id: string; slug: string; title: string; foundation: string; category: string; tags: string[]; relatedResources: string[]; learningPath?: string; isPlaceholder: boolean };
   const have = fs.existsSync(dir);
-  const files: [string, R][] = [];
+  const filesAll: [string, R][] = [];
   if (have) {
-    for (const f of fs.readdirSync(path.join(root, "data/resources")).filter((x) => x.endsWith(".json"))) files.push([f, JSON.parse(fs.readFileSync(path.join(root, "data/resources", f), "utf8")) as R]);
-    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".private.json"))) files.push([f, { tags: [], isPlaceholder: false, ...JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) } as R]);
+    for (const f of fs.readdirSync(path.join(root, "data/resources")).filter((x) => x.endsWith(".json"))) filesAll.push([f, JSON.parse(fs.readFileSync(path.join(root, "data/resources", f), "utf8")) as R]);
+    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".private.json"))) filesAll.push([f, { tags: [], isPlaceholder: false, ...JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) } as R]);
   }
+  // the engine checks run on the pool WITHOUT the real res-1502 record, so the hypothetical record is the only one with that slug
+  const files = filesAll.filter(([, r]) => r.id !== "res-1502");
   const policy = JSON.parse(fs.readFileSync(path.join(root, "lib/content/route-policy.json"), "utf8")) as { separateDemo: Record<string, string> };
   const unlisted = new Set(Object.keys(policy.separateDemo));
   const summary = (r: R) => ({ id: r.id, slug: r.slug, title: r.title, foundation: r.foundation, category: r.category, tags: r.tags ?? [], isPlaceholder: r.isPlaceholder }) as unknown as ResourceSummary;
@@ -129,6 +139,11 @@ describe("Stage 10.24A · OG-B02: the engine, the slug and the demo placeholder"
     const changed = (slug: string) => [...base].filter(([id, v]) => cards([...files, mk(slug)]).get(id) !== v).map(([id]) => id);
     expect(changed("household-contacts-sheet")).toEqual([]);
     expect(changed("emergency-contacts-sheet").length).toBeGreaterThan(0);
+  });
+  it.skipIf(!have)("Stage 10.24C: with the real staged record in the pool, res-1502 shows exactly the four curated cards and no existing page's related cards change", () => {
+    const base = cards(files), withReal = cards(filesAll);
+    expect(JSON.parse(withReal.get("res-1502")!)).toEqual([["Linked by us", "res-1006"], ["Linked by us", "res-1014"], ["Linked by us", "res-1028"], ["Linked by us", "res-1024"]]);
+    expect([...base].filter(([id, v]) => withReal.get(id) !== v).map(([id]) => id)).toEqual([]);
   });
   it("the demo placeholder res-0009 Household Contacts Template is unchanged and still a demo entry, and the route policy is untouched", () => {
     const demo = JSON.parse(fs.readFileSync(path.join(root, "data/resources/household-contacts-template.json"), "utf8")) as Record<string, unknown>;
