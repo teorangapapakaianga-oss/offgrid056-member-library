@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -37,17 +38,26 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to help your household identify trusted local support, record what you may be able to offer, and note where you may want help from others.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-15 \(Stage 10\.27A\)/);
   });
-  it("assigns no resource ID, creates no protected record, no PDF and no staged file; the suggested ID is recorded nowhere in config", () => {
+  it("Stage 10.27C: res-1514 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1514");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
-      const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; id: string; slug: string });
-      expect(recs.filter((r) => r.legacyCode === "OG-B14" || r.id === "res-1514" || r.slug === "local-support-network-planner")).toEqual([]);
-      expect(recs).toHaveLength(35);
+      const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as Record<string, unknown>);
+      const rec = recs.filter((r) => r.legacyCode === "OG-B14" || r.id === "res-1514" || r.slug === "local-support-network-planner");
+      expect(rec).toHaveLength(1);
+      expect(rec[0]).toMatchObject({ id: "res-1514", slug: "local-support-network-planner", legacyCode: "OG-B14", title: "Local Support Network Planner", foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 30, collections: [], tags: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, completionAvailable: true, relatedResources: ["res-1502", "res-1028", "res-1006", "res-1024"] });
+      expect(rec[0].marketFiles).toEqual({ NZ: { fileUrl: "/resources/local-support-network-planner.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/local-support-network-planner.AU.pdf", fileFormat: "PDF" } });
+      for (const k of ["accessTier", "entitlementRequirement", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"]) expect(rec[0], k).not.toHaveProperty(k);
+      expect(recs).toHaveLength(36); // 35 live + res-1514 staged (Stage 10.27C)
+      expect(recs.filter((r) => ((r.collections as string[] | undefined) ?? []).includes("planning-tools"))).toHaveLength(12);
     }
     const pdfs = path.join(root, "private-assets/resources");
-    if (fs.existsSync(pdfs)) expect(fs.readdirSync(pdfs).filter((f) => /local-support-network-planner/.test(f))).toEqual([]);
-    expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
+    if (fs.existsSync(pdfs)) {
+      const sha = (f: string) => crypto.createHash("sha256").update(fs.readFileSync(path.join(pdfs, f))).digest("hex");
+      expect(sha("local-support-network-planner.NZ.pdf")).toBe("56f1b2a872e67f2f564ec59838a9fe0502cfc10364d99c7abdd6ec07c780211a");
+      expect(sha("local-support-network-planner.AU.pdf")).toBe("b8da6fd4833a210cf8d97d39135b81482dcd3c4dfde6418844cf5c9641751ae8");
+    }
+    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.27C\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-15 \(Stage 10\.27B-R1; replaces the Stage 10\.27B V1 cover\)/);
     expect(String(meta.coverStatus)).toContain("OGB14_COVER_v2 — Local Support Network Planner");
     expect(String(meta.coverStatus)).toContain("6DB3ECFC3A6141995E9388AB59C1FD6DE914C1242636ABE984E13773032192CA");
@@ -113,11 +123,13 @@ describe("Stage 10.27A · OG-B14: the engine and the slug", () => {
   const dir = path.join(root, "private-assets/data-resources");
   type R = { id: string; slug: string; title: string; foundation: string; category: string; tags: string[]; relatedResources: string[]; learningPath?: string; isPlaceholder: boolean };
   const have = fs.existsSync(dir);
-  const files: [string, R][] = [];
+  const filesAll: [string, R][] = [];
   if (have) {
-    for (const f of fs.readdirSync(path.join(root, "data/resources")).filter((x) => x.endsWith(".json"))) files.push([f, JSON.parse(fs.readFileSync(path.join(root, "data/resources", f), "utf8")) as R]);
-    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".private.json"))) files.push([f, { tags: [], isPlaceholder: false, ...JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) } as R]);
+    for (const f of fs.readdirSync(path.join(root, "data/resources")).filter((x) => x.endsWith(".json"))) filesAll.push([f, JSON.parse(fs.readFileSync(path.join(root, "data/resources", f), "utf8")) as R]);
+    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".private.json"))) filesAll.push([f, { tags: [], isPlaceholder: false, ...JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) } as R]);
   }
+  // the hypothetical-record checks run on the pool WITHOUT the real res-1514 record, so the hypothetical record is the only one with that slug
+  const files = filesAll.filter(([, r]) => r.id !== "res-1514");
   const policy = JSON.parse(fs.readFileSync(path.join(root, "lib/content/route-policy.json"), "utf8")) as { separateDemo: Record<string, string> };
   const unlisted = new Set(Object.keys(policy.separateDemo));
   const summary = (r: R) => ({ id: r.id, slug: r.slug, title: r.title, foundation: r.foundation, category: r.category, tags: r.tags ?? [], isPlaceholder: r.isPlaceholder }) as unknown as ResourceSummary;
@@ -137,6 +149,11 @@ describe("Stage 10.27A · OG-B14: the engine and the slug", () => {
   it.skipIf(!have)("the real engine gives exactly four 'Linked by us' cards and no automatic fill, in the approved order", () => {
     const out = JSON.parse(cards([...files, mk("local-support-network-planner")]).get("res-hypothetical")!) as [string, string][];
     expect(out).toEqual([["Linked by us", "res-1502"], ["Linked by us", "res-1028"], ["Linked by us", "res-1006"], ["Linked by us", "res-1024"]]);
+  });
+  it.skipIf(!have)("Stage 10.27C: with the real staged record in the pool, res-1514 shows exactly the four curated cards and no existing page's related cards change", () => {
+    const base = cards(files), withReal = cards(filesAll);
+    expect(JSON.parse(withReal.get("res-1514")!)).toEqual([["Linked by us", "res-1502"], ["Linked by us", "res-1028"], ["Linked by us", "res-1006"], ["Linked by us", "res-1024"]]);
+    expect([...base].filter(([id, v]) => withReal.get(id) !== v).map(([id]) => id)).toEqual([]);
   });
   it.skipIf(!have)("the slug local-support-network-planner changes the related cards on 0 existing pages (hard gate); the legacy-style control slug would change several", () => {
     const base = cards(files);

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-14",
-  "stage": "10.24D",
+  "stage": "10.27C",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -85,9 +85,11 @@
   "baseline": {
     "liveProtectedResources": 35,
     "liveMarketFiles": 70,
-    "stagedProtectedResources": 0,
+    "stagedProtectedResources": 1,
     "brokenLinks": 0,
-    "worker": "see operational registers (not recorded here)"
+    "worker": "see operational registers (not recorded here)",
+    "stagedBuildProtectedResources": 36,
+    "stagedBuildMarketFiles": 72
   },
   "resources": [
     {
@@ -3682,6 +3684,112 @@
         "filesPresentInBuild": true,
         "registerRowFound": true
       }
+    },
+    {
+      "stableResourceId": "res-1514",
+      "legacyCode": "OG-B14",
+      "title": "Local Support Network Planner",
+      "resourceType": "worksheet",
+      "foundation": "general",
+      "programComponent": "resilience-planning",
+      "category": "planning",
+      "topic": "planning",
+      "tags": [],
+      "shortDescription": "WITHHELD_FROM_PUBLIC_REPOSITORY (held in the private resource record)",
+      "owner": "UNKNOWN_EXISTING_RECORD",
+      "version": "UNKNOWN_EXISTING_RECORD",
+      "versionDate": "UNKNOWN_EXISTING_RECORD",
+      "firstPublishedToPreview": null,
+      "stagedRecordPublishedDate": "2026-10-15",
+      "sourceFile": {
+        "legacyHtml": "OG-B14_Community_Resilience_Network_Builder.html",
+        "legacyPdf": "OG-B14_Community_Resilience_Network_Builder.pdf",
+        "location": "legacy 30-Day Programme HTML_Source and PDFs folders (local archive, not in this repository)",
+        "reviewConfig": "admin-import/config/metadata-review.json -> OG-B14",
+        "approvedCopy": "admin-import/config/approved-copy.json -> changes.OG-B14",
+        "protectedRecord": "private-assets/data-resources/local-support-network-planner.private.json (git-ignored)"
+      },
+      "sourceLink": "UNKNOWN_EXISTING_RECORD",
+      "status": "draft",
+      "migrationState": "STAGED",
+      "publicationStatus": "approved",
+      "releaseChannel": "private-preview",
+      "visibleBadge": null,
+      "visibleBadgeInCurrentBuild": "Preview",
+      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
+      "accessTier": "UNDEFINED_OWNER_DECISION",
+      "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
+      "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
+      "recordPremiumFlag": false,
+      "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
+      "canonicalRoute": "/resources/local-support-network-planner/",
+      "routeSource": "record.slug (private resource record), confirmed in the staged build",
+      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "marketAvailability": [
+        "NZ",
+        "AU"
+      ],
+      "downloadAssets": [
+        {
+          "market": "NZ",
+          "route": "/resources/local-support-network-planner.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/local-support-network-planner.NZ.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "56f1b2a872e67f2f564ec59838a9fe0502cfc10364d99c7abdd6ec07c780211a",
+          "bytes": 1567660,
+          "pdfTitleMatches": true
+        },
+        {
+          "market": "AU",
+          "route": "/resources/local-support-network-planner.AU.pdf",
+          "expectedSuffixedRoute": "/resources/local-support-network-planner.AU.pdf",
+          "namingMatchesConvention": true,
+          "presentInPrivateAssets": true,
+          "presentInBuild": true,
+          "byteIdenticalToBuild": true,
+          "sha256": "b8da6fd4833a210cf8d97d39135b81482dcd3c4dfde6418844cf5c9641751ae8",
+          "bytes": 1567416,
+          "pdfTitleMatches": true
+        }
+      ],
+      "reviewStatus": [
+        "NEEDS_ENTITLEMENT_DECISION",
+        "NEEDS_METADATA"
+      ],
+      "lastReviewedDate": "UNKNOWN_EXISTING_RECORD",
+      "collections": [],
+      "relatedResources": [
+        "res-1502",
+        "res-1028",
+        "res-1006",
+        "res-1024"
+      ],
+      "supersededBy": null,
+      "withdrawn": false,
+      "internalOnly": false,
+      "notes": [
+        "STAGED, not deployed (Stage 10.27C): the live site has 35 resources; the staged build has 36. Planning Tools is 12 live and 12 in the staged build (this resource is in no collection).",
+        "Related links are the four curated resources in the approved order (Household Contacts Sheet, Household Responsibility Roster, Emergency Readiness Checklist, Professional Support Planner); the fourth link keeps the automatic related fill suppressed. The printed PDF Where Next lists three rows (res-1024 is metadata only).",
+        "A privacy-minimised rewrite: the legacy neighbour asset map, third-party addresses, needs, radio, drill and distance fields are not carried.",
+        "`status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the owner-approved governance state. None of these is an entitlement."
+      ],
+      "recommendationEligible": false,
+      "handoffStatus": "INACTIVE",
+      "approvedHandoffRoute": null,
+      "entitlementContractStatus": "NOT_APPROVED",
+      "publicationFieldsInRecord": true,
+      "verification": {
+        "routeInBuild": true,
+        "listedInLibrary": true,
+        "listedInDownloads": true,
+        "titleOnPage": true,
+        "filesPresentInBuild": true,
+        "registerRowFound": true
+      }
     }
   ],
   "definitions": {
@@ -3785,7 +3893,7 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "No stage in progress; the next work is the owner's choice (the wider roadmap).",
+  "nextStage": "Stage 10.27D — OG-B14 controlled deployment + post-deploy QA (needs separate owner approval; not started)",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -3801,5 +3909,12 @@
     "lintExit": 0,
     "typecheckExit": 0
   },
-  "stagedResources": []
+  "stagedResources": [
+    {
+      "stableResourceId": "res-1514",
+      "stage": "10.27C",
+      "state": "STAGED, NOT DEPLOYED",
+      "note": "Counted in the staged build (36 / 72), not in the live totals (35 / 70)."
+    }
+  ]
 }

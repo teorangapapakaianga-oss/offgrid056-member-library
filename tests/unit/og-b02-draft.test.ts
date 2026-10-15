@@ -48,7 +48,7 @@ describe("Stage 10.24A · OG-B02 locked metadata", () => {
       const rec = recs.filter((r) => r.legacyCode === "OG-B02" || r.id === "res-1502" || r.slug === "household-contacts-sheet") as unknown as Record<string, unknown>[];
       expect(rec).toHaveLength(1);
       expect(rec[0]).toMatchObject({ id: "res-1502", slug: "household-contacts-sheet", legacyCode: "OG-B02", title: "Household Contacts Sheet", foundation: "general", programComponent: "resilience-emergency", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 20, status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", collections: [], tags: [], premium: false, isPlaceholder: false, downloadable: true, relatedResources: ["res-1006", "res-1014", "res-1028", "res-1024"], description: meta.description, marketFiles: { NZ: { fileUrl: "/resources/household-contacts-sheet.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/household-contacts-sheet.AU.pdf", fileFormat: "PDF" } } });
-      expect(recs).toHaveLength(35);
+      expect(recs).toHaveLength(36); // 35 live + res-1514 staged (Stage 10.27C)
       expect(recs.filter((r) => ((r as unknown as { collections?: string[] }).collections ?? []).includes("planning-tools"))).toHaveLength(12);
     }
     const pdfs = path.join(root, "private-assets/resources");
@@ -114,7 +114,8 @@ describe("Stage 10.24A · OG-B02: the engine, the slug and the demo placeholder"
     for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".private.json"))) filesAll.push([f, { tags: [], isPlaceholder: false, ...JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) } as R]);
   }
   // the engine checks run on the pool WITHOUT the real res-1502 record, so the hypothetical record is the only one with that slug
-  const files = filesAll.filter(([, r]) => r.id !== "res-1502");
+  const pool = filesAll.filter(([, r]) => r.id !== "res-1514"); // res-1514 (staged in Stage 10.27C) is not part of what Stage 10.24C proved
+  const files = pool.filter(([, r]) => r.id !== "res-1502");
   const policy = JSON.parse(fs.readFileSync(path.join(root, "lib/content/route-policy.json"), "utf8")) as { separateDemo: Record<string, string> };
   const unlisted = new Set(Object.keys(policy.separateDemo));
   const summary = (r: R) => ({ id: r.id, slug: r.slug, title: r.title, foundation: r.foundation, category: r.category, tags: r.tags ?? [], isPlaceholder: r.isPlaceholder }) as unknown as ResourceSummary;
@@ -142,7 +143,7 @@ describe("Stage 10.24A · OG-B02: the engine, the slug and the demo placeholder"
     expect(changed("emergency-contacts-sheet").length).toBeGreaterThan(0);
   });
   it.skipIf(!have)("Stage 10.24C: with the real staged record in the pool, res-1502 shows exactly the four curated cards and no existing page's related cards change", () => {
-    const base = cards(files), withReal = cards(filesAll);
+    const base = cards(files), withReal = cards(pool);
     expect(JSON.parse(withReal.get("res-1502")!)).toEqual([["Linked by us", "res-1006"], ["Linked by us", "res-1014"], ["Linked by us", "res-1028"], ["Linked by us", "res-1024"]]);
     expect([...base].filter(([id, v]) => withReal.get(id) !== v).map(([id]) => id)).toEqual([]);
   });
