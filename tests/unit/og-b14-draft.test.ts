@@ -38,7 +38,7 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
     expect(meta.description).toBe("A practical worksheet to help your household identify trusted local support, record what you may be able to offer, and note where you may want help from others.");
     expect(String(meta.descriptionStatus)).toMatch(/^OWNER-APPROVED 2026-10-15 \(Stage 10\.27A\)/);
   });
-  it("Stage 10.27C: res-1514 is assigned in the staged record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged", () => {
+  it("Stage 10.27D: res-1514 is assigned in the deployed record only (internal routing/data), never in the review config or the member-facing copy, and Planning Tools is unchanged", () => {
     for (const f of ["admin-import/config/approved-copy.json", "admin-import/config/metadata-review.json", "admin-import/config/program-components.json", "admin-import/config/future-tasks.json"]) expect(fs.readFileSync(path.join(root, f), "utf8"), f).not.toContain("res-1514");
     const dir = path.join(root, "private-assets/data-resources");
     if (fs.existsSync(dir)) {
@@ -48,7 +48,7 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
       expect(rec[0]).toMatchObject({ id: "res-1514", slug: "local-support-network-planner", legacyCode: "OG-B14", title: "Local Support Network Planner", foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 30, collections: [], tags: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, completionAvailable: true, relatedResources: ["res-1502", "res-1028", "res-1006", "res-1024"] });
       expect(rec[0].marketFiles).toEqual({ NZ: { fileUrl: "/resources/local-support-network-planner.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/local-support-network-planner.AU.pdf", fileFormat: "PDF" } });
       for (const k of ["accessTier", "entitlementRequirement", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"]) expect(rec[0], k).not.toHaveProperty(k);
-      expect(recs).toHaveLength(36); // 35 live + res-1514 staged (Stage 10.27C)
+      expect(recs).toHaveLength(36); // all 36 live (res-1514 deployed in Stage 10.27D)
       expect(recs.filter((r) => ((r.collections as string[] | undefined) ?? []).includes("planning-tools"))).toHaveLength(12);
     }
     const pdfs = path.join(root, "private-assets/resources");
@@ -57,7 +57,7 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
       expect(sha("local-support-network-planner.NZ.pdf")).toBe("56f1b2a872e67f2f564ec59838a9fe0502cfc10364d99c7abdd6ec07c780211a");
       expect(sha("local-support-network-planner.AU.pdf")).toBe("b8da6fd4833a210cf8d97d39135b81482dcd3c4dfde6418844cf5c9641751ae8");
     }
-    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.27C\)/);
+    expect(String(meta.migrationState)).toMatch(/^DEPLOYED \(Stage 10\.27D\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-15 \(Stage 10\.27B-R1; replaces the Stage 10\.27B V1 cover\)/);
     expect(String(meta.coverStatus)).toContain("OGB14_COVER_v2 — Local Support Network Planner");
     expect(String(meta.coverStatus)).toContain("6DB3ECFC3A6141995E9388AB59C1FD6DE914C1242636ABE984E13773032192CA");

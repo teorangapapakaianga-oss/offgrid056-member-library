@@ -30,7 +30,7 @@ describe("Stage 9.86 · OG-05 disposition", () => {
     if (!fs.existsSync(dir)) return;
     const recs = fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { legacyCode: string; slug: string });
     expect(recs.some((r) => r.legacyCode === "OG-05")).toBe(false);
-    expect(recs).toHaveLength(36); // 35 live + res-1514 staged (Stage 10.27C)
+    expect(recs).toHaveLength(36); // all 36 live (res-1514 deployed in Stage 10.27D)
     const pdfs = fs.readdirSync(path.join(root, "private-assets/resources"));
     expect(pdfs.filter((f) => /quick-reference|pillars/i.test(f))).toEqual([]);
   });

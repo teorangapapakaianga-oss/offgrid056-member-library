@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-14",
-  "stage": "10.27C",
+  "stage": "10.27D",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -83,13 +83,11 @@
     ]
   },
   "baseline": {
-    "liveProtectedResources": 35,
-    "liveMarketFiles": 70,
-    "stagedProtectedResources": 1,
+    "liveProtectedResources": 36,
+    "liveMarketFiles": 72,
+    "stagedProtectedResources": 0,
     "brokenLinks": 0,
-    "worker": "see operational registers (not recorded here)",
-    "stagedBuildProtectedResources": 36,
-    "stagedBuildMarketFiles": 72
+    "worker": "see operational registers (not recorded here)"
   },
   "resources": [
     {
@@ -3699,8 +3697,7 @@
       "owner": "UNKNOWN_EXISTING_RECORD",
       "version": "UNKNOWN_EXISTING_RECORD",
       "versionDate": "UNKNOWN_EXISTING_RECORD",
-      "firstPublishedToPreview": null,
-      "stagedRecordPublishedDate": "2026-10-15",
+      "firstPublishedToPreview": "2026-10-15",
       "sourceFile": {
         "legacyHtml": "OG-B14_Community_Resilience_Network_Builder.html",
         "legacyPdf": "OG-B14_Community_Resilience_Network_Builder.pdf",
@@ -3711,12 +3708,12 @@
       },
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "status": "draft",
-      "migrationState": "STAGED",
+      "migrationState": "LIVE",
       "publicationStatus": "approved",
       "releaseChannel": "private-preview",
-      "visibleBadge": null,
+      "visibleBadge": "Preview",
       "visibleBadgeInCurrentBuild": "Preview",
-      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 10.27D); the listings show no publication badge",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
@@ -3725,7 +3722,7 @@
       "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
       "canonicalRoute": "/resources/local-support-network-planner/",
       "routeSource": "record.slug (private resource record), confirmed in the staged build",
-      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "routeStatus": "VERIFIED_IN_BUILD",
       "marketAvailability": [
         "NZ",
         "AU"
@@ -3772,7 +3769,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "STAGED, not deployed (Stage 10.27C): the live site has 35 resources; the staged build has 36. Planning Tools is 12 live and 12 in the staged build (this resource is in no collection).",
+        "DEPLOYED (Stage 10.27D) as live protected resource #36 behind Cloudflare Access.",
         "Related links are the four curated resources in the approved order (Household Contacts Sheet, Household Responsibility Roster, Emergency Readiness Checklist, Professional Support Planner); the fourth link keeps the automatic related fill suppressed. The printed PDF Where Next lists three rows (res-1024 is metadata only).",
         "A privacy-minimised rewrite: the legacy neighbour asset map, third-party addresses, needs, radio, drill and distance fields are not carried.",
         "`status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the owner-approved governance state. None of these is an entitlement."
@@ -3816,7 +3813,7 @@
       "basedOn": "publicationStatus + releaseChannel (approved + private-preview = Preview)",
       "tooltip": "Approved resource in the protected OffGrid056 preview.",
       "tooltipRule": "Exact approved wording; used unless a technical constraint requires a minor punctuation or capitalisation change. It must not imply public release, production entitlement, paid access or a final member launch, and 'not yet approved for members' is not used for the approved private-preview state.",
-      "implemented": "DEPLOYED (Stage 10.19C, 10.18D, 10.21D, 10.22D, 10.23D and 10.24D): all 35 live protected resources show Preview on the resource detail page."
+      "implemented": "DEPLOYED (Stage 10.19C, 10.18D, 10.21D, 10.22D, 10.23D, 10.24D and 10.27D): all 36 live protected resources show Preview on the resource detail page."
     },
     "res1019": {
       "classification": "MODEL / BADGE SEMANTICS ISSUE",
@@ -3893,7 +3890,7 @@
       "detail": "Standard and advanced roadmaps; kept as separate resources by owner ruling."
     }
   ],
-  "nextStage": "Stage 10.27D — OG-B14 controlled deployment + post-deploy QA (needs separate owner approval; not started)",
+  "nextStage": "No stage in progress; the next work is the owner's choice (the remaining not-started queue: OG-B01, OG-B03, OG-B11, OG-B13, OG-B15).",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -3909,12 +3906,5 @@
     "lintExit": 0,
     "typecheckExit": 0
   },
-  "stagedResources": [
-    {
-      "stableResourceId": "res-1514",
-      "stage": "10.27C",
-      "state": "STAGED, NOT DEPLOYED",
-      "note": "Counted in the staged build (36 / 72), not in the live totals (35 / 70)."
-    }
-  ]
+  "stagedResources": []
 }
