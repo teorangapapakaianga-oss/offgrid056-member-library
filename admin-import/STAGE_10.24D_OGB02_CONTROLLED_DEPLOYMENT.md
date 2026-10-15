@@ -1,0 +1,46 @@
+# Stage 10.24D — OG-B02 Household Contacts Sheet: controlled deployment and post-deploy QA
+
+**Deployed on the owner's approval of Stage 10.24C. PASS. Rollback not triggered.** Only the approved staged OG-B02 build was deployed. No entitlement, OS, Supabase, Railway or Cloudflare Access change; no copy, cover, PDF or metadata change (the only metadata edits record the LIVE state). `res-0009` is unchanged.
+
+## Deployment
+| | |
+|---|---|
+| Result | **Success** (`npx wrangler deploy`, exit 0; 626 files uploaded, 454 already present) |
+| Source commit | `147fd33` (Stage 10.24C); tracked working tree clean (0 changes) |
+| Pre-deploy Worker (rollback target) | `f97d160a-2599-40b6-a4a2-fe3badec1e25` (100% before the deploy, confirmed) |
+| New Worker | `baf17c92-4ccf-45fb-aefe-f1ae5565eea6` (100%; created 2026-10-15T02:48:14Z; confirmed by `wrangler deployments list`) |
+| Older versions | all retained (`f97d160a…`, `4b864fb7…`, `dd11e4e9…` and earlier) |
+| What was deployed | `out/` of the second of two fresh `build:preview` builds: identical to the first (0 differences) and **identical to the approved Stage 10.24C staged build** (1,080 files, 0 differences after build-id normalisation); the uploaded tree is **byte-identical to its pre-upload snapshot (1,080 of 1,080)** |
+| Rollback triggered | **NO** |
+
+## Pre-deploy gate (all passed)
+Live baseline confirmed: 34 protected resources · 68 market files · Planning Tools 12 · Downloads 56 · My Progress 59 · 0 broken links · Worker `f97d160a…` at 100%. Staged build confirmed: 35 · 70 · 12 · 57 · 60 · 0. Staged-build QA on the deploy tree (`workspace/staged-qa-b02d.mjs`): ALL PASS (record, route, both PDFs with the approved hashes, four curated cards in order with no automatic fill, Planning Tools 12 → 12, existing pages untouched, Preview and exact tooltip, 0 Draft). Draft QA and PDF QA: ALL PASS (8 pages each, exact title, one cover). Slug side-effect re-run (permanent tests, standalone and with the real record): **0 existing pages change**. Record integrity: id, title, description (curly apostrophe), slug, route, classification, beginner, 20 minutes, no collection, approved / private-preview, entitlement undefined, handoff inactive, all as locked. **Default-timeout full suite 64 files, 1,730 tests, exit 0**; focused OG-B02 test file 24 passed; lint exit 0 (0 errors; warnings only in git-ignored scratch scripts); typecheck exit 0; `import:verify-prep` exit 0; `import:verify-build` exit 0 (35 records · 70 market files · 0 broken internal links).
+
+## Existing-asset integrity
+Against the live baseline (the deployed Stage 10.23D build): 8 files added (the new resource's page files and two PDFs), 0 removed; all 93 earlier PDFs byte-identical; stylesheet identical; all 23 JavaScript chunk names identical; programme, Start Here, Foundations, Planning Tools and the other untouched areas have 0 changed files. The changed pages differ only by the new entry and the counts (attributed hunk by hunk in Stage 10.24C). Related cards on existing pages: **0 changed**. **`res-0009`: unchanged; its page's visible text is identical to the previous live baseline** (its page files differ only by the new resource's entry in the shared index).
+
+## Access (unauthenticated)
+25 routes probed without following redirects (`/`, `/resources/`, `/library/`, the OG-B02 route, its NZ and AU PDFs and `index.txt`, the demo `household-contacts-template`, the OG-30 route and NZ PDF, the Emergency Readiness Checklist, the Advanced roadmap, the demo 30-Day Action Planner, an existing AU PDF, downloads, progress, planning tools, start here, saved, foundations, programme, `robots.txt`, an unknown route, a data path and a static chunk path): **25 redirected (302) to Cloudflare Access, 0 unauthenticated 200.** Access settings untouched. **Authenticated owner session available: NO** (none was manufactured); content was verified on the uploaded tree, which is byte-identical to what Cloudflare serves behind Access. A live download through Access was not possible without a session.
+
+## Live verification (uploaded tree)
+- **Route and metadata:** `/resources/household-contacts-sheet/`; title and the exact description (curly apostrophe); General · Worksheet · Beginner · 20 min · Planning; Preview badge; no OG-B02 or `res-1502` wording; both PDFs linked; the page asks for a market before offering the download. It is not in Planning Tools or Start Here.
+- **Badges:** **35 of 35** protected detail pages show the exact tooltip "Approved resource in the protected OffGrid056 preview."; **0 Draft**; **0** listing publication badges (library, downloads, progress, planning tools).
+- **Related (live page order):** Emergency Readiness Checklist, Water, Food and Air Household Snapshot, Household Responsibility Roster, Professional Support Planner; all "Linked by us"; no automatic card.
+- **PDFs:** NZ `household-contacts-sheet.NZ.pdf`, 2,513,688 bytes, sha256 `43272199d2247d2a2408402555e3a4049097f64e85f4d02fef67b68ba36d91ac`; AU `…AU.pdf`, 2,513,510 bytes, sha256 `a8467d92996829248873689bb7b2cac6c2d36c42a753fca5e7bfa74f3ec2f22d`; both equal the approved and staged hashes. 8 pages each; title "Household Contacts Sheet — OffGrid056"; the owner's cover embedded; "Household address (optional)" intact; no policy, account, password or access-code field; no medical detail; no Emergency Kit Location; no fixed emergency number in the body (only in the standing block); Where Next prints exactly three rows and Professional Support Planner is not printed; no OG-B02, OFFGRID056.COM, yearly or 12 months (`workspace/ogb02-pdfqa.mjs`: ALL PASS on the same bytes).
+- **Live counts (measured from the uploaded tree):** protected resources **35**; market files **70**; Planning Tools **12** (the new resource is not in it); Downloads **57**; My Progress **60**; Library resource links 61; broken links **0**. (Before: 34 · 68 · 12 · 56 · 59.)
+- **Entitlement and OS:** accessTier and entitlementRequirement UNDEFINED_OWNER_DECISION; recommendationEligible false; handoffStatus INACTIVE; approvedHandoffRoute null; entitlementContractStatus NOT_APPROVED; status draft, publicationStatus approved, releaseChannel private-preview.
+
+## Detectors (current source)
+OG-B02 (`workspace/ogb02-draft-qa.mts`, NZ and AU): technical safety 0; regulatory candidates 0, unresolved 0; Bucket C 0; price, payback, warranty, payment, multiplier, comparative, outcome, assurance, survival, supply-duration, storage and target-label 0; legacy-language 0; content flags 0; body 3,159 characters each, identical. The whole-library numeric scan (in the suite) has zero blocking findings. No exemption, no detector change.
+
+## Registers, review config and canonical index
+OG-B02 promoted STAGED → DEPLOYED in `CURRENT_STATUS.md`, `NEXT_ACTIONS.md` and `RESOURCE_REGISTER.md`; live **35 · 70**; Worker `baf17c92-4ccf-45fb-aefe-f1ae5565eea6`, rollback `f97d160a-2599-40b6-a4a2-fe3badec1e25`. **Migration totals (recalculated from the register):** Deployed 35 · Staged 0 · Prepared 0 · Blocked 1 (OG-16) · Merged 1 (OG-05) · Not started 8 = 45 (OG-B01, OG-B03, OG-B05, OG-B06, OG-B11, OG-B13, OG-B14, OG-B15). The review config carries OG-B02 as DEPLOYED. Canonical index: res-1502 LIVE, badge Preview, firstPublishedToPreview 2026-10-15, reviewStatus NEEDS_ENTITLEMENT_DECISION and NEEDS_METADATA (not VERIFIED_CURRENT). Test expectations moved from staged to live; no validator weakened; historical notes untouched. `res-0009` and `res-1502` remain intentionally separate.
+
+## Post-deploy validation
+After the register promotion: default-timeout full suite **64 files, 1,730 tests, exit 0**; lint exit 0 (0 errors; warnings only in git-ignored scratch scripts); typecheck exit 0; `import:verify-prep` exit 0; `import:verify-build` exit 0 (35 records · 70 market files · 0 broken links); Worker `baf17c92…` still at 100%. Unrelated-resource changes: **none**.
+
+## Verdict
+**PASS.** Deployment succeeded; Access intact; res-1502 live behind Access; 35 resources and 70 market files; Planning Tools 12; Downloads 57; My Progress 60; Preview badges correct and Draft absent; both PDFs with the approved hashes; the related set correct and unfilled; no existing page, PDF, copy, ID or engine change; `res-0009` unchanged; 0 broken links; detectors clean; entitlement unchanged; OS handoff inactive; registers agree; no rollback.
+
+## Owner decisions and next stage
+No decision is blocking. Stopped for owner review; no other resource was started. Open items (owner's choice of order): the treatment of the demo placeholder `res-0009` Household Contacts Template, the next legacy-resource audit (remaining not-started: OG-B01, OG-B03, OG-B05, OG-B06, OG-B11, OG-B13, OG-B14, OG-B15), the res-1025 wording review, the public-repository hygiene stage, access tiers and the entitlement contract, and optional res-1510 related-list curation. An authenticated owner check of the live OG-28, OG-29, OG-30 and OG-B02 pages and PDF downloads would close the one verification step this session cannot perform. Recommended next stage: **the next legacy-resource audit, OG-B06 Progress Tracker Wall Chart or OG-B05 Community Call Prep Sheet** (both listed with no technical safety topics), or a decision on `res-0009`; your call.

@@ -56,7 +56,7 @@ describe("Stage 10.24A · OG-B02 locked metadata", () => {
       expect(sha("household-contacts-sheet.NZ.pdf")).toBe("43272199d2247d2a2408402555e3a4049097f64e85f4d02fef67b68ba36d91ac");
       expect(sha("household-contacts-sheet.AU.pdf")).toBe("a8467d92996829248873689bb7b2cac6c2d36c42a753fca5e7bfa74f3ec2f22d");
     }
-    expect(String(meta.migrationState)).toMatch(/^STAGED, NOT DEPLOYED \(Stage 10\.24C\)/);
+    expect(String(meta.migrationState)).toMatch(/^DEPLOYED \(Stage 10\.24D\)/);
     expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-14 \(Stage 10\.24B\)/);
     expect(String(meta.coverStatus)).toContain("OGB02_COVER_v1 — Household Contacts Sheet");
     expect(String(meta.coverStatus)).toContain("37483DF484FCFD763C05DD1AC4ADAEC423ED9E817730AFF4426DB17DF0ED4854");
