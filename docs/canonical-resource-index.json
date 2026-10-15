@@ -3688,7 +3688,7 @@
     "status": "technical / build-state gate (draft, published, archived): decides whether a build loads the record; unchanged",
     "publicationStatus": "editorial / publication governance state (draft, review, approved, live, withdrawn, superseded, internal)",
     "releaseChannel": "environment / audience state (private-preview, members)",
-    "migrationState": "migration workflow state in the operational registers (Not started, Prepared, Staged, Deployed/LIVE, Blocked, Merged)",
+    "migrationState": "migration workflow state in the operational registers (Not started, Prepared, Staged, Deployed/LIVE, Blocked, Merged, Archived; Merged and Archived are register-only states that no protected record carries)",
     "accessProtection": "whether access protection exists (Cloudflare Access on the preview hostname)",
     "entitlementRequirement": "whether the member is entitled to receive a resource (undefined until the owner defines it)",
     "rule": "These six concepts stay separate and are never derived from one another."

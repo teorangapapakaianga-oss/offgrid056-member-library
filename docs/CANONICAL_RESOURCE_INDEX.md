@@ -28,7 +28,7 @@
   - `status`: technical / build-state gate (draft, published, archived): decides whether a build loads the record; unchanged
   - `publicationStatus`: editorial / publication governance state (draft, review, approved, live, withdrawn, superseded, internal)
   - `releaseChannel`: environment / audience state (private-preview, members)
-  - `migrationState`: migration workflow state in the operational registers (Not started, Prepared, Staged, Deployed/LIVE, Blocked, Merged)
+  - `migrationState`: migration workflow state in the operational registers (Not started, Prepared, Staged, Deployed/LIVE, Blocked, Merged, Archived; Merged and Archived are register-only states that no protected record carries)
   - `accessProtection`: whether access protection exists (Cloudflare Access on the preview hostname)
   - `entitlementRequirement`: whether the member is entitled to receive a resource (undefined until the owner defines it)
 - **Accepted Stage 10.19 baseline:** 30 protected resources · 60 market files · 0 broken links · 30 canonical index records · 0 duplicate stable IDs · 0 duplicate routes · 0 missing routes · all 60 market files present · 59 test files / 1,636 tests · lint 0 · typecheck 0.
