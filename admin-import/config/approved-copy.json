@@ -4837,7 +4837,7 @@
       {
         "where": "Cover image",
         "from": "<img src=\"assets/Week4_ActionPlanPathway_Cover.jpg\" class=\"cover-img\" alt=\"Week 4 Cover\">\n",
-        "to": "<img src=\"assets/local-support-network-planner-cover.png\" class=\"cover-img\" alt=\"Three adults around a wooden table talking together, with a notebook, a paper map and mugs in front of them, in a bright home with plants and a window behind\">\n",
+        "to": "<img src=\"assets/local-support-network-planner-cover.png\" class=\"cover-img\" alt=\"Two adults in a bright home kitchen, one placing a note on a cork noticeboard covered in sticky notes while the other holds a notebook\">\n",
         "expectedMatches": 1,
         "approvedBy": "owner",
         "approvedOn": "2026-10-15",

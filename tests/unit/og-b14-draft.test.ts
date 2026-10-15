@@ -48,19 +48,22 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
     const pdfs = path.join(root, "private-assets/resources");
     if (fs.existsSync(pdfs)) expect(fs.readdirSync(pdfs).filter((f) => /local-support-network-planner/.test(f))).toEqual([]);
     expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
-    expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-15 \(Stage 10\.27B\)/);
-    expect(String(meta.coverStatus)).toContain("OGB14_COVER_v1 — Local Support Network Planner");
-    expect(String(meta.coverStatus)).toContain("961D42A7DB856DD92CA012952454E4F0464C015632B100B3CA2CC2963540C4E3");
-    expect(String(meta.coverStatus)).toContain("C84AAC7CDAD7B380F4E25117E3641516DA5A1CE4FBCC2DA3F7E09E37A63D1B1A");
+    expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-15 \(Stage 10\.27B-R1; replaces the Stage 10\.27B V1 cover\)/);
+    expect(String(meta.coverStatus)).toContain("OGB14_COVER_v2 — Local Support Network Planner");
+    expect(String(meta.coverStatus)).toContain("6DB3ECFC3A6141995E9388AB59C1FD6DE914C1242636ABE984E13773032192CA");
+    expect(String(meta.coverStatus)).toContain("69813CE24574D0C9A14ECB5F439BACED50107F72BBBFEA6380C8A9810E3B0442");
     expect(allNew).toContain('<img src="assets/local-support-network-planner-cover.png" class="cover-img"');
     expect((allNew.match(/<img /g) ?? []).length).toBe(1);
     expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4|Week 4 Cover|Cover\.jpg|OG30_|long-term-direction-planner-cover|household-contacts-sheet-cover/);
   });
-  it("Stage 10.27B: the cover is distinct from the OG-30 and OG-B02 covers (prep images, when present)", async () => {
+  it("Stage 10.27B-R1: the V2 cover is distinct from the OG-30, OG-B02 and retired OG-B14 V1 covers, and is the active prep cover (prep images, when present)", async () => {
     const mine = path.join(root, "workspace/prep/OG-B14/assets/local-support-network-planner-cover.png");
-    const others = [path.join(root, "workspace/prep/OG-30/assets/long-term-direction-planner-cover.png"), path.join(root, "workspace/prep/OG-B02/assets/household-contacts-sheet-cover.png")];
+    const others = [path.join(root, "workspace/prep/OG-30/assets/long-term-direction-planner-cover.png"), path.join(root, "workspace/prep/OG-B02/assets/household-contacts-sheet-cover.png"), path.join(root, "workspace/prep/OG-B14/assets/local-support-network-planner-cover-v1-rejected.png")];
     if (![mine, ...others].every((f) => fs.existsSync(f))) return;
     const sharp = (await import("sharp")).default;
+    const crypto = await import("node:crypto");
+    expect(crypto.createHash("sha256").update(fs.readFileSync(mine)).digest("hex")).toBe("6db3ecfc3a6141995e9388ab59c1fd6de914c1242636abe984e13773032192ca"); // the active prep cover is V2, not the retired V1
+    expect((await sharp(mine).metadata()).height).toBeGreaterThan((await sharp(mine).metadata()).width as number); // V2 is a portrait image
     const grey = async (f: string) => sharp(f).resize(64, 43, { fit: "fill" }).removeAlpha().greyscale().raw().toBuffer();
     const a = await grey(mine);
     for (const o of others) {
