@@ -48,11 +48,46 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
     const pdfs = path.join(root, "private-assets/resources");
     if (fs.existsSync(pdfs)) expect(fs.readdirSync(pdfs).filter((f) => /local-support-network-planner/.test(f))).toEqual([]);
     expect(String(meta.migrationState)).toMatch(/Migration state stays Not started/);
-    expect(String(meta.coverStatus)).toMatch(/^PENDING/);
+    expect(String(meta.coverStatus)).toMatch(/^OWNER-SUPPLIED 2026-10-15 \(Stage 10\.27B\)/);
     expect(String(meta.coverStatus)).toContain("OGB14_COVER_v1 — Local Support Network Planner");
-    expect(String(meta.coverStatus)).toContain("OGB14_Local-Support-Network-Planner_Cover_v1.png");
-    expect(allNew).not.toMatch(/<img /);
+    expect(String(meta.coverStatus)).toContain("961D42A7DB856DD92CA012952454E4F0464C015632B100B3CA2CC2963540C4E3");
+    expect(String(meta.coverStatus)).toContain("C84AAC7CDAD7B380F4E25117E3641516DA5A1CE4FBCC2DA3F7E09E37A63D1B1A");
+    expect(allNew).toContain('<img src="assets/local-support-network-planner-cover.png" class="cover-img"');
+    expect((allNew.match(/<img /g) ?? []).length).toBe(1);
+    expect(allNew.replace(/<style>[\s\S]*?<\/style>/, "")).not.toMatch(/Week4|Week 4 Cover|Cover\.jpg|OG30_|long-term-direction-planner-cover|household-contacts-sheet-cover/);
   });
+  it("Stage 10.27B: the cover is distinct from the OG-30 and OG-B02 covers (prep images, when present)", async () => {
+    const mine = path.join(root, "workspace/prep/OG-B14/assets/local-support-network-planner-cover.png");
+    const others = [path.join(root, "workspace/prep/OG-30/assets/long-term-direction-planner-cover.png"), path.join(root, "workspace/prep/OG-B02/assets/household-contacts-sheet-cover.png")];
+    if (![mine, ...others].every((f) => fs.existsSync(f))) return;
+    const sharp = (await import("sharp")).default;
+    const grey = async (f: string) => sharp(f).resize(64, 43, { fit: "fill" }).removeAlpha().greyscale().raw().toBuffer();
+    const a = await grey(mine);
+    for (const o of others) {
+      const b = await grey(o);
+      let d = 0; for (let i = 0; i < a.length; i++) d += Math.abs(a[i] - b[i]);
+      expect(d / a.length, path.basename(o)).toBeGreaterThan(25); // a re-encoded copy of the same picture differs by about 4; this cover differs by about 60 to 70
+    }
+  }, 30000);
+  it("Stage 10.27B: the rendered NZ and AU PDFs in the git-ignored prep folder (when present) are the approved renders: 7 pages, exact title, one cover, identical body text", async () => {
+    const dir = path.join(root, "workspace/prep/OG-B14");
+    const nz = path.join(dir, "local-support-network-planner.NZ.pdf"), au = path.join(dir, "local-support-network-planner.AU.pdf");
+    if (!fs.existsSync(nz) || !fs.existsSync(au)) return;
+    const { PDFParse } = await import("pdf-parse");
+    const texts: string[] = [];
+    for (const f of [nz, au]) {
+      const parser = new PDFParse({ data: new Uint8Array(fs.readFileSync(f)) });
+      const { pages = [] } = await parser.getText();
+      expect(pages).toHaveLength(7);
+      const per = pages.map((p: { text?: string }) => (p.text ?? "").replace(/\s+/g, " ").trim());
+      expect((per[0].match(/Local Support Network Planner/g) ?? []).length).toBe(1);
+      expect(per[0]).toContain("A calm, practical way to think about the local support around your household.");
+      expect(per.join(" ")).not.toMatch(/OG-B14|Tier 4|Asset Map|Potential Needs|Relationship Status|\bUHF\b|\bHAM\b|annual drill|check-in time|500\s?m|not legal contracts|Rural Fire|Fire and Emergency/i);
+      expect(per.join(" ")).not.toMatch(/Professional Support/);
+      texts.push([per[1].slice(per[1].indexOf("What This Planner Is For")), ...per.slice(2, 6), per[6].slice(0, per[6].indexOf("Before you start"))].join(" | "));
+    }
+    expect(texts[0]).toBe(texts[1]);
+  }, 30000);
   it("has the owner-approved four curated related links in the metadata order, with the exact canonical titles", () => {
     expect(meta.relatedResources).toEqual(["res-1502", "res-1028", "res-1006", "res-1024"]);
     const dir = path.join(root, "private-assets/data-resources");
