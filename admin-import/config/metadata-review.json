@@ -1892,6 +1892,68 @@
       "migrationState": "DEPLOYED (Stage 10.24D) — live as a protected resource behind Cloudflare Access; the record and the two approved Stage 10.24B PDFs are in the deployed tree. Planning Tools stays at twelve live resources (this resource is in no collection). The demo placeholder Household Contacts Template is unchanged.",
       "recordStatusNote": "draft, as every real resource is.",
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Resilience Emergency worksheet that follows the Emergency Readiness Checklist and sits beside the Household Responsibility Roster: Emergency Readiness Checklist → Household Contacts Sheet → Water, Food and Air Household Snapshot, with the Household Responsibility Roster alongside and the Professional Support Planner later. Not an emergency procedure and not a medical or account record."
+    },
+    "OG-B14": {
+      "title": "Local Support Network Planner",
+      "titleStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A); legacy 'OG-B14 Community Resilience Network Builder' (code removed publicly)",
+      "proposedSlug": "local-support-network-planner",
+      "proposedSlugStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A): sorts after 'emergency-readiness-checklist' in the related-resource engine's slug order, so it does not change the automatic related cards on any existing page (Stage 10.27 simulation: 0 pages; a community-* slug would change 11)",
+      "resourceType": "worksheet",
+      "resourceTypeStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A)",
+      "foundation": "general",
+      "foundationStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A): local support applies to the whole household; no single foundation is its subject",
+      "programComponent": "resilience-planning",
+      "programComponentStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A): a household planning its local support network ahead of need",
+      "programAlignment": {
+        "foundation": "general — local support applies to the whole household; no single foundation is its subject",
+        "programComponent": "resilience-planning — helps a household think through the trusted people, groups and services around it, what it may offer and where it may want help; planning only, no emergency action",
+        "resilienceRole": "helps a household look at its own local support in a privacy-conscious way and choose one connection to explore",
+        "guidanceKind": "member-entry planning worksheet — not a neighbourhood directory, an asset or vulnerability register for other homes, a radio or communications plan, a drill plan, a legal agreement or an emergency-response plan",
+        "wordingMatchesRole": "yes — every field is member-entered and about the member's own household; the draft names no agency, address, equipment, supply, need, vulnerability, frequency, schedule or distance, makes no promise and asks for no third-party detail"
+      },
+      "alignmentAnswers": {
+        "problem": "It gives a household one calm place to think about the trusted local support around it, what it may offer and where it may want help, without recording anything about other households.",
+        "standalone": "The Household Contacts Sheet records a household's key contacts; the Household Responsibility Roster records who looks after what inside the household; the Professional Support Planner prepares for engaging professionals. No live resource helps a household plan its wider local support, and the legacy contact tables are covered by the Household Contacts Sheet and are not carried.",
+        "mustNotBecome": "A neighbourhood intelligence map, an asset or supply register for other homes, a vulnerability map, a shared emergency roster, a radio communications plan, a drill plan, a legal agreement or a directory of private household resources."
+      },
+      "category": "planning",
+      "categoryStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A)",
+      "difficulty": "beginner",
+      "difficultyStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A)",
+      "difficultySource": "OWNER-APPROVED: writing in contacts, offers and needs; no calculation.",
+      "estimatedTime": 30,
+      "estimatedTimeStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A)",
+      "estimatedTimeReasoning": "OWNER-APPROVED: thinking through priorities, people, offers, needs, groups, gaps and a next connection.",
+      "description": "A practical worksheet to help your household identify trusted local support, record what you may be able to offer, and note where you may want help from others.",
+      "descriptionStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A): the exact sentence",
+      "draftStatus": "DRAFT for owner copy review (Stage 10.27A): member-entered sections only (priorities, people and roles, household offer, household help wanted, local groups and services, gaps, next connection, notes), a three-row Where Next table and a closing summary. Not yet owner-approved as copy.",
+      "coverStatus": "PENDING (Stage 10.27A records the concept only; no image is generated or supplied). Future title-free concept: two or three adults around a kitchen or community table with a simple notebook or map-style planning sheet, relaxed and collaborative posture, natural daylight, calm local feel; no readable generated text, addresses, maps with identifiable property details, uniforms, emergency vehicles, sirens or lights, technical equipment, survival imagery or disaster scenes. Future asset tag 'OGB14_COVER_v1 — Local Support Network Planner'; suggested file name OGB14_Local-Support-Network-Planner_Cover_v1.png. The draft cover shows the template title on the dark brand background with no image; the legacy Week 4 artwork is removed.",
+      "tags": [],
+      "tagsStatus": "the convention across all live resources",
+      "collections": [],
+      "collectionsStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A): Planning Tools = NO. The resource is in no collection; Planning Tools stays at twelve live resources",
+      "relatedResources": [
+        "res-1502",
+        "res-1028",
+        "res-1006",
+        "res-1024"
+      ],
+      "relatedResourcesStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A): exactly four, in this metadata order: Household Contacts Sheet (before, res-1502), Household Responsibility Roster (next, res-1028), Emergency Readiness Checklist (also useful, res-1006), Professional Support Planner (later, res-1024). Four explicit links suppress the automatic related fill under the existing rule; lib/related.ts is not changed. The printed Where Next shows three rows; res-1024 is metadata only.",
+      "safetyBlocks": [],
+      "approvedSafetyBlocks": [],
+      "approvedSafetyBlocksStatus": "OWNER-APPROVED 2026-10-15 (Stage 10.27A): standing emergency-contact and general-disclaimer blocks only; no technical topic block, because the planner names no agency, procedure or system.",
+      "safetyTopicDispositions": {
+        "fire-and-emergency": {
+          "disposition": "REMOVED",
+          "approvedBy": "owner",
+          "approvedOn": "2026-10-15",
+          "reason": "The legacy sheet named a rural fire authority, controlled-burn advice, evacuation centres and emergency drill scenarios. Removed with the agency table and the drill plan; the planner names no agency and teaches no procedure."
+        }
+      },
+      "recordStatus": "draft",
+      "migrationState": "DRAFT PREPARED for owner copy review (Stage 10.27A) — NOT rendered, NOT staged, NOT a protected resource, no resource ID assigned. Migration state stays Not started. Planning Tools is unchanged.",
+      "recordStatusNote": "draft, as every real resource is.",
+      "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Resilience Planning worksheet that follows the Household Contacts Sheet and sits beside the Household Responsibility Roster: Household Contacts Sheet → Local Support Network Planner → Household Responsibility Roster, with the Emergency Readiness Checklist alongside and the Professional Support Planner later. Not an emergency procedure, a directory or a record of other households."
     }
   }
 }

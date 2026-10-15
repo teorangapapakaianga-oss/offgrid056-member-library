@@ -13,7 +13,7 @@ import { COLLECTION_IDS, PROGRAM_COMPONENTS } from "@/lib/content/constants";
  * Read from the committed review config (no private file needed). The draft is NOT owner-approved copy, NOT rendered, NOT staged and NOT live, and it has no res-ID.
  */
 const root = process.cwd();
-const withoutOgB02Entry = (raw: string) => { const j = JSON.parse(raw) as Record<string, Record<string, unknown> | undefined>; for (const k of ["resources", "changes", "classificationsDecided"]) if (j[k]) delete j[k]!["OG-B02"]; return JSON.stringify(j); };
+const withoutOgB02Entry = (raw: string) => { const j = JSON.parse(raw) as Record<string, Record<string, unknown> | undefined>; for (const k of ["resources", "changes", "classificationsDecided"]) if (j[k]) { delete j[k]!["OG-B02"]; delete j[k]!["OG-B14"]; } return JSON.stringify(j); };
 const ac =(JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/approved-copy.json"), "utf8")) as { changes: Record<string, { where: string; from: string; to: string }[]> }).changes["OG-24"];
 const meta = (JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/metadata-review.json"), "utf8")) as { resources: Record<string, Record<string, unknown>> }).resources["OG-24"];
 const pc = JSON.parse(fs.readFileSync(path.join(root, "admin-import/config/program-components.json"), "utf8")) as { classificationsDecided: Record<string, string> };
