@@ -145,9 +145,9 @@ describe("Stage 9.97 · OG-07 draft copy: the owner's structure", () => {
 describe("Stage 10.00 · registers", () => {
   it("OG-07 is deployed (not in Not started or Staged) and the counts are as locked", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
-    expect(rr.split("## Not started (7)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-07 \|/);
+    expect(rr.split("## Not started (6)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-07 \|/);
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-07 \| Priority Lock Worksheet \| general \/ worksheet \|/);
     expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-07 \|/m);
-    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*7\*\*/);
+    expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*6\*\*/);
   });
 });
