@@ -12,9 +12,9 @@ import { describe, expect, it } from "vitest";
 const root = process.cwd();
 const names = ["CURRENT_STATUS", "NEXT_ACTIONS", "RESOURCE_REGISTER"] as const;
 const text = Object.fromEntries(names.map((n) => [n, fs.readFileSync(path.join(root, "internal/member-programme", `${n}.md`), "utf8")])) as Record<(typeof names)[number], string>;
-const LIVE_WORKER = "bde27561-cd8d-4984-bff5-a8bf8489709a";
-const ROLLBACK = "d7480c93-75fb-4ca5-8b40-0383b9cacadf";
-const OLDER = ["baf17c92-4ccf-45fb-aefe-f1ae5565eea6", "f97d160a-2599-40b6-a4a2-fe3badec1e25", "4b864fb7-6736-46e5-b918-39f92ab37128", "dd11e4e9-6c2d-4dff-a6f7-5233a8150e2e", "3e53c3a7-eb7a-450d-8f12-5244c04c0d38", "07c5694d-db5b-45e4-a2f5-022ce518c8cb", "9ccff591-fc7b-4827-a1f6-4d9b754cbaa6", "7bccd708-70a8-479f-90c8-b6f7239e1c91", "61f3bcf8-c4df-4d52-a060-b760bfbabc26", "b7091068-bbee-4ac5-9f8b-1e9f7cb47b28", "e1b31486-afbe-4849-9702-a54e51114717", "8834be25-0110-4355-94a5-93b9943f792d", "5d88271b-6f06-4be8-9fd9-6b73fa4a002a", "2fb0663d-a7da-4acf-ba4c-957886b21631", "65437c37-b731-4851-b67e-5b0fae79fe12", "89333107-7c0a-4bdb-8229-f2b5241a9e05", "e63141a1-380a-4770-a125-9fd7a15d0bdb", "7de9641f-df4c-4cab-8e84-055c0861879d", "db2fd12a-955e-47c4-b3c9-d174e3da85d8", "fa23ec74-85d2-4d91-b484-3f037ccbe38b", "1922f7ba-a0b3-4a7b-ba01-593b3df6a160"];
+const LIVE_WORKER = "2954cb67-1d7c-486f-845e-3be7b3f5fac5";
+const ROLLBACK = "bde27561-cd8d-4984-bff5-a8bf8489709a";
+const OLDER = ["d7480c93-75fb-4ca5-8b40-0383b9cacadf", "baf17c92-4ccf-45fb-aefe-f1ae5565eea6", "f97d160a-2599-40b6-a4a2-fe3badec1e25", "4b864fb7-6736-46e5-b918-39f92ab37128", "dd11e4e9-6c2d-4dff-a6f7-5233a8150e2e", "3e53c3a7-eb7a-450d-8f12-5244c04c0d38", "07c5694d-db5b-45e4-a2f5-022ce518c8cb", "9ccff591-fc7b-4827-a1f6-4d9b754cbaa6", "7bccd708-70a8-479f-90c8-b6f7239e1c91", "61f3bcf8-c4df-4d52-a060-b760bfbabc26", "b7091068-bbee-4ac5-9f8b-1e9f7cb47b28", "e1b31486-afbe-4849-9702-a54e51114717", "8834be25-0110-4355-94a5-93b9943f792d", "5d88271b-6f06-4be8-9fd9-6b73fa4a002a", "2fb0663d-a7da-4acf-ba4c-957886b21631", "65437c37-b731-4851-b67e-5b0fae79fe12", "89333107-7c0a-4bdb-8229-f2b5241a9e05", "e63141a1-380a-4770-a125-9fd7a15d0bdb", "7de9641f-df4c-4cab-8e84-055c0861879d", "db2fd12a-955e-47c4-b3c9-d174e3da85d8", "fa23ec74-85d2-4d91-b484-3f037ccbe38b", "1922f7ba-a0b3-4a7b-ba01-593b3df6a160"];
 /** The statement of the CURRENT state at the top of each register: from "As at" to the first stage note, section or rule. */
 const current = (n: (typeof names)[number]) => { const t = text[n]; const a = t.indexOf("**As at:**"); const rest = t.slice(a); const e = rest.search(/\n> \*\*Stage|\n## |\n---/); return e < 0 ? rest : rest.slice(0, e); };
 
@@ -78,7 +78,7 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
       expect(c).not.toMatch(/explicit owner approval to deploy OG-12/);
       expect(c).not.toMatch(/Pending content revision/);
       expect(c).not.toMatch(/\b26 protected resources, 52|\b25 protected resources, 50|\b24 protected|\b48 market files|24 live|OG-04[^\n]{0,60}(is|are) (still )?staged/i);
-      expect(c).not.toMatch(/Worker `(?:4b864fb7|dd11e4e9|3e53c3a7|07c5694d|9ccff591|7bccd708|61f3bcf8|b7091068|e1b31486|8834be25|5d88271b|2fb0663d|d7480c93|baf17c92|f97d160a|65437c37|89333107)[^`]*` \(100%\)/); // the previous Workers are rollbacks, not the live one
+      expect(c).not.toMatch(/Worker `(?:4b864fb7|dd11e4e9|3e53c3a7|07c5694d|9ccff591|7bccd708|61f3bcf8|b7091068|e1b31486|8834be25|5d88271b|2fb0663d|d7480c93|bde27561|baf17c92|f97d160a|65437c37|89333107)[^`]*` \(100%\)/); // the previous Workers are rollbacks, not the live one
     });
   }
 
