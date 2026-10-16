@@ -43,7 +43,7 @@ describe("Stage 10.02C · OG-12 locked metadata", () => {
       const og12 = recs.filter((r) => r.legacyCode === "OG-12" || r.id === "res-1012");
       expect(og12).toHaveLength(1);
       expect(og12[0]).toMatchObject({ id: "res-1012", legacyCode: "OG-12" });
-      expect(recs).toHaveLength(36); // all 36 live (res-1514 deployed in Stage 10.27D)
+      expect(recs).toHaveLength(38); // 36 live + res-1513 and res-1515 staged (Stage 11.0J)
     }
   });
 
@@ -140,7 +140,7 @@ describe("Stage 10.04 · registers", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
     expect(rr.split("## Not started (0)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-12 \|/);
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-12 \| Pantry Rotation Tracker \| food \/ template \|/);
-    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-12 \|/m);
+    expect(rr.split("## Staged, not deployed (2)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-12 \|/m);
     expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*0\*\*/);
   });
 });

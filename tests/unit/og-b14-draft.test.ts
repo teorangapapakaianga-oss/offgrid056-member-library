@@ -48,7 +48,7 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
       expect(rec[0]).toMatchObject({ id: "res-1514", slug: "local-support-network-planner", legacyCode: "OG-B14", title: "Local Support Network Planner", foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 30, collections: [], tags: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, completionAvailable: true, relatedResources: ["res-1502", "res-1028", "res-1006", "res-1024"] });
       expect(rec[0].marketFiles).toEqual({ NZ: { fileUrl: "/resources/local-support-network-planner.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/local-support-network-planner.AU.pdf", fileFormat: "PDF" } });
       for (const k of ["accessTier", "entitlementRequirement", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"]) expect(rec[0], k).not.toHaveProperty(k);
-      expect(recs).toHaveLength(36); // all 36 live (res-1514 deployed in Stage 10.27D)
+      expect(recs).toHaveLength(38); // 36 live + res-1513 and res-1515 staged (Stage 11.0J)
       expect(recs.filter((r) => ((r.collections as string[] | undefined) ?? []).includes("planning-tools"))).toHaveLength(12);
     }
     const pdfs = path.join(root, "private-assets/resources");
@@ -129,7 +129,8 @@ describe("Stage 10.27A · OG-B14: the engine and the slug", () => {
     for (const f of fs.readdirSync(dir).filter((x) => x.endsWith(".private.json"))) filesAll.push([f, { tags: [], isPlaceholder: false, ...JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) } as R]);
   }
   // the hypothetical-record checks run on the pool WITHOUT the real res-1514 record, so the hypothetical record is the only one with that slug
-  const files = filesAll.filter(([, r]) => r.id !== "res-1514");
+  const poolAll = filesAll.filter(([, r]) => !["res-1513", "res-1515"].includes(r.id)); // res-1513 / res-1515 (staged in Stage 11.0J) name res-1514 and are covered by their own test
+  const files = poolAll.filter(([, r]) => r.id !== "res-1514");
   const policy = JSON.parse(fs.readFileSync(path.join(root, "lib/content/route-policy.json"), "utf8")) as { separateDemo: Record<string, string> };
   const unlisted = new Set(Object.keys(policy.separateDemo));
   const summary = (r: R) => ({ id: r.id, slug: r.slug, title: r.title, foundation: r.foundation, category: r.category, tags: r.tags ?? [], isPlaceholder: r.isPlaceholder }) as unknown as ResourceSummary;
@@ -151,7 +152,7 @@ describe("Stage 10.27A · OG-B14: the engine and the slug", () => {
     expect(out).toEqual([["Linked by us", "res-1502"], ["Linked by us", "res-1028"], ["Linked by us", "res-1006"], ["Linked by us", "res-1024"]]);
   });
   it.skipIf(!have)("Stage 10.27C: with the real staged record in the pool, res-1514 shows exactly the four curated cards and no existing page's related cards change", () => {
-    const base = cards(files), withReal = cards(filesAll);
+    const base = cards(files), withReal = cards(poolAll);
     expect(JSON.parse(withReal.get("res-1514")!)).toEqual([["Linked by us", "res-1502"], ["Linked by us", "res-1028"], ["Linked by us", "res-1006"], ["Linked by us", "res-1024"]]);
     expect([...base].filter(([id, v]) => withReal.get(id) !== v).map(([id]) => id)).toEqual([]);
   });

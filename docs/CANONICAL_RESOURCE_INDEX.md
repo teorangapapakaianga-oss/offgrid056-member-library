@@ -1,6 +1,6 @@
 # Canonical resource index
 
-**Stage 10.27D · updated 2026-10-14 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
+**Stage 11.0J · updated 2026-10-16 · governance document only.** The machine-readable companion is [canonical-resource-index.json](canonical-resource-index.json). Nothing here is read by the Library application, changes a route, a badge, a status or an entitlement, or contains protected content (short descriptions are withheld; they stay in the private resource records).
 
 ## Locked Library ↔ OS governance rules
 
@@ -149,7 +149,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 }
 ```
 
-## Index (36 live resources)
+## Index (38 records: 36 live, 2 staged)
 
 **res-1024 Professional Support Planner was deployed in Stage 10.18D** and is live resource #31 (31 resources, 62 market files).
 
@@ -162,6 +162,8 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 **res-1502 Household Contacts Sheet was deployed in Stage 10.24D** and is live resource #35 (35 resources, 70 market files).
 
 **res-1514 Local Support Network Planner was deployed in Stage 10.27D** and is live resource #36 (36 resources, 72 market files).
+
+**res-1513 Resilience Asset and Document Checklist and res-1515 Seasonal Review and Service Log are STAGED, not deployed (Stage 11.0J):** counted in the staged build (38 resources, 76 market files) and not in the live totals (36, 72). IDs and metadata are proposals awaiting owner confirmation.
 
 ### Identity and classification
 
@@ -203,6 +205,8 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1030 | OG-30 | Long-Term Direction Planner | worksheet | general | advanced-future | planning | `/resources/long-term-direction-planner/` | — |
 | res-1502 | OG-B02 | Household Contacts Sheet | worksheet | general | resilience-emergency | planning | `/resources/household-contacts-sheet/` | — |
 | res-1514 | OG-B14 | Local Support Network Planner | worksheet | general | resilience-planning | planning | `/resources/local-support-network-planner/` | — |
+| res-1513 | OG-B13 | Resilience Asset and Document Checklist | checklist | general | resilience-planning | planning | `/resources/resilience-asset-and-document-checklist/` | — |
+| res-1515 | OG-B15 | Seasonal Review and Service Log | template | general | resilience-planning | planning | `/resources/seasonal-review-and-service-log/` | — |
 
 ### Publication, badge, access and review
 
@@ -244,6 +248,8 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1030 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 | res-1502 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 | res-1514 | draft | approved | private-preview | LIVE | Preview | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1513 | draft | approved | private-preview | STAGED | — (staged: Preview) | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
+| res-1515 | draft | approved | private-preview | STAGED | — (staged: Preview) | UNDEFINED_OWNER_DECISION | UNDEFINED_OWNER_DECISION | NEEDS_ENTITLEMENT_DECISION, NEEDS_METADATA |
 
 ### Ownership, version and review (missing values are explicit)
 
@@ -285,6 +291,8 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1030 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-14 |
 | res-1502 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-15 |
 | res-1514 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | 2026-10-15 |
+| res-1513 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | not yet deployed |
+| res-1515 | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | UNKNOWN_EXISTING_RECORD | not yet deployed |
 
 ### Source and downloads
 
@@ -326,6 +334,8 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 | res-1030 | OG-30_Upgrade_Pathway_Decision_Matrix.html | OG-30_Upgrade_Pathway_Decision_Matrix.pdf | `/resources/long-term-direction-planner.NZ.pdf` | `/resources/long-term-direction-planner.AU.pdf` | `eca257980ea8…` | `a29643746bbe…` |
 | res-1502 | OG-B02_Emergency_Contacts_Info_Sheet.html | OG-B02_Emergency_Contacts_Info_Sheet.pdf | `/resources/household-contacts-sheet.NZ.pdf` | `/resources/household-contacts-sheet.AU.pdf` | `43272199d224…` | `a8467d92996…` |
 | res-1514 | OG-B14_Community_Resilience_Network_Builder.html | OG-B14_Community_Resilience_Network_Builder.pdf | `/resources/local-support-network-planner.NZ.pdf` | `/resources/local-support-network-planner.AU.pdf` | `56f1b2a872e6…` | `b8da6fd4833a…` |
+| res-1513 | OG-B13_Resilience_Insurance_Documentation.html (refreshed by the Stage 11.0I package) | OG-B13_Resilience_Insurance_Documentation.pdf | `/resources/resilience-asset-and-document-checklist.NZ.pdf` | `/resources/resilience-asset-and-document-checklist.AU.pdf` | `7d6a858a173e…` | `a5008efe0c4d…` |
+| res-1515 | OG-B15_Annual_Maintenance_Calendar.html (consolidated by the Stage 11.0I package) | OG-B15_Annual_Maintenance_Calendar.pdf | `/resources/seasonal-review-and-service-log.NZ.pdf` | `/resources/seasonal-review-and-service-log.AU.pdf` | `c67a95c9f862…` | `87053d8cf945…` |
 
 ### Future OS integration fields (all resources)
 
