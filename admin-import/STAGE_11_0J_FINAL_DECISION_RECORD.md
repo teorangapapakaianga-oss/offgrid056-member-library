@@ -24,3 +24,7 @@ Full evidence: `STAGE_11_0J_INTEGRATION_REPORT.md`. **Status: controlled integra
 | Security | Performed: unauthenticated live probes (302 to Cloudflare Access, 0 unauthenticated 200); no master or editable file tracked; no unrecorded editable file in the build. **NOT TESTED:** authenticated member downloads, Cloudflare Access on the new routes, entitlements, authentication of the staged site |
 
 **Remaining blockers to Stage 11.0K:** (1) separate owner approval; (2) owner's final review of the metadata above; (3) dashboard confirmation that no Git-triggered build exists; (4) authenticated-download verification, possible only after an approved deployment with an owner session; (5) optional: Drive IDs in the public repository (hygiene stage).
+
+
+## Post-decision security note (2026-10-17)
+The Cloudflare Worker `og056-preview` was connected to `teorangapapakaianga-oss/offgrid056-member-library` (production branch `main`; build command `npm run build`; deploy command `npx wrangler deploy`). A Git-triggered build would have deployed a demo-only site, because the protected assets are not in the repository. **The owner switched Production *Disable builds* ON** (confirmed from the dashboard screenshot, 06:34 on 17 Oct 2026); no deploy hooks are defined; the repository stays connected but cannot build. Still to confirm: the *Previews Base* tab (non-production branch builds). Any future auto-deploy needs a separate, approved design that includes the protected assets and an approval gate.

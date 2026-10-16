@@ -94,3 +94,7 @@ Commit: see the final message (branch `main`). Affected: `lib/content/{schemas,s
 4. Decide on the **Drive IDs in the public repository** (hygiene stage; history is preserved).
 5. The printed pages carry the resource codes OG-B13/OG-B15 (owner-approved); no action unless you want them removed in a new production pass.
 6. **Separate owner approval** for Stage 11.0K; rollback target would be `d7480c93-75fb-4ca5-8b40-0383b9cacadf`; B13 and B15 must deploy together.
+
+
+## Post-decision security note (2026-10-17)
+The Cloudflare Worker `og056-preview` was connected to `teorangapapakaianga-oss/offgrid056-member-library` (production branch `main`; build command `npm run build`; deploy command `npx wrangler deploy`). A Git-triggered build would have deployed a demo-only site, because the protected assets are not in the repository. **The owner switched Production *Disable builds* ON** (confirmed from the dashboard screenshot, 06:34 on 17 Oct 2026); no deploy hooks are defined; the repository stays connected but cannot build. Still to confirm: the *Previews Base* tab (non-production branch builds). Any future auto-deploy needs a separate, approved design that includes the protected assets and an approval gate.
