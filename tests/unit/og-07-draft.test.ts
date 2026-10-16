@@ -46,7 +46,7 @@ describe("Stage 9.97 · OG-07 locked metadata", () => {
       const og07 = recs.filter((r) => r.legacyCode === "OG-07" || r.id === "res-1007");
       expect(og07).toHaveLength(1);
       expect(og07[0]).toMatchObject({ id: "res-1007", legacyCode: "OG-07" });
-      expect(recs).toHaveLength(38); // 36 live + res-1513 and res-1515 staged (Stage 11.0J)
+      expect(recs).toHaveLength(38); // all 38 live (res-1513 and res-1515 deployed in Stage 11.0K)
     }
   });
 
@@ -147,7 +147,7 @@ describe("Stage 10.00 · registers", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
     expect(rr.split("## Not started (0)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-07 \|/);
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-07 \| Priority Lock Worksheet \| general \/ worksheet \|/);
-    expect(rr.split("## Staged, not deployed (2)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-07 \|/m);
+    expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-07 \|/m);
     expect(rr).toMatch(/\*\*Not started\*\*[^\n]*\*\*0\*\*/);
   });
 });

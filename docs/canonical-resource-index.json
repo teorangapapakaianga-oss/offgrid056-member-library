@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "generated": "2026-10-14",
-  "stage": "11.0J",
+  "stage": "11.0K",
   "purpose": "Authoritative index of the real protected Member Resource Library resources. Governance document only: it is not read by the Library application at runtime and changes no behaviour.",
   "governance": [
     "The Member Resource Library remains a separate protected application from the OffGrid056 OS.",
@@ -83,13 +83,11 @@
     ]
   },
   "baseline": {
-    "liveProtectedResources": 36,
-    "liveMarketFiles": 72,
-    "stagedProtectedResources": 2,
+    "liveProtectedResources": 38,
+    "liveMarketFiles": 76,
+    "stagedProtectedResources": 0,
     "brokenLinks": 0,
-    "worker": "see operational registers (not recorded here)",
-    "stagedBuildProtectedResources": 38,
-    "stagedBuildMarketFiles": 76
+    "worker": "see operational registers (not recorded here)"
   },
   "resources": [
     {
@@ -3804,7 +3802,7 @@
       "owner": "UNKNOWN_EXISTING_RECORD",
       "version": "UNKNOWN_EXISTING_RECORD",
       "versionDate": "UNKNOWN_EXISTING_RECORD",
-      "firstPublishedToPreview": null,
+      "firstPublishedToPreview": "2026-10-17",
       "sourceFile": {
         "legacyHtml": "OG-B13_Resilience_Insurance_Documentation.html",
         "legacyPdf": "OG-B13_Resilience_Insurance_Documentation.pdf",
@@ -3815,12 +3813,12 @@
       },
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "status": "draft",
-      "migrationState": "STAGED",
+      "migrationState": "LIVE",
       "publicationStatus": "approved",
       "releaseChannel": "private-preview",
-      "visibleBadge": null,
+      "visibleBadge": "Preview",
       "visibleBadgeInCurrentBuild": "Preview",
-      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 11.0K); the listings show no publication badge",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
@@ -3829,7 +3827,7 @@
       "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
       "canonicalRoute": "/resources/resilience-asset-and-document-checklist/",
       "routeSource": "record.slug (private resource record), confirmed in the staged build",
-      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "routeStatus": "VERIFIED_IN_BUILD",
       "marketAvailability": [
         "NZ",
         "AU"
@@ -3888,7 +3886,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "STAGED, not deployed (Stage 11.0J): the live site has 36 resources; the staged build has 38. Planning Tools stays 12 (this resource is in no collection). The legacy item was OG-B13 Resilience Insurance Documentation (HOLD in Stage 10.29-R; refreshed by the owner).",
+        "DEPLOYED (Stage 11.0K) as live protected resource #37 behind Cloudflare Access; released together with res-1515.",
         "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX for each market is served as a secondary 'Editable version' option beside that market's PDF (companionFiles, SHA-256 pinned to the package manifest) inside the protected hostname only.",
         "The PDFs are A4 and were produced outside the import pipeline. Their document (Info) title is descriptive ('OG-B13 NZ/AU Resilience Asset and Document Checklist') rather than '<title> — OffGrid056'; the printed pages carry the approved resource code. Owner-approved; import:verify-build checks them with the resource-scoped profile in admin-import/config/verify-build-profiles.json. Approved files are not edited.",
         "The stable ID is conditionally owner-approved (registry uniqueness and the distinct NZ/AU mappings verified; HOLD to STAGED approved). No estimated time is stated by the edition and none is recorded. Classification, description and related links are with the owner for final review. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule. The two resources are a release set: they deploy together."
@@ -3906,7 +3904,6 @@
         "filesPresentInBuild": true,
         "registerRowFound": true
       },
-      "stagedRecordPublishedDate": "2026-10-16",
       "knownExceptions": [
         "VERIFY_BUILD_RESOURCE_PROFILE"
       ]
@@ -3925,7 +3922,7 @@
       "owner": "UNKNOWN_EXISTING_RECORD",
       "version": "UNKNOWN_EXISTING_RECORD",
       "versionDate": "UNKNOWN_EXISTING_RECORD",
-      "firstPublishedToPreview": null,
+      "firstPublishedToPreview": "2026-10-17",
       "sourceFile": {
         "legacyHtml": "OG-B15_Annual_Maintenance_Calendar.html",
         "legacyPdf": "OG-B15_Annual_Maintenance_Calendar.pdf",
@@ -3936,12 +3933,12 @@
       },
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "status": "draft",
-      "migrationState": "STAGED",
+      "migrationState": "LIVE",
       "publicationStatus": "approved",
       "releaseChannel": "private-preview",
-      "visibleBadge": null,
+      "visibleBadge": "Preview",
       "visibleBadgeInCurrentBuild": "Preview",
-      "visibleBadgeWhere": "not live: the staged build shows Preview on the resource detail page; the live site does not have this resource until a deployment is approved",
+      "visibleBadgeWhere": "resource detail page only (deployed Stage 11.0K); the listings show no publication badge",
       "futureBadgeTooltip": "Approved resource in the protected OffGrid056 preview.",
       "accessTier": "UNDEFINED_OWNER_DECISION",
       "entitlementRequirement": "UNDEFINED_OWNER_DECISION",
@@ -3950,7 +3947,7 @@
       "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
       "canonicalRoute": "/resources/seasonal-review-and-annual-service-log/",
       "routeSource": "record.slug (private resource record), confirmed in the staged build",
-      "routeStatus": "VERIFIED_IN_STAGED_BUILD",
+      "routeStatus": "VERIFIED_IN_BUILD",
       "marketAvailability": [
         "NZ",
         "AU"
@@ -4009,7 +4006,7 @@
       "withdrawn": false,
       "internalOnly": false,
       "notes": [
-        "STAGED, not deployed (Stage 11.0J): the live site has 36 resources; the staged build has 38. Planning Tools stays 12 (this resource is in no collection). The legacy item was OG-B15 Annual Maintenance Calendar (HOLD in Stage 10.29-R; consolidated by the owner). The printed cover title reads 'Seasonal Review & Annual Service Log'.",
+        "DEPLOYED (Stage 11.0K) as live protected resource #38 behind Cloudflare Access; released together with res-1513.",
         "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX for each market is served as a secondary 'Editable version' option beside that market's PDF (companionFiles, SHA-256 pinned to the package manifest) inside the protected hostname only.",
         "The PDFs are A4 and were produced outside the import pipeline. Their document (Info) title is descriptive ('OG-B15 NZ/AU Seasonal Review and Service Log') rather than '<title> — OffGrid056'; the printed pages carry the approved resource code and a cross-reference to OG-B13. Owner-approved; import:verify-build checks them with the resource-scoped profile in admin-import/config/verify-build-profiles.json. Approved files are not edited.",
         "The stable ID is conditionally owner-approved (registry uniqueness and the distinct NZ/AU mappings verified; HOLD to STAGED approved). No estimated time is stated by the edition and none is recorded. Classification, description and related links are with the owner for final review. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule. The two resources are a release set: they deploy together."
@@ -4027,7 +4024,6 @@
         "filesPresentInBuild": true,
         "registerRowFound": true
       },
-      "stagedRecordPublishedDate": "2026-10-16",
       "knownExceptions": [
         "VERIFY_BUILD_RESOURCE_PROFILE"
       ]
@@ -4057,7 +4053,7 @@
       "basedOn": "publicationStatus + releaseChannel (approved + private-preview = Preview)",
       "tooltip": "Approved resource in the protected OffGrid056 preview.",
       "tooltipRule": "Exact approved wording; used unless a technical constraint requires a minor punctuation or capitalisation change. It must not imply public release, production entitlement, paid access or a final member launch, and 'not yet approved for members' is not used for the approved private-preview state.",
-      "implemented": "DEPLOYED (Stage 10.19C, 10.18D, 10.21D, 10.22D, 10.23D, 10.24D and 10.27D): all 36 live protected resources show Preview on the resource detail page."
+      "implemented": "DEPLOYED (Stage 10.19C, 10.18D, 10.21D, 10.22D, 10.23D, 10.24D and 10.27D): all 38 live protected resources show Preview on the resource detail page."
     },
     "res1019": {
       "classification": "MODEL / BADGE SEMANTICS ISSUE",
@@ -4139,7 +4135,7 @@
       "detail": "These owner-approved Stage 11.0I editions were produced outside the import pipeline. import:verify-build checks them against owner-approved, resource-scoped profiles (admin-import/config/verify-build-profiles.json): a descriptive document title, the printed resource codes, and the country's emergency number where the edition prints one. All other checks apply unchanged."
     }
   ],
-  "nextStage": "Stage 11.0K — OG-B13 and OG-B15 controlled deployment (needs separate owner approval and confirmation of the proposed IDs and metadata; not started)",
+  "nextStage": "No stage in progress; the next work is the owner's choice (the wider roadmap).",
   "acceptedBaseline": {
     "stage": "10.19",
     "protectedResources": 30,
@@ -4155,18 +4151,5 @@
     "lintExit": 0,
     "typecheckExit": 0
   },
-  "stagedResources": [
-    {
-      "stableResourceId": "res-1513",
-      "stage": "11.0J",
-      "state": "STAGED, NOT DEPLOYED",
-      "note": "Counted in the staged build (38 / 76), not in the live totals (36 / 72)."
-    },
-    {
-      "stableResourceId": "res-1515",
-      "stage": "11.0J",
-      "state": "STAGED, NOT DEPLOYED",
-      "note": "Counted in the staged build (38 / 76), not in the live totals (36 / 72)."
-    }
-  ]
+  "stagedResources": []
 }

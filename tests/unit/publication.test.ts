@@ -94,8 +94,8 @@ describe("E · no entitlement coupling", () => {
 describe("B and D · the current protected records (when present)", () => {
   const dir = path.join(root, "private-assets/data-resources");
   const recs = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => f.endsWith(".private.json")).map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as Record<string, unknown>) : [];
-  it.skipIf(recs.length === 0)("all 38 records (36 live, res-1513 and res-1515 staged) are approved + private-preview, keep status draft and pass the schema and the shared badge logic", () => {
-    expect(recs).toHaveLength(38); // 36 live + res-1513 and res-1515 staged (Stage 11.0J)
+  it.skipIf(recs.length === 0)("all 38 live resources (including res-1513 and res-1515) are approved + private-preview, keep status draft and pass the schema and the shared badge logic", () => {
+    expect(recs).toHaveLength(38); // all 38 live (res-1513 and res-1515 deployed in Stage 11.0K)
     for (const r of recs) {
       expect([r.status, r.publicationStatus, r.releaseChannel], String(r.id)).toEqual(["draft", "approved", "private-preview"]);
       expect(ResourceSchema.safeParse(r).success, String(r.id)).toBe(true);

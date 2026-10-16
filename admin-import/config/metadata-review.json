@@ -1987,7 +1987,7 @@
       "approvedSafetyBlocks": [],
       "approvedSafetyBlocksStatus": "n/a — the approved production PDFs carry their own scope, emergency and country notes; they are not changed",
       "recordStatus": "draft",
-      "migrationState": "STAGED, NOT DEPLOYED (Stage 11.0J) — the owner-approved Stage 11.0I v1.1 PDFs (NZ and AU) and the protected record are staged in private-assets for the preview build; not live. The editions were produced outside the import pipeline, so there is no approved-copy entry; fingerprints are in the package manifest."
+      "migrationState": "DEPLOYED (Stage 11.0K) — live as a protected resource behind Cloudflare Access; the record, the NZ and AU PDFs and the editable DOCX companions are in the deployed tree. Planning Tools stays at twelve live resources (this resource is in no collection)."
     },
     "OG-B15": {
       "title": "Seasonal Review & Annual Service Log",
@@ -2021,7 +2021,7 @@
       "approvedSafetyBlocks": [],
       "approvedSafetyBlocksStatus": "n/a — the approved production PDFs carry their own scope, emergency and country notes; they are not changed",
       "recordStatus": "draft",
-      "migrationState": "STAGED, NOT DEPLOYED (Stage 11.0J) — the owner-approved Stage 11.0I v1.1 PDFs (NZ and AU) and the protected record are staged in private-assets for the preview build; not live. The editions were produced outside the import pipeline, so there is no approved-copy entry; fingerprints are in the package manifest."
+      "migrationState": "DEPLOYED (Stage 11.0K) — live as a protected resource behind Cloudflare Access; the record, the NZ and AU PDFs and the editable DOCX companions are in the deployed tree. Planning Tools stays at twelve live resources (this resource is in no collection)."
     }
   }
 }

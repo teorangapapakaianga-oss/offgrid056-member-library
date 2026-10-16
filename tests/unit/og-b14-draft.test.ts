@@ -48,7 +48,7 @@ describe("Stage 10.27A · OG-B14 locked metadata", () => {
       expect(rec[0]).toMatchObject({ id: "res-1514", slug: "local-support-network-planner", legacyCode: "OG-B14", title: "Local Support Network Planner", foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 30, collections: [], tags: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, completionAvailable: true, relatedResources: ["res-1502", "res-1028", "res-1006", "res-1024"] });
       expect(rec[0].marketFiles).toEqual({ NZ: { fileUrl: "/resources/local-support-network-planner.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/local-support-network-planner.AU.pdf", fileFormat: "PDF" } });
       for (const k of ["accessTier", "entitlementRequirement", "recommendationEligible", "handoffStatus", "approvedHandoffRoute", "entitlementContractStatus"]) expect(rec[0], k).not.toHaveProperty(k);
-      expect(recs).toHaveLength(38); // 36 live + res-1513 and res-1515 staged (Stage 11.0J)
+      expect(recs).toHaveLength(38); // all 38 live (res-1513 and res-1515 deployed in Stage 11.0K)
       expect(recs.filter((r) => ((r.collections as string[] | undefined) ?? []).includes("planning-tools"))).toHaveLength(12);
     }
     const pdfs = path.join(root, "private-assets/resources");

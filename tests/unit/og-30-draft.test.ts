@@ -48,7 +48,7 @@ describe("Stage 10.23A · OG-30 locked metadata", () => {
         relatedResources: ["res-1027", "res-1512", "res-1026", "res-1021"], description: meta.description,
         marketFiles: { NZ: { fileUrl: "/resources/long-term-direction-planner.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/long-term-direction-planner.AU.pdf", fileFormat: "PDF" } },
       });
-      expect(recs).toHaveLength(38); // 36 live + res-1513 and res-1515 staged (Stage 11.0J)
+      expect(recs).toHaveLength(38); // all 38 live (res-1513 and res-1515 deployed in Stage 11.0K)
       expect(recs.filter((r) => (r.collections as string[] | undefined)?.includes("planning-tools"))).toHaveLength(12);
       const sha = (f: string) => crypto.createHash("sha256").update(fs.readFileSync(f)).digest("hex");
       expect(sha(path.join(root, "private-assets/resources/long-term-direction-planner.NZ.pdf"))).toBe("eca257980ea8b3cd439a0947f07d2e42e5aa18d7f1592452b941a3f5cd1cbcbe");

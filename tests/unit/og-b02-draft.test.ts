@@ -48,7 +48,7 @@ describe("Stage 10.24A · OG-B02 locked metadata", () => {
       const rec = recs.filter((r) => r.legacyCode === "OG-B02" || r.id === "res-1502" || r.slug === "household-contacts-sheet") as unknown as Record<string, unknown>[];
       expect(rec).toHaveLength(1);
       expect(rec[0]).toMatchObject({ id: "res-1502", slug: "household-contacts-sheet", legacyCode: "OG-B02", title: "Household Contacts Sheet", foundation: "general", programComponent: "resilience-emergency", category: "planning", resourceType: "worksheet", difficulty: "beginner", estimatedTime: 20, status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", collections: [], tags: [], premium: false, isPlaceholder: false, downloadable: true, relatedResources: ["res-1006", "res-1014", "res-1028", "res-1024"], description: meta.description, marketFiles: { NZ: { fileUrl: "/resources/household-contacts-sheet.NZ.pdf", fileFormat: "PDF" }, AU: { fileUrl: "/resources/household-contacts-sheet.AU.pdf", fileFormat: "PDF" } } });
-      expect(recs).toHaveLength(38); // 36 live + res-1513 and res-1515 staged (Stage 11.0J)
+      expect(recs).toHaveLength(38); // all 38 live (res-1513 and res-1515 deployed in Stage 11.0K)
       expect(recs.filter((r) => ((r as unknown as { collections?: string[] }).collections ?? []).includes("planning-tools"))).toHaveLength(12);
     }
     const pdfs = path.join(root, "private-assets/resources");
