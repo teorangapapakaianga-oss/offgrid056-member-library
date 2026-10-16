@@ -14,8 +14,8 @@ const dir = path.join(root, "private-assets/data-resources");
 const have = fs.existsSync(dir);
 const sha = (f: string) => crypto.createHash("sha256").update(fs.readFileSync(f)).digest("hex");
 const EDITIONS = [
-  { id: "res-1513", slug: "resilience-asset-and-document-checklist", code: "OG-B13", title: "Resilience Asset and Document Checklist", type: "checklist", related: ["res-1502", "res-1024", "res-1514", "res-1515"], hashes: { NZ: "7d6a858a173ee92a9f323f0dc0a1a86dc31f7dfe24cf909a14d0e55cd37319f5", AU: "a5008efe0c4dd2f7037e07f65854e2ac5f1d141a71afaf2303e1b3f3ebca5f15" }, docx: { NZ: "7299bc46282845b1d78422afc60036e9636876be9ace53a40b51527c28988a2d", AU: "6ceb842a98397023c37c6fdc254748a196751d5c8bd94c79417c28870b296e83" }, master: "OG-B13_%M%_Resilience_Asset_and_Document_Checklist" },
-  { id: "res-1515", slug: "seasonal-review-and-service-log", code: "OG-B15", title: "Seasonal Review and Service Log", type: "template", related: ["res-1006", "res-1012", "res-1028", "res-1513"], hashes: { NZ: "c67a95c9f86225c06785510631fa8be04efebffa9d538dcf5b38076cc5afc3ab", AU: "87053d8cf9455ccdabdb06ebbf83d0e0cbc9e6549ab4f042b1cb400f8677aeb8" }, docx: { NZ: "d115694b80443b97a009180816bcc96a59a637cac689ba9a150c65f568b0be4b", AU: "741db38fc61bc15b98d0c025b55a8f8a8a13fc0842cab7d7deb600cc3cdad80f" }, master: "OG-B15_%M%_Seasonal_Review_and_Service_Log" },
+  { id: "res-1513", slug: "resilience-asset-and-document-checklist", code: "OG-B13", title: "Resilience Asset & Document Checklist", type: "checklist", time: 45, related: ["res-1502", "res-1024", "res-1514", "res-1515"], hashes: { NZ: "7d6a858a173ee92a9f323f0dc0a1a86dc31f7dfe24cf909a14d0e55cd37319f5", AU: "a5008efe0c4dd2f7037e07f65854e2ac5f1d141a71afaf2303e1b3f3ebca5f15" }, docx: { NZ: "7299bc46282845b1d78422afc60036e9636876be9ace53a40b51527c28988a2d", AU: "6ceb842a98397023c37c6fdc254748a196751d5c8bd94c79417c28870b296e83" }, master: "OG-B13_%M%_Resilience_Asset_and_Document_Checklist" },
+  { id: "res-1515", slug: "seasonal-review-and-annual-service-log", code: "OG-B15", title: "Seasonal Review & Annual Service Log", type: "template", time: 60, related: ["res-1006", "res-1012", "res-1028", "res-1513"], hashes: { NZ: "c67a95c9f86225c06785510631fa8be04efebffa9d538dcf5b38076cc5afc3ab", AU: "87053d8cf9455ccdabdb06ebbf83d0e0cbc9e6549ab4f042b1cb400f8677aeb8" }, docx: { NZ: "d115694b80443b97a009180816bcc96a59a637cac689ba9a150c65f568b0be4b", AU: "741db38fc61bc15b98d0c025b55a8f8a8a13fc0842cab7d7deb600cc3cdad80f" }, master: "OG-B15_%M%_Seasonal_Review_and_Service_Log" },
 ] as const;
 
 describe("Stage 11.0J · OG-B13 / OG-B15 staged editions", () => {
@@ -27,17 +27,21 @@ describe("Stage 11.0J · OG-B13 / OG-B15 staged editions", () => {
     for (const e of EDITIONS) {
       const r = recs.filter((x) => x.id === e.id || x.legacyCode === e.code);
       expect(r).toHaveLength(1);
-      expect(r[0]).toMatchObject({ id: e.id, slug: e.slug, legacyCode: e.code, title: e.title, foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: e.type, difficulty: "beginner", collections: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, relatedResources: e.related });
+      expect(r[0]).toMatchObject({ id: e.id, slug: e.slug, legacyCode: e.code, title: e.title, foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: e.type, estimatedTime: e.time, difficulty: "beginner", collections: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, relatedResources: e.related });
       expect(r[0].marketFiles).toEqual({ NZ: { fileUrl: `/resources/${e.slug}.NZ.pdf`, fileFormat: "PDF" }, AU: { fileUrl: `/resources/${e.slug}.AU.pdf`, fileFormat: "PDF" } });
       expect(r[0]).not.toHaveProperty("fileUrl"); // a market-specific resource has no default file: no cross-market fallback
     }
     expect(recs.filter((r) => ((r.collections as string[] | undefined) ?? []).includes("planning-tools"))).toHaveLength(12);
+    const urls = recs.flatMap((r) => Object.values((r.marketFiles ?? {}) as Record<string, { fileUrl: string }>).map((f) => f.fileUrl));
+    expect(urls).toHaveLength(76);
+    expect(new Set(urls).size).toBe(76); // every country edition is a distinct, uniquely selectable file; none overwrites another edition or a protected legacy resource
+    expect(new Set(recs.map((r) => r.title)).size).toBe(38);
     expect(recs.filter((r) => ["OG-B01", "OG-B03", "OG-B11"].includes(r.legacyCode as string))).toEqual([]);
   });
   it.skipIf(!have)("serve the approved PDFs byte-identically, one edition per market; the DOCX companions are never served", () => {
     const pdfs = path.join(root, "private-assets/resources");
     for (const e of EDITIONS) for (const m of ["NZ", "AU"] as const) expect(sha(path.join(pdfs, `${e.slug}.${m}.pdf`)), `${e.id} ${m}`).toBe(e.hashes[m]);
-    expect(e0(EDITIONS[0].hashes.NZ)).not.toBe(EDITIONS[0].hashes.AU);
+    expect(EDITIONS[0].hashes.NZ).not.toBe(EDITIONS[0].hashes.AU);
     expect(fs.readdirSync(pdfs).filter((f) => /\.docx$/i.test(f))).toEqual([]);
     expect(fs.existsSync(path.join(root, "public/resources")) ? fs.readdirSync(path.join(root, "public/resources")).filter((f) => /\.docx$/i.test(f)) : []).toEqual([]);
   });

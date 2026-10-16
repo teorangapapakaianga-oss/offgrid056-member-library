@@ -3793,7 +3793,7 @@
     {
       "stableResourceId": "res-1513",
       "legacyCode": "OG-B13",
-      "title": "Resilience Asset and Document Checklist",
+      "title": "Resilience Asset & Document Checklist",
       "resourceType": "checklist",
       "foundation": "general",
       "programComponent": "resilience-planning",
@@ -3845,7 +3845,7 @@
           "byteIdenticalToBuild": true,
           "sha256": "7d6a858a173ee92a9f323f0dc0a1a86dc31f7dfe24cf909a14d0e55cd37319f5",
           "bytes": 142727,
-          "pdfTitleMatches": false,
+          "pdfTitleMatches": true,
           "docxCompanion": {
             "master": "01_DOCX/OG-B13_NZ_Resilience_Asset_and_Document_Checklist.docx",
             "sha256": "7299bc46282845b1d78422afc60036e9636876be9ace53a40b51527c28988a2d",
@@ -3862,7 +3862,7 @@
           "byteIdenticalToBuild": true,
           "sha256": "a5008efe0c4dd2f7037e07f65854e2ac5f1d141a71afaf2303e1b3f3ebca5f15",
           "bytes": 143154,
-          "pdfTitleMatches": false,
+          "pdfTitleMatches": true,
           "docxCompanion": {
             "master": "01_DOCX/OG-B13_AU_Resilience_Asset_and_Document_Checklist.docx",
             "sha256": "6ceb842a98397023c37c6fdc254748a196751d5c8bd94c79417c28870b296e83",
@@ -3888,7 +3888,7 @@
       "notes": [
         "STAGED, not deployed (Stage 11.0J): the live site has 36 resources; the staged build has 38. Planning Tools stays 12 (this resource is in no collection). The legacy item was OG-B13 Resilience Insurance Documentation (HOLD in Stage 10.29-R; refreshed by the owner).",
         "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX companion for each market is staged there only and is not served: the Library record has no companion-file field.",
-        "The PDFs are A4 and their embedded PDF title metadata is a page heading, not the resource title (approved files are not edited). The printed pages carry the legacy resource code and the footer 'OG-B13'/'OG-B15'; owner-approved, recorded here.",
+        "The PDFs are A4 and were produced outside the import pipeline. Their document (Info) title is descriptive ('OG-B13 NZ/AU Resilience Asset and Document Checklist') rather than '<title> — OffGrid056'; the printed pages carry the approved resource code. Owner-approved; import:verify-build checks them with the resource-scoped profile in admin-import/config/verify-build-profiles.json. Approved files are not edited.",
         "The stable ID, classification, descriptions, estimated time and related links are proposals awaiting owner confirmation. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule."
       ],
       "recommendationEligible": false,
@@ -3906,13 +3906,13 @@
       },
       "stagedRecordPublishedDate": "2026-10-16",
       "knownExceptions": [
-        "PDF_METADATA_TITLE_NOT_THE_RESOURCE_TITLE"
+        "VERIFY_BUILD_RESOURCE_PROFILE"
       ]
     },
     {
       "stableResourceId": "res-1515",
       "legacyCode": "OG-B15",
-      "title": "Seasonal Review and Service Log",
+      "title": "Seasonal Review & Annual Service Log",
       "resourceType": "template",
       "foundation": "general",
       "programComponent": "resilience-planning",
@@ -3930,7 +3930,7 @@
         "location": "legacy 30-Day Programme archive (not in this repository); the refreshed editions come from the Stage 11.0I v1.1 production package, kept verbatim in private-assets/production-masters/stage-11-0i-v1.1 (git-ignored)",
         "reviewConfig": "none (the editions were produced outside the import pipeline)",
         "approvedCopy": "none: owner-approved production PDFs and DOCX; fingerprints in 03_PRODUCTION_RECORDS/VERSION_MANIFEST.md",
-        "protectedRecord": "private-assets/data-resources/seasonal-review-and-service-log.private.json (git-ignored)"
+        "protectedRecord": "private-assets/data-resources/seasonal-review-and-annual-service-log.private.json (git-ignored)"
       },
       "sourceLink": "UNKNOWN_EXISTING_RECORD",
       "status": "draft",
@@ -3946,7 +3946,7 @@
       "accessProtection": "Cloudflare Access on the whole preview hostname (authentication, not entitlement)",
       "recordPremiumFlag": false,
       "recordPremiumFlagMeaning": "legacy content flag; not an entitlement and not used for access",
-      "canonicalRoute": "/resources/seasonal-review-and-service-log/",
+      "canonicalRoute": "/resources/seasonal-review-and-annual-service-log/",
       "routeSource": "record.slug (private resource record), confirmed in the staged build",
       "routeStatus": "VERIFIED_IN_STAGED_BUILD",
       "marketAvailability": [
@@ -3956,15 +3956,15 @@
       "downloadAssets": [
         {
           "market": "NZ",
-          "route": "/resources/seasonal-review-and-service-log.NZ.pdf",
-          "expectedSuffixedRoute": "/resources/seasonal-review-and-service-log.NZ.pdf",
+          "route": "/resources/seasonal-review-and-annual-service-log.NZ.pdf",
+          "expectedSuffixedRoute": "/resources/seasonal-review-and-annual-service-log.NZ.pdf",
           "namingMatchesConvention": true,
           "presentInPrivateAssets": true,
           "presentInBuild": true,
           "byteIdenticalToBuild": true,
           "sha256": "c67a95c9f86225c06785510631fa8be04efebffa9d538dcf5b38076cc5afc3ab",
           "bytes": 191476,
-          "pdfTitleMatches": false,
+          "pdfTitleMatches": true,
           "docxCompanion": {
             "master": "01_DOCX/OG-B15_NZ_Seasonal_Review_and_Service_Log.docx",
             "sha256": "d115694b80443b97a009180816bcc96a59a637cac689ba9a150c65f568b0be4b",
@@ -3973,15 +3973,15 @@
         },
         {
           "market": "AU",
-          "route": "/resources/seasonal-review-and-service-log.AU.pdf",
-          "expectedSuffixedRoute": "/resources/seasonal-review-and-service-log.AU.pdf",
+          "route": "/resources/seasonal-review-and-annual-service-log.AU.pdf",
+          "expectedSuffixedRoute": "/resources/seasonal-review-and-annual-service-log.AU.pdf",
           "namingMatchesConvention": true,
           "presentInPrivateAssets": true,
           "presentInBuild": true,
           "byteIdenticalToBuild": true,
           "sha256": "87053d8cf9455ccdabdb06ebbf83d0e0cbc9e6549ab4f042b1cb400f8677aeb8",
           "bytes": 191508,
-          "pdfTitleMatches": false,
+          "pdfTitleMatches": true,
           "docxCompanion": {
             "master": "01_DOCX/OG-B15_AU_Seasonal_Review_and_Service_Log.docx",
             "sha256": "741db38fc61bc15b98d0c025b55a8f8a8a13fc0842cab7d7deb600cc3cdad80f",
@@ -4007,7 +4007,7 @@
       "notes": [
         "STAGED, not deployed (Stage 11.0J): the live site has 36 resources; the staged build has 38. Planning Tools stays 12 (this resource is in no collection). The legacy item was OG-B15 Annual Maintenance Calendar (HOLD in Stage 10.29-R; consolidated by the owner). The printed cover title reads 'Seasonal Review & Annual Service Log'.",
         "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX companion for each market is staged there only and is not served: the Library record has no companion-file field.",
-        "The PDFs are A4 and their embedded PDF title metadata is a page heading, not the resource title (approved files are not edited). The printed pages carry the legacy resource code and the footer 'OG-B13'/'OG-B15'; owner-approved, recorded here.",
+        "The PDFs are A4 and were produced outside the import pipeline. Their document (Info) title is descriptive ('OG-B15 NZ/AU Seasonal Review and Service Log') rather than '<title> — OffGrid056'; the printed pages carry the approved resource code and a cross-reference to OG-B13. Owner-approved; import:verify-build checks them with the resource-scoped profile in admin-import/config/verify-build-profiles.json. Approved files are not edited.",
         "The stable ID, classification, descriptions, estimated time and related links are proposals awaiting owner confirmation. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule."
       ],
       "recommendationEligible": false,
@@ -4025,7 +4025,7 @@
       },
       "stagedRecordPublishedDate": "2026-10-16",
       "knownExceptions": [
-        "PDF_METADATA_TITLE_NOT_THE_RESOURCE_TITLE"
+        "VERIFY_BUILD_RESOURCE_PROFILE"
       ]
     }
   ],
@@ -4131,8 +4131,8 @@
     },
     {
       "resource": "res-1513 and res-1515",
-      "exception": "PDF_METADATA_TITLE_NOT_THE_RESOURCE_TITLE",
-      "detail": "The owner-approved Stage 11.0I PDFs carry a page heading as their embedded PDF title instead of the resource title. The approved files are not edited; recorded for the owner."
+      "exception": "VERIFY_BUILD_RESOURCE_PROFILE",
+      "detail": "These owner-approved Stage 11.0I editions were produced outside the import pipeline. import:verify-build checks them against owner-approved, resource-scoped profiles (admin-import/config/verify-build-profiles.json): a descriptive document title, the printed resource codes, and the country's emergency number where the edition prints one. All other checks apply unchanged."
     }
   ],
   "nextStage": "Stage 11.0K — OG-B13 and OG-B15 controlled deployment (needs separate owner approval and confirmation of the proposed IDs and metadata; not started)",

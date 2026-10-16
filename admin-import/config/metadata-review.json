@@ -1956,8 +1956,8 @@
       "memberJourneyRole": "Conceptual (documentation only; no live link is changed): a Resilience Planning worksheet that follows the Household Contacts Sheet and sits beside the Household Responsibility Roster: Household Contacts Sheet → Local Support Network Planner → Household Responsibility Roster, with the Emergency Readiness Checklist alongside and the Professional Support Planner later. Not an emergency procedure, a directory or a record of other households."
     },
     "OG-B13": {
-      "title": "Resilience Asset and Document Checklist",
-      "titleStatus": "OWNER-APPROVED (Stage 11.0J brief: the four approved editions carry this title)",
+      "title": "Resilience Asset & Document Checklist",
+      "titleStatus": "OWNER-APPROVED (Stage 11.0J verification brief: the printed cover title)",
       "proposedSlug": "resilience-asset-and-document-checklist",
       "proposedSlugStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation",
       "resourceType": "checklist",
@@ -1978,7 +1978,7 @@
       "difficulty": "beginner",
       "difficultyStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation",
       "estimatedTime": 45,
-      "estimatedTimeStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation (the document states no time)",
+      "estimatedTimeStatus": "PROPOSED — awaiting owner confirmation. Basis: the edition states no time; about 10 minutes of first-time completion per A4 page (B13 is 4 pages, B15 is 5 pages), rounded up to the next 15 minutes.",
       "description": "A practical household tool for organising records, tracking resilience assets and preparing better questions for your insurer.",
       "descriptionStatus": "OWNER-APPROVED WORDING (the edition's own cover subtitle, Stage 11.0I v1.1)",
       "tags": [],
@@ -1991,9 +1991,9 @@
       "migrationState": "STAGED, NOT DEPLOYED (Stage 11.0J) — the owner-approved Stage 11.0I v1.1 PDFs (NZ and AU) and the protected record are staged in private-assets for the preview build; not live. The editions were produced outside the import pipeline, so there is no approved-copy entry; fingerprints are in the package manifest."
     },
     "OG-B15": {
-      "title": "Seasonal Review and Service Log",
-      "titleStatus": "OWNER-APPROVED (Stage 11.0J brief: the four approved editions carry this title)",
-      "proposedSlug": "seasonal-review-and-service-log",
+      "title": "Seasonal Review & Annual Service Log",
+      "titleStatus": "OWNER-APPROVED (Stage 11.0J verification brief: the printed cover title)",
+      "proposedSlug": "seasonal-review-and-annual-service-log",
       "proposedSlugStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation",
       "resourceType": "template",
       "resourceTypeStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation",
@@ -2012,8 +2012,8 @@
       "categoryStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation",
       "difficulty": "beginner",
       "difficultyStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation",
-      "estimatedTime": 45,
-      "estimatedTimeStatus": "PROPOSED in Stage 11.0J — awaiting owner confirmation (the document states no time)",
+      "estimatedTime": 60,
+      "estimatedTimeStatus": "PROPOSED — awaiting owner confirmation. Basis: the edition states no time; about 10 minutes of first-time completion per A4 page (B13 is 4 pages, B15 is 5 pages), rounded up to the next 15 minutes.",
       "description": "A practical companion for keeping household resilience systems visible, assigned and maintained over time.",
       "descriptionStatus": "OWNER-APPROVED WORDING (the edition's own cover subtitle, Stage 11.0I v1.1)",
       "tags": [],

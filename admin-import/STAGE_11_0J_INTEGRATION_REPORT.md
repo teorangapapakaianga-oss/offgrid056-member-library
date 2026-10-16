@@ -1,81 +1,78 @@
-﻿# Stage 11.0J — Controlled Member Resource Library integration report
+﻿# Stage 11.0J — Verification and Integration Report (updated: targeted verification and resource-mapping resolution)
 
-**Scope:** controlled staging integration only. Nothing deployed, no Worker change, no access or entitlement change, no database or schema change, no edit to the approved PDFs/DOCX, no change to Google Drive, no Resilience OS access. Previous reports are preserved. **Verdict: CONDITIONAL PASS (staged; deployment HELD).**
+**Scope:** staging only; **Stage 11.0K deployment is not authorised and nothing was deployed.** No Worker, Cloudflare Access, entitlement, database or schema change; no edit to the approved PDFs or DOCX files (all eight re-checked against the manifest); no Google Drive change; no Resilience OS access. The first (superseded) version of this report is kept in git history (commit `1e96f5a`). **Verdict: CONDITIONAL PASS — staged and verified; deployment HOLD.**
 
-## A. Repository baseline
-- **Application A, Member Resource Library:** repo `teorangapapakaianga-oss/offgrid056-member-library`, local `C:\dev\OffGrid056-System\offgrid056-member-library`; branch `main` (the established development branch; there is no separate one); baseline HEAD `709012b` (Stage 10.29-R). Live Worker `d7480c93-75fb-4ca5-8b40-0383b9cacadf` at 100% (re-checked; unchanged).
-- **Architecture:** static Next.js export; one protected record per resource (`private-assets/data-resources/*.private.json`, git-ignored) with `marketFiles` for NZ and AU; PDFs staged from `private-assets/resources`; the market is **member-chosen**, never inferred (`lib/member/market.ts`: no IP or geolocation); a market-specific resource has no default file, so there is no cross-market fallback. Access is Cloudflare Access on the whole hostname (authentication, not entitlement); there is no login, database or entitlement logic.
-- **Register status found (not assumed):** OG-B13 and OG-B15 were on HOLD (Stage 10.29-R, commit `709012b`); OG-B01 and OG-B03 ARCHIVED; OG-B11 BLOCKED; 36 deployed; totals 36 · 0 · 0 · 2 · 2 · 1 · 4 · 0 = 45. These still applied.
-- **Baseline tests:** 65 files, 1,756 tests, exit 0 (Stage 10.29-R).
+**Correction to my first report.** I stated that the PDFs' embedded title is "a page heading". That was wrong. I had read the first raw `/Title` in the file, which for these outlined PDFs is a bookmark. Their real document (Info) title is descriptive, as you said. The verifier had the same defect (section 3).
 
-## B. Package validation
-Source: `OffGrid056_Stage11_0I_Final_Production_Package_v1.1(1).zip` (476,752 bytes, SHA-256 `3F765FE9…0CB6D`; byte-identical to the `v1.1.zip` in the same download area). Extracted to a scratch folder; nothing run from it. **11 of 11 files present** (4 DOCX, 4 PDF, 3 records). The three production records were read before any change. **All eight customer fingerprints match `VERSION_MANIFEST.md`:**
+## 1. Baseline and changes made
+- Baseline: branch `main`, HEAD `1e96f5a` (Stage 11.0J first pass); live Worker `d7480c93-75fb-4ca5-8b40-0383b9cacadf` (100%, unchanged); 38 protected records (36 live, 2 staged); tests 66 files / 1,762 tests; `import:verify-build` was failing for the four new PDFs.
+- Changes (all non-public, none deployed): verifier refactor into a testable module plus two resource-scoped profiles; one narrow detector rule; printed titles adopted for `res-1513` / `res-1515` (and the `res-1515` slug aligned, safe because nothing is deployed); reading-time basis; corrected index notes; new tests. Details in sections 3, 4, 8.
 
-| File | SHA-256 | Match |
-|---|---|---|
-| OG-B13_NZ …Checklist.docx | `7299bc46…8a2d` | MATCH |
-| OG-B13_NZ …Checklist.pdf | `7d6a858a…19f5` | MATCH |
-| OG-B13_AU …Checklist.docx | `6ceb842a…6e83` | MATCH |
-| OG-B13_AU …Checklist.pdf | `a5008efe…5f15` | MATCH |
-| OG-B15_NZ …Service_Log.docx | `d115694b…4b4b` | MATCH |
-| OG-B15_NZ …Service_Log.pdf | `c67a95c9…c3ab` | MATCH |
-| OG-B15_AU …Service_Log.docx | `741db38f…ad80f` | MATCH |
-| OG-B15_AU …Service_Log.pdf | `87053d8c…eeb8` | MATCH |
+## 2. Four-edition registry mapping
+Registry inspected before confirming: `res-1513` and `res-1515` are unused in the 36 private records, the 30 demo records, the index, the route policy and every register; legacy OG-B13 and OG-B15 never had an ID or record. The IDs follow the established OG-BNN → res-15NN mapping; no schema change, no migration, no established ID touched. **Confirmation of the IDs remains your decision.**
 
-PDFs: A4, 4 pages (B13) and 5 pages (B15); NZ and AU are distinct files with cover identification "NEW ZEALAND EDITION" / "AUSTRALIA EDITION · VERSION 1.1". The package's own records say "PRODUCTION CANDIDATES — NOT RELEASED; awaiting Project Owner approval" (the approval is your Stage 11.0J instruction).
+| Stable ID | Code | Variant | Display title (approved cover) | Package PDF (verbatim name) → served as | DOCX companion (verbatim) · status | Proposed classification | Reading-time basis | Related links (order) | Legacy relationship |
+|---|---|---|---|---|---|---|---|---|---|
+| `res-1513` | OG-B13 | NZ | Resilience Asset & Document Checklist | `OG-B13_NZ_Resilience_Asset_and_Document_Checklist.pdf` → `/resources/resilience-asset-and-document-checklist.NZ.pdf` | `OG-B13_NZ_Resilience_Asset_and_Document_Checklist.docx` · preserved, **not served** | general / resilience-planning / planning / checklist / beginner | 4 A4 pages × about 10 min, rounded up to 45 min (the edition states no time) | res-1502, res-1024, res-1514, res-1515 | refreshes legacy OG-B13 (HOLD 10.29-R; no record ever existed) |
+| `res-1513` | OG-B13 | AU | same | `OG-B13_AU_Resilience_Asset_and_Document_Checklist.pdf` → `…checklist.AU.pdf` | `OG-B13_AU_…Checklist.docx` · preserved, not served | same | same | same | same |
+| `res-1515` | OG-B15 | NZ | Seasonal Review & Annual Service Log | `OG-B15_NZ_Seasonal_Review_and_Service_Log.pdf` → `/resources/seasonal-review-and-annual-service-log.NZ.pdf` | `OG-B15_NZ_Seasonal_Review_and_Service_Log.docx` · preserved, not served | general / resilience-planning / planning / template / beginner | 5 A4 pages × about 10 min, rounded up to 60 min | res-1006, res-1012, res-1028, res-1513 | consolidates legacy OG-B15 (HOLD 10.29-R; no record ever existed) |
+| `res-1515` | OG-B15 | AU | same | `OG-B15_AU_Seasonal_Review_and_Service_Log.pdf` → `…annual-service-log.AU.pdf` | `OG-B15_AU_…Service_Log.docx` · preserved, not served | same | same | same | same |
 
-## C. Resource mapping
-| Edition | Mapped to | Served as (market-chosen) | DOCX companion |
-|---|---|---|---|
-| OG-B13 NZ | `res-1513` Resilience Asset and Document Checklist | `/resources/resilience-asset-and-document-checklist.NZ.pdf` | master only |
-| OG-B13 AU | `res-1513` | `…checklist.AU.pdf` | master only |
-| OG-B15 NZ | `res-1515` Seasonal Review and Service Log | `/resources/seasonal-review-and-service-log.NZ.pdf` | master only |
-| OG-B15 AU | `res-1515` | `…log.AU.pdf` | master only |
+**Unique, non-overwriting selection (tested):** one record per resource; the member chooses a market and is shown only that market's file (no default file, no fallback); all 76 market-file URLs and all 38 titles are unique; ids and slugs unique; the staging script refuses to overwrite; no existing record, PDF or page changed. The original package filenames and bytes are kept verbatim in the git-ignored `private-assets/production-masters/stage-11-0i-v1.1` (with `ASSOCIATIONS.json`); the served copies are byte-identical but use the Library's `<slug>.<MARKET>.pdf` naming. The legacy OG-B13/OG-B15 records are preserved as HOLD history in the register.
 
-- **Existing versus new:** the legacy OG-B13 and OG-B15 never had IDs or records. `res-1513` / `res-1515` follow the Library's established OG-BNN → res-15NN mapping (also used by the audit tooling), were unused, and create no conflict, no migration and no change to any existing identifier. **These IDs, the classification (general / resilience-planning / planning; checklist and template; beginner; 45 minutes), the descriptions (the editions' own cover subtitles) and the related lists are my proposals and need your confirmation before deployment.**
-- **Country/region approach:** the existing architecture covers this: one record per resource with NZ and AU files under `marketFiles`; the member picks a market (existing selector) and is shown only that edition; the PDFs identify the country on the cover. No new geographic system was added.
-- **PDF/DOCX association:** the PDFs are the served assets. The DOCX files are **not served**: the record schema (`strict`) has one file per market and no companion field. They are kept verbatim, with original filenames, beside the original PDFs and the three production records in the git-ignored `private-assets/production-masters/stage-11-0i-v1.1`, with `ASSOCIATIONS.json` mapping each DOCX to its PDF, market and ID. Serving them needs a model extension (F.2).
-- **Filenames:** the approved masters keep their exact names and bytes; the served PDFs use the Library's `<slug>.<MARKET>.pdf` naming, byte-identical (verified per file). Serving them under the package names would need a naming exception like the res-1002 one.
-- **Register mapping:** OG-B13 and OG-B15 move HOLD → STAGED; the Stage 10.29-R HOLD definition and both HOLD records are preserved verbatim as history (quoted, not counted). New totals: **Deployed 36 · Staged 2 · Prepared 0 · Blocked 2 · HOLD 0 · Merged 1 · Archived 4 · Not started 0 = 45.** OG-B01, OG-B03, OG-B11 and all archived/blocked records are unchanged. *Mapping decision for you:* if you would rather keep the HOLD rows and add separate entries, it is a register-only change.
+## 3. Verifier failures: root causes and corrective changes
+Verifier: `admin-import/pilot/verify-build.mts` (original lines 93 to 109). Each cell was measured on the real staged PDFs before the change.
 
-## D. Implementation
-- **Added (git-ignored, not committed):** two protected records (SHA-256 `a67c571a…2618`, `580f2955…1340`), four staged PDFs (byte-identical), and the masters folder (11 package files + `ASSOCIATIONS.json`).
-- **Added (committed):** `tests/unit/og-b13-b15-integration.test.ts` (6 tests) and this report.
-- **Modified (committed):** the three registers; `docs/canonical-resource-index.{json,md}` (two STAGED entries and one new exception value `PDF_METADATA_TITLE_NOT_THE_RESOURCE_TITLE`); `admin-import/config/metadata-review.json` and `program-components.json` (entries and classification for OG-B13/OG-B15, no resource IDs inside); record-count and register-state assertions in 16 existing test files (36→38 records, staged 2, HOLD 0).
-- **Preserved:** all 36 protected resources, IDs, routes, records, PDFs and the Worker; no application code, schema, constants, detector, route policy or `lib/related.ts` change; no Resilience OS change.
-- **Staged build:** two clean builds identical (1,104 files). Versus the live baseline: 16 files added (the two resources' page files and four PDFs), 0 removed, 354 changed; **the visible text of all 159 HTML pages is identical to the live build except the Library, Downloads and My Progress listings**, as expected; all 97 earlier PDFs byte-identical; **76 protected PDFs** in the tree. Counts: **38 protected · 76 market files · Planning Tools 12 · Downloads 60 · My Progress 63 · 0 broken links**; 38 of 38 detail pages carry the exact "Approved resource in the protected OffGrid056 preview." tooltip, 0 Draft. The related-card engine with the real records in the pool changes **0 existing pages**, and each new page shows exactly its four curated cards (permanent test). No DOCX, master file or V1/legacy file is in the build.
-- **Commit:** see the final message (branch `main`).
+| Rule (new id) | Expected | Actual (field examined) | Genuine defect or mismatch? | Fix |
+|---|---|---|---|---|
+| `VB-TITLE` | PDF title = "<record title> — OffGrid056" | B13: "1. Start with a simple asset inventory" (NZ and AU); B15: "1. Keep resilience working through regular review". **Field examined: first raw `/Title` in the file = an outline bookmark.** Real Info and XMP title: "OG-B13 NZ Resilience Asset and Document Checklist" (AU/NZ), "OG-B15 NZ/AU Seasonal Review and Service Log" | **Verifier defect** (wrong field), plus a policy mismatch (these editions use a descriptive title) | Read the Info dictionary (`pdfInfoTitle`); raw reader kept only as fallback. Profile fixes the exact expected title per edition (`OG-B13 {market} …`) |
+| `VB-OG-CODE` | no `OG-B..` code in the text | B13: `OG-B13`; B15: `OG-B15`, `OG-B13` (printed cover/footers; B15 refers to B13). Field: extracted text | **Mismatch**: the rule suits legacy-scrubbed copy; the approved editions print their codes by design | Profile allows only `OG-B13` for B13 and `OG-B15`+`OG-B13` for B15; any other code still fails |
+| `VB-NZ-NUMBERS` | 111 present; 000 and 112 absent | B13 NZ: none of 111/000/112 (not an emergency guide). B15 NZ: 111 present, 000/112 absent (**passes**). Field: extracted text | B13: **mismatch** (irrelevant requirement). B15 NZ: no failure | Profile: B13 requires nothing, still forbids 000/112 in NZ and 111 in AU; B15 NZ requires 111 |
+| `VB-NZ-AGENCY` | "Civil Defence" present | absent in B13 and B15 NZ. Field: extracted text | **Mismatch**: edition names 111 only, no agency | Profile `agency: not-required` (the foreign-agency check still applies: "State Emergency Service" in an NZ file still fails) |
+| `VB-AU-NUMBERS` | 000 and 112 present; 111 absent | B13 AU: none printed. B15 AU: "Triple Zero (000)" present, **112 absent**. Field: extracted text | B13: mismatch. B15 AU: the approved wording gives the national number 000; I found no content defect, but note that 112 is no longer required for this edition (decision in section 9) | Profile: B15 AU requires 000, forbids 111; B13 requires nothing, forbids 111 |
+| `VB-AU-AGENCY` | "State Emergency Service" present | absent in B13 and B15 AU | **Mismatch** | Profile `agency: not-required` (NZ-only terms such as "Civil Defence" in an AU file still fail) |
 
-## E. Quality assurance
-| # | Check | Result |
-|---|---|---|
-| 1 | All 11 ZIP deliverables accounted for | **PASS** |
-| 2 | Eight customer hashes match the manifest | **PASS** (8/8) |
-| 3 | NZ and AU editions distinguishable | **PASS** (separate market files and cover identification; member-chosen market) |
-| 4 | B13/B15 display with the correct titles | **PASS with an exception:** the pages and records show the approved titles; the printed B15 cover reads "Seasonal Review & Annual Service Log" and B13 "Resilience Asset & Document Checklist" |
-| 5 | PDF and DOCX correctly associated | **PASS** (masters + `ASSOCIATIONS.json`); DOCX not served |
-| 6 | No duplicate or conflicting resource IDs/slugs | **PASS** (38 unique; 15NN unused before) |
-| 7 | Existing protected resources unchanged | **PASS** (page text, PDFs, related cards, records) |
-| 8 | Archived, blocked and HOLD history preserved | **PASS** (test-asserted) |
-| 9 | Unauthorised users cannot reach protected content in the staged app | **NOT TESTED** for the staged app: it is a local static export with no authentication layer (protection exists only as Cloudflare Access on the deployed hostname, and nothing was deployed). Live site re-probed (3 unauthenticated requests, including the two new routes): HTTP 302 to Cloudflare Access, 0 unauthenticated 200; the new routes do not exist live |
-| 10 | Tests, lint, typecheck | Full suite **66 files, 1,762 tests, exit 0**; lint exit 0 (0 errors); typecheck exit 0; `import:verify-prep` exit 0 |
-| — | **`import:verify-build` (the Library's deployment gate)** | **FAIL for the four new PDFs (F.1).** Records 38 · market files 76 · broken links 0 |
-| 11 | No production deployment | **PASS** (Worker unchanged) |
-| 12 | No Resilience OS change | **PASS** (not opened) |
+No genuine safety or content defect was found in the four PDFs. Corrective change set: `admin-import/pilot/verify-build-rules.ts` (all per-file checks moved out of the CLI unchanged, each tagged with a rule id, plus `pdfInfoTitle`); `admin-import/config/verify-build-profiles.json` (version-controlled, owner-approved, matched by **stable id and legacy code**, never by market or pattern; it can change only the expected title, allowed codes, required/forbidden emergency numbers and the agency requirement); `verify-build.mts` now calls the module. All other checks (removed wording, cross-market terms and timings, tokens, error pages, publication state) apply to the profiled resources unchanged. The 36 existing resources have no profile and are checked exactly as before (verified: `import:verify-build` still passes all of them).
 
-Also run read-only on the PDFs' extracted text with the Library's numeric detectors (no exemption, no change): B13: Bucket C 0, price 0 (the safety detector raises "batteries-and-electrical" on asset names); **B15: 5 Bucket C items, all cadence words ("Weekly", "Monthly", "Annual", "once a year") in review and service labels**; two sentences of the standing emergency wording trigger the survival detector. These detectors normally gate prepared copy; the owner-approved production files were not changed.
+## 4. Cadence-detector classification
+The five Bucket C items on each B15 edition were: "Weekly / quick reset", "Monthly / household check", "Annual / full review", and "Annual resilience review … once a year, or after a major change, to reset the household plan" (two figures). They are the household's own review rhythm, not equipment intervals. **New rule `PLANNING_RHYTHM` in `admin-import/audit/numeric.ts`:** only those labelled rhythms qualify, and **never** when the same sentence prescribes technical work (replace, inspect, test, clean, flush, drain, lubricate, calibrate, service, maintenance, filter, battery, generator, chimney, alarm); "service due dates" may appear. Result on the real editions: Bucket C 0 (NZ and AU), every one of the ten decisions recorded as D_NOT_A_CLAIM with its reason. Unchanged and still Bucket C: "Service the generator annually", "Replace the smoke alarm battery once a year", "Test the alarm monthly", "Inspect the chimney every year", and "Monthly / household check: replace the smoke alarm battery", "Annual / full review: inspect the chimney and replace the batteries", "Weekly / quick reset: test the smoke alarm", "Annual / full review: service the generator" (the rhythm label does not excuse technical work).
 
-## F. Outstanding dependencies and exceptions (for the owner)
-1. **Deployment gate fails (blocker).** `import:verify-build` enforces, for every protected PDF: (a) the PDF title must be "<resource title> — OffGrid056" (the new PDFs' embedded titles are a page heading such as "1. Start with a simple asset inventory"); (b) no resource code in the text (the pages print "OG-B13"/"OG-B15", and B15 refers to "OG-B13"); (c) NZ files must name 111 and "Civil Defence", AU files must name 000, 112 and "State Emergency Service", with no cross-contamination (B13 has no emergency block; B15 cites 111 / "Triple Zero (000)" without those agencies; the AU B15 lacks 112). I did **not** weaken the verifier or edit the PDFs. Options: (i) owner-approved, edition-specific verifier rules for these externally produced editions (a small, explicit Library change); or (ii) a new production pass with corrected PDF metadata and wording (outside this stage).
-2. **DOCX companions cannot be served** without a Library model extension (a `companionFiles` field, UI and tests); proposed as a separate approved change.
-3. **Titles:** the printed cover titles use "&", and B15 adds "Annual" ("Seasonal Review & Annual Service Log"); the Library titles follow your brief. Confirm or align.
-4. **Printed legacy codes:** "OG-B13"/"OG-B15" appear in footers and in a cross-reference, which the Library otherwise avoids for members. B15's text refers to B13 records, so B13 should be deployed before or with B15.
-5. **Detector items** above (B15 cadence labels, standing-wording survival hits): an owner decision; no exemption was added.
-6. **Member access and delivery:** no change. Cloudflare Access is the only protection (authentication, not entitlement); access tiers and the entitlement contract remain undefined, and signed or per-member downloads do not exist (a separate dependency, not started).
-7. **Metadata confirmation:** IDs `res-1513`/`res-1515`, estimated time, classification, descriptions, related lists.
-8. **Production prerequisites:** F.1 and F.7, then a separate owner-approved deployment stage with the usual post-deploy checks (rollback target `d7480c93-75fb-4ca5-8b40-0383b9cacadf`).
+## 5. Positive and negative verification results (actual runs)
+- **Positive:** the four real staged PDFs pass `fileProblems` with their profiles (0 problems each), with the exact Info titles; `import:verify-build` on the staged build: all 76 market files ✓, 38 records, 0 broken links, "deployment build verified", exit 0.
+- **Negative (invalid documents still rejected), `tests/unit/verify-build-rules.test.ts` (9 tests):** wrong title (the old bookmark heading, the other country's title) → `VB-TITLE`; unexpected code (OG-B14, OG-B15 in B13, OG-B02 in B15) → `VB-OG-CODE`; "000"/"112" in an NZ B13, "111" in an AU B13, "State Emergency Service" in an NZ file, "Civil Defence" in an AU file → the cross-country rules, even where no number is required; B15 NZ without 111, B15 AU without 000, "111" in B15 AU, "000" in B15 NZ, an AU-numbered file labelled NZ → rejected; removed wording, unresolved tokens, empty/error pages, unknown market → still rejected; a **different** resource (res-1514) gets no relief (still fails without 111/Civil Defence; still passes with them); a record with the right id but wrong legacy code gets the default rules; **without profiles the real B13/B15 PDFs would still be rejected** (proving the profile is what admits them, and only them).
+- **Detector tests, `tests/unit/numeric-planning-rhythm.test.ts` (4 tests):** positives, technical-work negatives and unchanged-wording cases above, plus the real PDFs (Bucket C 0, ten decisions recorded).
+- Suite totals in section 8.
 
-## G. Release recommendation
-**CONDITIONAL PASS.** The four approved editions are integrated into the non-public staging structure with byte-identical assets, correct NZ/AU separation, no effect on the 36 existing resources, and a green repository (tests, lint, typecheck). **Deployment is HELD** by the verify-build gate failure and the pending metadata confirmation.
+## 6. Status of the four PDF / DOCX pairs
+| Pair | PDF SHA-256 (verified = manifest) | DOCX SHA-256 (verified = manifest) | PDF | DOCX |
+|---|---|---|---|---|
+| B13 NZ | `7d6a858a…19f5` | `7299bc46…8a2d` | staged, served byte-identical, 4 pages A4 | preserved in masters, not served |
+| B13 AU | `a5008efe…5f15` | `6ceb842a…6e83` | same | same |
+| B15 NZ | `c67a95c9…c3ab` | `d115694b…4b4b` | staged, served byte-identical, 5 pages A4 | same |
+| B15 AU | `87053d8c…eeb8` | `741db38f…ad80f` | same | same |
 
-**Exact next step (needs your decision, not executed):** answer F.1 (verifier-rules option (i) or a corrected-PDF pass (ii)) and confirm F.7; then authorise **Stage 11.0K — OG-B13 and OG-B15 controlled deployment + live verification**. No other development stage is started.
+## 7. Evidence that protected resources remain unchanged
+Two clean staged builds (1,104 files) are identical. Against the live baseline (the deployed Stage 10.27D build, 1,088 files): 16 files added (the two resources' pages and four PDFs), 0 removed, 355 changed. **The visible text of all 73 existing resource pages and of every other page except the Library, Downloads and My Progress listings is identical;** all 97 earlier PDFs are byte-identical; the related-card engine with the real records in the pool changes 0 existing pages (permanent test); no record, route, PDF or Worker was touched; 36 earlier records are listed unchanged by id. Counts: 38 protected / 76 market files / Planning Tools 12 / Downloads 60 / My Progress 63 / 0 broken links. Live site: Worker `d7480c93-75fb-4ca5-8b40-0383b9cacadf`, 3 unauthenticated probes redirected to Cloudflare Access, 0 unauthenticated 200, new routes absent.
+
+## 8. Authentication and security: performed versus not performed
+- **Performed:** unauthenticated requests to the live hostname (HTTP 302 to Cloudflare Access; new routes do not exist yet); a check that no DOCX, master or package file is in the build output; the production-masters folder is outside every served tree (git-ignored, not copied by `build:preview`); the market selection tests (no fallback).
+- **Not performed (and not claimed):** any authentication test of the staged site, which is a local static export with no authentication layer; any test of Cloudflare Access on the new routes (they are not deployed); any authenticated download test (no owner session exists here); any entitlement test (no entitlements exist). Local static-site tests do not validate production authentication, and nothing in this report says they do.
+- Checks: full suite **68 files, 1,775 tests, exit 0**; lint exit 0 (0 errors); typecheck exit 0; `import:verify-prep` exit 0; `import:verify-build` exit 0.
+
+## 9. Editable DOCX companions: proposal (needs your approval; nothing implemented)
+Today a record has one file per market (`marketFiles`, strict schema), so a DOCX cannot be attached without a model change. **Minimal design:** add an optional `companionFiles` map keyed by market, each entry `{ fileUrl, fileFormat: "DOCX", label }`, validated like `marketFiles` (local `/resources/…` URL, one per market, no default file); render one secondary link "Editable version (DOCX)" under the chosen market's PDF button only (same market gate, no choice between countries); stage the DOCX through the existing `private-assets/resources` → `public/resources` copy (so it is served only inside the Cloudflare-Access-protected hostname, never from a public URL); extend `verify-build` to require the DOCX to exist and match the recorded hash; add a canonical-index field; update the related tests (schema, market download, built output, verify-build). It changes the Library's record schema and one component, so I stopped. Interim: all four DOCX files are preserved byte-identical in the non-public masters folder and are not exposed. Alternative needing no change: deliver DOCX files through a separate, owner-approved channel.
+
+## 10. Remaining decisions and dependencies
+1. Confirm `res-1513` / `res-1515`, classification, 45- and 60-minute estimates, descriptions (the editions' cover subtitles), related lists and the HOLD → STAGED register mapping.
+2. Approve or reject the `companionFiles` design (section 9).
+3. Accept that the AU B15 edition requires 000 but not 112 (the verifier's earlier AU rule required both; the approved wording gives Triple Zero (000)).
+4. B15 refers to "OG-B13" by code: deploy B13 before or with B15.
+5. The safety-topic detector still reports "batteries-and-electrical" on B13's asset names and the survival-family flag on two standing emergency sentences; these are informational (no exemption added) and the approved PDFs carry their own scope and emergency notes. Say if you want a formal review.
+6. Authentication/entitlement: still Cloudflare Access only; per-member delivery is unbuilt.
+7. A separate owner-approved deployment stage (Stage 11.0K) with live verification; rollback target `d7480c93-75fb-4ca5-8b40-0383b9cacadf`.
+
+## 11. Commit and affected files
+Commit: see the final message (branch `main`). Affected files: `admin-import/audit/numeric.ts`; `admin-import/pilot/verify-build.mts`; new `admin-import/pilot/verify-build-rules.ts`, `admin-import/config/verify-build-profiles.json`; `admin-import/config/metadata-review.json`; `docs/canonical-resource-index.{json,md}`; the three registers; new tests `verify-build-rules.test.ts`, `numeric-planning-rhythm.test.ts`; updated `og-b13-b15-integration.test.ts`, `registers.test.ts` and this report. Git-ignored (not committed): the two protected records, four staged PDFs and the masters folder.
+
+## 12. Verdict
+**CONDITIONAL PASS.** The mapping is confirmed from registry evidence, the verifier now judges the four approved editions correctly and still rejects wrong documents (tested both ways), the cadence labels are classified as planning rhythms without weakening technical-interval detection, and the 36 protected resources are unchanged. **HOLD on deployment** until your decisions in section 10 (items 1 to 3 at minimum). Stage 11.0K is not started.

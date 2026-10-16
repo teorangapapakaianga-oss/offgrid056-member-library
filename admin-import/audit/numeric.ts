@@ -222,6 +222,22 @@ const PLANNING_HORIZON = [
 ];
 
 /**
+ * A household REVIEW RHYTHM (Stage 11.0J): the labelled rows of a planning sheet that say how often the household chooses to look across its own plan
+ * ("Weekly / quick reset", "Monthly / household check", "Annual / full review", "Annual resilience review: use this once a year, or after a major change, to
+ * reset the household plan"). That is the member's own planning cadence, not a technical servicing, inspection, test or replacement interval.
+ *
+ * Deliberately narrow: only these labelled rhythms, and never when the same sentence prescribes technical work. "Service due dates" is allowed to appear (the row
+ * reassesses the dates the manufacturer or provider sets); replacing, inspecting, testing, cleaning, flushing, draining, calibrating or servicing equipment is not.
+ * "Weekly", "Monthly" and "Annual" in any other sentence are judged exactly as before.
+ */
+const PLANNING_RHYTHM = [
+  { pattern: /\b(?:weekly|monthly|annual)\s*\/\s*(?:quick reset|household check|full review)\b/i, why: "a household review-rhythm label: how often the household chooses to look across its own plan" },
+  { pattern: /\bannual (?:resilience )?review\b[^.]{0,80}\bonce a year\b[^.]{0,80}\breset the household plan\b/i, why: "a household review rhythm: when the household resets its own plan" },
+];
+/** Technical work: if a sentence prescribes any of this, a rhythm label never excuses it. */
+const TECHNICAL_WORK = /\b(?:replac\w*|inspect\w*|test(?:ed|ing)?|clean\w*|flush\w*|drain\w*|lubricat\w*|calibrat\w*|servic(?:e|ed|ing)(?!\s+(?:due|dates?|logs?|records?|providers?))|maintenance|filters?|batter(?:y|ies)|generators?|chimney|alarms?)\b/i;
+
+/**
  * An interval is a claim when something is being recommended — check, replace, inspect, test, service, every… A
  * duration that is simply part of a sentence ("for three days", "in 30 days") is judged by its subject instead.
  */
@@ -897,6 +913,7 @@ export function scanNumericClaims(
       );
 
       const horizon = PLANNING_HORIZON.find((h) => h.pattern.test(sentence));
+      const rhythm = TECHNICAL_WORK.test(sentence) ? undefined : PLANNING_RHYTHM.find((h) => h.pattern.test(sentence));
       const base = { resource, market, sentence, ...hit };
       if (owned) out.push({ ...base, bucket: "E_TREATMENT_OWNED", claimId: owned, why: "governed by treatment-sources.json" });
       else if (approved) out.push({ ...base, bucket: "A_ALREADY_SOURCED", claimId: approved.id, why: approved.authority });
@@ -938,6 +955,7 @@ export function scanNumericClaims(
         out.push({ ...base, bucket: "C_NEEDS_SOURCE", why: "a comparative-performance claim: an unsupported statement that something outperforms what most people or typical approaches achieve, with no approved entry" });
       else if (notAClaim) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: notAClaim.why });
       else if (hit.category === "interval" && horizon) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: horizon.why });
+      else if (hit.category === "interval" && rhythm) out.push({ ...base, bucket: "D_NOT_A_CLAIM", why: rhythm.why });
       else if (
         hit.category === "interval" &&
         !RECURRING_SAFETY.test(sentence) &&

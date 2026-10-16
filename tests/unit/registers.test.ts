@@ -48,7 +48,7 @@ describe("Stage 9.84 · the registers agree on the current state", () => {
     it(`${n}: OG-04, OG-06 (res-1006) and OG-07 (res-1007) are live, OG-12 (res-1012) and OG-14 (res-1014) are live, OG-23 (res-1023) is live as #30, OG-24 (res-1024) is live as #31, OG-28 (res-1028) is live as #32, OG-29 (res-1029) is live as #33, OG-30 (res-1030) is live as #34, OG-B02 (res-1502) is live as #35, OG-B14 (res-1514) is live as #36, OG-B13 (res-1513) and OG-B15 (res-1515) are staged and not deployed, and the current-state statement carries no stale counts`, () => {
       const c = current(n);
       expect(c).toMatch(/OG-04[^\n]*(is live|live as protected resource #25|is deployed|deployed as protected resource #25|is live as)/);
-      expect(c).toMatch(/STAGED, NOT DEPLOYED(:\*\*|:|\s*=)?\s*(\*\*)?\s*OG-B13 Resilience Asset and Document Checklist \(`res-1513`\) and OG-B15 Seasonal Review and Service Log \(`res-1515`\)/);
+      expect(c).toMatch(/STAGED, NOT DEPLOYED(:\*\*|:|\s*=)?\s*(\*\*)?\s*OG-B13 Resilience Asset & Document Checklist \(`res-1513`\) and OG-B15 Seasonal Review & Annual Service Log \(`res-1515`\)/);
       expect(c).toMatch(/explicit Stage 11\.0K deployment approval/);
       expect(c).toMatch(/OG-B14 Local Support Network Planner \(`res-1514`\) is live as protected resource #36/);
       expect(c).not.toMatch(/explicit owner approval to deploy OG-B14/);
