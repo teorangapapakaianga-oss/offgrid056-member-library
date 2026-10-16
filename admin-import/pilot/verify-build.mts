@@ -12,12 +12,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { extractText, detectFileType } from "../parsers/index";
 import { isApprovedPublication } from "../../lib/content/publication";
-import { fileProblems, loadProfiles, pdfInfoTitle } from "./verify-build-rules";
+import { companionProblems, fileProblems, loadProfiles, loadReleaseSets, orphanCompanionProblems, pdfInfoTitle, releaseSetProblems } from "./verify-build-rules";
 
 const ROOT = path.resolve(import.meta.dirname, "..", "..");
 const OUT = path.join(ROOT, "out");
 const RECORDS = path.join(ROOT, "private-assets", "data-resources");
-const PROFILES = loadProfiles(path.join(ROOT, "admin-import", "config", "verify-build-profiles.json"));
+const PROFILE_FILE = path.join(ROOT, "admin-import", "config", "verify-build-profiles.json");
+const PROFILES = loadProfiles(PROFILE_FILE);
 
 interface PrivateRecord {
   id: string;
@@ -28,6 +29,7 @@ interface PrivateRecord {
   publicationStatus?: string;
   releaseChannel?: string;
   marketFiles: Record<string, { fileUrl: string }>;
+  companionFiles?: Record<string, { fileUrl: string; fileFormat: string; sha256: string }>;
 }
 
 if (!fs.existsSync(OUT) || !fs.existsSync(RECORDS)) {
@@ -63,6 +65,11 @@ for (const r of records.sort((a, b) => a.legacyCode.localeCompare(b.legacyCode))
     rows.push(`${problems.length ? "✗" : "✓"} ${r.legacyCode.padEnd(7)} ${market}  ${String(meta.pages).padStart(2)}p  "${title}"${problems.length ? "  — " + problems.join("; ") : ""}`);
   }
 }
+
+// Stage 11.0J: editable companions (exist, are real .docx files, match the recorded SHA-256, sit beside their own market's PDF), nothing editable served unrecorded,
+// and resources that must be released together (B15 names B13).
+for (const r of records) for (const p of companionProblems(r, OUT)) { failures++; rows.push(`✗ ${p.message}`); }
+for (const p of [...orphanCompanionProblems(OUT, records), ...releaseSetProblems(records.map((r) => r.id), loadReleaseSets(PROFILE_FILE))]) { failures++; rows.push(`✗ ${p.message}`); }
 
 // Every internal link on the Downloads page and each resource page must resolve inside the build.
 const broken = new Set<string>();

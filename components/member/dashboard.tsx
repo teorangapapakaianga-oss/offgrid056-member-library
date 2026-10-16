@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { ResourceSummary } from "@/lib/content/summaries";
 import { fiveFoundations, getResourceType } from "@/lib/content/taxonomy";
-import { formatMinutes, isNewResource } from "@/lib/format";
+import { formatMinutesOrNull, isNewResource } from "@/lib/format";
 import { useNow } from "@/lib/hooks/use-now";
 import { useMemberState } from "@/lib/member";
 import { foundationProgress, nextRecommended, overallProgress } from "@/lib/progress";
@@ -85,7 +85,7 @@ export function Dashboard({ items, paths }: { items: ResourceSummary[]; paths: P
   const weakest = [...perFoundation].filter((p) => p.next).sort((a, b) => a.percent - b.percent)[0];
   const recommended =
     assessment && !completedIds.has(assessment.id)
-      ? { resource: assessment, why: `Start by finding where your household actually is. It takes about ${formatMinutes(assessment.estimatedTime)}.` }
+      ? { resource: assessment, why: `Start by finding where your household actually is. ${formatMinutesOrNull(assessment.estimatedTime) ? ` It takes about ${formatMinutesOrNull(assessment.estimatedTime)}.` : ""}` }
       : weakest?.next
         ? { resource: weakest.next, why: `${fiveFoundations.find((f) => f.id === weakest.foundation)?.name} is your least-developed foundation so far.` }
         : null;
@@ -132,7 +132,7 @@ export function Dashboard({ items, paths }: { items: ResourceSummary[]; paths: P
             <div className="mt-4">
               <p className="text-lg leading-snug font-semibold">{continueWith.title}</p>
               <p className="mt-1 text-sm text-og-white/75">
-                {getResourceType(continueWith.resourceType).label} · {formatMinutes(continueWith.estimatedTime)}
+                {[getResourceType(continueWith.resourceType).label, formatMinutesOrNull(continueWith.estimatedTime)].filter(Boolean).join(" · ")}
               </p>
               <Link
                 href={`/resources/${continueWith.slug}/`}

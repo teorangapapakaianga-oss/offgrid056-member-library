@@ -2,7 +2,7 @@
 import Link from "next/link";
 import type { ResourceSummary } from "@/lib/content/summaries";
 import { getFoundation, getResourceType } from "@/lib/content/taxonomy";
-import { formatMinutes } from "@/lib/format";
+import { formatMinutesOrNull } from "@/lib/format";
 import { useMemberState } from "@/lib/member";
 import { recommendedNext, type RelatedReason } from "@/lib/related";
 import { Icon } from "@/components/ui/icon";
@@ -38,7 +38,7 @@ export function RecommendedNext({
         <span className="min-w-0 flex-1">
           <span className="block font-semibold">{next.resource.title}</span>
           <span className="block text-xs text-og-white/70">
-            {getResourceType(next.resource.resourceType).label} · {formatMinutes(next.resource.estimatedTime)}
+            {[getResourceType(next.resource.resourceType).label, formatMinutesOrNull(next.resource.estimatedTime)].filter(Boolean).join(" · ")}
           </span>
         </span>
         <Icon name="arrowRight" className="size-5 shrink-0 text-og-green" />

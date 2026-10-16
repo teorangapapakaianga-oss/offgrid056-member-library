@@ -47,7 +47,8 @@ export const ResourceSchema = z
     category: slug,
     resourceType: ResourceTypeIdSchema,
     difficulty: DifficultySchema,
-    estimatedTime: z.number().int().positive().max(24 * 60),
+    /** minutes; optional since Stage 11.0J: a resource whose time cannot honestly be stated omits it and shows no time anywhere */
+    estimatedTime: z.number().int().positive().max(24 * 60).optional(),
     tags: z.array(z.string()).default([]),
     collections: z.array(z.enum(COLLECTION_IDS)).optional(),
     order: z.number().int().optional(),
@@ -81,6 +82,22 @@ export const ResourceSchema = z
         }),
       )
       .optional(),
+    /**
+     * Editable companions (Stage 11.0J): at most one editable DOCX per market, always offered as a SECONDARY option beside that market's own PDF.
+     * Same gate as the PDF: a local file served only inside the protected hostname, never an external link, never offered for a market without a PDF,
+     * and pinned by its SHA-256 so the build can prove it is the approved file.
+     */
+    companionFiles: z
+      .partialRecord(
+        z.enum(MARKET_CODES),
+        z.object({
+          fileUrl: z.string().refine((s) => s.startsWith("/") && /\.docx$/i.test(s), "a local /… path to a .docx file"),
+          fileFormat: z.literal("DOCX"),
+          sha256: z.string().regex(/^[0-9a-f]{64}$/, "lower-case SHA-256"),
+          fileSizeBytes: z.number().int().positive().optional(),
+        }),
+      )
+      .optional(),
     externalUrl: z.url({ protocol: /^https$/ }).optional(),
     videoUrl: z.url({ protocol: /^https$/ }).optional(),
     downloadable: z.boolean(),
@@ -100,6 +117,15 @@ export const ResourceSchema = z
     // version regardless of their market. With no default, those pages have nothing to leak.
     if (r.marketFiles && r.fileUrl) ctx.addIssue({ code: "custom", path: ["fileUrl"], message: "a resource with marketFiles must not also have a default fileUrl" });
     if (r.fileUrl && !r.fileFormat) ctx.addIssue({ code: "custom", path: ["fileFormat"], message: "fileUrl needs a fileFormat" });
+    if (r.companionFiles) {
+      if (!r.marketFiles) ctx.addIssue({ code: "custom", path: ["companionFiles"], message: "companionFiles need marketFiles: an editable version is only ever offered beside its own market's file" });
+      const urls = new Set<string>();
+      for (const [m, c] of Object.entries(r.companionFiles)) {
+        if (!r.marketFiles?.[m as keyof typeof r.marketFiles]) ctx.addIssue({ code: "custom", path: ["companionFiles", m], message: `no ${m} file to sit beside` });
+        if (urls.has(c.fileUrl) || Object.values(r.marketFiles ?? {}).some((f) => f.fileUrl === c.fileUrl)) ctx.addIssue({ code: "custom", path: ["companionFiles", m, "fileUrl"], message: "a companion must be its own file, never another edition's file" });
+        urls.add(c.fileUrl);
+      }
+    }
     if (r.resourceType === "download-pack" && !r.packItems?.length) ctx.addIssue({ code: "custom", path: ["packItems"], message: "a download-pack needs packItems" });
   });
 

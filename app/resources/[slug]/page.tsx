@@ -82,11 +82,13 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
           <p className="mt-3 text-lg text-og-graphite/90">{r.description}</p>
 
           <dl className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-og-taupe">
-            <div className="inline-flex items-center gap-1.5">
-              <dt className="sr-only">Estimated time</dt>
-              <Icon name="clock" className="size-4" />
-              <dd>{formatMinutes(r.estimatedTime)}</dd>
-            </div>
+            {r.estimatedTime != null && (
+              <div className="inline-flex items-center gap-1.5">
+                <dt className="sr-only">Estimated time</dt>
+                <Icon name="clock" className="size-4" />
+                <dd>{formatMinutes(r.estimatedTime)}</dd>
+              </div>
+            )}
             <div className="inline-flex items-center gap-1.5">
               <dt className="sr-only">Difficulty</dt>
               <dd>
@@ -159,6 +161,16 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
                   title={r.title}
                   updatedDate={r.updatedDate ?? r.publishedDate}
                   openable={true}
+                  companions={
+                    r.companionFiles
+                      ? Object.fromEntries(
+                          Object.entries(r.companionFiles).map(([code, f]) => [
+                            code,
+                            { fileUrl: f.fileUrl, format: f.fileFormat, sizeBytes: fileSizeBytes(f.fileUrl, f.fileSizeBytes) },
+                          ]),
+                        )
+                      : undefined
+                  }
                   files={Object.fromEntries(
                     Object.entries(r.marketFiles).map(([code, f]) => [
                       code,

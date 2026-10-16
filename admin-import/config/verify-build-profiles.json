@@ -5,10 +5,23 @@
       "resourceId": "res-1513",
       "legacyCode": "OG-B13",
       "infoTitle": "OG-B13 {market} Resilience Asset and Document Checklist",
-      "allowedOgCodes": ["OG-B13"],
+      "allowedOgCodes": [
+        "OG-B13"
+      ],
       "emergency": {
-        "NZ": { "require": [], "forbid": ["000", "112"] },
-        "AU": { "require": [], "forbid": ["111"] }
+        "NZ": {
+          "require": [],
+          "forbid": [
+            "000",
+            "112"
+          ]
+        },
+        "AU": {
+          "require": [],
+          "forbid": [
+            "111"
+          ]
+        }
       },
       "agency": "not-required",
       "reason": "An insurance and documentation worksheet, not an emergency-response guide: it prints no emergency numbers or agency names, so none is required. An NZ file must still never carry an Australian number or agency and an AU file must still never carry 111 or an NZ term. The edition identifies itself with its approved resource code and carries a descriptive document title.",
@@ -18,14 +31,42 @@
       "resourceId": "res-1515",
       "legacyCode": "OG-B15",
       "infoTitle": "OG-B15 {market} Seasonal Review and Service Log",
-      "allowedOgCodes": ["OG-B15", "OG-B13"],
+      "allowedOgCodes": [
+        "OG-B15",
+        "OG-B13"
+      ],
       "emergency": {
-        "NZ": { "require": ["111"], "forbid": ["000", "112"] },
-        "AU": { "require": ["000"], "forbid": ["111"] }
+        "NZ": {
+          "require": [
+            "111"
+          ],
+          "forbid": [
+            "000",
+            "112"
+          ]
+        },
+        "AU": {
+          "require": [
+            "000"
+          ],
+          "forbid": [
+            "111"
+          ]
+        }
       },
       "agency": "not-required",
       "reason": "The approved edition's immediate-danger note names the national emergency number only (NZ: 111; AU: Triple Zero (000)) and no agency; it refers to the companion record OG-B13 by code. The country's number is still required and the other country's number still forbidden; 112 is not required for the AU edition because its approved wording gives Triple Zero (000).",
       "approvedBy": "Project Owner, Stage 11.0J verification brief (2026-10-16)"
+    }
+  ],
+  "releaseSets": [
+    {
+      "id": "b13-b15",
+      "resources": [
+        "res-1513",
+        "res-1515"
+      ],
+      "reason": "The OG-B15 edition refers to the OG-B13 records and the two link to each other; neither may be released without the other (owner decision, Stage 11.0J)."
     }
   ]
 }

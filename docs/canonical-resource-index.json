@@ -3849,7 +3849,8 @@
           "docxCompanion": {
             "master": "01_DOCX/OG-B13_NZ_Resilience_Asset_and_Document_Checklist.docx",
             "sha256": "7299bc46282845b1d78422afc60036e9636876be9ace53a40b51527c28988a2d",
-            "served": false
+            "served": true,
+            "route": "/resources/resilience-asset-and-document-checklist.NZ.docx"
           }
         },
         {
@@ -3866,7 +3867,8 @@
           "docxCompanion": {
             "master": "01_DOCX/OG-B13_AU_Resilience_Asset_and_Document_Checklist.docx",
             "sha256": "6ceb842a98397023c37c6fdc254748a196751d5c8bd94c79417c28870b296e83",
-            "served": false
+            "served": true,
+            "route": "/resources/resilience-asset-and-document-checklist.AU.docx"
           }
         }
       ],
@@ -3887,9 +3889,9 @@
       "internalOnly": false,
       "notes": [
         "STAGED, not deployed (Stage 11.0J): the live site has 36 resources; the staged build has 38. Planning Tools stays 12 (this resource is in no collection). The legacy item was OG-B13 Resilience Insurance Documentation (HOLD in Stage 10.29-R; refreshed by the owner).",
-        "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX companion for each market is staged there only and is not served: the Library record has no companion-file field.",
+        "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX for each market is served as a secondary 'Editable version' option beside that market's PDF (companionFiles, SHA-256 pinned to the package manifest) inside the protected hostname only.",
         "The PDFs are A4 and were produced outside the import pipeline. Their document (Info) title is descriptive ('OG-B13 NZ/AU Resilience Asset and Document Checklist') rather than '<title> — OffGrid056'; the printed pages carry the approved resource code. Owner-approved; import:verify-build checks them with the resource-scoped profile in admin-import/config/verify-build-profiles.json. Approved files are not edited.",
-        "The stable ID, classification, descriptions, estimated time and related links are proposals awaiting owner confirmation. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule."
+        "The stable ID is conditionally owner-approved (registry uniqueness and the distinct NZ/AU mappings verified; HOLD to STAGED approved). No estimated time is stated by the edition and none is recorded. Classification, description and related links are with the owner for final review. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule. The two resources are a release set: they deploy together."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",
@@ -3968,7 +3970,8 @@
           "docxCompanion": {
             "master": "01_DOCX/OG-B15_NZ_Seasonal_Review_and_Service_Log.docx",
             "sha256": "d115694b80443b97a009180816bcc96a59a637cac689ba9a150c65f568b0be4b",
-            "served": false
+            "served": true,
+            "route": "/resources/seasonal-review-and-annual-service-log.NZ.docx"
           }
         },
         {
@@ -3985,7 +3988,8 @@
           "docxCompanion": {
             "master": "01_DOCX/OG-B15_AU_Seasonal_Review_and_Service_Log.docx",
             "sha256": "741db38fc61bc15b98d0c025b55a8f8a8a13fc0842cab7d7deb600cc3cdad80f",
-            "served": false
+            "served": true,
+            "route": "/resources/seasonal-review-and-annual-service-log.AU.docx"
           }
         }
       ],
@@ -4006,9 +4010,9 @@
       "internalOnly": false,
       "notes": [
         "STAGED, not deployed (Stage 11.0J): the live site has 36 resources; the staged build has 38. Planning Tools stays 12 (this resource is in no collection). The legacy item was OG-B15 Annual Maintenance Calendar (HOLD in Stage 10.29-R; consolidated by the owner). The printed cover title reads 'Seasonal Review & Annual Service Log'.",
-        "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX companion for each market is staged there only and is not served: the Library record has no companion-file field.",
+        "Owner-approved Stage 11.0I v1.1 production edition (NZ and AU). The approved PDFs are served byte-identical under the Library's <slug>.<MARKET>.pdf naming; the original package filenames are kept in the masters folder. The editable DOCX for each market is served as a secondary 'Editable version' option beside that market's PDF (companionFiles, SHA-256 pinned to the package manifest) inside the protected hostname only.",
         "The PDFs are A4 and were produced outside the import pipeline. Their document (Info) title is descriptive ('OG-B15 NZ/AU Seasonal Review and Service Log') rather than '<title> — OffGrid056'; the printed pages carry the approved resource code and a cross-reference to OG-B13. Owner-approved; import:verify-build checks them with the resource-scoped profile in admin-import/config/verify-build-profiles.json. Approved files are not edited.",
-        "The stable ID, classification, descriptions, estimated time and related links are proposals awaiting owner confirmation. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule."
+        "The stable ID is conditionally owner-approved (registry uniqueness and the distinct NZ/AU mappings verified; HOLD to STAGED approved). No estimated time is stated by the edition and none is recorded. Classification, description and related links are with the owner for final review. `status` is the technical build gate (draft); publicationStatus approved and releaseChannel private-preview record the governance state. None of these is an entitlement. Version 1.1 is recorded in the package manifest; the index version fields stay UNKNOWN_EXISTING_RECORD by rule. The two resources are a release set: they deploy together."
       ],
       "recommendationEligible": false,
       "handoffStatus": "INACTIVE",

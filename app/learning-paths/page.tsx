@@ -23,7 +23,8 @@ export default function LearningPathsPage() {
       <ul role="list" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {paths.map((p) => {
           const steps = p.steps.map((id) => all.find((r) => r.id === id)).filter((r) => r !== undefined);
-          const minutes = steps.reduce((n, s) => n + s.estimatedTime, 0);
+          const minutes = steps.reduce((n, s) => n + (s.estimatedTime ?? 0), 0);
+          const timesKnown = steps.every((s) => s.estimatedTime !== null); // a total is shown only when every step states a time
           const f = getFoundation(p.foundation);
           return (
             <li key={p.id}>
@@ -35,7 +36,7 @@ export default function LearningPathsPage() {
                 </div>
                 <p className="text-sm text-og-graphite/90">{p.description}</p>
                 <p className="mt-auto text-xs text-og-taupe">
-                  {steps.length} steps · about {formatMinutes(minutes)}
+                  {steps.length} steps{timesKnown ? ` · about ${formatMinutes(minutes)}` : ""}
                 </p>
                 <span className="inline-flex items-center gap-1 text-sm font-semibold text-og-deep">
                   Open path

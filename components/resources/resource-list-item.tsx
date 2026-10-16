@@ -2,7 +2,7 @@
 import Link from "next/link";
 import type { ResourceSummary } from "@/lib/content/summaries";
 import { getFoundation, getResourceType } from "@/lib/content/taxonomy";
-import { formatMinutes } from "@/lib/format";
+import { formatMinutesOrNull } from "@/lib/format";
 import { FOUNDATION_STYLES } from "@/lib/foundation-style";
 
 /** Compact row for dashboard lists (recently viewed, saved, next steps). */
@@ -20,7 +20,7 @@ export function ResourceListItem({ resource: r, meta }: { resource: ResourceSumm
       <span className="min-w-0 flex-1">
         <span className="block truncate text-sm font-semibold text-og-charcoal">{r.title}</span>
         <span className="block truncate text-xs text-og-taupe">
-          {getResourceType(r.resourceType).label} · {getFoundation(r.foundation).name} · {meta ?? formatMinutes(r.estimatedTime)}
+          {[getResourceType(r.resourceType).label, getFoundation(r.foundation).name, meta ?? formatMinutesOrNull(r.estimatedTime)].filter(Boolean).join(" · ")}
         </span>
       </span>
     </Link>

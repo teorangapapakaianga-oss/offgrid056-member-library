@@ -8,6 +8,11 @@ export function formatMinutes(mins: number): string {
   return m ? `${h} h ${m} min` : `${h} h`;
 }
 
+/** "45 min", or null when a resource states no time (Stage 11.0J: estimatedTime is optional) */
+export function formatMinutesOrNull(mins: number | null | undefined): string | null {
+  return typeof mins === "number" ? formatMinutes(mins) : null;
+}
+
 export const TIME_BANDS = [
   { id: "under-10", label: "Under 10 minutes", test: (m: number) => m < 10 },
   { id: "10-30", label: "10–30 minutes", test: (m: number) => m >= 10 && m <= 30 },

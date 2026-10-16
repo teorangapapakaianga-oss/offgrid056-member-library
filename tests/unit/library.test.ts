@@ -25,7 +25,7 @@ describe("filters", () => {
 
   it("uses the time bands from the brief", () => {
     const f = { ...EMPTY_FILTERS, time: ["under-10"] };
-    expect(applyFilters(items, f, ctx).every((r) => r.estimatedTime < 10)).toBe(true);
+    expect(applyFilters(items, f, ctx).every((r) => r.estimatedTime !== null && r.estimatedTime < 10)).toBe(true);
   });
 
   it("treats Completed / Not completed from member state", () => {

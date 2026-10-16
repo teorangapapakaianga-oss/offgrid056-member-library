@@ -1,8 +1,10 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { extractText, detectFileType } from "@/admin-import/parsers/index";
-import { fileProblems, loadProfiles, pdfInfoTitle, rawPdfTitle, type FileFacts } from "@/admin-import/pilot/verify-build-rules";
+import { companionProblems, fileProblems, loadProfiles, loadReleaseSets, orphanCompanionProblems, pdfInfoTitle, rawPdfTitle, releaseSetProblems, type FileFacts } from "@/admin-import/pilot/verify-build-rules";
 
 /**
  * Stage 11.0J — import:verify-build: the default per-file rules are unchanged, and two owner-approved, resource-scoped profiles (res-1513, res-1515) cover the
@@ -92,5 +94,40 @@ describe("Stage 11.0J · verify-build profiles", () => {
       expect(rules(facts(other, "AU", okAU, "Local Support Network Planner — OffGrid056"))).toEqual([]);
       expect(rules(facts(other, "NZ", `${ok} 000`, "Local Support Network Planner — OffGrid056"))).toEqual(["VB-NZ-NUMBERS"]);
     });
+  });
+});
+
+describe("Stage 11.0J · editable companions and release sets in verify-build", () => {
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), "vb-"));
+  fs.mkdirSync(path.join(out, "resources"));
+  const good = Buffer.concat([Buffer.from("PK"), Buffer.from("docx body")]);
+  const sha = (b: Buffer) => crypto.createHash("sha256").update(b).digest("hex");
+  fs.writeFileSync(path.join(out, "resources/t.NZ.docx"), good);
+  fs.writeFileSync(path.join(out, "resources/t.AU.docx"), good);
+  const rec = (over: object = {}) => ({ legacyCode: "OG-B13", marketFiles: { NZ: { fileUrl: "/resources/t.NZ.pdf" }, AU: { fileUrl: "/resources/t.AU.pdf" } }, companionFiles: { NZ: { fileUrl: "/resources/t.NZ.docx", fileFormat: "DOCX", sha256: sha(good) }, AU: { fileUrl: "/resources/t.AU.docx", fileFormat: "DOCX", sha256: sha(good) } }, ...over });
+  it("passes when the companions exist, are zip files and match the recorded SHA-256", () => {
+    expect(companionProblems(rec(), out)).toEqual([]);
+    expect(orphanCompanionProblems(out, [rec()])).toEqual([]);
+  });
+  it("rejects a missing file, a hash mismatch, a non-docx file and a companion without its market's PDF", () => {
+    expect(companionProblems(rec({ companionFiles: { NZ: { fileUrl: "/resources/missing.docx", fileFormat: "DOCX", sha256: sha(good) } } }), out).map((p) => p.rule)).toEqual(["VB-COMPANION"]);
+    const bad = rec({ companionFiles: { NZ: { fileUrl: "/resources/t.NZ.docx", fileFormat: "DOCX", sha256: "0".repeat(64) } } });
+    expect(companionProblems(bad, out)[0].actual).toMatch(/does not match the record/);
+    fs.writeFileSync(path.join(out, "resources/notzip.docx"), "plain text");
+    expect(companionProblems(rec({ companionFiles: { NZ: { fileUrl: "/resources/notzip.docx", fileFormat: "DOCX", sha256: sha(Buffer.from("plain text")) } } }), out).map((p) => p.actual)).toEqual(["not a zip/docx file"]);
+    expect(companionProblems(rec({ marketFiles: { NZ: { fileUrl: "/resources/t.NZ.pdf" } } }), out).map((p) => p.actual)).toContain("companion without a PDF for its market");
+  });
+  it("rejects any editable file in the build that no record names", () => {
+    fs.writeFileSync(path.join(out, "resources/stray.docx"), good);
+    expect(orphanCompanionProblems(out, [rec()]).map((p) => p.actual)).toEqual(["notzip.docx", "stray.docx"]);
+    expect(orphanCompanionProblems(out, [])).toHaveLength(4); // with no record naming them, every .docx is an orphan
+  });
+  it("requires B13 and B15 to be released together", () => {
+    const sets = loadReleaseSets(path.join(root, "admin-import/config/verify-build-profiles.json"));
+    expect(sets.map((s) => s.resources)).toEqual([["res-1513", "res-1515"]]);
+    expect(releaseSetProblems(["res-1001", "res-1513", "res-1515"], sets)).toEqual([]);
+    expect(releaseSetProblems(["res-1001"], sets)).toEqual([]); // neither present: fine
+    expect(releaseSetProblems(["res-1515"], sets)[0].rule).toBe("VB-RELEASE-SET"); // B15 alone would link to an unavailable B13
+    expect(releaseSetProblems(["res-1513"], sets)[0].rule).toBe("VB-RELEASE-SET");
   });
 });

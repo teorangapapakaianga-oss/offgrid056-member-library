@@ -17,7 +17,8 @@ export interface ResourceSummary {
   categoryName: string;
   resourceType: ResourceTypeId;
   difficulty: Difficulty;
-  estimatedTime: number;
+  /** null when the resource states no time */
+  estimatedTime: number | null;
   tags: string[];
   collections: string[];
   order: number;
@@ -43,7 +44,7 @@ export function toSummary(r: Resource): ResourceSummary {
     categoryName: getCategory(r.foundation, r.category)?.name ?? r.category,
     resourceType: r.resourceType,
     difficulty: r.difficulty,
-    estimatedTime: r.estimatedTime,
+    estimatedTime: r.estimatedTime ?? null,
     tags: r.tags,
     collections: r.collections ?? [],
     order: r.order ?? 999,

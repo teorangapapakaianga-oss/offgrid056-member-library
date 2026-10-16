@@ -2,6 +2,9 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
+import { safetyExposureFor } from "@/admin-import/audit/group-a";
+import { isSurvivalClaimSentence } from "@/admin-import/audit/numeric";
+import { extractText, detectFileType } from "@/admin-import/parsers/index";
 import { relatedResources } from "@/lib/related";
 import type { ResourceSummary } from "@/lib/content/summaries";
 
@@ -27,9 +30,11 @@ describe("Stage 11.0J · OG-B13 / OG-B15 staged editions", () => {
     for (const e of EDITIONS) {
       const r = recs.filter((x) => x.id === e.id || x.legacyCode === e.code);
       expect(r).toHaveLength(1);
-      expect(r[0]).toMatchObject({ id: e.id, slug: e.slug, legacyCode: e.code, title: e.title, foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: e.type, estimatedTime: e.time, difficulty: "beginner", collections: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, relatedResources: e.related });
+      expect(r[0]).toMatchObject({ id: e.id, slug: e.slug, legacyCode: e.code, title: e.title, foundation: "general", programComponent: "resilience-planning", category: "planning", resourceType: e.type, difficulty: "beginner", collections: [], status: "draft", publicationStatus: "approved", releaseChannel: "private-preview", downloadable: true, relatedResources: e.related });
       expect(r[0].marketFiles).toEqual({ NZ: { fileUrl: `/resources/${e.slug}.NZ.pdf`, fileFormat: "PDF" }, AU: { fileUrl: `/resources/${e.slug}.AU.pdf`, fileFormat: "PDF" } });
       expect(r[0]).not.toHaveProperty("fileUrl"); // a market-specific resource has no default file: no cross-market fallback
+      expect(r[0]).not.toHaveProperty("estimatedTime"); // the editions state no time and none is invented (owner decision 3)
+      expect(r[0].companionFiles).toEqual({ NZ: expect.objectContaining({ fileUrl: `/resources/${e.slug}.NZ.docx`, fileFormat: "DOCX", sha256: e.docx.NZ }), AU: expect.objectContaining({ fileUrl: `/resources/${e.slug}.AU.docx`, fileFormat: "DOCX", sha256: e.docx.AU }) });
     }
     expect(recs.filter((r) => ((r.collections as string[] | undefined) ?? []).includes("planning-tools"))).toHaveLength(12);
     const urls = recs.flatMap((r) => Object.values((r.marketFiles ?? {}) as Record<string, { fileUrl: string }>).map((f) => f.fileUrl));
@@ -38,11 +43,12 @@ describe("Stage 11.0J · OG-B13 / OG-B15 staged editions", () => {
     expect(new Set(recs.map((r) => r.title)).size).toBe(38);
     expect(recs.filter((r) => ["OG-B01", "OG-B03", "OG-B11"].includes(r.legacyCode as string))).toEqual([]);
   });
-  it.skipIf(!have)("serve the approved PDFs byte-identically, one edition per market; the DOCX companions are never served", () => {
+  it.skipIf(!have)("serve the approved PDFs byte-identically, one edition per market, and the DOCX companions only as the recorded secondary option for the same market", () => {
     const pdfs = path.join(root, "private-assets/resources");
     for (const e of EDITIONS) for (const m of ["NZ", "AU"] as const) expect(sha(path.join(pdfs, `${e.slug}.${m}.pdf`)), `${e.id} ${m}`).toBe(e.hashes[m]);
     expect(EDITIONS[0].hashes.NZ).not.toBe(EDITIONS[0].hashes.AU);
-    expect(fs.readdirSync(pdfs).filter((f) => /\.docx$/i.test(f))).toEqual([]);
+    for (const e of EDITIONS) for (const m of ["NZ", "AU"] as const) expect(sha(path.join(pdfs, `${e.slug}.${m}.docx`)), `${e.id} ${m} docx`).toBe(e.docx[m]);
+    expect(fs.readdirSync(pdfs).filter((f) => /\.docx$/i.test(f)).sort()).toEqual(EDITIONS.flatMap((e) => (["AU", "NZ"] as const).map((m) => `${e.slug}.${m}.docx`)).sort()); // nothing else editable is staged
     expect(fs.existsSync(path.join(root, "public/resources")) ? fs.readdirSync(path.join(root, "public/resources")).filter((f) => /\.docx$/i.test(f)) : []).toEqual([]);
   });
   it.skipIf(!have)("keep the approved package verbatim in the non-public masters folder, with the DOCX companion associated to each PDF", () => {
@@ -56,11 +62,11 @@ describe("Stage 11.0J · OG-B13 / OG-B15 staged editions", () => {
     expect(fs.readdirSync(path.join(m, "03_PRODUCTION_RECORDS")).sort()).toEqual(["FINAL_PRODUCTION_QA.md", "SOURCE_AND_RIGHTS_RECORD.md", "VERSION_MANIFEST.md"]);
     const assoc = (JSON.parse(fs.readFileSync(path.join(m, "ASSOCIATIONS.json"), "utf8")) as { associations: { resource: string; market: string; docxServed: boolean }[] }).associations;
     expect(assoc).toHaveLength(4);
-    expect(assoc.every((a) => a.docxServed === false)).toBe(true);
+    expect(assoc.every((a) => a.docxServed === true)).toBe(true);
   });
-  it("leave the Library model unchanged: no companion-file field, no HOLD value, no new market", () => {
+  it("limit the Library model change to optional estimatedTime and companionFiles: no HOLD value, no new market", () => {
     const schema = fs.readFileSync(path.join(root, "lib/content/schemas.ts"), "utf8") + fs.readFileSync(path.join(root, "lib/content/constants.ts"), "utf8");
-    expect(schema).not.toMatch(/companion|INVENTORY REVIEW|\bHOLD\b/i);
+    expect(schema).not.toMatch(/INVENTORY REVIEW|\bHOLD\b/i);
     expect(schema).toMatch(/MARKET_CODES/);
   });
   it("record the HOLD history, and the owner-approved dispositions of OG-B01, OG-B03 and OG-B11, in the register", () => {
@@ -104,3 +110,37 @@ describe.skipIf(!have)("Stage 11.0J · related cards: the two new slugs change n
 function e0(s: string): string {
   return s;
 }
+
+describe.skipIf(!have)("Stage 11.0J · the two informational detector flags are reviewed, and the detectors still catch genuine technical content", () => {
+  const read = async (slug: string, m: "NZ" | "AU") => {
+    const file = path.resolve(root, "private-assets/resources", `${slug}.${m}.pdf`);
+    return (await extractText(file, detectFileType(file, ".pdf"), 400000)).text.replace(/\s+/g, " ");
+  };
+  it("B13 'batteries-and-electrical': every battery/solar mention is an asset-category label or an insurer question (LABEL ONLY / PLANNING PROMPT), never guidance or a procedure", async () => {
+    for (const m of ["NZ", "AU"] as const) {
+      const text = await read("resilience-asset-and-document-checklist", m);
+      expect(safetyExposureFor(text), m).toContain("batteries-and-electrical"); // still detected: the detector is not weakened
+      const sentences = text.split(/(?<=[.!?])\s+/).filter((s) => /\b(?:batter\w*|solar|inverter)\b/i.test(s));
+      expect(sentences.length, m).toBeGreaterThan(0);
+      for (const s of sentences) {
+        expect(s, m).toMatch(/generators|storage|panels|heating equipment/i); // an asset list or a "do I declare…" question
+        expect(s, m).not.toMatch(/\b(?:install\w*|replace\w*|wire\w*|connect\w*|isolate\w*|disconnect\w*|test\w*|service\w*|repair\w*|charge\w*|discharge\w*)\b/i);
+      }
+    }
+  }, 60000);
+  it("B15 AU 'survival' sentences are the standing immediate-danger direction (call Triple Zero; do not investigate), with no duration or outcome claim", async () => {
+    const text = await read("seasonal-review-and-annual-service-log", "AU");
+    const hits = text.split(/(?<=[.!?])\s+/).filter((s) => isSurvivalClaimSentence(s));
+    expect(hits).toHaveLength(2);
+    for (const s of hits) {
+      expect(s).toMatch(/do not investigate it for this worksheet|call Triple Zero \(000\)/);
+      expect(s.replace("(000)", "")).not.toMatch(/\d/);
+    }
+    const nz = await read("seasonal-review-and-annual-service-log", "NZ");
+    expect(nz.split(/(?<=[.!?])\s+/).filter((s) => isSurvivalClaimSentence(s))).toEqual([]); // the NZ wording ("serious, immediate or imminent risk") does not trip it
+  }, 60000);
+  it("the detectors are unchanged: genuine technical wording is still flagged", () => {
+    expect(safetyExposureFor("Wire the battery bank to the inverter and the solar array, then test the inverter.")).toContain("batteries-and-electrical");
+    expect(isSurvivalClaimSentence("A person can survive three days without water.")).toBe(true);
+  });
+});

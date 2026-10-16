@@ -7,9 +7,11 @@
  * switches a check off for a resource wholesale, and every cross-market, removed-wording, token and error-page check still applies to it.
  *
  * Rule identifiers: VB-TITLE, VB-OG-CODE, VB-TOKEN, VB-ERRPAGE, VB-DAYCOMPLETE, VB-TASTING, VB-REMOVED, VB-NZ-NUMBERS, VB-NZ-AGENCY, VB-NZ-FOREIGN-AGENCY,
- * VB-NZ-AU-TIMING, VB-AU-NUMBERS, VB-AU-AGENCY, VB-AU-NZ-TERM, VB-MARKET.
+ * VB-NZ-AU-TIMING, VB-AU-NUMBERS, VB-AU-AGENCY, VB-AU-NZ-TERM, VB-MARKET, and (Stage 11.0J) VB-COMPANION, VB-COMPANION-ORPHAN, VB-RELEASE-SET.
  */
+import crypto from "node:crypto";
 import fs from "node:fs";
+import path from "node:path";
 
 // PDF text extraction inserts page markers and spaces between styled runs; compare with both removed.
 const flat = (s: string) => s.replace(/--\s*\d+ of \d+\s*--\s*\d*/g, "").replace(/\s+/g, "").toLowerCase();
@@ -150,4 +152,56 @@ export function rawPdfTitle(buf: Buffer): string {
     return x[0] === 0xfe && x[1] === 0xff ? Buffer.from(x.subarray(2)).swap16().toString("utf16le") : x.toString("latin1");
   }
   return v.slice(1, -1);
+}
+
+// ---- Stage 11.0J: editable companions and release sets -------------------------------------------------------------------------------------------
+
+export interface ReleaseSet {
+  id: string;
+  /** resources that must travel together: if any is in the build, all must be */
+  resources: string[];
+  reason: string;
+}
+export function loadReleaseSets(file: string): ReleaseSet[] {
+  if (!fs.existsSync(file)) return [];
+  return (JSON.parse(fs.readFileSync(file, "utf8")) as { releaseSets?: ReleaseSet[] }).releaseSets ?? [];
+}
+/** A resource that links to another must never be released without it (B15 names B13, so both go together). */
+export function releaseSetProblems(ids: string[], sets: ReleaseSet[]): Problem[] {
+  const out: Problem[] = [];
+  for (const s of sets) {
+    const present = s.resources.filter((r) => ids.includes(r)), missing = s.resources.filter((r) => !ids.includes(r));
+    if (present.length && missing.length) out.push({ rule: "VB-RELEASE-SET", expected: `all of ${s.resources.join(", ")} together`, actual: `${present.join(", ")} without ${missing.join(", ")}`, message: `[VB-RELEASE-SET] ${s.id}: ${present.join(", ")} present without ${missing.join(", ")}` });
+  }
+  return out;
+}
+
+interface CompanionRecord {
+  legacyCode: string;
+  marketFiles?: Record<string, { fileUrl: string }>;
+  companionFiles?: Record<string, { fileUrl: string; fileFormat: string; sha256: string }>;
+}
+const sha256 = (buf: Buffer) => crypto.createHash("sha256").update(buf).digest("hex");
+
+/** Every companion must exist in the build output, be a real .docx (zip) whose SHA-256 equals the recorded one, and sit beside a PDF for its own market. */
+export function companionProblems(r: CompanionRecord, out: string): Problem[] {
+  const problems: Problem[] = [];
+  const add = (expected: string, actual: string, market: string) => problems.push({ rule: "VB-COMPANION", expected, actual, message: `[VB-COMPANION] ${r.legacyCode} ${market}: ${actual}` });
+  for (const [market, c] of Object.entries(r.companionFiles ?? {})) {
+    if (!r.marketFiles?.[market]) add(`a ${market} PDF beside the companion`, "companion without a PDF for its market", market);
+    const file = path.join(out, c.fileUrl);
+    if (!fs.existsSync(file)) { add("the file in the build", `MISSING ${c.fileUrl}`, market); continue; }
+    const buf = fs.readFileSync(file);
+    if (buf.subarray(0, 2).toString("latin1") !== "PK") add("a .docx (zip) file", "not a zip/docx file", market);
+    if (sha256(buf) !== c.sha256) add(c.sha256, `SHA-256 ${sha256(buf)} does not match the record`, market);
+  }
+  return problems;
+}
+
+/** No .docx may be served unless a record names it: nothing editable is ever exposed by accident. */
+export function orphanCompanionProblems(out: string, records: CompanionRecord[]): Problem[] {
+  const dir = path.join(out, "resources");
+  if (!fs.existsSync(dir)) return [];
+  const named = new Set(records.flatMap((r) => Object.values(r.companionFiles ?? {}).map((c) => c.fileUrl)));
+  return fs.readdirSync(dir).filter((f) => /\.docx$/i.test(f)).filter((f) => !named.has(`/resources/${f}`)).map((f) => ({ rule: "VB-COMPANION-ORPHAN", expected: "only recorded companions", actual: f, message: `[VB-COMPANION-ORPHAN] unreferenced editable file in the build: ${f}` }));
 }

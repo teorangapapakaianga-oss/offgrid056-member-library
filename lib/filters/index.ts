@@ -74,7 +74,8 @@ function matchesGroup(r: ResourceSummary, g: FilterGroup, values: string[], ctx:
     case "difficulty":
       return values.includes(r.difficulty);
     case "time":
-      return TIME_BANDS.some((b) => values.includes(b.id) && b.test(r.estimatedTime));
+      // a resource with no stated time matches no time band
+      return r.estimatedTime !== null && TIME_BANDS.some((b) => values.includes(b.id) && b.test(r.estimatedTime as number));
     case "status":
       return values.some((v) => {
         if (v === "new") return ctx.now !== null && isNewResource(r, ctx.now);
@@ -116,7 +117,7 @@ export function sortResources(items: ResourceSummary[], sort: SortId): ResourceS
     case "title":
       return s.sort((a, b) => a.title.localeCompare(b.title, "en"));
     case "shortest":
-      return s.sort((a, b) => a.estimatedTime - b.estimatedTime);
+      return s.sort((a, b) => (a.estimatedTime ?? Number.MAX_SAFE_INTEGER) - (b.estimatedTime ?? Number.MAX_SAFE_INTEGER)); // no stated time sorts last
     default:
       return s.sort(
         (a, b) => Number(b.featured) - Number(a.featured) || a.order - b.order || b.publishedDate.localeCompare(a.publishedDate),

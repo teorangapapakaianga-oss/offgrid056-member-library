@@ -163,7 +163,7 @@ Next stage: Stage 10.19B — implement publicationStatus + releaseChannel + Prev
 
 **res-1514 Local Support Network Planner was deployed in Stage 10.27D** and is live resource #36 (36 resources, 72 market files).
 
-**res-1513 Resilience Asset & Document Checklist and res-1515 Seasonal Review & Annual Service Log are STAGED, not deployed (Stage 11.0J):** counted in the staged build (38 resources, 76 market files) and not in the live totals (36, 72). IDs and metadata are proposals awaiting owner confirmation.
+**res-1513 Resilience Asset & Document Checklist and res-1515 Seasonal Review & Annual Service Log are STAGED, not deployed (Stage 11.0J):** counted in the staged build (38 resources, 76 market files) and not in the live totals (36, 72). The IDs are conditionally owner-approved (registry uniqueness verified); classification, descriptions and related links are with the owner for final review.
 
 ### Identity and classification
 

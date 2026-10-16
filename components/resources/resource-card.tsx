@@ -53,11 +53,13 @@ export function ResourceCard({ resource: r, headingLevel = 3 }: { resource: Reso
         <p className="line-clamp-3 text-sm leading-relaxed text-og-graphite/90">{r.description}</p>
 
         <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-og-taupe">
-          <span className="inline-flex items-center gap-1">
-            <Icon name="clock" className="size-4" />
-            <span className="sr-only">Estimated time: </span>
-            {formatMinutes(r.estimatedTime)}
-          </span>
+          {r.estimatedTime !== null && (
+            <span className="inline-flex items-center gap-1">
+              <Icon name="clock" className="size-4" />
+              <span className="sr-only">Estimated time: </span>
+              {formatMinutes(r.estimatedTime)}
+            </span>
+          )}
           <DifficultyBadge difficulty={r.difficulty} />
           {r.downloadable && (
             <span className="inline-flex items-center gap-1">

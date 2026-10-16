@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { LearningPath } from "@/lib/content/constants";
 import type { ResourceSummary } from "@/lib/content/summaries";
 import { getFoundation } from "@/lib/content/taxonomy";
-import { formatMinutes } from "@/lib/format";
+import { formatMinutesOrNull } from "@/lib/format";
 import { useMemberState } from "@/lib/member";
 import { Icon } from "@/components/ui/icon";
 import { ProgressBar } from "@/components/ui/progress-bar";
@@ -73,7 +73,7 @@ export function LearningPathSteps({ path, steps }: { path: LearningPath; steps: 
                 <span className="min-w-0 flex-1">
                   <span className="block font-semibold text-og-charcoal">{s.title}</span>
                   <span className="block text-xs text-og-taupe">
-                    {getFoundation(s.foundation).name} · {formatMinutes(s.estimatedTime)}
+                    {[getFoundation(s.foundation).name, formatMinutesOrNull(s.estimatedTime)].filter(Boolean).join(" · ")}
                     {done && " · Completed"}
                     {isCurrent && " · You are here"}
                   </span>

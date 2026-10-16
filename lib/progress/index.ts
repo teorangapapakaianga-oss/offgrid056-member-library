@@ -44,7 +44,7 @@ export function nextRecommended(items: ResourceSummary[], completed: ReadonlySet
   const featured = open.find((r) => r.featured);
   if (featured) return featured;
   return [...open].sort(
-    (a, b) => DIFFICULTY_RANK[a.difficulty] - DIFFICULTY_RANK[b.difficulty] || a.estimatedTime - b.estimatedTime,
+    (a, b) => DIFFICULTY_RANK[a.difficulty] - DIFFICULTY_RANK[b.difficulty] || (a.estimatedTime ?? Number.MAX_SAFE_INTEGER) - (b.estimatedTime ?? Number.MAX_SAFE_INTEGER),
   )[0];
 }
 
