@@ -54,7 +54,7 @@ describe("Stage 9.86 · OG-05 disposition", () => {
     expect(decision.registerTreatment).toMatch(/not a protected-resource status value/);
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
     expect(rr.split("## Merged / No standalone resource")[1].split("## Archived")[0]).toMatch(/\| OG-05 \| 5 Pillars Quick Reference \| \*\*MERGED \/ NO STANDALONE RESOURCE\*\*/);
-    expect(rr.split("## Not started (5)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-05 \|/);
+    expect(rr.split("## Not started (0)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-05 \|/);
   });
 
   it("closes the follow-ups: the page pointer is done and DEPLOYED (Stage 9.88), and the supply-duration detector is implemented", () => {

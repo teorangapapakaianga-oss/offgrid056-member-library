@@ -122,7 +122,7 @@ describe("Stage 10.10 · OG-14 is deployed", () => {
     const rr = fs.readFileSync(path.join(root, "internal/member-programme/RESOURCE_REGISTER.md"), "utf8");
     expect(rr.split("## Deployed")[1].split("## Staged")[0]).toMatch(/\| OG-14 \| Water, Food and Air Household Snapshot \| general \/ worksheet \|/);
     expect(rr.split("## Staged, not deployed (0)")[1].split("## Prepared")[0]).not.toMatch(/^\| OG-14 \|/m);
-    expect(rr.split("## Not started (5)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-14 \|/);
+    expect(rr.split("## Not started (0)")[1].split("## Route clashes")[0]).not.toMatch(/\| OG-14 \|/);
   });
 });
 
