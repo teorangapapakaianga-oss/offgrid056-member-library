@@ -9,10 +9,10 @@
  * If their market has no verified file, nothing is offered and the reason is given. There is no fallback to
  * another country's download — fail closed, per the owner ruling.
  */
-import { MarketGate } from "@/components/member/market-controls";
+import { MarketGate, MarketSwitcher } from "@/components/member/market-controls";
 import { DownloadActions, type FileInfo } from "@/components/resources/download-actions";
 import { Icon } from "@/components/ui/icon";
-import { companionForMarket, type CompanionFile } from "@/lib/content/companions";
+import { editionForMarket, type CompanionFile } from "@/lib/content/companions";
 import { formatBytes } from "@/lib/format-bytes";
 import { marketName, type MarketCode } from "@/lib/member/market";
 
@@ -42,10 +42,10 @@ export function MarketDownload({
   return (
     <MarketGate availableMarkets={available}>
       {(market) => {
-        const file = market ? files[market] : undefined;
-        if (!market || !file) return null; // MarketGate has already explained why
+        const edition = editionForMarket(files, companions, market);
+        if (!market || !edition) return null; // MarketGate has already explained why
+        const { file, companion } = edition;
         const info: FileInfo = { ...file, title, updatedDate, openable };
-        const companion = companionForMarket(companions, files, market);
         return (
           <div>
             <DownloadActions file={info} />
@@ -65,6 +65,7 @@ export function MarketDownload({
               This version is for <strong className="font-semibold text-og-charcoal">{marketName(market)}</strong> —
               emergency numbers and local guidance match your market.
             </p>
+            <MarketSwitcher className="mt-3" />
           </div>
         );
       }}

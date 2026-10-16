@@ -11,6 +11,18 @@ export interface CompanionFile {
   sizeBytes: number | null;
 }
 
+/** Exactly one edition for the chosen market: its PDF and (if any) its editable version. Never another market's file. */
+export function editionForMarket<F>(
+  files: Partial<Record<MarketCode, F>>,
+  companions: Partial<Record<MarketCode, CompanionFile>> | undefined,
+  market: MarketCode | null,
+): { file: F; companion: CompanionFile | null } | null {
+  if (!market) return null;
+  const file = files[market];
+  if (!file) return null;
+  return { file, companion: companionForMarket(companions, files, market) };
+}
+
 /** The editable version for this market, or null. Never another market's, and never one without its PDF. */
 export function companionForMarket(
   companions: Partial<Record<MarketCode, CompanionFile>> | undefined,

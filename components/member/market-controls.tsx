@@ -10,6 +10,7 @@
  *  - `MarketIndicator`  — a quiet line saying which market is in use, with a way to change it
  *  - `MarketChooser`    — the first-visit prompt, shown before market-dependent content is opened
  *  - `MarketGate`       — wraps content that cannot be shown safely until a market is chosen
+ *  - `MarketSwitcher`   — a visible "Change country" control inside a market-specific download panel (Stage 11.0K)
  */
 import { useState } from "react";
 import { Icon } from "@/components/ui/icon";
@@ -79,6 +80,52 @@ export function MarketIndicator({ className = "" }: { className?: string }) {
 }
 
 /**
+ * "Change country", placed inside the panel that depends on the country (Stage 11.0K).
+ *
+ * The sidebar indicator is the only other way to change the market, and it sits at the foot of a desktop-only sidebar (below the fold on a laptop,
+ * absent on tablet and phone), so members could not find it. This one is part of the download panel itself: it shows the current country, opens the
+ * same New Zealand / Australia buttons, and writes the same stored choice. Nothing is inferred; the panel re-renders with the chosen country's files only.
+ */
+export function MarketSwitcher({ className = "" }: { className?: string }) {
+  const view = useMemberState();
+  const [open, setOpen] = useState(false);
+  const market = view.state.market?.code ?? null;
+  if (!view.ready || !market) return null;
+  if (!open) {
+    return (
+      <div className={className}>
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-og-line bg-white px-3 text-sm font-semibold text-og-deep underline-offset-2 hover:border-og-deep hover:underline"
+        >
+          <Icon name="foundations" className="size-4" aria-hidden="true" />
+          Change country
+          <span className="sr-only"> (currently {marketName(market)})</span>
+        </button>
+      </div>
+    );
+  }
+  return (
+    <div className={className}>
+      <div className="rounded-lg border border-og-line bg-white p-3">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-og-taupe">Choose your country</p>
+        <MarketButtons
+          current={market}
+          onChoose={(code) => {
+            void memberStore.setMarket(code);
+            setOpen(false);
+          }}
+        />
+        <button type="button" onClick={() => setOpen(false)} className="mt-2 min-h-11 text-xs text-og-taupe underline">
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/**
  * Shown when the member has not chosen yet and is about to open market-dependent content.
  *
  * It explains why it is asking, because "pick a country" with no reason invites a careless answer.
@@ -137,6 +184,7 @@ export function MarketGate({
           The guidance in this resource — emergency numbers, agencies and safety wording — is still being verified for{" "}
           {marketName(market)}. We would rather show you nothing than show you another country&rsquo;s answer.
         </p>
+        <MarketSwitcher className="mt-3" />
       </div>
     );
   }
