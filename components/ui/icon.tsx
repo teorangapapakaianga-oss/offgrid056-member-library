@@ -24,6 +24,7 @@ const PATHS = {
   arrowRight: "M4 12h15M13 6l6 6-6 6",
   download: "M12 4v11M7 10l5 5 5-5M5 20h14",
   info: "M12 21a9 9 0 1 1 0-18 9 9 0 0 1 0 18zM12 11v6M12 7.5v.5",
+  signOut: "M10 4H5v16h5M15 8l4 4-4 4M19 12H9",
   sparkle: "M12 3v5M12 16v5M3 12h5M16 12h5M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3",
 } as const;
 

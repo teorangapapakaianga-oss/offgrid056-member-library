@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { Icon, type IconName } from "@/components/ui/icon";
 import { MOBILE_BAR, isActive } from "@/lib/navigation";
+import { SignOutControl } from "@/components/member/sign-out";
 import { NavLinks } from "./nav-links";
 
 const DrawerContext = createContext<{ open: () => void }>({ open: () => {} });
@@ -50,6 +51,7 @@ export function ShellChrome({ children }: { children: ReactNode }) {
               <Icon name="close" className="size-6" />
             </button>
           </div>
+          <SignOutControl className="mb-6 px-3" />
           <nav aria-label="Main">
             <NavLinks onNavigate={close} />
           </nav>

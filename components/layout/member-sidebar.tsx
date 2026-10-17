@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MarketIndicator } from "@/components/member/market-controls";
+import { SignOutControl } from "@/components/member/sign-out";
 import { NavLinks } from "./nav-links";
 
 /** Desktop (≥ 1024 px) persistent sidebar. Tablet and mobile use the drawer instead. */
@@ -16,6 +17,8 @@ export function MemberSidebar() {
       <p className="mb-6 px-3 text-center text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-og-green">
         Member Resource Library
       </p>
+      {/* Sign out sits above the navigation so it is visible without scrolling the sidebar. */}
+      <SignOutControl className="mb-6 px-3" />
       <nav aria-label="Main">
         <NavLinks />
       </nav>
